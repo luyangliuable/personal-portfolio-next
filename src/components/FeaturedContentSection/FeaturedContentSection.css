@@ -1,0 +1,18 @@
+.featured-section {
+    --featured-section-height: 50vh;
+    background-image: radial-gradient(rgba(194, 194, 194, 1) 1px, rgba(194, 194, 194, 0) 0);
+    background-size: 8px 8px;
+    background-position: -19px -19px;
+    animation: background-scroll 12s linear infinite;
+    flex-wrap: wrap;
+    max-width: 1900px;
+}
+
+.show-more-button-wrapper {
+}
+
+@media screen and (max-width: 768px) {
+    .show-more-button-wrapper {
+        bottom: 9%;
+    }
+}

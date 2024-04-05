@@ -1,0 +1,141 @@
+.hero-section-badge__container {
+    overflow-x: auto;
+}
+
+@media screen and (min-width: 1000px) {
+    .hero-section__content__left {
+        padding: 0 5vw 0 5vw;
+        z-index: 1;
+        width: 50%;
+        max-width: 600px;
+    }
+
+    .hero-section__content__right {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 30%;
+    }
+
+    .hero-section__content {
+        margin-bottom: 8vh;
+        display: flex;
+        padding: 3vh 0;
+        justify-content: center;
+        flex-direction: row;
+    }
+
+    .hero-section__background {
+        animation-play-state: infinite;
+        filter: blur(28px);
+        position: absolute;
+        border-radius: 100%;
+        transition: all .5s ease-in-out;
+        opacity: .038;
+    }
+
+
+    .hero-section__background__wrapper {
+        left: 0;
+        position: absolute;
+        height: 40vh;
+        width: 50%;
+        z-index: 0;
+    }
+
+    .hero-section__background--animate-one {
+        animation: animate-background-blur-bubbles--translate-left 20s infinite;
+    }
+
+    .hero-section__background--animate-two {
+        animation: animate-background-blur-bubbles--rotate-and-translate-up 10s infinite;
+    }
+
+
+    .hero-section__background__wrapper * {
+        z-index: 0;
+    }
+
+    .hero-section__background__wrapper *:hover {
+        background: purple;
+        transform: translate(2vw, 2vw);
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .hero-section-badge__container {
+        display: none;
+    }
+
+    .hero-section__content__left {
+        animation: .5s animate-slide-up-fade-in ease-in;
+        padding: 0 5vw 0 5vw;
+        font-size: calc(.7rem + 0.1vw); 
+    }
+
+    .hero-section__content__right {
+        display: flex;
+        z-index: 1;
+        margin-top: 2vh;
+        justify-content: center;
+    }
+
+    .hero-section__background__wrapper {
+        left: 0; top: 0;
+        background: transparent;
+        position: absolute;
+        height: 100vh;
+        width: 100vw;
+        z-index: 0;
+    }
+
+    .hero-section__background {
+        display: none;
+    }
+}
+
+.hero-section-badge__link {
+    padding: 1vw;
+    z-index: 1;
+    transition: all 0.2s ease-in-out;
+}
+
+.hero-section-badge__link:hover {
+    opacity: 0.6;
+}
+
+.hero-section__content__left__text {
+    z-index: 3;
+    color: #888;
+    max-width: 550px;
+    font-size: .95rem;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap");
+.hero-section__heading {
+    font-family: 'TT Norms Pro', 'Spartan', sans-serif;
+    color: #2d2d2d; 
+    margin-bottom: .8rem;
+    font-size: clamp(2em, 3vw, 5em) !important;
+    font-weight: 700;
+}
+
+@media (min-width: 768px) {
+    .hero-section__content__left__text {
+        font-size: 1.125rem; /* Slightly larger on larger screens */
+    }
+}
+
+@media (min-width: 1024px) {
+    .hero-section__content__left__text {
+        font-size: 1.25rem; /* Even larger on larger screens */
+    }
+}
+
+.hero-section {
+    overflow: hidden;
+}
+
+.hero-section__text_small {
+    font-size: .87rem;
+}

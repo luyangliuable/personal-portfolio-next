@@ -1,0 +1,13 @@
+.browser {
+    border: none;
+    width: 100vw;
+    height: calc(100vh - 30px);
+}
+
+@media screen and (max-width: 100px) {
+    .browser {
+        display: none;
+        height: 50vh;
+        transform: scale(.5);
+    }
+}

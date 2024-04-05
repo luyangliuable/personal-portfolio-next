@@ -86,6 +86,7 @@ class FeaturedContentSection extends Component<IFeaturedContentSectionProps, IFe
 
     async fetchPostList() {
         const response = await this.postRepository.getFeaturedPostList();
+        console.log(response);
         this.setState({
             featuredPosts: response
         });

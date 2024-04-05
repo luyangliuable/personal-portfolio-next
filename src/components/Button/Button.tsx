@@ -40,7 +40,7 @@ class HeroSection extends Component<IButtonProps, {}> {
             if (this.props.to === null) return (<></>);
 
             return (
-                <Link to={this.props.disabled ? null : this.props.to}>
+                <Link href={this.props.disabled ? "/" : this.props.to}>
                     {this.renderButton()}
                 </Link>
             );

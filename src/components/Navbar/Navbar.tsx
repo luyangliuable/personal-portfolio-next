@@ -1,3 +1,4 @@
+'use client';
 import React, { Context, Component, createRef, ReactNode } from "react";
 import Link from "next/link";
 import { INavbarState, ILink, NavbarItem } from "./Interface/INavbarState";

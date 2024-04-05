@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from 'next/link';
+import Link from 'next/link';
 import { IBlogPageState } from "./Interface/IBlogPageState";
 import HeroHeader from "../../components/HeroHeader/HeroHeader";
 import PostRepository from "../../repositories/PostRepository";
@@ -177,7 +177,7 @@ class BlogPage extends Component<IBlogPageProps | any, IBlogPageState> {
                 const tagClassName = ['blog__tag', 'noselect', 'blog__tag--selected'].join(" ");
                 const to = `${baseUrlLink}?tag=${encodeURIComponent(selectedTagsString.join(","))}`;
                 return (
-                    <Link to={to} key={tagName} className={tagClassName}>#{tagName}</Link>
+                    <Link href={to} key={tagName} className={tagClassName}>#{tagName}</Link>
                 );
             })
     };
@@ -190,7 +190,7 @@ class BlogPage extends Component<IBlogPageProps | any, IBlogPageState> {
                 let selectedTagsString: string[] = [];
                 selectedTagsString = this.currentSelectedTags.concat(tagName);
                 const to = `${baseUrlLink}?tag=${encodeURIComponent(selectedTagsString.join(","))}`;
-                return (<Link to={to} key={tagName} className="blog__tag flex items-center justify-center noselect cursor-pointer">#{tagName}</Link>);
+                return (<Link href={to} key={tagName} className="blog__tag flex items-center justify-center noselect cursor-pointer">#{tagName}</Link>);
             });
     };
 

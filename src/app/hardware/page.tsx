@@ -1,3 +1,4 @@
+'use client';
 import React, { Component } from "react";
 import "./HardwareProjectsPage.css";
 import Gallery from "../../components/Gallery/Gallery";

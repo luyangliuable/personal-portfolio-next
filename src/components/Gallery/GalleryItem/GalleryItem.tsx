@@ -1,6 +1,5 @@
 import React, { Component, CSSProperties, createRef, RefObject } from "react";
 import { isoDateFormatToString } from "../../../components/Utility/StringUtility";
-import { Link } from "next/link";
 import { cardGradientEffect } from "../../../components/Utility/MouseUtility";
 import "./GalleryItem.css";
 import IGalleryItemProps from "./Interface/IGalleryItemProps";
@@ -11,6 +10,7 @@ import TagCloud from "../../TagCloud/TagCloud";
 import DynamicLoadQueue from "../../../stores/DynamicLoadQueue/DynamicLoadQueue";
 import Image from "../../Image/Image";
 import SequentialRiseSpan from "../../Atoms/SequentialRiseSpan/SequentialRiseSpan";
+import Link from "next/link";
 
 class GalleryItem extends Component<IGalleryItemProps, IGalleryItemState> {
     galleryItemRef: RefObject<HTMLDivElement>;
@@ -55,7 +55,7 @@ class GalleryItem extends Component<IGalleryItemProps, IGalleryItemState> {
         const style: CSSProperties = this.props.style || {};
         const { image, className } = this.props;
         return (
-            <Link className={className} to={this.props.link ?? ""}>
+            <Link className={className} href={this.props.link ?? ""}>
                 <div
                     ref={this.galleryItemRef}
                     style={style}
@@ -64,7 +64,7 @@ class GalleryItem extends Component<IGalleryItemProps, IGalleryItemState> {
                     className="gallery-item flex flex-col justify-start items-center opacity-0 pb-10 blur-boundary card">
                     {this.GalleryItemTypeSegment}
                     <div className="position-absolute color-white right-0 w-15 top-10 font-fira-code">READ</div>
-                    <Image className="gallery-item__image" src={image} />
+                    <Image className="gallery-item__image" src={image ?? ""} />
                     <h3>{this.props.name}</h3>
                     {
                         this.props.minuteRead && this.props.dateCreated &&

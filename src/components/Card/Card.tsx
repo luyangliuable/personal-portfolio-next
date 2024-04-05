@@ -1,6 +1,6 @@
 import React, { Component, createRef, RefObject } from "react";
 import "./Card.css";
-import { Link } from "next/link";
+import Link from "next/link";
 
 import { cardGradientEffect } from "../../components/Utility/MouseUtility";
 import { isoDateFormatToString } from "../../components/Utility/StringUtility";
@@ -57,7 +57,7 @@ class Card extends Component<ICardProps, ICardState> {
             return (<></>);
 
         return (
-            <NavLink ref={this.cardItemRef} onMouseMove={cardGradientEffect} className="card card-item" to={link}>
+            <Link ref={this.cardItemRef} onMouseMove={cardGradientEffect} className="card card-item" href={link}>
                 <TagCloud tags={tags} />
                 <section className="card-item__content">
                     <h3 className="card-item__heading">{heading}</h3>
@@ -67,7 +67,7 @@ class Card extends Component<ICardProps, ICardState> {
                     {<Image src={image} className="card-image-preview" alt="Card Preview" />}
                 </div>
                 <footer className="flex mt-5"><Image src={authorImage} className="user-image card-image--author-image" alt="Author" />{author}</footer>
-            </NavLink>
+            </Link>
         );
     }
 }

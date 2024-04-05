@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import NavBar from '../components/Navbar/Navbar';
 import "./globals.css";
+import LandingPage from '../pages/LandingPage/LandingPage';
 
 interface IAppStateInterface {
     scrollY?: number,
@@ -62,7 +62,7 @@ function App() {
 
     return (
         <div className="App">
-            <NavBar scrollStatus={{ scrolled: appState.scrollY, deltaScrolled: deltaScrolled }} />
+            <LandingPage scrolled={0} scrolling={false} />
         </div>
     );
 }

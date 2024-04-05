@@ -4,7 +4,7 @@ import Repository from "./Repository";
 class PostRepository extends Repository {
     private static instance: PostRepository;
     private static postListCache: any[] | null = null;
-    static BASE_URL: string = `${process.env.REACT_APP_SERVER_BASE_URI}/api/posts/` || "https://llcode.tech/api/posts";
+    static BASE_URL: string = "https://llcode.tech/api/posts";
 
     private constructor() { super(); }
 

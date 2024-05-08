@@ -7,16 +7,24 @@
     width: 100%;
 }
 
-.sequential-rise-span > div {
+.sequential-rise-span > * {
     overflow-y: hidden; overflow-x: visible;
     width: max-content;
 }
 
 .sequential-rise-span > div > p {
-    width: max-content;
-    white-space: nowrap;
+    width: 100%; /* Adjusted to ensure wrapping within parent container. Modify as needed. */
+    white-space: normal; /* Allows text to wrap */
     margin: 0;
     line-height: 117%;
+}
+
+.sequential-rise-span > div > p > span {
+    display: inline; /* Ensures <span> elements are inline */
+}
+
+.sequential-rise-span {
+    display: inline-block
 }
 
 .slide-up {

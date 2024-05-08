@@ -24,10 +24,23 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ lang, children, filename }) => {
     const codeBlockRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        if (filename !== undefined && codeBlockRef.current !== null) codeBlockRef
-            .current!
-            .style
-            .setProperty("margin-top", "50px");
+        if (filename !== undefined && codeBlockRef.current !== null) {
+            codeBlockRef
+                .current!
+                .style
+                .setProperty("margin-top", "50px");
+            console.log(filename);
+            console.log(filename);
+            console.log(filename);
+            console.log(filename);
+            console.log(filename);
+            console.log(filename);
+            console.log(filename);
+            console.log(filename);
+            console.log(filename);
+            console.log(filename);
+            console.log(filename);
+        }
     }, [codeBlockRef.current, filename]);
 
     useEffect(() => {
@@ -46,7 +59,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ lang, children, filename }) => {
         }
     }, [children]);
 
-    const cleanedChildren = children ? children.replace(/^\n/, ""): "";
+    const cleanedChildren = children ? children.replace(/^\n/, "") : "";
 
     const copyToClipboard = () => {
         if (cleanedChildren) navigator.clipboard.writeText(cleanedChildren);

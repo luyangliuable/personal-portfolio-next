@@ -1,7 +1,8 @@
+"use client";
+
 import React, { useMemo, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { marked } from "marked";
-import { useLocation } from 'react-router-dom';
 import { isCenterAlignedWithViewport } from "../../../components/Utility/ScrollUtility";
 import { IoMdArrowBack } from "react-icons/io";
 import { IBlogContentState } from "./Interface/IBlogContentState";
@@ -13,16 +14,16 @@ import IBlogContentProps from "./Interface/IBlogContentProps";
 import BlogPostResponse from "../../../repositories/Response/BlogPostResponse";
 import TableOfContent from "./TableOfContents/TableOfContents";
 import Image from "../../../components/Image/Image";
-import OpenGraphWrapper from "../../../wrappers/OpenGraphWrapper/OpenGraphWrapper";
 import PostDetailsPanel from "./PostDetailsPanel/PostDetailsPanel";
 import AuthorDetails from "./AuthorDetails/AuthorDetails";
+import { useScrollPosition } from "../../../hooks";
 import "./BlogContent.css";
 import "./CodeBlock/CodeBlock.css";
 
-const BlogContent: React.FC<IBlogContentProps> = ({ scrolled }) => {
+const BlogContent: React.FC<IBlogContentProps> = () => {
     const postRepository = useMemo(() => PostRepository.getInstance(), []);
     const emitter = useMemo(() => new EventEmitter(), []);
-    let location = useLocation();
+    const { scrollY: scrolled } = useScrollPosition();
     const [state, setState] = useState<IBlogContentState>({
         headings: [],
         cache: {
@@ -38,7 +39,7 @@ const BlogContent: React.FC<IBlogContentProps> = ({ scrolled }) => {
             content: undefined
         }));
         getBlogContentFromQuery();
-    }, [location]);
+    }, []);
 
 
     useEffect(() => {
@@ -87,15 +88,8 @@ const BlogContent: React.FC<IBlogContentProps> = ({ scrolled }) => {
     }
 
     async function getBlogContentFromQuery(): Promise<void> {
-        const searchParams: any = new URLSearchParams(window.location.search);
-
-        const queryObj: any = {};
-        for (let [key, value] of searchParams.entries()) {
-            queryObj[key] = value;
-        }
-
         postRepository
-            .getPost(queryObj.id)
+            .getPost("6623069379831740b12790b9")
             .then((response: BlogPostResponse) => {
                 updateContentToDisplay(response);
             });
@@ -137,23 +131,19 @@ const BlogContent: React.FC<IBlogContentProps> = ({ scrolled }) => {
 
 
     return (
-        <OpenGraphWrapper
-            heading="Luyang's Blogs"
-            body="Blog posts for documenting useful code, mark memorable moments in my life and help my journey of endless self-improvement."
-            imageUrl="https://w.wallhaven.cc/full/o5/wallhaven-o5wlp9.png"
-        >
-            <main className="page-container">
-                <section className="blog-content__wrapper">
-                    <PostDetailsPanel content={content} relatedPosts={relatedPosts} />
-                    {renderBlogContent()}
+        <main className="page-container">
+            <section className="blog-content__wrapper">
+                <PostDetailsPanel content={content} relatedPosts={relatedPosts} />
+                {renderBlogContent()}
+                { ( headings.length !== 0) &&
                     <aside className="blog-content__side-components position-sticky mt-20vh">
-                        <Link to="/digital_chronicles/blogs" className="flex items-center"><IoMdArrowBack />Back to Blogs</Link>
+                        <Link href="/digital_chronicles/blogs" className="flex items-center"><IoMdArrowBack />Back to Blogs</Link>
                         <TableOfContent emitter={emitter} headings={headings} />
                     </aside>
-                </section>
-            </main>
-        </OpenGraphWrapper>
+                }
+            </section>
+        </main>
     );
 }
 
-export default BlogContent;
+export default React.memo(BlogContent);

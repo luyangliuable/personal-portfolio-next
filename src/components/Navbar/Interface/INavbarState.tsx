@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-interface ILink {
+export interface ILink {
     name: string;
     icon?: ReactNode;
     to: string;
@@ -8,13 +8,11 @@ interface ILink {
     onClick?: () => void;
 }
 
-interface NavbarItem extends ILink {
+export interface NavbarItem extends ILink {
     sublinks?: ILink[];
 }
 
-interface INavbarState {
-    name: string;
-    links: NavbarItem[];
+export interface INavbarState {
     currentlyHoveredNavbarLinkName: string | null;
     lastScrollY: number;
     isNavbarHidden: boolean;
@@ -22,5 +20,3 @@ interface INavbarState {
     navBarDetached: boolean;
     dropdownMenuLinkDisplay: ReactNode[];
 }
-
-export { INavbarState, ILink, NavbarItem };

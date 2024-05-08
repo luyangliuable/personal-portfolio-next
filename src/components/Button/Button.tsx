@@ -1,8 +1,8 @@
-"use client";
 import React, { Component } from 'react';
-import Link from 'next/link';
+import Link from "next/link";
 import './Button.css';
 import IButtonProps, { IButtonPropsWithTo, IButtonPropsWithOnClick } from "./Interface/IButtonProps";
+
 import { cardGradientEffect } from "../Utility/MouseUtility";
 
 class HeroSection extends Component<IButtonProps, {}> {
@@ -36,11 +36,8 @@ class HeroSection extends Component<IButtonProps, {}> {
 
     render(): React.ReactNode {
         if (this.isLinkProps(this.props)) {
-
-            if (this.props.to === null) return (<></>);
-
             return (
-                <Link href={this.props.disabled ? "/" : this.props.to}>
+                <Link href={this.props.disabled ? null : this.props.to}>
                     {this.renderButton()}
                 </Link>
             );

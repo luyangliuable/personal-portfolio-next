@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useMemo } from "react";
 import HeroSection from "../../components/HeroSection/HeroSection";
 import ILandingPagestate from "./Interface/ILandingPageState";
 import ILandingPageProps from "./Interface/ILandingPageProps";
@@ -6,24 +6,23 @@ import Experiences from "../../components/ExperienceSection/ExperienceSection";
 import FeaturedContentSection from "../../components/FeaturedContentSection/FeaturedContentSection";
 import LandingPageCard from "../../components/LandingPageCard/LandingPageCard";
 import BlogPage from "../BlogPage/BlogPage";
+import { useScrollPosition } from "../../hooks";
 
-class LandingPage extends Component<ILandingPageProps, ILandingPagestate> {
-  constructor(props: ILandingPageProps) {
-    super(props);
-  }
+const LandingPage: React.FC<ILandingPageProps> = () => {
+    const { scrollY, scrolling } = useScrollPosition();
 
-  render(): React.ReactElement<any, any> {
     return (
-      <main className="landing-page-content">
-        <HeroSection scrolling={this.props.scrolling} />
-        <FeaturedContentSection scrolled={this.props.scrolled} />
-        <div className="experience-section-wrapper"><Experiences scrolled={this.props.scrolled} /></div>
-        <LandingPageCard landingPageCardType="fitContent" className="blend-with-background">
+        <main className="landing-page-content">
+            <HeroSection scrolling={scrolling} />
+            <FeaturedContentSection />
+            <div className="experience-section-wrapper">
+                <Experiences scrolled={scrollY} />
+            </div>
+            <LandingPageCard landingPageCardType="fitContent" className="blend-with-background">
                 <section className="flex-column-centered-centered"><BlogPage /></section>
             </LandingPageCard>
         </main>
     )
-  }
 }
 
 export default LandingPage;

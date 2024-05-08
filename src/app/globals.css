@@ -2,7 +2,8 @@
     --page-top-margin: 68px;
     --navbar-height: 68px;
 
-    --page-bottom-margin: 120px;
+    --page-bottom-margin: 0;
+    --page-bottom-padding: 120px;
     --common-card-margin: min(25vh, 100px);
 
     --dark-mode-black: #1e1e1e;
@@ -28,14 +29,6 @@
     --orange: #ffcc81;
     --cyan: #7ed1e2;
 }
-
-
-
-code {
-    font-family: 'Fira Code', source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-                 monospace;
-}
-
 
 @font-face {
     font-family: 'Fira Code';
@@ -178,69 +171,36 @@ code {
     font-style: italic;
 }
 
-
 body {
     margin: 0;
     background: #EEE;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
-    with: 100vw !important;
+}
+
+code {
+    font-family: 'Fira Code', source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+                 monospace;
 }
 
 html {
     font-family: 'Proxima Nova', ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI, Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
 }
 
-
-.App {
-    position: absolute;
+* {
+    box-sizing: border-box;
 }
 
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+code {
+    font-family: 'Fira Code', source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+                 monospace;
 }
 
 h1 {
     margin-block-start: 0.67em;
     font-size: 2em;
     margin-block-end: 0.67em;
-}
-
-.App-header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-}
-
-.flex-vertical {
-    display: flex;
-    flex-direction: column;
-}
-
-.App-link {
-    color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
 }
 
 @media screen and (max-width: 768px) {
@@ -291,6 +251,8 @@ a {
 .page-body, main {
     margin-top: var(--page-top-margin);
     margin-bottom: var(--page-bottom-margin);
+    /* margin-bottom: var(--page-bottom-padding); */
+    padding-bottom: var(--page-bottom-padding);
     width: 100vw;
     display: flex;
     flex-direction: column;
@@ -416,6 +378,10 @@ a {
 
 .justify-center {
     justify-content: center
+}
+
+.justify-evenly {
+    justify-content: space-evenly
 }
 
 .justify-start {

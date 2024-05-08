@@ -1,4 +1,5 @@
-import React, { Component, createRef } from "react";
+"use client";
+import React, { Component } from "react";
 import { IGalleryProps } from "./Interface/IGalleryProps";
 import IGalleryState from "./Interface/IGalleryState";
 import GalleryItem from "./GalleryItem/GalleryItem";
@@ -11,20 +12,6 @@ class Gallery extends Component<IGalleryProps, IGalleryState> {
 
     constructor(props: IGalleryProps) {
         super(props);
-        this.galleryContainerRef = createRef();
-        this.state = {
-            shouldAddDummy: false
-        };
-    }
-
-    componentDidMount(): void {
-        const container = this.galleryContainerRef.current!;
-        const itemCount = container.querySelectorAll(':scope > *').length;
-        if (itemCount === 1) {
-            this.setState({ shouldAddDummy: true });
-        } else {
-            this.setState({ shouldAddDummy: false });
-        }
     }
 
     renderGalleryItems(): React.ReactNode {
@@ -37,10 +24,8 @@ class Gallery extends Component<IGalleryProps, IGalleryState> {
         return (
             <>
                 <div className="heading__wrapper"><h2>{this.props.heading}</h2></div>
-                <div ref={this.galleryContainerRef} className="gallery-item__container">
+                <div className="gallery-item__container">
                     {this.renderGalleryItems()}
-                    {this.state.shouldAddDummy && <GalleryItem style={{ visibility: "hidden" }} />}
-                    {this.state.shouldAddDummy && <GalleryItem style={{ visibility: "hidden" }} />}
                 </div>
             </>
         );

@@ -1,12 +1,11 @@
 import React from "react";
 import BlogPostResponse from "../../../../repositories/Response/BlogPostResponse";
 import BuyMeACoffeeButton from "../BuyMeACoffeeButton/BuyMeACoffeeButton";
-import { Link } from "react-router-dom";
-import '../../../../components/Card/Card.css';
+import Link from "next/link";
 import AuthorDetails from "../AuthorDetails/AuthorDetails";
-import SkeletonBlogContent from "../SkeletonBlogContent/SkeletonBlogContent";
 import { cardGradientEffect } from "../../../../components/Utility/MouseUtility";
 import TagCloud from "../../../../components/TagCloud/TagCloud";
+import "./PostDetailsPanel.css";
 
 type IPostDetailsPanelProps = {
     content?: BlogPostResponse,
@@ -30,7 +29,7 @@ const PostDetailsPanel: React.FC<IPostDetailsPanelProps> = ({ content, relatedPo
                             const { heading, author } = post;
                             const link = `/digital_chronicles/blog?id=${post._id.$oid}`;
                             return (
-                                <Link className="w-80" to={link} key={idx}>
+                                <Link className="w-80" href={link} key={idx}>
                                     <div className="card no-boundary px-1" onMouseMove={cardGradientEffect}>
                                         <h4 className="mb-0">{heading}</h4>
                                         <p className="m-0">{author}</p>

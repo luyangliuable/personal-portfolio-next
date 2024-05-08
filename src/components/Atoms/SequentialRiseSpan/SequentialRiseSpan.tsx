@@ -1,17 +1,28 @@
 import React, { useState, useRef, useEffect, RefObject } from "react";
 import "./SequentialRiseSpan.css";
 
-interface ISequentialRiseSpanProps {
+export interface ISequentialRiseSpanProps {
     children: string;
     className?: string;
     elementType?: keyof JSX.IntrinsicElements;
+    wordsPerAnimation?: number,
+    animationDelayMiliseconds?: number,
     numberOfLettersPerLine?: number,
     calculationAdjustment?: number,
     minNumberOfLettersPerLine?: number,
     maxNumberOfLettersPerLine?: number
 }
 
-const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({ calculationAdjustment, children, elementType, className, numberOfLettersPerLine, minNumberOfLettersPerLine, maxNumberOfLettersPerLine }) => {
+
+const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
+    calculationAdjustment,
+    children,
+    elementType,
+    className,
+    numberOfLettersPerLine,
+    minNumberOfLettersPerLine,
+    maxNumberOfLettersPerLine
+}) => {
     const spanItemRef = useRef<HTMLDivElement>(null);
     const [wrappedLines, setWrappedLines] = useState([]);
     const [lineRefs, setLineRefs] = useState<RefObject<any>[]>([]);
@@ -65,7 +76,9 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({ calculationAdj
     useEffect(() => {
         let currentLine = '';
         let lines: string[] = [];
+
         const finalNumberOfLettersPerLine = numberOfLettersPerLine ?? Math.min(Math.max(measuredLettersPerLine, (minNumberOfLettersPerLine ?? 0)), (maxNumberOfLettersPerLine ?? Number.MAX_SAFE_INTEGER))
+
         String(children).split(' ').forEach((word) => {
             if ((currentLine + (currentLine ? ' ' : '') + word).length > finalNumberOfLettersPerLine) {
                 lines.push(currentLine);
@@ -74,8 +87,12 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({ calculationAdj
                 currentLine += (currentLine.length > 0 ? ' ' : '') + word;
             }
         });
+
         lines.push(currentLine);
+
+
         setLineRefs(lines.map(() => React.createRef<any>()));
+
         const linesElements = lines.map((line, index) => {
             const LineElement = React.createElement(
                 elementType || 'p',
@@ -87,6 +104,7 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({ calculationAdj
             );
             return LineElement;
         });
+
         setWrappedLines(linesElements);
     }, [children, elementType, className, measuredLettersPerLine, minNumberOfLettersPerLine]);
 

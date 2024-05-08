@@ -8,6 +8,6 @@ const reactComponentWhiteList: { [key: string]: any } = {
     'note': BlogNote,
     'warn': BlogWarning,
     'bbb': CodeBlock
-};
+}
 
 export default reactComponentWhiteList;

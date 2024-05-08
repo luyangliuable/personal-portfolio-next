@@ -1,7 +1,6 @@
 import React, { Component, createRef, RefObject } from "react";
 import "./Card.css";
 import Link from "next/link";
-
 import { cardGradientEffect } from "../../components/Utility/MouseUtility";
 import { isoDateFormatToString } from "../../components/Utility/StringUtility";
 import TagCloud from "../TagCloud/TagCloud";

@@ -1,3 +1,6 @@
+import reactComponentWhiteList from  "../reactComponentWhiteList";
+import React from "react";
+
 export type Attributes = { [key: string]: string };
 
 export const getFirstTagName = (html: string): string | null => {

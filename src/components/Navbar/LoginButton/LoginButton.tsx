@@ -1,6 +1,5 @@
 import React, { Component, ReactNode } from "react";
-/* import { NavLink } from "react-router-dom"; */
-import Link from 'next/link'
+import Link from "next/link";
 import { CiLogin } from 'react-icons/ci';
 import { AiFillCaretDown } from 'react-icons/ai';
 import UserRepository from "../../../repositories/UserRepository";
@@ -79,10 +78,9 @@ class LoginButton extends Component<ILoginButtonProps, ILoginButtonState> {
         const loginButtonInnerHTML = this.loginButtonInnerHTML;
         return (
             <Link
-                href={this.loginButtonTo ?? "/"}
+                href={this.loginButtonTo ?? ""}
                 onMouseOver={() => this.props.onMouseOver(this.sublinks)}
-                >
-                {/* className={({ isActive }) => ["navbar-item flex justify-center", isActive ? "navbar-item active-link" : null].filter(Boolean).join(" ")}> */}
+                className="navbar-item flex justify-center">
                 {loginButtonInnerHTML}
                 <div className="navbar-item__dropdown"></div>
             </Link >

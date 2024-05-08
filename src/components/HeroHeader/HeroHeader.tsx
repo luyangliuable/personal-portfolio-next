@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import IHeroHeaderProps from "./Interface/IHeroHeaderProps";
 import SequentialRiseSpan from "../Atoms/SequentialRiseSpan/SequentialRiseSpan";

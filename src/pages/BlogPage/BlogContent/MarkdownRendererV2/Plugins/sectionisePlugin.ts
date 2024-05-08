@@ -1,6 +1,6 @@
 import { findAfter } from 'unist-util-find-after';
 import { visit } from 'unist-util-visit';
-import { stringToHash } from "../../../../components/Utility/StringUtility";
+import { stringToHash } from "../../../../../components/Utility/StringUtility";
 
 const MAX_HEADING_DEPTH = 6;
 

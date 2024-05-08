@@ -1,9 +1,9 @@
+
 import React from "react";
 import ItableOfContentsProps from "./Interface/ItableOfContentsProps"
 import { useEffect, useState, useRef, RefObject } from "react";
 import { stringToHash } from "../../../../components/Utility/StringUtility";
 import "./TableOfContents.css";
-import gsap from "gsap";
 
 const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
     const [tocEntries, setTocEntries] = useState<JSX.Element[] | null>(null);
@@ -44,7 +44,7 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
             const marginBottom = `${(22 - 4.5 * level) / 2}px`;
             const color = getTextColor(level);
             const id = stringToHash(title);
-            const className = `level-${level - 2} section-toc-entry`;
+            const className = `level-${level - 2} section-toc-entry flex items-center`;
             return (
                 <div key={idx} id={id.toString()} className={className} style={{ color, margin: `${marginBottom} ${indentation}` }} onClick={(e) => handleClick(e, id.toString())}>
                     {title}
@@ -56,9 +56,6 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
             setTocEntryRef(renderedSubHeadings.map(() => React.createRef<any>()));
         }
     }
-
-    /* function sync(pathLength) {
-* } */
 
     const drawPath = () => {
         const tocPath = tocMarkerPathRef.current,
@@ -158,23 +155,13 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
                 })
             }
             <svg className="toc-marker" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="gradient1" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0" style={{ stopColor: '#000', stopOpacity: 1 }} id="stop13" />
-                        <stop offset="1" style={{ stopColor: '#00bfff', stopOpacity: 1 }} id="stop14" />
-                    </linearGradient>
-                    <linearGradient id="SvgjsLinearGradient1000">
-                        <stop stop-color="hsl(37, 99%, 67%)" offset="0"></stop>
-                        <stop stop-color="hsl(316, 73%, 52%)" offset="1"></stop>
-                    </linearGradient>
-                </defs>
                 <path
                     ref={tocMarkerPathRef}
-                    stroke="#000"
+                    stroke="#444"
                     strokeWidth="3"
                     fill="transparent"
                     strokeLinecap="round"
-                    stroke-dasharray="0, 0, 0, 1000"
+                    troke-dasharray="0, 0, 0, 1000"
                     strokeLinejoin="round"
                     transform="translate(-0.5, -0.5)"
                 />
@@ -184,4 +171,3 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
 }
 
 export default TableOfContents;
-

@@ -6,6 +6,8 @@
         },
         {
             "name": "Blogs",
+            "to": "/digital_chronicles",
+            "isDisabled": true,
             "sublinks": [
                 {
                     "name": "💻 Posts",
@@ -51,6 +53,8 @@
         },
         {
             "name": "Tools",
+            "to": "/tools",
+            "isDisabled": true,
             "sublinks": [
                 {
                     "name": "🤖 Chatgpt 5",
@@ -119,6 +123,8 @@
         },
         {
             "name": "About",
+            "to": "/about",
+            "isDisabled": true,
             "sublinks": [
                 {
                     "name": "🐩 Teddie the Dog",
@@ -134,6 +140,7 @@
         },
         {
             "name": "Misc.",
+            "isDisabled": true,
             "sublinks": [
                 {
                     "name": "🎵 Music Playlist",

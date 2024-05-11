@@ -20,7 +20,7 @@ import { useScrollPosition } from "../../../hooks";
 import "./BlogContent.css";
 import "./CodeBlock/CodeBlock.css";
 
-const BlogContent: React.FC<IBlogContentProps> = () => {
+const BlogContent: React.FC<IBlogContentProps> = ({id}) => {
     const postRepository = useMemo(() => PostRepository.getInstance(), []);
     const emitter = useMemo(() => new EventEmitter(), []);
     const { scrollY: scrolled } = useScrollPosition();
@@ -54,7 +54,7 @@ const BlogContent: React.FC<IBlogContentProps> = () => {
 
 
     function observeSections(): void {
-        const sections = Array.from(document.querySelectorAll('.blog-section'));
+        const sections = Array.from(document.querySelectorAll('.blog-section .blog-section--root'));
 
         const intersectingSections = sections.filter(section => {
             const offset = isCenterAlignedWithViewport(section);
@@ -89,7 +89,7 @@ const BlogContent: React.FC<IBlogContentProps> = () => {
 
     async function getBlogContentFromQuery(): Promise<void> {
         postRepository
-            .getPost("6623069379831740b12790b9")
+            .getPost(id)
             .then((response: BlogPostResponse) => {
                 updateContentToDisplay(response);
             });

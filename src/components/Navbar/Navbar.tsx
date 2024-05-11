@@ -5,13 +5,13 @@ import Link from "next/link";
 import { INavbarState, ILink, NavbarItem } from "./Interface/INavbarState";
 import { useScrollPosition } from "../../hooks";
 import { FaArrowCircleUp } from "react-icons/fa";
-import { AiOutlineDown } from "react-icons/ai";
-import { CiLock } from "react-icons/ci";
 import INavbarProps from "./Interface/INavbarProps";
 import NavBurgerPanel from "./NavBurgerPanel/NavBurgerPanel";
 import BurgerMenuIcon from "./BurgerMenuIcon/BurgerMenuIcon";
 import LoginButton from "./LoginButton/LoginButton";
 import linksData from "../../configs/links.json";
+import NavLink from "./NavLink/NavLink";
+import NavbarScrollProgress from "./NavbarScrollProgress/NavbarScrollProgress";
 import "./Navbar.css";
 
 import { usePathname } from 'next/navigation';
@@ -51,21 +51,6 @@ const NavBar: React.FC<INavbarProps> = () => {
         setNavBarHeight(height);
     }, [])
 
-    const updateScrolledProgress = (progress: number) => {
-        if (scrollProgress) {
-            scrollProgress.current!.style.width = `${progress * 100}vw`;
-            const blueEnd = 95 + progress * 4.5;
-            scrollProgress.current!.style.background = `linear-gradient(to right,  var(--dark-mode-purple-2), ${blueEnd}%, #00bfff)`;
-
-            if (progress === 1) {
-                scrollProgress.current!.classList.add("scroll-progress-complete");
-                scrollProgress.current!.style.background = "orange";
-            } else {
-                scrollProgress.current!.classList.remove("scroll-progress-complete");
-            }
-        }
-    };
-
     const listenDeltaScrolled = () => {
         const { hideNavBarScrollSensitivity, isNavbarHidden } = state;
         const deltaScrolled = deltaScrollCalculation?.deltaScrolled ?? 0;
@@ -82,11 +67,7 @@ const NavBar: React.FC<INavbarProps> = () => {
         } else if (scrollY! < navBarHeight) {
             attachNavBar();
         }
-
-        const pageHeight = document.documentElement.scrollHeight - window.innerHeight;
-        updateScrolledProgress(scrollY! / pageHeight);
     };
-
 
     const addBurgerClickOutEventLister = () => {
         window.addEventListener("click", hideBurgerMenu);
@@ -120,11 +101,9 @@ const NavBar: React.FC<INavbarProps> = () => {
 
     const initializeNavBar = () => {
         listenContinuousScrolled();
-        updateScrolledProgress(0);
+        // updateScrolledProgress(0);
         if (window.innerWidth < 900) addBurgerClickOutEventLister();
     }
-
-
 
     useEffect(() => {
         updateScrollingBehavior();
@@ -159,6 +138,7 @@ const NavBar: React.FC<INavbarProps> = () => {
             }
         });
     };
+
 
     const hideNavBar = () => {
         // If the navbar is not already hidden, hide it and set the navbar height to 0px
@@ -206,49 +186,37 @@ const NavBar: React.FC<INavbarProps> = () => {
         selectedNavlinkWindow.current?.classList.add("show-navbar-dropdown");
     }
 
-    const renderDropdownMenu = (links: ILink[] | undefined): ReactNode | void => {
-        if (links !== undefined) {
+    const renderDropdownMenu = (links?: ILink[]): ReactNode | void => {
+        if (links && links.length > 0) {
             showDropdownMenu();
-            setState((prev) => {
-                return {
-                    ...prev,
-                    dropdownMenuLinkDisplay: links.map((item, _) => renderNavLink(item))
-                }
-            });
-            if (state.dropdownMenuLinkDisplay.length === 0) hideDropdownMenu();
+
+            setState(prev => ({
+                ...prev,
+                dropdownMenuLinkDisplay: links.map(link => (
+                    <NavLink
+                        key={link.name}
+                        link={link}
+                        isSubLink={true}
+                        links={links}
+                        renderDropdownMenu={renderDropdownMenu}
+                    />
+                )),
+            }));
         } else {
             hideDropdownMenu();
         }
-    }
+    };
 
     const renderNavLink = (link: NavbarItem, isSubLink: boolean = true) => {
-        // https://mikebifulco.com/posts/javascript-filter-boolean
-        const navLinkContent = [
-            link.name, link.icon,
-            link.sublinks && <AiOutlineDown key="down-icon" />,
-            link.isLocked && <CiLock key="lock-icon" />
-        ].filter(Boolean);
-        const targetPath = link.isLocked ? null : link.to;
-        const onMouseOverAction = isSubLink ? () => {} : () => renderDropdownMenu(links.filter(item => item.name === link.name)[0].sublinks);
-
-        const isActive = () => {
-            if (pathname == null || targetPath == null) return false;
-
-            const currentUrl = new URLSearchParams(pathname!);
-            const targetUrl = new URLSearchParams(targetPath!);
-            console.log(currentUrl, targetUrl);
-
-            return pathname === targetPath;
-        }
-
         return (
-            <Link
-                href={targetPath ?? ""}
-                className={`navbar-item flex justify-center items-center  ${isActive() ? "active-link" : ""}`}
+            <NavLink
                 key={link.name}
-                onMouseOver={onMouseOverAction}>
-                {navLinkContent}
-            </Link>
+                link={link}
+                isSubLink={isSubLink}
+                hideDropdownMenu={hideDropdownMenu}
+                links={links}
+                renderDropdownMenu={renderDropdownMenu}
+            />
         );
     };
 
@@ -258,7 +226,7 @@ const NavBar: React.FC<INavbarProps> = () => {
                 <Link href="/"><h1 className="logo">{websiteName}</h1></Link>
             </div>
             <nav ref={navbarLeft} className="navbar-left flex flex-row">
-                { links.map((item, _) => renderNavLink(item, false)) }
+                {links.map((item, _) => renderNavLink(item, false))}
                 <LoginButton onMouseOver={renderDropdownMenu} />
                 <section ref={selectedNavlinkWindow} className="selected-navlink-window flex items-center">
                     <div ref={navbarSubmenu} className="navbar-item__dropdown ">
@@ -278,9 +246,7 @@ const NavBar: React.FC<INavbarProps> = () => {
         <>
             <article className="navbar" onMouseLeave={() => hideDropdownMenu()} ref={navbar}>
                 {navBarMainSection}
-                <aside id="scroll-progress" ref={scrollProgress}>
-                    <FaArrowCircleUp />
-                </aside>
+                <NavbarScrollProgress scrollY/>
             </article>
             {navbarBurgerPanel}
         </>

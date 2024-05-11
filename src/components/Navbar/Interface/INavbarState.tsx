@@ -5,6 +5,7 @@ export interface ILink {
     icon?: ReactNode;
     to: string;
     isLocked?: boolean;
+    isDisabled?: boolean;
     onClick?: () => void;
 }
 

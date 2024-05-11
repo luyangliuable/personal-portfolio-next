@@ -1,4 +1,5 @@
 interface BlogContentProps {
+    id: string;
     scrolled?: number;
 }
 

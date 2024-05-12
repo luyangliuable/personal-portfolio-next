@@ -12,5 +12,5 @@ interface PageProps {
 export default function BlogContentServer({ params }: PageProps) {
     const { id } = params;
 
-    return (<BlogContent id />);
+    return (<BlogContent id={ id } />);
 }

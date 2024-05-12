@@ -29,17 +29,6 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ lang, children, filename }) => {
                 .current!
                 .style
                 .setProperty("margin-top", "50px");
-            console.log(filename);
-            console.log(filename);
-            console.log(filename);
-            console.log(filename);
-            console.log(filename);
-            console.log(filename);
-            console.log(filename);
-            console.log(filename);
-            console.log(filename);
-            console.log(filename);
-            console.log(filename);
         }
     }, [codeBlockRef.current, filename]);
 

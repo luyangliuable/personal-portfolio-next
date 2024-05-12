@@ -1,16 +1,14 @@
-"use client";
 import React from "react";
 import type { Metadata } from "next";
-import "./CodingProjectsPage.css";
 import Gallery from "../../../components/Gallery/Gallery";
 import HeroHeader from "../../../components/HeroHeader/HeroHeader";
 import { GalleryItem } from "../../../components/Gallery/Interface/IGalleryProps";
 
-/* export const metadata: Metadata = {
-*     title: "Luyang's Coding Projects",
-*     description: "My coding projects outside of work that are either from uni, self-interest or for fun."
-* };
-*  */
+export const metadata: Metadata = {
+    title: "Luyang's Website | Coding Projects",
+    description: "My coding projects outside of work that are either from uni, self-interest or for fun."
+};
+
 
 type CodingProjects = {
     projectsICreated: GalleryItem[],

@@ -6,30 +6,29 @@ import GalleryItem from "./GalleryItem/GalleryItem";
 import "../Utility/MouseUtility";
 import "./Gallery.css";
 
-
 class Gallery extends Component<IGalleryProps, IGalleryState> {
-    galleryContainerRef: React.RefObject<HTMLDivElement>;
+  galleryContainerRef: React.RefObject<HTMLDivElement>;
 
-    constructor(props: IGalleryProps) {
-        super(props);
-    }
+  constructor(props: IGalleryProps) {
+    super(props);
+  }
 
-    renderGalleryItems(): React.ReactNode {
-        return this.props.content.map((item: any, index: number) => (
-            <GalleryItem key={index} {...item} />
-        ))
-    }
+  renderGalleryItems(): React.ReactNode {
+    return this.props.content.map((item: any, index: number) => (
+      <GalleryItem key={index} {...item} />
+    ));
+  }
 
-    render() {
-        return (
-            <>
-                <div className="heading__wrapper"><h2>{this.props.heading}</h2></div>
-                <div className="gallery-item__container">
-                    {this.renderGalleryItems()}
-                </div>
-            </>
-        );
-    }
+  render() {
+    return (
+      <>
+        <div className="heading__wrapper">
+          <h2>{this.props.heading}</h2>
+        </div>
+        <div className="gallery">{this.renderGalleryItems()}</div>
+      </>
+    );
+  }
 }
 
 export default Gallery;

@@ -6,12 +6,10 @@ import { marked } from "marked";
 import { isCenterAlignedWithViewport } from "../../../components/Utility/ScrollUtility";
 import { IoMdArrowBack } from "react-icons/io";
 import { IBlogContentState } from "./Interface/IBlogContentState";
-import { EventEmitter } from 'events';
+import { EventEmitter } from "events";
 import PostRepository from "../../../repositories/PostRepository";
 import MarkdownRendererV2 from "./MarkdownRendererV2/MarkdownRendererV2";
-import SkeletonBlogContent from "./SkeletonBlogContent/SkeletonBlogContent";
 import IBlogContentProps from "./Interface/IBlogContentProps";
-import BlogPostResponse from "../../../repositories/Response/BlogPostResponse";
 import TableOfContent from "./TableOfContents/TableOfContents";
 import Image from "../../../components/Image/Image";
 import PostDetailsPanel from "./PostDetailsPanel/PostDetailsPanel";
@@ -20,130 +18,118 @@ import { useScrollPosition } from "../../../hooks";
 import "./BlogContent.css";
 import "./CodeBlock/CodeBlock.css";
 
-const BlogContent: React.FC<IBlogContentProps> = ({id}) => {
-    const postRepository = useMemo(() => PostRepository.getInstance(), []);
-    const emitter = useMemo(() => new EventEmitter(), []);
-    const { scrollY: scrolled } = useScrollPosition();
-    const [state, setState] = useState<IBlogContentState>({
-        headings: [],
-        cache: {
-            fetchedImageUrl: "",
-            fetchedAuthorImageUrl: "",
-        }
-    });
+const BlogContent: React.FC<IBlogContentProps> = ({ id, content }) => {
+  const postRepository = useMemo(() => PostRepository.getInstance(), []);
+  const emitter = useMemo(() => new EventEmitter(), []);
+  const { scrollY: scrolled } = useScrollPosition();
 
-    useEffect(() => {
-        document.documentElement.scrollTo(0, 0);
-        setState((prev) => ({
-            ...prev,
-            content: undefined
-        }));
-        getBlogContentFromQuery();
-    }, []);
+  const [state, setState] = useState<IBlogContentState>({
+    headings: [],
+    cache: {
+      fetchedImageUrl: "",
+      fetchedAuthorImageUrl: "",
+    },
+  });
 
+  useEffect(() => {
+    document.documentElement.scrollTo(0, 0);
+  }, []);
 
-    useEffect(() => {
-        updatedRelatedPosts();
-        updateBlogContentHeadings();
-    }, [state.content]);
-
-
-    useEffect(() => {
-        observeSections();
-    }, [scrolled]);
-
-
-    function observeSections(): void {
-        const sections = Array.from(document.querySelectorAll('.blog-section .blog-section--root'));
-
-        const intersectingSections = sections.filter(section => {
-            const offset = isCenterAlignedWithViewport(section);
-            return offset <= window.innerHeight && offset >= -window.innerHeight;
-        }).map(section => section.id);
-
-        if (intersectingSections.length > 0) {
-            emitter.emit('intersectingSections', intersectingSections);
-        }
-    }
-
-
-    const updateContentToDisplay = (content: BlogPostResponse): void => {
-        setState((prev) => ({ ...prev, content: content }));
-    }
-
-
+  useEffect(() => {
     const updateBlogContentHeadings = (): void => {
-        if (state.content !== undefined) {
-            const renderer = new marked.Renderer();
-            const originalHeadingRenderer = renderer.heading.bind(renderer);
-            let headings: { title: string; level: number }[] = [];
-            renderer.heading = (text, level) => {
-                headings.push({ title: text, level: level });
-                return originalHeadingRenderer(text, level);
-            };
-            marked(state.content?.body, { renderer });
-            if (!headings) return;
-            setState((prev) => ({ ...prev, headings: headings }));
-        }
-    }
-
-    async function getBlogContentFromQuery(): Promise<void> {
-        postRepository
-            .getPost(id)
-            .then((response: BlogPostResponse) => {
-                updateContentToDisplay(response);
-            });
-    }
-
+      if (content !== undefined) {
+        const renderer = new marked.Renderer();
+        const originalHeadingRenderer = renderer.heading.bind(renderer);
+        let headings: { title: string; level: number }[] = [];
+        renderer.heading = (text, level) => {
+          headings.push({ title: text, level: level });
+          return originalHeadingRenderer(text, level);
+        };
+        marked(content?.body, { renderer });
+        if (!headings) return;
+        setState((prev) => ({ ...prev, headings: headings }));
+      }
+    };
 
     async function updatedRelatedPosts(): Promise<void> {
-        if (state.content === undefined) return;
-        const { tags, _id } = state.content!;
-        const relatedPosts = await postRepository.getRelatedPosts(tags, _id.$oid, 3);
-        setState(prev => ({ ...prev, relatedPosts }));
+      if (content === undefined) return;
+      const { tags, _id } = content;
+      const relatedPosts = await postRepository.getRelatedPosts(
+        tags,
+        _id.$oid,
+        3,
+      );
+      setState((prev) => ({ ...prev, relatedPosts }));
     }
 
+    updatedRelatedPosts();
+    updateBlogContentHeadings();
+  }, [content, postRepository]);
 
-    function renderBlogContent(): React.ReactNode {
-        if (state.content === undefined) return (<SkeletonBlogContent />);
-        const { heading, image, body, _id } = state.content;
-        const imageId = image?.$oid;
+  useEffect(() => {
+    function observeSections(): void {
+      const sections = document.querySelectorAll(
+        ".blog-section, .blog-section--root",
+      );
+      const sectionsArray = Array.from(sections);
+      const intersectingSections = sectionsArray
+        .filter((section) => {
+          const offset = isCenterAlignedWithViewport(section);
+          return offset <= window.innerHeight && offset >= -window.innerHeight;
+        })
+        .map((section) => section.id);
 
-        return (
-            <article className="blog-content box-shadow">
-                <header className="blog-content__header">
-                    <h1>{heading}</h1>
-                    <AuthorDetails content={state.content} />
-                </header>
-                <Image className="blog-content__image" src={imageId} />
-                <section className="w-full flex-col justify-center items-center translucent-white table-of-content--small-screen">
-                    <TableOfContent className="w-80" headings={state.headings} />
-                </section>
-                <section className="blog-content-body">
-                    <MarkdownRendererV2 key={_id.$oid} markdown={body} />
-                </section>
-            </article>
-        );
+      if (intersectingSections.length > 0) {
+        emitter.emit("intersectingSections", intersectingSections);
+      }
     }
 
+    observeSections();
+  }, [scrolled, emitter]);
 
-    const { relatedPosts, headings, content } = state;
-
+  function renderBlogContent(): React.ReactNode {
+    const { heading, image, body, _id } = content;
+    const imageId = image?.$oid;
 
     return (
-        <main className="page-container">
-            <section className="blog-content__wrapper">
-                <PostDetailsPanel content={content} relatedPosts={relatedPosts} />
-                {renderBlogContent()}
-                { ( headings.length !== 0) &&
-                    <aside className="blog-content__side-components position-sticky mt-20vh">
-                        <Link href="/digital_chronicles/blogs" className="flex items-center"><IoMdArrowBack />Back to Blogs</Link>
-                        <TableOfContent emitter={emitter} headings={headings} />
-                    </aside>
-                }
-            </section>
-        </main>
+      <article className="blog-content box-shadow">
+        <header className="blog-content__header">
+          <h1>{heading}</h1>
+          <AuthorDetails content={content} />
+        </header>
+        <Image alt="" className="blog-content__image" src={imageId} />
+        <section className="w-full flex-col justify-center items-center translucent-white table-of-content--small-screen">
+          <TableOfContent className="w-80" headings={state.headings} />
+        </section>
+        <section className="blog-content-body">
+          <MarkdownRendererV2 key={_id.$oid} markdown={body} />
+        </section>
+      </article>
     );
-}
+  }
+
+  const { relatedPosts, headings } = state;
+
+  return (
+    <main className="page-container">
+      <section className="blog-content__wrapper">
+        <PostDetailsPanel content={content} relatedPosts={relatedPosts} />
+        {renderBlogContent()}
+        {headings.length !== 0 && (
+          <aside className="blog-content__side-components position-sticky mt-20vh">
+            <Link
+              href="/digital_chronicles/blogs"
+              className="flex items-center"
+            >
+              <IoMdArrowBack />
+              Back to Blogs
+            </Link>
+            <TableOfContent emitter={emitter} headings={headings} />
+          </aside>
+        )}
+      </section>
+    </main>
+  );
+};
 
 export default React.memo(BlogContent);

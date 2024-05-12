@@ -1,6 +1,6 @@
 import React from "react";
-import type { Metadata } from "next";
 import BlogPage from "../../../pages/BlogPage/BlogPage";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: "Luyang's Blog",

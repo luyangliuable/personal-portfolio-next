@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { NavLink } from "react-router-dom";
+import Link from "next/link";
 import IButtonProps, { IButtonPropsWithTo } from "../../Button/Interface/IButtonProps";
 import './IconButton.css';
 
@@ -30,7 +30,7 @@ const IconButton: React.FC<IButtonProps> = (props: IButtonProps) => {
 
     if (isLinkProps(props)) {
         return (
-            <NavLink target={props.target} to={props.to} className={props.className}>{renderButton()}</NavLink>
+            <Link target={props.target} href={props.to} className={props.className}>{renderButton()}</Link>
         );
     }
 

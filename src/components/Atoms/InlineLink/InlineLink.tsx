@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink } from "react-router-dom";
+import Link from "next/link";
 import IButtonProps, { IButtonPropsWithTo, IButtonPropsWithOnClick } from "../../Button/Interface/IButtonProps";
 import './InlineLink.css';
 
@@ -25,9 +25,9 @@ class InlineLink extends Component<IButtonProps, {}> {
     render(): React.ReactNode {
         if (this.isLinkProps(this.props)) {
             return (
-                <NavLink target={this.props.target} to={this.props.to} className={this.props.className}>
+                <Link target={this.props.target} href={this.props.to ?? ""} className={this.props.className}>
                     {this.renderButton()}
-                </NavLink>
+                </Link>
             );
         } else if (this.isButtonProps(this.props)) {
             return (

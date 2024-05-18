@@ -29,12 +29,14 @@ class LandingPageCard extends Component<ILandingPageCardProps, any> {
         }, 500);
     }
 
-    private determineWhatTypeOfLandingPageCardToUse(landingPageCardType: LandingPageCardType): string {
+    private determineWhatTypeOfLandingPageCardToUse(landingPageCardType?: LandingPageCardType): string {
         const mapper = {
             "normal": "landing-page-card",
             "fitUnderNavbar": "landing-page-card landing-page-card--fit-under-navbar",
             "fitContent": "landing-page-card landing-page-card--fit-content"
         }
+
+        if (landingPageCardType === undefined) return "landing-page-card";
 
         return mapper[landingPageCardType];
     }

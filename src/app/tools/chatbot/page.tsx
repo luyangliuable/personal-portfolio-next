@@ -1,7 +1,10 @@
 'use client';
 import React, { useEffect } from "react";
-import { Chatbot } from "ollama-chat-client";
+// @ts-ignore
+import { Chatbot as ChatbotComponent } from "ollama-chat-client";
 import "./Chatbot.css";
+
+const Chatbot = ChatbotComponent as unknown as React.FC<{ baseURI: string }>;
 
 const LlChatbot: React.FC = ({}) => {
     useEffect(() => {

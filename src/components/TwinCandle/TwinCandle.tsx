@@ -280,7 +280,7 @@ class TwinCandles extends Component<ITwinCandleProps, ITwinCandleState> {
             });
 
             // TODO temporary solution because I am tired start
-            var element: HTMLElement = document.querySelector(".featured-section-content");
+            var element: HTMLElement | null = document.querySelector(".featured-section-content");
 
             // Check if the element exists and set its "darkness"
             if (element) {
@@ -296,7 +296,7 @@ class TwinCandles extends Component<ITwinCandleProps, ITwinCandleState> {
 
     public turnCandleLightOff = () => {
         // TODO temporary solution because I am tired start
-        var element: HTMLElement = document.querySelector(".featured-section-content");
+        var element: HTMLElement | null = document.querySelector(".featured-section-content");
 
         // Check if the element exists and set its display to "none"
         if (element) {
@@ -318,9 +318,13 @@ class TwinCandles extends Component<ITwinCandleProps, ITwinCandleState> {
     }
 
     private changeRefClassName = (element: RefObject<HTMLElement>, newClassNameList: string[]) => {
-        // Assuming that the ref must contain only one classname at a time.
-        element.current?.classList.remove(...element.current?.classList);
+        // Convert the DOMTokenList to an array
+        const currentClassList = Array.from(element.current?.classList || []);
 
+        // Remove all current class names
+        element.current?.classList.remove(...currentClassList);
+
+        // Add new class names
         for (const newClassName of newClassNameList) {
             element.current?.classList.add(newClassName);
         }

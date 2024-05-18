@@ -1,7 +1,6 @@
-import React, { useMemo } from "react";
+import React from "react";
 import HeroSection from "../../components/HeroSection/HeroSection";
-import ILandingPagestate from "./Interface/ILandingPageState";
-import ILandingPageProps from "./Interface/ILandingPageProps";
+import { ILandingPagestate, ILandingPageProps } from "../../interfaces";
 import Experiences from "../../components/ExperienceSection/ExperienceSection";
 import FeaturedContentSection from "../../components/FeaturedContentSection/FeaturedContentSection";
 import LandingPageCard from "../../components/LandingPageCard/LandingPageCard";

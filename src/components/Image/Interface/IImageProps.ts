@@ -1,6 +1,4 @@
-// import { JSXStyles } from 'react';
-
-class IImageProps {
+interface IImageProps {
     src: string;
     className?: string;
     style?: any;

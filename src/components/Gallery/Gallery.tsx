@@ -7,8 +7,6 @@ import "../Utility/MouseUtility";
 import "./Gallery.css";
 
 class Gallery extends Component<IGalleryProps, IGalleryState> {
-  galleryContainerRef: React.RefObject<HTMLDivElement>;
-
   constructor(props: IGalleryProps) {
     super(props);
   }

@@ -1,4 +1,4 @@
-import { IBlogHeading } from "../../Interface/IBlogContentState";
+import { IBlogHeading } from "../IBlogContentState"
 import { EventEmitter } from 'events';
  
 export default interface ItableOfContentsProps {

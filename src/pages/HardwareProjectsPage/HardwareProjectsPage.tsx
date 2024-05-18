@@ -1,8 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import "./HardwareProjectsPage.css";
 import Gallery from "../../components/Gallery/Gallery";
-import IHardwareProjectsPageState from "./Interface/IHardwareProjectsPageState";
-import IHeroHeaderProps from "../../components/HeroHeader/Interface/IHeroHeaderProps";
 import HeroHeader from "../../components/HeroHeader/HeroHeader";
 import { GalleryItem } from "../../components/Gallery/Interface/IGalleryProps";
 

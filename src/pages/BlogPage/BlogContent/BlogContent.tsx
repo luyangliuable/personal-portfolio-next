@@ -5,11 +5,11 @@ import Link from "next/link";
 import { marked } from "marked";
 import { isCenterAlignedWithViewport } from "../../../components/Utility/ScrollUtility";
 import { IoMdArrowBack } from "react-icons/io";
-import { IBlogContentState } from "./Interface/IBlogContentState";
+import { IBlogContentState } from "../../../interfaces/BlogPage/BlogContent/IBlogContentState";
+import IBlogContentProps from "../../../interfaces/BlogPage/BlogContent/IBlogContentProps";
 import { EventEmitter } from "events";
 import PostRepository from "../../../repositories/PostRepository";
 import MarkdownRendererV2 from "./MarkdownRendererV2/MarkdownRendererV2";
-import IBlogContentProps from "./Interface/IBlogContentProps";
 import TableOfContent from "./TableOfContents/TableOfContents";
 import Image from "../../../components/Image/Image";
 import PostDetailsPanel from "./PostDetailsPanel/PostDetailsPanel";
@@ -37,29 +37,25 @@ const BlogContent: React.FC<IBlogContentProps> = ({ id, content }) => {
 
   useEffect(() => {
     const updateBlogContentHeadings = (): void => {
-      if (content !== undefined) {
+      if (content) {
         const renderer = new marked.Renderer();
         const originalHeadingRenderer = renderer.heading.bind(renderer);
         let headings: { title: string; level: number }[] = [];
         renderer.heading = (text, level) => {
-          headings.push({ title: text, level: level });
-          return originalHeadingRenderer(text, level);
+          headings.push({ title: text, level });
+          return originalHeadingRenderer(text, level, "");
         };
-        marked(content?.body, { renderer });
-        if (!headings) return;
-        setState((prev) => ({ ...prev, headings: headings }));
+        marked(content.body, { renderer });
+        setState((prev) => ({ ...prev, headings }));
       }
     };
 
     async function updatedRelatedPosts(): Promise<void> {
-      if (content === undefined) return;
-      const { tags, _id } = content;
-      const relatedPosts = await postRepository.getRelatedPosts(
-        tags,
-        _id.$oid,
-        3,
-      );
-      setState((prev) => ({ ...prev, relatedPosts }));
+      if (content) {
+        const { tags, _id } = content;
+        const relatedPosts = await postRepository.getRelatedPosts(tags, _id.$oid, 3);
+        setState((prev) => ({ ...prev, relatedPosts }));
+      }
     }
 
     updatedRelatedPosts();
@@ -68,9 +64,7 @@ const BlogContent: React.FC<IBlogContentProps> = ({ id, content }) => {
 
   useEffect(() => {
     function observeSections(): void {
-      const sections = document.querySelectorAll(
-        ".blog-section, .blog-section--root",
-      );
+      const sections = document.querySelectorAll(".blog-section, .blog-section--root");
       const sectionsArray = Array.from(sections);
       const intersectingSections = sectionsArray
         .filter((section) => {
@@ -88,6 +82,8 @@ const BlogContent: React.FC<IBlogContentProps> = ({ id, content }) => {
   }, [scrolled, emitter]);
 
   function renderBlogContent(): React.ReactNode {
+    if (!content) return null; // Check if content is undefined
+
     const { heading, image, body, _id } = content;
     const imageId = image?.$oid;
 
@@ -113,19 +109,20 @@ const BlogContent: React.FC<IBlogContentProps> = ({ id, content }) => {
   return (
     <main className="page-container">
       <section className="blog-content__wrapper">
-        <PostDetailsPanel content={content} relatedPosts={relatedPosts} />
-        {renderBlogContent()}
-        {headings.length !== 0 && (
-          <aside className="blog-content__side-components position-sticky mt-20vh">
-            <Link
-              href="/digital_chronicles/blogs"
-              className="flex items-center"
-            >
-              <IoMdArrowBack />
-              Back to Blogs
-            </Link>
-            <TableOfContent emitter={emitter} headings={headings} />
-          </aside>
+        {content && (
+          <>
+            <PostDetailsPanel content={content} relatedPosts={relatedPosts} />
+            {renderBlogContent()}
+            {headings.length !== 0 && (
+              <aside className="blog-content__side-components position-sticky mt-20vh">
+                <Link href="/digital_chronicles/blogs" className="flex items-center">
+                  <IoMdArrowBack />
+                  Back to Blogs
+                </Link>
+                <TableOfContent emitter={emitter} headings={headings} />
+              </aside>
+            )}
+          </>
         )}
       </section>
     </main>

@@ -1,4 +1,4 @@
-type GalleryItem = {
+export type GalleryItem = {
     name: string,
     description: string,
     image: string,
@@ -7,10 +7,7 @@ type GalleryItem = {
     tags?: string[]
 }
 
-interface IGalleryProps {
+export interface IGalleryProps {
     content: GalleryItem[];
     heading: string
 }
-
-
-export { GalleryItem, IGalleryProps }

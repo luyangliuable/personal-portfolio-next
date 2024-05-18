@@ -24,4 +24,4 @@ const HeroHeader: React.FC<IHeroHeaderProps> = ({ heading, description, graphics
     );
 }
 
-export default HeroHeader;
+export default React.memo(HeroHeader);

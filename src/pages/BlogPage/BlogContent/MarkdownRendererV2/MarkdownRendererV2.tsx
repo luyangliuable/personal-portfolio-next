@@ -3,9 +3,9 @@ import { remark } from 'remark';
 import { visit } from 'unist-util-visit';
 import html from 'remark-html';
 import Prism from "prismjs";
-import { extractAttributesFromHtmlElement } from "./utils/utils";
-import sectionise from "./Plugins/sectionisePlugin";
-import reactComponentWhiteList from "./reactComponentWhiteList";
+import { extractAttributesFromHtmlElement } from "../../../../utils/BlogPage/BlogContent/MarkdownRendererV2/utils";
+import sectionise from "../../../../utils/BlogPage/BlogContent/MarkdownRendererV2/Plugins/sectionisePlugin";
+import reactComponentWhiteList from "../../../../utils/BlogPage/BlogContent/MarkdownRendererV2/reactComponentWhiteList";
 import "./MarkdownRenderer.css";
 
 import 'prismjs/components/prism-javascript';

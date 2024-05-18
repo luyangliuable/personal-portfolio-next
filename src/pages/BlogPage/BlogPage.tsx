@@ -1,13 +1,12 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Link from 'next/link';
-import { IBlogPageState } from "./Interface/IBlogPageState";
+import { useRouter } from 'next/navigation';
+import { IBlogPageState, IBlogPageProps } from "../../interfaces";
 import { FaWindowClose } from "react-icons/fa";
 import HeroHeader from "../../components/HeroHeader/HeroHeader";
 import PostRepository from "../../repositories/PostRepository";
 import BlogPostResponse from "../../repositories/Response/BlogPostResponse";
-import IBlogPageProps from "./Interface/IBlogPageProps";
 import Card from "../../components/Card/Card";
 import BlogPostGraphics from "../../components/BlogPostGraphics/BlogPostGraphics";
 import SmallCard from "../../components/Atoms/SmallCard/SmallCard";
@@ -30,6 +29,8 @@ const BlogPage: React.FC<IBlogPageProps> = (props) => {
         topPickedPosts: []
     });
 
+    const router = useRouter();
+
     const isSubset = (array1: string[], array2: string[]): boolean => {return array1.every(item => array2.includes(item))};
 
     useEffect(() => {
@@ -44,7 +45,7 @@ const BlogPage: React.FC<IBlogPageProps> = (props) => {
     }, [state.content]);
 
     useEffect(() => {
-        const selectedTags = getCurrentSelectedTagsFromUrl();
+        const { currentSelectTags: selectedTags } = state;
         const groupedPosts = groupPostsByYear(sortPostsByDate(state.content).filter(({ tags }) => isSubset(selectedTags, tags) || !selectedTags));
         setState(prev => ({ ...prev, currentlyShowingContent: groupedPosts }));
     }, [state.content, state.currentSelectTags]);
@@ -133,6 +134,7 @@ const BlogPage: React.FC<IBlogPageProps> = (props) => {
                         const link = `/digital_chronicles/blog/${post._id.$oid}`;
                         return (
                             <SmallCard
+                                key={post._id.$oid}
                                 authorImage={authorImage}
                                 author={post.author}
                                 link={link}
@@ -155,39 +157,59 @@ const BlogPage: React.FC<IBlogPageProps> = (props) => {
         return tagsIntoArr;
     }
 
-    const renderUnSelectedTags = (): React.ReactNode | null => {
+    const renderUnSelectedTags = () => {
         const baseUrlLink = "/digital_chronicles/blogs";
-        const selectedTags = getCurrentSelectedTagsFromUrl();
+        const { currentSelectTags: selectedTags } = state;
 
-        return [...state.allTags]
-            .map((tagName) => {
-                let selectedTagsString: string[] = [];
-                selectedTagsString = selectedTags.concat(tagName);
-                let to = `${baseUrlLink}?tag=${encodeURIComponent(selectedTagsString.join(","))}`;
+        return Array.from(state.allTags).map((tagName) => {
+            let selectedTagsString = [...selectedTags, tagName];
+            let to = `${baseUrlLink}?tag=${encodeURIComponent(selectedTagsString.join(","))}`;
 
-                // Selected tags
-                if (state.currentSelectTags.includes(tagName)) {
-                    selectedTagsString = selectedTags.filter(tag => tag !== tagName);
-                    to = `${baseUrlLink}?tag=${encodeURIComponent(selectedTagsString.join(","))}`;
-                    return (<Link onClick={() => {
-                        const newTags = state.currentSelectTags.filter((tag) => tag !== tagName);
+            if (state.currentSelectTags.includes(tagName)) {
+                selectedTagsString = selectedTags.filter(tag => tag !== tagName);
+                to = `${baseUrlLink}?tag=${encodeURIComponent(selectedTagsString.join(","))}`;
+                return (
+                    <span
+                        key={tagName}
+                        className="blog__tag flex items-center noselect blog__tag--selected"
+                        onClick={() => {
+                            const newTags = state.currentSelectTags.filter(tag => tag !== tagName);
+                            router.push(to);
+                            setState(prev => ({ ...prev, currentSelectTags: newTags }));
+                        }}
+                    >
+                        #{tagName} <FaWindowClose />
+                    </span>
+                );
+            }
+
+            if (state.content.filter(({ tags }) => isSubset([...selectedTags, tagName], tags)).length === 0) {
+                selectedTagsString = getCurrentSelectedTagsFromUrl();
+                to = `${baseUrlLink}?tag=${encodeURIComponent(selectedTagsString.join(","))}`;
+                return (
+                    <span
+                        key={tagName}
+                        className="blog__tag noselect blog__tag--disabled"
+                    >
+                        #{tagName}
+                    </span>
+                );
+            }
+
+            return (
+                <span
+                    key={tagName}
+                    className="blog__tag flex items-center justify-center noselect cursor-pointer"
+                    onClick={() => {
+                        const newTags = state.currentSelectTags.concat(tagName);
+                        router.push(to);
                         setState(prev => ({ ...prev, currentSelectTags: newTags }));
-                    }} href={to} key={tagName} className="blog__tag flex items-center noselect blog__tag--selected">#{tagName} <FaWindowClose /></Link>);
-                }
-
-                // Disabled tags because with selected doesn't show any content
-                if (state.content.filter(({ tags }) => isSubset([...selectedTags, tagName], tags) || ![...selectedTags, tagName]).length === 0) {
-                    selectedTagsString = getCurrentSelectedTagsFromUrl();
-                    to = `${baseUrlLink}?tag=${encodeURIComponent(selectedTagsString.join(","))}`;
-                    return (<Link href={to} key={tagName} className="blog__tag noselect blog__tag--disabled">#{tagName}</Link>);
-                }
-
-                // Unselected tags
-                return (<Link onClick={() => {
-                    const newTags = state.currentSelectTags.concat(tagName);
-                    setState(prev => ({ ...prev, currentSelectTags: newTags }));
-                }} href={to} key={tagName} className="blog__tag flex items-center justify-center noselect cursor-pointer">#{tagName}</Link>);
-            });
+                    }}
+                >
+                    #{tagName}
+                </span>
+            );
+        });
     };
 
     const heroHeading = heroHeaderContent.heading;
@@ -207,4 +229,4 @@ const BlogPage: React.FC<IBlogPageProps> = (props) => {
     );
 }
 
-export default React.memo(BlogPage);
+export default BlogPage;

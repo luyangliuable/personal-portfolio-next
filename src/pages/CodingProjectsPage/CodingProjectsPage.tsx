@@ -1,8 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import "./CodingProjectsPage.css";
 import Gallery from "../../components/Gallery/Gallery";
-import IHeroHeaderProps from "../../components/HeroHeader/Interface/IHeroHeaderProps";
-import ICodingCatState from "../../components/CodingCat/Interface/ICodingCatState";
 import HeroHeader from "../../components/HeroHeader/HeroHeader";
 import { GalleryItem } from "../../components/Gallery/Interface/IGalleryProps";
 

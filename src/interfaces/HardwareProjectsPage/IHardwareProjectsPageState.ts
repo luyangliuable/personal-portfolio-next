@@ -1,4 +1,4 @@
-import { GalleryItem } from "../../../components/Gallery/Interface/IGalleryProps";
+import { GalleryItem } from "../../components/Gallery/Interface/IGalleryProps";
 
 interface IHardwareProjectsPageProps {
   content: GalleryItem[]

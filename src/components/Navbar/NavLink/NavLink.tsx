@@ -25,13 +25,13 @@ const NavLink: React.FC<INavLinkProps> = ({ link, isSubLink, renderDropdownMenu,
         link.isLocked && <CiLock key="lock-icon" />
     ].filter(Boolean);
 
-    const targetPath = link.isLocked ? null : link.to;
+    const targetPath = link.isLocked ? undefined : link.to;
 
-    const onMouseOverAction = isSubLink && links ? () => {} : () => renderDropdownMenu(links.filter(item => item.name === link.name)[0].sublinks);
+    const onMouseOverAction = isSubLink && links ? () => {} : () => renderDropdownMenu(links?.filter(item => item.name === link.name)[0].sublinks);
 
     const pathname = usePathname() ?? "/";
 
-    const isActive = (currentPathname, targetPathname) => {
+    const isActive = (currentPathname?: string, targetPathname?: string) => {
         if (!currentPathname || !targetPathname) return false;
         if (currentPathname === targetPathname) return true;
         if (targetPathname === "/") return false;

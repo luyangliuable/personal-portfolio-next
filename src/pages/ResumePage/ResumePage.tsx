@@ -1,5 +1,5 @@
 import React from 'react';
-import IResumePageProps from "./Interface/IResumePageProps";
+import { IResumePageProps } from "../../interfaces";
 import "./ResumePage.css";
 
 const ResumePage: React.FC<IResumePageProps> = (props) => {

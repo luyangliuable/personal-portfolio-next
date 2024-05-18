@@ -199,7 +199,7 @@ const NavBar: React.FC<INavbarProps> = () => {
                         isSubLink={true}
                         links={links}
                         renderDropdownMenu={renderDropdownMenu}
-                    />
+                        hideDropdownMenu />
                 )),
             }));
         } else {
@@ -215,8 +215,7 @@ const NavBar: React.FC<INavbarProps> = () => {
                 isSubLink={isSubLink}
                 hideDropdownMenu={hideDropdownMenu}
                 links={links}
-                renderDropdownMenu={renderDropdownMenu}
-            />
+                renderDropdownMenu={renderDropdownMenu} />
         );
     };
 
@@ -246,7 +245,7 @@ const NavBar: React.FC<INavbarProps> = () => {
         <>
             <article className="navbar" onMouseLeave={() => hideDropdownMenu()} ref={navbar}>
                 {navBarMainSection}
-                <NavbarScrollProgress scrollY/>
+                <NavbarScrollProgress scrollY={ scrollY ?? 0 }/>
             </article>
             {navbarBurgerPanel}
         </>

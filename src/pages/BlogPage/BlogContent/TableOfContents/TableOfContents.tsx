@@ -1,6 +1,5 @@
-
 import React from "react";
-import ItableOfContentsProps from "./Interface/ItableOfContentsProps"
+import ItableOfContentsProps from "../../../../interfaces/BlogPage/BlogContent/TableOfContents/ItableOfContentsProps"
 import { useEffect, useState, useRef, RefObject } from "react";
 import { stringToHash } from "../../../../components/Utility/StringUtility";
 import "./TableOfContents.css";

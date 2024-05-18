@@ -1,6 +1,6 @@
-import BlogPostResponse from "../../../repositories/Response/BlogPostResponse";
+import BlogPostResponse from "../../repositories/Response/BlogPostResponse";
 
-interface IBlogPageState {
+export interface IBlogPageState {
     content: BlogPostResponse[],
     currentlyShowingContent: {[category: number]: BlogPostResponse[]}[],
     allTags: Set<string>,
@@ -8,5 +8,3 @@ interface IBlogPageState {
     topPickedPosts: BlogPostResponse[],
     render?: () => React.ReactElement<any, any>,
 }
-
-export { IBlogPageState }

@@ -1,5 +1,5 @@
 import { visit } from 'unist-util-visit';
-import CodeBlock from '../../CodeBlock/CodeBlock';
+import CodeBlock from "../../../../../pages/BlogPage/BlogContent/CodeBlock/CodeBlock";
 import ReactDOMServer from 'react-dom/server';
 import React from "react";
 
@@ -28,7 +28,7 @@ function customCodeBlockPlugin() {
             const getMetadataKeyValPairs = (metadata: string) => {
                 const regexPattern = /([\w\.]+)=([\w\.\-\/\d]+)/g;
                 const keyValuePairs: string[] = [];
-                let match: RegExpExecArray;
+                let match: RegExpExecArray | null;
                 while ((match = regexPattern.exec(metadata)) !== null) {
                     if (!/app\.js/.test(match[1])) {
                         keyValuePairs.push(match[0]);

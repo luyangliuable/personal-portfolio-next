@@ -1,4 +1,4 @@
-import reactComponentWhiteList from  "../reactComponentWhiteList";
+import reactComponentWhiteList from "./reactComponentWhiteList";
 import React from "react";
 
 export type Attributes = { [key: string]: string };

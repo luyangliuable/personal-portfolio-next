@@ -103,18 +103,19 @@ const BlackHole: React.FC = () => {
         }
 
         function draw() {
-            b.globalCompositeOperation = "lighter";
-            f.globalCompositeOperation = "lighter";
+            if (!b || !f || !m) return;
+            b!.globalCompositeOperation = "lighter";
+            f!.globalCompositeOperation = "lighter";
             //animation
             for (i = 0; i < num; i++) {
                 p[i].move(w / 2, h / 2);
                 p[i].show();
             }
 
-            m.beginPath();
-            m.arc(w / 2, h / 2, 100, 0, 2 * Math.PI);
-            m.fillStyle = "black";
-            m.fill();
+            m!.beginPath();
+            m!.arc(w / 2, h / 2, 100, 0, 2 * Math.PI);
+            m!.fillStyle = "black";
+            m!.fill();
         }
 
         function init(elem: RefObject<HTMLCanvasElement>): { canv: HTMLCanvasElement | null, ctx: CanvasRenderingContext2D | null } {
@@ -134,9 +135,12 @@ const BlackHole: React.FC = () => {
 
         function loop() {
             (window as any).requestAnimFrame(loop);
-            b.clearRect(0, 0, w, h);
-            m.clearRect(0, 0, w, h);
-            f.clearRect(0, 0, w, h);
+
+            if (!b || !m || !f) return;
+
+            b!.clearRect(0, 0, w, h);
+            m!.clearRect(0, 0, w, h);
+            f!.clearRect(0, 0, w, h);
             draw();
         }
         loop();

@@ -56,7 +56,12 @@ class Card extends Component<ICardProps, ICardState> {
             return (<></>);
 
         return (
-            <Link ref={this.cardItemRef} onMouseMove={cardGradientEffect} className="card card-item" href={link}>
+            <Link
+                ref={this.cardItemRef}
+                onMouseMove={cardGradientEffect}
+                className="card card-item"
+                href={link}
+                scroll passHref>
                 <TagCloud tags={tags} />
                 <section className="card-item__content">
                     <h3 className="card-item__heading">{heading}</h3>

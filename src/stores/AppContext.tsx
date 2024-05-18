@@ -65,4 +65,4 @@ export const AppContextProvider: React.FC<IAppContextProps> = ({ children }) => 
     );
 };
 
-export { IAppContextProps, IAppContextProvider };
+export { type IAppContextProps, type IAppContextProvider };

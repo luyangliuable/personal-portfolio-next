@@ -1,5 +1,5 @@
 interface INavbarProps {
-    scrollStatus: {
+    scrollStatus?: {
         scrolled: number | undefined;
         deltaScrolled: number | undefined
     }

@@ -1,4 +1,4 @@
-import BlogPostResponse from "../../../../repositories/Response/BlogPostResponse";
+import BlogPostResponse from "../../../repositories/Response/BlogPostResponse";
 
 interface BlogContentProps {
     id: string;

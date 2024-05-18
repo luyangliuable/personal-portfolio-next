@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, RefObject } from "react";
+import React, { ReactElement, useState, useRef, useEffect, RefObject, JSXElementConstructor } from "react";
 import "./SequentialRiseSpan.css";
 
 export interface ISequentialRiseSpanProps {
@@ -24,7 +24,7 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
     maxNumberOfLettersPerLine
 }) => {
     const spanItemRef = useRef<HTMLDivElement>(null);
-    const [wrappedLines, setWrappedLines] = useState([]);
+    const [wrappedLines, setWrappedLines] = useState<ReactElement<{ key: number; className: string; }>[]>([]);
     const [lineRefs, setLineRefs] = useState<RefObject<any>[]>([]);
     const [measuredLettersPerLine, setMeasuredLettersPerLine] = useState<number>(numberOfLettersPerLine ?? 0);
 
@@ -113,7 +113,7 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
             {
                 measuredLettersPerLine !== 0 &&
                 wrappedLines.map((line, index) => {
-                    const lineElement = React.cloneElement(line, {
+                    const lineElement = React.cloneElement(line as React.ReactElement, {
                         style: { animationDelay: `${index * 100}ms` },
                         ref: lineRefs[index]
                     })

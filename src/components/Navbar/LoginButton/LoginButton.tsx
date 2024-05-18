@@ -22,7 +22,7 @@ class LoginButton extends Component<ILoginButtonProps, ILoginButtonState> {
                 icon: (<AiFillCaretDown />),
                 sublinks: [{
                     name: "Logout",
-                    to: null,
+                    to: "",
                     onClick: () => this.logoff()
                 }]
             },

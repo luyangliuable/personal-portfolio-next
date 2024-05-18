@@ -1,5 +1,3 @@
-interface ILandingPagestate {
-
-}
+interface ILandingPagestate {}
 
 export default ILandingPagestate;

@@ -18,11 +18,11 @@ import BlackHole from "../Organisms/BlackHole/BlackHole";
 
 import "./ExperienceSection.css";
 
-import madPattiesSunset from "../../assets/photos/scenicMemories/madPattiesSunset.jpg";
-import teddieTheDog from "../../assets/photos/scenicMemories/teddieTheDog.jpg";
-import camberwellSunset from "../../assets/photos/scenicMemories/camberwellSunset.jpg";
-import enrouteToCamberwell from "../../assets/photos/scenicMemories/enrouteToCamberwell.jpg";
-import beachMyFamilyVistsOften from "../../assets/photos/scenicMemories/beachMyFamilyVistsOften.jpg";
+/* import madPattiesSunset from "../../assets/photos/scenicMemories/madPattiesSunset.jpg";
+* import teddieTheDog from "../../assets/photos/scenicMemories/teddieTheDog.jpg";
+* import camberwellSunset from "../../assets/photos/scenicMemories/camberwellSunset.jpg";
+* import enrouteToCamberwell from "../../assets/photos/scenicMemories/enrouteToCamberwell.jpg";
+* import beachMyFamilyVistsOften from "../../assets/photos/scenicMemories/beachMyFamilyVistsOften.jpg"; */
 
 const ExperienceSection: React.FC<IExperienceSectionProps> = ({ scrolled }) => {
   const experienceSectionParentRef = useRef<HTMLDivElement | null>(null);
@@ -127,22 +127,6 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({ scrolled }) => {
           },
         },
         {
-          dateTime: "2021",
-          cardTitle: "",
-          location: "Brighton Beach, Victoria Park, Vic, Australia",
-          url: "",
-          cardSubtitle: "",
-          cardDetailedText: "",
-          importance: 1,
-          display: "IMAGE",
-          media: {
-            type: "IMAGE",
-            source: {
-              url: beachMyFamilyVistsOften,
-            },
-          },
-        },
-        {
           dateTime: "2022",
           cardTitle: "",
           url: "",
@@ -160,53 +144,6 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({ scrolled }) => {
           },
         },
         {
-          dateTime: "2020",
-          cardTitle: "",
-          url: "",
-          cardSubtitle: "",
-          cardDetailedText: "",
-          importance: 1,
-          display: "IMAGE",
-          media: {
-            type: "IMAGE",
-            source: {
-              url: enrouteToCamberwell,
-            },
-          },
-        },
-        {
-          dateTime: "2022",
-          cardTitle: "",
-          url: "",
-          cardSubtitle: "",
-          location: "-37.829423, 145.058246",
-          cardDetailedText:
-            "A image I took of the sunset in Camberwell where I used to live.",
-          importance: 0.9,
-          display: "IMAGE",
-          media: {
-            type: "IMAGE",
-            source: {
-              url: camberwellSunset,
-            },
-          },
-        },
-        {
-          dateTime: "2016",
-          cardTitle: "",
-          url: "",
-          cardSubtitle: "",
-          cardDetailedText: "Teddie was born.",
-          importance: 1,
-          display: "IMAGE",
-          media: {
-            type: "IMAGE",
-            source: {
-              url: teddieTheDog,
-            },
-          },
-        },
-        {
           dateTime: "2018",
           cardTitle: "MW Sheetmetal",
           url: "http://www.cisco.com",
@@ -217,23 +154,6 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({ scrolled }) => {
             type: "IMAGE",
             source: {
               url: "https://metro.co.uk/wp-content/uploads/2016/02/poo_emoji.jpg?quality=90&strip=all&zoom=1&resize=644%2C429",
-            },
-          },
-        },
-        {
-          dateTime: "2021",
-          cardTitle: "",
-          url: "",
-          cardSubtitle: "",
-          location: "-37.790968, 145.172341",
-          cardDetailedText:
-            "I captured this serene view at Mad Patties during the COVID era. Every afternoon, it greeted me, making it unforgettable. A year following my departure, the shop closed down.",
-          importance: 1,
-          display: "IMAGE",
-          media: {
-            type: "IMAGE",
-            source: {
-              url: madPattiesSunset,
             },
           },
         },

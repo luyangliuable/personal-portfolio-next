@@ -1,6 +1,6 @@
 import { JSXElementConstructor } from 'react';
 
-interface ExperienceSectionItem {
+export interface ExperienceSectionItem {
     dateTime: string,
     cardTitle: string,
     location?: string,
@@ -17,7 +17,7 @@ interface ExperienceSectionItem {
     }
 }
 
-interface IExperienceSectionState<
+export interface IExperienceSectionState<
     P = any,
     W extends string | JSXElementConstructor<any> = string | JSXElementConstructor<any>
 > {
@@ -28,6 +28,3 @@ interface IExperienceSectionState<
     lockPosition?: number
     unlockPosition: number | null
 }
-
-
-export { IExperienceSectionState, ExperienceSectionItem }

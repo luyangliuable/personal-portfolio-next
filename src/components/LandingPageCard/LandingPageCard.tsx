@@ -1,3 +1,5 @@
+"use client";
+
 import React, { Component } from 'react';
 import './LandingPageCard.css';
 import { ILandingPageCardProps, LandingPageCardType } from "./Interface/ILandingPageCardProps";

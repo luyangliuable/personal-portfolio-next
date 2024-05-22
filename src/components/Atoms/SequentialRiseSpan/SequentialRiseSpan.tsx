@@ -66,8 +66,11 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
 
 
     useEffect(() => {
-        if (measuredLettersPerLine === 0) calculateLettersPerLine();
-        window.addEventListener('resize', calculateLettersPerLine);
+        if (numberOfLettersPerLine === undefined) {
+            if (measuredLettersPerLine === 0) calculateLettersPerLine();
+            window.addEventListener('resize', calculateLettersPerLine);
+        }
+
         return () => {
             window.removeEventListener('resize', calculateLettersPerLine);
         }
@@ -89,7 +92,6 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
         });
 
         lines.push(currentLine);
-
 
         setLineRefs(lines.map(() => React.createRef<any>()));
 

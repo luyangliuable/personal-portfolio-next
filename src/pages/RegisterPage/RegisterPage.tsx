@@ -1,3 +1,5 @@
+"use client";
+
 import React, { Component, createRef } from 'react';
 import "./RegisterPage.css";
 import PostRepository from "../../repositories/UserRepository";

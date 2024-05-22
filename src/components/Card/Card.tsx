@@ -56,12 +56,13 @@ class Card extends Component<ICardProps, ICardState> {
             return (<></>);
 
         return (
-            <Link
+            <a
                 ref={this.cardItemRef}
                 onMouseMove={cardGradientEffect}
                 className="card card-item"
-                href={link}
-                scroll passHref>
+                href={link}>
+                {/* prefetch={false}
+* scroll passHref */}
                 <TagCloud tags={tags} />
                 <section className="card-item__content">
                     <h3 className="card-item__heading">{heading}</h3>
@@ -71,7 +72,7 @@ class Card extends Component<ICardProps, ICardState> {
                     {<Image src={image} className="card-image-preview" alt="Card Preview" />}
                 </div>
                 <footer className="flex mt-5"><Image src={authorImage} className="user-image card-image--author-image" alt="Author" />{author}</footer>
-            </Link>
+            </a>
         );
     }
 }

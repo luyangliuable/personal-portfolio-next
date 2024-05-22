@@ -1,3 +1,5 @@
+"use client";
+
 import React, { Component, createRef, RefObject } from 'react';
 import { isCenterAlignedWithViewport } from "../Utility/ScrollUtility";
 import { FaAngleDown } from "react-icons/fa";

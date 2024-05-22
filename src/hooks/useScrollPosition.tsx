@@ -10,7 +10,7 @@ interface IAppStateInterface {
     }
 }
 
-const useScrollPosition = () => {
+const useScrollPosition = (overrideThrottleInterval?: number) => {
     const [appState, setAppState] = useState<IAppStateInterface>({});
 
     useEffect(() => {
@@ -36,7 +36,7 @@ const useScrollPosition = () => {
         };
 
         // Add the event listener
-        window.addEventListener("scroll", throttle(handleScroll, 20));
+        window.addEventListener("scroll", throttle(handleScroll, overrideThrottleInterval ?? 20));
 
         // Interval for calculating the delta scroll every timeIntervalCheckMiliseconds.
         const deltaScrollCalculationInterval: NodeJS.Timeout = setInterval(() => {

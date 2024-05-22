@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useMemo } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import IHeroProps from "./Interface/IHeroProps";
@@ -8,7 +10,7 @@ import LandingPageCard from "../LandingPageCard/LandingPageCard";
 import SequentialRiseSpan from "../Atoms/SequentialRiseSpan/SequentialRiseSpan";
 import "./HeroSection.css";
 
-const HeroSection: React.FC<IHeroProps> = ({ scrolling }) => {
+const HeroSection: React.FC<IHeroProps> = ({}) => {
     const mainHeading: string = "Hi There, I am Luyang.";
 
     const introduction: JSX.Element = (
@@ -85,7 +87,7 @@ const HeroSection: React.FC<IHeroProps> = ({ scrolling }) => {
                 <div className="space h-28"></div>
                 <section className="hero-section__content">
                     <section className="hero-section__content__right">
-                        <CodingCat showAnimtion={scrolling} />
+                        <CodingCat />
                     </section>
                     {heroSectionContentLeft}
                 </section>

@@ -36,15 +36,12 @@ class Image extends Component<IImageProps, IImageState> {
     async updateImage() {
         try {
             const imageId = this.props.src ?? Image.defaultProps.defaultImageId;
-
             const [imageUrl] = await Promise.all([
-                this.imageRepository.getImageById(imageId),
+                this.imageRepository.getImageById(imageId, this.props.compression),
             ]);
-
             this.setState({
-                fetchedImageUrl: imageUrl,
+                fetchedImageUrl: imageUrl
             });
-
         } catch (error) {
             console.error("Error fetching images:", error);
         }

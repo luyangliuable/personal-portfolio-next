@@ -13,12 +13,15 @@ class ImageRepository extends Repository {
         return ImageRepository.instance;
     }
 
-    async getImageById(idOrUrl: string): Promise<string> {
+    async getImageById(idOrUrl: string, compression?: number): Promise<string> {
         if (idOrUrl === null) console.error("no image id provided");
         let url: string = idOrUrl;
+
         if (!idOrUrl.startsWith('http://') && !idOrUrl.startsWith('https://') && !idOrUrl.startsWith('/static')) url = `${ImageRepository.BASE_URL}${idOrUrl}`;
+        url = `${url}?compression=${compression ?? 100}`;
         if (this.cache.has(url)) return this.cache.get(url)!;
         if (this.ongoingRequests.has(url)) return this.ongoingRequests.get(url)!;
+
         const fetchImage = async () => {
             try {
                 const response = await fetch(url);

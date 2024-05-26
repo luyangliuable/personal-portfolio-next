@@ -65,7 +65,7 @@ class GalleryItem extends Component<IGalleryItemProps, IGalleryItemState> {
                     className="gallery-item flex flex-col justify-between items-center pb-10 blur-boundary card">
                     {this.GalleryItemTypeSegment}
                     <div className="position-absolute color-white right-0 w-15 top-10 font-fira-code">READ</div>
-                    <Image className="gallery-item__image" src={image ?? ""} />
+                    <Image compression={30} className="gallery-item__image" src={image ?? ""} />
                     <TagCloud tags={this.props.tags} />
                     <h3>{this.props.name}</h3>
                     {

@@ -1,5 +1,6 @@
-import ThreeDPrintingGallery from "../../../pages/threeDPrintingGalleryPage/ThreeDPrintingGallery";
+import ThreeDPrintingGallery from "../../../page/threeDPrintingGalleryPage/ThreeDPrintingGallery";
 import type { Metadata } from "next";
+
 
 export const metadata: Metadata = {
   title: "Luyang's Website | 3d Printing",

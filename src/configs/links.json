@@ -36,6 +36,7 @@
         },
         {
             "name": "Projects",
+            "to": "/projects",
             "sublinks": [
                 {
                     "name": "🏗︎ Coding Projects",

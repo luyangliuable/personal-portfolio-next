@@ -164,9 +164,9 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                 },
                 {
                     dateTime: "2021",
-                    cardTitle: "Monash University Humanwise Lab",
+                    cardTitle: "Monash University Humanwise",
                     url: "https://www.mymi.org.au/",
-                    cardSubtitle: "Started role as Summer Research Assistant",
+                    cardSubtitle: "Summer Research Assistant",
                     cardDetailedText: "",
                     importance: 0.85,
                     media: {
@@ -180,7 +180,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                     dateTime: "2022",
                     cardTitle: "Monash Young Medtech Innovators",
                     url: "https://www.mymi.org.au/",
-                    cardSubtitle: "Started role as Software Engineer",
+                    cardSubtitle: "Software Engineer",
                     cardDetailedText: "",
                     importance: 0.85,
                     media: {
@@ -251,7 +251,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
             proximityYToLockPosition
         )
             lockPosition();
-        if (state.isLocked && state.lockPosition !== undefined) {
+        if (state.isLocked && state.lockPosition !== undefined && scrollY) {
             const scrollAmount =
                 state.lockPosition - proximityYToLockPosition - scrollY;
             scrollTimeline(scrollAmount);

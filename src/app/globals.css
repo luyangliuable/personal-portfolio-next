@@ -372,6 +372,10 @@ a {
     flex-direction: column
 }
 
+.gap-2 {
+    gap: 2rem;
+}
+
 .flex-row {
     flex-direction: row
 }
@@ -389,7 +393,7 @@ a {
 }
 
 .justify-between {
-    justify-content: space-between
+    justify-content: space-between !important
 }
 
 .justify-around {

@@ -1,10 +1,11 @@
-import React, { Component, CSSProperties, createRef, RefObject } from "react";
+"use client";
+
+import React, { CSSProperties, useEffect, useRef, ReactElement, useState } from "react";
 import { isoDateFormatToString } from "../../../components/Utility/StringUtility";
 import Link from "next/link";
 import { cardGradientEffect } from "../../../components/Utility/MouseUtility";
 import "./GalleryItem.css";
 import IGalleryItemProps from "./Interface/IGalleryItemProps";
-import IGalleryItemState from "./Interface/IGalleryItemState";
 import TagCloud from "../../TagCloud/TagCloud";
 import DynamicLoadQueue from "../../../stores/DynamicLoadQueue/DynamicLoadQueue";
 import Image from "../../Image/Image";
@@ -13,25 +14,20 @@ import { TbToolsOff } from "react-icons/tb";
 import { CgWebsite } from "react-icons/cg";
 import { truncateTextBody } from "../../Utility/StringUtility";
 
-class GalleryItem extends Component<IGalleryItemProps, IGalleryItemState> {
-    galleryItemRef: RefObject<HTMLDivElement>;
-    dynamicLoadQueue: DynamicLoadQueue;
+const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
+    const galleryItemRef = useRef<HTMLDivElement>(null);
+    const dynamicLoadQueue = DynamicLoadQueue.getInstance();
 
-    constructor(props: IGalleryItemProps) {
-        super(props);
-        this.dynamicLoadQueue = DynamicLoadQueue.getInstance();
-        this.galleryItemRef = createRef();
-        this.state = {};
-    }
+    const [isRendered, setIsRendered] = useState(false);
 
-    componentDidMount() {
-        if (this.galleryItemRef.current) {
-            this.dynamicLoadQueue.addToQueue(this.galleryItemRef.current);
+    useEffect(() => {
+        if (isRendered && galleryItemRef.current) {
+            dynamicLoadQueue.addToQueue(galleryItemRef.current);
         }
-    }
+    }, [isRendered, galleryItemRef, dynamicLoadQueue]);
 
-    get GalleryItemTypeSegment(): React.ReactElement {
-        const type = this.props.type;
+    const GalleryItemTypeSegment = (): ReactElement => {
+        const type = props.type;
 
         if (type === "blog") {
             return (
@@ -39,51 +35,58 @@ class GalleryItem extends Component<IGalleryItemProps, IGalleryItemState> {
                     <CgWebsite />
                     <span>BLOG</span>
                 </div>
-            )
+            );
         } else if (type === "tool") {
             return (
                 <div className="gallery-item__type font-fira-code">
                     <TbToolsOff />
                     <span>TOOL</span>
                 </div>
-            )
+            );
         }
 
-        return (<></>)
+        return <></>;
+    };
+
+    const style: CSSProperties = props.style || {};
+    const { image, className } = props;
+
+    useEffect(() => {
+        setIsRendered(true);
+    }, [])
+
+    if (!isRendered) {
+        return (<></>);
     }
 
-    render() {
-        const style: CSSProperties = this.props.style || {};
-        const { image, className } = this.props;
-        return (
-            <Link className={className} href={this.props.link ?? ""}>
-                <div
-                    ref={this.galleryItemRef}
-                    style={style}
-                    key={this.props.key}
-                    onMouseMove={cardGradientEffect}
-                    className="gallery-item flex flex-col justify-between items-center pb-10 blur-boundary card">
-                    {this.GalleryItemTypeSegment}
-                    <div className="position-absolute color-white right-0 w-15 top-10 font-fira-code">READ</div>
-                    <Image compression={30} className="gallery-item__image" src={image ?? ""} />
-                    <TagCloud tags={this.props.tags} />
-                    <h3>{this.props.name}</h3>
-                    {
-                        this.props.minuteRead && this.props.dateCreated &&
-                        (<p className="gallery-item__metadata">{this.props.minuteRead} min read | {isoDateFormatToString(new Date(this.props.dateCreated))} </p>)
-                    }
-                    <p>{this.props.subheading}</p>
-                    {this.props.description &&
-                        <div className="w-full box-border p-4">
-                            <SequentialRiseSpan minNumberOfLettersPerLine={42}>
-                                {truncateTextBody(this.props.description, 150)}
-                            </SequentialRiseSpan>
-                        </div>
-                    }
-                </div>
-            </Link>
-        );
-    }
+    return (
+        <Link className={className} href={props.link ?? ""}>
+            <div
+                ref={galleryItemRef}
+                style={style}
+                key={props.key}
+                onMouseMove={cardGradientEffect}
+                className="gallery-item flex flex-col justify-start items-center pb-10 blur-boundary card">
+                <GalleryItemTypeSegment />
+                <div className="position-absolute color-white right-0 w-15 top-10 font-fira-code">READ</div>
+                <Image compression={30} className="gallery-item__image" src={image ?? ""} />
+                <TagCloud tags={props.tags} />
+                <h3>{props.name}</h3>
+                <p>{props.subheading}</p>
+                {props.description &&
+                    <div className="w-full box-border p-4">
+                        <SequentialRiseSpan minNumberOfLettersPerLine={42}>
+                            {truncateTextBody(props.description, 200)}
+                        </SequentialRiseSpan>
+                    </div>
+                }
+                {
+                    props.minuteRead && props.dateCreated &&
+                    (<p className="position-absolute gallery-item__metadata">{props.minuteRead} min read | {isoDateFormatToString(new Date(props.dateCreated))} </p>)
+                }
+            </div>
+        </Link>
+    );
 }
 
 export default GalleryItem;

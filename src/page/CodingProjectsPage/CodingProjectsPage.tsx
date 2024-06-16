@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useRef, useMemo, useState, RefObject, useEffect } from "react";
 import "./CodingProjectsPage.css";
 import Gallery from "../../components/Gallery/Gallery";
 import HeroHeader from "../../components/HeroHeader/HeroHeader";
@@ -14,6 +16,8 @@ const CodingProjectsPage: React.FC<{}> = () => {
         heading: "Coding Projects",
         description: "My coding projects outside of work that are either from uni, self-interest or for fun."
     }); // as const
+
+    const [isRendered, setIsRendered] = useState(false);
 
     const projects: CodingProjects = {
         projectsICreated: [
@@ -78,6 +82,10 @@ const CodingProjectsPage: React.FC<{}> = () => {
 
     const { heading, description } = heroHeaderContent;
 
+    useEffect(() => {
+        setIsRendered(true);
+    }, [])
+
     return (
         <main>
             <HeroHeader heading={heading} description={description} />
@@ -87,4 +95,4 @@ const CodingProjectsPage: React.FC<{}> = () => {
     );
 }
 
-export default React.memo(CodingProjectsPage);
+export default CodingProjectsPage;

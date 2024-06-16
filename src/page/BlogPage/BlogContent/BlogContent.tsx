@@ -105,15 +105,16 @@ const BlogContent: React.FC<IBlogContentProps> = ({ id, content }) => {
   }
 
   const { relatedPosts, headings } = state;
+  const showSides = (headings.length !== 0 && relatedPosts);
 
   return (
     <main className="page-container">
       <section className="blog-content__wrapper">
         {content && (
           <>
-            <PostDetailsPanel content={content} relatedPosts={relatedPosts} />
+            {showSides && <PostDetailsPanel content={content} relatedPosts={relatedPosts} />}
             {renderBlogContent()}
-            {headings.length !== 0 && (
+            {showSides && (
               <aside className="blog-content__side-components position-sticky mt-20vh">
                 <Link href="/digital_chronicles/blogs" className="flex items-center">
                   <IoMdArrowBack />

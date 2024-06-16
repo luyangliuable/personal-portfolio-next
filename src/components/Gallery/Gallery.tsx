@@ -1,32 +1,24 @@
-"use client";
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import { IGalleryProps } from "./Interface/IGalleryProps";
-import IGalleryState from "./Interface/IGalleryState";
 import GalleryItem from "./GalleryItem/GalleryItem";
 import "../Utility/MouseUtility";
 import "./Gallery.css";
 
-class Gallery extends Component<IGalleryProps, IGalleryState> {
-  constructor(props: IGalleryProps) {
-    super(props);
-  }
+const Gallery: React.FC<IGalleryProps> = (props) => {
+    const renderGalleryItems = (): React.ReactNode => {
+        return props.content.map((item: any, index: number) => (
+            <GalleryItem key={index} {...item} />
+        ));
+    };
 
-  renderGalleryItems(): React.ReactNode {
-    return this.props.content.map((item: any, index: number) => (
-      <GalleryItem key={index} {...item} />
-    ));
-  }
-
-  render() {
     return (
-      <>
-        <div className="heading__wrapper">
-          <h2>{this.props.heading}</h2>
-        </div>
-        <div className="gallery">{this.renderGalleryItems()}</div>
-      </>
+        <>
+            <div className="heading__wrapper">
+                <h2>{props.heading}</h2>
+            </div>
+            <div className="gallery">{renderGalleryItems()}</div>
+        </>
     );
-  }
-}
+};
 
 export default Gallery;

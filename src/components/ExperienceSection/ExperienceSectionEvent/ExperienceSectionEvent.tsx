@@ -26,7 +26,7 @@ const ExperienceSectionEvent: React.FC<ExperienceSectionEventProps> = ({ item, i
     imageWrapperClassName.push("experience-section-card__image-wrapper")
 
     const experienceSectionCardTextExperienceBody = (): React.ReactElement => (
-        <div className="w-70">
+        <div className="w-half">
             <h2>{item.cardTitle}</h2>
             <div className="experience-section-card__text-body">
                 <div className="experience-section-card__date">{item.dateTime}</div>

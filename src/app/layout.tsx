@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import NavBar from "../components/Navbar/Navbar";
-import { Providers } from "../stores/provider";
 import Footer from "../components/Footer/Footer";
+import { Providers } from "../stores/provider";
 
 export const metadata: Metadata = {
     title: "Luyang's Website",

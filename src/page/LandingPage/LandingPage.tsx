@@ -16,7 +16,6 @@ const LandingPage: React.FC<ILandingPageProps> = () => {
         const handleLoad = () => {
             setIsLoaded(true);
         };
-
         handleLoad();
     }, []);
 

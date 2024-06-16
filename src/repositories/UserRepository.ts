@@ -3,9 +3,7 @@ import Repository from "./Repository";
 
 class UserRepository extends Repository {
     static BASE_URL: string = process.env.REACT_APP_WEATHER_API_BASE_URL || "https://llcode.tech/api";
-
     private constructor() { super(); }
-
 
     static options(method: 'GET' | 'DELETE' | 'POST' | 'PUT', body?: { [category: string]: any }): any {
         return {
@@ -21,7 +19,9 @@ class UserRepository extends Repository {
         const url = `${UserRepository.BASE_URL}/user`;
         const options = UserRepository.options("GET");
         return fetch(url, options)
-            .then(response => response.json())
+            .then(response => {
+                return response.json();
+            })
             .catch(error => { throw Error(error) });
     }
 

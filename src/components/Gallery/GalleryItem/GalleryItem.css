@@ -4,11 +4,11 @@
     margin: 15px 10px; /* When not showing on grid */
     opacity: 0;
     background-color: rgba(220, 220, 220, 0.3);
-    min-height: 360px;
+    min-height: 380px;
     border-radius: 20px !important;
     border: 1px solid #FFF !important;
     overflow: hidden;
-    padding-bottom: 10px
+    padding-bottom: 32px
 }
 
 .initially-hidden {
@@ -72,6 +72,9 @@
 
 
 .gallery-item__metadata {
+    padding: 10px 0 !important;
+    border-top: 1px solid #FFF;
+    bottom: 0;
 }
 
 .gallery-item__type {

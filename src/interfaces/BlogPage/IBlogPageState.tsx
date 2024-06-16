@@ -2,7 +2,7 @@ import BlogPostResponse from "../../repositories/Response/BlogPostResponse";
 
 export interface IBlogPageState {
     content: BlogPostResponse[],
-    currentlyShowingContent: {[category: number]: BlogPostResponse[]}[],
+    currentlyShowingContent: Record<string, BlogPostResponse[]>,
     allTags: Set<string>,
     currentSelectTags: string[],
     topPickedPosts: BlogPostResponse[],

@@ -1,5 +1,5 @@
 import { visit } from 'unist-util-visit';
-import CodeBlock from "../../../../../pages/BlogPage/BlogContent/CodeBlock/CodeBlock";
+import CodeBlock from "../../../../../page/BlogPage/BlogContent/CodeBlock/CodeBlock";
 import ReactDOMServer from 'react-dom/server';
 import React from "react";
 

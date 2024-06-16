@@ -187,6 +187,7 @@ const NavBar: React.FC<INavbarProps> = () => {
     }
 
     const renderDropdownMenu = (links?: ILink[]): ReactNode | void => {
+        console.log(links);
         if (links && links.length > 0) {
             showDropdownMenu();
 

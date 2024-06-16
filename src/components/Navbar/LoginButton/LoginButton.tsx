@@ -1,91 +1,80 @@
-import React, { Component, ReactNode } from "react";
+import React, { useEffect, ReactNode } from "react";
 import Link from "next/link";
 import { CiLogin } from 'react-icons/ci';
 import { AiFillCaretDown } from 'react-icons/ai';
 import UserRepository from "../../../repositories/UserRepository";
 import { truncateTextBody } from "../../Utility/StringUtility";
-import { AppContext, IAppContextProvider } from "../../../stores/AppContext";
-
-import ILoginButtonState from "./Interface/ILoginButtonState";
+import { useDispatch, useSelector } from 'react-redux';
 import ILoginButtonProps from "./Interface/ILoginButtonProps";
+import { selectIsLoggedIn, selectCurrentUser } from "../../../stores/Selectors/Auth";
+import { authUser } from "../../../stores/Repository/Auth";
+import { unwrapResult } from '@reduxjs/toolkit';
+import { AppDispatch } from "../../../stores/store";
 
-class LoginButton extends Component<ILoginButtonProps, ILoginButtonState> {
-    static contextType = AppContext;
+const LoginButton: React.FC<ILoginButtonProps> = ({ onMouseOver }) => {
+    const dispatch: AppDispatch = useDispatch();
+    const isLoggedIn = useSelector(selectIsLoggedIn);
+    const userName = useSelector(selectCurrentUser);
 
-    constructor(props: ILoginButtonProps, context: IAppContextProvider) {
-        super(props);
+    useEffect(() => {
+        dispatch(authUser())
+            .then(unwrapResult)
+            .then(data => {})
+            .catch((err) => {});
+    }, [dispatch]);
 
-        this.state = {
-            loginButtonLoggedInState: {
-                name: `Hello`,
-                to: "/user/login",
-                icon: (<AiFillCaretDown />),
-                sublinks: [{
-                    name: "Logout",
-                    to: "",
-                    onClick: () => this.logoff()
-                }]
-            },
-            loginButtonLoggedOffState: {
-                name: "Login",
-                icon: (<CiLogin />),
-                to: "/user/login",
-                sublinks: [{
-                    name: "Sign Up",
-                    to: "/user/register"
-                }]
-            },
-        }
-    }
-
-    private logoff() {
+    const logoff = () => {
         UserRepository.logout().then(() => {
             window.location.href = "/";
         });
-    }
-
-    get loginButtonInnerHTML(): ReactNode {
-        const appCtx = this.context as IAppContextProvider;
-        const { userName, loginStatus } = appCtx;
-
-        if (loginStatus) {
-            return (
-                <>
-                    Hello {truncateTextBody(userName, 7)} {this.state.loginButtonLoggedInState.icon}
-                </>
-            );
-        } else {
-            const { name, icon } = this.state.loginButtonLoggedOffState;
-            return (
-                <>
-                    {name} {icon}
-                </>
-            );
-        }
-    }
-
-    get loginButtonTo(): string | null {
-        const appCtx = this.context as IAppContextProvider;
-        return appCtx.loginStatus ? null : this.state.loginButtonLoggedInState.to;
-    }
-
-    get sublinks(): unknown {
-        const appCtx = this.context as IAppContextProvider;
-        return appCtx.loginStatus ? this.state.loginButtonLoggedInState.sublinks : this.state.loginButtonLoggedOffState.sublinks;
-    }
-
-    render(): ReactNode {
-        const loginButtonInnerHTML = this.loginButtonInnerHTML;
-        return (
-            <Link
-                href={this.loginButtonTo ?? ""}
-                onMouseOver={() => this.props.onMouseOver(this.sublinks)}
-                className="navbar-item flex justify-center">
-                {loginButtonInnerHTML}
-                <div className="navbar-item__dropdown"></div>
-            </Link >
-        )
     };
-}
+
+    const loginButtonContent = {
+        loggedIn: {
+            name: "Hello",
+            to: "/user/login",
+            icon: (<AiFillCaretDown />),
+            sublinks: [{
+                name: "Logout",
+                to: "",
+                onClick: () => logoff()
+            }]
+        },
+        loggedOff: {
+            name: "Login",
+            icon: (<CiLogin />),
+            to: "/user/login",
+            sublinks: [{
+                name: "Sign Up",
+                to: "/user/register"
+            }]
+        },
+    };
+
+    const getLoginButtonInnerHTML = (): ReactNode => {
+        if (isLoggedIn && userName) {
+            return <>Hi {truncateTextBody(userName, 5)}</>;
+        }
+        return (
+            <>{loginButtonContent.loggedOff.name} {loginButtonContent.loggedOff.icon}</>
+        );
+    };
+
+    const getLoginButtonTo = (): string => {
+        return loginButtonContent.loggedIn.to;
+    };
+
+    const sublinks = isLoggedIn ? loginButtonContent.loggedIn.sublinks : loginButtonContent.loggedOff.sublinks;
+
+    return (
+        <Link
+            href={getLoginButtonTo()}
+            onMouseOver={() => onMouseOver(sublinks)}
+            className="navbar-item flex justify-center">
+            {getLoginButtonInnerHTML()}
+            <div className="navbar-item__dropdown"></div>
+        </Link>
+    );
+};
 
 export default LoginButton;

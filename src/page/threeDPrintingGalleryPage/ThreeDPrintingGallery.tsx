@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import "./ThreeDPrintingGallery.css";
 import HeroHeader from "../../components/HeroHeader/HeroHeader";
 import Gallery from "../../components/Gallery/Gallery";
@@ -7,9 +9,9 @@ import { GalleryItem } from "../../components/Gallery/Interface/IGalleryProps";
 const ThreeDPrintingGallery: React.FC<{}> = () => {
     const heroHeaderContent = Object.freeze({
         heading: "3D Printing Projects",
-        description: "I fabricated these items using a 2016-model 3D printer, acquired in 2017. I plan to resume printing with a new printer once funds allow, as my current one is non-operational. I also designed several of the models myself."
+        description: "I fabricated these items using a 2016-model 3D printer, acquired in 2017."
     }); // as const
-
+    const [isRendered, setIsRendered] = useState(false);
     const content: GalleryItem[] = [
         {
             name: "3d Printed Maneki Neko",
@@ -29,6 +31,14 @@ const ThreeDPrintingGallery: React.FC<{}> = () => {
     ];
 
     const { heading, description } = heroHeaderContent;
+
+    useEffect(() => {
+        setIsRendered(true);
+    }, [])
+
+    if (!isRendered) {
+        return (<></>);
+    }
 
     return (
         <main>

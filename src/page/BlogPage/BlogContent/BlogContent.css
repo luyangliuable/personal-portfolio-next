@@ -3,6 +3,10 @@
     width: 100%;
 }
 
+.blog-content__side-components {
+    animation: fade-in--up .5s ease-in-out
+}
+
 .blog-content {
     --padding-left-right: min( 5vw, 500px );
     --padding-top-bottom: min( 3vh, 200px );

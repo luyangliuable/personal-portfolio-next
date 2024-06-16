@@ -1,5 +1,5 @@
 import React from "react";
-import HardwareProjectsPage from "../../../pages/HardwareProjectsPage/HardwareProjectsPage";
+import HardwareProjectsPage from "../../../page/HardwareProjectsPage/HardwareProjectsPage";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

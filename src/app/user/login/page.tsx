@@ -1,3 +1,3 @@
-import LogInPage from "../../../pages/LogInPage/LogInPage";
+import LogInPage from "../../../page/LogInPage/LogInPage";
 
 export default LogInPage;

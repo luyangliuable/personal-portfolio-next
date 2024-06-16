@@ -17,6 +17,8 @@
 
 .blog__tag-container {
     padding: 0;
+    flex-wrap: 1;
+    flex-basis: 50%;
     margin-bottom: 5vh;
 }
 
@@ -101,3 +103,4 @@
         z-index: -1;
         animation: fade-in--width .4s ease-in-out;
     }
+

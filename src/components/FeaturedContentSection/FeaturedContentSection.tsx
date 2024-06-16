@@ -79,7 +79,7 @@ class FeaturedContentSection extends Component<IFeaturedContentSectionProps, IFe
                         dateCreated={content.date_created}
                         minuteRead={content.reading_time_minutes}
                         className="my-2.5"
-                        link={`/digital_chronicles/blog?id=${content._id.$oid}`}
+                        link={`/digital_chronicles/blog/${content._id.$oid}`}
                         image={content.image.$oid} />
                 </div>
             )

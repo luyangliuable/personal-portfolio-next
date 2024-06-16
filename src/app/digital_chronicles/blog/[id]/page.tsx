@@ -1,4 +1,4 @@
-import BlogContent from "../../../../pages/BlogPage/BlogContent/BlogContent";
+import BlogContent from "../../../../page/BlogPage/BlogContent/BlogContent";
 import PostRepository from "../../../../repositories/PostRepository";
 import BlogPostResponse from "../../../../repositories/Response/BlogPostResponse";
 import { truncateTextBody } from "../../../../components/Utility/StringUtility";

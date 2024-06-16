@@ -27,7 +27,7 @@ const PostDetailsPanel: React.FC<IPostDetailsPanelProps> = ({ content, relatedPo
                     {
                         relatedPosts.map((post: BlogPostResponse, idx: number) => {
                             const { heading, author } = post;
-                            const link = `/digital_chronicles/blog?id=${post._id.$oid}`;
+                            const link = `/digital_chronicles/blog/${post._id.$oid}`;
                             return (
                                 <Link className="w-80" href={link} key={idx}>
                                     <div className="card no-boundary px-1" onMouseMove={cardGradientEffect}>

@@ -19,9 +19,9 @@
     --navbar-max-height: 93px;
     --progress-height: 3.5px;
     --navbar-item-border-radius: 4px;
-    --navbar-item-width: 8.5vw;
+    --navbar-item-width: 110px;
     --navbar-item-max-width: 180px;
-    --navbar-item-margin: 0.1vw;
+    --navbar-item-margin: 0.3vw;
     --navbar-item-padding: 10px 0 10px;
     --navbar-transition: background .2s ease-in-out, box-shadow .1s ease-in-out, transform .1s ease-in-out;
     top: 0;
@@ -83,7 +83,7 @@
     padding: var(--navbar-item-padding) 5px;
     width: 180px;
     justify-content: space-between;
-    margin-bottom: 1px;
+    margin-bottom: 1px; margin-right: 0;
     text-shadow: none
 }
 
@@ -100,7 +100,7 @@
     opacity: 1
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1200px) {
     .navbar-left {
         display: none !important
     }

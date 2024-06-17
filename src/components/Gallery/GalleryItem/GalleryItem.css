@@ -29,7 +29,7 @@
     .gallery-item {
         width: 300px;
         max-width: 90vw;
-        min-height: 140px;
+        min-height: 360px;
     }
 }
 

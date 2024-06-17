@@ -1,5 +1,5 @@
-/* Styles for screens wider than 900px */
-@media screen and (min-width: 900px) {
+/* Styles for screens wider than 1200px */
+@media screen and (min-width: 1200px) {
     .navbar-burger, .navbar-burger-icon {
         display: none;
     }
@@ -9,8 +9,8 @@
     }
 }
 
-/* Styles for screens narrower than 900px */
-@media screen and (max-width: 900px) {
+/* Styles for screens narrower than 1200px */
+@media screen and (max-width: 1200px) {
     .nav-burger {
         width: 50px;
         height: 50px;

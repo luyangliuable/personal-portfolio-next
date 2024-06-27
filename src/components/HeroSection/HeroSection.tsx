@@ -15,7 +15,7 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
 
     const introduction: JSX.Element = (
         <SequentialRiseSpan calculationAdjustment={1.07} minNumberOfLettersPerLine={48} maxNumberOfLettersPerLine={70}>
-            Passionate software engineer with expertise in web/mobile development, machine learning, and efficient time management with over 2 years of full-time industry experience.
+            A software engineer, dog lover and fitness ethusiast who enjoys cooking, experimenting, eager to embrace life’s adventures and form meaningful connections and creating memories with like-minded people!
         </SequentialRiseSpan>
     );
 

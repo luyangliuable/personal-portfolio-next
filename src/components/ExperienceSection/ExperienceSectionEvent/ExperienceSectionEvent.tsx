@@ -13,7 +13,6 @@ interface ExperienceSectionEventProps {
 
 const ExperienceSectionEvent: React.FC<ExperienceSectionEventProps> = ({ item, index, alt, timeLineRef }) => {
     const defaultDisplay = item.display === "NORMAL" || !item.display;
-    const connectingLineRef = useRef<HTMLDivElement>();
     const experienceSectionCardIndexIsEvenNumber = index % 2 === 0;
     const experienceSectionCardClassName = ["card experience-section-card no-boundary flex flex-row justify-between items-center"];
 
@@ -21,7 +20,6 @@ const ExperienceSectionEvent: React.FC<ExperienceSectionEventProps> = ({ item, i
         : experienceSectionCardClassName.push("exp-below");
 
     const imageWrapperClassName = ["experience-section-card__image-wrapper"];
-    const imageClassName = ["experience-section-card__image object-cover"];
 
     imageWrapperClassName.push("experience-section-card__image-wrapper")
 
@@ -41,9 +39,7 @@ const ExperienceSectionEvent: React.FC<ExperienceSectionEventProps> = ({ item, i
             {defaultDisplay && experienceSectionCardTextExperienceBody()}
             <div className="connecting-line"></div>
             <div className={imageWrapperClassName.join(" ")}>
-                <img className={imageClassName.join(" ")}
-                    alt={alt}
-                    src={item.media.source.url} />
+                <Image compression={20} alt={alt} src={item.media.source.url} />
             </div>
         </div>
     );

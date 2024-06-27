@@ -22,13 +22,11 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
         listenSections();
     }, [tocEntries, props.emitter]);
 
-    const handleClick = (event: React.MouseEvent<HTMLDivElement>, id: string) => {
+    const handleClick = (_event: React.MouseEvent<HTMLDivElement>, id: string) => {
         const allBlogSections = Array.from(document.querySelectorAll(".blog-section"));
         const targetElement = allBlogSections.find((section) => section.id === id);
 
-        if (targetElement) {
-            targetElement.scrollIntoView({ block: 'center', behavior: 'smooth' });
-        }
+        if (targetElement) targetElement.scrollIntoView({ block: 'start', behavior: 'smooth' });
     };
 
     const renderTableOfContents = (): void => {

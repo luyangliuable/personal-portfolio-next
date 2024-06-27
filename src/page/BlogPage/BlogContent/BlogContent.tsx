@@ -69,7 +69,8 @@ const BlogContent: React.FC<IBlogContentProps> = ({ id, content }) => {
       const intersectingSections = sectionsArray
         .filter((section) => {
           const offset = isCenterAlignedWithViewport(section);
-          return offset <= window.innerHeight && offset >= -window.innerHeight;
+          const threshold = window.innerHeight/2
+          return offset <= threshold && offset >= -threshold;
         })
         .map((section) => section.id);
 

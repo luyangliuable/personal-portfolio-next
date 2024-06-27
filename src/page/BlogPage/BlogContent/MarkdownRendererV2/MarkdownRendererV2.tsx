@@ -51,20 +51,24 @@ function customCodeBlockPlugin() {
 
 const processNodes = (node: any): any => {
     if (node.nodeType === Node.TEXT_NODE) return node.textContent;
+
     if (node.nodeType === Node.ELEMENT_NODE) {
         const tagName = node.tagName.toLowerCase();
         const attributes = extractAttributesFromHtmlElement(node);
+
         if (reactComponentWhiteList[tagName]) {
             const Component = reactComponentWhiteList[tagName];
             const children = Array.from(node.childNodes).map(processNodes);
             return React.createElement(Component, attributes, ...children);
         }
+
         return React.createElement(
             tagName, 
             attributes, 
             ...Array.from(node.childNodes).map(processNodes)
         );
     }
+
     return node.outerHTML;
 };
 
@@ -117,9 +121,7 @@ const MarkdownRendererV2: React.FC<MarkdownRendererProps> = ({ markdown }) => {
         Prism.highlightAll();
     }, [renderedContent]);
 
-    return (
-        <>{renderedContent}</>
-    );
+    return renderedContent;
 };
 
 export default MarkdownRendererV2;

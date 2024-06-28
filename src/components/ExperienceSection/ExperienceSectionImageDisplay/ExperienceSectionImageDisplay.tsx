@@ -15,8 +15,8 @@ interface IExperienceSectionImageDisplayProps {
 const ExperienceSectionImageDisplay: React.FC<IExperienceSectionImageDisplayProps> = ({ item, index, alt }) => {
   const experienceSectionCardIndexIsEvenNumber = index % 2 === 0;
 
-  const parseCoordString = (coord: string | undefined): string | void => {
-    if (!coord) return;
+  const parseCoordString = (coord: string | undefined): string => {
+    if (!coord) return "";
     const [latitude, longitude] = coord.split(',').map(coord => parseFloat(coord.trim()));
     if (!latitude || !longitude) return coord;
     const latDirection = latitude >= 0 ? 'N' : 'S';

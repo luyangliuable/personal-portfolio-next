@@ -21,6 +21,7 @@
 }
 
 .footer__bottom {
+    border-top: .1px solid #CCC;
     left: 0;
 }
 

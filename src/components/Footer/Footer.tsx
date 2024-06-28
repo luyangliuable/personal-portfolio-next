@@ -6,6 +6,7 @@ import connectionsData from "../../configs/connections.json";
 import linksData from "../../configs/links.json";
 import IconButton from "../Atoms/IconButton/IconButton";
 import dynamic from 'next/dynamic';
+import Button from "../Button/Button";
 
 // Dynamic import for GetInTouch client component
 /* const GetInTouch = dynamic(() => import('./GetInTouch'), { ssr: false }); */
@@ -86,6 +87,7 @@ const Footer: React.FC = () => {
             <div className="footer__bottom position-relative w-full flex justify-around">
                 <p>LLcode.tech © 2024 All Rights Reserved</p>
                 <p>Made with Typescript, Rust and Love 💖 v0.5.0</p>
+                <Button to="https://github.com/luyangliuable/personal-portfolio-next/issues">Submit an Issue</Button>
             </div>
         </footer>
     );

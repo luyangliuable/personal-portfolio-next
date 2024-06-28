@@ -1,12 +1,6 @@
 "use client";
 
-import React, {
-    useCallback,
-    useRef,
-    useState,
-    useEffect,
-    useMemo,
-} from "react";
+import React, { useCallback, useRef, useState, useEffect, useMemo } from "react";
 import IExperienceSectionProps from "./Interface/IExperienceSectionProps";
 import {
     IExperienceSectionState,
@@ -20,12 +14,6 @@ import BlackHole from "../Organisms/BlackHole/BlackHole";
 import { useScrollPosition } from "../../hooks";
 
 import "./ExperienceSection.css";
-
-/* import madPattiesSunset from "../../assets/photos/scenicMemories/madPattiesSunset.jpg";
-* import teddieTheDog from "../../assets/photos/scenicMemories/teddieTheDog.jpg";
-* import camberwellSunset from "../../assets/photos/scenicMemories/camberwellSunset.jpg";
-* import enrouteToCamberwell from "../../assets/photos/scenicMemories/enrouteToCamberwell.jpg";
-* import beachMyFamilyVistsOften from "../../assets/photos/scenicMemories/beachMyFamilyVistsOften.jpg"; */
 
 const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
     const experienceSectionParentRef = useRef<HTMLDivElement | null>(null);
@@ -54,7 +42,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                             url: "https://llcode.tech/api/image/663ff95a79831740b12790c0",
                         },
                     },
-                },{
+                }, {
                     dateTime: "2022",
                     cardTitle: "Monash NRC",
                     url: "",
@@ -87,7 +75,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                     url: "",
                     cardSubtitle: "",
                     cardDetailedText:
-                    "Last sunset captured onboard the princess cruise voyage.",
+                        "Last sunset captured onboard the princess cruise voyage.",
                     importance: 1,
                     display: "IMAGE",
                     media: {
@@ -129,7 +117,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                     url: "",
                     cardSubtitle: "",
                     cardDetailedText:
-                    "A sunset silhouettes a distant cityscape in Camberwell.",
+                        "A sunset silhouettes a distant cityscape in Camberwell.",
                     importance: 1,
                     display: "IMAGE",
                     media: {
@@ -145,7 +133,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                     cardSubtitle: "",
                     location: "-37.902488, 145.164690",
                     cardDetailedText:
-                    "In the park where I habitually strolled with Teddie post-work or studies, the sunset painted serene silences. ",
+                        "In the park where I habitually strolled with Teddie post-work or studies, the sunset painted serene silences. ",
                     importance: 1,
                     display: "IMAGE",
                     media: {
@@ -208,7 +196,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                             url: "https://llcode.tech/api/image/667d043b5f03f0355e1fc366",
                         },
                     },
-                },{
+                }, {
                     dateTime: "2021",
                     cardTitle: "",
                     url: "",
@@ -294,7 +282,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
         if (experienceSectionParentRef.current!) setLockPosition();
         if (
             isCenterAlignedWithViewport(experienceSectionParentRef.current!) <
-                proximityYToLockPosition
+            proximityYToLockPosition
         )
             lockPosition();
         if (state.isLocked && state.lockPosition !== undefined && scrollY) {
@@ -337,7 +325,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
         if (experienceSectionParentRef.current === null) return;
         const currentPosition =
             experienceSectionParentRef.current!.parentElement!.getBoundingClientRect()
-                .top + (scrollY ?? 0);
+                                      .top + (scrollY ?? 0);
         if (!state.isLocked && state.lockPosition !== currentPosition) {
             setState({
                 ...state,
@@ -394,66 +382,66 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
         const groupedItems = groupExperienceSectionItems(sortedItems);
         let accumulatedIdx = 0;
         return Object.keys(groupedItems)
-            .sort((a, b) => parseInt(b) - parseInt(a))
-            .map((year) => {
-                const currentYearItems = groupedItems[year];
-                const fragment = (
-                    <React.Fragment key={year}>
-                        {currentYearItems.map((item: any, idx: number) => {
-                            const currentIndex = accumulatedIdx + idx;
-                            if (item.display !== undefined) {
-                                return (
-                                    <ExperienceSectionImageDisplay
-                                    key={currentIndex}
-                                    item={item}
-                                    index={currentIndex}
-                                        />
-                                );
-                            }
-                            return (
-                                <ExperienceSectionEvent
-                                timeLineRef={timeLineRef}
-                                key={currentIndex}
-                                item={item}
-                                index={currentIndex}
-                                    />
-                            );
-                        })}
-                        <div className="experience-section__year">{year}</div>
-                        </React.Fragment>
-                );
-                accumulatedIdx += currentYearItems.length;
-                return fragment;
-            });
+                     .sort((a, b) => parseInt(b) - parseInt(a))
+                     .map((year) => {
+                         const currentYearItems = groupedItems[year];
+                         const fragment = (
+                             <React.Fragment key={year}>
+                             {currentYearItems.map((item: any, idx: number) => {
+                                 const currentIndex = accumulatedIdx + idx;
+                                 if (item.display !== undefined) {
+                                     return (
+                                         <ExperienceSectionImageDisplay
+                                             key={currentIndex}
+                                             item={item}
+                                             index={currentIndex}
+                                         />
+                                     );
+                                 }
+                                 return (
+                                     <ExperienceSectionEvent
+                                         timeLineRef={timeLineRef}
+                                         key={currentIndex}
+                                         item={item}
+                                         index={currentIndex}
+                                     />
+                                 );
+                             })}
+                             <div className="experience-section__year">{year}</div>
+                             </React.Fragment>
+                         );
+                         accumulatedIdx += currentYearItems.length;
+                         return fragment;
+                     });
     }, []);
 
     const experienceSectionContent = useMemo(() => (
         <div
-        className="timeline__line flex flex-row items-center"
-        ref={timeLineRef} >
+            className="timeline__line flex flex-row items-center"
+            ref={timeLineRef} >
             {mapExperienceSectionItems()}
             <BlackHole />
-            </div>
+        </div>
     ), [mapExperienceSectionItems]);
 
     return (
         <div className="experience-section-wrapper">
             <article
-        className="landing-page-card flex flex-col justify-start overflow-hidden experience-section-parent-container"
-        ref={experienceSectionParentRef}>
-            <header className="ml-2vw important-text">
-            <SequentialRiseSpan elementType="h2">Retrospective</SequentialRiseSpan>
-            </header>
-            <section ref={experienceSectionRef} className="experience-section">
-            {/* Scrolling timeline within the section */}
-            <div
-        ref={experienceSectionScrollRef}
-        className="experience-section--content">
-            {experienceSectionContent}
-        </div>
-            </section>
+                className="landing-page-card flex flex-col justify-start overflow-hidden experience-section-parent-container"
+                ref={experienceSectionParentRef}>
+                <header className="ml-2vw important-text">
+                    <SequentialRiseSpan elementType="h2">Retrospective</SequentialRiseSpan>
+                </header>
+                <section ref={experienceSectionRef} className="experience-section">
+                    {/* Scrolling timeline within the section */}
+                    <div
+                        ref={experienceSectionScrollRef}
+                        className="experience-section--content">
+                        {experienceSectionContent}
+                    </div>
+                </section>
             </article>
-            </div>
+        </div>
     );
 };
 

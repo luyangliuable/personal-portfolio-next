@@ -3,9 +3,10 @@
     width: 380px; height: fit-content; min-height: 320px;
     margin: 15px 10px; /* When not showing on grid */
     opacity: 0;
-    background-color: rgba(220, 220, 220, 0.3);
+    background: rgba(245, 240, 255, .1) !important;
+    backdrop-filter: blur(12px) !important;
     min-height: 380px;
-    border-radius: 20px !important;
+    border-radius: 20px;
     border: 1px solid #FFF !important;
     overflow: hidden;
     padding-bottom: 32px
@@ -71,10 +72,20 @@
 }
 
 
-.gallery-item__metadata {
+.gallery-item .gallery-item__metadata {
     padding: 10px 0 !important;
+    font-family: 'Fira Code';
+    font-size: .7rem;
     border-top: 1px solid #FFF;
     bottom: 0;
+}
+
+.gallery-item .gallery-item__metadata>span {
+    margin-right: 1rem;
+}
+
+.gallery-item .gallery-item__metadata svg {
+    margin-right: .2rem;
 }
 
 .gallery-item__type {

@@ -13,6 +13,8 @@ import SequentialRiseSpan from "../../Atoms/SequentialRiseSpan/SequentialRiseSpa
 import { TbToolsOff } from "react-icons/tb";
 import { CgWebsite } from "react-icons/cg";
 import { truncateTextBody } from "../../Utility/StringUtility";
+import { CiTimer } from "react-icons/ci";
+import { CiCalendar } from "react-icons/ci";
 
 const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
   const galleryItemRef = useRef<HTMLDivElement>(null);
@@ -82,7 +84,12 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
         }
         {
           props.minuteRead && props.dateCreated &&
-          (<p className="position-absolute gallery-item__metadata">{props.minuteRead} min read | {isoDateFormatToString(new Date(props.dateCreated))} </p>)
+          (
+            <p className="position-absolute gallery-item__metadata flex">
+              <span className="flex items-center"><CiTimer /> {props.minuteRead} min read</span>
+              <span className="flex items-center"><CiCalendar /> {isoDateFormatToString(new Date(props.dateCreated))}</span>
+            </p>
+          )
         }
       </div>
     </Link>

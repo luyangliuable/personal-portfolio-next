@@ -42,7 +42,6 @@ const NavLink: React.FC<INavLinkProps> = ({ link, isSubLink, renderDropdownMenu,
 
   return (
   <a
-    shallow
     href={(targetPath && !link.isDisabled) ? targetPath : pathname}
     onClick={() => link.isDisabled && hideDropdownMenu()}
     className={`navbar-item flex justify-center items-center  ${isActive(pathname, targetPath) ? "active-link" : ""}`}

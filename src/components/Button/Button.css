@@ -6,6 +6,8 @@
     box-sizing: content-box;
     border-radius: var(--border-radius);
     cursor: pointer;
+    /* font-family: "Fira Code"; */
+    /* font-size: .75rem; */
     width: fit-content;
     color: #333;
     transition: background .5s ease-in-out;
@@ -25,6 +27,10 @@
     .button__error {
         background: red !important;
         cursor: not-allowed !important;
+    }
+
+    .button svg {
+        margin-left: .2rem;
     }
 
 .override-button {

@@ -1,5 +1,6 @@
 .hero-section-badge__container {
     overflow-x: auto;
+    gap: 1.2rem;
 }
 
 @media screen and (min-width: 1000px) {
@@ -95,9 +96,21 @@
 }
 
 .hero-section-badge__link {
-    padding: 1vw;
+    padding: .55rem 1.2rem;
     z-index: 1;
-    transition: all 0.2s ease-in-out;
+    border: 1px solid #000;
+    color: #FFF;
+    font-weight: bold;
+    font-family: "Fira Code";
+    font-size: .75rem;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+}
+
+.hero-section-badge__link svg {
+    margin-right: .3rem;
 }
 
 .hero-section-badge__link:hover {

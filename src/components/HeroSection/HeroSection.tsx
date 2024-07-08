@@ -8,6 +8,13 @@ import CodingCat from "../CodingCat/CodingCat";
 import Button from "../Button/Button";
 import LandingPageCard from "../LandingPageCard/LandingPageCard";
 import SequentialRiseSpan from "../Atoms/SequentialRiseSpan/SequentialRiseSpan";
+
+import { SiCodecademy } from "react-icons/si";
+import { FaGithubSquare } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import { RiNotionFill } from "react-icons/ri";
+
 import "./HeroSection.css";
 
 const HeroSection: React.FC<IHeroProps> = ({}) => {
@@ -22,23 +29,33 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
     const connections: any = [{
         name: "Notion",
         link: "https://luyangl.notion.site/luyangl/71be1ff365c44fd2b4f6f8dce14b7536?v=f1e55d08878e4bfda1b744e76b9480c7",
-        imageSrc:
-            "https://img.shields.io/badge/notion-%2312100E.svg?&style=for-the-badge&logo=notion&logoColor=%23333&color=%239e9e9e",
+        color: "#000",
+        background: "#FEFEFF",
+        icon: <RiNotionFill />,
+        imageSrc: "https://img.shields.io/badge/notion-%2312100E.svg?&style=for-the-badge&logo=notion&logoColor=%23333&color=%239e9e9e",
     },
     {
         name: "Email",
         link: "mailto:luyang.l@protonmail.me",
-        imageSrc:
-            "https://img.shields.io/badge/email-%2312100E.svg?&style=for-the-badge&logo=protonmail&logoColor=white&color=black",
+        color: "#004300",
+        background: "#77dd77",
+        icon: <MdEmail />,
+        imageSrc: "https://img.shields.io/badge/email-%2312100E.svg?&style=for-the-badge&logo=protonmail&logoColor=white&color=black",
     },
     {
         name: "GitHub",
         link: "https://github.com/luyangliuable",
+        color: "#FFF",
+        background: "#181717",
+        icon: <FaGithubSquare />,
         imageSrc:
             "https://img.shields.io/badge/github-%2312100E.svg?&style=for-the-badge&logo=github&logoColor=white&color=black",
     },
     {
         name: "LinkedIn",
+        icon: <FaLinkedin />,
+        color: "#FFF",
+        background: "#0077B5",
         link: "https://www.linkedin.com/in/luyang-l",
         imageSrc:
             "https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white",
@@ -46,8 +63,10 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
     {
         name: "Codecademy",
         link: "https://www.codecademy.com/profiles/luyangliuable",
-        imageSrc:
-            "https://img.shields.io/badge/codecademy-%2312100E.svg?&style=for-the-badge&logo=codecademy&logoColor=white&color=black",
+        color: "#FFF",
+        background: "#000",
+        icon: <SiCodecademy />,
+        imageSrc: "https://img.shields.io/badge/codecademy-%2312100E.svg?&style=for-the-badge&logo=codecademy&logoColor=white&color=black",
     }]
 
     const footer = useMemo(() => {
@@ -55,8 +74,18 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
             <footer className="hero-section-badge__container flex justify-center items-center w-full">
                 {connections.map(
                     (item: any, index: number) => (
-                        <Link key={index} href={item.link} className="hero-section-badge__link" target="_blank" rel="noopener noreferrer" >
-                            <img src={item.imageSrc} alt={item.name} />
+                        <Link
+                            key={index}
+                            style={{
+                                color: item.color,
+                                backgroundColor: item.background
+                            }}
+                            href={item.link}
+                            className="hero-section-badge__link flex justify-center items-center"
+                            target="_blank"
+                            rel="noopener noreferrer" >
+                            {item.icon}
+                            {item.name.toUpperCase()}
                         </Link>
                     )
                 )}

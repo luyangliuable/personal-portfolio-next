@@ -39,7 +39,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                     media: {
                         type: "IMAGE",
                         source: {
-                            url: "https://llcode.tech/api/image/663ff95a79831740b12790c0",
+                            url: "https://llcode.tech/api/image/668c9606a8e1db1f839dba5a",
                         },
                     },
                 }, {
@@ -94,7 +94,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                     media: {
                         type: "IMAGE",
                         source: {
-                            url: "https://www.commbank.com.au/content/dam/commbank/commBank-logo.svg",
+                            url: "https://llcode.tech/api/image/668c946aa8e1db1f839dba56",
                         },
                     },
                 }, {

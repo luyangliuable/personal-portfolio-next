@@ -28,7 +28,10 @@ const ExperienceSectionImageDisplay: React.FC<IExperienceSectionImageDisplayProp
 
   const experienceSectionCardTextImageBody = (): React.ReactElement => (
     <div className="w-full flex flex-col items-center mt-5">
-      <SequentialRiseSpan elementType="p" className="image-display__detailed-text" minNumberOfLettersPerLine={50} calculationAdjustment={1.1}>
+      <SequentialRiseSpan
+        elementType="p"
+        className="image-display__detailed-text"
+        numberOfLettersPerLine={50}>
         {item.cardDetailedText}
       </SequentialRiseSpan>
       <div className="experience-section-card__location flex items-center justify-center font-fira-code">

@@ -21,7 +21,7 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
     const mainHeading: string = "Hi There, I am Luyang.";
 
     const introduction: JSX.Element = (
-        <SequentialRiseSpan calculationAdjustment={1.07} minNumberOfLettersPerLine={48} maxNumberOfLettersPerLine={70}>
+        <SequentialRiseSpan calculationAdjustment={.82} minNumberOfLettersPerLine={48}>
             A software engineer, dog lover and fitness ethusiast who enjoys cooking, experimenting, eager to embrace life’s adventures and form meaningful connections and creating memories with like-minded people!
         </SequentialRiseSpan>
     );

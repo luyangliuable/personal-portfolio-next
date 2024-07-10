@@ -227,30 +227,30 @@ const NavBar: React.FC<INavbarProps> = () => {
             </div>
             <nav ref={navbarLeft} className="navbar-left flex flex-row">
                 {links.map((item, _) => renderNavLink(item, false))}
-                <LoginButton onMouseOver={renderDropdownMenu} />
                 <section ref={selectedNavlinkWindow} className="selected-navlink-window flex items-center">
                     <div ref={navbarSubmenu} className="navbar-item__dropdown ">
                         {state.dropdownMenuLinkDisplay}
                     </div>
                 </section>
             </nav>
+            <LoginButton onMouseOver={renderDropdownMenu} />
             <div ref={burgerButton} className="nav-burger" onClick={toggleBurgerMenu}><BurgerMenuIcon /></div>
         </section>
     ), [state.dropdownMenuLinkDisplay]);
 
-    const navbarBurgerPanel = useMemo(() => (
-        <NavBurgerPanel links={links} burgerPanel={burgerPanel} />
-    ), [state.dropdownMenuLinkDisplay]);
+  const navbarBurgerPanel = useMemo(() => (
+    <NavBurgerPanel links={links} burgerPanel={burgerPanel} />
+  ), [state.dropdownMenuLinkDisplay]);
 
-    return (
-        <>
-            <article className="navbar" onMouseLeave={() => hideDropdownMenu()} ref={navbar}>
-                {navBarMainSection}
-                <NavbarScrollProgress scrollY={ scrollY ?? 0 }/>
-            </article>
-            {navbarBurgerPanel}
-        </>
-    );
+  return (
+    <>
+      <article className="navbar" onMouseLeave={() => hideDropdownMenu()} ref={navbar}>
+        {navBarMainSection}
+        <NavbarScrollProgress scrollY={ scrollY ?? 0 }/>
+      </article>
+    {navbarBurgerPanel}
+    </>
+  );
 }
 
 export default NavBar;

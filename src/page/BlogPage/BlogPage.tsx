@@ -76,7 +76,6 @@ const BlogPage: React.FC<IBlogPageProps> = (props) => {
                         || selectedTags.includes("daily-leetcode")
                         || selectedTags.includes("algorithms"))
     );
-    console.log(groupedPosts)
     setState((prev: IBlogPageState) => ({ ...prev, currentlyShowingContent: groupedPosts }));
   };
 

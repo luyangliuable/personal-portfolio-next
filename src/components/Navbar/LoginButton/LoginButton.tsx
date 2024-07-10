@@ -10,71 +10,88 @@ import { selectIsLoggedIn, selectCurrentUser } from "../../../stores/Selectors/A
 import { authUser } from "../../../stores/Repository/Auth";
 import { unwrapResult } from '@reduxjs/toolkit';
 import { AppDispatch } from "../../../stores/store";
+import "./LoginButton.css";
 
 const LoginButton: React.FC<ILoginButtonProps> = ({ onMouseOver }) => {
-    const dispatch: AppDispatch = useDispatch();
-    const isLoggedIn = useSelector(selectIsLoggedIn);
-    const userName = useSelector(selectCurrentUser);
+  const dispatch: AppDispatch = useDispatch();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const userName = useSelector(selectCurrentUser);
 
-    useEffect(() => {
-        dispatch(authUser())
-            .then(unwrapResult)
-            .then(data => {})
-            .catch((err) => {});
-    }, [dispatch]);
+  useEffect(() => {
+    dispatch(authUser())
+      .then(unwrapResult)
+      .then(data => {})
+      .catch((err) => {});
+  }, [dispatch]);
 
-    const logoff = () => {
-        UserRepository.logout().then(() => {
-            window.location.href = "/";
-        });
-    };
+  const logoff = () => {
+    UserRepository.logout().then(() => {
+      window.location.href = "/";
+    });
+  };
 
-    const loginButtonContent = {
-        loggedIn: {
-            name: "Hello",
-            to: "/user/login",
-            icon: (<AiFillCaretDown />),
-            sublinks: [{
-                name: "Logout",
-                to: "",
-                onClick: () => logoff()
-            }]
-        },
-        loggedOff: {
-            name: "Login",
-            icon: (<CiLogin />),
-            to: "/user/login",
-            sublinks: [{
-                name: "Sign Up",
-                to: "/user/register"
-            }]
-        },
-    };
+  const loginButtonContent = {
+    loggedIn: {
+      name: "Hello",
+      to: "/user/login",
+      icon: (<AiFillCaretDown />),
+      sublinks: [{
+        name: "Logout",
+        to: "",
+        onClick: () => logoff()
+      }]
+    },
+    loggedOff: {
+      name: "Login",
+      icon: (<CiLogin />),
+      to: "/user/login",
+      sublinks: [{
+        name: "Sign Up",
+        to: "/user/register"
+      }]
+    },
+  };
 
-    const getLoginButtonInnerHTML = (): ReactNode => {
-        if (isLoggedIn && userName) {
-            return <>Hi {truncateTextBody(userName, 5)}</>;
-        }
-        return (
-            <>{loginButtonContent.loggedOff.name} {loginButtonContent.loggedOff.icon}</>
-        );
-    };
+  const getLoginButtonInnerHTML = (): ReactNode => {
+    if (isLoggedIn && userName) {
+      return <>Hi {truncateTextBody(userName, 5)}</>;
+      }
+      return (
+      <>{loginButtonContent.loggedOff.name} {loginButtonContent.loggedOff.icon}</>
+      );
+  };
 
-    const getLoginButtonTo = (): string => {
-        return loginButtonContent.loggedIn.to;
-    };
+  const getLoginButtonTo = (): string => {
+    return loginButtonContent.loggedIn.to;
+  };
 
-    const sublinks = isLoggedIn ? loginButtonContent.loggedIn.sublinks : loginButtonContent.loggedOff.sublinks;
+  const sublinks = isLoggedIn ? loginButtonContent.loggedIn.sublinks : loginButtonContent.loggedOff.sublinks;
 
-    return (
-        <Link
-            href={getLoginButtonTo()}
-            onMouseOver={() => onMouseOver(sublinks)}
-            className="navbar-item flex justify-center">
-            {getLoginButtonInnerHTML()}
-            <div className="navbar-item__dropdown"></div>
-        </Link>
-    );
+  return (
+    <nav className="login-button--container flex flex-row">
+    <Link
+      href={getLoginButtonTo()}
+      className="login-button flex justify-center">
+      {getLoginButtonInnerHTML()}
+      <div className="navbar-item__dropdown"></div>
+    </Link>
+    { isLoggedIn ?
+      <Link
+        href="https://llcode.tech/api/logout"
+        className="login-button flex justify-center">
+        Logoff
+        <div className="navbar-item__dropdown"></div>
+      </Link>
+    :
+      <Link
+        href={"/user/register"}
+        className="login-button flex justify-center">
+        SignUp
+        <div className="navbar-item__dropdown"></div>
+      </Link>
+    }
+    </nav>
+  );
 };
 
 export default LoginButton;

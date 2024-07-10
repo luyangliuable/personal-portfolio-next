@@ -65,8 +65,6 @@ const LoginButton: React.FC<ILoginButtonProps> = ({ onMouseOver }) => {
     return loginButtonContent.loggedIn.to;
   };
 
-  const sublinks = isLoggedIn ? loginButtonContent.loggedIn.sublinks : loginButtonContent.loggedOff.sublinks;
-
   return (
     <nav className="login-button--container flex flex-row">
     <Link

@@ -23,3 +23,9 @@
         border-radius: var(--navbar-item-border-radius);
         border: none;
     }
+
+    @media screen and (max-width: 1200px) {
+        .login-button--container {
+            display: none
+        }
+    }

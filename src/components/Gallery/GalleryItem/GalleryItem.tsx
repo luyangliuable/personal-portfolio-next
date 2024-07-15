@@ -47,7 +47,7 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
       );
     }
 
-    return null;
+    return (<></>);
   };
 
   const style: CSSProperties = props.style || {};
@@ -58,7 +58,7 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
   }, [])
 
   if (!isRendered) {
-    return null;
+    return (<></>);
   }
 
   return (
@@ -81,7 +81,7 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
              {truncateTextBody(props.description, 200)}
            </SequentialRiseSpan>
          </div>
-          }
+        }
         {
           props.minuteRead && props.dateCreated &&
           (

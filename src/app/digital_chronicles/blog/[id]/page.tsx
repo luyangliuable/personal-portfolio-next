@@ -34,7 +34,5 @@ export default async function BlogContentServer({ params }: PageProps) {
     const postRepository = PostRepository.getInstance();
     const content: BlogPostResponse = await postRepository.getPost(id);
 
-    /* await sleep(10000); */
-
     return <BlogContent id={id} content={content} />;
 }

@@ -248,7 +248,7 @@ class TwinCandles extends Component<ITwinCandleProps, ITwinCandleState> {
 
 
     public transitionCandleFireToOff = () => {
-        if (this.state.currentCandleState === "On") {
+        if (this.state.currentCandleState === "On" || this.state.currentCandleState === "Transitioning") {
             this.updateCandleState("Transitioning");
 
             Object.entries(this.state.fireOffTransitionState).forEach(([key, value]) => {
@@ -272,7 +272,7 @@ class TwinCandles extends Component<ITwinCandleProps, ITwinCandleState> {
     }
 
     public transitionCandleFireToOn = () => {
-        if (this.state.currentCandleState === "Off") {
+        if (this.state.currentCandleState === "Off" || this.state.currentCandleState === "Transitioning") {
             this.updateCandleState("Transitioning");
 
             Object.entries(this.state.fireOnTransitionState).forEach(([key, value]) => {

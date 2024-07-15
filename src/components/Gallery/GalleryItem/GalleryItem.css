@@ -1,6 +1,7 @@
 .gallery-item {
     transition: transform .1s ease-in, opacity .1s ease-in;
-    width: 380px; height: fit-content; min-height: 320px;
+    width: 380px;
+    height: 100%;
     margin: 15px 10px; /* When not showing on grid */
     opacity: 0;
     background: rgba(245, 240, 255, .1) !important;

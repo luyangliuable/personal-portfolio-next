@@ -14,6 +14,8 @@ import BlackHole from "../Organisms/BlackHole/BlackHole";
 import { useScrollPosition } from "../../hooks";
 
 import "./ExperienceSection.css";
+import ZaOcean from "../Organisms/ZaOcean/ZaOcean";
+import ZaBanquet from "../Organisms/ZaBanquet/ZaBanquet";
 
 const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
   const experienceSectionParentRef = useRef<HTMLDivElement | null>(null);
@@ -390,7 +392,9 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                  .map((year) => {
                    const currentYearItems = groupedItems[year];
                    const fragment = (
-                     <React.Fragment key={year}>
+                     <div className="timeline__year" key={year}>
+                     { year === String(2023) && <ZaOcean />}
+                     { year === String(2022) && <ZaBanquet />}
                      {currentYearItems.map((item: any, idx: number) => {
                        const currentIndex = accumulatedIdx + idx;
                        if (item.display !== undefined) {
@@ -412,7 +416,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                        );
                      })}
                      <div className="experience-section__year">{year}</div>
-                     </React.Fragment>
+                     </div>
                    );
                    accumulatedIdx += currentYearItems.length;
                    return fragment;

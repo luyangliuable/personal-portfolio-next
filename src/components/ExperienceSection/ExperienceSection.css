@@ -36,6 +36,7 @@
 
 .experience-section-card {
     width: 310px;
+    backdrop-filter: blur(8px);
     margin: 0 -45px;
     padding: 10px;
     height: fit-content;
@@ -136,4 +137,12 @@
     .experience-section-card__location {
         display: none !important;
     }
+}
+
+.timeline__year {
+    position: relative;
+    /* border: 1px solid black; */
+    display: flex;
+    align-items: center;
+    height: fit-content;
 }

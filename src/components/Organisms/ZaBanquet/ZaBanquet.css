@@ -1,0 +1,156 @@
+.flowers {
+    --color-1: #d3cce3;
+    --color-2: purple;
+    --color-3: #9379aa;
+    --color-4: #521c81;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: -1;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 50%;
+}
+
+.flowers .flower-leaves {
+    position: relative;
+    width: 100%;
+    height: 20px;
+    background-color: #a8e6ba;
+    border-radius: 100% 10%;
+    top: 80%;
+    left: 5px;
+    box-shadow: -1px 1px black, 1px 1px black, 1px -1px black;
+}
+
+
+.flowers .flower-leaves:before, .flowers .flower-leaves:after {
+    content: "";
+    position: absolute;
+    background-color: #a8e6ba;
+}
+.flowers .flower-leaves:before {
+    width: 60px;
+    height: 20px;
+    border-radius: 100% 10%;
+    transform: rotate(30deg);
+    right: 10px;
+    box-shadow: -1px 1px black, 1px 1px black, 1px -1px black;
+}
+.flowers .flower-leaves:after {
+    width: 50px;
+    height: 20px;
+    border-radius: 100% 10%;
+    transform: rotate(15deg);
+    top: 2px;
+}
+
+.flowers .flower {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    /* animation: moveWater 1s ease-in-out infinite; */
+    /* transform: rotateX(40deg) !important; */
+}
+
+.flowers .flower:after {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+    left: 6px;
+    top: 8px;
+    background-image: radial-gradient(8px 8px at center, var(--color-3) 30%, var(--color-4) 41%, 60%, transparent);
+}
+
+.flowers .flower > .petal {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #f8f8ff;
+    background-image: linear-gradient(45deg, #f8f8ff, var(--color-1));
+    border-radius: 50% 80%;
+    border: .1px solid var(--color-2);
+    box-shadow: -0.04em -0.04em var(--color-2), -0.05em -0.05em black;
+}
+
+.flowers .flower > .petal:nth-child(1) {
+    transform: rotate(40deg);
+    left: 5px;
+    top: 2px;
+}
+
+.flowers .flower
+> .petal:nth-child(2) {
+    transform: rotate(-20deg);
+    top: 6px;
+    left: 0px;
+}
+
+.flowers .flower > .petal:nth-child(3) {
+    transform: rotate(-90deg);
+    top: 12px;
+    left: 2px;
+}
+
+.flowers .flower > .petal:nth-child(4) {
+    transform: rotate(180deg);
+    top: 12px;
+    left: 10px;
+}
+
+.flowers .flower > .petal:nth-child(5) {
+    transform: rotate(100deg);
+    top: 5px;
+    left: 10px;
+}
+
+.flowers .bunch .flower:nth-child(1) {
+    left: 33px;
+    transform: scale(1.5) rotate(30deg);
+}
+
+.flowers .bunch .flower:nth-child(2) {
+    left: 10px;
+    transform: scale(1.5) rotate(-20deg);
+}
+
+.flowers .bunch .flower:nth-child(3) {
+    left: 25px;
+    top: 40px;
+    transform: scale(1.5) rotate(5deg);
+}
+
+.flowers .bunch .flower:nth-child(4) {
+    left: 45px;
+    top: 40px;
+    transform: scale(1.5) rotate(5deg);
+}
+
+.roses .bunch > .rose:nth-child(1) {
+    left: 12px;
+    top: 12px;
+}
+
+.roses .bunch > .rose:nth-child(2) {
+    left: 0px;
+    top: 25px;
+    transform: scale(1.1) rotate(-20deg);
+}
+
+.roses .bunch > .rose:nth-child(3) {
+    left: 25px;
+    top: 30px;
+    transform: scale(1.2) rotate(20deg);
+}
+
+.petal {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    /* background-color: #ffd9df; */
+    /* background-image: linear-gradient(-45deg, #ec87bf 10%, #ffd9df 65%); */
+    border-radius: 20% 80%;
+    /* box-shadow: -0.04em -0.04em #ec87bf, -0.05em -0.05em black; */
+}

@@ -50,6 +50,7 @@
 .flowers .flower {
     position: absolute;
     width: 30px;
+    transform-origin: center;
     height: 30px;
     visibility: hidden;
 }

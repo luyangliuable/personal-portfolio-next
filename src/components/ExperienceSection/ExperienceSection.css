@@ -141,8 +141,7 @@
 
 .timeline__year {
     position: relative;
-    /* border: 1px solid black; */
+    height: 100vh;
     display: flex;
     align-items: center;
-    height: fit-content;
 }

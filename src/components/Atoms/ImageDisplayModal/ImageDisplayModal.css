@@ -6,6 +6,13 @@ body .image-display-modal--container {
     z-index: 10;
 }
 
+@media (max-width: 1439px) {
+    body .image-display-modal--container {
+        display:none;
+    }
+}
+
+
 .image-display-modal .image-display-modal--handle-close {
     position: absolute;
     top: 0; right: 0;
@@ -33,9 +40,8 @@ body .image-display-modal--container {
 
 .image-display-modal--image {
     width: 100%;
-    height: 70%;
     height: 80%;
-    padding: 3rem;
+    padding: 0 3rem 3rem 3rem;
 }
 
 .image-display-modal--image img {

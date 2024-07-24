@@ -76,8 +76,10 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
       lineRefs.forEach(ref => {
         if (ref.current) observer.observe(ref.current);
       });
+
       return observer;
     }
+
     const observer = addIntersectionObserver();
     return () => observer.disconnect();
   }, [lineRefs]);

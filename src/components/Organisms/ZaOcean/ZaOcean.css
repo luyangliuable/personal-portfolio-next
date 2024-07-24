@@ -1,4 +1,8 @@
 .section-down{
+    --water-color: #00bfff;
+    --water-color--dark: #1e90ff;
+    --ship-color: #030308;
+
     position: absolute;
     display: block;
     z-index: -1;
@@ -7,6 +11,7 @@
     width: 100%;
     height: 50%;
 }
+
 .water-wrapper{
     position: absolute;
     left: 65px;
@@ -17,14 +22,17 @@
     z-index: 6;
     overflow: hidden;
 }
+
 .water-wrapper.right{
     left: 450px;
     bottom: -20px;
 }
+
 .water-wrapper.top.right{
     left: 454.5px;
     bottom: -10px;
 }
+
 .water-wrap{
     position: absolute;
     left: 0;
@@ -36,6 +44,7 @@
     transform: translateX(0);
     animation: moveWater 1.6s linear infinite;
 }
+
 @keyframes moveWater {
     0% {
         transform: translateX(0);
@@ -44,6 +53,7 @@
         transform: translateX(-33.333333333333%);
     }
 }
+
 .water{
     position: absolute;
     left: 0;
@@ -54,12 +64,14 @@
     z-index: 6;
     background-color: rgb(249, 249, 249);
 }
+
 .water.snd{
     left: 77px;
 }
 .water.trd{
     left: 154px;
 }
+
 .water span{
     position: absolute;
     left: -4px;
@@ -69,13 +81,13 @@
     display: block;
     z-index: 6;
     border-radius: 50%;
-    border: 2px solid #030308;
-    border-color: #030308 transparent transparent transparent;
+    border: 2px solid var(--water-color--dark);
+    border-color: var(--water-color--dark) transparent transparent transparent;
 }
 .water span:nth-child(2){
     left: 9px;
     top: -1px;
-    border-color: transparent transparent #030308 transparent;
+    border-color: transparent transparent var(--water-color--dark) transparent;
 }
 .water span:nth-child(3){
     left: 22px;
@@ -83,7 +95,7 @@
 .water span:nth-child(4){
     left: 35px;
     top: -1px;
-    border-color: transparent transparent #030308 transparent;
+    border-color: transparent transparent var(--water-color--dark) transparent;
 }
 .water span:nth-child(5){
     left: 48px;
@@ -91,7 +103,7 @@
 .water span:nth-child(6){
     left: 61px;
     top: -1px;
-    border-color: transparent transparent #030308 transparent;
+    border-color: transparent transparent var(--water-color--dark) transparent;
 }
 .water-wrapper.top{
     width: 68px;
@@ -122,13 +134,14 @@
     display: block;
     z-index: 6;
     border-radius: 50%;
-    border: 2px solid #030308;
-    border-color: #030308 transparent transparent transparent;
+    border: 2px solid var(--water-color--dark);
+    border-color: var(--water-color--dark) transparent transparent transparent;
 }
+
 .water-wrapper.top .water span:nth-child(2){
     left: 8px;
     top: 0;
-    border-color: transparent transparent #030308 transparent;
+    border-color: transparent transparent var(--water-color--dark) transparent;
 }
 .water-wrapper.top .water span:nth-child(3){
     left: 19px;
@@ -136,7 +149,7 @@
 .water-wrapper.top .water span:nth-child(4){
     left: 30px;
     top: 0;
-    border-color: transparent transparent #030308 transparent;
+    border-color: transparent transparent var(--water-color--dark) transparent;
 }
 .water-wrapper.top .water span:nth-child(5){
     left: 41px;
@@ -144,8 +157,9 @@
 .water-wrapper.top .water span:nth-child(6){
     left: 53px;
     top: 0;
-    border-color: transparent transparent #030308 transparent;
+    border-color: transparent transparent var(--water-color--dark) transparent;
 }
+
 .fish-wrapper{
     position: absolute;
     left: 82px;
@@ -568,6 +582,7 @@
     z-index: 6;
     animation: moveWater 2s linear infinite;
 }
+
 .water-big{
     position: absolute;
     left: 0;
@@ -577,12 +592,15 @@
     display: block;
     z-index: 1;
 }
+
 .water-big.snd{
     left: 116px;
 }
+
 .water-big.trd{
     left: 232px;
 }
+
 .water-big span{
     position: absolute;
     left: 0;
@@ -593,6 +611,7 @@
     z-index: 1;
     background-color: rgb(249, 249, 249);
 }
+
 .water-big span:nth-child(2){
     left: -2px;
     top: -20px;
@@ -602,9 +621,10 @@
     background-color: transparent;
     border-radius: 50%;
     border: 2px solid #030308;
-    border-color: transparent #030308 #030308 transparent;
+    border-color: transparent var(--water-color) var(--water-color) transparent;
     transform: rotate(45deg);
 }
+
 .water-big span:nth-child(3){
     left: 37px;
     top: -20px;
@@ -613,8 +633,8 @@
     z-index: 2;
     background-color: transparent;
     border-radius: 50%;
-    border: 2px solid #030308;
-    border-color: transparent #030308 #030308 transparent;
+    border: 2px solid var(--water-color);
+    border-color: transparent var(--water-color) var(--water-color) transparent;
     transform: rotate(45deg);
 }
 .water-big span:nth-child(4){
@@ -625,8 +645,8 @@
     z-index: 2;
     background-color: transparent;
     border-radius: 50%;
-    border: 2px solid #030308;
-    border-color: transparent #030308 #030308 transparent;
+    border: 2px solid var(--water-color);
+    border-color: transparent var(--water-color) var(--water-color) transparent;
     transform: rotate(45deg);
 }
 .water-big span:nth-child(5){
@@ -704,6 +724,7 @@
     width: 10px;
     transform: rotate(55deg);
 }
+
 .water-big span:nth-child(14){
     left: 100px;
     top: 14px;
@@ -711,6 +732,7 @@
     width: 10px;
     transform: rotate(55deg);
 }
+
 .ship-wrapper{
     position: absolute;
     left: 260px;
@@ -718,6 +740,7 @@
     display: block;
     z-index: 4;
 }
+
 .ship{
     position: absolute;
     left: 0;
@@ -729,6 +752,7 @@
     transform-origin: center center;
     animation: shipFloat 1.6s linear infinite;
 }
+
 @keyframes shipFloat {
     0% {
         transform: translateY(0) rotate(0);
@@ -746,6 +770,7 @@
         transform: translateY(0) rotate(0);
     }
 }
+
 .ship span{
     position: absolute;
     left: 0;
@@ -753,7 +778,7 @@
     display: block;
     width: 86px;
     height: 34px;
-    border: 3px solid #030308;
+    border: 3px solid var(--ship-color);
     border-bottom-right-radius: 40px;
     border-bottom-left-radius: 20px;
     background-color: rgb(249, 249, 249);
@@ -766,7 +791,7 @@
     height: 85px;
     border: none;
     border-radius: 0;
-    background-color: #030308;
+    background-color: var(--ship-color);
 }
 .ship span:nth-child(3){
     left: 21px;
@@ -776,7 +801,7 @@
     border: none;
     border-radius: 0;
     background-color: transparent;
-    border-bottom: 62px solid #030308;
+    border-bottom: 62px solid var(--ship-color);
     border-left: 20px solid transparent;
     border-right: 20px solid transparent;
     transform: rotate(-16.5deg);
@@ -805,11 +830,12 @@
     border: none;
     border-radius: 0;
     background-color: transparent;
-    border-bottom: 48px solid #030308;
+    border-bottom: 48px solid var(--ship-color);
     border-left: 31px solid transparent;
     border-right: 0 solid transparent;
     border-bottom-left-radius: 5px;
 }
+
 .ship span:nth-child(6){
     left: 1px;
     bottom: 58px;

@@ -1,6 +1,5 @@
 .blog-content__header {
-    width: fit-content;
-    width: 100%;
+    width: 100% !important;
 }
 
 .blog-content__side-components {
@@ -50,7 +49,7 @@
 
 .blog-content__image {
     --blog-content__image-top-bottom-margin: min(10vh, 25px);
-    width: 98%;
+    width: 100%;
     height: min(30vh, 400px);
     margin: var(--blog-content__image-top-bottom-margin) var(--blog-content__image-top-bottom-margin);
     object-fit: cover;

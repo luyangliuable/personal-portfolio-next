@@ -4,7 +4,6 @@ import React, { useMemo, useState, ReactNode, useEffect, useRef, RefObject } fro
 import Link from "next/link";
 import { INavbarState, ILink, NavbarItem } from "./Interface/INavbarState";
 import { useScrollPosition } from "../../hooks";
-import { FaArrowCircleUp } from "react-icons/fa";
 import INavbarProps from "./Interface/INavbarProps";
 import NavBurgerPanel from "./NavBurgerPanel/NavBurgerPanel";
 import BurgerMenuIcon from "./BurgerMenuIcon/BurgerMenuIcon";
@@ -12,9 +11,8 @@ import LoginButton from "./LoginButton/LoginButton";
 import linksData from "../../configs/links.json";
 import NavLink from "./NavLink/NavLink";
 import NavbarScrollProgress from "./NavbarScrollProgress/NavbarScrollProgress";
+import { toggleProperty, toggleClassName, dp } from "../Utility/LogicUtility";
 import "./Navbar.css";
-
-import { usePathname } from 'next/navigation';
 
 const NavBar: React.FC<INavbarProps> = () => {
     const { scrollY, deltaScrollCalculation } = useScrollPosition();
@@ -23,12 +21,9 @@ const NavBar: React.FC<INavbarProps> = () => {
     const navbarLeft: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
     const selectedNavlinkWindow: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
     const burgerPanel: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
-    const burgerButton: RefObject<HTMLDivElement>  = useRef<HTMLDivElement>(null);
-    const scrollProgress: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
+    const burgerButton: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
     const navbarSubmenu: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
     const [navBarHeight, setNavBarHeight] = useState(0);
-
-    const pathname = usePathname();
 
     const links = useMemo(() => {
         return linksData.links as NavbarItem[]
@@ -55,17 +50,18 @@ const NavBar: React.FC<INavbarProps> = () => {
         const { hideNavBarScrollSensitivity, isNavbarHidden } = state;
         const deltaScrolled = deltaScrollCalculation?.deltaScrolled ?? 0;
         if ((deltaScrolled >= hideNavBarScrollSensitivity) && !isNavbarHidden && state.navBarDetached) {
-            hideNavBar();
+            setNavBarHidden(true);
         } else if (deltaScrolled <= -hideNavBarScrollSensitivity && isNavbarHidden) {
-            showNavBar();
+            setNavBarHidden(false);
         }
     };
 
     const listenContinuousScrolled = () => {
         if (!state.navBarDetached && scrollY! >= navBarHeight) {
-            detachNavBar();
+            setNavBarHidden(true);
+            setTimeout(() => setNavbarDetached(true), 100);
         } else if (scrollY! < navBarHeight) {
-            attachNavBar();
+            setNavbarDetached(false);
         }
     };
 
@@ -101,7 +97,6 @@ const NavBar: React.FC<INavbarProps> = () => {
 
     const initializeNavBar = () => {
         listenContinuousScrolled();
-        // updateScrolledProgress(0);
         if (window.innerWidth < 900) addBurgerClickOutEventLister();
     }
 
@@ -117,52 +112,37 @@ const NavBar: React.FC<INavbarProps> = () => {
         if (deltaScrollCalculation?.deltaScrolled !== 0) listenDeltaScrolled();
     }
 
-    const attachNavBar = () => {
-        navbar.current?.classList.remove("detached");
-        burgerPanel.current?.classList.add("nav-burger-panel-move-lower");
-        setState(prev => {
-            return {
-                ...prev,
-                navBarDetached: false
-            };
-        });
+    const setNavbarDetached = (set: boolean) => {
+        if (state.navBarDetached !== set && navbar.current) {
+            toggleClassName(navbar.current, set, "detached");
+            toggleClassName(navbar.current, !set, "nav-burger-panel-move-lower");
+            setState(prev => {
+                return {
+                    ...prev,
+                    navBarDetached: set
+                };
+            });
+        }
     }
 
-    const detachNavBar = () => {
-        navbar.current?.classList.add("detached");
-        burgerPanel.current?.classList.remove("nav-burger-panel-move-lower");
-        setState(prev => {
-            return {
-                ...prev,
-                navBarDetached: true
-            }
-        });
-    };
-
-
-    const hideNavBar = () => {
-        // If the navbar is not already hidden, hide it and set the navbar height to 0px
-        navbar.current?.classList.add("hidden");
-        document.documentElement.style.setProperty('--navbar-height', '0px');
-        setState(prev => {
-            return {
-                ...prev,
-                isNavbarHidden: true
-            }
-        });
-    };
-
-    const showNavBar = () => {
-        navbar.current?.classList.remove("hidden");
-        // Connascence of value here /Users/blackfish/personal-portfolio/client/src/App.css:5
-        document.documentElement.style.setProperty('--navbar-height', `${navBarHeight}px`);
-        setState(prev => {
-            return {
-                ...prev,
-                isNavbarHidden: false
-            }
-        });
-    };
+    const setNavBarHidden = (set: boolean) => {
+        if (state.isNavbarHidden === set) return;
+        if (navbar.current) {
+            toggleProperty(
+                document.documentElement,
+                set,
+                { "--navbar-height": "0px" },
+                { "--navbar-height": `${navBarHeight}px` }
+            );
+            toggleClassName(navbar.current, set, "hidden");
+            setState(prev => {
+                return {
+                    ...prev,
+                    isNavbarHidden: set
+                };
+            });
+        }
+    }
 
     const toggleBurgerMenu = () => {
         burgerPanel.current?.classList.toggle("nav-burger-panel-hide");
@@ -176,21 +156,16 @@ const NavBar: React.FC<INavbarProps> = () => {
         }
     };
 
-    const hideDropdownMenu = () => {
-        navbarSubmenu.current?.classList.remove("show-navbar-dropdown");
-        selectedNavlinkWindow.current?.classList.remove("show-navbar-dropdown");
-    }
-
-    const showDropdownMenu = () => {
-        navbarSubmenu.current?.classList.add("show-navbar-dropdown");
-        selectedNavlinkWindow.current?.classList.add("show-navbar-dropdown");
+    const setDropdownMenu = (set: boolean): void => {
+        if (navbarSubmenu.current && selectedNavlinkWindow.current) {
+            toggleClassName(navbarSubmenu.current, set, "show-navbar-dropdown");
+            toggleClassName(selectedNavlinkWindow.current, set, "show-navbar-dropdown");
+        }
     }
 
     const renderDropdownMenu = (links?: ILink[]): ReactNode | void => {
-        console.log(links);
         if (links && links.length > 0) {
-            showDropdownMenu();
-
+            setDropdownMenu(true);
             setState(prev => ({
                 ...prev,
                 dropdownMenuLinkDisplay: links.map(link => (
@@ -204,7 +179,7 @@ const NavBar: React.FC<INavbarProps> = () => {
                 )),
             }));
         } else {
-            hideDropdownMenu();
+            setDropdownMenu(false);
         }
     };
 
@@ -214,7 +189,7 @@ const NavBar: React.FC<INavbarProps> = () => {
                 key={link.name}
                 link={link}
                 isSubLink={isSubLink}
-                hideDropdownMenu={hideDropdownMenu}
+                hideDropdownMenu={() => setDropdownMenu(false)}
                 links={links}
                 renderDropdownMenu={renderDropdownMenu} />
         );
@@ -238,19 +213,19 @@ const NavBar: React.FC<INavbarProps> = () => {
         </section>
     ), [state.dropdownMenuLinkDisplay]);
 
-  const navbarBurgerPanel = useMemo(() => (
-    <NavBurgerPanel links={links} burgerPanel={burgerPanel} />
-  ), [state.dropdownMenuLinkDisplay]);
+    const navbarBurgerPanel = useMemo(() => (
+        <NavBurgerPanel links={links} burgerPanel={burgerPanel} />
+    ), [state.dropdownMenuLinkDisplay]);
 
-  return (
-    <>
-      <article className="navbar" onMouseLeave={() => hideDropdownMenu()} ref={navbar}>
-        {navBarMainSection}
-        <NavbarScrollProgress scrollY={ scrollY ?? 0 }/>
-      </article>
-    {navbarBurgerPanel}
-    </>
-  );
+    return (
+        <>
+            <article className="navbar" onMouseLeave={() => setDropdownMenu(false)} ref={navbar}>
+                {navBarMainSection}
+                <NavbarScrollProgress scrollY={scrollY ?? 0} />
+            </article>
+            {navbarBurgerPanel}
+        </>
+    );
 }
 
 export default NavBar;

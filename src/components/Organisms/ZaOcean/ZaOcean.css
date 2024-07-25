@@ -3,6 +3,7 @@
     --water-color--dark: #1e90ff;
     --ship-color: #030308;
 
+    display: none !important;
     position: absolute;
     display: block;
     z-index: -1;
@@ -14,6 +15,7 @@
 
 .water-wrapper{
     position: absolute;
+    display: none;
     left: 65px;
     bottom: 0;
     height: 70px;

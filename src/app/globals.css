@@ -778,7 +778,7 @@ a {
 
 @keyframes scale-in {
     0% {
-        transform: scale(.1);
+        transform: scale(.1) rotate(var(--rotation));
         opacity: 0;
     }
     100% {

@@ -60,8 +60,9 @@ const ZaBanquet = () => {
           style={{
             left: `${left}%`,
             top: `${top}%`,
-            animationDelay: `${i * 100}ms`,
-            transform: `scale(${scale}) rotate(${rotate}deg)`,
+            animationDelay: `${i * 50}ms`,
+            '--rotation': `${rotate}deg`,
+            transform: `scale(${scale}) rotate(var(--rotation))`,
             '--color-1': theme['--color-1'],
             '--color-2': theme['--color-2'],
             '--color-3': theme['--color-3'],

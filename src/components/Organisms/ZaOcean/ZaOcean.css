@@ -7,7 +7,7 @@
     display: block;
     z-index: -1;
     transform: translate(0, 0);
-    opacity: .3;
+    /* opacity: .3; */
     width: 100%;
     height: 50%;
 }
@@ -609,7 +609,7 @@
     width: 116px;
     display: block;
     z-index: 1;
-    background-color: rgb(249, 249, 249);
+    background-color: rgb(246, 246, 246);
 }
 
 .water-big span:nth-child(2){

@@ -92,7 +92,10 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
                         </p>
                     )
                 }
-                <Contributors repoOwner={props.repoOwner} repoName={props.repoName} />
+                {
+                    props.repoOwner && props.repoName &&
+                    <Contributors repoOwner={props.repoOwner} repoName={props.repoName} />
+                }
             </div>
         </Link>
     );

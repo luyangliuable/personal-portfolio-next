@@ -10,11 +10,11 @@ const octokit = new Octokit({
 });
 
 interface IContributorsProps {
-  repoName?: string,
-  repoOwner?: string
+  repoName: string,
+  repoOwner: string
 }
 
-const Contributors: React.FC<IContributorsProps> | null = ({repoName, repoOwner}) => {
+const Contributors: React.FC<IContributorsProps> = ({repoName, repoOwner}) => {
   const contributorTooltipRef = useRef<HTMLDivElement>(null);
   const [contributors, setContributors] = useState<any[]>([]);
 
@@ -50,10 +50,8 @@ const Contributors: React.FC<IContributorsProps> | null = ({repoName, repoOwner}
 
       setContributors(contributors);
     };
-    if (repoOwner && repoName) fetchContributors();
+    fetchContributors();
   }, [repoName, repoOwner]);
-
-  if (!repoName || !repoOwner) return null;
 
   return (
     <div className="position-absolute gallery-item__metadata flex w-full">

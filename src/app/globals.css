@@ -678,6 +678,8 @@ a {
 
 .user-image {
     border-radius: 100%;
+    width: 40px; height: 40px;
+    border: 2px solid white;
     object-fit: cover
 }
 

@@ -5,6 +5,7 @@ import "../Utility/MouseUtility";
 import "./Gallery.css";
 
 const Gallery: React.FC<IGalleryProps> = (props) => {
+
     const renderGalleryItems = (): React.ReactNode => {
         return props.content.map((item: any, index: number) => (
             <GalleryItem key={index} {...item} />

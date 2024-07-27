@@ -54,7 +54,7 @@ const Contributors: React.FC<IContributorsProps> = ({repoName, repoOwner}) => {
   }, [repoName, repoOwner]);
 
   return (
-    <div className="position-absolute gallery-item__metadata flex w-full">
+    <div className="position-absolute gallery-item__metadata p-1 flex w-full">
       {
         createPortal(
           <div

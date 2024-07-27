@@ -60,21 +60,15 @@
 	transition: width 200ms ease-out;
 }
 
-
 .gallery-item:hover .gallery-item__image {
     width: 110%;
 }
-
-
-
 
 .gallery-item__image:hover {
     cursor: grabbing;
 }
 
-.contributor {
-
-}
+.contributor {}
 
 .contributor--tooltip {
     border-radius: 3px;
@@ -91,7 +85,7 @@
 }
 
 .gallery-item .gallery-item__metadata {
-    padding: .5rem 1rem .1rem !important;
+    padding: .5rem 0;
     font-family: 'Fira Code';
     font-size: .7rem;
     overflow-x: auto;

@@ -588,8 +588,16 @@ a {
     padding-bottom: 1.25rem;
 }
 
+.px-5 {
+  padding: 0 1.25rem !important;
+}
+
+.p-1 {
+    padding: .25rem !important
+}
+
 .p-4 {
-    padding: 1rem
+    padding: 1rem !important
 }
 
 .p-24, .p-25 {

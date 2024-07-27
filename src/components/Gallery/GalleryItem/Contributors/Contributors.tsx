@@ -18,8 +18,6 @@ const Contributors: React.FC<IContributorsProps> | null = ({repoName, repoOwner}
   const contributorTooltipRef = useRef<HTMLDivElement>(null);
   const [contributors, setContributors] = useState<any[]>([]);
 
-  if (!repoName || !repoOwner) return null;
-
   useEffect(() => {
     const fetchContributors = async () => {
       let contributors: any[] = [];
@@ -54,6 +52,8 @@ const Contributors: React.FC<IContributorsProps> | null = ({repoName, repoOwner}
     };
     if (repoOwner && repoName) fetchContributors();
   }, [repoName, repoOwner]);
+
+  if (!repoName || !repoOwner) return null;
 
   return (
     <div className="position-absolute gallery-item__metadata flex w-full">

@@ -26,5 +26,4 @@ export interface IExperienceSectionState<
     currentElementPositionY?: number,
     timeLineLength?: number,
     lockPosition?: number
-    unlockPosition: number | null
 }

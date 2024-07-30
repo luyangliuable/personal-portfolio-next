@@ -17,9 +17,11 @@ import AuthorDetails from "./AuthorDetails/AuthorDetails";
 import { useScrollPosition } from "../../../hooks";
 import "./BlogContent.css";
 import "./CodeBlock/CodeBlock.css";
+import { useGetPostQuery } from "../../../stores/Repository/Posts";
 
-const BlogContent: React.FC<IBlogContentProps> = ({ id, content }) => {
+const BlogContent: React.FC<IBlogContentProps> = ({ id, content, showRelatedPosts }) => {
   const postRepository = useMemo(() => PostRepository.getInstance(), []);
+
   const emitter = useMemo(() => new EventEmitter(), []);
   const { scrollY: scrolled } = useScrollPosition();
 
@@ -38,6 +40,7 @@ const BlogContent: React.FC<IBlogContentProps> = ({ id, content }) => {
   useEffect(() => {
     const updateBlogContentHeadings = (): void => {
       if (content) {
+        console.log(content.body);
         const renderer = new marked.Renderer();
         const originalHeadingRenderer = renderer.heading.bind(renderer);
         let headings: { title: string; level: number }[] = [];
@@ -51,7 +54,7 @@ const BlogContent: React.FC<IBlogContentProps> = ({ id, content }) => {
     };
 
     async function updatedRelatedPosts(): Promise<void> {
-      if (content) {
+      if (content && showRelatedPosts) {
         const { tags, _id } = content;
         const relatedPosts = await postRepository.getRelatedPosts(tags, _id.$oid, 3);
         setState((prev) => ({ ...prev, relatedPosts }));
@@ -88,6 +91,8 @@ const BlogContent: React.FC<IBlogContentProps> = ({ id, content }) => {
     const { heading, image, body, _id } = content;
     const imageId = image?.$oid;
 
+    if (!body) return (<></>);
+
     return (
       <article className="blog-content box-shadow">
         <header className="blog-content__header">
@@ -100,7 +105,7 @@ const BlogContent: React.FC<IBlogContentProps> = ({ id, content }) => {
         </section>
         <section className="blog-content-body">
           <MarkdownRendererV2 key={_id.$oid} markdown={body} />
-        </section>
+            </section>
       </article>
     );
   }
@@ -113,9 +118,8 @@ const BlogContent: React.FC<IBlogContentProps> = ({ id, content }) => {
       <section className="blog-content__wrapper">
         {content && (
           <>
-          {showSides && <PostDetailsPanel content={content} relatedPosts={relatedPosts} />}
+          {<PostDetailsPanel content={content} relatedPosts={relatedPosts} />}
           {renderBlogContent()}
-          {showSides && (
             <aside className="blog-content__side-components position-sticky mt-20vh">
               <Link shallow href="/digital_chronicles/blogs" className="flex items-center">
                 <IoMdArrowBack />
@@ -123,7 +127,6 @@ const BlogContent: React.FC<IBlogContentProps> = ({ id, content }) => {
               </Link>
               <TableOfContent emitter={emitter} headings={headings} />
             </aside>
-          )}
           </>
         )}
       </section>

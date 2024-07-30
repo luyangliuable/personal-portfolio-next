@@ -296,28 +296,6 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
         updateTimelineLength();
     }, []);
 
-  /* useEffect(() => {
-   *     const addIntersectionObserver = () => {
-   *         const observer = new IntersectionObserver((entries) => {
-   *             entries.forEach(entry => {
-   *                 if (entry.isIntersecting) {
-   *                   lockPosition();
-   *                 } else {
-   *                   unlockPosition();
-   *                 }
-   *             });
-   *         }, { threshold: .5 });
-
-   *         if (experienceSectionParentRef.current) observer.observe(experienceSectionParentRef.current);
-
-   *         return observer;
-   *     }
-
-   *     const observer = addIntersectionObserver();
-   *     return () => observer.disconnect();
-
-   * }, [experienceSectionParentRef.current]) */
-
     useEffect(() => {
         const proximityYToLockPosition = window.innerHeight / 3;
         if (experienceSectionParentRef.current!) setLockPosition();
@@ -432,30 +410,30 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
         <div
             className="timeline__line flex flex-row items-center"
             ref={timeLineRef} >
-            {mapExperienceSectionItems()}
-            <BlackHole />
+          {mapExperienceSectionItems()}
+          <div><BlackHole /></div>
         </div>
     ), [mapExperienceSectionItems]);
 
-    return (
-        <div className="experience-section-wrapper">
-            <article
-                className="landing-page-card flex flex-col justify-start overflow-hidden experience-section-parent-container"
-                ref={experienceSectionParentRef}>
-                <header className="ml-2vw important-text">
-                    <SequentialRiseSpan elementType="h2">Retrospective</SequentialRiseSpan>
-                </header>
-                <section ref={experienceSectionRef} className="experience-section">
-                    {/* Scrolling timeline within the section */}
-                    <div
-                        ref={experienceSectionScrollRef}
-                        className="experience-section--content">
-                        {experienceSectionContent}
-                    </div>
-                </section>
-            </article>
-        </div>
-    );
+  return (
+    <div className="experience-section-wrapper">
+      <article
+        className="landing-page-card flex flex-col justify-start overflow-hidden experience-section-parent-container"
+        ref={experienceSectionParentRef}>
+        <header className="ml-2vw important-text">
+          <SequentialRiseSpan elementType="h2">Retrospective</SequentialRiseSpan>
+        </header>
+        <section ref={experienceSectionRef} className="experience-section">
+          {/* Scrolling timeline within the section */}
+          <div
+            ref={experienceSectionScrollRef}
+            className="experience-section--content">
+            {experienceSectionContent}
+          </div>
+        </section>
+      </article>
+    </div>
+  );
 };
 
 export default ExperienceSection;

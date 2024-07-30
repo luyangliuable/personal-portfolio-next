@@ -39,7 +39,7 @@ function sectionise(node: any, index: any, parent: any) {
 
     const slug = stringToHash(headingContent).toString();
 
-    const section = {
+    let section = {
         type: 'section',
         depth: depth,
         children: between,
@@ -51,6 +51,22 @@ function sectionise(node: any, index: any, parent: any) {
             }
         },
     };
+
+    if (headingContent.trim().toLowerCase() === "table of contents") {
+        section = {
+            type: 'section',
+            depth: depth,
+            children: between,
+            data: {
+                hName: 'section',
+                hProperties: {
+                    id: slug,
+                    className: "hidden"
+                }
+            },
+        }
+    };
+
 
     parent.children.splice(startIndex, section.children.length, section);
 }

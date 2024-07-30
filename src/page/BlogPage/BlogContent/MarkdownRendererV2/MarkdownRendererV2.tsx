@@ -22,7 +22,6 @@ type MarkdownRendererProps = {
     markdown: string;
 };
 
-
 function customCodeBlockPlugin() {
     return (tree: any) => {
         visit(tree, 'inlineCode', (node) => {
@@ -63,8 +62,8 @@ const processNodes = (node: any): any => {
         }
 
         return React.createElement(
-            tagName, 
-            attributes, 
+            tagName,
+            attributes,
             ...Array.from(node.childNodes).map(processNodes)
         );
     }
@@ -76,14 +75,15 @@ const convertHtmlToReact = (htmlString: string): JSX.Element => {
     const container = document.createElement('div');
     container.innerHTML = htmlString;
     const elements = Array.from(container.childNodes).map(processNodes);
+    console.log(elements);
     return (
         <>
             {
                 elements.map((el, index) => {
                     const key = typeof el + index;
-                    return typeof el === 'string'
-                        ? React.createElement('div', { dangerouslySetInnerHTML: { __html: el }, key: key })
-                        : React.cloneElement(el, { key: key });
+                    return typeof el === "string"
+                        ? React.createElement("div", { dangerouslySetInnerHTML: { __html: el }, key: key })
+                        : React.cloneElement(el ?? "div", { key: key });
                 })
             }
         </>
@@ -103,10 +103,29 @@ const MarkdownRendererV2: React.FC<MarkdownRendererProps> = ({ markdown }) => {
         return;
     };
 
+    function filterMarkdown(text: string): string {
+        // Regular expression to match the Table of Contents section
+        const tocRegex = /\*\*Table of Contents\*\*\n(?:\s*-\s[^\n]*\n)+/g;
+
+        // Replace the Table of Contents section with an empty string
+        let filteredText = text.replace(tocRegex, '');
+
+        // Regular expression to remove * characters from text surrounded by |
+        const asteriskRegex = /\|([^\|]*)\|/g;
+
+        // Replace * characters within |...| blocks
+        filteredText = filteredText.replace(asteriskRegex, (match, p1) => {
+            return `|${p1.replace(/\*/g, '')}|`;
+        });
+
+        return filteredText;
+    }
+
     useEffect(() => {
-        const filteredMarkdown = markdown.split('\n')
-            .filter(line => !/^#[^#]/.test(line))
-            .join('\n');
+
+        const filteredMarkdown = filterMarkdown(markdown.split('\n')
+            .filter(line => !/^#[^#]/.test(line) && !/^<!.*>/.test(line))
+            .join('\n'));
 
         remark()
             .use(remarkTableToHtml as any)

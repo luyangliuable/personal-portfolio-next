@@ -75,7 +75,7 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = (props) =
     }
 
     const renderTopPickedPostsSortedByDateDescending = (): React.ReactNode => {
-        const sliceEnd = state.numOfElementsToShow - 1;
+        const sliceEnd = state.numOfElementsToShow - 2;
         return state.featuredPosts?.slice(0, sliceEnd).map((content) => (
             <div key={content._id.$oid}>
                 <GalleryItem
@@ -102,14 +102,22 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = (props) =
     return (
         <LandingPageCard className="mb-20" heading="Featured Content" landingPageCardType="fitContent" blendWithBackground={true}>
             <section ref={currentComponentRef} className="flex flex-col items-center">
-                <div ref={featuredSectionRef} className="featured-section featured-section-with-before w-full flex flex-row justify-center items-start">
+                <div ref={featuredSectionRef} className="featured-section featured-section-with-before w-full position-relative flex flex-row justify-center items-stretch">
                     <GalleryItem
                         name={getFeaturedToolHeading()}
                         type="tool"
-                        className="my-2.5"
+                        className="my-2.5 h-full"
                         image="65596ad4ad7cc31ee9263e32"
                         description={truncateTextBody(state.featuredTool?.description)}
                         link={state.featuredTool?.link}
+                    />
+                    <GalleryItem
+                        name="Sponser Me for Can4Cancer Now!"
+                        className="my-2.5 h-full"
+                        action="VISIT"
+                        image="https://raisely-images.imgix.net/can4cancer-2024/uploads/can-4-cancer-logo-jpg-9f9f6a.jpg?fit=max&w=1000&auto=format&q=62"
+                        description="I joined can4cancer which is an initiative that aims to raise funds to support research towards curing and preventing cancer."
+                        link="https://melbournewalk24.can4cancer.com.au/lucas-liu"
                     />
                     {renderTopPickedPostsSortedByDateDescending()}
                 </div>

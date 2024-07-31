@@ -71,7 +71,7 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
                 onMouseMove={cardGradientEffect}
                 className="gallery-item flex flex-col justify-start items-center pb-10 blur-boundary card">
                 <GalleryItemTypeSegment />
-                <div className="position-absolute color-white right-0 w-15 top-10 font-fira-code">READ</div>
+                <div className="position-absolute color-white right-0 w-15 top-10 font-fira-code">{props.action ?? "READ"}</div>
                 <Image compression={30} alt="" className="gallery-item__image" src={image ?? ""} />
                 <TagCloud tags={props.tags} />
                 <h3>{props.name}</h3>

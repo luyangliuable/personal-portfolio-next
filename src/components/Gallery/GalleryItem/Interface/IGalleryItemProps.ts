@@ -2,6 +2,7 @@ import { CSSProperties } from 'react';
 
 interface IGalleryItemPropsBase {
   name?: string;
+  action?: string;
   subheading?: string;
   className?: string;
   image?: string;

@@ -71,6 +71,7 @@ const Footer: React.FC = () => {
                     <section className="footer__sponsor mb-20">
                         <h3 className="mb-0">Sponsor Me</h3>
                         <InlineLink target="_blank" to="https://ko-fi.com/D1D1PFTTH" className="mt-5">Kofi</InlineLink>
+                        <InlineLink target="_blank" to="https://melbournewalk24.can4cancer.com.au/lucas-liu" className="mt-5">Can4cancer</InlineLink>
                     </section>
                 </div>
 

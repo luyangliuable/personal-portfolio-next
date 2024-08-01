@@ -121,7 +121,7 @@ const BlogPage: React.FC<IBlogPageProps> = (props) => {
                          in_progress={content.in_progress}
                          tags={content.tags}
                          image={content.image && content.image.$oid}
-                         link={`/digital_chronicles/blog/${content._id.$oid}`}
+                         link={`/digital-chronicles/blog/${content._id.$oid}`}
                        />
                      ))
                    }
@@ -138,7 +138,7 @@ const BlogPage: React.FC<IBlogPageProps> = (props) => {
             key={post._id.$oid}
             authorImage={authorImage}
             author={post.author}
-            link={`/digital_chronicles/blog/${post._id.$oid}`}
+            link={`/digital-chronicles/blog/${post._id.$oid}`}
             heading={post.heading}
             image={post.image.$oid}
             body=""
@@ -149,7 +149,7 @@ const BlogPage: React.FC<IBlogPageProps> = (props) => {
   );
 
   const renderUnSelectedTags = () => {
-    const baseUrlLink = "/digital_chronicles/blogs";
+    const baseUrlLink = "/digital-chronicles/blogs";
     const { currentSelectTags: selectedTags } = state;
 
     return Array.from(state.allTags).map(tagName => {

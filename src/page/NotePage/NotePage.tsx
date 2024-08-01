@@ -97,7 +97,7 @@ const Notes: React.FC = () => {
                                                 in_progress={content.in_progress}
                                                 tags={content.tags}
                                                 image={content.image && content.image.$oid}
-                                                link={`/digital_chronicles/coding-note/${content._id.$oid}`}
+                                                link={`/digital-chronicles/coding-note/${content._id.$oid}`}
                                             />
                                         )
                                     })

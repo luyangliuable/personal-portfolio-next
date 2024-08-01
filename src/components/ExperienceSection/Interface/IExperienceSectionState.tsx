@@ -3,6 +3,7 @@ import { JSXElementConstructor } from 'react';
 export interface ExperienceSectionItem {
     dateTime: string,
     cardTitle: string,
+    objectPosition?: "top" | "bottom" | "center",
     location?: string,
     url: string,
     cardSubtitle: string,

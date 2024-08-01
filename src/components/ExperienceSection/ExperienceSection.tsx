@@ -79,6 +79,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                     cardDetailedText:
                         "Last sunset captured onboard the princess cruise voyage.",
                     importance: 1,
+                    objectPosition: "bottom",
                     display: "IMAGE",
                     media: {
                         type: "IMAGE",
@@ -134,6 +135,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                     url: "",
                     cardSubtitle: "",
                     location: "-37.902488, 145.164690",
+                    objectPosition: "bottom",
                     cardDetailedText:
                         "In the park where I habitually strolled with Teddie post-work or studies, the sunset painted serene silences. ",
                     importance: 1,
@@ -177,6 +179,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                     cardSubtitle: "",
                     location: "-37.829423, 145.058246",
                     cardDetailedText: "A image I took of the sunset in Camberwell where I used to live.",
+                    objectPosition: "bottom",
                     importance: .9,
                     display: "IMAGE",
                     media: {
@@ -233,6 +236,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                     cardSubtitle: "",
                     location: "-37.790968, 145.172341",
                     cardDetailedText: "I captured this serene view at Mad Patties during the COVID era.",
+                    objectPosition: "top",
                     importance: 1,
                     display: "IMAGE",
                     media: {
@@ -334,16 +338,6 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
         }
     };
 
-    const unlockPosition = (): void => {
-        if (state.isLocked) {
-            setState({
-                ...state,
-                isLocked: false,
-            });
-            scrollTimeline(0);
-        }
-    };
-
     const scrollTimeline = (scrollXAmount: number): void => {
         if (state.isLocked) {
             const transformValue = `translate(${scrollXAmount}px, 0)`;
@@ -410,30 +404,30 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
         <div
             className="timeline__line flex flex-row items-center"
             ref={timeLineRef} >
-          {mapExperienceSectionItems()}
-          <div><BlackHole /></div>
+            {mapExperienceSectionItems()}
+            <div><BlackHole /></div>
         </div>
     ), [mapExperienceSectionItems]);
 
-  return (
-    <div className="experience-section-wrapper">
-      <article
-        className="landing-page-card flex flex-col justify-start overflow-hidden experience-section-parent-container"
-        ref={experienceSectionParentRef}>
-        <header className="ml-2vw important-text">
-          <SequentialRiseSpan elementType="h2">Retrospective</SequentialRiseSpan>
-        </header>
-        <section ref={experienceSectionRef} className="experience-section">
-          {/* Scrolling timeline within the section */}
-          <div
-            ref={experienceSectionScrollRef}
-            className="experience-section--content">
-            {experienceSectionContent}
-          </div>
-        </section>
-      </article>
-    </div>
-  );
+    return (
+        <div className="experience-section-wrapper">
+            <article
+                className="landing-page-card flex flex-col justify-start overflow-hidden experience-section-parent-container"
+                ref={experienceSectionParentRef}>
+                <header className="ml-2vw important-text">
+                    <SequentialRiseSpan elementType="h2">Retrospective</SequentialRiseSpan>
+                </header>
+                <section ref={experienceSectionRef} className="experience-section">
+                    {/* Scrolling timeline within the section */}
+                    <div
+                        ref={experienceSectionScrollRef}
+                        className="experience-section--content">
+                        {experienceSectionContent}
+                    </div>
+                </section>
+            </article>
+        </div>
+    );
 };
 
 export default ExperienceSection;

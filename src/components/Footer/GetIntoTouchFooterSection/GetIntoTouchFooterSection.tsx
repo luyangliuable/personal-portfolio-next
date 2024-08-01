@@ -2,6 +2,7 @@
 
 import React, { useRef, useState, RefObject } from "react";
 import Button from "../../Button/Button";
+import "./GetIntoTouchFooterSection.css";
 
 const GetInTouch: React.FC = () => {
     const [buttonClassName, setButtonClassName] = useState("");

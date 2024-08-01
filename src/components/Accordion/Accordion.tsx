@@ -18,7 +18,10 @@ const Item: FC<IAccordionItemProps> = ({ heading, children, icon }) => {
 
     return (
         <div className="accordion--item flex flex-col">
-            <div onClick={() => setShow(prev => !prev)} className="accordion--tab noselect flex items-center justify-between cursor-pointer">
+            <div onClick={(e) => {
+                setShow(prev => !prev);
+                if (!show) (e.target as HTMLElement).scrollIntoView({ behavior: 'smooth' });
+            }} className="accordion--tab noselect flex items-center justify-between cursor-pointer">
                 <div className="flex flex-row items-center">
                     <span className="mr-2">{icon}</span>
                     <span>{heading}</span>
@@ -28,7 +31,7 @@ const Item: FC<IAccordionItemProps> = ({ heading, children, icon }) => {
             <div className={cl("accordion--content w-full flex flex-col items-center", { "none": !show })}>
                 {children}
             </div>
-        </div>
+        </div >
     );
 }
 

@@ -1,4 +1,6 @@
 .skeleton-page__header {
-    height: 90vh;
-    min-height: 200px
+    position: fixed;
+    z-index: 10;
+    top: var(--navbar-height);
+    height: 100vh;
 }

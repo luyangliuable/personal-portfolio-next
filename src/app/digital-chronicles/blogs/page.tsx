@@ -13,5 +13,5 @@ export default async function BlogPageWithTopPicks() {
     const postRepository = PostRepository.getInstance();
     /* const content: BlogPostResponse[] = await postRepository.getPostList(); */
 
-    return <BlogPage showTopPicks/>;
+    return <BlogPage showTopPicks showLoadingSkeleton/>;
 }

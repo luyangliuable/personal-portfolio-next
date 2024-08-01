@@ -46,7 +46,7 @@ const stringToHash = (str: string): number => {
 
 function removeHashesAndStripWhitespace(str: string) {
     let result = str.replace(/#/g, '');
-    return result.replace(/\s+/g, '');
+    return result.replace(/^\s/mg, '').trim();
 }
 
 export { truncateTextBody, stripAwayHashSymbols, isoDateFormatToString, stringToHash, removeHashesAndStripWhitespace };

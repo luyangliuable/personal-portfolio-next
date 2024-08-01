@@ -15,7 +15,7 @@ export default interface BlogPostResponse {
     }
     is_featured?: boolean;
     month?: number;
-    post_type?: string;
+    post_type?: "blog" | "project" | "tool" | "url" | "none" | "md";
     reading_time_minutes?: number;
     tags: string[];
     year?: number

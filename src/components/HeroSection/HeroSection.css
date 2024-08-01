@@ -25,42 +25,6 @@
         justify-content: center;
         flex-direction: row;
     }
-
-    .hero-section__background {
-        animation-play-state: infinite;
-        filter: blur(28px);
-        position: absolute;
-        border-radius: 100%;
-        transition: all .5s ease-in-out;
-        opacity: .038;
-    }
-
-
-    .hero-section__background__wrapper {
-        left: 0;
-        position: absolute;
-        height: 40vh;
-        width: 50%;
-        z-index: 0;
-    }
-
-    .hero-section__background--animate-one {
-        animation: animate-background-blur-bubbles--translate-left 20s infinite;
-    }
-
-    .hero-section__background--animate-two {
-        animation: animate-background-blur-bubbles--rotate-and-translate-up 10s infinite;
-    }
-
-
-    .hero-section__background__wrapper * {
-        z-index: 0;
-    }
-
-    .hero-section__background__wrapper *:hover {
-        background: purple;
-        transform: translate(2vw, 2vw);
-    }
 }
 
 @media screen and (max-width: 1000px) {
@@ -79,19 +43,6 @@
         z-index: 1;
         margin-top: 2vh;
         justify-content: center;
-    }
-
-    .hero-section__background__wrapper {
-        left: 0; top: 0;
-        background: transparent;
-        position: absolute;
-        height: 100vh;
-        width: 100vw;
-        z-index: 0;
-    }
-
-    .hero-section__background {
-        display: none;
     }
 }
 

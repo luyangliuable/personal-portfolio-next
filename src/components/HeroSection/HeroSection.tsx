@@ -102,9 +102,11 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
                     </SequentialRiseSpan>
                 </header>
                 <div className="hero-section__content__left__text position-relative">{introduction}</div>
-                <div className="flex flex-row mt-10 justify-start self-start">
-                    <Button to="/digital-chronicles/blogs">See my Blogs <AiOutlineArrowRight /></Button>
+                <div className="hero-section__button-container flex flex-row mt-10 justify-start self-start flex-wrap gap-1">
+                    <Button to="/digital-chronicles/blogs">See my Blog <AiOutlineArrowRight /></Button>
+                    <Button to="/about/teddie">See my Dog <AiOutlineArrowRight /></Button>
                     <Button to="/projects/code">See my Projects <AiOutlineArrowRight /></Button>
+                    <Button to="/digital-chronicles/coding-notes">See my Notes <AiOutlineArrowRight /></Button>
                 </div>
             </section>
         );

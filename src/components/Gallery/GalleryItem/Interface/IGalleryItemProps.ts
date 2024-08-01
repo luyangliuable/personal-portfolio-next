@@ -10,7 +10,7 @@ interface IGalleryItemPropsBase {
   dateCreated?: string;
   minuteRead?: number;
   link?: string;
-  type?: "blog" | "project" | "tool" | "url";
+  type?: "blog" | "project" | "tool" | "url" | "none" | "md";
   key?: number | string;
   style?: CSSProperties;
   tags?: string[];

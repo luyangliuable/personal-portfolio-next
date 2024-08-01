@@ -1,0 +1,183 @@
+.loading-bar--container {
+    height: 350px;
+    display: flex; justify-content: center; align-items: center;
+}
+
+.loading-bar {
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+    margin: auto;
+    inset: 0;
+    border: 5px solid #555;
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+}
+.box1 {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    background: #000;
+    border: 10px solid #000;
+}
+.box1 .bar {
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    position: absolute;
+    animation: grow 1s infinite;
+}
+.box1 .bar:first-child {
+    left: 0;
+    top: 0;
+}
+.box1 .bar:nth-child(2) {
+    inset: 0;
+    margin: auto;
+}
+.box1 .bar:last-child {
+    bottom: 0;
+    right: 0;
+}
+@keyframes grow {
+    0% {
+        width: 40px;
+        height: 40px;
+    }
+    25% {
+        width: 100%;
+        height: 40px;
+    }
+    50% {
+        width: 40px;
+        height: 40px;
+    }
+    75% {
+        width: 40px;
+        height: 100%;
+    }
+    100% {
+        width: 40px;
+        height: 40px;
+    }
+}
+.box2 {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    background: #000;
+    border: 10px solid #000;
+}
+.box2 .bar {
+    width: 40px;
+    height: 100px;
+    position: absolute;
+    background: #fff;
+    bottom: 0;
+}
+.box2 .bar:first-child {
+    left: 0;
+    animation: jump 1s infinite;
+}
+.box2 .bar:nth-child(2) {
+    left: 0;
+    right: 0;
+    margin: auto;
+    animation: jump 1s 0.3s infinite;
+}
+.box2 .bar:last-child {
+    right: 0;
+    animation: jump 1s 0.6s infinite;
+}
+@keyframes jump {
+    0% {
+        bottom: 0;
+    }
+    50% {
+        bottom: 50px;
+    }
+    100% {
+        bottom: 0;
+    }
+}
+.box3 {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    background: #000;
+    border: 10px solid #000;
+}
+.box3 .bar {
+    width: 40px;
+    height: 0;
+    position: absolute;
+    background: #fff;
+    top: 0;
+}
+.box3 .bar:first-child {
+    left: 0;
+    animation: drop 1s infinite alternate;
+}
+.box3 .bar:nth-child(2) {
+    left: 0;
+    right: 0;
+    margin: auto;
+    animation: drop 1s 0.3s infinite alternate;
+}
+.box3 .bar:last-child {
+    right: 0;
+    animation: drop 1s 0.6s infinite alternate;
+}
+@keyframes drop {
+    from {
+        height: 0;
+        top: 0;
+    }
+    to {
+        height: 100%;
+        top: 0;
+    }
+}
+.box4 {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    background: #000;
+    border: 10px solid #000;
+}
+.box4 .bar {
+    width: 40px;
+    height: 0;
+    position: absolute;
+    background: #fff;
+    top: 0;
+}
+.box4 .bar:first-child {
+    left: 0;
+    animation: drop2 0.5s infinite;
+}
+.box4 .bar:nth-child(2) {
+    left: 0;
+    right: 0;
+    margin: auto;
+    animation: drop2 0.5s 0.1s infinite;
+}
+.box4 .bar:last-child {
+    right: 0;
+    animation: drop2 0.5s 0.2s infinite;
+}
+@keyframes drop2 {
+    0% {
+        height: 0;
+        top: 0;
+    }
+    50% {
+        height: 100%;
+        top: 0;
+    }
+    100% {
+        height: 0;
+        top: 100%;
+    }
+}

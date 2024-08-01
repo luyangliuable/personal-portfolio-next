@@ -1,7 +1,7 @@
 import BlogPostResponse from "../../../repositories/Response/BlogPostResponse";
 
 interface IFeaturedContentSectionState {
-    featuredPosts?: BlogPostResponse[];
+    featuredPosts: BlogPostResponse[];
     numOfElementsToShow: number,
     featuredTool?: {
         name: string,

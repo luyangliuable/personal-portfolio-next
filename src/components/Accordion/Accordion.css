@@ -1,0 +1,33 @@
+.accordion {
+    width: 100%;
+    padding: 5rem;
+}
+
+    .accordion .accordion--item {
+        height: fit-content
+    }
+
+
+    .accordion .accordion--content {
+        margin-bottom: 4rem;
+    }
+
+    .accordion .accordion--tab {
+        background: #DDD;
+        width: 100%;
+        font-size: 1.25rem;
+        padding: 20px;
+        margin-bottom: 1rem;
+        border-radius: 12px;
+    }
+
+.flip {
+    transition: transform .1s ease-in-out;
+    transform: rotate(-180deg);
+}
+
+
+.no-flip {
+    transition: transform .1s ease-in-out;
+    transform: rotate(0deg);
+}

@@ -6,14 +6,11 @@
     box-sizing: content-box;
     border-radius: var(--border-radius);
     cursor: pointer;
-    /* font-family: "Fira Code"; */
-    /* font-size: .75rem; */
     width: fit-content;
     color: #333;
     transition: background .5s ease-in-out;
     -webkit-transition: background .5s ease-in-out;
     -moz-transition: background .5s ease-in-out;
-    margin: 5px;
     z-index: 1;
     border: none;
 }
@@ -36,6 +33,7 @@
 .override-button {
     background: transparent;
     border: none;
+    padding: 0;
 }
 
 

@@ -1,0 +1,12 @@
+.footer__get-in-touch {
+    min-width: 20%;
+}
+
+    .footer__get-in-touch h3 {
+        align-self: flex-start
+    }
+
+    textrea::placeholder, input::placeholder {
+        font-family: 'Proxima Nova';
+        font-size: 1rem;
+    }

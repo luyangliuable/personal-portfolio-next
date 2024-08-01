@@ -43,3 +43,26 @@ export const dp = (callback: EffectCallback, dependencyList: any[]) => {
         callback();
     };
 };
+
+export const cl = (...args: any[]) => {
+    let res = "";
+
+    args.forEach(item => {
+        if (item && typeof item == "object") {
+            const a = Object.keys(item).reduce((acc: string, key: string) => {
+                if (item[key]) {
+                    acc = acc + ` ${key}`;
+                }
+                return acc.trim();
+            }, "");
+
+            res = res + ` ${a}`;
+
+        } else {
+            if (item) res = res + ` ${item}`;
+        }
+
+    });
+
+    return res.trim();
+}

@@ -1,7 +1,7 @@
 import BlogContent from "../../../../page/BlogPage/BlogContent/BlogContent";
 import PostRepository from "../../../../repositories/PostRepository";
 import BlogPostResponse from "../../../../repositories/Response/BlogPostResponse";
-import { truncateTextBody } from "../../../../components/Utility/StringUtility";
+import { removeHashesAndStripWhitespace, truncateTextBody } from "../../../../components/Utility/StringUtility";
 import type { Metadata } from "next";
 
 interface PageProps {
@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `Blog | ${content.heading}`,
     authors: { name: content.author },
-    description: truncateTextBody(content.body),
+    description: truncateTextBody(removeHashesAndStripWhitespace(content.body)),
     openGraph: {
       images: [`https://llcode.tech/api/image/${content.image.$oid}`],
     },

@@ -20,7 +20,7 @@ const Item: FC<IAccordionItemProps> = ({ heading, children, icon }) => {
         <div className="accordion--item flex flex-col">
             <div onClick={() => setShow(prev => !prev)} className="accordion--tab noselect flex items-center justify-between cursor-pointer">
                 <div className="flex flex-row items-center">
-                    <span className="mr-4">{icon}</span>
+                    <span className="mr-2">{icon}</span>
                     <span>{heading}</span>
                 </div>
                 <IoIosArrowDropdown className={cl({ "flip": show, "no-flip": !show })} />

@@ -14,6 +14,7 @@
     display: flex;
     gap: 10px;
 }
+
 .box1 {
     position: relative;
     width: 150px;
@@ -21,6 +22,7 @@
     background: #000;
     border: 10px solid #000;
 }
+
 .box1 .bar {
     width: 40px;
     height: 40px;
@@ -40,6 +42,7 @@
     bottom: 0;
     right: 0;
 }
+
 @keyframes grow {
     0% {
         width: 40px;
@@ -179,5 +182,18 @@
     100% {
         height: 0;
         top: 100%;
+    }
+}
+
+
+@media screen and (max-width: 900px) {
+    .box3, .box4 {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .box2, .box3, .box4 {
+        display: none;
     }
 }

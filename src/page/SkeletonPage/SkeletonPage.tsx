@@ -6,9 +6,9 @@ const SkeletonPage: React.FC = () => {
     useScrollToTopOnLoad();
 
     return (
-        <main className="skeleton-page">
+        <div className="skeleton-page">
             <div className="skeleton-component skeleton-page__header w-full"></div>
-        </main>
+        </div>
     );
 };
 

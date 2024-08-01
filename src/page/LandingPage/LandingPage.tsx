@@ -29,7 +29,7 @@ const LandingPage: React.FC<ILandingPageProps> = () => {
             <FeaturedContentSection />
             <Experiences />
             <LandingPageCard landingPageCardType="fitContent" className="blend-with-background">
-                <section className="flex-column-centered-centered"><BlogPage /></section>
+                <section className="flex-column-centered-centered"><BlogPage  /></section>
             </LandingPageCard>
         </main>
     );

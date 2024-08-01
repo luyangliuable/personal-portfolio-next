@@ -14,7 +14,7 @@ import "./BlogPage.css";
 import SkeletonPage from "../SkeletonPage/SkeletonPage";
 import { useGetPostListQuery } from "../../stores/Repository/Posts";
 
-const BlogPage: React.FC<IBlogPageProps> = (props) => {
+const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, showLoadingSkeleton }) => {
 
     const router = useRouter();
     const authorImage = "https://llcode.tech/api/image/65817ae96c73ceb16ba51731";
@@ -131,7 +131,7 @@ const BlogPage: React.FC<IBlogPageProps> = (props) => {
     };
 
     const renderTopPickedBlogPost = (): React.ReactNode | null => (
-        props.showTopPicks && (
+        showTopPicks && (
             <div className="w-half flex-col items-start pl-3vw blog__featured">
                 <h3>Top Picks</h3>
                 {state.topPickedPosts.map(post => (
@@ -150,8 +150,6 @@ const BlogPage: React.FC<IBlogPageProps> = (props) => {
     );
 
     const renderUnSelectedTags = () => {
-        if (isLoading || isError) return;
-
         const baseUrlLink = "/digital-chronicles/blogs";
         const { currentSelectTags: selectedTags } = state;
 
@@ -198,22 +196,22 @@ const BlogPage: React.FC<IBlogPageProps> = (props) => {
         return <Toggle disabled={displayLeetCodePostsToggleButtonDisabled} setToggleState={setDisplayLeetCodePosts} toggleState={displayLeetCodePosts} />;
     }
 
-    if (isLoading || Object.keys(state.currentlyShowingContent).length === 0) return (<SkeletonPage />)
-
     return (
         <main>
             <HeroHeader heading={heroHeaderContent.heading} description={heroHeaderContent.description} graphics={<BlogPostGraphics />} />
-            <article className="blog-container flex w-full">
-                <section className="blog-list flex flex-col w-full items-center">
-                    <div className="blog-page--options-container flex">
-                        <ul className="blog__tag-container flex justify-center flex-wrap">{renderUnSelectedTags()}</ul>
-                        {data!.length > 0 && renderDisplayLeetCodePostsToggleButton()}
-                    </div>
-                    <div className="w-full flex flex-col items-center">{renderPostsSortedByDateDescending()}</div>
-                </section>
-                {renderTopPickedBlogPost()}
-            </article>
-        </main>
+            {!isLoading &&
+                <article className="blog-container flex w-full">
+                    <section className="blog-list flex flex-col w-full items-center">
+                        <div className="blog-page--options-container flex">
+                            <ul className="blog__tag-container flex justify-center flex-wrap">{renderUnSelectedTags()}</ul>
+                            {data!.length > 0 && renderDisplayLeetCodePostsToggleButton()}
+                        </div>
+                        <div className="w-full flex flex-col items-center">{renderPostsSortedByDateDescending()}</div>
+                    </section>
+                    {renderTopPickedBlogPost()}
+                </article>
+            }
+        </main >
     );
 };
 

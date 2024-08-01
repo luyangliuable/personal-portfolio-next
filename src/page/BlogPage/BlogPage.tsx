@@ -13,6 +13,7 @@ import Toggle from "../../components/Atoms/Toggle/Toggle";
 import "./BlogPage.css";
 import SkeletonPage from "../SkeletonPage/SkeletonPage";
 import { useGetPostListQuery } from "../../stores/Repository/Posts";
+import LoadingBar from "../../components/LoadingBar/LoadingBar";
 
 const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, showLoadingSkeleton }) => {
 
@@ -211,8 +212,13 @@ const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, showLoadingSkeleton 
                     {renderTopPickedBlogPost()}
                 </article>
             }
+            {isLoading &&
+                <div className="loading-bar--container">
+                    <LoadingBar />
+                </div>
+            }
         </main >
     );
 };
 
-export default BlogPage;
+export default React.memo(BlogPage);

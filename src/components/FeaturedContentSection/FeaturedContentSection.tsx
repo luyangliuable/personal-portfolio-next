@@ -12,10 +12,42 @@ import PostRepository from "../../repositories/PostRepository";
 import TwinCandle from "../TwinCandle/TwinCandle";
 
 import "./FeaturedContentSection.css";
+import LoadingBar from '../LoadingBar/LoadingBar';
 
 const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = (props) => {
     const [state, setState] = useState<IFeaturedContentSectionState>({
-        featuredPosts: [],
+        featuredPosts: [
+          {
+            image: {
+              $oid: "65596ad4ad7cc31ee9263e32"
+            },
+            _id: {
+              $oid: "featured-tool"
+            },
+            heading: "Featured Tool: Coming Soon",
+            date_created: "",
+            post_type: "tool",
+            tags: [],
+            author: "Luyang Liu",
+            body: "Coming Soon",
+            url: "Coming Soon"
+          },
+          {
+            image: {
+              $oid: "66ab67bd8803e8c20005c32e"
+            },
+            _id: {
+              $oid: "can4cancer"
+            },
+            date_created: "",
+            body: "I joined can4cancer which is an initiative that aims to raise funds to support research towards curing and preventing cancer.",
+            author: "Luyang Liu",
+            url: "https://melbournewalk24.can4cancer.com.au/lucas-liu",
+            post_type: "none",
+            tags: [],
+            heading: "Sponser Me for Can4Cancer Now!",
+          }
+        ],
         numOfElementsToShow: 0,
         featuredTool: {
             name: "Coming Soon",
@@ -75,17 +107,18 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = (props) =
     }
 
     const renderTopPickedPostsSortedByDateDescending = (): React.ReactNode => {
-        const sliceEnd = state.numOfElementsToShow - 2;
+        const sliceEnd = state.numOfElementsToShow;
         return state.featuredPosts?.slice(0, sliceEnd).map((content) => (
             <div key={content._id.$oid}>
                 <GalleryItem
                     name={content.heading}
                     tags={content.tags}
-                    type="blog"
+                    description={content.body}
                     dateCreated={content.date_created}
+                    type={content.post_type === "md" ? "blog" : content.post_type}
                     minuteRead={content.reading_time_minutes}
                     className="my-2.5"
-                    link={`/digital-chronicles/blog/${content._id.$oid}`}
+                    link={content.url ?? `/digital-chronicles/blog/${content._id.$oid}`}
                     image={content.image.$oid}
                 />
             </div>
@@ -94,32 +127,19 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = (props) =
 
     const fetchPostList = async () => {
         const response = await postRepository.getFeaturedPostList();
-        setState(prevState => ({ ...prevState, featuredPosts: response }));
+        setState(prevState => ({ ...prevState, featuredPosts: [...prevState.featuredPosts, ...response] }));
     }
-
-    const getFeaturedToolHeading = () => "Featured Tool: " + state.featuredTool?.name;
 
     return (
         <LandingPageCard className="mb-20" heading="Featured Content" landingPageCardType="fitContent" blendWithBackground={true}>
             <section ref={currentComponentRef} className="flex flex-col items-center">
                 <div ref={featuredSectionRef} className="featured-section featured-section-with-before w-full position-relative flex flex-row justify-center items-stretch">
-                    <GalleryItem
-                        name={getFeaturedToolHeading()}
-                        type="tool"
-                        className="my-2.5 h-full"
-                        image="65596ad4ad7cc31ee9263e32"
-                        description={truncateTextBody(state.featuredTool?.description)}
-                        link={state.featuredTool?.link}
-                    />
-                    <GalleryItem
-                        name="Sponser Me for Can4Cancer Now!"
-                        className="my-2.5 h-full"
-                        action="VISIT"
-                        image="https://raisely-images.imgix.net/can4cancer-2024/uploads/can-4-cancer-logo-jpg-9f9f6a.jpg?fit=max&w=1000&auto=format&q=62"
-                        description="I joined can4cancer which is an initiative that aims to raise funds to support research towards curing and preventing cancer."
-                        link="https://melbournewalk24.can4cancer.com.au/lucas-liu"
-                    />
-                    {renderTopPickedPostsSortedByDateDescending()}
+                    {state.featuredPosts.length > 2 && renderTopPickedPostsSortedByDateDescending()}
+                    {state.featuredPosts.length <= 2 &&
+                        <div className="loading-bar--container">
+                            <LoadingBar />
+                        </div>
+                    }
                 </div>
                 <div className="show-more-button-wrapper" ref={showMoreButtonRef}>
                     <Button

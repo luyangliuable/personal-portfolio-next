@@ -1,17 +1,33 @@
 .accordion {
-    background: #EEE;
-    border: 1px solid black;
     width: 100%;
-    min-height: 500px;
-    padding: 10px;
+    padding: 5rem;
 }
 
-    .accordion--tab {
+    .accordion .accordion--item {
+        height: fit-content
+    }
+
+
+    .accordion .accordion--content {
+        margin-bottom: 4rem;
+    }
+
+    .accordion .accordion--tab {
         background: #DDD;
         width: 100%;
-        min-height: 80px;
         font-size: 1.2rem;
         padding: 20px;
         margin-bottom: 1rem;
         border-radius: 12px;
     }
+
+.flip {
+    transition: transform .1s ease-in-out;
+    transform: rotate(-180deg);
+}
+
+
+.no-flip {
+    transition: transform .1s ease-in-out;
+    transform: rotate(0deg);
+}

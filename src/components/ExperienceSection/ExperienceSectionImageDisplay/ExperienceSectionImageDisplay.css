@@ -19,9 +19,10 @@
     }
 
 .image-display__image__wrapper {
-    overflow: hidden;
-    border-radius: 10px;
-    height: 19vh;
+    position: relative;
+    /* overflow: hidden; */
+    border-radius: 4px;
+    height: 20vh;
     min-height: 100px; max-height: 200px
 }
 

@@ -7,6 +7,7 @@ import { FaExpand } from "react-icons/fa";
 import Image from "../../Image/Image";
 import "./ExperienceSectionImageDisplay.css";
 import ImageDisplayModal from '../../Atoms/ImageDisplayModal/ImageDisplayModal';
+import { cl } from '../../Utility/LogicUtility';
 
 interface IExperienceSectionImageDisplayProps {
     item: ExperienceSectionItem,
@@ -50,6 +51,8 @@ const ExperienceSectionImageDisplay: React.FC<IExperienceSectionImageDisplayProp
     experienceSectionCardIndexIsEvenNumber ? experienceSectionCardClassName.push("above")
         : experienceSectionCardClassName.push("below");
 
+    const { objectPosition, media, cardDetailedText } = item;
+
     return (
         <div
             onMouseMove={cardGradientEffect}
@@ -57,15 +60,19 @@ const ExperienceSectionImageDisplay: React.FC<IExperienceSectionImageDisplayProp
             className={experienceSectionCardClassName.join(" ")}>
             <div className="connecting-line"></div>
             <div className="image-display__image__wrapper flex justify-center items-center box-shadow-large">
-                <Image compression={100} alt={alt} src={item.media.source.url} />
+                <Image compression={100} className={cl({
+                    "object-bottom": objectPosition === "bottom",
+                    "object-center": objectPosition === "center",
+                    "object-top": objectPosition === "top"
+                })} alt={alt} src={media.source.url} />
             </div>
             {experienceSectionCardTextImageBody()}
             <div className="expand position-absolute flex justify-center items-center"><FaExpand /></div>
             <ImageDisplayModal
                 showModal={showModal}
                 setShowModal={setShowModal}
-                description={item.cardDetailedText}
-                image={item.media.source.url} />
+                description={cardDetailedText}
+                image={media.source.url} />
         </div>
     );
 }

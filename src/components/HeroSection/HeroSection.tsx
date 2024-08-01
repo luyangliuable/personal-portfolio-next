@@ -103,7 +103,7 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
                 </header>
                 <div className="hero-section__content__left__text position-relative">{introduction}</div>
                 <div className="flex flex-row mt-10 justify-start self-start">
-                    <Button to="/digital_chronicles/blogs">See my Blogs <AiOutlineArrowRight /></Button>
+                    <Button to="/digital-chronicles/blogs">See my Blogs <AiOutlineArrowRight /></Button>
                     <Button to="/projects/code">See my Projects <AiOutlineArrowRight /></Button>
                 </div>
             </section>

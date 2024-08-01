@@ -85,7 +85,7 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = (props) =
                     dateCreated={content.date_created}
                     minuteRead={content.reading_time_minutes}
                     className="my-2.5"
-                    link={`/digital_chronicles/blog/${content._id.$oid}`}
+                    link={`/digital-chronicles/blog/${content._id.$oid}`}
                     image={content.image.$oid}
                 />
             </div>

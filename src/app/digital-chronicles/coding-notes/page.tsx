@@ -1,5 +1,4 @@
 import React from "react";
-import BlogPage from "../../../page/BlogPage/BlogPage";
 import type { Metadata } from "next";
 import Notes from "../../../page/NotePage/NotePage";
 

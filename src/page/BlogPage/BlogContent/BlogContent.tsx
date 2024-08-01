@@ -121,7 +121,7 @@ const BlogContent: React.FC<IBlogContentProps> = ({ id, content, showRelatedPost
           {<PostDetailsPanel content={content} relatedPosts={relatedPosts} />}
           {renderBlogContent()}
             <aside className="blog-content__side-components position-sticky mt-20vh">
-              <Link shallow href="/digital_chronicles/blogs" className="flex items-center">
+              <Link shallow href="/digital-chronicles/blogs" className="flex items-center">
                 <IoMdArrowBack />
                 Back to Blogs
               </Link>

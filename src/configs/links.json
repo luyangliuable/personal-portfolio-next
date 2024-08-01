@@ -6,30 +6,30 @@
         },
         {
             "name": "Blogs",
-            "to": "/digital_chronicles",
+            "to": "/digital-chronicles",
             "isDisabled": true,
             "sublinks": [
                 {
                     "name": "💻 Posts",
-                    "to": "/digital_chronicles/blogs"
+                    "to": "/digital-chronicles/blogs"
                 },
                 {
                     "name": "🧑‍💻 Coding Notes",
-                    "to": "/digital_chronicles/coding-notes"
+                    "to": "/digital-chronicles/coding-notes"
                 },
                 {
                     "name": "🏞 Scenic Memories",
                     "isLocked": true,
-                    "to": "/digital_chronicles/scenic_memories"
+                    "to": "/digital-chronicles/scenic_memories"
                 },
                 {
                     "name": "🎞️ Film Reviews",
                     "isLocked": true,
-                    "to": "/digital_chronicles/film_reviews"
+                    "to": "/digital-chronicles/film_reviews"
                 },
                 {
                     "name": "🧩 My Daily Leetcode",
-                    "to": "/digital_chronicles/blogs?tag=daily-leetcode"
+                    "to": "/digital-chronicles/blogs?tag=daily-leetcode"
                 }
             ]
         },
@@ -43,7 +43,7 @@
                 },
                 {
                     "name": "🖨️ 3D Printing",
-                    "to": "/projects/3d_printing"
+                    "to": "/projects/3d-printing"
                 },
                 {
                     "name": "🤖 Hardware",
@@ -63,7 +63,7 @@
                 {
                     "name": "🌉 HexaBridger",
                     "isLocked": true,
-                    "to": "/tools/hex_to_rgb"
+                    "to": "/tools/hex-to-rgb"
                 },
                 {
                     "name": "🌸 BloomChain ",
@@ -83,37 +83,37 @@
                 {
                     "name": "⌛ TimeCapsule Letters",
                     "isLocked": true,
-                    "to": "/tools/time_capsule_letters"
+                    "to": "/tools/time-capsule-letters"
                 },
                 {
                     "name": "🌐 CssCrossBrowser",
                     "isLocked": true,
-                    "to": "/tools/css_cross_browser"
+                    "to": "/tools/css-cross-browser"
                 },
                 {
                     "name": "✉️ AnonyLetters",
                     "isLocked": true,
-                    "to": "/tools/anony_letters"
+                    "to": "/tools/anony-letters"
                 },
                 {
                     "name": "😯 Mood Diaries",
                     "isLocked": true,
-                    "to": "/tools/mood_tracker"
+                    "to": "/tools/mood-tracker"
                 },
                 {
                     "name": "⚛️ AtomicHabits",
                     "isLocked": true,
-                    "to": "/tools/atomic_habits"
+                    "to": "/tools/atomic-habits"
                 },
                 {
                     "name": "🏋️‍♂️ Gym Log",
                     "isLocked": true,
-                    "to": "/tools/gym_log"
+                    "to": "/tools/gym-log"
                 },
                 {
                     "name": "🤝 MeetSleek",
                     "isLocked": true,
-                    "to": "/tools/meet_sleek"
+                    "to": "/tools/meet-sleek"
                 }
             ]
         },
@@ -144,27 +144,27 @@
             "sublinks": [
                 {
                     "name": "🎵 Music Playlist",
-                    "to": "/misc/music_playlist",
+                    "to": "/misc/music-playlist",
                     "isLocked": true
                 },
                 {
                     "name": "🎥 Youtube Playlist",
-                    "to": "/misc/youtube_playlist",
+                    "to": "/misc/youtube-playlist",
                     "isLocked": true
                 },
                 {
                     "name": "⌨️ Man of the Day",
-                    "to": "/misc/man_of_the_Day",
+                    "to": "/misc/man-of-the-Day",
                     "isLocked": true
                 },
                 {
                     "name": "📐 Algorithm of the Day",
-                    "to": "/misc/algorithm_of_the_Day",
+                    "to": "/misc/algorithm-of-the-Day",
                     "isLocked": true
                 },
                 {
                     "name": "🙏 Wall of Gratefulness",
-                    "to": "/misc/wall_of_gratefulness",
+                    "to": "/misc/wall-of-gratefulness",
                     "isLocked": true
                 }
             ]

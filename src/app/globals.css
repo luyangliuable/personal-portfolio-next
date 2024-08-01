@@ -534,6 +534,10 @@ a {
     margin-left: 2vw;
 }
 
+.mr-2 {
+    margin-right: .5rem;
+}
+
 .child-mb-50 > * {
     margin-bottom: 50px;
 }
@@ -795,6 +799,17 @@ a {
 
 
 @keyframes scale-in {
+    0% {
+        transform: scale(.1) rotate(var(--rotation));
+        opacity: 0;
+    }
+    100% {
+        opacity: 1
+    }
+}
+
+
+@keyframes bounce {
     0% {
         transform: scale(.1) rotate(var(--rotation));
         opacity: 0;

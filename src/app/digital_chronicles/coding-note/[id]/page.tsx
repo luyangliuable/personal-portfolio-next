@@ -1,7 +1,6 @@
 import BlogContent from "../../../../page/BlogPage/BlogContent/BlogContent";
-import PostRepository from "../../../../repositories/PostRepository";
 import BlogPostResponse from "../../../../repositories/Response/BlogPostResponse";
-import { truncateTextBody } from "../../../../components/Utility/StringUtility";
+import { removeHashesAndStripWhitespace, truncateTextBody } from "../../../../components/Utility/StringUtility";
 import type { Metadata } from "next";
 import NoteRepository from "../../../../repositories/NoteRepository";
 
@@ -18,10 +17,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const content: BlogPostResponse = await repo.getPost(id);
 
   return {
-    title: `Blog | ${content.heading}`,
+    title: `Notes | ${content.heading}`,
     authors: { name: content.author },
-    description: truncateTextBody(content.body),
+    description: truncateTextBody(removeHashesAndStripWhitespace(content.body)),
     openGraph: {
+      images: [`https://wallhaven.cc/w/gpgyw3`]
     },
   };
 }

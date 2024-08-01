@@ -3,6 +3,7 @@ import SkeletonImage from './SkeletonImage/SkeletonImage';
 import IImageProps from './Interface/IImageProps';
 import IImageState from './Interface/IImageState';
 import ImageRepository from "../../repositories/ImageRepository";
+import { default as NextImage } from 'next/image';
 import "./Image.css";
 
 class Image extends Component<IImageProps, IImageState> {
@@ -57,7 +58,7 @@ class Image extends Component<IImageProps, IImageState> {
         }
 
         return (
-            <img className={className} src={fetchedImageUrl} alt={alt} />
+            <NextImage width="100" height="100" className={className} src={fetchedImageUrl} alt={alt} />
         )
     }
 }

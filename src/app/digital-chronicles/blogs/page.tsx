@@ -1,12 +1,17 @@
 import React from "react";
 import BlogPage from "../../../page/BlogPage/BlogPage";
 import type { Metadata } from "next";
+import PostRepository from "../../../repositories/PostRepository";
+import BlogPostResponse from "../../../repositories/Response/BlogPostResponse";
 
 export const metadata: Metadata = {
     title: "Luyang's Blog",
     description: ""
 };
 
-const BlogPageWithTopPicks: React.FC = () => { return (<BlogPage showTopPicks />) }
+export default async function BlogPageWithTopPicks() {
+    const postRepository = PostRepository.getInstance();
+    /* const content: BlogPostResponse[] = await postRepository.getPostList(); */
 
-export default BlogPageWithTopPicks;
+    return <BlogPage showTopPicks/>;
+}

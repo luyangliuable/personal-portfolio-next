@@ -1,6 +1,7 @@
 .hero-header {
     width: 100vw;
     min-height: 38vh;
+    animation: fade-in .5s ease-in-out;
     border-bottom: .1px solid #DDD;
     padding: 2vh 5vw;
     margin-bottom: 5vh;

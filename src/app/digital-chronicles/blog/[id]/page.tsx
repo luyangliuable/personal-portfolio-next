@@ -27,8 +27,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 
-const sleep = async (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-
 export default async function BlogContentServer({ params }: PageProps) {
   const { id } = params;
     const postRepository = PostRepository.getInstance();

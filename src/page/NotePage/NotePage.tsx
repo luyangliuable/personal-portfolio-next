@@ -1,25 +1,30 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HeroHeader from "../../components/HeroHeader/HeroHeader";
-import { useGetNoteListQuery } from "../../stores/Repository/Notes";
 import Card from "../../components/Card/Card";
 import Accordion from "../../components/Accordion/Accordion";
 import BlogPostResponse from "../../repositories/Response/BlogPostResponse";
 import EmojIcon from "../../components/EmojIcon/EmojIcon";
+import SkeletonPage from "../SkeletonPage/SkeletonPage";
 
-const Notes: React.FC = () => {
+const Notes: React.FC<{ content: BlogPostResponse[] }> = ({ content }) => {
     const heroHeaderContent = Object.freeze({
         heading: "Coding Notes",
         description: "My personal coding notes and snippets, organized by language and topic that I wrote during the nostalgic days at University."
     });
 
-    const { data, error, isLoading } = useGetNoteListQuery();
+    const [isPageLoaded, setIsPageLoaded] = useState(false);
 
-    if (isLoading) return (<></>);
-    if (error) return <div>Error</div>;
+    useEffect(() => {
+        setIsPageLoaded(true);
+    }, []);
 
-    const grouped = data!.reduce((acc: Record<string, any>, item: BlogPostResponse) => {
+    if (!isPageLoaded) {
+        return <SkeletonPage />
+    }
+
+    const grouped = content!.reduce((acc: Record<string, any>, item: BlogPostResponse) => {
         const tagName = item.tags.length > 0 ? item.tags[0] : "random";
 
         if (acc.hasOwnProperty(tagName)) {

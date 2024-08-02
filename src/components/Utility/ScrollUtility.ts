@@ -8,6 +8,17 @@ const isCenterAlignedWithViewport = (div: Element | null): number => {
     return divCenterY - viewportCenterY;
 }
 
+export function getVisiblePercentage(element: Element | null): number {
+    if (element === null) return 0;
+    const rect = element.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+    const visibleHeight = Math.max(0, Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0));
+    const elementHeight = rect.height;
+    const visiblePercentage = (visibleHeight / elementHeight) * 100;
+    return visiblePercentage;
+}
+
+
 const getHTMLElementCenterYPosition = (element: any, offset: number = 0): number => {
     const rect = element.getBoundingClientRect();
     const divCenterY = rect.top;

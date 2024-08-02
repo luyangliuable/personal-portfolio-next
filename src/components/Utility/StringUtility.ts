@@ -33,20 +33,33 @@ const isoDateFormatToString = (date: Date): string => {
 
 
 const stringToHash = (str: string): number => {
-    let hash = 0;
+  const a = convertHtmlEntities(removeTextInsideAngleBrackets(removeHashesAndStripWhitespace(str)));
+  let hash = 0;
 
-    for (let i = 0; i < str.length; i++) {
-        const char = str.charCodeAt(i);
-        hash = ((hash << 5) - hash) + char;
-        hash |= 0; // Convert to 32bit integer
-    }
+  for (let i = 0; i < a!.length; i++) {
+    const char = a!.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash |= 0;
+  }
 
-    return hash;
+  return hash;
 }
 
-function removeHashesAndStripWhitespace(str: string) {
-    let result = str.replace(/#/g, '');
-    return result.replace(/^\s/mg, '').trim();
+function removeHashesAndStripWhitespace(str: string): string {
+  let result = str.replace(/#/g, '');
+  return result.replace(/^\s/mg, '').trim();
 }
 
-export { truncateTextBody, stripAwayHashSymbols, isoDateFormatToString, stringToHash, removeHashesAndStripWhitespace };
+function removeTextInsideAngleBrackets(input: string): string {
+  return input.replace(/<[^>]*>/g, '').trim();
+}
+
+export function convertHtmlEntities(str: string): string {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(str, 'text/html');
+
+  if (!doc.documentElement.textContent) console.warn(`Failed to convert html entities: ${str}`);
+  return doc.documentElement.textContent ?? str;
+}
+
+export { truncateTextBody, stripAwayHashSymbols, isoDateFormatToString, stringToHash, removeHashesAndStripWhitespace, removeTextInsideAngleBrackets };

@@ -1,7 +1,7 @@
 import React from "react";
 import ItableOfContentsProps from "../../../../interfaces/BlogPage/BlogContent/TableOfContents/ItableOfContentsProps"
 import { useEffect, useState, useRef, RefObject } from "react";
-import { stringToHash } from "../../../../components/Utility/StringUtility";
+import { stringToHash, removeHashesAndStripWhitespace, removeTextInsideAngleBrackets, convertHtmlEntities } from "../../../../components/Utility/StringUtility";
 import "./TableOfContents.css";
 
 const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
@@ -44,7 +44,7 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
             const className = `level-${level - 2} section-toc-entry flex items-center`;
             return (
                 <div key={idx} id={id.toString()} className={className} style={{ color, margin: `${marginBottom} ${indentation}` }} onClick={(e) => handleClick(e, id.toString())}>
-                    {title}
+                    {convertHtmlEntities(removeTextInsideAngleBrackets(removeHashesAndStripWhitespace(title)))}
                 </div>
             );
         })

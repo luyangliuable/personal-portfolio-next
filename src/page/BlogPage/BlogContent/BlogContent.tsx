@@ -3,7 +3,7 @@
 import React, { useMemo, useState, useEffect } from "react";
 import Link from "next/link";
 import { marked } from "marked";
-import { isCenterAlignedWithViewport } from "../../../components/Utility/ScrollUtility";
+import { getVisiblePercentage, isCenterAlignedWithViewport } from "../../../components/Utility/ScrollUtility";
 import { IoMdArrowBack } from "react-icons/io";
 import { IBlogContentState } from "../../../interfaces/BlogPage/BlogContent/IBlogContentState";
 import IBlogContentProps from "../../../interfaces/BlogPage/BlogContent/IBlogContentProps";
@@ -17,7 +17,6 @@ import AuthorDetails from "./AuthorDetails/AuthorDetails";
 import { useScrollPosition } from "../../../hooks";
 import "./BlogContent.css";
 import "./CodeBlock/CodeBlock.css";
-import { useGetPostQuery } from "../../../stores/Repository/Posts";
 
 const BlogContent: React.FC<IBlogContentProps> = ({ id, content, showRelatedPosts }) => {
   const postRepository = useMemo(() => PostRepository.getInstance(), []);
@@ -71,67 +70,66 @@ const BlogContent: React.FC<IBlogContentProps> = ({ id, content, showRelatedPost
       const sectionsArray = Array.from(sections);
       const intersectingSections = sectionsArray
         .filter((section) => {
-          const offset = isCenterAlignedWithViewport(section);
-          const threshold = window.innerHeight/2
-          return offset <= threshold && offset >= -threshold;
+            const visibleSectionPerc = getVisiblePercentage(section);
+            const threshold = 10; // at least 10% visible
+            return visibleSectionPerc >= threshold;
         })
-        .map((section) => section.id);
+              .map((section) => section.id);
 
-      if (intersectingSections.length > 0) {
-        emitter.emit("intersectingSections", intersectingSections);
+          if (intersectingSections.length > 0) {
+              emitter.emit("intersectingSections", intersectingSections);
+          }
       }
-    }
 
-    observeSections();
+      observeSections();
   }, [scrolled, emitter]);
 
-  function renderBlogContent(): React.ReactNode {
-    if (!content) return null; // Check if content is undefined
+    function renderBlogContent(): React.ReactNode {
+        if (!content) return null; // Check if content is undefined
 
-    const { heading, image, body, _id } = content;
-    const imageId = image?.$oid;
+        const { heading, image, body, _id } = content;
+        const imageId = image?.$oid;
 
-    if (!body) return (<></>);
+        if (!body) return (<></>);
+
+        return (
+            <article className="blog-content box-shadow">
+                <header className="blog-content__header">
+                    <h1>{heading}</h1>
+                    <AuthorDetails content={content} />
+                </header>
+                <Image alt="" className="blog-content__image" src={imageId} />
+                <section className="w-full flex-col justify-center items-center translucent-white table-of-content--small-screen">
+                    <TableOfContent className="w-80" headings={state.headings} />
+                </section>
+                <section className="blog-content-body">
+                    <MarkdownRendererV2 key={_id.$oid} markdown={body} />
+                </section>
+            </article>
+        );
+    }
+
+    const { relatedPosts, headings } = state;
 
     return (
-      <article className="blog-content box-shadow">
-        <header className="blog-content__header">
-          <h1>{heading}</h1>
-          <AuthorDetails content={content} />
-        </header>
-        <Image alt="" className="blog-content__image" src={imageId} />
-        <section className="w-full flex-col justify-center items-center translucent-white table-of-content--small-screen">
-          <TableOfContent className="w-80" headings={state.headings} />
-        </section>
-        <section className="blog-content-body">
-          <MarkdownRendererV2 key={_id.$oid} markdown={body} />
+        <main className="page-container">
+            <section className="blog-content__wrapper">
+                {content && (
+                    <>
+                        {<PostDetailsPanel content={content} relatedPosts={relatedPosts} />}
+                        {renderBlogContent()}
+                        <aside className="blog-content__side-components position-sticky mt-20vh">
+                            <Link shallow href="/digital-chronicles/blogs" className="flex items-center">
+                                <IoMdArrowBack />
+                                Back to Blogs
+                            </Link>
+                            <TableOfContent emitter={emitter} headings={headings} />
+                        </aside>
+                    </>
+                )}
             </section>
-      </article>
+        </main>
     );
-  }
-
-  const { relatedPosts, headings } = state;
-  const showSides = (headings.length !== 0 && relatedPosts);
-
-  return (
-    <main className="page-container">
-      <section className="blog-content__wrapper">
-        {content && (
-          <>
-          {<PostDetailsPanel content={content} relatedPosts={relatedPosts} />}
-          {renderBlogContent()}
-            <aside className="blog-content__side-components position-sticky mt-20vh">
-              <Link shallow href="/digital-chronicles/blogs" className="flex items-center">
-                <IoMdArrowBack />
-                Back to Blogs
-              </Link>
-              <TableOfContent emitter={emitter} headings={headings} />
-            </aside>
-          </>
-        )}
-      </section>
-    </main>
-  );
 };
 
 export default React.memo(BlogContent);

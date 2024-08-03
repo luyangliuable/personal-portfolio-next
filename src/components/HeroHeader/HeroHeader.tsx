@@ -17,15 +17,16 @@ const HeroHeader: React.FC<IHeroHeaderProps> = ({ heading, description, graphics
     const componentRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-      console.log(animationScroll);
+        console.log(animationScroll);
     }, [animationScroll])
 
     useEffect(() => {
         const addIntersectionObserver = () => {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting && !animationScroll) {
-                        setAnimationScroll(componentRef.current!.getBoundingClientRect().top + window.scrollY);
+                    if (entry.isIntersecting) {
+                        const posY = componentRef.current!.getBoundingClientRect().top + window.scrollY;
+                        setAnimationScroll(posY < 100 ? 1 : posY);
                     }
                 });
             }, { threshold: [0.1] });
@@ -44,9 +45,9 @@ const HeroHeader: React.FC<IHeroHeaderProps> = ({ heading, description, graphics
             className="hero-header flex flex-row justify-start items-center"
             style={{
                 visibility: animationScroll ? "visible" : "hidden",
-                opacity: animationScroll ? clamp(0, 1, 300 - ((scrollY ?? 0) - animationScroll), 1 / 300) : 1,
-                borderBottom: `${animationScroll ? clamp(.1, 2, (scrollY ?? 0) - animationScroll) : ".1"}px solid #DDD`,
-                transform: animationScroll ? `translateY(${clamp(- 1000, 0, -((scrollY ?? 0) - animationScroll), 1 / 2)}px)` : "none",
+                opacity: animationScroll ? clamp(.3, 1, 300 - ((scrollY ?? 0) - animationScroll), 1 / 300) : 1,
+                borderBottom: `${animationScroll ? clamp(.1, 2, (scrollY ?? 0) - animationScroll, 1 / 5) : ".1"}px solid #DDD`,
+                transform: animationScroll ? `translateY(${clamp(-150, 0, -((scrollY ?? 0) - animationScroll), 1 / 2)}px)` : "none",
                 width: animationScroll ? `${clamp(95, 100, 100 * 50 - ((scrollY ?? 0) - animationScroll), 1 / 50)}% ` : "100%"
             }}>
             {

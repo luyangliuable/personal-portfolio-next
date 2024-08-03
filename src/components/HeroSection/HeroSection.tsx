@@ -11,8 +11,7 @@ import SequentialRiseSpan from "../Atoms/SequentialRiseSpan/SequentialRiseSpan";
 import { useScrollPosition } from "../../hooks";
 
 import { SiCodecademy } from "react-icons/si";
-import { FaGithubSquare } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa";
+import { FaGithubSquare, FaLinkedin, FaStackOverflow } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { RiNotionFill } from "react-icons/ri";
 
@@ -71,6 +70,14 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
         background: "#000",
         icon: <SiCodecademy />,
         imageSrc: "https://img.shields.io/badge/codecademy-%2312100E.svg?&style=for-the-badge&logo=codecademy&logoColor=white&color=black",
+    },
+    {
+        name: "SO",
+        link: "https://stackoverflow.com/users/1570777/luyangliuable",
+        color: "#F48024", // Stack Overflow's primary color
+        background: "#FFF", // White background
+        icon: <FaStackOverflow />,
+        imageSrc: "https://img.shields.io/badge/codecademy-%2312100E.svg?&style=for-the-badge&logo=codecademy&logoColor=white&color=black",
     }]
 
     const footer = useMemo(() => {
@@ -123,7 +130,7 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
                     opacity: clamp(.5, 1, 1000 - (scrollY ?? 0), 1 / 1000),
                     /* borderRadius: `${clamp(12, 300, scrollY, 1 / 2)}px`, */
                     /* width: `calc(98vw - ${clamp(0, 50, (scrollY ?? 0), 1 / 6)}px`, */
-                    transform: `scaleX(${clamp(.9, 1, 5200 - (scrollY ?? 0), 1 / 5200)}) translateY(${clamp(-260, 0, -(scrollY ?? 0), 1 / 2)}px)`
+                    transform: `scaleX(${clamp(.8, 1, 3200 - (scrollY ?? 0), 1 / 3200)}) translateY(${clamp(-260, 0, -(scrollY ?? 0), 1 / 2)}px)`
                 }}
                 className="hero-section" landingPageCardType="fitContent" >
                 <div className="space h-28"></div>

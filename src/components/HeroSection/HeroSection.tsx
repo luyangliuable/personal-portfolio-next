@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import IHeroProps from "./Interface/IHeroProps";
 import Link from "next/link";
@@ -8,6 +8,7 @@ import CodingCat from "../CodingCat/CodingCat";
 import Button from "../Button/Button";
 import LandingPageCard from "../LandingPageCard/LandingPageCard";
 import SequentialRiseSpan from "../Atoms/SequentialRiseSpan/SequentialRiseSpan";
+import { useScrollPosition } from "../../hooks";
 
 import { SiCodecademy } from "react-icons/si";
 import { FaGithubSquare } from "react-icons/fa";
@@ -16,9 +17,12 @@ import { MdEmail } from "react-icons/md";
 import { RiNotionFill } from "react-icons/ri";
 
 import "./HeroSection.css";
+import { clamp } from "../Utility/LogicUtility";
 
 const HeroSection: React.FC<IHeroProps> = ({}) => {
     const mainHeading: string = "Hi There, I am Luyang.";
+
+    const { scrollY } = useScrollPosition();
 
     const introduction: JSX.Element = (
         <SequentialRiseSpan calculationAdjustment={.82} minNumberOfLettersPerLine={48}>
@@ -114,7 +118,14 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
 
     return (
         <section className="hero-section__wrapper">
-            <LandingPageCard className="hero-section" landingPageCardType="fitContent" >
+            <LandingPageCard
+                style={{
+                    opacity: clamp(.5, 1, 1000 - (scrollY ?? 0), 1 / 1000),
+                    /* borderRadius: `${clamp(12, 300, scrollY, 1 / 2)}px`, */
+                    width: `${clamp(95, 98, 98 * 100 - (scrollY ?? 0), 1 / 100)}vw`,
+                    transform: `translateY(${clamp(-1000, 0, -(scrollY ?? 0), 1 / 2)}px)`
+                }}
+                className="hero-section" landingPageCardType="fitContent" >
                 <div className="space h-28"></div>
                 <section className="hero-section__content">
                     <section className="hero-section__content__right">

@@ -51,7 +51,7 @@ class LandingPageCard extends Component<ILandingPageCardProps, any> {
         if (this.props.blendWithBackground) classArray.push('blend-with-background');
         const landingPageCardHeading = this.props.heading;
         return (
-            <div className={classArray.join(' ')}>
+            <div style={this.props.style} className={classArray.join(' ')}>
                 <div className="landing-page-card__content">
                     {landingPageCardHeading && (
                         <header className="landing-page-card__heading important-text">

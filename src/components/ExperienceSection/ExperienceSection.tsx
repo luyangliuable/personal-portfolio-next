@@ -328,8 +328,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
     const setLockPosition = () => {
         if (experienceSectionParentRef.current === null) return;
         const currentPosition =
-            experienceSectionParentRef.current!.parentElement!.getBoundingClientRect()
-                .top + (scrollY ?? 0);
+            experienceSectionParentRef.current!.parentElement!.getBoundingClientRect().top + (scrollY ?? 0);
         if (!state.isLocked && state.lockPosition !== currentPosition) {
             setState({
                 ...state,

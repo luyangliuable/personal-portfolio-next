@@ -66,3 +66,8 @@ export const cl = (...args: any[]) => {
 
     return res.trim();
 }
+
+export const clamp = (min: number, max: number, value?: number, factor?: number): number => {
+    const validValue = (value ?? 0) * (factor ?? 1);
+    return Math.min(max, Math.max(min, validValue));
+}

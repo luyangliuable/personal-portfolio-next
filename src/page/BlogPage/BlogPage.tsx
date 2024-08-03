@@ -198,7 +198,7 @@ const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, showLoadingSkeleton 
     }
 
     return (
-        <main>
+        <main className="flex items-center">
             <HeroHeader heading={heroHeaderContent.heading} description={heroHeaderContent.description} graphics={<BlogPostGraphics />} />
             {!isLoading &&
                 <article className="blog-container flex w-full">

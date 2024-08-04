@@ -38,7 +38,7 @@ const GetInTouch: React.FC = () => {
     }
 
     return (
-        <form className="footer__get-in-touch flex flex-col items-start" onSubmit={handleSubmit}>
+        <form className="footer__get-in-touch flex flex-col items-start justify-start" onSubmit={handleSubmit}>
             <h3>Get In Touch</h3>
             <input ref={messageEmailRef} className="box-border" type="text" placeholder="Email" />
             <textarea ref={messageDescriptionRef} className="box-border" placeholder="Message" />

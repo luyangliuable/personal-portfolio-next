@@ -7,7 +7,7 @@
 }
 
 .footer h3 {
-    border-bottom: 1px solid #AAA;
+    border-bottom: 1px solid #CCC;
     padding-bottom: .5rem;
     width: 100%;
 }
@@ -17,9 +17,8 @@
 }
 
 .footer__bottom {
-    border-top: .1px solid #CCC;
-    padding: 2.2rem 0;
-    left: 0;
+    border-top: .1px solid #888;
+    padding: 1rem 0;
 }
 
 .footer textarea, footer input {
@@ -57,4 +56,5 @@ textarea:focus, input:focus {
     align-items: stretch;
     gap: 2rem;
     justify-items: stretch;
+    margin-bottom: 1rem;
 }

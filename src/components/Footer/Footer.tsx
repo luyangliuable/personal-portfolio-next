@@ -51,39 +51,38 @@ const Footer: React.FC = () => {
     }
 
     return (
-        <footer className="footer flex flex-col">
-            <div className="footer__main flex flex-row justify-evenly w-full">
+        <footer className="footer position-relative flex flex-col">
+            <div className="footer__main w-full">
                 <GetInTouch />
-                <div className="flex flex-col">
-                    <section className="footer__connect-with-me mb-20">
-                        <h3 className="mb-0">Connect with Me</h3>
-                        <div className="flex flex-row flex-wrap">
-                            {
-                                linksToMyOtherSocialMedia.map(
-                                    (item: any, index: number) => (
-                                        <IconButton target="_blank" key={index} to={item.link} className="mt-5" logoName={item.name} buttonColor="%23eaeaea"></IconButton>
-                                    )
+                <section className="footer__connect-with-me mb-20">
+                    <h3 className="mb-0">Connect with Me</h3>
+                    <div className="flex flex-row flex-wrap">
+                        {
+                            linksToMyOtherSocialMedia.map(
+                                (item: any, index: number) => (
+                                    <IconButton target="_blank" key={index} to={item.link} className="mt-5" logoName={item.name} buttonColor="%23eaeaea"></IconButton>
                                 )
-                            }
-                        </div>
-                    </section>
-
-                    <section className="footer__sponsor mb-20">
-                        <h3 className="mb-0">Sponsor Me</h3>
-                        <InlineLink target="_blank" to="https://ko-fi.com/D1D1PFTTH" className="mt-5">Kofi</InlineLink>
-                        <InlineLink target="_blank" to="https://melbournewalk24.can4cancer.com.au/lucas-liu" className="mt-5">Can4cancer</InlineLink>
-                    </section>
-                </div>
-
-                <div className="flex flex-col">
-                    {renderFooterSection(about, "footer__about")}
-                    <section className="footer__resources">
-                        <h3 className="mb-0">Resources</h3>
-                        <InlineLink to={resume.to} className="mt-5">{resume.name}</InlineLink>
-                    </section>
-                </div>
-
+                            )
+                        }
+                    </div>
+                </section>
+                <section className="footer__sponsor mb-20">
+                    <h3 className="mb-0">Sponsor Me</h3>
+                    <InlineLink target="_blank" to="https://ko-fi.com/D1D1PFTTH" className="mt-5">Kofi</InlineLink>
+                    <InlineLink target="_blank" to="https://melbournewalk24.can4cancer.com.au/lucas-liu" className="mt-5">Can4cancer</InlineLink>
+                </section>
+                {renderFooterSection(about, "footer__about")}
+                <section className="footer__resources">
+                    <h3 className="mb-0">Resources</h3>
+                    <InlineLink to={resume.to} className="mt-5">{resume.name}</InlineLink>
+                </section>
                 {renderFooterSection(tools, "footer__tools")}
+                <section className="footer__local-time">
+                    <h3>Local Time</h3>
+                    <span>
+                        {new Intl.DateTimeFormat("en-AU", { timeZone: "Australia/Melbourne", hour: "2-digit", minute: "2-digit", hour12: false }).format(new Date()) + " (UTC +10:00)"}
+                    </span>
+                </section>
             </div>
             <div className="footer__bottom position-relative w-full flex justify-around">
                 <p>LLcode.tech © 2024 All Rights Reserved</p>

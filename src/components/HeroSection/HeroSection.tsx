@@ -130,7 +130,7 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
                     opacity: clamp(.5, 1, 1000 - (scrollY ?? 0), 1 / 1000),
                     /* borderRadius: `${clamp(12, 300, scrollY, 1 / 2)}px`, */
                     /* width: `calc(98vw - ${clamp(0, 50, (scrollY ?? 0), 1 / 6)}px`, */
-                    transform: `scaleX(${clamp(.8, 1, 3200 - (scrollY ?? 0), 1 / 3200)}) translateY(${clamp(-260, 0, -(scrollY ?? 0), 1 / 2)}px)`
+                    transform: `scale(${clamp(.8, 1, 3200 - (scrollY ?? 0), 1 / 3200)}) translateY(${clamp(-260, 0, -(scrollY ?? 0), 1 / 2)}px)`
                 }}
                 className="hero-section" landingPageCardType="fitContent" >
                 <div className="space h-28"></div>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useEffect } from "react";
+import React, { useMemo, useRef } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import IHeroProps from "./Interface/IHeroProps";
 import Link from "next/link";
@@ -9,18 +9,19 @@ import Button from "../Button/Button";
 import LandingPageCard from "../LandingPageCard/LandingPageCard";
 import SequentialRiseSpan from "../Atoms/SequentialRiseSpan/SequentialRiseSpan";
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
+import { useGSAP } from "@gsap/react";
 import { SiCodecademy } from "react-icons/si";
 import { FaGithubSquare, FaLinkedin, FaStackOverflow } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { RiNotionFill } from "react-icons/ri";
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import "./HeroSection.css";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const HeroSection: React.FC<IHeroProps> = ({}) => {
+    const heroSectionRef = useRef(null);
     const mainHeading: string = "Hi There, I am Luyang.";
 
     const introduction: JSX.Element = (
@@ -80,29 +81,22 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
         imageSrc: "https://img.shields.io/badge/codecademy-%2312100E.svg?&style=for-the-badge&logo=codecademy&logoColor=white&color=black",
     }]
 
-    useEffect(() => {
-        const heroSection = {
-            this: ".hero-section",
-        };
-
+    useGSAP(() => {
+        const heroSection = ".hero-section";
         const tl = gsap.timeline({
             scrollTrigger: {
-                trigger: heroSection.this,
+                trigger: heroSection,
                 start: "top top",
                 end: "bottom top",
-                scrub: .1
+                scrub: 0.1
             },
         });
 
-        tl.add(gsap.to(heroSection.this, {
-            opacity: .3,
-            transform: "translateY(-260px) scale(.80)",
-        }), "start")
-
-        return () => {
-            tl.kill();
-        }
-    }, []);
+        tl.add(gsap.to(heroSection, {
+            opacity: 0.3,
+            transform: "translateY(-260px) scale(0.80)",
+        }), "start");
+    });
 
     const footer = useMemo(() => {
         return (
@@ -130,7 +124,7 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
 
     const heroSectionContentLeft = useMemo(() => {
         return (
-            <section className="hero-section__content__left">
+            <section className="hero-section__content__left" ref={heroSectionRef}>
                 <header className="self-start">
                     <SequentialRiseSpan elementType="h1" className="hero-section__heading" minNumberOfLettersPerLine={40}>
                         {mainHeading}

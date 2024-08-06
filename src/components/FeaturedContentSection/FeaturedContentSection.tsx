@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { FaAngleDown } from "react-icons/fa";
-import { truncateTextBody } from "../Utility/StringUtility";
 import IFeaturedContentSectionProps from "./Interface/IFeaturedContentSectionProps";
 import IFeaturedContentSectionState from "./Interface/IFeaturedContentSectionState";
 import Button from "../Button/Button";
@@ -10,43 +9,43 @@ import GalleryItem from "../Gallery/GalleryItem/GalleryItem";
 import LandingPageCard from "../LandingPageCard/LandingPageCard";
 import PostRepository from "../../repositories/PostRepository";
 import TwinCandle from "../TwinCandle/TwinCandle";
-
-import "./FeaturedContentSection.css";
 import LoadingBar from '../LoadingBar/LoadingBar';
+import "./FeaturedContentSection.css";
+import { useTrigger } from '../../stores/TriggerContext';
 
 const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = (props) => {
     const [state, setState] = useState<IFeaturedContentSectionState>({
         featuredPosts: [
-          {
-            image: {
-              $oid: "65596ad4ad7cc31ee9263e32"
+            {
+                image: {
+                    $oid: "65596ad4ad7cc31ee9263e32"
+                },
+                _id: {
+                    $oid: "featured-tool"
+                },
+                heading: "Featured Tool: Coming Soon",
+                date_created: "",
+                post_type: "tool",
+                tags: [],
+                author: "Luyang Liu",
+                body: "Coming Soon",
+                url: "Coming Soon"
             },
-            _id: {
-              $oid: "featured-tool"
-            },
-            heading: "Featured Tool: Coming Soon",
-            date_created: "",
-            post_type: "tool",
-            tags: [],
-            author: "Luyang Liu",
-            body: "Coming Soon",
-            url: "Coming Soon"
-          },
-          {
-            image: {
-              $oid: "66ab67bd8803e8c20005c32e"
-            },
-            _id: {
-              $oid: "can4cancer"
-            },
-            date_created: "",
-            body: "I joined can4cancer which is an initiative that aims to raise funds to support research towards curing and preventing cancer.",
-            author: "Luyang Liu",
-            url: "https://melbournewalk24.can4cancer.com.au/lucas-liu",
-            post_type: "none",
-            tags: [],
-            heading: "Sponser Me for Can4Cancer Now!",
-          }
+            {
+                image: {
+                    $oid: "66ab67bd8803e8c20005c32e"
+                },
+                _id: {
+                    $oid: "can4cancer"
+                },
+                date_created: "",
+                body: "I joined can4cancer which is an initiative that aims to raise funds to support research towards curing and preventing cancer.",
+                author: "Luyang Liu",
+                url: "https://melbournewalk24.can4cancer.com.au/lucas-liu",
+                post_type: "none",
+                tags: [],
+                heading: "Sponser Me for Can4Cancer Now!",
+            }
         ],
         numOfElementsToShow: 0,
         featuredTool: {
@@ -62,6 +61,8 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = (props) =
     const twinCandleComponentRef = useRef<TwinCandle>(null);
     const showMoreButtonRef = useRef<HTMLDivElement>(null);
     const postRepository = PostRepository.getInstance();
+
+    const { toggleTrigger } = useTrigger();
 
     useEffect(() => {
         calculateElementsToShow();
@@ -100,10 +101,12 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = (props) =
     }
 
     const showAllElements = () => {
-        const featuredPostsLength = state.featuredPosts?.length ?? 0;
-        setState({ ...state, numOfElementsToShow: featuredPostsLength + 2 });
-        if (showMoreButtonRef.current) showMoreButtonRef.current.style.display = 'none';
-        if (featuredSectionRef.current) featuredSectionRef.current.classList.remove('featured-section-with-before');
+        /* const featuredPostsLength = state.featuredPosts?.length ?? 0;
+* setState({ ...state, numOfElementsToShow: featuredPostsLength + 2 });
+* if (showMoreButtonRef.current) showMoreButtonRef.current.style.display = 'none';
+* if (featuredSectionRef.current) featuredSectionRef.current.classList.remove('featured-section-with-before'); */
+        alert("Show all elements disabled temporarily.");
+        toggleTrigger();
     }
 
     const renderTopPickedPostsSortedByDateDescending = (): React.ReactNode => {

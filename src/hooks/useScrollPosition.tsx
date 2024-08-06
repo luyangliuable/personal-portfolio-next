@@ -36,7 +36,8 @@ const useScrollPosition = (overrideThrottleInterval?: number) => {
         };
 
         // Add the event listener
-        window.addEventListener("scroll", throttle(handleScroll, overrideThrottleInterval ?? 20));
+        const throttledHandleScroll = throttle(handleScroll, overrideThrottleInterval ?? 20);
+        window.addEventListener("scroll", throttledHandleScroll);
 
         // Interval for calculating the delta scroll every timeIntervalCheckMiliseconds.
         const deltaScrollCalculationInterval: NodeJS.Timeout = setInterval(() => {
@@ -55,7 +56,7 @@ const useScrollPosition = (overrideThrottleInterval?: number) => {
         }, 400);
 
         return () => {
-            window.removeEventListener("scroll", handleScroll);
+            window.removeEventListener("scroll", throttledHandleScroll);
             window.clearTimeout(scrollTimeout);
             window.clearInterval(deltaScrollCalculationInterval);
         };

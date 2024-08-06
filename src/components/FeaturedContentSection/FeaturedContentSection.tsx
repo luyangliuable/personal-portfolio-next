@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { FaAngleDown } from "react-icons/fa";
-import { truncateTextBody } from "../Utility/StringUtility";
 import IFeaturedContentSectionProps from "./Interface/IFeaturedContentSectionProps";
 import IFeaturedContentSectionState from "./Interface/IFeaturedContentSectionState";
 import Button from "../Button/Button";
@@ -45,7 +44,7 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = (props) =
             url: "https://melbournewalk24.can4cancer.com.au/lucas-liu",
             post_type: "none",
             tags: [],
-            heading: "Sponser Me for Can4Cancer Now!",
+            heading: "Sponsor Me for Can4Cancer Now!",
           }
         ],
         numOfElementsToShow: 0,
@@ -65,6 +64,8 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = (props) =
 
     useEffect(() => {
         calculateElementsToShow();
+        addEventListener("resize", calculateElementsToShow);
+
         fetchPostList();
 
         const observer = new IntersectionObserver(
@@ -88,6 +89,8 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = (props) =
             if (twinCandleComponentParentRef.current) {
                 observer.unobserve(twinCandleComponentParentRef.current);
             }
+
+            window.removeEventListener("resize", calculateElementsToShow);
         };
     }, []);
 
@@ -109,31 +112,33 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = (props) =
     const renderTopPickedPostsSortedByDateDescending = (): React.ReactNode => {
         const sliceEnd = state.numOfElementsToShow;
         return state.featuredPosts?.slice(0, sliceEnd).map((content) => (
-            <div key={content._id.$oid}>
-                <GalleryItem
-                    name={content.heading}
-                    tags={content.tags}
-                    description={content.body}
-                    dateCreated={content.date_created}
-                    type={content.post_type === "md" ? "blog" : content.post_type}
-                    minuteRead={content.reading_time_minutes}
-                    className="my-2.5"
-                    link={content.url ?? `/digital-chronicles/blog/${content._id.$oid}`}
-                    image={content.image.$oid}
-                />
-            </div>
-        ));
+            <GalleryItem
+                key={content._id.$oid}
+                name={content.heading}
+                tags={content.tags}
+                description={content.body}
+                dateCreated={content.date_created}
+                type={content.post_type === "md" ? "blog" : content.post_type}
+                minuteRead={content.reading_time_minutes}
+                className="my-2.5"
+                link={content.url ?? `/digital-chronicles/blog/${content._id.$oid}`}
+                image={content.image.$oid}
+            />
+        ))
     }
 
     const fetchPostList = async () => {
         const response = await postRepository.getFeaturedPostList();
+
         setState(prevState => ({ ...prevState, featuredPosts: [...prevState.featuredPosts, ...response] }));
     }
 
     return (
         <LandingPageCard className="mb-20" heading="Featured Content" landingPageCardType="fitContent" blendWithBackground={true}>
             <section ref={currentComponentRef} className="flex flex-col items-center">
-                <div ref={featuredSectionRef} className="featured-section featured-section-with-before w-full position-relative flex flex-row justify-center items-stretch">
+                <div
+                    ref={featuredSectionRef}
+                    className="featured-section mb-16 featured-section-with-before w-full position-relative flex flex-row justify-center items-stretch">
                     {state.featuredPosts.length > 2 && renderTopPickedPostsSortedByDateDescending()}
                     {state.featuredPosts.length <= 2 &&
                         <div className="loading-bar--container">

@@ -2,6 +2,8 @@
     --page-top-margin: 68px;
     --navbar-height: 68px;
 
+    --baseline: .25rem;
+
     --page-bottom-margin: 0;
     --page-bottom-padding: 120px;
     --common-card-margin: min(25vh, 100px);
@@ -322,6 +324,18 @@ a {
     overflow-x: scroll
 }
 
+.overflow-y-scroll {
+    overflow-y: scroll
+}
+
+.overflow-y-auto {
+    overflow-y: auto
+}
+
+.overflow-y-hidden {
+    overflow-y: hidden
+}
+
 /* Dimensions */
 
 .w-full {
@@ -417,7 +431,7 @@ a {
 }
 
 .items-stretch {
-    align-items: stretch;
+    align-items: stretch !important;
 }
 
 .items-start {
@@ -508,10 +522,17 @@ a {
     margin-bottom: 0
 }
 
+.mb-1 {
+    margin-bottom: var(--baseline);
+}
+
+.mb-16 {
+    margin-bottom: calc(4*var(--baseline));
+}
+
 .mb-20 {
     margin-bottom: 5rem
 }
-
 
 .h-28 {
     height: 7rem

@@ -2,7 +2,6 @@
     transition: transform .1s ease-in, opacity .1s ease-in;
     width: 380px;
     height: 100%;
-    margin: 15px 10px; /* When not showing on grid */
     opacity: 0;
     background: rgba(245, 240, 255, .1) !important;
     backdrop-filter: blur(12px) !important;
@@ -18,7 +17,7 @@
 }
 
 .initially-hidden-show {
-    animation: fadeIn 1s ease-in forwards; /* Use forwards to retain the final state of the animation */
+    animation: fadeIn 1s ease-in forwards;
 }
 
 @keyframes fadeIn {

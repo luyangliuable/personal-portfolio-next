@@ -16,9 +16,7 @@ const SmallCard: React.FC<ICardProps> = ({ link, authorImage, image, author, hea
                     {author}
                 </footer>
             </div>
-            <div className="small-card__image__wrapper flex justify-center items-center">
-                <Image compression={30} className="small-card__image" alt={heading} src={image ?? ""} />
-            </div>
+            <Image compression={30} className="small-card__image" alt={heading} src={image ?? ""} />
         </Link>
     )
 }

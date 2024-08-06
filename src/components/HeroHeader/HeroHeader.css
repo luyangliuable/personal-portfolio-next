@@ -9,7 +9,7 @@
     backdrop-filter: blur(5px)
 }
 
-.hero-header--description {
+.hero-header__description {
     color: #555;
     font-size: .96em;
     width: min(85%, 600px);

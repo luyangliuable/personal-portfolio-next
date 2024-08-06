@@ -26,13 +26,6 @@ const CodingCat = () => {
             },
         };
 
-        const style = getComputedStyle(document.documentElement),
-            green = style.getPropertyValue("--green"),
-            pink = style.getPropertyValue("--pink"),
-            blue = style.getPropertyValue("--blue"),
-            orange = style.getPropertyValue("--orange"),
-            cyan = style.getPropertyValue("--cyan");
-
         const animatePawState = (selector: string) =>
             gsap.fromTo(
                 selector,
@@ -53,13 +46,6 @@ const CodingCat = () => {
             .add(animatePawState(cat.pawLeft.down), "start+=0.19")
             .add(animatePawState(cat.pawRight.up), "start+=0.19")
             .timeScale(1.6);
-
-        gsap.from(".terminal-code line", {
-            duration: 0.1,
-            stagger: 0.1,
-            ease: "none",
-            repeat: -1,
-        });
 
         setAnimation(tl);
         tl.pause();

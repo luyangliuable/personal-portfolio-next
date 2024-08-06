@@ -6,24 +6,24 @@ import {
     IExperienceSectionState,
     ExperienceSectionItem,
 } from "./Interface/IExperienceSectionState";
-import { isCenterAlignedWithViewport } from "../Utility/ScrollUtility";
 import ExperienceSectionEvent from "./ExperienceSectionEvent/ExperienceSectionEvent";
 import SequentialRiseSpan from "../Atoms/SequentialRiseSpan/SequentialRiseSpan";
 import ExperienceSectionImageDisplay from "./ExperienceSectionImageDisplay/ExperienceSectionImageDisplay";
 import BlackHole from "../Organisms/BlackHole/BlackHole";
-import { useScrollPosition } from "../../hooks";
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import "./ExperienceSection.css";
 import ZaOcean from "../Organisms/ZaOcean/ZaOcean";
 import ZaBanquet from "../Organisms/ZaBanquet/ZaBanquet";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
     const experienceSectionParentRef = useRef<HTMLDivElement | null>(null);
     const experienceSectionRef = useRef<HTMLElement | null>(null);
     const experienceSectionScrollRef = useRef<HTMLDivElement | null>(null);
     const timeLineRef = useRef<HTMLDivElement | null>(null);
-
-    const { scrollY } = useScrollPosition();
 
     const items: ExperienceSectionItem[] =
         useMemo((): ExperienceSectionItem[] => {
@@ -281,16 +281,12 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
     useEffect(() => {
         const updateTimelineLength = (): void => {
             const offset = 10;
-
             if (experienceSectionParentRef.current === null) return;
-
             const timeLineLength =
                 experienceSectionScrollRef.current!.getBoundingClientRect().width +
                 offset;
-
             const targetElement = experienceSectionParentRef.current?.parentElement;
-            if (targetElement) targetElement.style.height = `${timeLineLength + 200}px`;
-
+            if (targetElement) targetElement.style.height = `${timeLineLength/2 + 100}px`;
             setState({
                 ...state,
                 timeLineLength: timeLineLength,
@@ -298,51 +294,29 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
         };
 
         updateTimelineLength();
+        window.addEventListener("resize", updateTimelineLength);
+
+        () => {
+            window.removeEventListener("resize", updateTimelineLength);
+        }
     }, []);
 
     useEffect(() => {
-        const proximityYToLockPosition = window.innerHeight / 3;
-        if (experienceSectionParentRef.current!) setLockPosition();
-
-        if (
-            isCenterAlignedWithViewport(experienceSectionParentRef.current!) <
-            proximityYToLockPosition
-        ) lockPosition();
-
-        if (state.isLocked && state.lockPosition !== undefined && scrollY) {
-            const scrollAmount =
-                state.lockPosition - proximityYToLockPosition - scrollY;
-            scrollTimeline(scrollAmount);
-        }
-    }, [scrollY]);
-
-    const lockPosition = (): void => {
-        if (scrollY !== undefined) {
-            setState({
-                ...state,
-                isLocked: true,
+        if (experienceSectionScrollRef.current && experienceSectionParentRef.current) {
+            const scrollElement = experienceSectionScrollRef.current;
+            const triggerElement = experienceSectionParentRef.current;
+            gsap.to(scrollElement, {
+                x: () => -scrollElement.scrollWidth,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: triggerElement,
+                    start: "top 30%",
+                    end: () => `+=${scrollElement.scrollWidth / 2}`,
+                    scrub: true,
+                }
             });
         }
-    };
-
-    const setLockPosition = () => {
-        if (experienceSectionParentRef.current === null) return;
-        const currentPosition =
-            experienceSectionParentRef.current!.parentElement!.getBoundingClientRect().top + (scrollY ?? 0);
-        if (!state.isLocked && state.lockPosition !== currentPosition) {
-            setState({
-                ...state,
-                lockPosition: currentPosition,
-            });
-        }
-    };
-
-    const scrollTimeline = (scrollXAmount: number): void => {
-        if (state.isLocked) {
-            const transformValue = `translate(${scrollXAmount}px, 0)`;
-            experienceSectionScrollRef.current!.style.transform = transformValue;
-        }
-    };
+    }, [items]);
 
     const sortedItems = items.sort(
         (a: ExperienceSectionItem, b: ExperienceSectionItem) => {

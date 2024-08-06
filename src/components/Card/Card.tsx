@@ -69,8 +69,8 @@ class Card extends Component<ICardProps, ICardState> {
                 <div className="card-image-preview__wrapper position-absolute overflow-hidden flex justify-center items-center">
                     {<Image compression={30} src={image} className="card-image-preview" alt="Card Preview" />}
                 </div>
-                <footer className="flex mt-5">
-                    <Image compression={5} src={authorImage} className="user-image card-image--author-image" alt="Author" />
+                <footer className="flex mt-5 position-relative">
+                    <Image src={authorImage} className="user-image card-image--author-image" alt={author} />
                     {author}
                 </footer>
             </a>

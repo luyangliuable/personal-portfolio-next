@@ -1,5 +1,7 @@
+import BlogPostResponse from "../../../repositories/Response/BlogPostResponse";
+
 interface IFeaturedContentSectionProps {
-  scrolled?: number
+    postList: BlogPostResponse[]
 }
 
 export default IFeaturedContentSectionProps;

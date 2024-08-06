@@ -13,13 +13,7 @@
 }
 
 .small-card__image {
-    width: 300%;
-    max-height: 150%;
-}
-
-.small-card__image__wrapper {
     width: 100px; height: 100px;
-    overflow: hidden;
     object-fit: cover;
     border-radius: 8px;
 }

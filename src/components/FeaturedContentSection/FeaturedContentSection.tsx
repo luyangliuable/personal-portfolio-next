@@ -7,13 +7,11 @@ import IFeaturedContentSectionState from "./Interface/IFeaturedContentSectionSta
 import Button from "../Button/Button";
 import GalleryItem from "../Gallery/GalleryItem/GalleryItem";
 import LandingPageCard from "../LandingPageCard/LandingPageCard";
-import PostRepository from "../../repositories/PostRepository";
 import TwinCandle from "../TwinCandle/TwinCandle";
-import LoadingBar from '../LoadingBar/LoadingBar';
 import "./FeaturedContentSection.css";
 import { useTrigger } from '../../stores/TriggerContext';
 
-const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = (props) => {
+const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({ postList }) => {
     const [state, setState] = useState<IFeaturedContentSectionState>({
         featuredPosts: [
             {
@@ -60,13 +58,11 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = (props) =
     const twinCandleComponentParentRef = useRef<HTMLDivElement>(null);
     const twinCandleComponentRef = useRef<TwinCandle>(null);
     const showMoreButtonRef = useRef<HTMLDivElement>(null);
-    const postRepository = PostRepository.getInstance();
 
     const { toggleTrigger } = useTrigger();
 
     useEffect(() => {
         calculateElementsToShow();
-        fetchPostList();
 
         const observer = new IntersectionObserver(
             (entries) => {
@@ -102,16 +98,17 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = (props) =
 
     const showAllElements = () => {
         /* const featuredPostsLength = state.featuredPosts?.length ?? 0;
-* setState({ ...state, numOfElementsToShow: featuredPostsLength + 2 });
-* if (showMoreButtonRef.current) showMoreButtonRef.current.style.display = 'none';
-* if (featuredSectionRef.current) featuredSectionRef.current.classList.remove('featured-section-with-before'); */
+         * setState({ ...state, numOfElementsToShow: featuredPostsLength + 2 });
+         * if (showMoreButtonRef.current) showMoreButtonRef.current.style.display = 'none';
+         * if (featuredSectionRef.current) featuredSectionRef.current.classList.remove('featured-section-with-before'); */
         alert("Show all elements disabled temporarily.");
         toggleTrigger();
     }
 
     const renderTopPickedPostsSortedByDateDescending = (): React.ReactNode => {
         const sliceEnd = state.numOfElementsToShow;
-        return state.featuredPosts?.slice(0, sliceEnd).map((content) => (
+        const posts = [...state.featuredPosts, ...postList.filter(post => post.is_featured)];
+        return posts.slice(0, sliceEnd).map((content) => (
             <div key={content._id.$oid}>
                 <GalleryItem
                     name={content.heading}
@@ -128,21 +125,11 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = (props) =
         ));
     }
 
-    const fetchPostList = async () => {
-        const response = await postRepository.getFeaturedPostList();
-        setState(prevState => ({ ...prevState, featuredPosts: [...prevState.featuredPosts, ...response] }));
-    }
-
     return (
         <LandingPageCard className="mb-20" heading="Featured Content" landingPageCardType="fitContent" blendWithBackground={true}>
             <section ref={currentComponentRef} className="flex flex-col items-center">
                 <div ref={featuredSectionRef} className="featured-section featured-section-with-before w-full position-relative flex flex-row justify-center items-stretch">
-                    {state.featuredPosts.length > 2 && renderTopPickedPostsSortedByDateDescending()}
-                    {state.featuredPosts.length <= 2 &&
-                        <div className="loading-bar--container">
-                            <LoadingBar />
-                        </div>
-                    }
+                    {renderTopPickedPostsSortedByDateDescending()}
                 </div>
                 <div className="show-more-button-wrapper" ref={showMoreButtonRef}>
                     <Button

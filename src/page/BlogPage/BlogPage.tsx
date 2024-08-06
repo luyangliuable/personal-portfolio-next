@@ -11,11 +11,8 @@ import BlogPostGraphics from "../../components/BlogPostGraphics/BlogPostGraphics
 import SmallCard from "../../components/Atoms/SmallCard/SmallCard";
 import Toggle from "../../components/Atoms/Toggle/Toggle";
 import "./BlogPage.css";
-import SkeletonPage from "../SkeletonPage/SkeletonPage";
-import { useGetPostListQuery } from "../../stores/Repository/Posts";
-import LoadingBar from "../../components/LoadingBar/LoadingBar";
 
-const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, showLoadingSkeleton }) => {
+const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, data }) => {
 
     const router = useRouter();
     const authorImage = "https://llcode.tech/api/image/65817ae96c73ceb16ba51731";
@@ -34,23 +31,17 @@ const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, showLoadingSkeleton 
 
     const [displayLeetCodePosts, setDisplayLeetCodePosts] = useState<boolean>(false);
 
-    const { data, isLoading, isError } = useGetPostListQuery();
-
     useEffect(() => {
         document.documentElement.scrollTo(0, 0);
         setState(prev => ({ ...prev, currentSelectTags: getCurrentSelectedTagsFromUrl() }));
     }, []);
 
     useEffect(() => {
-        if (isLoading || isError) return;
-
         updateAllUniqueTags();
         updateTopPickedPosts();
     }, [data]);
 
     useEffect(() => {
-        if (isLoading || isError) return;
-
         updateCurrentlyShowingContent();
         const { currentSelectTags: selectedTags } = state;
         if (selectedTags.includes("daily-leetcode") || selectedTags.includes("algorithms")) setDisplayLeetCodePosts(true);
@@ -58,19 +49,19 @@ const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, showLoadingSkeleton 
 
     const updateAllUniqueTags = () => {
         const uniqueTags: Set<string> = new Set();
-        if (data) data.forEach(post => post.tags?.forEach(tag => uniqueTags.add(tag)));
+        data.forEach(post => post.tags?.forEach(tag => uniqueTags.add(tag)));
         setState(prev => ({ ...prev, allTags: uniqueTags }));
     };
 
     const updateTopPickedPosts = () => {
-        const topPickedPosts = data!.filter(post => post.is_featured);
+        const topPickedPosts = data.filter(post => post.is_featured);
         setState(prev => ({ ...prev, topPickedPosts }));
     };
 
     const updateCurrentlyShowingContent = () => {
         const { currentSelectTags: selectedTags } = state;
         const groupedPosts = groupPostsByYear(
-            sortPostsByDate(data!)
+            sortPostsByDate(data)
                 .filter(({ tags }) => isSubset(selectedTags, tags) || !selectedTags.length)
                 .filter(({ tags }) => !tags.includes("daily-leetcode")
                     || displayLeetCodePosts
@@ -170,8 +161,7 @@ const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, showLoadingSkeleton 
                     <span
                         key={tagName}
                         className="blog__tag flex items-center noselect blog__tag--selected"
-                        onClick={handleClick}
-                    >
+                        onClick={handleClick}>
                         #{tagName} <FaWindowClose />
                     </span>
                 );
@@ -183,8 +173,7 @@ const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, showLoadingSkeleton 
                 <span
                     key={tagName}
                     className={`blog__tag noselect ${isDisabled ? 'blog__tag--disabled' : 'cursor-pointer'}`}
-                    onClick={!isDisabled ? handleClick : undefined}
-                >
+                    onClick={!isDisabled ? handleClick : undefined}>
                     #{tagName}
                 </span>
             );
@@ -200,23 +189,18 @@ const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, showLoadingSkeleton 
     return (
         <main className="flex items-center">
             <HeroHeader heading={heroHeaderContent.heading} description={heroHeaderContent.description} graphics={<BlogPostGraphics />} />
-            {!isLoading &&
-                <article className="blog-container flex w-full">
-                    <section className="blog-list flex flex-col w-full items-center">
-                        <div className="blog-page--options-container flex">
-                            <ul className="blog__tag-container flex justify-center flex-wrap">{renderUnSelectedTags()}</ul>
-                            {data!.length > 0 && renderDisplayLeetCodePostsToggleButton()}
-                        </div>
-                        <div className="w-full flex flex-col items-center">{renderPostsSortedByDateDescending()}</div>
-                    </section>
-                    {renderTopPickedBlogPost()}
-                </article>
-            }
-            {isLoading &&
-                <div className="loading-bar--container">
-                    <LoadingBar />
-                </div>
-            }
+            <article className="blog-container flex w-full">
+                <section className="blog-list flex flex-col w-full items-center">
+                    <div className="blog-page--options-container flex">
+                        <ul className="blog__tag-container flex justify-center flex-wrap">
+                            {renderUnSelectedTags()}
+                        </ul>
+                        {data.length > 0 && renderDisplayLeetCodePostsToggleButton()}
+                    </div>
+                    <div className="w-full flex flex-col items-center">{renderPostsSortedByDateDescending()}</div>
+                </section>
+                {renderTopPickedBlogPost()}
+            </article>
         </main >
     );
 };

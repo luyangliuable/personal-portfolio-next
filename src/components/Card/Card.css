@@ -131,10 +131,9 @@
 }
 
 .card-image--author-image {
-    width: 20px;
-    height: 20px;
+    width: 20px; height: 20px;
     margin-right: 4px;
-    margin-right: min(10px,3vw)
+    margin-right: .2rem
 }
 
 .card-item h3 {

@@ -24,17 +24,9 @@ const NavbarScrollProgress: React.FC<{ scrollY: number }> = ({}) => {
     const updateScrolledProgress = (progress: number) => {
         if (scrollProgress?.current) {
             const scrollProgressElement = scrollProgress.current;
-
             scrollProgressElement.style.width = `${progress * 100}vw`;
             const blueEnd = 95 + progress * 4.5;
             scrollProgressElement.style.background = `linear-gradient(to right, var(--dark-mode-purple-2), ${blueEnd}%, #00bfff)`;
-
-            if (progress === 1) {
-                scrollProgressElement.classList.add('scroll-progress-complete');
-                scrollProgressElement.style.background = 'orange';
-            } else {
-                scrollProgressElement.classList.remove('scroll-progress-complete');
-            }
         }
     };
 

@@ -1,8 +1,9 @@
 .featured-section {
-    --featured-section-height: 50vh;
     position: relative;
     flex-wrap: wrap;
     max-width: 1900px;
+
+    min-height: 400px;
 
     perspective: 360px;
     perspective-origin: 50% 50%;

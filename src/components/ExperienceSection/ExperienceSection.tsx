@@ -309,7 +309,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                 ease: "none",
                 scrollTrigger: {
                     trigger: triggerElement,
-                    start: "top 30%",
+                    start: "top 20%",
                     end: () => `+=${scrollElement.scrollWidth / 2}`,
                     scrub: true,
                 }

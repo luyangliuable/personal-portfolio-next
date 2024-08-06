@@ -42,7 +42,7 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({ postLi
                 url: "https://melbournewalk24.can4cancer.com.au/lucas-liu",
                 post_type: "none",
                 tags: [],
-                heading: "Sponser Me for Can4Cancer Now!",
+                heading: "Sponsor Me for Can4Cancer Now!",
             }
         ],
         numOfElementsToShow: 0,

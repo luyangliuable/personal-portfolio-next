@@ -4,14 +4,18 @@ import SequentialRiseSpan from "../Atoms/SequentialRiseSpan/SequentialRiseSpan";
 import "./HeroHeader.css";
 
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(ScrollTrigger);
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useTrigger } from "../../stores/TriggerContext";
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const HeroHeader: React.FC<IHeroHeaderProps> = ({ heading, description, graphics }) => {
     const componentRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
+    const { trigger } = useTrigger();
+
+    useGSAP(() => {
         const heroHeader = {
             this: ".hero-header",
             graphics: ".hero-header__graphics-container",
@@ -34,11 +38,7 @@ const HeroHeader: React.FC<IHeroHeaderProps> = ({ heading, description, graphics
             transform: "translateY(-150px) scale(95%)",
             borderBottomColor: "#333",
         }), "start")
-
-        return () => {
-            tl.kill();
-        };
-    }, [])
+    }, [trigger])
 
     return (
         <div

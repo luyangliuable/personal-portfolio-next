@@ -11,19 +11,24 @@ import SequentialRiseSpan from "../Atoms/SequentialRiseSpan/SequentialRiseSpan";
 import ExperienceSectionImageDisplay from "./ExperienceSectionImageDisplay/ExperienceSectionImageDisplay";
 import BlackHole from "../Organisms/BlackHole/BlackHole";
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from "@gsap/react";
 
 import "./ExperienceSection.css";
 import ZaOcean from "../Organisms/ZaOcean/ZaOcean";
 import ZaBanquet from "../Organisms/ZaBanquet/ZaBanquet";
+import { useTrigger } from "../../stores/TriggerContext";
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
     const experienceSectionParentRef = useRef<HTMLDivElement | null>(null);
     const experienceSectionRef = useRef<HTMLElement | null>(null);
     const experienceSectionScrollRef = useRef<HTMLDivElement | null>(null);
     const timeLineRef = useRef<HTMLDivElement | null>(null);
+
+
+    const { trigger } = useTrigger();
 
     const items: ExperienceSectionItem[] =
         useMemo((): ExperienceSectionItem[] => {
@@ -274,9 +279,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
             ];
         }, []);
 
-    const [state, setState] = useState<IExperienceSectionState>({
-        isLocked: false
-    });
+    const [state, setState] = useState<IExperienceSectionState>({});
 
     useEffect(() => {
         const updateTimelineLength = (): void => {
@@ -286,7 +289,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                 experienceSectionScrollRef.current!.getBoundingClientRect().width +
                 offset;
             const targetElement = experienceSectionParentRef.current?.parentElement;
-            if (targetElement) targetElement.style.height = `${timeLineLength/2 + 100}px`;
+            if (targetElement) targetElement.style.height = `${timeLineLength / 2 + 100}px`;
             setState({
                 ...state,
                 timeLineLength: timeLineLength,
@@ -301,7 +304,8 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
         }
     }, []);
 
-    useEffect(() => {
+    useGSAP(() => {
+        ScrollTrigger.refresh();
         if (experienceSectionScrollRef.current && experienceSectionParentRef.current) {
             const scrollElement = experienceSectionScrollRef.current;
             const triggerElement = experienceSectionParentRef.current;
@@ -316,7 +320,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                 }
             });
         }
-    }, [items]);
+    }, { dependencies: [items, trigger], revertOnUpdate: true });
 
     const sortedItems = items.sort(
         (a: ExperienceSectionItem, b: ExperienceSectionItem) => {

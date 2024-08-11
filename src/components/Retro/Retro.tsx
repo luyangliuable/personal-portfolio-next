@@ -1,15 +1,22 @@
 import React from "react";
 import "./Retro.css";
+import { cl } from "../Utility/LogicUtility";
 
 interface IRetroProps {
     children?: React.ReactNode,
     style?: React.CSSProperties,
-    className?: string
+    className?: string,
+    showBorder?: boolean
 }
 
-const Retro: React.FC<IRetroProps> = ({ children, className, style }) => {
+const Retro: React.FC<IRetroProps> = ({ children, className, style, showBorder }) => {
     return (
-        <div style={style ?? {}} className={`retro ${className ?? ""}`}>
+        <div
+            style={style ?? {}}
+            className={cl("retro", className, {
+                "retro--show-border": showBorder
+            })}
+        >
             {children}
         </div>
     );

@@ -8,6 +8,12 @@
     z-index: -1;
 }
 
+.retro--show-border::before {
+    border-width: 1.5px 4px;
+    border-style: solid;
+    border-color: #FFF;
+    box-shadow: 1px 1px 5px rgba(139, 101, 77, 0.2);
+}
 
 .retro::before {
     --wire-color: rgb(194, 194, 194);
@@ -15,21 +21,28 @@
     content: "";
 
     left: 0;
-    width: 60%; height: 340px;
-    left: 20%;
+    width: 200%; height: 340px;
+    left: -50%;
+
     position: absolute;
 
     border-radius: 5px;
-    box-shadow: 1px 1px 5px #DDD;
 
     bottom: -60px;
 
     background-image: -webkit-linear-gradient(var(--wire-color) 2px, transparent 2px), -webkit-linear-gradient(left, var(--wire-color) 2px, transparent 2px);
-    border-width: 1.5px 4px;
-    border-style: solid;
-    border-color: #FFF;
     background-size: 70px 70px, 90px 90px;
-    background-position: -1px -1px, -1px -1px;
+    background-position: 0px -70px, 0px 0px;
+
     transform: rotateX(85deg);
     animation: planeMoveTop 5s infinite linear;
+}
+
+@keyframes planeMoveTop {
+    from {
+        background-position: 0px -70px, 0px 0px;
+    }
+    to {
+        background-position: 0px 0px, 90px 0px;
+    }
 }

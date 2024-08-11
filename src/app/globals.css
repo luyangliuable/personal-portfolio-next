@@ -833,12 +833,3 @@ a {
         opacity: 1
     }
 }
-
-@keyframes planeMoveTop {
-    from {
-        background-position: 0px -100px, 0px 0px;
-    }
-    to {
-        background-position: 0px 0px, 100px 0px;
-    }
-}

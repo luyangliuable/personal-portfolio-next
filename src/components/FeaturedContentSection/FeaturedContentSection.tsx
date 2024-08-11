@@ -119,46 +119,46 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({ postLi
         const { numberOfCardsEachRow: sliceEnd, showAllPosts } = state;
         const posts = [...state.featuredPosts, ...postList.filter(post => post.is_featured)];
         return groupArray(posts.slice(0, showAllPosts ? -1 : sliceEnd), sliceEnd).map((group, index) => (
-            <div key={index} className="featured-section w-full flex flex-col position-relative">
-                <Retro />
-                <div className="flex flex-row w-full justify-center items-stretch gap-1 flex-wrap position-relative">
-                    {group.map((content) => (
-                        <div key={content._id.$oid}>
-                            <GalleryItem
-                                name={content.heading}
-                                tags={content.tags}
-                                description={content.body}
-                                dateCreated={content.date_created}
-                                type={content.post_type === "md" ? "blog" : content.post_type}
-                                minuteRead={content.reading_time_minutes}
-                                className="my-2.5"
-                                link={content.url ?? `/digital-chronicles/blog/${content._id.$oid}`}
-                                image={content.image.$oid}
-                            />
-                        </div>
-                    ))}
+          <div key={index} className="featured-section w-full flex flex-col position-relative">
+            <Retro showBorder={showAllPosts} />
+            <div className="flex flex-row w-full justify-center items-stretch gap-1 flex-wrap position-relative">
+              {group.map((content) => (
+                <div key={content._id.$oid}>
+                  <GalleryItem
+                    name={content.heading}
+                    tags={content.tags}
+                    description={content.body}
+                    dateCreated={content.date_created}
+                    type={content.post_type === "md" ? "blog" : content.post_type}
+                    minuteRead={content.reading_time_minutes}
+                    className="my-2.5"
+                    link={content.url ?? `/digital-chronicles/blog/${content._id.$oid}`}
+                    image={content.image.$oid}
+                  />
                 </div>
+              ))}
             </div>
+          </div>
         ));
     }
 
-    return (
-        <LandingPageCard className="mb-20" heading="Featured Content" landingPageCardType="fitContent" blendWithBackground={true}>
-            <section ref={currentComponentRef} className="featured-section--wrapper flex flex-col items-center position-relative">
-                {renderTopPickedPostsSortedByDateDescending()}
-                <div className="show-more-button-wrapper" ref={showMoreButtonRef}>
-                    <Button
-                        style={{ "--border-radius": "20px", zIndex: 2, border: "2px solid #FFF" } as React.CSSProperties}
-                        onClick={showAllElements}
-                        showButtonLine>
-                        Show More <FaAngleDown />
-                    </Button>
-                </div>
-                <div className="divider h-28"></div>
-                <div ref={twinCandleComponentParentRef}><TwinCandle ref={twinCandleComponentRef} /></div>
-            </section>
-        </LandingPageCard>
-    );
+  return (
+    <LandingPageCard className="mb-20" heading="Featured Content" landingPageCardType="fitContent" blendWithBackground={true}>
+      <section ref={currentComponentRef} className="featured-section--wrapper flex flex-col items-center position-relative">
+        {renderTopPickedPostsSortedByDateDescending()}
+        <div className="show-more-button-wrapper" ref={showMoreButtonRef}>
+          <Button
+            style={{ "--border-radius": "20px", zIndex: 2, border: "2px solid #FFF" } as React.CSSProperties}
+            onClick={showAllElements}
+            showButtonLine>
+            Show More <FaAngleDown />
+          </Button>
+        </div>
+        <div className="divider h-28"></div>
+        <div ref={twinCandleComponentParentRef}><TwinCandle ref={twinCandleComponentRef} /></div>
+      </section>
+    </LandingPageCard>
+  );
 }
 
 export default FeaturedContentSection;

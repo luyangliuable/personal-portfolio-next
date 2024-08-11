@@ -321,7 +321,6 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                     start: "top 20%",
                     end: () => `+=${scrollElement.scrollWidth / 2 + 200}`,
                     scrub: true,
-                    markers: true,
                     onUpdate: throttle(refreshScrollTrigger, 1000),
                     invalidateOnRefresh: true
                 }

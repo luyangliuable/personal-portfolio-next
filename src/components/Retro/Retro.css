@@ -1,0 +1,35 @@
+.retro {
+    perspective: 360px;
+    perspective-origin: 50% 50%;
+    position: absolute;
+
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+}
+
+
+.retro::before {
+    --wire-color: rgb(194, 194, 194);
+
+    content: "";
+
+    left: 0;
+    width: 60%; height: 340px;
+    left: 20%;
+    position: absolute;
+
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px #DDD;
+
+    bottom: -60px;
+
+    background-image: -webkit-linear-gradient(var(--wire-color) 2px, transparent 2px), -webkit-linear-gradient(left, var(--wire-color) 2px, transparent 2px);
+    border-width: 1.5px 4px;
+    border-style: solid;
+    border-color: #FFF;
+    background-size: 70px 70px, 90px 90px;
+    background-position: -1px -1px, -1px -1px;
+    transform: rotateX(85deg);
+    animation: planeMoveTop 5s infinite linear;
+}

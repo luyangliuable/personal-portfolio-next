@@ -3,11 +3,10 @@
     background: #eaeaea;
     width: 100%;
     bottom: 0;
-    padding: 4rem 3rem 0;
 }
 
 .footer h3 {
-    border-bottom: 1px solid #CCC;
+    border-bottom: 1px solid var(--divider-color);
     padding-bottom: .5rem;
     width: 100%;
 }
@@ -17,8 +16,8 @@
 }
 
 .footer__bottom {
-    border-top: .1px solid #888;
-    padding: 1rem 0;
+    border-top: .1px solid var(--divider-color);
+    padding: 1rem 2rem;
 }
 
 .footer textarea, footer input {
@@ -55,6 +54,7 @@ textarea:focus, input:focus {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     align-items: stretch;
     gap: 2rem;
+    padding: 0 2rem;
     justify-items: stretch;
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
 }

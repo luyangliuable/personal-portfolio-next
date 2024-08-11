@@ -18,8 +18,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import "./HeroSection.css";
 
-gsap.registerPlugin(useGSAP, ScrollTrigger);
-
 const HeroSection: React.FC<IHeroProps> = ({}) => {
     const heroSectionRef = useRef(null);
     const mainHeading: string = "Hi There, I am Luyang.";
@@ -82,6 +80,7 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
     }]
 
     useGSAP(() => {
+        gsap.registerPlugin(ScrollTrigger);
         const heroSection = ".hero-section";
         const tl = gsap.timeline({
             scrollTrigger: {

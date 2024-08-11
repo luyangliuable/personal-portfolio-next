@@ -1,28 +1,8 @@
 .featured-section {
-    position: relative;
-    flex-wrap: wrap;
-    max-width: 1900px;
-
+    gap: 3rem 1rem;
     min-height: 400px;
-
-    perspective: 360px;
-    perspective-origin: 50% 50%;
-}
-
-
-.featured-section-with-before::before {
-    content: "";
-    width: 100%;
-    height: 80%;
-    position: absolute;
-    bottom: -62px; /* TODO fix this */
-    background-image: -webkit-linear-gradient(rgb(194, 194, 194) 2px, transparent 2px), -webkit-linear-gradient(left, rgb(194, 194, 194) 2px, transparent 2px);
-    background-size: 100px 100px, 100px 100px;
-    background-position: -1px -1px, -1px -1px;
-    transform: rotateX(85deg);
-    animation: planeMoveTop 5s infinite linear;
-    z-index: -1;
-    pointer-events: none;
+    margin-bottom: 2rem;
+    z-index: 1;
 }
 
 @media (max-width: 1439px) {
@@ -32,11 +12,8 @@
     }
 }
 
-@keyframes planeMoveTop {
-    from {
-        background-position: 0px -100px, 0px 0px;
-    }
-    to {
-        background-position: 0px 0px, 100px 0px;
-    }
+.show-more-button-wrapper {
+    margin-top: -2rem;
+    transform: translateY(-50%);
+    z-index: 3;
 }

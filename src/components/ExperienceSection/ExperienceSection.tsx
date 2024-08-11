@@ -12,13 +12,13 @@ import ExperienceSectionImageDisplay from "./ExperienceSectionImageDisplay/Exper
 import BlackHole from "../Organisms/BlackHole/BlackHole";
 import { gsap } from 'gsap';
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import "./ExperienceSection.css";
 import ZaOcean from "../Organisms/ZaOcean/ZaOcean";
 import ZaBanquet from "../Organisms/ZaBanquet/ZaBanquet";
 import { useTrigger } from "../../stores/TriggerContext";
-
-gsap.registerPlugin(useGSAP);
+import { throttle } from "../Utility/AnimationUtility";
 
 const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
     const experienceSectionParentRef = useRef<HTMLDivElement | null>(null);
@@ -300,22 +300,36 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
         }
     }, []);
 
+    const { trigger } = useTrigger();
+
     useGSAP(() => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const refreshScrollTrigger = () => {
+            ScrollTrigger.refresh();
+        };
+
         if (experienceSectionScrollRef.current && experienceSectionParentRef.current) {
             const scrollElement = experienceSectionScrollRef.current;
             const triggerElement = experienceSectionParentRef.current;
+
             gsap.to(scrollElement, {
-                x: () => -scrollElement.scrollWidth,
+                x: () => -scrollElement.scrollWidth - window.innerWidth,
                 ease: "none",
                 scrollTrigger: {
                     trigger: triggerElement,
                     start: "top 20%",
-                    end: () => `+=${scrollElement.scrollWidth / 2}`,
+                    end: () => `+=${scrollElement.scrollWidth / 2 + 200}`,
                     scrub: true,
+                    markers: true,
+                    onUpdate: throttle(refreshScrollTrigger, 1000),
+                    invalidateOnRefresh: true
                 }
             });
+
+            refreshScrollTrigger();
         }
-    });
+    }, [trigger]);
 
     const sortedItems = items.sort(
         (a: ExperienceSectionItem, b: ExperienceSectionItem) => {

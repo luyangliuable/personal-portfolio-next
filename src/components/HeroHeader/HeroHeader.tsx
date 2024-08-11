@@ -8,7 +8,6 @@ import { useGSAP } from "@gsap/react";
 
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTrigger } from "../../stores/TriggerContext";
-gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const HeroHeader: React.FC<IHeroHeaderProps> = ({ heading, description, graphics }) => {
     const componentRef = useRef<HTMLDivElement>(null);
@@ -16,6 +15,8 @@ const HeroHeader: React.FC<IHeroHeaderProps> = ({ heading, description, graphics
     const { trigger } = useTrigger();
 
     useGSAP(() => {
+        gsap.registerPlugin(ScrollTrigger);
+
         const heroHeader = {
             this: ".hero-header",
             graphics: ".hero-header__graphics-container",

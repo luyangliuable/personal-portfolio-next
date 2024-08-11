@@ -180,10 +180,7 @@ body {
     background: #EEE;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}
-
-html {
-    width: 100%; overflow-x: hidden;
+    width: 100vw; overflow-x: hidden;
 }
 
 code {
@@ -327,6 +324,10 @@ a {
 
 .overflow-x-scroll {
     overflow-x: scroll
+}
+
+.overflow-x-hidden {
+    overflow-x: hidden
 }
 
 .overflow-y-scroll {

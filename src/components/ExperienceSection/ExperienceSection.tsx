@@ -314,7 +314,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
             const triggerElement = experienceSectionParentRef.current;
 
             gsap.to(scrollElement, {
-                x: () => -scrollElement.scrollWidth - (window.innerWidth + 100),
+                x: () => -scrollElement.scrollWidth - (window.innerWidth + 150),
                 ease: "none",
                 scrollTrigger: {
                     trigger: triggerElement,

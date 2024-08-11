@@ -55,12 +55,14 @@ class DynamicLoadQueue {
             this.isLocked = false;
             return;
         }
+
         const element = this.queue.shift();
+
         if (element) {
             this.fadeInElement(element);
             setTimeout(() => {
                 this.processQueue();
-            }, 50);
+            }, 120);
         }
     }
 

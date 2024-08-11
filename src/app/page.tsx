@@ -1,9 +1,9 @@
 import LandingPage from '../page/LandingPage/LandingPage';
+import PostRepository from '../repositories/PostRepository';
 
-function App() {
-    return (
-        <LandingPage />
-    );
+export default async function App() {
+    const postRepo = PostRepository.getInstance();
+    const postList = await postRepo.getPostList();
+
+    return (<LandingPage postList={postList} />);
 }
-
-export default App;

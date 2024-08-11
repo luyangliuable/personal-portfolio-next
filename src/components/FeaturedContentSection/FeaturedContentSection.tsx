@@ -7,45 +7,135 @@ import IFeaturedContentSectionState from "./Interface/IFeaturedContentSectionSta
 import Button from "../Button/Button";
 import GalleryItem from "../Gallery/GalleryItem/GalleryItem";
 import LandingPageCard from "../LandingPageCard/LandingPageCard";
-import PostRepository from "../../repositories/PostRepository";
 import TwinCandle from "../TwinCandle/TwinCandle";
-
 import "./FeaturedContentSection.css";
-import LoadingBar from '../LoadingBar/LoadingBar';
+import { useTrigger } from '../../stores/TriggerContext';
+import Retro from '../Retro/Retro';
 
-const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = (props) => {
+const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({ postList }) => {
     const [state, setState] = useState<IFeaturedContentSectionState>({
         featuredPosts: [
-          {
-            image: {
-              $oid: "65596ad4ad7cc31ee9263e32"
+            {
+                image: {
+                    $oid: "65596ad4ad7cc31ee9263e32"
+                },
+                _id: {
+                    $oid: "featured-tool"
+                },
+                heading: "Featured Tool: Coming Soon",
+                date_created: "",
+                post_type: "tool",
+                tags: [],
+                author: "Luyang Liu",
+                body: "Coming Soon",
+                url: "Coming Soon"
             },
-            _id: {
-              $oid: "featured-tool"
+            {
+                image: {
+                    $oid: "66ab67bd8803e8c20005c32e"
+                },
+                _id: {
+                    $oid: "can4cancer"
+                },
+                date_created: "",
+                body: "I joined can4cancer which is an initiative that aims to raise funds to support research towards curing and preventing cancer.",
+                author: "Luyang Liu",
+                url: "https://melbournewalk24.can4cancer.com.au/lucas-liu",
+                post_type: "none",
+                tags: [],
+                heading: "Sponsor Me for Can4Cancer Now!",
             },
-            heading: "Featured Tool: Coming Soon",
-            date_created: "",
-            post_type: "tool",
-            tags: [],
-            author: "Luyang Liu",
-            body: "Coming Soon",
-            url: "Coming Soon"
-          },
-          {
-            image: {
-              $oid: "66ab67bd8803e8c20005c32e"
+            {
+                image: {
+                    $oid: "65596ad4ad7cc31ee9263e32"
+                },
+                _id: {
+                    $oid: "featured-tool"
+                },
+                heading: "Featured Tool: Coming Soon",
+                date_created: "",
+                post_type: "tool",
+                tags: [],
+                author: "Luyang Liu",
+                body: "Coming Soon",
+                url: "Coming Soon"
             },
-            _id: {
-              $oid: "can4cancer"
+            {
+                image: {
+                    $oid: "66ab67bd8803e8c20005c32e"
+                },
+                _id: {
+                    $oid: "can4cancer"
+                },
+                date_created: "",
+                body: "I joined can4cancer which is an initiative that aims to raise funds to support research towards curing and preventing cancer.",
+                author: "Luyang Liu",
+                url: "https://melbournewalk24.can4cancer.com.au/lucas-liu",
+                post_type: "none",
+                tags: [],
+                heading: "Sponsor Me for Can4Cancer Now!",
             },
-            date_created: "",
-            body: "I joined can4cancer which is an initiative that aims to raise funds to support research towards curing and preventing cancer.",
-            author: "Luyang Liu",
-            url: "https://melbournewalk24.can4cancer.com.au/lucas-liu",
-            post_type: "none",
-            tags: [],
-            heading: "Sponsor Me for Can4Cancer Now!",
-          }
+
+            {
+                image: {
+                    $oid: "65596ad4ad7cc31ee9263e32"
+                },
+                _id: {
+                    $oid: "featured-tool"
+                },
+                heading: "Featured Tool: Coming Soon",
+                date_created: "",
+                post_type: "tool",
+                tags: [],
+                author: "Luyang Liu",
+                body: "Coming Soon",
+                url: "Coming Soon"
+            },
+            {
+                image: {
+                    $oid: "66ab67bd8803e8c20005c32e"
+                },
+                _id: {
+                    $oid: "can4cancer"
+                },
+                date_created: "",
+                body: "I joined can4cancer which is an initiative that aims to raise funds to support research towards curing and preventing cancer.",
+                author: "Luyang Liu",
+                url: "https://melbournewalk24.can4cancer.com.au/lucas-liu",
+                post_type: "none",
+                tags: [],
+                heading: "Sponsor Me for Can4Cancer Now!",
+            },
+            {
+                image: {
+                    $oid: "65596ad4ad7cc31ee9263e32"
+                },
+                _id: {
+                    $oid: "featured-tool"
+                },
+                heading: "Featured Tool: Coming Soon",
+                date_created: "",
+                post_type: "tool",
+                tags: [],
+                author: "Luyang Liu",
+                body: "Coming Soon",
+                url: "Coming Soon"
+            },
+            {
+                image: {
+                    $oid: "66ab67bd8803e8c20005c32e"
+                },
+                _id: {
+                    $oid: "can4cancer"
+                },
+                date_created: "",
+                body: "I joined can4cancer which is an initiative that aims to raise funds to support research towards curing and preventing cancer.",
+                author: "Luyang Liu",
+                url: "https://melbournewalk24.can4cancer.com.au/lucas-liu",
+                post_type: "none",
+                tags: [],
+                heading: "Sponsor Me for Can4Cancer Now!",
+            }
         ],
         numOfElementsToShow: 0,
         featuredTool: {
@@ -56,17 +146,16 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = (props) =
     });
 
     const currentComponentRef = useRef<HTMLDivElement>(null);
-    const featuredSectionRef = useRef<HTMLDivElement>(null);
     const twinCandleComponentParentRef = useRef<HTMLDivElement>(null);
     const twinCandleComponentRef = useRef<TwinCandle>(null);
     const showMoreButtonRef = useRef<HTMLDivElement>(null);
-    const postRepository = PostRepository.getInstance();
+
+    const { toggleTrigger } = useTrigger();
 
     useEffect(() => {
         calculateElementsToShow();
-        addEventListener("resize", calculateElementsToShow);
 
-        fetchPostList();
+        window.addEventListener("resize", calculateElementsToShow);
 
         const observer = new IntersectionObserver(
             (entries) => {
@@ -89,7 +178,6 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = (props) =
             if (twinCandleComponentParentRef.current) {
                 observer.unobserve(twinCandleComponentParentRef.current);
             }
-
             window.removeEventListener("resize", calculateElementsToShow);
         };
     }, []);
@@ -106,45 +194,43 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = (props) =
         const featuredPostsLength = state.featuredPosts?.length ?? 0;
         setState({ ...state, numOfElementsToShow: featuredPostsLength + 2 });
         if (showMoreButtonRef.current) showMoreButtonRef.current.style.display = 'none';
-        if (featuredSectionRef.current) featuredSectionRef.current.classList.remove('featured-section-with-before');
     }
 
     const renderTopPickedPostsSortedByDateDescending = (): React.ReactNode => {
         const sliceEnd = state.numOfElementsToShow;
-        return state.featuredPosts?.slice(0, sliceEnd).map((content) => (
-            <GalleryItem
-                key={content._id.$oid}
-                name={content.heading}
-                tags={content.tags}
-                description={content.body}
-                dateCreated={content.date_created}
-                type={content.post_type === "md" ? "blog" : content.post_type}
-                minuteRead={content.reading_time_minutes}
-                className="my-2.5"
-                link={content.url ?? `/digital-chronicles/blog/${content._id.$oid}`}
-                image={content.image.$oid}
-            />
-        ))
-    }
-
-    const fetchPostList = async () => {
-        const response = await postRepository.getFeaturedPostList();
-
-        setState(prevState => ({ ...prevState, featuredPosts: [...prevState.featuredPosts, ...response] }));
+        /* CONSTuu sliceEnd = 10000; */
+        const posts = [...state.featuredPosts, ...postList.filter(post => post.is_featured)];
+        return posts.slice(0, sliceEnd).map((content) => (
+            <div key={content._id.$oid}>
+                <GalleryItem
+                    name={content.heading}
+                    tags={content.tags}
+                    description={content.body}
+                    dateCreated={content.date_created}
+                    type={content.post_type === "md" ? "blog" : content.post_type}
+                    minuteRead={content.reading_time_minutes}
+                    className="my-2.5"
+                    link={content.url ?? `/digital-chronicles/blog/${content._id.$oid}`}
+                    image={content.image.$oid}
+                />
+            </div>
+        ));
     }
 
     return (
         <LandingPageCard className="mb-20" heading="Featured Content" landingPageCardType="fitContent" blendWithBackground={true}>
             <section ref={currentComponentRef} className="flex flex-col items-center">
-                <div
-                    ref={featuredSectionRef}
-                    className="featured-section mb-16 featured-section-with-before w-full position-relative flex flex-row justify-center items-stretch">
-                    {state.featuredPosts.length > 2 && renderTopPickedPostsSortedByDateDescending()}
-                    {state.featuredPosts.length <= 2 &&
-                        <div className="loading-bar--container">
-                            <LoadingBar />
-                        </div>
-                    }
+                <div className="featured-section w-full flex flex-col position-relative">
+                    <div className="flex flex-row w-full justify-center items-stretch gap-1 flex-wrap">
+                        {renderTopPickedPostsSortedByDateDescending()}
+                    </div>
+                    <Retro />
+                </div>
+                <div className="featured-section w-full flex flex-col position-relative">
+                    <div className="flex flex-row w-full justify-center items-stretch gap-1 flex-wrap">
+                        {renderTopPickedPostsSortedByDateDescending()}
+                    </div>
+                    <Retro />
                 </div>
                 <div className="show-more-button-wrapper" ref={showMoreButtonRef}>
                     <Button

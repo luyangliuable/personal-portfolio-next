@@ -10,17 +10,12 @@ const AuthorDetails: React.FC<{ content?: BlogPostResponse }> = ({ content }) =>
         return (<></>)
 
     const { author, date_created } = content;
-
     const displayDateCreated = isoDateFormatToString(new Date(date_created));
 
     return (
         <section>
             <div className="flex">
-                <Image
-                    compression={5}
-                    className="user-image blog-content--author-image"
-                    src={defaultAuthorImage}
-                />
+                <Image className="user-image blog-content--author-image" src={defaultAuthorImage} alt={content.author} />
                 <div className="flex-vertical">
                     <b>{author}</b>
                     <br />

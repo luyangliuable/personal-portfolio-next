@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo, useRef } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import IHeroProps from "./Interface/IHeroProps";
 import Link from "next/link";
@@ -8,20 +8,21 @@ import CodingCat from "../CodingCat/CodingCat";
 import Button from "../Button/Button";
 import LandingPageCard from "../LandingPageCard/LandingPageCard";
 import SequentialRiseSpan from "../Atoms/SequentialRiseSpan/SequentialRiseSpan";
-import { useScrollPosition } from "../../hooks";
-
+import { gsap } from 'gsap';
+import { useGSAP } from "@gsap/react";
 import { SiCodecademy } from "react-icons/si";
 import { FaGithubSquare, FaLinkedin, FaStackOverflow } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { RiNotionFill } from "react-icons/ri";
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import "./HeroSection.css";
-import { clamp } from "../Utility/LogicUtility";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const HeroSection: React.FC<IHeroProps> = ({}) => {
+    const heroSectionRef = useRef(null);
     const mainHeading: string = "Hi There, I am Luyang.";
-
-    const { scrollY } = useScrollPosition();
 
     const introduction: JSX.Element = (
         <SequentialRiseSpan calculationAdjustment={.82} minNumberOfLettersPerLine={48}>
@@ -80,6 +81,23 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
         imageSrc: "https://img.shields.io/badge/codecademy-%2312100E.svg?&style=for-the-badge&logo=codecademy&logoColor=white&color=black",
     }]
 
+    useGSAP(() => {
+        const heroSection = ".hero-section";
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: heroSection,
+                start: "top top",
+                end: "bottom top",
+                scrub: 0.1
+            },
+        });
+
+        tl.add(gsap.to(heroSection, {
+            opacity: 0.3,
+            transform: "translateY(-260px) scale(0.80)",
+        }), "start");
+    });
+
     const footer = useMemo(() => {
         return (
             <footer className="hero-section-badge__container flex justify-center items-center w-full">
@@ -106,7 +124,7 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
 
     const heroSectionContentLeft = useMemo(() => {
         return (
-            <section className="hero-section__content__left">
+            <section className="hero-section__content__left" ref={heroSectionRef}>
                 <header className="self-start">
                     <SequentialRiseSpan elementType="h1" className="hero-section__heading" minNumberOfLettersPerLine={40}>
                         {mainHeading}
@@ -124,25 +142,17 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
     }, [mainHeading, introduction]);
 
     return (
-        <section className="hero-section__wrapper">
-            <LandingPageCard
-                style={{
-                    opacity: clamp(.5, 1, 1000 - (scrollY ?? 0), 1 / 1000),
-                    /* borderRadius: `${clamp(12, 300, scrollY, 1 / 2)}px`, */
-                    /* width: `calc(98vw - ${clamp(0, 50, (scrollY ?? 0), 1 / 6)}px`, */
-                    transform: `scale(${clamp(.8, 1, 3200 - (scrollY ?? 0), 1 / 3200)}) translateY(${clamp(-260, 0, -(scrollY ?? 0), 1 / 2)}px)`
-                }}
-                className="hero-section" landingPageCardType="fitContent" >
-                <div className="space h-28"></div>
-                <section className="hero-section__content">
-                    <section className="hero-section__content__right">
-                        <CodingCat />
-                    </section>
-                    {heroSectionContentLeft}
+        <LandingPageCard
+            className="hero-section" landingPageCardType="fitContent" >
+            <div className="space h-28"></div>
+            <section className="hero-section__content">
+                <section className="hero-section__content__right">
+                    <CodingCat />
                 </section>
-                {footer}
-            </LandingPageCard>
-        </section>
+                {heroSectionContentLeft}
+            </section>
+            {footer}
+        </LandingPageCard>
     );
 }
 

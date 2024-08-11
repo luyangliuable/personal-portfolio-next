@@ -175,7 +175,7 @@
     font-style: italic;
 }
 
-html, body {
+body {
     margin: 0;
     background: #EEE;
     -webkit-font-smoothing: antialiased;

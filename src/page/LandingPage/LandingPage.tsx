@@ -9,7 +9,7 @@ import LandingPageCard from "../../components/LandingPageCard/LandingPageCard";
 import BlogPage from "../BlogPage/BlogPage";
 import SkeletonPage from "../SkeletonPage/SkeletonPage";
 
-const LandingPage: React.FC<ILandingPageProps> = () => {
+const LandingPage: React.FC<ILandingPageProps> = ({ postList }) => {
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
@@ -26,10 +26,10 @@ const LandingPage: React.FC<ILandingPageProps> = () => {
     return (
         <main className="landing-page-content">
             <HeroSection />
-            <FeaturedContentSection />
+            <FeaturedContentSection postList={postList} />
             <Experiences />
             <LandingPageCard landingPageCardType="fitContent" className="blend-with-background">
-                <section className="flex-column-centered-centered"><BlogPage  /></section>
+                <section className="flex-column-centered-centered"><BlogPage data={postList} /></section>
             </LandingPageCard>
         </main>
     );

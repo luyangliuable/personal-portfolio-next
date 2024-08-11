@@ -143,7 +143,7 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({ postLi
     }
 
   return (
-    <LandingPageCard className="mb-20" heading="Featured Content" landingPageCardType="fitContent" blendWithBackground={true}>
+    <LandingPageCard className="mb-20 overflow-x-hidden" heading="Featured Content" landingPageCardType="fitContent" blendWithBackground={true}>
       <section ref={currentComponentRef} className="featured-section--wrapper flex flex-col items-center position-relative">
         {renderTopPickedPostsSortedByDateDescending()}
         <div className="show-more-button-wrapper" ref={showMoreButtonRef}>

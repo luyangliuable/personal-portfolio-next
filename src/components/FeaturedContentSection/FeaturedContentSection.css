@@ -1,9 +1,8 @@
 .featured-section {
-    position: relative;
-    width: 100%;
     gap: 3rem 1rem;
     min-height: 400px;
     margin-bottom: 2rem;
+    z-index: 1;
 }
 
 @media (max-width: 1439px) {
@@ -11,4 +10,10 @@
         content: "";
         display:none;
     }
+}
+
+.show-more-button-wrapper {
+    margin-top: -2rem;
+    transform: translateY(-50%);
+    z-index: 3;
 }

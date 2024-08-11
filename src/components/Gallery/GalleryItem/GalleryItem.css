@@ -1,5 +1,5 @@
 .gallery-item {
-    transition: transform .1s ease-in, opacity .1s ease-in;
+    transition: transform .2s ease-in, opacity .5s ease-in;
     width: 380px;
     height: 100%;
     opacity: 0;
@@ -13,7 +13,8 @@
 }
 
 .initially-hidden {
-    opacity: 0; transform: translateX(30px);
+    opacity: 0;
+    transform: translateY(-50px);
 }
 
 .initially-hidden-show {

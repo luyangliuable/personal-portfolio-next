@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
-
 const TriggerContext = createContext<{ trigger: boolean; toggleTrigger: () => void } | undefined>(undefined);
 
 export const TriggerProvider = ({ children }: { children: ReactNode }) => {

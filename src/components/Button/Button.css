@@ -60,12 +60,10 @@
 
 .button-line {
     position: absolute;
-    height: 4px;
-    left: -10px;
-    transform: translateY(-25px);
+    height: 2.5px;
     width: 100vw;
     border-radius: 100%;
-    background: #F3F3F3
+    background: #F3F3F3;
 }
 
 .t-button:hover::after {

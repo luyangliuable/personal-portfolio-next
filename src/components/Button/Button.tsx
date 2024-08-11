@@ -17,14 +17,14 @@ class HeroSection extends Component<IButtonProps, {}> {
 
     renderButton() {
         return (
-            <>
+            <div className="flex justify-center items-center">
                 <div style={this.props.style} className={["t-button button no-select", this.props.className].join(" ")} onMouseMove={(e) => cardGradientEffect(e, false, 1, 38, 20)}>
                     <span>{this.props.children}</span>
                 </div>
                 {
                     this.props.showButtonLine && (<div className="button-line"></div>)
                 }
-            </>
+            </div>
         );
     }
 

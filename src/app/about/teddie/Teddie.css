@@ -163,7 +163,6 @@
 }
 
 .teddie--hero {
-    margin-bottom: 1000%;
     position: relative;
     height: 92vh;
     width: 100%;
@@ -171,6 +170,7 @@
     font-family: 'TT Norms Pro';
     font-weight: bold;
     background: #FFF;
+    margin-bottom: 5rem;
 }
 
 .teddie--hero .secondary-text {
@@ -181,19 +181,23 @@
     font-size: 9rem;
 }
 
-.image-stack>* {
-    transition: .3s transform ease-in-out;
-    border: 1px solid #FFDEA2;
+.image-stack {
+  width: 80% !important;
 }
 
-.image-stack>* {
-    position: absolute;
-    border-radius: 20px;
-    width: 320px; height: 300px;
-    background-image: url('./teddie.png'); /* Path to your image */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+.teddie--gallery {
+  height: fit-content !important;
+}
+
+.image-stack div {
+  border: 1px solid black;
+  border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  background-image: url('./teddie.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .gallery {
@@ -201,6 +205,6 @@
 }
 
 .gallery img {
-    width: 100px;
-    height: 100px;
+  width: 100px;
+  height: 100px;
 }

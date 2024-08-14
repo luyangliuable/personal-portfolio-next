@@ -17,6 +17,7 @@ import { RiNotionFill } from "react-icons/ri";
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import "./HeroSection.css";
+import { refreshScrollTrigger } from "../Utility/ScrollUtility";
 
 const HeroSection: React.FC<IHeroProps> = ({}) => {
     const heroSectionRef = useRef(null);
@@ -87,6 +88,7 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
                 trigger: heroSection,
                 start: "top top",
                 end: "bottom top",
+                invalidateOnRefresh: true,
                 scrub: 0.1
             },
         });
@@ -94,7 +96,10 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
         tl.add(gsap.to(heroSection, {
             opacity: 0.3,
             transform: "translateY(-260px) scale(0.80)",
+            boxShadow: "0px 0px 0px #A5A58C",
         }), "start");
+
+        refreshScrollTrigger(ScrollTrigger);
     });
 
     const footer = useMemo(() => {

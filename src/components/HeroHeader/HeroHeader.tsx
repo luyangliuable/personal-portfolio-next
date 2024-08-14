@@ -8,6 +8,7 @@ import { useGSAP } from "@gsap/react";
 
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTrigger } from "../../stores/TriggerContext";
+import { refreshScrollTrigger } from "../Utility/ScrollUtility";
 
 const HeroHeader: React.FC<IHeroHeaderProps> = ({ heading, description, graphics }) => {
     const componentRef = useRef<HTMLDivElement>(null);
@@ -29,6 +30,7 @@ const HeroHeader: React.FC<IHeroHeaderProps> = ({ heading, description, graphics
             scrollTrigger: {
                 trigger: heroHeader.this,
                 start: "top top",
+                invalidateOnRefresh: true,
                 end: "bottom top",
                 scrub: true
             },
@@ -39,6 +41,8 @@ const HeroHeader: React.FC<IHeroHeaderProps> = ({ heading, description, graphics
             transform: "translateY(-150px) scale(95%)",
             borderBottomColor: "#333",
         }), "start")
+
+        refreshScrollTrigger(ScrollTrigger);
     }, [trigger])
 
     return (

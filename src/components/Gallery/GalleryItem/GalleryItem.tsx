@@ -16,6 +16,7 @@ import { truncateTextBody } from "../../Utility/StringUtility";
 import { CiTimer } from "react-icons/ci";
 import { CiCalendar } from "react-icons/ci";
 import Contributors from "./Contributors/Contributors";
+import { cl } from "../../Utility/LogicUtility";
 
 const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
     const galleryItemRef = useRef<HTMLDivElement>(null);
@@ -63,38 +64,44 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
     }
 
     return (
-        <Link shallow className={className} href={props.link ?? ""}>
+        <Link
+            shallow
+            className={cl(className, "h-full position-relative w-full flex items-center justify-center")}
+            href={props.link ?? ""}>
             <div
-                ref={galleryItemRef}
                 style={style}
+                ref={galleryItemRef}
                 key={props.key}
                 onMouseMove={cardGradientEffect}
-                className="gallery-item flex flex-col justify-start items-center pb-10 blur-boundary card">
+                className="gallery-item initially-hidden blur-boundary card">
                 <GalleryItemTypeSegment />
-                <div className="position-absolute color-white right-0 w-15 top-10 font-fira-code">{props.action ?? "READ"}</div>
-                <Image compression={30} alt="" className="gallery-item__image" src={image ?? ""} />
-                <TagCloud tags={props.tags} />
-                <h3>{props.name}</h3>
-                <p>{props.subheading}</p>
-                {props.description &&
-                    <div className="w-full box-border p-4">
-                        <SequentialRiseSpan minNumberOfLettersPerLine={42}>
-                            {truncateTextBody(props.description, 200)}
-                        </SequentialRiseSpan>
-                    </div>
+                {/* <div className="position-absolute color-white right-0 w-15 top-10 font-fira-code">{props.action ?? "READ"}</div> */}
+                <div className="gallery-item__image"><Image alt="" src={image ?? ""} /></div>
+                <div className="px-5">
+                  <TagCloud tags={props.tags} />
+                  <h3>{props.name}</h3>
+                  <p>{props.subheading}</p>
+                  {props.description &&
+                   <div className="w-full box-border">
+                     <SequentialRiseSpan minNumberOfLettersPerLine={42}>
+                       {truncateTextBody(props.description, 200)}
+                     </SequentialRiseSpan>
+                   </div>
+                  }
+                </div>
+                {
+                  props.minuteRead && props.dateCreated &&
+                  (
+                    <p className="position-absolute gallery-item__metadata flex">
+                      <span className="flex items-center"><CiTimer /> {props.minuteRead} min read</span>
+                      <span className="flex items-center"><CiCalendar /> {isoDateFormatToString(new Date(props.dateCreated))}</span>
+                    </p>
+                  )
                 }
                 {
-                    props.minuteRead && props.dateCreated &&
-                    (
-                        <p className="position-absolute gallery-item__metadata flex">
-                            <span className="flex items-center"><CiTimer /> {props.minuteRead} min read</span>
-                            <span className="flex items-center"><CiCalendar /> {isoDateFormatToString(new Date(props.dateCreated))}</span>
-                        </p>
-                    )
-                }
-                {
-                    props.repoOwner && props.repoName &&
-                    <Contributors repoOwner={props.repoOwner} repoName={props.repoName} />
+                  props.repoOwner && props.repoName &&
+
+                  <Contributors repoOwner={props.repoOwner} repoName={props.repoName} />
                 }
             </div>
         </Link>

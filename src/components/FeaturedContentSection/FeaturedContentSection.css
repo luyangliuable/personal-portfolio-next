@@ -3,7 +3,12 @@
     min-height: 400px;
     margin-bottom: 2rem;
     z-index: 1;
+    padding-bottom: 1rem;
 }
+
+    .featured-section .featured-section--item {
+        width: 400px;
+    }
 
 .featured-section--wrapper {
     min-height: 550px;

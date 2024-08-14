@@ -11,6 +11,7 @@ import TwinCandle from "../TwinCandle/TwinCandle";
 import "./FeaturedContentSection.css";
 import { useTrigger } from '../../stores/TriggerContext';
 import Retro from '../Retro/Retro';
+import Bento from '../Bento/Bento';
 
 const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({ postList }) => {
     const [state, setState] = useState<IFeaturedContentSectionState>({
@@ -123,7 +124,9 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({ postLi
             <Retro showBorder={showAllPosts} />
             <div className="flex flex-row w-full justify-center items-stretch gap-1 flex-wrap position-relative">
               {group.map((content) => (
-                <div key={content._id.$oid}>
+                <div
+                  className="featured-section--item flex justify-center"
+                  key={content._id.$oid} >
                   <GalleryItem
                     name={content.heading}
                     tags={content.tags}

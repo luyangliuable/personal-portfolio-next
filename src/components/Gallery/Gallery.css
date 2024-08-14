@@ -1,11 +1,9 @@
+@import "../Card/Card.css";
+
 .gallery {
-    display: grid;
-    width: calc(100vw - 100px);
-    grid-template-columns: repeat(auto-fill, 400px);
-    align-items: stretch;
-    gap: 1.5rem 0.5rem;
-    justify-content: space-around;
-    margin-bottom: 2rem;
+    position: relative;
+    width: 90vw;
+    margin-bottom: 5rem;
 }
 
 .gallery > * {
@@ -14,14 +12,5 @@
     height: 100%;
 }
 
-@media screen and (max-width: 1300px) {
-    .gallery {
-        grid-template-columns: repeat(auto-fill, 300px);
-        justify-items: center;
-        width: 100vw;
-    }
-}
-
 .heading__wrapper {
-    width: calc(100vw - 170px);
 }

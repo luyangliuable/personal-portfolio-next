@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const isCenterAlignedWithViewport = (div: Element | null): number => {
     if (div === null) return Number.MAX_SAFE_INTEGER;
@@ -89,4 +90,10 @@ function useScrollToTopOnLoad() {
     }, []);
 }
 
-export { useScrollToTopOnLoad, resetElementPosition, adjustElementPositionAbsoluteY as centerElementInParent, isCenterAlignedWithViewport, getHTMLElementCenterYPosition, isCloseToAnotherElement }
+
+const refreshScrollTrigger = (scrollTrigger: any) => {
+    scrollTrigger.refresh();
+    setTimeout(() => scrollTrigger.refresh(), 500);
+};
+
+export {refreshScrollTrigger, useScrollToTopOnLoad, resetElementPosition, adjustElementPositionAbsoluteY as centerElementInParent, isCenterAlignedWithViewport, getHTMLElementCenterYPosition, isCloseToAnotherElement }

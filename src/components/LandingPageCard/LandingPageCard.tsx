@@ -48,6 +48,7 @@ class LandingPageCard extends Component<ILandingPageCardProps, any> {
             this.determineWhatTypeOfLandingPageCardToUse(this.props.landingPageCardType),
             this.props.className
         ];
+
         if (this.props.blendWithBackground) classArray.push('blend-with-background');
         const landingPageCardHeading = this.props.heading;
         return (

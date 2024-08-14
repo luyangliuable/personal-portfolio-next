@@ -1,0 +1,21 @@
+.bento-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    padding: 0;
+    margin: 0;
+    gap: 1.5vw;
+    justify-items: center;
+    align-items: stretch;
+    box-sizing: border-box;
+    grid-auto-rows: minmax(200px, auto);
+}
+
+.bento-item {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}

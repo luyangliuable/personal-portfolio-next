@@ -18,7 +18,7 @@ import "./ExperienceSection.css";
 import ZaOcean from "../Organisms/ZaOcean/ZaOcean";
 import ZaBanquet from "../Organisms/ZaBanquet/ZaBanquet";
 import { useTrigger } from "../../stores/TriggerContext";
-import { throttle } from "../Utility/AnimationUtility";
+import { refreshScrollTrigger } from "../Utility/ScrollUtility";
 
 const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
     const experienceSectionParentRef = useRef<HTMLDivElement | null>(null);
@@ -304,29 +304,21 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
 
     useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
-
-        const refreshScrollTrigger = () => {
-            ScrollTrigger.refresh();
-        };
-
         if (experienceSectionScrollRef.current && experienceSectionParentRef.current) {
             const scrollElement = experienceSectionScrollRef.current;
             const triggerElement = experienceSectionParentRef.current;
-
             gsap.to(scrollElement, {
-                x: () => -scrollElement.scrollWidth - (window.innerWidth + 150),
+                x: () => -scrollElement.scrollWidth,
                 ease: "none",
                 scrollTrigger: {
                     trigger: triggerElement,
-                    start: "top 20%",
-                    end: () => `+=${scrollElement.scrollWidth / 2}`,
+                    start: "top 20%", // Starts scrolling earlier
+                    end: () => `+=${scrollElement.scrollWidth / 2 - window.innerHeight*.8}`,
                     scrub: true,
-                    /* onUpdate: throttle(refreshScrollTrigger, 1000), */
                     invalidateOnRefresh: true
                 }
             });
-
-            refreshScrollTrigger();
+            refreshScrollTrigger(ScrollTrigger);
         }
     }, [trigger]);
 

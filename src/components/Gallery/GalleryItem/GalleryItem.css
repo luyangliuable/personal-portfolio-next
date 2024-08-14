@@ -1,20 +1,18 @@
 .gallery-item {
-    transition: transform .2s ease-in, opacity .5s ease-in;
-    width: 380px;
     height: 100%;
-    opacity: 0;
+    width: min(100%, 90vw);
     background: rgba(245, 240, 255, .1) !important;
     backdrop-filter: blur(12px) !important;
-    min-height: 380px;
     border-radius: 20px;
     border: 1px solid #FFF !important;
+    padding-bottom: calc(50px + 10px);
     overflow: hidden;
-    padding-bottom: 32px;
 }
 
 .initially-hidden {
+    transition: transform .3s ease-in, opacity .3s ease-in;
     opacity: 0;
-    transform: translateY(-50px);
+    transform: translateY(50px);
 }
 
 .initially-hidden-show {
@@ -24,22 +22,13 @@
 @keyframes fadeIn {
     to {
         opacity: 1;
-    }
-}
-
-@media screen and (max-width: 1300px) {
-    .gallery-item {
-        width: 300px;
-        max-width: 90vw;
-        min-height: 360px;
+        transform: translateY(0px);
     }
 }
 
 .gallery-item p {
     width: 90%;
     text-align: left;
-    padding: 0;
-    margin: 0;
     color: #555;
     font-size: 14px;
 }
@@ -54,21 +43,21 @@
 .gallery-item__image {
     width: 100%;
     height: min( 40vw, 200px );
-    object-fit: cover;
     border-radius: 2px; -webkit-border-radius: 2px; -moz-border-radius: 2px;
 	display: block;
-	transition: width 200ms ease-out;
+    overflow: hidden;
 }
 
-.gallery-item:hover .gallery-item__image {
-    width: 110%;
+.gallery-item__image>* {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 200ms ease-out;
 }
 
-.gallery-item__image:hover {
-    cursor: grabbing;
+.gallery-item:hover .gallery-item__image>* {
+    transform: scale(1.2);
 }
-
-.contributor {}
 
 .contributor--tooltip {
     border-radius: 3px;
@@ -85,17 +74,16 @@
 }
 
 .gallery-item .gallery-item__metadata {
-    padding: .5rem 0;
+    width: 100%;
+    padding: .5rem 1.25rem;
     font-family: 'Fira Code';
     font-size: .7rem;
     overflow-x: auto;
     border-top: 1px solid #FFF;
-    gap: .5rem;
+    position: absolute;
     bottom: 0;
-}
-
-.gallery-item .gallery-item__metadata>span {
-    margin-right: 1rem;
+    gap: 1rem;
+    margin: 0;
 }
 
 .gallery-item .gallery-item__metadata svg {
@@ -115,6 +103,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
+    z-index: 1;
 }
 
 .gallery-item__type>* {

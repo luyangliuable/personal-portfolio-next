@@ -96,14 +96,14 @@
     height: 50px;
     left: 50%;
     top: 100%;
-    width: 0.5px;
-    box-shadow: var(--landing-page-card-box-shadow);
-    background-color: #000;
+    width: 1px;
+    /* box-shadow: var(--landing-page-card-box-shadow); */
+    background-color: var(--divider-color);
 }
 
 .timeline__line {
     position: relative;
-    height: 2px;
+    height: 1.2px;
     box-shadow: 1px 1px 1px 0 black;
     background-color: #000;
 }

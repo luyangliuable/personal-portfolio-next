@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from 'react-dom';
 import { Octokit } from '@octokit/rest';
 import Image from "../../../Image/Image";
+import "./Contributors.css";
 
 const octokit = new Octokit({
     auth: process.env.REACT_APP_GITHUB_TOKEN
@@ -47,58 +48,57 @@ const Contributors: React.FC<IContributorsProps> = ({repoName, repoOwner}) => {
           contributions: 0
         })
       }
-
-      setContributors(contributors);
-    };
-    fetchContributors();
+          setContributors(contributors);
+      };
+      fetchContributors();
   }, [repoName, repoOwner]);
 
-  return (
-    <div className="position-relative gallery-item__metadata p-1 flex w-full">
-      {
-        createPortal(
-          <div
-            ref={contributorTooltipRef}
-            className="contributor--tooltip flex justify-center items-center"
-            style={{
-            }}
-          >
-            waga
-          </div>,
-          document.body
-        )
-      }
-      {
-        contributors.map(item => (
-          <a
-            onClick={(e) => e.stopPropagation()}
-            onMouseOver={(e) => {
-              if (contributorTooltipRef.current) {
-                contributorTooltipRef.current.innerHTML = item.login;
-                contributorTooltipRef.current.style.opacity = '1';
-                contributorTooltipRef.current.style.display = 'block';
-              }
-            }}
-            onMouseMove={(e) => {
-              if (contributorTooltipRef.current) {
-                contributorTooltipRef.current.style.left = `${e.pageX + 10}px`;
-                contributorTooltipRef.current.style.top = `${e.pageY + 10}px`;
-              }
-            }}
-            onMouseOut={() => {
-              if (contributorTooltipRef.current) {
-                contributorTooltipRef.current.style.opacity = '0';
-              }
-            }}
-            className="contributor position-relative"
-            key={item.login}
-            href={item.profileUrl}>
-            <Image className="user-image" src={item.avatarUrl} alt={item.login} />
-          </a>
-        ))
-      }
-    </div>
-  )
+    if (!contributors) {
+        return <></>;
+    }
+
+    return (
+        <div className="position-relative gallery-item__metadata p-1 flex w-full">
+            {
+                createPortal(
+                    <div
+                        ref={contributorTooltipRef}
+                        className="contributor--tooltip flex justify-center items-center">
+                    </div>,
+                    document.body
+                )
+            }
+            {
+                contributors.map(item => (
+                    <a
+                        onClick={(e) => e.stopPropagation()}
+                        onMouseOver={(e) => {
+                            if (contributorTooltipRef.current) {
+                                contributorTooltipRef.current.innerHTML = item.login;
+                                contributorTooltipRef.current.style.opacity = '1';
+                                contributorTooltipRef.current.style.display = 'block';
+                            }
+                        }}
+                        onMouseMove={(e) => {
+                            if (contributorTooltipRef.current) {
+                                contributorTooltipRef.current.style.left = `${e.pageX + 10}px`;
+                                contributorTooltipRef.current.style.top = `${e.pageY + 10}px`;
+                            }
+                        }}
+                        onMouseOut={() => {
+                            if (contributorTooltipRef.current) {
+                                contributorTooltipRef.current.style.opacity = '0';
+                            }
+                        }}
+                        className="contributor position-relative"
+                        key={item.login}
+                        href={item.profileUrl}>
+                        <Image className="user-image" src={item.avatarUrl} alt={item.login} />
+                    </a>
+                ))
+            }
+        </div>
+    )
 }
 
 export default Contributors;

@@ -7,6 +7,7 @@ import Accordion from "../../components/Accordion/Accordion";
 import BlogPostResponse from "../../repositories/Response/BlogPostResponse";
 import EmojIcon from "../../components/EmojIcon/EmojIcon";
 import SkeletonPage from "../SkeletonPage/SkeletonPage";
+import BlogPostGraphics from "../../components/BlogPostGraphics/BlogPostGraphics";
 
 const Notes: React.FC<{ content: BlogPostResponse[] }> = ({ content }) => {
     const heroHeaderContent = Object.freeze({
@@ -78,7 +79,10 @@ const Notes: React.FC<{ content: BlogPostResponse[] }> = ({ content }) => {
 
     return (
         <main>
-            <HeroHeader heading={heroHeaderContent.heading} description={heroHeaderContent.description} />
+            <HeroHeader
+                heading={heroHeaderContent.heading}
+                description={heroHeaderContent.description}
+                graphics={<BlogPostGraphics />} />
             <Accordion>
                 {
                     Object.keys(grouped).map(category => {
@@ -86,7 +90,7 @@ const Notes: React.FC<{ content: BlogPostResponse[] }> = ({ content }) => {
                             <Accordion.Item
                                 key={category}
                                 icon={<EmojIcon emojis={emojIconMap[category] ?? emojIconMap["random"]} />}
-                                heading={category}>
+                                heading={`${category} (${grouped[category].length})`}>
                                 {
                                     grouped[category].map((content: BlogPostResponse) => {
                                         return (

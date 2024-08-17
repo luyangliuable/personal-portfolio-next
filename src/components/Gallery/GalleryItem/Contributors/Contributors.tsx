@@ -40,14 +40,14 @@ const Contributors: React.FC<IContributorsProps> = ({repoName, repoOwner}) => {
         console.error('Error fetching contributors:', error);
       }
 
-      if (!contributors.some(item => item.login === "luyangliuable")) {
-        contributors.unshift({
-          login: "luyangliuable",
-          avatarUrl: "https://avatars.githubusercontent.com/u/23611033?v=4",
-          profileUrl: "https://github.com/luyangliuable",
-          contributions: 0
-        })
-      }
+          if (!contributors.some(item => item.login === "luyangliuable")) {
+              contributors.unshift({
+                  login: "luyangliuable",
+                  avatarUrl: "https://avatars.githubusercontent.com/u/23611033?v=4",
+                  profileUrl: "https://github.com/luyangliuable",
+                  contributions: 0
+              })
+          }
           setContributors(contributors);
       };
       fetchContributors();

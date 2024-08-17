@@ -1,6 +1,5 @@
 import React, { Component, createRef, RefObject } from "react";
 import "./Card.css";
-import Link from "next/link";
 import { cardGradientEffect } from "../../components/Utility/MouseUtility";
 import { isoDateFormatToString } from "../../components/Utility/StringUtility";
 import TagCloud from "../TagCloud/TagCloud";
@@ -66,9 +65,11 @@ class Card extends Component<ICardProps, ICardState> {
                     <h3 className="card-item__heading">{heading}</h3>
                     <p className="card-item__label flex flex-row items-center">{`${displayMinuteRead} | ${displayDateCreated}`}{in_progress && <InProgressBlock />}</p>
                 </section>
-                <div className="card-image-preview__wrapper position-absolute overflow-hidden flex justify-center items-center">
-                    {<Image compression={30} src={image} className="card-image-preview" alt="Card Preview" />}
-                </div>
+                {image &&
+                    <div className="card-image-preview__wrapper position-absolute overflow-hidden flex justify-center items-center">
+                        {<Image compression={30} src={image} className="card-image-preview" alt="Card Preview" />}
+                    </div>
+                }
                 <footer className="flex mt-5 position-relative">
                     <Image src={authorImage} className="user-image card-image--author-image" alt={author} />
                     {author}

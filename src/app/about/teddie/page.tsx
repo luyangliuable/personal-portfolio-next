@@ -24,7 +24,7 @@ const Teddie = () => {
             <LandingPageCard className="teddie--gallery" blendWithBackground>
                 <div className="flex justify-center items-center">
                     <Bento className="image-stack px-5" gap="2rem">
-                        <Bento.Item rowSpan={2} colSpan={4}>
+                        <Bento.Item rowSpan={2} colSpan={3}>
                             <div className="image"></div>
                         </Bento.Item>
                         <Bento.Item colSpan={2}>

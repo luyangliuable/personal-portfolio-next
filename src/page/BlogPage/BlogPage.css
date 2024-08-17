@@ -12,7 +12,7 @@
 .blog__featured {
     display: flex; /* Define here instead of class .flex because need to override display: none later */
     flex-grow: 1;
-    border-left: .1px solid #888;
+    border-left: 1px solid var(--divider-color);
 }
 
 .blog__tag-container {
@@ -91,6 +91,7 @@
 
     .blog__year > span {
         background: #EEE;
+        color: var(--text-grey);
     }
 
     .blog__year::before {
@@ -98,7 +99,8 @@
         position: absolute;
         left: 0; right: 0; top: 0;
         transform: translate(-20px, 13px);
-        background: black;
+        transform: translate(-20px, 13px);
+        background: var(--divider-color);
         height: 1px;
         z-index: -1;
         animation: fade-in--width .4s ease-in-out;

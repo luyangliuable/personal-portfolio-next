@@ -2,10 +2,9 @@
     height: 100%;
     width: min(100%, 90vw);
     background: rgba(245, 240, 255, .1) !important;
-    backdrop-filter: blur(12px) !important;
     border-radius: 20px;
     border: 1px solid #FFF !important;
-    padding-bottom: calc(50px + 10px);
+    padding-bottom: calc(2*.8rem + 50px);
     overflow: hidden;
 }
 
@@ -53,29 +52,16 @@
     height: 100%;
     object-fit: cover;
     transition: transform 200ms ease-out;
+    z-index: 1;
 }
 
 .gallery-item:hover .gallery-item__image>* {
     transform: scale(1.2);
 }
 
-.contributor--tooltip {
-    border-radius: 3px;
-    transform: translate(0, -100%);
-    border: 1px solid black;
-    position: absolute;
-    display: none;
-    background-color: rgba(0,0,0,0.4);
-    backdrop-filter: blur(8px);
-    color: #fff;
-    padding: 5px;
-    transition: opacity .2s ease-in-out;
-    pointer-events: none
-}
-
 .gallery-item .gallery-item__metadata {
     width: 100%;
-    padding: .5rem 1.25rem;
+    padding: .8rem 1.5rem;
     font-family: 'Fira Code';
     font-size: .7rem;
     overflow-x: auto;
@@ -107,7 +93,6 @@
 }
 
 .gallery-item__type>* {
-    /* transform: rotate(45deg); */
     width: 22px;
     height: 25px;
 }

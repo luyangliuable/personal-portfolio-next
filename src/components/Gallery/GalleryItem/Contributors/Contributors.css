@@ -1,0 +1,13 @@
+.contributor--tooltip {
+    border-radius: 3px;
+    transform: translate(0, -100%);
+    border: 1px solid black;
+    position: absolute;
+    display: none;
+    background-color: rgba(0,0,0,0.4);
+    color: #fff;
+    padding: .3rem;
+    transition: opacity .2s ease-in-out;
+    pointer-events: none;
+    z-index: 1;
+}

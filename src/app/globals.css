@@ -23,6 +23,10 @@
     --zenburn-background: #3F3F3F;
     --zenburn-foreground: #DCDCCC;
 
+    --text-grey: #555;
+    --text-black: #000;
+    --text-white: #FFF;
+
     --divider-color: #CCC;
 
     --bg: #1a1e2d;
@@ -698,7 +702,8 @@ a {
 /* Override Styles (!important only allowed here) */
 .blur-boundary {
     background: rgba(200, 200, 200, .1) !important;
-    backdrop-filter: blur(2px) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
     border: none !important
 }
 

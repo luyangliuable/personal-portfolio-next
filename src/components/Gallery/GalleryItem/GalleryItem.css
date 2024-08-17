@@ -32,6 +32,23 @@
     font-size: 14px;
 }
 
+
+.gallery-item .gallery-item__link h3 {
+    background-image: linear-gradient(#888, #888), linear-gradient(#888, #888);
+    background-size: 0% 0.1em;
+    overflow: visible;
+    background-position-y: 100%;
+    background-position-x: 0%, 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.4s ease-in-out;
+    text-decoration: none;
+    width: fit-content;
+}
+
+.gallery-item:hover .gallery-item__link h3 {
+    background-size: 100% 0.1em;
+}
+
 .gallery-item h3 {
     width: 90%;
     font-size: clamp(1.1rem, 1.1vw, 2rem);
@@ -52,7 +69,7 @@
     height: 100%;
     object-fit: cover;
     transition: transform 200ms ease-out;
-    z-index: 1;
+    /* z-index: 1; */
 }
 
 .gallery-item:hover .gallery-item__image>* {
@@ -65,11 +82,27 @@
     font-family: 'Fira Code';
     font-size: .7rem;
     overflow-x: auto;
+
+    scrollbar-color: #CCC #F1F1F1;
+    scrollbar-width: thin;
+
     border-top: 1px solid #FFF;
     position: absolute;
     bottom: 0;
     gap: 1rem;
     margin: 0;
+}
+
+.gallery-item .gallery-item__metadata::-webkit-scrollbar {
+    border-radius: 0 !important;
+}
+
+.gallery-item .gallery-item__metadata::-webkit-scrollbar-thumb {
+    border-radius: 0 !important;
+}
+
+.gallery-item .gallery-item__metadata::-webkit-scrollbar-track {
+    border-radius: 0 !important;
 }
 
 .gallery-item .gallery-item__metadata svg {

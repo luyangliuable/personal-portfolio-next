@@ -7,7 +7,7 @@ import IButtonProps, { IButtonPropsWithTo, IButtonPropsWithOnClick } from "./Int
 
 import { cardGradientEffect } from "../Utility/MouseUtility";
 
-class HeroSection extends Component<IButtonProps, {}> {
+class Button extends Component<IButtonProps, {}> {
     contentInterval: any;
 
     constructor(props: IButtonProps) {
@@ -60,4 +60,4 @@ class HeroSection extends Component<IButtonProps, {}> {
     }
 }
 
-export default HeroSection;
+export default Button;

@@ -9,11 +9,14 @@
     opacity: 1;
 }
 
-.card::before {
+/* .card::after, */
+.card::before
+{
     border-radius: inherit;
     content: "";
     height: 100%;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
     opacity: 0;
     position: absolute;
     transition: opacity 500ms;
@@ -24,6 +27,10 @@
 .card::before {
     background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(200, 200, 200, 0.3), transparent 40%);
 }
+
+/* .card::after { */
+/*     background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(200, 200, 200, 0.4), transparent 40%); */
+/* } */
 
 .page-container {
     width: 100vw;

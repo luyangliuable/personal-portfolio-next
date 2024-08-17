@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useRouter } from 'next/navigation';
+/* import { useRouter } from 'next/navigation'; */
 import { IBlogPageState, IBlogPageProps } from "../../interfaces";
 import { FaWindowClose } from "react-icons/fa";
 import HeroHeader from "../../components/HeroHeader/HeroHeader";
@@ -11,10 +11,11 @@ import BlogPostGraphics from "../../components/BlogPostGraphics/BlogPostGraphics
 import SmallCard from "../../components/Atoms/SmallCard/SmallCard";
 import Toggle from "../../components/Atoms/Toggle/Toggle";
 import "./BlogPage.css";
+import SkeletonPage from "../SkeletonPage/SkeletonPage";
 
 const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, data }) => {
 
-    const router = useRouter();
+    /* const router = useRouter(); */
     const authorImage = "https://llcode.tech/api/image/65817ae96c73ceb16ba51731";
 
     const heroHeaderContent = Object.freeze({
@@ -29,6 +30,8 @@ const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, data }) => {
         topPickedPosts: []
     });
 
+    const [isRendered, setIsRendered] = useState<boolean>(false);
+
     const [displayLeetCodePosts, setDisplayLeetCodePosts] = useState<boolean>(false);
 
     useEffect(() => {
@@ -39,13 +42,13 @@ const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, data }) => {
     useEffect(() => {
         updateAllUniqueTags();
         updateTopPickedPosts();
-    }, [data]);
+    }, []);
 
     useEffect(() => {
         updateCurrentlyShowingContent();
         const { currentSelectTags: selectedTags } = state;
         if (selectedTags.includes("daily-leetcode") || selectedTags.includes("algorithms")) setDisplayLeetCodePosts(true);
-    }, [data, state.currentSelectTags, displayLeetCodePosts]);
+    }, [state.currentSelectTags, displayLeetCodePosts]);
 
     const updateAllUniqueTags = () => {
         const uniqueTags: Set<string> = new Set();
@@ -152,7 +155,7 @@ const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, data }) => {
                 : [...selectedTags, tagName];
             const to = `${baseUrlLink}?tag=${encodeURIComponent(updatedTags.join(","))}`;
             const handleClick = () => {
-                router.push(to, { scroll: false });
+                window.history.replaceState({}, '', to);
                 setState(prev => ({ ...prev, currentSelectTags: updatedTags }));
             };
 
@@ -184,6 +187,14 @@ const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, data }) => {
         const { currentSelectTags: selectedTags } = state;
         const displayLeetCodePostsToggleButtonDisabled = selectedTags.includes("daily-leetcode") || selectedTags.includes("algorithms");
         return <Toggle disabled={displayLeetCodePostsToggleButtonDisabled} setToggleState={setDisplayLeetCodePosts} toggleState={displayLeetCodePosts} />;
+    }
+
+    useEffect(() => {
+        setIsRendered(true);
+    });
+
+    if (!isRendered) {
+        return <SkeletonPage />;
     }
 
     return (

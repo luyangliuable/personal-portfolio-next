@@ -6,7 +6,7 @@
 
     --page-bottom-margin: 0;
     --page-bottom-padding: 120px;
-    --common-card-margin: min(25vh, 100px);
+    --common-card-margin: 10px;
 
     --dark-mode-black: #1e1e1e;
     --dark-mode-purple: #491ed3;
@@ -542,6 +542,31 @@ a {
 
 .mb-20 {
     margin-bottom: 5rem
+}
+
+
+.h-7 {
+    height: calc(7*var(--baseline))
+}
+
+.h-14 {
+    height: calc(14*var(--baseline))
+}
+
+.h-18 {
+    height: calc(18*var(--baseline))
+}
+
+.h-19 {
+    height: calc(19*var(--baseline))
+}
+
+.h-20 {
+    height: calc(20*var(--baseline))
+}
+
+.h-21 {
+    height: calc(21*var(--baseline))
 }
 
 .h-28 {

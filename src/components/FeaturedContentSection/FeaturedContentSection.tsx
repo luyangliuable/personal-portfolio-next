@@ -157,7 +157,7 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({ postLi
             Show More <FaAngleDown />
           </Button>
         </div>
-        <div className="divider h-28"></div>
+        <div className="divider h-21"></div>
         <div ref={twinCandleComponentParentRef}><TwinCandle ref={twinCandleComponentRef} /></div>
       </section>
     </LandingPageCard>

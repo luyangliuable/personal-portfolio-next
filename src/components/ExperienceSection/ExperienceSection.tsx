@@ -13,6 +13,7 @@ import BlackHole from "../Organisms/BlackHole/BlackHole";
 import { gsap } from 'gsap';
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { TiArrowLeftThick } from "react-icons/ti";
 
 import "./ExperienceSection.css";
 import ZaOcean from "../Organisms/ZaOcean/ZaOcean";
@@ -394,7 +395,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                                 />
                             );
                         })}
-                        <div className="experience-section__year">{year}</div>
+                        <div className="experience-section__year flex items-center"><TiArrowLeftThick />{year}</div>
                     </div>
                 );
                 accumulatedIdx += currentYearItems.length;

@@ -163,11 +163,11 @@
     font-weight: var(--font-weight-bold);
     background: linear-gradient(
         90deg,
-        #00bfff 0%,
-        #4f87f7 35%,
-        #897ed3 50%,
-        #4f87f7 65%,
-        #00bfff 100%
+        #89c4e6 0%,    /* Darker Pastel Sky Blue */
+        #c4a3b7 40%,   /* Darker Pastel Pink */
+        #b4a7d6 60%,   /* Darker Pastel Lavender */
+        #a3b9c7 80%,   /* Darker Pastel Teal */
+        #89c4e6 100%   /* Darker Pastel Sky Blue */
     );
     background-size: 200% 200%;
     width: 220px;

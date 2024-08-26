@@ -46,7 +46,7 @@
 }
 
 .gallery-item:hover .gallery-item__link h3 {
-    background-size: 100% 0.1em;
+    /*background-size: 100% 0.1em;*/
 }
 
 .gallery-item h3 {

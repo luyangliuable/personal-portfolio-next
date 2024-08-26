@@ -1,7 +1,7 @@
 import {CSSProperties} from "react";
 
 interface ISkeletonImageProps {
-    class?: string,
+    className?: string,
     style?: CSSProperties
 }
 

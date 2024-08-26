@@ -2,11 +2,9 @@ import React from 'react';
 import "./SkeletonImage.css";
 import ISkeletonImageProps from "./Interface/ISkeletonImageProps";
 
-const SkeletonImage: React.FC<ISkeletonImageProps> = (props) => {
-    const className = `image-skeleton ${props.class}`;
-
+const SkeletonImage: React.FC<ISkeletonImageProps> = ({ className, style }) => {
     return (
-        <div className={className} style={props.style}></div>
+        <div className={`image-skeleton ${className}`} style={style}></div>
     );
 }
 

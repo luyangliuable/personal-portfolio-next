@@ -1,7 +1,7 @@
 .featured-section {
     gap: 3rem 1rem;
-    min-height: 400px;
-    margin-bottom: 2rem;
+    height: 430px;
+    margin-bottom: 4rem;
     z-index: 1;
     padding-bottom: 1rem;
 }

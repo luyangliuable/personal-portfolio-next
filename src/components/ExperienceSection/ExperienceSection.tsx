@@ -20,6 +20,7 @@ import ZaOcean from "../Organisms/ZaOcean/ZaOcean";
 import ZaBanquet from "../Organisms/ZaBanquet/ZaBanquet";
 import { useTrigger } from "../../stores/TriggerContext";
 import { refreshScrollTrigger } from "../Utility/ScrollUtility";
+import Burger from "../Organisms/Burger/Burger";
 
 const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
     const experienceSectionParentRef = useRef<HTMLDivElement | null>(null);
@@ -249,18 +250,6 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                     }
                 }, {
                     dateTime: "2021",
-                    cardTitle: "Mad Patties",
-                    url: "http://www.cisco.com",
-                    cardSubtitle: "Kitchen Hand",
-                    cardDetailedText: "",
-                    media: {
-                        type: "IMAGE",
-                        source: {
-                            url: "https://llcode.tech/api/image/667d02115f03f0355e1fc363",
-                        },
-                    },
-                }, {
-                    dateTime: "2021",
                     cardTitle: "Cisco",
                     url: "http://www.cisco.com",
                     cardSubtitle: "Network Engineer Intern",
@@ -270,6 +259,18 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                         type: "IMAGE",
                         source: {
                             url: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Cisco_logo_blue_2016.svg/440px-Cisco_logo_blue_2016.svg.png",
+                        },
+                    },
+                }, {
+                    dateTime: "2021",
+                    cardTitle: "Mad Patties",
+                    url: "http://www.cisco.com",
+                    cardSubtitle: "Kitchen Hand",
+                    cardDetailedText: "",
+                    media: {
+                        type: "IMAGE",
+                        source: {
+                            url: "https://llcode.tech/api/image/667d02115f03f0355e1fc363",
                         },
                     },
                 },
@@ -395,6 +396,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                                 />
                             );
                         })}
+                        {year === String(2021) && <Burger />}
                         <div className="experience-section__year flex items-center"><TiArrowLeftThick />{year}</div>
                     </div>
                 );

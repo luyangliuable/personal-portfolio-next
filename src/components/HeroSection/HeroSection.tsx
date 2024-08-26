@@ -83,6 +83,7 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
     useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
         const heroSection = ".hero-section";
+
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: heroSection,
@@ -94,10 +95,7 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
         });
 
         tl.add(gsap.to(heroSection, {
-            opacity: 0.3,
-            transform: "translateY(-300px) scale(0.75)",
-            boxShadow: "0px 0px 0px #A5A58C",
-            /* ease: "power2.out", */
+            transform: "translateY(65px)",
         }), "start");
 
         refreshScrollTrigger(ScrollTrigger);

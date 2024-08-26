@@ -1,13 +1,17 @@
 .experience-section-parent-container {
     overflow-x: hidden;
     position: sticky;
-    top: var(--navbar-height);
+    z-index: 3;
+    top: calc(var(--navbar-height) + .5vh);
     height: calc(99vh - var(--navbar-height));
     transition: all 0.1s ease-in;
+    margin-bottom: -400px;
 }
 
 .experience-section-wrapper {
+    position: relative;
     width: 100%;
+    z-index: 3;
     display: flex;
     justify-content: center;
     margin-bottom: var(--common-card-margin);

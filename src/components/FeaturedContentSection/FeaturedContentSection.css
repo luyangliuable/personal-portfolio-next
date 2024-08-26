@@ -22,7 +22,7 @@
 }
 
 .show-more-button-wrapper {
-    margin-top: -2rem;
+    margin-top: -1rem;
     transform: translateY(-50%);
-    z-index: 3;
+    z-index: 1;
 }

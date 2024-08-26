@@ -304,20 +304,35 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
 
     useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
-        if (experienceSectionScrollRef.current && experienceSectionParentRef.current) {
+        if (experienceSectionScrollRef.current && experienceSectionParentRef.current && experienceSectionParentRef.current) {
             const scrollElement = experienceSectionScrollRef.current;
             const triggerElement = experienceSectionParentRef.current;
+            const containerElement = experienceSectionParentRef.current.parentElement;
+
+            gsap.to(containerElement, {
+                transform: "translateY(-400px) scale(.8)",
+                ease: "power2.in",
+                scrollTrigger: {
+                    trigger: containerElement,
+                    start: `bottom-=${window.innerHeight / 2} top`,
+                    end: "bottom top",
+                    invalidateOnRefresh: true,
+                    scrub: true
+                },
+            });
+
             gsap.to(scrollElement, {
                 x: () => -scrollElement.scrollWidth,
                 ease: "none",
                 scrollTrigger: {
                     trigger: triggerElement,
                     start: "top 20%", // Starts scrolling earlier
-                    end: () => `+=${scrollElement.scrollWidth / 2 - window.innerHeight*.8}`,
+                    end: () => `+=${scrollElement.scrollWidth / 2}`,
                     scrub: true,
                     invalidateOnRefresh: true
                 }
             });
+
             refreshScrollTrigger(ScrollTrigger);
         }
     }, [trigger]);

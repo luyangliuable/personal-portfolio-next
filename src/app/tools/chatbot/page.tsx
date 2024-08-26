@@ -13,7 +13,7 @@ const LlChatbot: React.FC = ({}) => {
 
     return (
         <main className="chatbot__wrapper">
-            <Chatbot baseURI="https://fda4-2405-6e00-28ee-a3f6-61ac-94d0-acc-8db9.ngrok-free.app" />
+            <Chatbot baseURI="https://8dfe-2405-6e00-28ee-a3f6-61ac-94d0-acc-8db9.ngrok-free.app" />
         </main>
     );
 };

@@ -70,7 +70,7 @@ class Card extends Component<ICardProps, ICardState> {
                         {<Image compression={30} src={image} className="card-image-preview" alt="Card Preview" />}
                     </div>
                 }
-                <footer className="flex mt-5 position-relative">
+                <footer className="flex mt-5 position-relative items-center">
                     <Image src={authorImage} className="user-image card-image--author-image" alt={author} />
                     {author}
                 </footer>

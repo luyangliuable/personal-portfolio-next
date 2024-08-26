@@ -54,7 +54,7 @@ class Image extends Component<IImageProps, IImageState> {
         alt ??= this.defaultImageAlt;
 
         if (fetchedImageUrl === undefined) {
-            return (<SkeletonImage class={this.props.className} />)
+            return (<SkeletonImage className={this.props.className} />)
         }
 
         return (

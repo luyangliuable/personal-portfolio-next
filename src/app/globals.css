@@ -758,8 +758,8 @@ a {
 }
 
 .user-image {
-    border-radius: 100%;
-    width: 40px; height: 40px;
+    border-radius: 100% !important;
+    width: 20px !important; height: 20px !important;
     border: 2px solid white;
     object-fit: cover
 }

@@ -306,26 +306,36 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
         gsap.registerPlugin(ScrollTrigger);
         if (experienceSectionScrollRef.current && experienceSectionParentRef.current && experienceSectionParentRef.current) {
             const scrollElement = experienceSectionScrollRef.current;
-            const triggerElement = experienceSectionParentRef.current;
-            const containerElement = experienceSectionParentRef.current.parentElement;
+            const sectionElement = experienceSectionParentRef.current;
+            const triggerElement = sectionElement.parentElement;
 
-            gsap.to(containerElement, {
-                transform: "translateY(-400px) scale(.8)",
-                ease: "power2.in",
+            const timelineFinishTrigger = {
+                trigger: triggerElement,
+                start: `bottom-=${window.innerHeight / 2} top`,
+                end: "bottom top",
+                invalidateOnRefresh: true,
+                scrub: true
+            };
+
+            gsap.to(sectionElement, {
+                boxShadow: "0px 0px 0px #A5A58C",
                 scrollTrigger: {
-                    trigger: containerElement,
-                    start: `bottom-=${window.innerHeight / 2} top`,
-                    end: "bottom top",
-                    invalidateOnRefresh: true,
-                    scrub: true
-                },
+                    ...timelineFinishTrigger,
+                    start: `bottom-=${window.innerHeight / 4} top`,
+                }
+            });
+
+            gsap.to(triggerElement, {
+                transform: "translateY(-400px) scale(0.8)",
+                ease: "power2.in",
+                scrollTrigger: timelineFinishTrigger,
             });
 
             gsap.to(scrollElement, {
                 x: () => -scrollElement.scrollWidth,
                 ease: "none",
                 scrollTrigger: {
-                    trigger: triggerElement,
+                    trigger: sectionElement,
                     start: "top 20%", // Starts scrolling earlier
                     end: () => `+=${scrollElement.scrollWidth / 2}`,
                     scrub: true,

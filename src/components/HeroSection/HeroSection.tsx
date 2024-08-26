@@ -95,7 +95,7 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
         });
 
         tl.add(gsap.to(heroSection, {
-            transform: "translateY(65px)",
+            transform: `translateY(${window.innerHeight / 15}px)`,
         }), "start");
 
         refreshScrollTrigger(ScrollTrigger);

@@ -1,4 +1,4 @@
-import React, { Component, createRef, RefObject } from "react";
+import React, { Component, createRef, pRefObject } from "react";
 import "./Card.css";
 import { cardGradientEffect } from "../../components/Utility/MouseUtility";
 import { isoDateFormatToString } from "../../components/Utility/StringUtility";
@@ -50,10 +50,7 @@ class Card extends Component<ICardProps, ICardState> {
         const { link, in_progress, authorImage, image, author, heading, minuteRead, tags, date_created } = this.props;
         const displayMinuteRead = `${minuteRead || "X"} min read`;
         const displayDateCreated = date_created ? isoDateFormatToString(new Date(date_created)) : '';
-
-        if (link === undefined || image === undefined || authorImage === undefined)
-            return null;
-
+        if (link === undefined || image === undefined || authorImage === undefined) return null;
         return (
             <a
                 ref={this.cardItemRef}

@@ -22,7 +22,7 @@ const NavBurgerPanel: React.FC<INavBurgerPanelProps> = ({ burgerPanel, links }) 
       {isMounted &&
         createPortal(
           (
-            <div ref={burgerPanel} className="nav-burger-panel nav-burger-panel-move-lower">
+          <div ref={burgerPanel} className="nav-burger-panel-hide nav-burger-panel nav-burger-panel-move-lower">
               <Accordion>
                 {links.map(( link: NavbarItem ) => {
                   const isActive = pathname === link.to;

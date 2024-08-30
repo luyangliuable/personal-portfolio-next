@@ -74,7 +74,7 @@ const Accordion: FC<IAccordionProps>
   & { Button: FC<IAccordionButtonProps> }
   = ({ children }) => {
     return (
-      <div className="accordion">
+      <div className="accordion flex flex-col items-center">
         {children}
       </div>
     );

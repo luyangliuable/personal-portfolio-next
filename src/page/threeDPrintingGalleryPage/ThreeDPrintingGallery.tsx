@@ -26,7 +26,7 @@ const ThreeDPrintingGallery: React.FC<{}> = () => {
         {
             name: "3d Printed Dino",
             description: "A 3D-printed dinosaur with a rhythmic rattle exoskeleton",
-            image: "https://llcode.tech/api/image/65051a3ef9b642fb30be599c"
+            image: "https://llcode.tech/api/image/65051a29f9b642fb30be599b"
         },
     ];
 

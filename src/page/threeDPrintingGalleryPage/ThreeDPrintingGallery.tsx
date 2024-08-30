@@ -14,11 +14,6 @@ const ThreeDPrintingGallery: React.FC<{}> = () => {
     const [isRendered, setIsRendered] = useState(false);
     const content: GalleryItem[] = [
         {
-            name: "3d Printed Maneki Neko",
-            description: "With a wink and a beckon printing using Creality 3D printer, this Maneki Neko promises high-tech fortune and whimsy in every layer.",
-            image: "https://llcode.tech/api/image/650502c8f9b642fb30be5999"
-        },
-        {
             name: "3d Printed Swivel Arm",
             description: "Precision-engineered, 3D-printed arm I designed using solidworks that can swivel around: it was used on a robot as the ultimate payload handler",
             image: "https://llcode.tech/api/image/650516c6f9b642fb30be599a"
@@ -28,6 +23,11 @@ const ThreeDPrintingGallery: React.FC<{}> = () => {
             description: "A 3D-printed dinosaur with a rhythmic rattle exoskeleton",
             image: "https://llcode.tech/api/image/65051a29f9b642fb30be599b"
         },
+        {
+            name: "3d Printed Maneki Neko",
+            description: "With a wink and a beckon printing using Creality 3D printer, this Maneki Neko promises high-tech fortune and whimsy in every layer.",
+            image: "https://llcode.tech/api/image/650502c8f9b642fb30be5999"
+        }
     ];
 
     const { heading, description } = heroHeaderContent;

@@ -4,10 +4,11 @@ import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Link from "next/link";
 import INavBurgerPanelProps from "./Interface/INavBurgerPanelProps";
-import "./NavBurgerPanel.css";
 import { usePathname } from 'next/navigation';
 import Accordion from '../../Accordion/Accordion';
 import { ILink, NavbarItem } from '../Interface/INavbarState';
+
+import "./NavBurgerPanel.css";
 
 const NavBurgerPanel: React.FC<INavBurgerPanelProps> = ({ burgerPanel, links }) => {
   const pathname = usePathname();

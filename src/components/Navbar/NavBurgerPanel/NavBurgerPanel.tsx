@@ -6,6 +6,8 @@ import Link from "next/link";
 import INavBurgerPanelProps from "./Interface/INavBurgerPanelProps";
 import "./NavBurgerPanel.css";
 import { usePathname } from 'next/navigation';
+import Accordion from '../../Accordion/Accordion';
+import { ILink, NavbarItem } from '../Interface/INavbarState';
 
 const NavBurgerPanel: React.FC<INavBurgerPanelProps> = ({ burgerPanel, links }) => {
   const pathname = usePathname();
@@ -20,19 +22,26 @@ const NavBurgerPanel: React.FC<INavBurgerPanelProps> = ({ burgerPanel, links }) 
       {isMounted &&
         createPortal(
           (
-            <div ref={burgerPanel} className="nav-burger-panel nav-burger-panel-hide nav-burger-panel-move-lower">
-              {links.map(link => {
-                const isActive = pathname === link.to;
-                return (
-                  <Link
-                    href={link.to ?? ""}
-                    className={`burger-item flex justify-center items-center ${isActive ? "active-link" : ""}`}
-                    key={link.name}
-                  >
-                    {link.name}
-                  </Link>
-                );
-              })}
+            <div ref={burgerPanel} className="nav-burger-panel nav-burger-panel-move-lower">
+              <Accordion>
+                {links.map(( link: NavbarItem ) => {
+                  const isActive = pathname === link.to;
+                  return (
+                    link.sublinks ?
+                      <Accordion.Item heading={link.name}>
+                        {
+                          link.sublinks?.map(sublink => (
+                            <Accordion.Button href={sublink.to ?? ""} heading={sublink.name} key={sublink.name}></Accordion.Button>
+
+                          ))
+                        }
+                      </Accordion.Item>
+                      :
+                      <Accordion.Button href={link.to ?? ""} heading={link.name}></Accordion.Button>
+
+                  );
+                })}
+              </Accordion>
             </div>
           ),
           document.body

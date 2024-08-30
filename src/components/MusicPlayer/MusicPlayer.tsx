@@ -6,7 +6,7 @@ import MusicPlayerItem from './MusicPlayerItem/MusicPlayerItem';
 import React, { ReactNode } from 'react';
 
 interface IMusicPlayerProps {
-    children: ReactNode
+    children?: ReactNode
 }
 
 const MusicPlayer: React.FC<IMusicPlayerProps> = ({ children }) => {
@@ -16,11 +16,43 @@ const MusicPlayer: React.FC<IMusicPlayerProps> = ({ children }) => {
                 createPortal(
                     <div className="music-player box-shadow-large flex flex-col items-center">
                         <div className="music-player--play"></div>
-                        <div className="overflow-y-hidden w-full p-4">
-                            <MusicPlayerItem />
-                            <MusicPlayerItem />
-                            <MusicPlayerItem />
-                            <MusicPlayerItem />
+                        <div className="overflow-y-scroll w-full p-4">
+                            <MusicPlayerItem
+                                imageSrc=""
+                                imageSrcAlt=""
+                                artistName="Artist ABC"
+                                length="03:10"
+                                musicTitle="Test Music" />
+                            <MusicPlayerItem
+                                imageSrc=""
+                                imageSrcAlt=""
+                                artistName="Artist ABC"
+                                length="03:10"
+                                musicTitle="Test Music" />
+                            <MusicPlayerItem
+                                imageSrc=""
+                                imageSrcAlt=""
+                                artistName="Artist ABC"
+                                length="03:10"
+                                musicTitle="Test Music" />
+                            <MusicPlayerItem
+                                imageSrc=""
+                                imageSrcAlt=""
+                                artistName="Artist ABC"
+                                length="03:10"
+                                musicTitle="Test Music" />
+                            <MusicPlayerItem
+                                imageSrc=""
+                                imageSrcAlt=""
+                                artistName="Artist ABC"
+                                length="03:10"
+                                musicTitle="Test Music" />
+                            <MusicPlayerItem
+                                imageSrc=""
+                                imageSrcAlt=""
+                                artistName="Artist ABC"
+                                length="03:10"
+                                musicTitle="Test Music" />
                             {children}
                         </div>
                     </div>,

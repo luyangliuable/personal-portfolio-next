@@ -1,23 +1,32 @@
 .accordion {
-    width: 100%;
-    padding: 5rem;
+    width: 92%;
+    max-width: 800px;
 }
 
     .accordion .accordion--item {
-        height: fit-content
+        height: fit-content;
+        width: calc(100% - 20px);
     }
 
+    .accordion .accordion--item .accordion--button {
+      height: fit-content;
+    }
+
+    .accordion--content .accordion--item .accordion--button {
+      font-size: 1rem;
+    }
 
     .accordion .accordion--content {
-        margin-bottom: 4rem;
+      margin-bottom: 1rem;
     }
 
-    .accordion .accordion--tab {
-        background: #DDD;
-        width: 100%;
-        font-size: 1.25rem;
-        padding: 20px;
-        margin-bottom: 1rem;
+    .accordion .accordion--tab, .accordion .accordion--button {
+      background: #DDD;
+      border: .1px solid #888;
+      width: 100%;
+      font-size: 1.25rem;
+      padding: 20px;
+        margin-bottom: .5rem;
         border-radius: 12px;
     }
 
@@ -30,4 +39,9 @@
 .no-flip {
     transition: transform .1s ease-in-out;
     transform: rotate(0deg);
+}
+
+.accordion__dropdown-button {
+    width: 24px;
+    height: 24px;
 }

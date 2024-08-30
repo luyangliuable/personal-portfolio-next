@@ -82,10 +82,10 @@
 
 
 .blog__year {
-    width: 80%;
+    width: 88%;
     left: 20px;
     margin: 40px 0;
-    margin: min(60px, 4vh) 0 min(30px, 2vh);
+    margin: min(120px, 8vh) 0 min(30px, 2vh);
     font-size: 1.5rem;
 }
 

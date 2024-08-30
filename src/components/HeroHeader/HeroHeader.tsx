@@ -9,6 +9,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTrigger } from "../../stores/TriggerContext";
 import { refreshScrollTrigger } from "../Utility/ScrollUtility";
+import GolfedSierpinski from "../GolfedSierpinski/GolfedSierpinski";
 
 const HeroHeader: React.FC<IHeroHeaderProps> = ({ heading, description, graphics }) => {
     const componentRef = useRef<HTMLDivElement>(null);
@@ -50,7 +51,10 @@ const HeroHeader: React.FC<IHeroHeaderProps> = ({ heading, description, graphics
             ref={componentRef}
             className="hero-header flex flex-row justify-start items-center">
             {
-                graphics && (<div className="hero-header__graphics-container">{graphics}</div>)
+                graphics ?
+                    (<div className="hero-header__graphics-container">{graphics}</div>)
+                    :
+                    (<GolfedSierpinski />)
             }
             <div className="hero-header__content w-full">
                 <div className="hero-header__heading" >

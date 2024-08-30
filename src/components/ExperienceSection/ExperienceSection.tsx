@@ -313,7 +313,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
 
             const timelineFinishTrigger = {
                 trigger: triggerElement,
-                start: `bottom-=${window.innerHeight / 2} top`,
+                start: `bottom-=400 top`,
                 end: "bottom top",
                 invalidateOnRefresh: true,
                 scrub: true
@@ -323,7 +323,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                 boxShadow: "0px 0px 0px #A5A58C",
                 scrollTrigger: {
                     ...timelineFinishTrigger,
-                    start: `bottom-=${window.innerHeight / 4} top`,
+                    start: `bottom-=200 top`,
                 }
             });
 

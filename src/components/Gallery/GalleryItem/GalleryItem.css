@@ -1,9 +1,10 @@
 .gallery-item {
+    --border-size: 2px;
     height: 100%;
     width: min(100%, 90vw);
-    background: rgba(245, 240, 255, .1) !important;
+    background: rgba(235, 235, 255, .1) !important;
     border-radius: 20px;
-    border: 1px solid #FFF !important;
+    border: var(--border-size) solid #FFF !important;
     padding-bottom: calc(2*.8rem + 50px);
     overflow: hidden;
 }
@@ -86,7 +87,7 @@
     scrollbar-color: #CCC #F1F1F1;
     scrollbar-width: thin;
 
-    border-top: 1px solid #FFF;
+    border-top: calc(var(--border-size)/2) solid #FFF;
     position: absolute;
     bottom: 0;
     gap: 1rem;

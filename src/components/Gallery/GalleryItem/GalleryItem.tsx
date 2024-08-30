@@ -73,7 +73,7 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
                 ref={galleryItemRef}
                 key={props.key}
                 onMouseMove={cardGradientEffect}
-                className="card gallery-item initially-hidden blur-boundary">
+                className="card gallery-item initially-hidden blur-boundary--sm">
                 <GalleryItemTypeSegment />
                 <div className="gallery-item__image"><Image alt="" src={image ?? ""} /></div>
                 <div className="px-5">

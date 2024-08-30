@@ -751,10 +751,13 @@ a {
 
 /* Override Styles (!important only allowed here) */
 .blur-boundary {
-    background: rgba(200, 200, 200, .1) !important;
     backdrop-filter: blur(12px) !important;
     -webkit-backdrop-filter: blur(12px) !important;
-    border: none !important
+}
+
+.blur-boundary--sm {
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
 }
 
 .no-boundary {

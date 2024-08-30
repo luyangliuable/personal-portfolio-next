@@ -10,25 +10,34 @@
             "isDisabled": true,
             "sublinks": [
                 {
-                    "name": "💻 Posts",
+                    "name": "Posts",
+                    "emoji": "💻",
+                    "description": "My Blog posts",
                     "to": "/digital-chronicles/blogs"
                 },
                 {
-                    "name": "🧑‍💻 Coding Notes",
+                    "name": "Coding Notes",
+                    "emoji": "📓",
+                    "description": "Coding Notes from the past",
                     "to": "/digital-chronicles/coding-notes"
                 },
                 {
-                    "name": "🏞 Scenic Memories",
+                    "name": "Scenic Memories",
+                    "emoji": "🏞",
+                    "description": "Images of me in nature probably",
                     "isLocked": true,
                     "to": "/digital-chronicles/scenic_memories"
                 },
                 {
-                    "name": "🎞️ Film Reviews",
+                    "name": "Film Reviews",
+                    "emoji": "🎞️",
                     "isLocked": true,
                     "to": "/digital-chronicles/film_reviews"
                 },
                 {
-                    "name": "🧩 My Daily Leetcode",
+                    "name": "My Daily Leetcode",
+                    "description": "The grind",
+                    "emoji": "🧩",
                     "to": "/digital-chronicles/blogs?tag=daily-leetcode"
                 }
             ]
@@ -38,15 +47,21 @@
             "to": "/projects",
             "sublinks": [
                 {
-                    "name": "🏗︎ Coding Projects",
+                    "name": "Coding Projects",
+                    "emoji": "🏗︎",
+                    "description": "My coding projects",
                     "to": "/projects/code"
                 },
                 {
-                    "name": "🖨️ 3D Printing",
+                    "name": "3D Printing",
+                    "emoji": "🖨️",
+                    "description": "My 3d prints",
                     "to": "/projects/3d-printing"
                 },
                 {
-                    "name": "🤖 Hardware",
+                    "name": "Hardware",
+                    "emoji": "🤖",
+                    "description": "Tools I use for hardware",
                     "to": "/projects/hardware"
                 }
             ]
@@ -57,61 +72,84 @@
             "isDisabled": true,
             "sublinks": [
                 {
-                    "name": "🤖 Chatgpt 5",
+                    "name": "Chatgpt 5",
+                    "emoji": "🤖",
+                    "description": "Chatgpt clone using mistral LLM",
                     "to": "/tools/chatbot"
                 },
                 {
-                    "name": "🌉 HexaBridger",
+                    "name": "HexaBridger",
+                    "emoji": "🌉",
+                    "description": "Secret",
                     "isLocked": true,
                     "to": "/tools/hex-to-rgb"
                 },
                 {
-                    "name": "🌸 BloomChain ",
+                    "name": "BloomChain ",
+                    "emoji": "🌸",
+                    "description": "NFT using AI? WTF",
                     "isLocked": true,
                     "to": "/tools/bloomchain"
                 },
                 {
-                    "name": "📝 PonderPad",
+                    "name": "PonderPad",
+                    "emoji": "📝",
+                    "description": "Single page note taking app",
                     "isLocked": true,
                     "to": "/tools/ponderpad"
                 },
                 {
-                    "name": "🗣️ MangaSpeak",
+                    "name": "MangaSpeak",
+                    "emoji": "🗣️",
+                    "description": "Manga to realistic speech",
                     "isLocked": true,
                     "to": "/tools/mangaspeak"
                 },
                 {
-                    "name": "⌛ TimeCapsule Letters",
+                    "name": "TimeCapsule Letters",
+                    "emoji": "⌛",
+                    "description": "Send a letter to someone in the future",
                     "isLocked": true,
                     "to": "/tools/time-capsule-letters"
                 },
                 {
-                    "name": "🌐 CssCrossBrowser",
+                    "name": "CssCrossBrowser",
+                    "emoji": "🌐",
                     "isLocked": true,
+                    "description": "See what css looks like on different browsers",
                     "to": "/tools/css-cross-browser"
                 },
                 {
-                    "name": "✉️ AnonyLetters",
+                    "name": "AnonyLetters",
+                    "emoji": "✉️",
                     "isLocked": true,
                     "to": "/tools/anony-letters"
                 },
                 {
-                    "name": "😯 Mood Diaries",
+                    "name": "Mood Diaries",
+                    "emoji": "😯",
                     "isLocked": true,
+                    "description": "Mood tracker app",
                     "to": "/tools/mood-tracker"
                 },
                 {
-                    "name": "⚛️ AtomicHabits",
+                    "name": "AtomicHabits",
+                    "emoji": "⚛️",
                     "isLocked": true,
+                    "description": "App based on atomic habits book",
                     "to": "/tools/atomic-habits"
                 },
                 {
-                    "name": "🏋️‍♂️ Gym Log",
+                    "name": "‍️Gym Log",
+                    "emoji": "🏋",
                     "isLocked": true,
+                    "description": "Gym tracking app",
                     "to": "/tools/gym-log"
                 },
                 {
-                    "name": "🤝 MeetSleek",
+                    "name": "MeetSleek",
+                    "emoji": "🤝",
+                    "description": "When2meet inspired but with better ui/ux",
                     "isLocked": true,
                     "to": "/tools/meet-sleek"
                 }
@@ -127,12 +165,15 @@
             "isDisabled": true,
             "sublinks": [
                 {
-                    "name": "🐩 Teddie the Dog",
+                    "name": "Teddie",
+                    "emoji": "🐩",
+                    "description": "About my dog",
                     "to": "/about/teddie",
                     "isLocked": true
                 },
                 {
-                    "name": "😃 About Me",
+                    "name": "About Me",
+                    "emoji": "😃",
                     "to": "/about/me",
                     "isLocked": true
                 }
@@ -143,27 +184,36 @@
             "isDisabled": true,
             "sublinks": [
                 {
-                    "name": "🎵 Music Playlist",
+                    "name": "Music Playlist",
+                    "description": "Free online music player disguised as my playlist",
+                    "emoji": "🎵",
                     "to": "/misc/music-playlist",
                     "isLocked": true
                 },
                 {
-                    "name": "🎥 Youtube Playlist",
+                    "name": "Youtube Playlist",
+                    "description": "Youtube videos that are interesting",
+                    "emoji": "🎥",
                     "to": "/misc/youtube-playlist",
                     "isLocked": true
                 },
                 {
-                    "name": "⌨️ Man of the Day",
+                    "name": "Man of the Day",
+                    "description": "Shell command of the day",
+                    "emoji": "⌨️",
                     "to": "/misc/man-of-the-Day",
                     "isLocked": true
                 },
                 {
-                    "name": "📐 Algorithm of the Day",
+                    "name": "Algorithm of the Day",
+                    "emoji": "📐",
                     "to": "/misc/algorithm-of-the-Day",
                     "isLocked": true
                 },
                 {
-                    "name": "🙏 Wall of Gratefulness",
+                    "name": "Wall of Gratefulness",
+                    "description": "A wall to put what you are grateful for today",
+                    "emoji": "🙏",
                     "to": "/misc/wall-of-gratefulness",
                     "isLocked": true
                 }

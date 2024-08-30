@@ -203,7 +203,12 @@ const NavBar: React.FC<INavbarProps> = () => {
             <nav ref={navbarLeft} className="navbar-left flex flex-row">
                 {links.map((item, _) => renderNavLink(item, false))}
                 <section ref={selectedNavlinkWindow} className="selected-navlink-window flex items-center">
-                    <div ref={navbarSubmenu} className="navbar-item__dropdown ">
+                    <div
+                        ref={navbarSubmenu}
+                        style={{
+                            width: state.dropdownMenuLinkDisplay.length > 5 ? "600px" : "auto"
+                        }}
+                        className="navbar-item__dropdown">
                         {state.dropdownMenuLinkDisplay}
                     </div>
                 </section>

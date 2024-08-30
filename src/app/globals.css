@@ -413,6 +413,10 @@ a {
     align-self: flex-start
 }
 
+.self-end {
+    align-self: flex-end
+}
+
 .visible-hidden {
     visibility: hidden
 }

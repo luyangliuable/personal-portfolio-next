@@ -3,8 +3,10 @@ import { ReactNode } from "react";
 export interface ILink {
     name: string;
     icon?: ReactNode;
+    emoji?: string;
     to: string;
     isLocked?: boolean;
+    description?: string;
     isDisabled?: boolean;
     onClick?: () => void;
 }

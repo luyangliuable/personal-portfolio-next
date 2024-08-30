@@ -3,7 +3,8 @@ import "./EmojIcon.css";
 import { cl } from "../Utility/LogicUtility";
 
 interface IEmojIconProps {
-    emojis: string[]
+    emojis: string[],
+    style?: React.CSSProperties
 }
 
 const generateRandomPastelColor = () => {
@@ -14,7 +15,7 @@ const generateRandomPastelColor = () => {
     return `rgb(${r}, ${g}, ${b}, ${a})`;
 }
 
-const EmojIcon: React.FC<IEmojIconProps> = ({ emojis }) => {
+const EmojIcon: React.FC<IEmojIconProps> = ({ emojis, style }) => {
     const positions = [
         { top: 10, left: 10 },
         { top: 10, left: 50 },
@@ -22,8 +23,8 @@ const EmojIcon: React.FC<IEmojIconProps> = ({ emojis }) => {
         { top: 50, left: 50 }
     ]
     const single = emojis.length === 1;
-    return (
-        <div className={cl("emoj-icon", {"flex justify-center items-center": single})}>
+    return (  
+        <div style={style} className={cl("emoj-icon", {"flex justify-center items-center": single})}>
             {single &&
                 <span
                     style={{ backgroundColor: generateRandomPastelColor() }}
@@ -52,4 +53,4 @@ const EmojIcon: React.FC<IEmojIconProps> = ({ emojis }) => {
     )
 }
 
-export default EmojIcon;
+export default React.memo(EmojIcon);

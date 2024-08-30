@@ -50,9 +50,7 @@ const HeroHeader: React.FC<IHeroHeaderProps> = ({ heading, description, graphics
             ref={componentRef}
             className="hero-header flex flex-row justify-start items-center">
             {
-                graphics && (
-                    <div className="hero-header__graphics-container">{graphics}</div>
-                )
+                graphics && (<div className="hero-header__graphics-container">{graphics}</div>)
             }
             <div className="hero-header__content w-full">
                 <div className="hero-header__heading" >
@@ -63,8 +61,8 @@ const HeroHeader: React.FC<IHeroHeaderProps> = ({ heading, description, graphics
                 <div>
                     <div className="hero-header__description">
                         <SequentialRiseSpan
-                            maxNumberOfLettersPerLine={100}
-                            calculationAdjustment={.8}>
+                            maxNumberOfLettersPerLine={110}
+                            calculationAdjustment={.95}>
                             {description}
                         </SequentialRiseSpan>
                     </div>

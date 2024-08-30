@@ -56,5 +56,5 @@ textarea:focus, input:focus {
     gap: 2rem;
     padding: 0 2rem;
     justify-items: stretch;
-    margin-bottom: 3rem;
+    margin: 2rem 0;
 }

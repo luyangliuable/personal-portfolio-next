@@ -1,4 +1,4 @@
-import React, { Component, createRef, pRefObject } from "react";
+import React, { Component, createRef, RefObject } from "react";
 import "./Card.css";
 import { cardGradientEffect } from "../../components/Utility/MouseUtility";
 import { isoDateFormatToString } from "../../components/Utility/StringUtility";

@@ -63,7 +63,7 @@ const GolfedSierpinski = () => {
         return () => {
             window.removeEventListener('resize', resizeCanvas);
         };
-    }, []);
+    }, [size]);
 
     return (
         <canvas className="golfed-sierpinski" ref={canvasRef} width={size} height={size}></canvas>

@@ -69,11 +69,11 @@ const HeroHeader: React.FC<IHeroHeaderProps> = ({ heading, description, graphics
         <div ref={componentRef} className="hero-header flex justify-start items-center">
             {screenWidth > 768 && renderGraphics()}
             <div className="hero-header__content w-half">
-                <div className="hero-header__heading">
-                    <SequentialRiseSpan elementType="h1">{heading}</SequentialRiseSpan>
+                <div className="hero-header__heading important-text">
+                    <SequentialRiseSpan elementType="h1">{`${heading} / `}</SequentialRiseSpan>
                 </div>
                 <div className="hero-header__description">
-                    <SequentialRiseSpan maxNumberOfLettersPerLine={110} calculationAdjustment={0.95}>
+                    <SequentialRiseSpan maxNumberOfLettersPerLine={50} calculationAdjustment={0.95}>
                         {description}
                     </SequentialRiseSpan>
                 </div>

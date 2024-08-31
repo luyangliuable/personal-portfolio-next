@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useRef } from "react";
+import React, { useMemo, useRef, useEffect, useState } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import IHeroProps from "./Interface/IHeroProps";
 import Link from "next/link";
@@ -80,6 +80,25 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
         imageSrc: "https://img.shields.io/badge/codecademy-%2312100E.svg?&style=for-the-badge&logo=codecademy&logoColor=white&color=black",
     }]
 
+    const [ screenWidth, setscreenWidth ] = useState<number>(0);
+
+    useEffect(() => {
+        const update = () => {
+            setscreenWidth(window.innerWidth);
+        };
+
+        if (typeof window !== "undefined") {
+            setscreenWidth(window.innerWidth);
+            window.addEventListener("resize", update);
+        }
+
+        return () => {
+            if (typeof window !== "undefined") {
+                window.removeEventListener("resize", update);
+            }
+        };
+    }, []);
+
     useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
         const heroSection = ".hero-section";
@@ -128,10 +147,17 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
     const heroSectionContentLeft = useMemo(() => {
         return (
             <section className="hero-section__content__left" ref={heroSectionRef}>
-                <header className="self-start">
-                    <SequentialRiseSpan elementType="h1" className="hero-section__heading" minNumberOfLettersPerLine={40}>
-                        {mainHeading}
-                    </SequentialRiseSpan>
+                <header className="mb-16">
+                    {screenWidth > 550 &&
+                        <SequentialRiseSpan elementType="h1" className="hero-section__heading">
+                            {mainHeading}
+                        </SequentialRiseSpan>
+                    }
+                    {screenWidth <= 550 &&
+                        <SequentialRiseSpan elementType="h1" className="hero-section__heading" maxNumberOfLettersPerLine={10}>
+                            {mainHeading}
+                        </SequentialRiseSpan>
+                    }
                 </header>
                 <div className="hero-section__content__left__text position-relative">{introduction}</div>
                 <div className="hero-section__button-container flex flex-row mt-10 justify-start self-start flex-wrap gap-1">

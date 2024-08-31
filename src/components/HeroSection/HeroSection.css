@@ -78,8 +78,9 @@
 .hero-section__heading {
     font-family: 'TT Norms Pro', sans-serif;
     color: #2d2d2d; 
-    margin-bottom: .8rem;
+    margin: 0 0 .8rem;
     font-size: clamp(2em, 3.4vw, 5em) !important;
+    font-size: 50px !important;
     font-weight: 700;
 }
 

@@ -59,7 +59,7 @@ const ExperienceSectionImageDisplay: React.FC<IExperienceSectionImageDisplayProp
             onClick={() => setShowModal(true)}
             className={experienceSectionCardClassName.join(" ")}>
             <div className="connecting-line"></div>
-            <div className="image-display__image__wrapper flex justify-center items-center box-shadow-large">
+            <div className="image-display__image__wrapper flex justify-center items-center box-shadow-lg">
                 <Image compression={100} className={cl({
                     "object-bottom": objectPosition === "bottom",
                     "object-center": objectPosition === "center",

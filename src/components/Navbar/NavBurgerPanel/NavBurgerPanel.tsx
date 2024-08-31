@@ -30,25 +30,25 @@ const NavBurgerPanel: React.FC<INavBurgerPanelProps> = ({ burgerPanel, links }) 
                   return (
                     link.sublinks ?
                       <Accordion.Item heading={link.name}>
-                        {
+                          {
                           link.sublinks?.map(sublink => (
-                            <Accordion.Button href={sublink.to ?? ""} heading={sublink.name} key={sublink.name}></Accordion.Button>
+                          <Accordion.Button href={sublink.to ?? ""} heading={`${sublink.emoji} ${sublink.name}`} key={sublink.name}></Accordion.Button>
 
                           ))
-                        }
+                          }
                       </Accordion.Item>
                       :
                       <Accordion.Button href={link.to ?? ""} heading={link.name}></Accordion.Button>
 
-                  );
-                })}
+                      );
+                      })}
               </Accordion>
-            </div>
+          </div>
           ),
           document.body
-        )}
+          )}
     </>
-  );
-};
+    );
+    };
 
-export default React.memo(NavBurgerPanel);
+    export default React.memo(NavBurgerPanel);

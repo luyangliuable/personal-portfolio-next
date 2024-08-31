@@ -14,84 +14,83 @@
 
 
 .navbar {
-    --navbar-width: 100%;
-    --navbar-height: 61px; /* Fallback value, real value determined inside Navbar.tsx */
-    --navbar-submenu-height: 120px;
-    --navbar-max-height: 93px;
-    --progress-height: 3.5px;
-    --navbar-item-border-radius: 4px;
-    --navbar-item-width: 110px;
-    --navbar-item-max-width: 180px;
-    --navbar-item-margin: 0.3vw;
-    --navbar-item-padding: 10px 0 10px;
-    --navbar-transition: background .2s ease-in-out, box-shadow .1s ease-in-out, transform .1s ease-in-out;
-    top: 0;
-    z-index: 10;
-    position: absolute;
-    background: transparent;
-    transition: var(--navbar-transition);
-    -webkit-transition: var(--navbar-transition);
-    -moz-transition: var(--navbar-transition);
-    width: var(--navbar-width);
-    box-sizing: border-box;
+  --navbar-width: 100%;
+  --navbar-height: 61px; /* Fallback value, real value determined inside Navbar.tsx */
+  --navbar-submenu-height: 120px;
+  --navbar-max-height: 93px;
+  --progress-height: 3.5px;
+  --navbar-item-border-radius: 4px;
+  --navbar-item-width: 110px;
+  --navbar-item-max-width: 90vw;
+  --navbar-item-margin: 0.3vw;
+  --navbar-item-padding: 10px 0 10px;
+  --navbar-transition: background .2s ease-in-out, box-shadow .1s ease-in-out, transform .1s ease-in-out;
+  top: 0;
+  z-index: 10;
+  position: absolute;
+  background: transparent;
+  transition: var(--navbar-transition);
+  -webkit-transition: var(--navbar-transition);
+  -moz-transition: var(--navbar-transition);
+  width: var(--navbar-width);
+  box-sizing: border-box;
 }
 
 .navbar-left {
-    padding: 10px 0;
-    width: 85vw
+  padding: 10px 0;
+  width: 85vw
 }
 
 .navbar-left>a:hover ~ .selected-navlink-window {
-    opacity: 1;
+  opacity: 1;
+}
+.navbar-item__dropdown {
+  --dropdown-top-offset: 12px;
+  z-index: 100 !important;
+  box-sizing: content-box;
+  position: fixed;
+  border: .5px solid #AAA;
+  display: none;
+  align-items: center;
+  top: calc( var(--navbar-height) - var(--dropdown-top-offset));
+  width: auto;
+  max-height: 50vh;
+  padding: 10px;
+  border-radius: 12px;
+  background: rgb(250,250,250,.98);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  overflow-y: auto;
+  flex-wrap: wrap;
+  gap: .5rem;
+  align-items: stretch
 }
 
-
 .navbar-item {
-    text-decoration: none;
-    cursor: pointer;
-    color: #000;
-    padding: var(--navbar-item-padding);
-    width: var(--navbar-item-width);
-    max-width: var(--navbar-item-max-width);
-    transition: background .3s ease-in;
-    border-radius: var(--navbar-item-border-radius);
-    font-family: 'TT Norms Pro', Spartan, 'Poppins', sans-serif;
-    margin-left: var(--navbar-item-margin);
-    transition: all .2s ease-in;
+  text-decoration: none;
+  cursor: pointer;
+  color: #000;
+  padding: var(--navbar-item-padding);
+  width: var(--navbar-item-width);
+  min-height: 100%;
+  max-width: var(--navbar-item-max-width);
+  transition: background .3s ease-in;
+  border-radius: var(--navbar-item-border-radius);
+  font-family: 'TT Norms Pro', Spartan, 'Poppins', sans-serif;
+  margin-left: var(--navbar-item-margin);
+  transition: all .2s ease-in;
 }
 
 .navbar-item:active {
-    transform: translateY(5px);
+  transform: translateY(5px);
 }
 
-.navbar-item__dropdown {
-    --dropdown-top-offset: 12px;
-    z-index: 100 !important;
-    box-sizing: content-box;
-    position: fixed;
-    border: .1px solid #CCC;
-    display: none;
-    align-items: center;
-    top: calc( var(--navbar-height) - var(--dropdown-top-offset));
-    width: auto;
-    max-width: 50vw;
-    max-height: 50vh;
-    padding: 10px;
-    border-radius: 12px;
-    background: rgb(250,250,250,.98);
-    backdrop-filter: blur(28px);
-    -webkit-backdrop-filter: blur(28px);
-    overflow-y: auto;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.navbar-item__dropdown > .navbar-item {
-  position: relative;
+.navbar-item__dropdown .navbar-item {
+  flex: 1 1 100%;
+  height: 100%;
   padding: var(--navbar-item-padding) 5px;
-  width: 180px;
+  width: calc(var(--navbar-item-width) + 150px);
   justify-content: space-between;
-  margin-bottom: 1px; margin-right: 0;
   text-shadow: none
 }
 
@@ -214,4 +213,8 @@
   background: var(--dark-mode-purple-2);
   color: #FEFEFE !important;
   text-shadow: none !important;
+}
+
+.active-link * {
+  color: #FEFEFE !important;
 }

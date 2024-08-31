@@ -9,7 +9,7 @@
     color: var(--selected-navlink-window-color);
     border-radius: var(--navbar-item-border-radius);
     background: var(--selected-navlink-window-color);
-    transition: transform 0.2s ease-in-out;
+    transition: transform 0.1s ease-in-out;
 }
 
 

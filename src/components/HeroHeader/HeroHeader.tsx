@@ -1,79 +1,86 @@
-"use client"; import React, { useEffect, useRef } from "react";
+"use client";
+
+import React, { useRef, useState, useEffect } from "react";
 import IHeroHeaderProps from "./Interface/IHeroHeaderProps";
 import SequentialRiseSpan from "../Atoms/SequentialRiseSpan/SequentialRiseSpan";
 import "./HeroHeader.css";
 
 import { gsap } from 'gsap';
-import { useGSAP } from "@gsap/react";
-
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from "@gsap/react";
 import { useTrigger } from "../../stores/TriggerContext";
 import { refreshScrollTrigger } from "../Utility/ScrollUtility";
 import GolfedSierpinski from "../GolfedSierpinski/GolfedSierpinski";
 
 const HeroHeader: React.FC<IHeroHeaderProps> = ({ heading, description, graphics }) => {
     const componentRef = useRef<HTMLDivElement>(null);
-
     const { trigger } = useTrigger();
+
+    const [ screenWidth, setscreenWidth ] = useState<number>(0);
+
+    useEffect(() => {
+        const update = () => {
+            setscreenWidth(window.innerWidth);
+        };
+
+        if (typeof window !== "undefined") {
+            setscreenWidth(window.innerWidth);
+            window.addEventListener("resize", update);
+        }
+
+        return () => {
+            if (typeof window !== "undefined") {
+                window.removeEventListener("resize", update);
+            }
+        };
+    }, []);
 
     useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
 
-        const heroHeader = {
-            this: ".hero-header",
-            graphics: ".hero-header__graphics-container",
-            content: ".hero-header__content",
-            heading: ".hero-header__heading",
-            description: ".hero-header__description"
-        };
-
-        const tl = gsap.timeline({
+        gsap.timeline({
             scrollTrigger: {
-                trigger: heroHeader.this,
+                trigger: ".hero-header",
                 start: "top top",
-                invalidateOnRefresh: true,
                 end: "bottom top",
-                scrub: true
+                scrub: true,
+                invalidateOnRefresh: true,
             },
-        });
-
-        tl.add(gsap.to(heroHeader.this, {
-            opacity: .3,
+        }).to(".hero-header", {
+            opacity: 0.3,
             transform: "translateY(-150px) scale(95%)",
             borderBottomColor: "#333",
-        }), "start")
+        });
 
         refreshScrollTrigger(ScrollTrigger);
-    }, [trigger])
+    }, [trigger]);
+
+    const renderGraphics = () => (
+        graphics ? (
+            <div className="hero-header__graphics-container">{graphics}</div>
+        ) : (
+            <div className="hero-header__graphics-container">
+                <GolfedSierpinski />
+            </div>
+        )
+    );
 
     return (
-        <div
-            ref={componentRef}
-            className="hero-header flex flex-row justify-start items-center">
-            {
-                graphics ?
-                    (<div className="hero-header__graphics-container">{graphics}</div>)
-                    :
-                    (<GolfedSierpinski />)
-            }
-            <div className="hero-header__content w-full">
-                <div className="hero-header__heading" >
-                    <SequentialRiseSpan elementType="h1">
-                        {heading}
+        <div ref={componentRef} className="hero-header flex justify-start items-center">
+            {screenWidth > 768 && renderGraphics()}
+            <div className="hero-header__content w-half">
+                <div className="hero-header__heading">
+                    <SequentialRiseSpan elementType="h1">{heading}</SequentialRiseSpan>
+                </div>
+                <div className="hero-header__description">
+                    <SequentialRiseSpan maxNumberOfLettersPerLine={110} calculationAdjustment={0.95}>
+                        {description}
                     </SequentialRiseSpan>
                 </div>
-                <div>
-                    <div className="hero-header__description">
-                        <SequentialRiseSpan
-                            maxNumberOfLettersPerLine={110}
-                            calculationAdjustment={.95}>
-                            {description}
-                        </SequentialRiseSpan>
-                    </div>
-                </div>
             </div>
-        </div >
+            {screenWidth <= 768 && renderGraphics()}
+        </div>
     );
-}
+};
 
 export default React.memo(HeroHeader);

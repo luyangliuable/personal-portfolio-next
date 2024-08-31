@@ -22,6 +22,7 @@ interface IAccordionButtonProps {
 
 interface IAccordionProps {
   children: ReactNode;
+  className?: string;
 }
 
 const Item: FC<IAccordionItemProps> = ({ heading, children, icon }) => {
@@ -91,9 +92,9 @@ const Button: FC<IAccordionButtonProps> = ({ heading, icon, href, onClick, targe
 const Accordion: FC<IAccordionProps>
   & { Item: FC<IAccordionItemProps> }
   & { Button: FC<IAccordionButtonProps> }
-  = ({ children }) => {
+  = ({ children, className }) => {
     return (
-      <div className="accordion flex flex-col items-center">
+      <div className={ cl("accordion flex flex-col items-center", className) }>
         {children}
       </div>
     );

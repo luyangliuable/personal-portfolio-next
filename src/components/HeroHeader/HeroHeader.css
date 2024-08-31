@@ -53,5 +53,6 @@
 
     .hero-header__description {
         width: 100%;
+        font-weight: 400;
     }
 }

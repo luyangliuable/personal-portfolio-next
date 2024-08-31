@@ -32,14 +32,13 @@ const NavBurgerPanel: React.FC<INavBurgerPanelProps> = ({ burgerPanel, links }) 
                       <Accordion.Item heading={link.name}>
                           {
                           link.sublinks?.map(sublink => (
-                          <Accordion.Button href={sublink.to ?? ""} heading={`${sublink.emoji} ${sublink.name}`} key={sublink.name}></Accordion.Button>
+                              <Accordion.Button href={sublink.to ?? ""} disabled={sublink.isLocked} heading={`${sublink.emoji} ${sublink.name}`} key={sublink.name}></Accordion.Button>
 
                           ))
                           }
                       </Accordion.Item>
                       :
-                      <Accordion.Button href={link.to ?? ""} heading={link.name}></Accordion.Button>
-
+                      <Accordion.Button href={link.to ?? ""} heading={link.name} disabled={link.isLocked}></Accordion.Button>
                       );
                       })}
               </Accordion>

@@ -2,7 +2,7 @@ import React, { useState, FC, ReactNode } from "react";
 import "./Accordion.css";
 import { IoIosArrowDropdown } from "react-icons/io";
 import { cl } from "../Utility/LogicUtility";
-import Link from "next/link";
+import { CiLock } from "react-icons/ci";
 
 interface IAccordionItemProps {
   heading: string;
@@ -13,6 +13,7 @@ interface IAccordionItemProps {
 interface IAccordionButtonProps {
   heading: string;
   href?: string;
+  disabled?: boolean;
   onClick?: () => void;
   target?: string;
   icon?: ReactNode;
@@ -45,27 +46,45 @@ const Item: FC<IAccordionItemProps> = ({ heading, children, icon }) => {
   );
 }
 
-const Button: FC<IAccordionButtonProps> = ({ heading, icon, href, onClick, target }) => {
+const Button: FC<IAccordionButtonProps> = ({ heading, icon, href, onClick, target, disabled }) => {
   const [show, setShow] = useState<boolean>(false);
 
-  return (
-    <div className="accordion--item flex flex-col">
+  const isLink = href && !disabled;
 
+  return (
+    <div className="accordion--item flex flex-row justify-between">
       {
         React.createElement(
-          href ? "a" : "div",
+          isLink ? "a" : "div",
           {
             className: "accordion--button noselect flex items-center justify-between cursor-pointer",
-            href: href ? href : undefined,
+            href: isLink ? href : undefined,
           },
-          <div className="flex flex-row items-center"><span className="mr-2">{icon}</span><span>{heading}</span></div>
+          (
+            <div className="flex flex-row items-center w-full position-relative">
+              <span className="mr-2">{icon}</span>
+              <span>{heading}</span>
+              {disabled &&
+                  <div
+                      className="blur-boundary flex justify-center items-center position-absolute"
+                      style={{
+                        background: "rgba(255,255,255,.5)",
+                        strokeWidth: "2rem",
+                        right: 0,
+                        minWidth: "30px",
+                        minHeight: "30px",
+                        height: "30px",
+                        borderRadius: "4px",
+                        border: ".1px solid #888"
+                      }}>
+                      <CiLock style={{ strokeWidth: "1px" }} key="lock-icon" />
+                  </div>
+              }
+              </div>
+            )
         )
-      }
-
-      <div className="">
-      </div>
-
-    </div >
+          }
+      </div >
   );
 }
 

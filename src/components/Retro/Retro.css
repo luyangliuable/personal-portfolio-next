@@ -4,6 +4,7 @@
   perspective: 360px;
   perspective-origin: 50% 50%;
   position: absolute;
+
   height: 100%;
   width: 100%;
   z-index: -1;
@@ -17,28 +18,27 @@
 }
 
 .retro::before {
-  --wire-color: rgb(194, 194, 194);
+  --wire-color: rgb(210, 210, 210);
+
   content: "";
-  position: absolute;
-  width: 200%;
-  height: 360px;
+  left: 0;
+  width: 200%; height: 360px;
   left: -50%;
-  bottom: -60px;
+  position: absolute;
   border-radius: 5px;
-  background-image:
-    linear-gradient(var(--wire-color) 2px, transparent 2px),
-    linear-gradient(90deg, var(--wire-color) 2px, transparent 2px);
-  background-size: var(--square-width) var(--square-height);
-  background-position: 0 calc(-1 * var(--square-width)), 0 0;
+  bottom: -60px;
+  background-image: -webkit-linear-gradient(var(--wire-color) .5px, transparent 1px), -webkit-linear-gradient(left, var(--wire-color) 2px, transparent 1px);
+  background-size: var(--square-width) var(--square-width), var(--square-height) var(--square-height);
+  background-position: 0px calc(-1*var(--square-width)), 0px 0px;
   transform: rotateX(85deg);
   animation: planeMoveTop 5s infinite linear;
 }
 
 @keyframes planeMoveTop {
   from {
-    background-position: 0 calc(-1 * var(--square-width)), 0 0;
+    background-position: 0px calc(-1*var(--square-width)), 0px 0px;
   }
   to {
-    background-position: 0 0, var(--square-height) 0;
+    background-position: 0px 0px, var(--square-height) 0px;
   }
 }

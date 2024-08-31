@@ -44,14 +44,13 @@ const NavLink: React.FC<INavLinkProps> = ({ link, isSubLink, renderDropdownMenu,
         <a
             href={(targetPath && !link.isDisabled) ? targetPath : pathname}
             onClick={() => link.isDisabled && hideDropdownMenu()}
-            className={cl("navbar-item flex flex-col justify-center items-center", {
+            className={cl("position-relative flex flex-row justify-center items-center navbar-item", {
                 "items-start": isSubLink,
                 "active-link": isActive(pathname, targetPath)
             })}
             key={link.name}
             onMouseOver={onMouseOverAction}>
-
-            <div className="flex flex-row justify-center items-center">
+            <div className="flex flex-row justify-start items-center">
                 {link.emoji && <EmojIcon style={{
                     width: "40px",
                     height: "40px",
@@ -65,31 +64,32 @@ const NavLink: React.FC<INavLinkProps> = ({ link, isSubLink, renderDropdownMenu,
                         {navLinkContent}
                     </div>
                     {
-                        isSubLink && <div style={{
-                            fontSize: ".8rem",
-                            marginTop: "2px",
-                            color: "#888"
-                        }}>{link.description}</div>
+                        isSubLink && <div
+                            className="w-full"
+                            style={{
+                                fontSize: ".8rem",
+                                marginTop: "2px",
+                                color: "#888"
+                            }}>{link.description}</div>
                     }
                 </div>
-                {
-                    link.isLocked &&
-                    <div
-                        className="blur-boundary position-absolute flex justify-center items-center"
-                        style={{
-                            background: "rgba(255,255,255,.5)",
-                            width: "30px",
-                            height: "30px",
-                            borderRadius: "4px",
-                            right: "10%",
-                            border: ".1px solid #888",
-                            transform: "translateY(10px)"
-                        }}>
-                        <CiLock
-                            key="lock-icon" />
-                    </div>
-                }
             </div>
+            {
+                link.isLocked &&
+                <div
+                    className="blur-boundary flex justify-center items-center mr-2"
+                    style={{
+                        background: "rgba(255,255,255,.5)",
+                        strokeWidth: "2rem",
+                        minWidth: "30px",
+                        minHeight: "30px",
+                        height: "30px",
+                        borderRadius: "4px",
+                        border: ".1px solid #888"
+                    }}>
+                    <CiLock style={{ strokeWidth: "1px" }} key="lock-icon" />
+                </div>
+            }
         </a>
     );
 };

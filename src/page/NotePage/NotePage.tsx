@@ -77,6 +77,21 @@ const Notes: React.FC<{ content: BlogPostResponse[] }> = ({ content }) => {
         "sql": ["💻"]
     };
 
+    const getIcon = (category: string) => {
+      return (
+        <div
+          style={{
+            width: "40px",
+            minWidth: "40px",
+            height: "40px",
+            minHeight: "40px",
+          }}
+        >
+          <EmojIcon emojis={emojIconMap[category] ?? emojIconMap["random"]} />
+        </div>
+      );  
+    };
+
     return (
         <main>
             <HeroHeader
@@ -89,7 +104,7 @@ const Notes: React.FC<{ content: BlogPostResponse[] }> = ({ content }) => {
                         return (
                             <Accordion.Item
                                 key={category}
-                                icon={<EmojIcon emojis={emojIconMap[category] ?? emojIconMap["random"]} />}
+                                icon={getIcon(category)}
                                 heading={`${category} (${grouped[category].length})`}>
                                 {
                                     grouped[category].map((content: BlogPostResponse) => {

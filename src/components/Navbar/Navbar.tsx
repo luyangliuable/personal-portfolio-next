@@ -208,7 +208,7 @@ const NavBar: React.FC<INavbarProps> = () => {
                         style={{
                             width: state.dropdownMenuLinkDisplay.length > 5 ? "900px" : "auto"
                         }}
-                        className="navbar-item__dropdown box-shadow-spread">
+                        className="navbar-item__dropdown blur-boundary box-shadow-spread">
                         {state.dropdownMenuLinkDisplay}
                     </div>
                 </section>

@@ -32,7 +32,7 @@
 
 .hero-header__graphics-container {
     position: relative;
-    width: min(20vw, 160px);
+    width: min(15vw, 160px);
     height: min(20vw, 250px);
     display: flex;
     justify-content: center;
@@ -40,7 +40,7 @@
     margin: 0 40px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: calc(768px - 1px)) {
     .hero-header__graphics-container {
         margin: 40px 0 0;
     }

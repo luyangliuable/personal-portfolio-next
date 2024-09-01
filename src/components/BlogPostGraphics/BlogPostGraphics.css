@@ -29,10 +29,8 @@
 
 .blog-graphics__paper, .paper.-two {
     width: 90%; height: 100%;
-    min-width: 80px;
-    min-height: 130px;
-    max-width: 200px;
-    max-height: 300px;
+    min-width: 80px; min-height: 130px;
+    max-width: 200px; max-height: 300px;
     border: .1px solid black;
     border-radius: 1vw;
     transform: rotateX(-40deg) rotateZ(-20deg);

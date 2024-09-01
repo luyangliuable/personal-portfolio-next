@@ -10,6 +10,7 @@ export interface ISequentialRiseSpanProps {
   numberOfLettersPerLine?: number,
   calculationAdjustment?: number,
   minNumberOfLettersPerLine?: number,
+  baseAnimationDelay?: number,
   maxNumberOfLettersPerLine?: number
 }
 
@@ -17,6 +18,7 @@ export interface ISequentialRiseSpanProps {
 const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
   calculationAdjustment,
   children,
+  baseAnimationDelay,
   elementType,
   className,
   numberOfLettersPerLine,
@@ -144,7 +146,7 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
         measuredLettersPerLine !== 0 &&
         wrappedLines.map((line, index) => {
           const lineElement = React.cloneElement(line as React.ReactElement, {
-            style: { animationDelay: `${index * 100}ms` },
+            style: { animationDelay: `${ baseAnimationDelay + index * 100}ms` },
             ref: lineRefs[index]
           })
           return (<div key={index} className="w-full break-words">{lineElement}</div>)

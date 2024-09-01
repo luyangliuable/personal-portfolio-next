@@ -73,7 +73,7 @@ const HeroHeader: React.FC<IHeroHeaderProps> = ({ heading, description, graphics
                     <SequentialRiseSpan calculationAdjustment={0.35} elementType="h1">{`${heading}\u00A0/ `}</SequentialRiseSpan>
                 </div>
                 <div className="hero-header__description">
-                    <SequentialRiseSpan maxNumberOfLettersPerLine={50} calculationAdjustment={0.8}>
+                    <SequentialRiseSpan baseAnimationDelay={150} maxNumberOfLettersPerLine={50} calculationAdjustment={0.8}>
                         {description}
                     </SequentialRiseSpan>
                 </div>

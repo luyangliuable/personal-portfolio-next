@@ -295,11 +295,11 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
         };
 
         updateTimelineLength();
-        window.addEventListener("resize", updateTimelineLength);
+        // window.addEventListener("resize", updateTimelineLength);
 
-        () => {
+        /* () => {
             window.removeEventListener("resize", updateTimelineLength);
-        }
+        } */
     }, []);
 
     const { trigger } = useTrigger();

@@ -17,9 +17,14 @@
     width: min(85%, 600px);
 }
 
-.hero-header__heading h1 {
+.hero-header__heading div h1 {
     font-size: 42px !important;
+    margin-top: 0;
 }
+.hero-header__heading div:not(:last-child) h1 {
+    margin: 0;
+}
+
 
 .hero-header__content {
     margin-left: 2rem;

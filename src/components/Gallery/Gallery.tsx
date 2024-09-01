@@ -6,11 +6,13 @@ import GalleryItem from "./GalleryItem/GalleryItem";
 import "../Utility/MouseUtility";
 import "./Gallery.css";
 import Bento from "../Bento/Bento";
+import IGalleryItemProps from "./GalleryItem/Interface/IGalleryItemProps";
 
 const Gallery: React.FC<IGalleryProps> = (props) => {
 
     const renderGalleryItems = (): React.ReactNode => {
-        return props.content.map((item: any, index: number) => {
+        return props.content.map((item: IGalleryItemProps, index: number) => {
+            item = { ...item, name: `${item.name}\u00A0/` }
             if (index == 0) {
                 return (
                     <Bento.Item key={index} colSpan={2}>

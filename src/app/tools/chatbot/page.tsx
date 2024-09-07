@@ -1,21 +1,21 @@
-'use client';
-import React, { useEffect } from "react";
+import React from "react";
+import type { Metadata } from "next";
 // @ts-ignore
-import { Chatbot as ChatbotComponent } from "ollama-chat-client";
 import "./Chatbot.css";
+import LlChatbot from "../../../page/Chatbot/Chatbot";
+import ConfigRepository from "../../../repositories/ConfigRepo";
 
-const Chatbot = ChatbotComponent as unknown as React.FC<{ baseURI: string }>;
 
-const LlChatbot: React.FC = ({}) => {
-    useEffect(() => {
-        document.documentElement.scrollTo(0, 0);
-    }, []);
-
-    return (
-        <main className="chatbot__wrapper">
-            <Chatbot baseURI="https://8dfe-2405-6e00-28ee-a3f6-61ac-94d0-acc-8db9.ngrok-free.app" />
-        </main>
-    );
+export const metadata: Metadata = {
+    title: "Luyang's Chatbot",
+    description: "A chatgpt clone."
 };
 
-export default LlChatbot;
+const page = async () => {
+    const configRepo = ConfigRepository.getInstance();
+    const baseURI = await configRepo.get("OLLAMA_CLIENT_API");
+
+    return <LlChatbot baseURI={String(baseURI)} />;
+};
+
+export default page;

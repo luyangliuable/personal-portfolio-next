@@ -1,5 +1,6 @@
 .experience-section-parent-container {
     overflow-x: hidden;
+    display: flow-root;
     position: sticky;
     z-index: 3;
     top: calc(var(--navbar-height) + .5vh);

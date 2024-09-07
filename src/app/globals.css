@@ -201,7 +201,11 @@ body {
     background: #EEE;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    width: 100vw; overflow-x: hidden;
+}
+
+html, body {
+    width: 100vw;
+    overflow-x: clip;
 }
 
 code {

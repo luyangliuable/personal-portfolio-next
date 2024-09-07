@@ -9,10 +9,10 @@ export const metadata: Metadata = {
     description: "My personal coding notes and snippets, organized by language and topic that I wrote during the nostalgic days of Uni."
 };
 
-
 export default async function NotesPage() {
     const noteRepository = NoteRepository.getInstance();
     const content: BlogPostResponse[] = await noteRepository.getPostList();
+    const { title, description } = metadata;
 
-    return <Notes content={content} />;
+    return <Notes title={title} description={description} content={content} />;
 }

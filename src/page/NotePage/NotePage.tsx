@@ -8,11 +8,16 @@ import BlogPostResponse from "../../repositories/Response/BlogPostResponse";
 import EmojIcon from "../../components/EmojIcon/EmojIcon";
 import SkeletonPage from "../SkeletonPage/SkeletonPage";
 import BlogPostGraphics from "../../components/BlogPostGraphics/BlogPostGraphics";
+import type { Metadata } from "next";
 
-const Notes: React.FC<{ content: BlogPostResponse[] }> = ({ content }) => {
+export interface INotesProps extends Metadata {
+  content: BlogPostResponse[];
+}
+
+const Notes: React.FC<INotesProps> = ({ title, description, content }) => {
     const heroHeaderContent = Object.freeze({
-        heading: "Coding Notes",
-        description: "My personal coding notes and snippets, organized by language and topic that I wrote during the nostalgic days at University."
+        heading: title,
+        description: description
     });
 
     const [isPageLoaded, setIsPageLoaded] = useState(false);
@@ -95,8 +100,8 @@ const Notes: React.FC<{ content: BlogPostResponse[] }> = ({ content }) => {
     return (
         <main>
             <HeroHeader
-                heading={heroHeaderContent.heading}
-                description={heroHeaderContent.description}
+                heading={heroHeaderContent.heading! as string}
+                description={heroHeaderContent.description! as string}
                 graphics={<BlogPostGraphics />} />
             <Accordion>
                 {

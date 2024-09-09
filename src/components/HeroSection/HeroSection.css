@@ -5,7 +5,6 @@
 
 @media screen and (min-width: 1000px) {
     .hero-section__content__left {
-        z-index: 1;
         width: 50%;
         max-width: 600px;
     }
@@ -40,7 +39,6 @@
 
     .hero-section__content__right {
         display: flex;
-        z-index: 1;
         margin-top: 2vh;
         justify-content: center;
     }
@@ -48,7 +46,6 @@
 
 .hero-section-badge__link {
     padding: .55rem 1.2rem;
-    z-index: 1;
     border: 1px solid #000;
     color: #FFF;
     font-weight: bold;
@@ -69,7 +66,6 @@
 }
 
 .hero-section__content__left__text {
-    z-index: 3;
     color: #888;
     max-width: 550px;
     font-size: .95rem;
@@ -97,7 +93,21 @@
 }
 
 .hero-section {
-    overflow: hidden;
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.hero-section__after {
+    --height: 150px;
+    width: 100vw;
+    width: 95vw;
+    height: var(--height);
+    margin-bottom: calc(-0.5*var(--height));
+    z-index: -1;
+    transform: translateY(-10%) translateZ(-1000px);
+    background-image: radial-gradient(var(--background-pattern-color) 1px, transparent 0);
+    background-size: 4px 4px;
+    background-position: -19px -19px;
 }
 
 .hero-section__text_small {

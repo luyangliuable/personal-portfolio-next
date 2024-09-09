@@ -15,6 +15,7 @@ import { FaGithubSquare, FaLinkedin, FaStackOverflow } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { RiNotionFill } from "react-icons/ri";
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { CSSRulePlugin } from 'gsap/CSSRulePlugin';
 
 import "./HeroSection.css";
 import { refreshScrollTrigger } from "../Utility/ScrollUtility";
@@ -117,6 +118,12 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
             transform: `translateY(${window.innerHeight / 15}px)`,
         }), "start");
 
+        const afterElement = ".hero-section__after";
+
+        tl.add(gsap.to(afterElement, {
+            transform: `translateY(-100%)`,
+        }), "start");
+
         refreshScrollTrigger(ScrollTrigger);
     });
 
@@ -171,17 +178,20 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
     }, [mainHeading, introduction]);
 
     return (
-        <LandingPageCard
-            className="hero-section" landingPageCardType="fitContent" >
-            <div className="space h-28"></div>
-            <section className="hero-section__content">
-                <section className="hero-section__content__right">
-                    <CodingCat />
+        <>
+            <LandingPageCard
+                className="hero-section" landingPageCardType="fitContent" >
+                <div className="space h-28"></div>
+                <section className="hero-section__content">
+                    <section className="hero-section__content__right">
+                        <CodingCat />
+                    </section>
+                    {heroSectionContentLeft}
                 </section>
-                {heroSectionContentLeft}
-            </section>
-            {footer}
-        </LandingPageCard>
+                {footer}
+            </LandingPageCard>
+            <div className="hero-section__after"></div>
+        </>
     );
 }
 

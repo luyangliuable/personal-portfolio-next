@@ -8,6 +8,15 @@
     --page-bottom-padding: 120px;
     --common-card-margin: 10px;
 
+    --background-color: #EEE;
+    --background-color-darker: #EAEAEA;
+    --background-color-lighter: #EAEAEA;
+    --background-highlight-color: #DEDEDE;
+    --background-highlight-color-2: #DDD;
+    --background-pattern-color: #CCC;
+
+    --border-color: #AAA;
+
     --dark-mode-black: #1e1e1e;
     --dark-mode-purple: #491ed3;
     --dark-mode-purple-2: #897ed3;
@@ -198,7 +207,7 @@
 
 body {
     margin: 0;
-    background: #EEE;
+    background: var(--background-color);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -302,13 +311,13 @@ a {
 
 .grid-background--line {
     background-image:
-        linear-gradient(to right, #EEE 1px, transparent 1px),
-        linear-gradient(to bottom, #EEE 1px, transparent 1px);
+        linear-gradient(to right, var(--background-pattern-color) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--background-pattern-color) 1px, transparent 1px);
 }
 
 
 .grid-background--dot {
-    background-image: radial-gradient(#CCC 1px, transparent 0);
+    background-image: radial-gradient(var(--background-pattern-color) 1px, transparent 0);
     background-size: 4px 4px;
     background-position: -19px -19px;
 }
@@ -823,8 +832,8 @@ a {
 }
 
 .skeleton-component {
-  --loader-background-color: #EEEEEE;
-  --loader-highlight-color: #DEDEDE;
+  --loader-background-color: var(background-color);
+  --loader-highlight-color: var(--background-highlight-color);
   background: linear-gradient(90deg, var(--loader-background-color) 25%, var(--loader-highlight-color) 50%, var(--loader-background-color) 75%);
   animation: loading 2s infinite ease-in-out;
   background-size: 200% 100%;

@@ -98,15 +98,14 @@
 }
 
 .hero-section__after {
-    --height: 150px;
-    width: 100vw;
+    --height: 25vh;
     width: 95vw;
     height: var(--height);
-    margin-bottom: calc(-0.5*var(--height));
-    z-index: -1;
-    transform: translateY(-10%) translateZ(-1000px);
+    margin-bottom: calc(-1*var(--height) + var(--common-card-margin));
+    z-index: -2;
+    transform: translateY(-5%);
     background-image: radial-gradient(var(--background-pattern-color) 1px, transparent 0);
-    background-size: 4px 4px;
+    background-size: 9px 9px;
     background-position: -19px -19px;
 }
 

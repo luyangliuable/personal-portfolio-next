@@ -107,7 +107,7 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: heroSection,
-                start: "top top+=5",
+                start: "top+=30% top",
                 end: "bottom top",
                 invalidateOnRefresh: true,
                 scrub: 0.1
@@ -115,13 +115,13 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
         });
 
         tl.add(gsap.to(heroSection, {
-            transform: `translateY(${window.innerHeight / 15}px)`,
+            transform: `translateY(${window.innerHeight / 10}px)`,
         }), "start");
 
         const afterElement = ".hero-section__after";
 
         tl.add(gsap.to(afterElement, {
-            transform: `translateY(-100%)`,
+            transform: `translateY(0)`,
         }), "start");
 
         refreshScrollTrigger(ScrollTrigger);

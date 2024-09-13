@@ -58,6 +58,14 @@
     color: #FFF
 }
 
+.t-button svg {
+    transition: transform 100ms ease-out;
+}
+
+.t-button:hover svg {
+    transform: translateX(3px);
+}
+
 .button-line {
     position: absolute;
     height: 2.5px;

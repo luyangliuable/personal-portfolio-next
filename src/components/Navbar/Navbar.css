@@ -93,6 +93,15 @@
   text-shadow: none
 }
 
+.navbar-item svg {
+    margin-left: .1rem;
+    transition: transform 100ms ease-out;
+}
+
+.navbar-item:hover svg {
+    transform: translateY(3px);
+}
+
 .navbar-item__dropdown > .navbar-item:hover {
   background: var(--dark-mode-blue);
   text-shadow: none
@@ -119,7 +128,6 @@
   }
 }
 
-
 .hidden {
   transform: translateY(calc(var(--navbar-height)));
   transform: translateY(-59px); /* For some reason the above doesn't work so I put this here for now */
@@ -131,11 +139,6 @@
   background: rgba(220,220,220, .4);
   box-shadow: .1px .1px 1px #888;
 }
-
-/* .detached .navbar-content .navbar-left .navbar-item { */
-/*   color: #000; */
-/*   font-weight: 500 */
-/* } */
 
 .detached .navbar-item {
   text-shadow: 1px 1px 3px rgba(255, 255, 210, 0.2), -1px -1px 3px rgba(255, 250, 210, .2);
@@ -196,8 +199,6 @@
 .logo__wrapper {
   animation: fade-in--up .3s ease-in-out;
 }
-
-
 
 @keyframes animateBg {
   0% {

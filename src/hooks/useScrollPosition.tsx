@@ -16,17 +16,13 @@ const useScrollPosition = (overrideThrottleInterval?: number) => {
     useEffect(() => {
         let scrollTimeout: NodeJS.Timeout;
         const timeToCheckScrollingHasStoppedMiliseconds = 50;
-
         const handleScroll = () => {
             clearTimeout(scrollTimeout); // Clear the timeout to reset the end-of-scroll detection
-
             setAppState(prevState => ({
                 ...prevState,
                 scrollY: window.scrollY,
                 scrolling: true
             }));
-
-            // Check if the user has stopped scrolling after a certain time
             scrollTimeout = setTimeout(() => {
                 setAppState(prevState => ({
                     ...prevState,
@@ -35,11 +31,9 @@ const useScrollPosition = (overrideThrottleInterval?: number) => {
             }, timeToCheckScrollingHasStoppedMiliseconds);
         };
 
-        // Add the event listener
-        const throttledHandleScroll = throttle(handleScroll, overrideThrottleInterval ?? 20);
+        const throttledHandleScroll = throttle(handleScroll, overrideThrottleInterval ?? 10);
         window.addEventListener("scroll", throttledHandleScroll);
 
-        // Interval for calculating the delta scroll every timeIntervalCheckMiliseconds.
         const deltaScrollCalculationInterval: NodeJS.Timeout = setInterval(() => {
             setAppState(prevState => {
                 const deltaScrolled = window.scrollY - Math.max(0, prevState.deltaScrollCalculation?.lastRecordedScrollY ?? 0);

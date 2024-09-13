@@ -129,8 +129,7 @@
 }
 
 .hidden {
-  transform: translateY(calc(var(--navbar-height)));
-  transform: translateY(-59px); /* For some reason the above doesn't work so I put this here for now */
+  transform: translateY(calc(-1*var(--navbar-height) + 0.04rem));
 }
 
 .detached {

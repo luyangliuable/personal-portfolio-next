@@ -72,7 +72,7 @@
 }
 
 .hero-section__heading {
-    font-family: 'TT Norms Pro', sans-serif;
+    font-family: 'TT Norms Pro', 'Inter', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
     color: #2d2d2d; 
     margin: 0;
     font-size: clamp(2em, 3.4vw, 5em) !important;

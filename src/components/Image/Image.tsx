@@ -36,16 +36,11 @@ class Image extends Component<IImageProps, IImageState> {
 
     async updateImage() {
         try {
-            const {src} = this.props;
+            const { src } = this.props;
             const imageId = src ?? Image.defaultProps.defaultImageId;
-            let imageUrl;
-            if (src.startsWith('/_next'))  {
-                imageUrl = src.replace('./_next', '');
-            } else {
-                [imageUrl] = await Promise.all([
-                    this.imageRepository.getImageById(imageId, this.props.compression),
-                ]);
-            }
+            const [imageUrl] = await Promise.all([
+                this.imageRepository.getImageById(imageId, this.props.compression),
+            ]);
             this.setState({
                 fetchedImageUrl: imageUrl
             });
@@ -64,7 +59,7 @@ class Image extends Component<IImageProps, IImageState> {
         }
 
         return (
-            <NextImage quality={50} width="100" height="100" className={className} src={fetchedImageUrl} alt={alt} />
+            <NextImage width="100" height="100" className={className} src={fetchedImageUrl} alt={alt} />
         )
     }
 }

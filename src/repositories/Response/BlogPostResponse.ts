@@ -3,6 +3,8 @@ export default interface BlogPostResponse {
         $oid: string
     };
     author: string;
+    imageOverride?: any;
+    imageOverlay?: any;
     body: string;
     date_created: string;
     date_last_modified?: string;

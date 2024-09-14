@@ -10,26 +10,27 @@ import LandingPageCard from "../LandingPageCard/LandingPageCard";
 import TwinCandle from "../TwinCandle/TwinCandle";
 import "./FeaturedContentSection.css";
 import { useTrigger } from '../../stores/TriggerContext';
+import WaveBackground from "./gallery-background-wave.jpg";
 import Retro from '../Retro/Retro';
-import Bento from '../Bento/Bento';
 
 const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({ postList }) => {
     const [state, setState] = useState<IFeaturedContentSectionState>({
         featuredPosts: [
             {
                 image: {
-                    $oid: "65596ad4ad7cc31ee9263e32"
+                    $oid: "66e588c918eb5f86ea13b531"
                 },
                 _id: {
                     $oid: "featured-tool"
                 },
-                heading: "Featured Tool: Coming Soon",
+                imageOverlay: WaveBackground,
+                heading: "Featured Tool: LLcode.tech Chatbot",
                 date_created: "",
                 post_type: "tool",
                 tags: [],
                 author: "Luyang Liu",
-                body: "Coming Soon",
-                url: "Coming Soon"
+                body: "Working chatGPT clone using mistral.",
+                url: "/tools/chatbot"
             },
             {
                 image: {
@@ -65,9 +66,7 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({ postLi
 
     useEffect(() => {
         calculateElementsToShow();
-
         window.addEventListener("resize", calculateElementsToShow);
-
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
@@ -136,7 +135,8 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({ postLi
                     minuteRead={content.reading_time_minutes}
                     className="my-2.5"
                     link={content.url ?? `/digital-chronicles/blog/${content._id.$oid}`}
-                    image={content.image.$oid}
+                    imageOverlay={content.imageOverlay?.src}
+                    image={content.imageOverride?.src ?? content.image.$oid}
                   />
                 </div>
               ))}

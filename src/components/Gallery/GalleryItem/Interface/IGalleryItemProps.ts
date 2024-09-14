@@ -6,6 +6,7 @@ interface IGalleryItemPropsBase {
   subheading?: string;
   className?: string;
   image?: string;
+  imageOverlay?: any;
   description?: string;
   dateCreated?: string;
   minuteRead?: number;
@@ -26,7 +27,6 @@ interface IGalleryItemPropsWithoutRepo extends IGalleryItemPropsBase {
   repoName?: undefined;
 }
 
-// TODO: Use new typescript AllOrNothing.
 type IGalleryItemProps = IGalleryItemPropsWithRepo | IGalleryItemPropsWithoutRepo;
 
 export default IGalleryItemProps;

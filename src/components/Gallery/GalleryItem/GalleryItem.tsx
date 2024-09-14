@@ -53,7 +53,7 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
     };
 
     const style: CSSProperties = props.style || {};
-    const { image, className } = props;
+    const { image, className, imageOverlay } = props;
 
     useEffect(() => {
         setIsRendered(true);
@@ -75,7 +75,16 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
                 onMouseMove={cardGradientEffect}
                 className="card gallery-item initially-hidden blur-boundary--sm">
                 <GalleryItemTypeSegment />
-                <div className="gallery-item__image"><Image alt="" src={image ?? ""} /></div>
+                <div className="gallery-item__image flex justify-center items-center">
+                    { !imageOverlay ?
+                        <Image alt="" src={image ?? ""} />
+                        :
+                        <>
+                            <img alt="" src={imageOverlay} />
+                            <Image alt="" src={image ?? ""} />
+                        </>
+                    }
+                </div>
                 <div className="px-5">
                     <TagCloud tags={props.tags} />
                     <a className="gallery-item__link" href={props.link}><h3>{props.name}</h3></a>

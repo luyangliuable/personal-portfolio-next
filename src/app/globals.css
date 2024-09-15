@@ -67,16 +67,19 @@
 @font-face {
     font-family: 'Fira Code';
     src: url('../assets/fonts/FiraCode/FiraCode-Regular.ttf') format('woff2');
+    font-display: swap;
 }
 
 @font-face {
     font-family: 'Proxima Nova';
     src: url('../assets/fonts/ProximaNova/ProximaNova-Regular.woff2') format('woff2');
+    font-display: swap;
 }
 
 @font-face {
     font-family: 'Proxima Nova Bold';
     src: url('../assets/fonts/ProximaNova/ProximaNova-Bold.woff2') format('woff2');
+    font-display: swap;
 }
 
 @font-face {
@@ -84,6 +87,7 @@
     src: url('../assets/fonts/TTNormalsPro/TT Norms Pro Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -91,6 +95,7 @@
     src: url('../assets/fonts/TTNormalsPro/TT Norms Pro Italic.woff2') format('woff2');
     font-weight: normal;
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -98,6 +103,7 @@
     src: url('../assets/fonts/TTNormalsPro/TT Norms Pro Thin.woff2') format('woff2');
     font-weight: 100;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -105,6 +111,7 @@
     src: url('../assets/fonts/TTNormalsPro/TT Norms Pro Thin Italic.woff2') format('woff2');
     font-weight: 100;
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -112,6 +119,7 @@
     src: url('../assets/fonts/TTNormalsPro/TT Norms Pro ExtraLight.woff2') format('woff2');
     font-weight: 200;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -119,6 +127,7 @@
     src: url('../assets/fonts/TTNormalsPro/TT Norms Pro ExtraLight Italic.woff2') format('woff2');
     font-weight: 200;
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -126,6 +135,7 @@
     src: url('../assets/fonts/TTNormalsPro/TT Norms Pro Light.woff2') format('woff2');
     font-weight: 300;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -133,6 +143,7 @@
     src: url('../assets/fonts/TTNormalsPro/TT Norms Pro Light Italic.woff2') format('woff2');
     font-weight: 300;
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -140,6 +151,7 @@
     src: url('../assets/fonts/TTNormalsPro/TT Norms Pro Medium.woff2') format('woff2');
     font-weight: 500;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -147,6 +159,7 @@
     src: url('../assets/fonts/TTNormalsPro/TT Norms Pro Medium Italic.woff2') format('woff2');
     font-weight: 500;
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -154,6 +167,7 @@
     src: url('../assets/fonts/TTNormalsPro/TT Norms Pro Bold.woff2') format('woff2');
     font-weight: bold; /* or 700 */
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -161,6 +175,7 @@
     src: url('../assets/fonts/TTNormalsPro/TT Norms Pro Bold Italic.woff2') format('woff2');
     font-weight: bold; /* or 700 */
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -168,6 +183,7 @@
     src: url('../assets/fonts/TTNormalsPro/TT Norms Pro ExtraBold.woff2') format('woff2');
     font-weight: 800;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -175,6 +191,7 @@
     src: url('../assets/fonts/TTNormalsPro/TT Norms Pro ExtraBold Italic.woff2') format('woff2');
     font-weight: 800;
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -182,6 +199,7 @@
     src: url('../assets/fonts/TTNormalsPro/TT Norms Pro Black.woff2') format('woff2');
     font-weight: 900;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -189,6 +207,7 @@
     src: url('../assets/fonts/TTNormalsPro/TT Norms Pro Black Italic.woff2') format('woff2');
     font-weight: 900;
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -196,6 +215,7 @@
     src: url('../assets/fonts/TTNormalsPro/TT Norms Pro ExtraBlack.woff2') format('woff2');
     font-weight: 950;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -203,6 +223,7 @@
     src: url('../assets/fonts/TTNormalsPro/TT Norms Pro ExtraBlack Italic.woff2') format('woff2');
     font-weight: 950;
     font-style: italic;
+    font-display: swap;
 }
 
 body {

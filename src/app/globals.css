@@ -934,3 +934,15 @@ a {
     opacity: 1
   }
 }
+
+.normalised-width {
+    padding: 0 4rem;
+    max-width: 1800px;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .normalised-width {
+        padding: 0 2rem;
+    }
+}

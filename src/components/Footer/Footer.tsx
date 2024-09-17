@@ -53,7 +53,7 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="footer position-relative flex items-center flex-col">
-      <div className="footer__main w-full">
+      <div className="footer__main normalised-width w-full">
         <GetInTouch />
         <section className="footer__connect-with-me mb-20">
           <h3 className="mb-0">Connect with Me</h3>

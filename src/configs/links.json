@@ -195,7 +195,7 @@
                     "description": "Youtube videos that are interesting",
                     "emoji": "🎥",
                     "to": "/misc/youtube-playlist",
-                    "isLocked": true
+                    "isLocked": false
                 },
                 {
                     "name": "Man of the Day",

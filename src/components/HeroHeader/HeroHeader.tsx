@@ -66,19 +66,21 @@ const HeroHeader: React.FC<IHeroHeaderProps> = ({ heading, description, graphics
     );
 
     return (
-        <div ref={componentRef} className="hero-header flex justify-start items-center">
-            {screenWidth > 768 && renderGraphics()}
-            <div className="hero-header__content w-half">
-                <div className="hero-header__heading important-text">
-                    <SequentialRiseSpan calculationAdjustment={0.35} elementType="h1">{`${heading}\u00A0/ `}</SequentialRiseSpan>
+        <div ref={componentRef} className="hero-header flex justify-center items-center position-relative">
+            <div className="flex flex-row normalised-width w-full items-center position-relative hero-header__inner">
+                {screenWidth > 768 && renderGraphics()}
+                <div className="hero-header__content w-full">
+                    <div className="hero-header__heading important-text">
+                        <SequentialRiseSpan calculationAdjustment={0.35} elementType="h1">{`${heading}\u00A0/ `}</SequentialRiseSpan>
+                    </div>
+                    <div className="hero-header__description">
+                        <SequentialRiseSpan baseAnimationDelay={150} maxNumberOfLettersPerLine={50} calculationAdjustment={0.8}>
+                            {description}
+                        </SequentialRiseSpan>
+                    </div>
                 </div>
-                <div className="hero-header__description">
-                    <SequentialRiseSpan baseAnimationDelay={150} maxNumberOfLettersPerLine={50} calculationAdjustment={0.8}>
-                        {description}
-                    </SequentialRiseSpan>
-                </div>
+                {screenWidth <= 768 && renderGraphics()}
             </div>
-            {screenWidth <= 768 && renderGraphics()}
         </div>
     );
 };

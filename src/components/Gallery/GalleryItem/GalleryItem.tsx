@@ -98,11 +98,29 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
                     }
                 </div>
                 {
-                    props.minuteRead && props.dateCreated &&
+                    (props.minuteRead || props.dateCreated || props.metadata) &&
                     (
                         <p className="position-absolute gallery-item__metadata flex">
-                            <span className="flex items-center"><CiTimer /> {props.minuteRead} min read</span>
-                            <span className="flex items-center"><CiCalendar /> {isoDateFormatToString(new Date(props.dateCreated))}</span>
+                            {
+                                props.minuteRead &&
+                                <span className="flex items-center"><CiTimer /> {props.minuteRead} min read</span>
+                            }
+                            {
+                                props.dateCreated &&
+                                <span className="flex items-center"><CiCalendar /> {isoDateFormatToString(new Date(props.dateCreated))}</span>
+                            }
+                            {
+                                props.metadata &&
+                                props.metadata.map((item, idx) => {
+                                    return (
+                                        <span key={idx} className="flex items-center">
+                                            {item.icon}
+                                            {!item.callback && item.value}
+                                            {item.callback && item.callback(item.value)}
+                                        </span>
+                                    )
+                                })
+                            }
                         </p>
                     )
                 }

@@ -6,7 +6,10 @@ import "./GolfedSierpinski.css";
 const GolfedSierpinski = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
-    const [ size, setSize ] = useState<number>(0);
+    const [size, setSize] = useState<number>(0);
+
+    const sizeX = 1.2 * size;
+    const sizeY = size;
 
     useEffect(() => {
         const update = () => {
@@ -35,8 +38,7 @@ const GolfedSierpinski = () => {
         const S = Math.sin;
 
         const resizeCanvas = () => {
-            canvas.width = size*1.2;
-            canvas.height = size;
+            canvas.width = size, canvas.height = size;
         };
 
         const animate = (t: number) => {

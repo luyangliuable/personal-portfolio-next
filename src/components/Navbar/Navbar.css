@@ -1,5 +1,5 @@
 .selected-navlink-window {
-    --selected-navlink-window-color: var(--background-highlight-color-2);
+    --selected-navlink-window-color: var(--background-highlight-color-gradient);
     opacity: 0;
     z-index: -1;
     transform: translateX(var(--dynamic-translate));
@@ -217,7 +217,7 @@
 }
 
 .active-link {
-  background: var(--dark-mode-purple-2);
+  background: var(--dark-mode-purple-gradient);
   color: #FEFEFE !important;
   text-shadow: none !important;
 }

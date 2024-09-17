@@ -60,7 +60,7 @@ const ExperienceSectionImageDisplay: React.FC<IExperienceSectionImageDisplayProp
             className={experienceSectionCardClassName.join(" ")}>
             <div className="connecting-line"></div>
             <div className="image-display__image__wrapper flex justify-center items-center box-shadow-lg">
-                <Image compression={100} className={cl({
+                <Image className={cl({
                     "object-bottom": objectPosition === "bottom",
                     "object-center": objectPosition === "center",
                     "object-top": objectPosition === "top"

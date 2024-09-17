@@ -1,0 +1,8 @@
+@keyframes scale-from-zero {
+    0% {
+        transform: translateX(var(--translate-x)) scaleX(0)
+    }
+    100% {
+        transform: translateX(var(--translate-x)) scaleX(var(--scale-x))
+    }
+}

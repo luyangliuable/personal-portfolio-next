@@ -13,6 +13,7 @@
     --background-color-lighter: #EAEAEA;
     --background-highlight-color: #DEDEDE;
     --background-highlight-color-2: #DDD;
+    --background-highlight-color-gradient: linear-gradient(225deg, rgba(221,221,221,1) 0%, rgba(204,204,204,1) 100%);
     --background-pattern-color: #AAA;
 
     --border-color: #AAA;
@@ -20,6 +21,7 @@
     --dark-mode-black: #1e1e1e;
     --dark-mode-purple: #491ed3;
     --dark-mode-purple-2: #897ed3;
+    --dark-mode-purple-gradient: linear-gradient(225deg, rgba(137,126,211,1) 0%, rgba(100,105,217,1) 100%);
     --dark-mode-pink: #AA6DA3;
     --dark-mode-blue: #1e90ff;
     --dark-mode-blue-2: #1c7497;
@@ -804,18 +806,24 @@ a {
     border: none !important
 }
 
+.no-border {
+    border: none !important;
+}
+
 .translucent-white {
     background: rgba(255, 255, 255, 0.2)
 }
 
 .box-shadow-lg {
-    box-shadow: 1px 1px 4px rgba(139, 101, 77, 0.2), /* Bottom shadow */
-                1px 1px 4px rgba(139, 101, 77, 0.2); /* Right shadow */
+    box-shadow: 2px 2px 4px rgba(139, 101, 77, 0.2),
+                2px 2px 4px rgba(139, 101, 77, 0.2),
+                2px 2px 8px rgba(0, 0, 0, 0.05) !important;
 }
 
 .box-shadow-md {
     box-shadow: 1px 1px 2px rgba(139, 101, 77, 0.2),
-                1px 1px 2px rgba(139, 101, 77, 0.2);
+                1px 1px 2px rgba(139, 101, 77, 0.2),
+                1px 1px 8px rgba(0, 0, 0, 0.05) !important;
 }
 
 .box-shadow-spread {

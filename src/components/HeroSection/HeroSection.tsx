@@ -139,7 +139,7 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
                                 backgroundColor: item.background
                             }}
                             href={item.link}
-                            className="hero-section-badge__link flex justify-center items-center"
+                            className="hero-section-badge__link flex justify-center items-center box-shadow-md"
                             target="_blank"
                             rel="noopener noreferrer" >
                             {item.icon}

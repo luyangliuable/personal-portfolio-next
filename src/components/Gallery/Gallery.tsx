@@ -39,7 +39,7 @@ const Gallery: React.FC<IGalleryProps> = (props) => {
 
     return (
         <>
-            <div className="gallery">
+            <div className="gallery normalised-width">
                 <div className="heading__wrapper"><h2>{props.heading}</h2></div>
                 <Bento gap="1rem">
                     {renderGalleryItems()}

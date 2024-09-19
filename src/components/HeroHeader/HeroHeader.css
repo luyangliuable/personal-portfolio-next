@@ -1,10 +1,13 @@
 .hero-header {
     width: 100vw;
+
     min-height: 50vh;
+
     animation: fade-in .5s ease-in-out;
+
     border-bottom: .1px solid #DDD;
-    padding: 2vh 5vw;
     margin-bottom: 5vh;
+
     background: rgb(235, 235, 235);
     backdrop-filter: blur(5px)
 }
@@ -33,12 +36,6 @@
 
 .hero-header__graphics-container {
     position: relative;
-    width: min(15vw, 160px);
-    height: min(20vw, 250px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 40px;
 }
 
 @media screen and (max-width: calc(768px - 1px)) {
@@ -49,13 +46,17 @@
 
     .hero-header__content {
         width: 100%;
+        margin: 0;
     } 
+
+    .hero-header__inner {
+        flex-direction: column;
+    }
 
     .hero-header {
         flex-direction: column;
-        min-height: 380px;
+        min-height: 400px;
         justify-content: center;
-        padding: 2vh 2vw;
     }
 
     .hero-header__description {

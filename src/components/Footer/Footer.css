@@ -54,8 +54,7 @@ textarea:focus, input:focus {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     align-items: stretch;
     gap: 2rem;
-    padding: 0 4rem;
-    max-width: 1500px;
+
     justify-items: stretch;
     margin: 2rem 0;
 }

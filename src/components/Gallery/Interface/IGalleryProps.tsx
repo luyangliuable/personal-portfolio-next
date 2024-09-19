@@ -1,3 +1,5 @@
+import IGalleryItemProps from "../GalleryItem/Interface/IGalleryItemProps";
+
 export type GalleryItemBase = {
   name: string;
   description: string;
@@ -21,6 +23,6 @@ export type GalleryItemWithoutRepo = GalleryItemBase & {
 export type GalleryItem = GalleryItemWithRepo | GalleryItemWithoutRepo;
 
 export interface IGalleryProps {
-  content: GalleryItem[];
+  content: IGalleryItemProps[];
   heading: string
 }

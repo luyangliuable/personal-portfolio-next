@@ -24,6 +24,7 @@
     display: flex;
     justify-content: flex-start;
     background: #F9F9F9;
+    background: linear-gradient(225deg, rgba(255,255,253,1) 0%, rgba(245,245,245,1) 100%);
     box-shadow: var(--landing-page-card-box-shadow);
     -webkit-box-shadow: var(--landing-page-card-box-shadow);
     -moz-box-shadow: var(--landing-page-card-box-shadow);

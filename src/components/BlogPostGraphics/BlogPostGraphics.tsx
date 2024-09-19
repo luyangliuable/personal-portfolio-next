@@ -3,7 +3,7 @@ import "./BlogPostGraphics.css";
 
 const BlogPostGraphics: React.FC<{}> = () => {
     return (
-        <div className="blog-graphics">
+        <div className="blog-graphics flex">
             <div className="blog-graphics__paper">
                 <div></div>
                 <div></div>

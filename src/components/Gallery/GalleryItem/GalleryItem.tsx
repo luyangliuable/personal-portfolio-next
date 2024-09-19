@@ -77,11 +77,11 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
                 <GalleryItemTypeSegment />
                 <div className="gallery-item__image flex justify-center items-center">
                     { !imageOverlay ?
-                        <Image alt="" src={image ?? ""} />
+                        <Image compression={30} alt="" src={image ?? ""} />
                         :
                         <>
                             <img alt="" src={imageOverlay} />
-                            <Image alt="" src={image ?? ""} />
+                            <Image compression={30} alt="" src={image ?? ""} />
                         </>
                     }
                 </div>

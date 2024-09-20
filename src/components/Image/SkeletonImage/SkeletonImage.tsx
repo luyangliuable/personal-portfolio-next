@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import "./SkeletonImage.css";
 import ISkeletonImageProps from "./Interface/ISkeletonImageProps";
+import { cl } from "../../../components/Utility/LogicUtility";
 
-const SkeletonImage: React.FC<ISkeletonImageProps> = ({ className, style }) => {
+const SkeletonImage = forwardRef<HTMLDivElement, ISkeletonImageProps>(({ className, style }, ref) => {
     return (
-        <div className={`image-skeleton ${className}`} style={style}></div>
+        <div ref={ref} className={cl("image-skeleton", className)} style={style}></div>
     );
-}
+});
+
+SkeletonImage.displayName = "SkeletonImage";
 
 export default SkeletonImage;

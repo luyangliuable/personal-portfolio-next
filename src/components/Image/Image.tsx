@@ -1,67 +1,71 @@
-import React, { Component } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import SkeletonImage from './SkeletonImage/SkeletonImage';
 import IImageProps from './Interface/IImageProps';
-import IImageState from './Interface/IImageState';
 import ImageRepository from "../../repositories/ImageRepository";
 import { default as NextImage } from 'next/image';
 import "./Image.css";
 
-class Image extends Component<IImageProps, IImageState> {
-    imageRepository: ImageRepository;
+const Image: React.FC<IImageProps> = (props) => {
+    const imageRepository = ImageRepository.getInstance();
+    const [fetchedImageUrl, setFetchedImageUrl] = useState<string | undefined>(undefined);
+    const [isInView, setIsInView] = useState<boolean>(false);
+    const defaultImageAlt = "You are blind";
+    const imageRef = useRef(null);
 
-    static defaultProps = {
-        defaultImage: "https://llcode.tech/api/image/651942aaf9b642fb30be59ae",
+    const defaultProps = {
         defaultImageId: "651942aaf9b642fb30be59ae",
-        defaultAuthorImage: "https://llcode.tech/api/image/65194be0f9b642fb30be59af",
-        defaultAuthorImageId: "65194be0f9b642fb30be59af"
     };
 
-    defaultImageAlt = "You are blind";
-
-    componentDidMount(): void {
-        this.updateImage();
-    }
-
-    componentDidUpdate(prevProps: IImageProps) {
-        if (this.props.src !== prevProps.src) {
-            this.updateImage();
-        }
-    }
-
-    constructor(props: IImageProps) {
-        super(props);
-        this.imageRepository = ImageRepository.getInstance();
-        this.state = {}
-    }
-
-    async updateImage() {
+    const updateImage = async () => {
         try {
-            const { src } = this.props;
-            const imageId = src ?? Image.defaultProps.defaultImageId;
+            const imageId = props.src ?? defaultProps!.defaultImageId;
             const [imageUrl] = await Promise.all([
-                this.imageRepository.getImageById(imageId, this.props.compression),
+                imageRepository.getImageById(imageId, props.compression),
             ]);
-            this.setState({
-                fetchedImageUrl: imageUrl
-            });
+            setFetchedImageUrl(imageUrl);
         } catch (error) {
             console.error("Error fetching images:", error);
         }
-    }
+    };
 
-    render() {
-        const { fetchedImageUrl } = this.state;
-        let { className, alt } = this.props;
-        alt ??= this.defaultImageAlt;
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting && !isInView) {
+                        entry.target.classList.add("animation");
+                        setIsInView(true);
+                    }
+                });
+            },
+            { threshold: 1 }
+        );
 
-        if (fetchedImageUrl === undefined) {
-            return (<SkeletonImage className={this.props.className} />)
+        if (imageRef.current) {
+            observer.observe(imageRef.current);
         }
 
-        return (
-            <NextImage width="100" height="100" className={className} src={fetchedImageUrl} alt={alt} />
-        )
+        return () => {
+            if (imageRef.current) {
+                observer.unobserve(imageRef.current);
+            }
+        };
+    }, []);
+
+    useEffect(() => {
+        if (isInView) updateImage();
+    }, [props.src, isInView]);
+
+    let { className, alt } = props;
+    alt = alt ?? defaultImageAlt;
+
+    if (!fetchedImageUrl) {
+        return (<SkeletonImage ref={imageRef} className={props.className} />);
     }
-}
+
+    return (
+        <NextImage loading="lazy" ref={imageRef} width="100" height="100" className={className} src={fetchedImageUrl} alt={alt} />
+    );
+};
 
 export default Image;

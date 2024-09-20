@@ -313,7 +313,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
 
             const timelineFinishTrigger = {
                 trigger: triggerElement,
-                start: `bottom-=400 top`,
+                start: `bottom-=${window.innerHeight} top`,
                 end: "bottom top",
                 invalidateOnRefresh: true,
                 scrub: true
@@ -321,10 +321,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
 
             gsap.to(sectionElement, {
                 boxShadow: "0px 0px 0px #A5A58C",
-                scrollTrigger: {
-                    ...timelineFinishTrigger,
-                    start: `bottom-=200 top`,
-                }
+                scrollTrigger: timelineFinishTrigger,
             });
 
             gsap.to(triggerElement, {
@@ -338,7 +335,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                 ease: "none",
                 scrollTrigger: {
                     trigger: sectionElement,
-                    start: "top 20%", // Starts scrolling earlier
+                    start: "top 20%",
                     end: () => `+=${scrollElement.scrollWidth / 2}`,
                     scrub: true,
                     invalidateOnRefresh: true

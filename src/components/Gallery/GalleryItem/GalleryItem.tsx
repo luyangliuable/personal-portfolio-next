@@ -76,12 +76,25 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
                 className="card gallery-item initially-hidden blur-boundary--sm">
                 <GalleryItemTypeSegment />
                 <div className="gallery-item__image flex justify-center items-center">
-                    { !imageOverlay ?
-                        <Image compression={30} alt="" src={image ?? ""} />
+                    {!imageOverlay ?
+                        <Image
+                            isLazyLoading={false}
+                            compression={30}
+                            alt=""
+                            src={image ?? ""}
+                        />
                         :
                         <>
-                            <img alt="" src={imageOverlay} />
-                            <Image compression={30} alt="" src={image ?? ""} />
+                            <img
+                                alt=""
+                                src={imageOverlay}
+                            />
+                            <Image
+                                isLazyLoading={false}
+                                compression={30}
+                                alt=""
+                                src={image ?? ""}
+                            />
                         </>
                     }
                 </div>

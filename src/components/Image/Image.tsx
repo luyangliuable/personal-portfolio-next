@@ -3,6 +3,7 @@ import SkeletonImage from './SkeletonImage/SkeletonImage';
 import IImageProps from './Interface/IImageProps';
 import ImageRepository from "../../repositories/ImageRepository";
 import { default as NextImage } from 'next/image';
+import { cl } from "../Utility/LogicUtility";
 import "./Image.css";
 
 const Image: React.FC<IImageProps> = (props) => {
@@ -17,6 +18,7 @@ const Image: React.FC<IImageProps> = (props) => {
     };
 
     const updateImage = async () => {
+        if (fetchedImageUrl) return;
         try {
             const imageId = props.src ?? defaultProps!.defaultImageId;
             const [imageUrl] = await Promise.all([
@@ -38,7 +40,7 @@ const Image: React.FC<IImageProps> = (props) => {
                     }
                 });
             },
-            { threshold: 1 }
+            { threshold: .1 }
         );
 
         if (imageRef.current) {
@@ -53,7 +55,7 @@ const Image: React.FC<IImageProps> = (props) => {
     }, []);
 
     useEffect(() => {
-        if (isInView) updateImage();
+        if (isInView || props.isLazyLoading === false) updateImage();
     }, [props.src, isInView]);
 
     let { className, alt } = props;
@@ -64,7 +66,9 @@ const Image: React.FC<IImageProps> = (props) => {
     }
 
     return (
-        <NextImage loading="lazy" ref={imageRef} width="100" height="100" className={className} src={fetchedImageUrl} alt={alt} />
+        <NextImage loading="lazy" ref={imageRef} width="100" height="100" className={
+            cl(className, {"animation": props.isLazyLoading === false})
+        } src={fetchedImageUrl} alt={alt} />
     );
 };
 

@@ -40,7 +40,7 @@ const Image: React.FC<IImageProps> = (props) => {
                     }
                 });
             },
-            { threshold: .1 }
+            { threshold: .1, rootMargin: '20%' }
         );
 
         if (imageRef.current) {

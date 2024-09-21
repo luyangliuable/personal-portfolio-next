@@ -1,9 +1,9 @@
 @keyframes bob {
     0%, 100% {
-        margin-top: -5px;
+        transform: translateY(-5px);
     }
     50% {
-        margin-top: 5px;
+        transform: translateY(5px);
     }
 }
 
@@ -15,18 +15,15 @@
     --min-width: 80px;
     --min-height: 130px;
     --parent-size-factor: 1.5;
-
-
+    position: relative;
     width: calc(var(--width)*var(--parent-size-factor));
     max-width: calc(var(--max-width)*var(--parent-size-factor));
     min-width: calc(var(--min-width)*var(--parent-size-factor));
-
     height: var(--height);
     max-height: var(--max-height);
     min-height: var(--min-height);
-
     padding-left: 2vw;
-
+    animation: bob 1s ease-in-out infinite;
 }
 
 .blog-graphics__paper {

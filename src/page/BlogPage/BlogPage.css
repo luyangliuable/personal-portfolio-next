@@ -44,7 +44,7 @@
 }
 
 .blog__tag {
-    padding: 5px 9px;
+    padding: .8rem 1rem;
     font-size: clamp(12px, .5vw, 15px);
     border-radius: 4px;
     box-shadow: none;
@@ -53,7 +53,7 @@
     text-overflow: ellipsis;
     transition: all .2s ease-in;
     background: #EEE; color: #555;
-    border: .1px dashed #888;
+    border: 1px dashed #888;
 }
 
     .blog__tag>svg {

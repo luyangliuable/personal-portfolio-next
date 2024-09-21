@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-/* import { useRouter } from 'next/navigation'; */
 import { IBlogPageState, IBlogPageProps } from "../../interfaces";
 import { FaWindowClose } from "react-icons/fa";
 import HeroHeader from "../../components/HeroHeader/HeroHeader";
@@ -15,14 +14,11 @@ import SkeletonPage from "../SkeletonPage/SkeletonPage";
 
 const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, data }) => {
 
-    /* const router = useRouter(); */
     const authorImage = "https://llcode.tech/api/image/65817ae96c73ceb16ba51731";
-
     const heroHeaderContent = Object.freeze({
         heading: "Blog Posts",
         description: "Blog posts for documenting useful code, mark memorable moments in my life and help my journey of endless self-improvement.",
     });
-
     const [state, setState] = useState<IBlogPageState>({
         currentlyShowingContent: {},
         allTags: new Set(),
@@ -31,7 +27,6 @@ const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, data }) => {
     });
 
     const [isRendered, setIsRendered] = useState<boolean>(false);
-
     const [displayLeetCodePosts, setDisplayLeetCodePosts] = useState<boolean>(false);
 
     useEffect(() => {

@@ -6,7 +6,7 @@ import { Providers } from "../stores/provider";
 
 export const metadata: Metadata = {
     title: "Luyang's Website",
-    description: "Passionate software engineer with expertise in web/mobile development, machine learning, and efficient time management with over 2 years of full- time industry experience."
+description: "Passionate software engineer with 2+ years of experience in web/mobile development, machine learning, and time management."
 };
 
 export default function RootLayout({

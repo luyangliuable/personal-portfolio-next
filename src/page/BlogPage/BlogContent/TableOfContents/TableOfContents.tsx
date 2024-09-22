@@ -3,6 +3,7 @@ import ItableOfContentsProps from "../../../../interfaces/BlogPage/BlogContent/T
 import { useEffect, useState, useRef, RefObject } from "react";
 import { stringToHash, removeHashesAndStripWhitespace, removeTextInsideAngleBrackets, convertHtmlEntities } from "../../../../components/Utility/StringUtility";
 import "./TableOfContents.css";
+import { cl } from "../../../../components/Utility/LogicUtility";
 
 const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
     const [tocEntries, setTocEntries] = useState<JSX.Element[] | null>(null);
@@ -25,7 +26,6 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
     const handleClick = (_event: React.MouseEvent<HTMLDivElement>, id: string) => {
         const allBlogSections = Array.from(document.querySelectorAll(".blog-section"));
         const targetElement = allBlogSections.find((section) => section.id === id);
-
         if (targetElement) targetElement.scrollIntoView({ block: 'start', behavior: 'smooth' });
     };
 
@@ -37,8 +37,8 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
         const subheadings = props.headings?.filter(({ level }) => level !== 0);
         const renderedSubHeadings = subheadings?.map(({ title, level }, idx: number) => {
             if (level === 1) title = "";
-            const indentation = `${Math.max((level - 1), 0) * 20}px`;
-            const marginBottom = `${(22 - 4.5 * level) / 2}px`;
+            const indentation = `${Math.max((level - 2), 0) * 20}px`;
+            const marginBottom = idx === 0 ? "0px" : `${(22 - 4.5 * level) / 2}px`;
             const color = getTextColor(level);
             const id = stringToHash(title);
             const className = `level-${level - 2} section-toc-entry flex items-center`;
@@ -57,49 +57,46 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
     const drawPath = () => {
         const tocPath = tocMarkerPathRef.current,
             path: any[] = [];
-
         let height = 0,
-            indent = 40,
-            startHeight = 90,
+            indent = 10,
+            baseIndent = 10,
+            indentOffset = 20,
+            heightEach = 20,
+            startHeight = 75,
             startIdx = -1,
             endIdx = -1,
             pathStart = 0,
             pathEnd = 0;
-
         tocEntries!.forEach((entry, idx) => {
             if (entry.props.className.includes('active')) {
                 if (startIdx === -1) startIdx = idx;
+                if (idx === 1) startHeight = 80;
                 endIdx = idx;
             }
         });
-
         path.push("M", indent, startHeight);
         height = startHeight;
-
         tocEntries!.forEach((entry, idx) => {
             const computedStyle = window.getComputedStyle(tocEntryRef[idx].current!);
             const extra = parseFloat(computedStyle.height) + parseFloat(computedStyle.marginBottom) * 2;
-
             if (idx < startIdx) pathStart += extra;
-
-            if (indent == 40 && entry.props.className.includes('level-1')) {
-                path.push("L", 60, height);
-                indent = 60;
-                if (idx <= endIdx) pathEnd += 20;
-                if (idx < startIdx) pathStart += 20;
-            } else if (indent == 60 && entry.props.className.includes('level-0')) {
-                path.push("L", 40, height);
-                indent = 40;
-                if (idx <= endIdx) pathEnd += 20;
-                if (idx < startIdx) pathStart += 20;
+            const { className } = entry.props;
+            const match = className.match(/level-(\d+)/);
+            if (match) {
+                const level = match[1];
+                const expectedIdent = baseIndent + level * indentOffset;
+                if (indent !== expectedIdent) {
+                    indent = expectedIdent;
+                    path.push("L", indent, height);
+                    if (idx <= endIdx) pathEnd += heightEach;
+                    if (idx < startIdx) pathStart += heightEach;
+                }
+                if (idx <= endIdx) pathEnd += extra;
+                path.push("L", indent, height + extra);
+                height += extra;
             }
-
-            if (idx <= endIdx) pathEnd += extra;
-            path.push("L", indent, height + extra);
-            height += extra;
         });
         const { lastPathStart, lastPathEnd } = lastPathInfo;
-
         if (pathStart !== lastPathStart || pathEnd !== lastPathEnd) {
             if (startIdx === -1) tocPath!.setAttribute('opacity', '0');
             const pathString = path.join(' ');
@@ -114,12 +111,10 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
             });
         }
     }
-
     useEffect(() => {
         if (tocEntries === null) return;
         drawPath();
     }, [tocEntries]);
-
     function listenSections(): void {
         if (tocEntries === null || props.emitter === undefined) return;
         if (listenTocItems.has('intersectingSectionsListener')) return;
@@ -136,11 +131,8 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
         });
         setlistenTocItems(prev => new Set(prev).add('intersectingSectionsListener'));
     }
-
-    const className = ["table-of-contents", props.className].join(" ");
-
     return (
-        <div className={className}>
+        <div className={cl("table-of-contents", props.className)}>
             <h2>Table of Contents:</h2>
             {
                 tocEntries &&

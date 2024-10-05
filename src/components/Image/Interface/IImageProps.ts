@@ -1,9 +1,11 @@
+import { CSSProperties } from "react";
+
 interface IImageProps {
     src: string;
     className?: string;
     compression?: number;
     isLazyLoading?: boolean;
-    style?: any;
+    style?: CSSProperties;
     alt?: string
 }
 

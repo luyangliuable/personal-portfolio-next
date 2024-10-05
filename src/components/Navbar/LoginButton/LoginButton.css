@@ -1,14 +1,19 @@
 .login-button--container {
     gap: .4rem;
+    width: fit-content;
+    height: 100%;
     margin-right: 2rem;
 }
 
     .login-button--container .login-button {
-        padding: var(--navbar-item-padding);
-        width: var(--navbar-item-width);
-        max-width: var(--navbar-item-max-width);
-        border-radius: var(--navbar-item-border-radius);
-        border: 1px solid #FFF;
+        border: 1px solid #FFF !important;
+        cursor: pointer;
+        transition: background .2s ease-in-out;
+    }
+
+    .login-button--container .user-details {
+        cursor: pointer;
+        width: fit-content;
         transition: background .2s ease-in-out;
     }
 

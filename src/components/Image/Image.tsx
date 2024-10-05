@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useEffect, useRef, useState } from 'react';
 import SkeletonImage from './SkeletonImage/SkeletonImage';
 import IImageProps from './Interface/IImageProps';
@@ -6,7 +8,7 @@ import { default as NextImage } from 'next/image';
 import { cl } from "../Utility/LogicUtility";
 import "./Image.css";
 
-const Image: React.FC<IImageProps> = (props) => {
+const Image: React.FC<IImageProps> = ({ compression, src, isLazyLoading, className, alt, style }) => {
     const imageRepository = ImageRepository.getInstance();
     const [fetchedImageUrl, setFetchedImageUrl] = useState<string | undefined>(undefined);
     const [isInView, setIsInView] = useState<boolean>(false);
@@ -20,9 +22,9 @@ const Image: React.FC<IImageProps> = (props) => {
     const updateImage = async () => {
         if (fetchedImageUrl) return;
         try {
-            const imageId = props.src ?? defaultProps!.defaultImageId;
+            const imageId = src ?? defaultProps!.defaultImageId;
             const [imageUrl] = await Promise.all([
-                imageRepository.getImageById(imageId, props.compression),
+                imageRepository.getImageById(imageId, compression),
             ]);
             setFetchedImageUrl(imageUrl);
         } catch (error) {
@@ -55,19 +57,18 @@ const Image: React.FC<IImageProps> = (props) => {
     }, []);
 
     useEffect(() => {
-        if (isInView || props.isLazyLoading === false) updateImage();
-    }, [props.src, isInView]);
+        if (isInView || isLazyLoading === false) updateImage();
+    }, [src, isInView]);
 
-    let { className, alt } = props;
     alt = alt ?? defaultImageAlt;
 
     if (!fetchedImageUrl) {
-        return (<SkeletonImage ref={imageRef} className={props.className} />);
+        return (<SkeletonImage ref={imageRef} className={className} />);
     }
 
     return (
-        <NextImage loading="lazy" ref={imageRef} width="100" height="100" className={
-            cl(className, {"animation": props.isLazyLoading === false})
+        <NextImage style={style} loading="lazy" ref={imageRef} width="100" height="100" className={
+            cl(className, { "animation": isLazyLoading === false })
         } src={fetchedImageUrl} alt={alt} />
     );
 };

@@ -68,7 +68,8 @@
 .navbar-item {
   text-decoration: none;
   cursor: pointer;
-  color: #000;
+  font-weight: 500;
+  color: #555;
   padding: var(--navbar-item-padding);
   width: var(--navbar-item-width);
   min-height: 100%;
@@ -171,11 +172,11 @@
     font-weight: var(--font-weight-bold);
     background: linear-gradient(
         90deg,
-        #89c4e6 0%,    /* Darker Pastel Sky Blue */
-        #c4a3b7 40%,   /* Darker Pastel Pink */
-        #b4a7d6 60%,   /* Darker Pastel Lavender */
-        #a3b9c7 80%,   /* Darker Pastel Teal */
-        #89c4e6 100%   /* Darker Pastel Sky Blue */
+        #89c4e6 0%,
+        #c4a3b7 40%,
+        #b4a7d6 60%,
+        #a3b9c7 80%,
+        #89c4e6 100%
     );
     background: linear-gradient(
         90deg,

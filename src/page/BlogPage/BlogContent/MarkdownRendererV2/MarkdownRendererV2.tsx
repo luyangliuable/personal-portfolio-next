@@ -122,7 +122,6 @@ const MarkdownRendererV2: React.FC<MarkdownRendererProps> = ({ markdown }) => {
     }
 
     useEffect(() => {
-
         const filteredMarkdown = filterMarkdown(markdown.split('\n')
             .filter(line => !/^#[^#]/.test(line) && !/^<!.*>/.test(line))
             .join('\n'));

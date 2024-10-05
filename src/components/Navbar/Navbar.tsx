@@ -23,14 +23,12 @@ const NavBar: React.FC<INavbarProps> = () => {
     const burgerPanel: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
     const burgerButton: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
     const navbarSubmenu: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
-    const [navBarHeight, setNavBarHeight] = useState(0);
 
-    const links = useMemo(() => {
-        return linksData.links as NavbarItem[]
-    }, [])
-
+    const links: NavbarItem[] = linksData.links as NavbarItem[];
     const websiteName = "~/llcode.tech" as const;
 
+    const [isRendered, setIsRendered] = useState(false);
+    const [navBarHeight, setNavBarHeight] = useState(0);
     const [state, setState] = useState<INavbarState>({
         lastScrollY: 0,
         navBarDetached: false,
@@ -44,6 +42,7 @@ const NavBar: React.FC<INavbarProps> = () => {
         const element = navbar.current!;
         const height = element?.getBoundingClientRect().height || 0;
         setNavBarHeight(height);
+        setIsRendered(true);
     }, [])
 
     const listenDeltaScrolled = () => {
@@ -87,7 +86,8 @@ const NavBar: React.FC<INavbarProps> = () => {
                 if (child !== selectedNavlinkWindowTarget) {
                     child.addEventListener("mouseover", () => {
                         const factor = navbarLeftTarget.children.length - index - 1;
-                        const translateXValue = `calc(-${factor}*( min(var(--navbar-item-width), var(--navbar-item-max-width)) + var(--navbar-item-margin)) + var(--navbar-item-margin) )`;
+                        const itemWidth = `min(var(--navbar-item-width), var(--navbar-item-max-width))`;
+                        const translateXValue = `calc(-${factor} * (${itemWidth} + var(--navbar-item-margin)) + var(--navbar-item-margin))`;
                         selectedNavlinkWindowTarget.style.setProperty("--dynamic-translate", `${translateXValue}`);
                     });
                 }

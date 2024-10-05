@@ -13,7 +13,7 @@
                     "name": "Posts",
                     "emoji": "💻",
                     "description": "My Blog posts",
-                    "to": "/digital-chronicles/blogs"
+                    "to": "/digital-chronicles/blog"
                 },
                 {
                     "name": "Coding Notes",

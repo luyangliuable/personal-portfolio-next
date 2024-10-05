@@ -1,95 +1,53 @@
-import React, { useEffect, ReactNode } from "react";
+import React, { CSSProperties, ReactNode, useEffect, useState } from "react";
 import Link from "next/link";
 import { CiLogin } from 'react-icons/ci';
 import { AiFillCaretDown } from 'react-icons/ai';
-import UserRepository from "../../../repositories/UserRepository";
 import { truncateTextBody } from "../../Utility/StringUtility";
-import { useDispatch, useSelector } from 'react-redux';
 import ILoginButtonProps from "./Interface/ILoginButtonProps";
-import { selectIsLoggedIn, selectCurrentUser } from "../../../stores/Selectors/Auth";
-import { authUser } from "../../../stores/Repository/Auth";
-import { unwrapResult } from '@reduxjs/toolkit';
-import { AppDispatch } from "../../../stores/store";
+import { auth, signIn, signOut } from "../../../auth";
 import "./LoginButton.css";
+import Image from "../../Image/Image";
 
-const LoginButton: React.FC<ILoginButtonProps> = ({ onMouseOver }) => {
-  const dispatch: AppDispatch = useDispatch();
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-  const userName = useSelector(selectCurrentUser);
+const LoginButton: React.FC<{ style?: CSSProperties }> = async ({ style }) => {
+    const data = await auth();
 
-  useEffect(() => {
-    dispatch(authUser())
-      .then(unwrapResult)
-      .then(data => {})
-      .catch((err) => {});
-  }, [dispatch]);
+    return (
+        <nav style={style} className="login-button--container flex flex-row items-center">
+            {
+                data &&
+                <>
+                    <div className="user-details flex flex-row flex items-center gap-half">
+                        {data.user!.email}
+                        <Image className="user-image-md" src={data.user!.image as string} />
+                    </div>
+                    <form
+                        action={async () => {
+                            "use server"
+                            await signOut()
+                        }}
+                        className="w-full flex flex-row gap-1">
+                        <button className="navbar-item login-button flex justify-center">
+                            Sign Out
+                        </button>
+                    </form>
+                </>
+            }
+            {
+                !data &&
+                <form
+                    action={async () => {
+                        "use server"
+                        await signIn()
+                    }}
+                    className="w-full">
+                    <button className="navbar-item login-button flex justify-center">
+                        Sign In
+                    </button>
+                </form>
 
-  const logoff = () => {
-    UserRepository.logout().then(() => {
-      window.location.href = "/";
-    });
-  };
-
-  const loginButtonContent = {
-    loggedIn: {
-      name: "Hello",
-      to: "/user/login",
-      icon: (<AiFillCaretDown />),
-      sublinks: [{
-        name: "Logout",
-        to: "",
-        onClick: () => logoff()
-      }]
-    },
-    loggedOff: {
-      name: "Login",
-      icon: (<CiLogin />),
-      to: "/user/login",
-      sublinks: [{
-        name: "Sign Up",
-        to: "/user/register"
-      }]
-    },
-  };
-
-  const getLoginButtonInnerHTML = (): ReactNode => {
-    if (isLoggedIn && userName) {
-      return <>Hi {truncateTextBody(userName, 5)}</>;
-      }
-      return (
-      <>{loginButtonContent.loggedOff.name} {loginButtonContent.loggedOff.icon}</>
-      );
-  };
-
-  const getLoginButtonTo = (): string => {
-    return loginButtonContent.loggedIn.to;
-  };
-
-  return (
-    <nav className="login-button--container flex flex-row">
-    <Link
-      href={getLoginButtonTo()}
-      className="login-button flex justify-center">
-      {getLoginButtonInnerHTML()}
-      <div className="navbar-item__dropdown"></div>
-    </Link>
-    { isLoggedIn ?
-      <Link
-        href="https://llcode.tech/api/logout"
-        className="login-button flex justify-center">
-        Logoff
-        <div className="navbar-item__dropdown"></div>
-      </Link>
-    :
-      <Link
-        href={"/user/register"}
-        className="login-button flex justify-center">
-        SignUp
-        <div className="navbar-item__dropdown"></div>
-      </Link>
-    }
-    </nav>
-  );
+            }
+        </nav >
+    );
 };
 
 export default LoginButton;

@@ -465,6 +465,10 @@ a {
     flex-direction: column
 }
 
+.gap-half {
+    gap: .5rem;
+}
+
 .gap-1 {
     gap: 1rem;
 }
@@ -832,9 +836,17 @@ a {
               2px 2px 8px rgba(0, 0, 0, 0.05);          /* Light, diffused shadow for realism */
 }
 
-.user-image {
+.user-image, .user-image-sm {
   border-radius: 100% !important;
   width: 20px !important; height: 20px !important;
+  border: 2px solid white;
+  object-fit: cover
+}
+
+.user-image-md {
+  border-radius: 100% !important;
+  width: 30px !important;
+  height: 30px !important;
   border: 2px solid white;
   object-fit: cover
 }

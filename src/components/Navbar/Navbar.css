@@ -41,6 +41,11 @@
     width: fit-content;
 }
 
+.nav-burger {
+    position: absolute;
+    right: 0;
+}
+
 .navbar-left>a:hover ~ .selected-navlink-window {
     opacity: 1;
 }
@@ -122,6 +127,10 @@
 @media screen and (max-width: 1200px) {
     .navbar-left {
         display: none !important
+    }
+
+    .navbar svg {
+        stroke: rgba(0, 0, 0, .35);
     }
 }
 

@@ -23,9 +23,7 @@ class ImageRepository extends Repository {
         const fetchImage = async () => {
             try {
                 const response = await fetch(url, {
-                    headers: {
-                        'Cache-Control': 'public, max-age=31536000',
-                    }
+                    headers: {}
                 });
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);

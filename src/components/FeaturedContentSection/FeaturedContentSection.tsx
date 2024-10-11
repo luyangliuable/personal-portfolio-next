@@ -120,7 +120,7 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({ postLi
         const posts = [...state.featuredPosts, ...postList.filter(post => post.is_featured)];
         return groupArray(posts.slice(0, showAllPosts ? -1 : sliceEnd), sliceEnd).map((group, index) => (
           <div key={index} className="featured-section w-full flex flex-col position-relative">
-            <Retro showBorder={showAllPosts} />
+            <Retro showBorder/>
             <div className="flex flex-row w-full justify-center items-stretch gap-1 flex-wrap position-relative">
               {group.map((content) => (
                 <div

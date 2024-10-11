@@ -4,18 +4,19 @@
   perspective: 360px;
   perspective-origin: 50% 50%;
   position: absolute;
-
   overflow: hidden;
   height: 100%;
   width: 100%;
   z-index: -1;
+  box-shadow: 1px 1px 5px rgba(139, 101, 77, 0.2);
 }
 
 .retro--show-border::before {
-  border-width: 1.5px 4px;
+  border-width: 3px 8px;
   border-style: solid;
-  border-color: #FFF;
-  box-shadow: 1px 1px 5px rgba(139, 101, 77, 0.2);
+  border-color: var(--wire-color);
+  box-shadow: 15px 15px 50px #FFF;
+  z-index: 0;
 }
 
 .retro::before {
@@ -33,6 +34,7 @@
   background-position: 0px calc(-1*var(--square-width)), 0px 0px;
   transform: rotateX(85deg);
   animation: planeMoveTop 5s infinite linear;
+  z-index: -2;
 }
 
 @keyframes planeMoveTop {

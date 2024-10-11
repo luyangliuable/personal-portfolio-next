@@ -14,7 +14,7 @@ const Retro: React.FC<IRetroProps> = ({ children, className, style, showBorder }
         <div
             style={style ?? {}}
             className={cl("retro", className, {
-                "retro--show-border": showBorder
+                "retro--show-border": true
             })}
         >
             {children}

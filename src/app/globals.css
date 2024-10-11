@@ -49,21 +49,13 @@
     --orange: #ffcc81;
     --cyan: #7ed1e2;
 
-    /* Pastel Edition Light */
-    --green: #c5f2c2;
-    --pink: #ffc5e6;
-    --blue: #add8e6;
-    --orange: #ffdcb2;
-    --cyan: #b2e8ed;
-
     /* Pastel Edition Dark */
     --green: #92d7a6;
-    --pink: #e9a5c6;
+    --pink: #555;
     --blue: #85a9c6;
     --orange: #e3b88f;
     --cyan: #8bc4c9;
     --cyan: #cbf4f9;
-
 }
 
 @font-face {

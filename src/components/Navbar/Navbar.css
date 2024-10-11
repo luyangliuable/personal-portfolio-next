@@ -83,7 +83,6 @@
     border-radius: var(--navbar-item-border-radius);
     font-family: 'TT Norms Pro', Spartan, 'Poppins', sans-serif;
     margin-left: var(--navbar-item-margin);
-    transition: all .2s ease-in;
 }
 
 .navbar-item:active {

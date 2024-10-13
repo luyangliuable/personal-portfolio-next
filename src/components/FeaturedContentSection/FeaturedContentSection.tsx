@@ -139,7 +139,7 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({
             >
                 <Retro showBorder />
                 <div className="featured-section--inner w-full flex flex-col position-relative items-center">
-                    <div className="flex flex-row items-stretch gap-1 justify-between flex-wrap position-relative">
+                    <div className="flex flex-row items-stretch gap-2 justify-between flex-wrap position-relative">
                         {group.map((content) => (
                             <div
                                 className="featured-section--item flex"

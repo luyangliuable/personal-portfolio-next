@@ -1,4 +1,4 @@
-import { CSSProperties } from 'react';
+import { CSSProperties } from "react";
 
 interface IGalleryItemPropsBase {
     name?: string;
@@ -15,9 +15,9 @@ interface IGalleryItemPropsBase {
     key?: number | string;
     style?: CSSProperties;
     metadata?: {
-        value: string | number | React.ReactNode,
-        icon?: React.ReactNode,
-        callback?: (val: string | number | React.ReactNode) => React.ReactNode
+        value: string | number | React.ReactNode;
+        icon?: React.ReactNode;
+        callback?: (val: string | number | React.ReactNode) => React.ReactNode;
     }[];
     tags?: string[];
 }
@@ -32,6 +32,8 @@ interface IGalleryItemPropsWithoutRepo extends IGalleryItemPropsBase {
     repoName?: undefined;
 }
 
-type IGalleryItemProps = IGalleryItemPropsWithRepo | IGalleryItemPropsWithoutRepo;
+type IGalleryItemProps =
+    | IGalleryItemPropsWithRepo
+    | IGalleryItemPropsWithoutRepo;
 
 export default IGalleryItemProps;

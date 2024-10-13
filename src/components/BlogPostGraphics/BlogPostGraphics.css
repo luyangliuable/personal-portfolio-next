@@ -1,5 +1,6 @@
 @keyframes bob {
-    0%, 100% {
+    0%,
+    100% {
         transform: translateY(-5px);
     }
     50% {
@@ -16,9 +17,9 @@
     --min-height: 130px;
     --parent-size-factor: 1.5;
     position: relative;
-    width: calc(var(--width)*var(--parent-size-factor));
-    max-width: calc(var(--max-width)*var(--parent-size-factor));
-    min-width: calc(var(--min-width)*var(--parent-size-factor));
+    width: calc(var(--width) * var(--parent-size-factor));
+    max-width: calc(var(--max-width) * var(--parent-size-factor));
+    min-width: calc(var(--min-width) * var(--parent-size-factor));
     height: var(--height);
     max-height: var(--max-height);
     min-height: var(--min-height);
@@ -28,7 +29,7 @@
 
 .blog-graphics__paper {
     position: relative;
-    background: #FAFAFA;
+    background: #fafafa;
     z-index: 1;
     display: flex;
     flex-direction: column;
@@ -39,18 +40,19 @@
 .blog-graphics__paper:before {
     --paper-background-color: rgb(235, 235, 235);
     --paper-flip-size: max(min(5vw, 60px), 25px);
-    content: '';
+    content: "";
     position: absolute;
     top: -1.5px;
     right: -1.5px;
-    border-top: var(--paper-flip-size)  solid var(--paper-background-color);
-    border-left: var(--paper-flip-size) solid #F7F8F3;
+    border-top: var(--paper-flip-size) solid var(--paper-background-color);
+    border-left: var(--paper-flip-size) solid #f7f8f3;
     width: 0;
     border-radius: 0 0 0 12px;
     box-shadow: -2px 2px 1px rgba(109, 71, 47, 0.2);
 }
 
-.blog-graphics__paper, .paper.-two {
+.blog-graphics__paper,
+.paper.-two {
     --transform: rotateX(-40deg) rotateZ(-20deg);
     width: var(--width);
     height: var(--height);
@@ -58,28 +60,28 @@
     max-height: var(--max-height);
     min-width: var(--min-width);
     min-height: var(--min-height);
-    border: .1px solid black;
+    border: 0.1px solid black;
     border-radius: 1vw;
     transform: var(--transform);
 }
 
-.blog-graphics__paper>div {
+.blog-graphics__paper > div {
     background: #666;
     height: 1px;
     width: 80%;
 }
 
-.blog-graphics__paper>div:nth-child(1) {
+.blog-graphics__paper > div:nth-child(1) {
     width: 50%;
 }
 
-.blog-graphics__paper>div:last-child {
+.blog-graphics__paper > div:last-child {
     width: 50%;
 }
 
 .paper.-two {
     position: absolute;
-    transform: var(--transform) translate(min(-.5vw, -8px), max(.5vw, 8px));
+    transform: var(--transform) translate(min(-0.5vw, -8px), max(0.5vw, 8px));
     background-image: radial-gradient(#333 1px, transparent 0);
     background-size: 4px 4px;
 }

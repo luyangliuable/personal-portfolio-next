@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState } from "react";
 import "./GolfedSierpinski.css";
 
 const GolfedSierpinski = () => {
@@ -32,13 +32,13 @@ const GolfedSierpinski = () => {
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
-        const context = canvas.getContext('2d');
+        const context = canvas.getContext("2d");
         if (!context) return;
 
         const S = Math.sin;
 
         const resizeCanvas = () => {
-            canvas.width = size, canvas.height = size;
+            (canvas.width = size), (canvas.height = size);
         };
 
         const animate = (t: number) => {
@@ -46,29 +46,40 @@ const GolfedSierpinski = () => {
 
             resizeCanvas();
 
-            const squareSize = 4;  // New square size
-            const spacing = 3;     // Adjust spacing if needed
+            const squareSize = 4; // New square size
+            const spacing = 3; // Adjust spacing if needed
 
-            context.fillStyle = '#433';
+            context.fillStyle = "#433";
 
-            for (let i = 114; i--;) {
-                for (let j = 66; j--;) {
-                    const P = S(((j - i) & (j + i)) + t) * squareSize + squareSize;
-                    context.fillRect(i * 2 * squareSize - P / 2, j * 2 * squareSize - P / 2, P, P);
+            for (let i = 114; i--; ) {
+                for (let j = 66; j--; ) {
+                    const P =
+                        S(((j - i) & (j + i)) + t) * squareSize + squareSize;
+                    context.fillRect(
+                        i * 2 * squareSize - P / 2,
+                        j * 2 * squareSize - P / 2,
+                        P,
+                        P,
+                    );
                 }
             }
 
             requestAnimationFrame(animate);
         };
         requestAnimationFrame(animate);
-        window.addEventListener('resize', resizeCanvas);
+        window.addEventListener("resize", resizeCanvas);
         return () => {
-            window.removeEventListener('resize', resizeCanvas);
+            window.removeEventListener("resize", resizeCanvas);
         };
     }, [size]);
 
     return (
-        <canvas className="golfed-sierpinski" ref={canvasRef} width={size} height={size}></canvas>
+        <canvas
+            className="golfed-sierpinski"
+            ref={canvasRef}
+            width={size}
+            height={size}
+        ></canvas>
     );
 };
 

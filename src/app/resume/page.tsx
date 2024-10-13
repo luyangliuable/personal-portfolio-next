@@ -3,7 +3,7 @@ import ResumePage from "../../page/ResumePage/ResumePage";
 
 export const metadata: Metadata = {
     title: "Luyang's Resume",
-    description: ""
+    description: "",
 };
 
 export default ResumePage;

@@ -1,14 +1,18 @@
 .featured-section {
     gap: 3rem 1rem;
     height: 430px;
-    margin-bottom: 4rem;
+    margin-bottom: 1rem;
     z-index: 1;
     padding-bottom: 1rem;
 }
 
-    .featured-section .featured-section--item {
-        width: 400px;
-    }
+.featured-section--inner > div {
+    width: 90%;
+}
+
+.featured-section .featured-section--item {
+    width: 400px;
+}
 
 .featured-section--wrapper {
     min-height: 550px;
@@ -17,12 +21,11 @@
 @media (max-width: 1439px) {
     .featured-section-with-before::before {
         content: "";
-        display:none;
+        display: none;
     }
 }
 
 .show-more-button-wrapper {
-    margin-top: -1rem;
     transform: translateY(-50%);
     z-index: 1;
 }

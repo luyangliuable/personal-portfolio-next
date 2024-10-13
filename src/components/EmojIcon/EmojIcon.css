@@ -4,16 +4,17 @@
     height: 100%;
     border-radius: 50%;
     font-size: 1.5rem;
-    border: 1.5px solid #FFF;
+    border: 1.5px solid #fff;
     overflow: hidden;
 }
 
 .emoj-icon--emoji {
     position: absolute;
-    font-size: .5rem;
+    font-size: 0.5rem;
     padding: 2px;
     backdrop-filter: blur(2px);
-    width: 15px; height: 15px;
+    width: 15px;
+    height: 15px;
     border-radius: 50%;
 }
 

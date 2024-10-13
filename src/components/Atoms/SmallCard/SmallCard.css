@@ -9,11 +9,12 @@
 }
 
 .small-card h3 {
-    font-size: .9rem;
+    font-size: 0.9rem;
 }
 
 .small-card__image {
-    width: 100px; height: 100px;
+    width: 100px;
+    height: 100px;
     object-fit: cover;
     border-radius: 8px;
 }

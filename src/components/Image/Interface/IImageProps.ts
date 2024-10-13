@@ -6,7 +6,7 @@ interface IImageProps {
     compression?: number;
     isLazyLoading?: boolean;
     style?: CSSProperties;
-    alt?: string
+    alt?: string;
 }
 
 export default IImageProps;

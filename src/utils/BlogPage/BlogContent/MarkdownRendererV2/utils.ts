@@ -8,14 +8,16 @@ export const getFirstTagName = (html: string): string | null => {
     return matches ? matches[1].toLowerCase() : null;
 };
 
-export function extractAttributesFromHtmlElement(node: Element): { [key: string]: any } {
+export function extractAttributesFromHtmlElement(node: Element): {
+    [key: string]: any;
+} {
     const attributes: { [key: string]: any } = {};
     const attributeNameMap: { [key: string]: string } = {
-        "class": "className"
+        class: "className",
     };
-    Array.from(node.attributes).forEach(attr => {
+    Array.from(node.attributes).forEach((attr) => {
         const attrName = attributeNameMap[attr.name] || attr.name;
-        if (attr.name === 'style') {
+        if (attr.name === "style") {
             attributes[attrName] = styleStringToObject(attr.value);
         } else {
             attributes[attrName] = attr.value;
@@ -26,10 +28,12 @@ export function extractAttributesFromHtmlElement(node: Element): { [key: string]
 
 function styleStringToObject(styleString: string): { [key: string]: string } {
     const styleObject: { [key: string]: string } = {};
-    styleString.split(';').forEach(styleProperty => {
-        const [key, value] = styleProperty.split(':');
+    styleString.split(";").forEach((styleProperty) => {
+        const [key, value] = styleProperty.split(":");
         if (key && value) {
-            const formattedKey = key.trim().replace(/-(.)/g, (match, group) => group.toUpperCase());
+            const formattedKey = key
+                .trim()
+                .replace(/-(.)/g, (match, group) => group.toUpperCase());
             styleObject[formattedKey] = value.trim();
         }
     });

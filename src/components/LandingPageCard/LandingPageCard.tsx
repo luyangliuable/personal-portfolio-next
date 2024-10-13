@@ -1,23 +1,24 @@
 "use client";
 
-import React, { Component } from 'react';
-import './LandingPageCard.css';
-import { ILandingPageCardProps, LandingPageCardType } from "./Interface/ILandingPageCardProps";
-import SequentialRiseSpan from '../Atoms/SequentialRiseSpan/SequentialRiseSpan';
-
+import React, { Component } from "react";
+import "./LandingPageCard.css";
+import {
+    ILandingPageCardProps,
+    LandingPageCardType,
+} from "./Interface/ILandingPageCardProps";
+import SequentialRiseSpan from "../Atoms/SequentialRiseSpan/SequentialRiseSpan";
 
 class LandingPageCard extends Component<ILandingPageCardProps, any> {
-
     constructor(props: ILandingPageCardProps) {
         super(props);
-        this.state = {}
+        this.state = {};
     }
 
     componentDidMount(): void {
         window.addEventListener("scroll", () => {
             this.setState({
                 ...this.state,
-                scrolling: true
+                scrolling: true,
             });
         });
         document.documentElement.scrollTo(0, 0);
@@ -25,18 +26,21 @@ class LandingPageCard extends Component<ILandingPageCardProps, any> {
             if (this.state.scrolling) {
                 this.setState({
                     ...this.state,
-                    scrolling: false
+                    scrolling: false,
                 });
             }
         }, 500);
     }
 
-    private determineWhatTypeOfLandingPageCardToUse(landingPageCardType?: LandingPageCardType): string {
+    private determineWhatTypeOfLandingPageCardToUse(
+        landingPageCardType?: LandingPageCardType,
+    ): string {
         const mapper = {
-            "normal": "landing-page-card",
-            "fitUnderNavbar": "landing-page-card landing-page-card--fit-under-navbar",
-            "fitContent": "landing-page-card landing-page-card--fit-content"
-        }
+            normal: "landing-page-card",
+            fitUnderNavbar:
+                "landing-page-card landing-page-card--fit-under-navbar",
+            fitContent: "landing-page-card landing-page-card--fit-content",
+        };
 
         if (landingPageCardType === undefined) return "landing-page-card";
 
@@ -45,18 +49,24 @@ class LandingPageCard extends Component<ILandingPageCardProps, any> {
 
     render(): any {
         let classArray = [
-            this.determineWhatTypeOfLandingPageCardToUse(this.props.landingPageCardType),
-            this.props.className
+            this.determineWhatTypeOfLandingPageCardToUse(
+                this.props.landingPageCardType,
+            ),
+            this.props.className,
         ];
 
-        if (this.props.blendWithBackground) classArray.push('blend-with-background');
+        if (this.props.blendWithBackground)
+            classArray.push("blend-with-background");
         const landingPageCardHeading = this.props.heading;
         return (
-            <div style={this.props.style} className={classArray.join(' ')}>
+            <div style={this.props.style} className={classArray.join(" ")}>
                 <div className="landing-page-card__content">
                     {landingPageCardHeading && (
                         <header className="landing-page-card__heading important-text">
-                            <SequentialRiseSpan elementType="h2" className="landing-page-card__header" >
+                            <SequentialRiseSpan
+                                elementType="h2"
+                                className="landing-page-card__header"
+                            >
                                 {landingPageCardHeading ?? ""}
                             </SequentialRiseSpan>
                         </header>

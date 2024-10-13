@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, RefObject } from "react";
 import { FaArrowCircleUp } from "react-icons/fa";
 import { useScrollPosition } from "../../../hooks";
-import { usePathname } from 'next/navigation';
+import { usePathname } from "next/navigation";
 import "./NavbarScrollProgress.css";
 
 const NavbarScrollProgress: React.FC<{ scrollY: number }> = ({}) => {
-    const scrollProgress: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
+    const scrollProgress: RefObject<HTMLDivElement> =
+        useRef<HTMLDivElement>(null);
     const { scrollY } = useScrollPosition();
 
     const pathname = usePathname();
@@ -16,10 +17,11 @@ const NavbarScrollProgress: React.FC<{ scrollY: number }> = ({}) => {
 
     useEffect(() => {
         if (scrollY !== undefined) {
-            const pageHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const pageHeight =
+                document.documentElement.scrollHeight - window.innerHeight;
             updateScrolledProgress(scrollY! / pageHeight);
         }
-    }, [scrollY])
+    }, [scrollY]);
 
     const updateScrolledProgress = (progress: number) => {
         if (scrollProgress?.current) {
@@ -34,7 +36,7 @@ const NavbarScrollProgress: React.FC<{ scrollY: number }> = ({}) => {
         <aside id="scroll-progress" ref={scrollProgress}>
             <FaArrowCircleUp />
         </aside>
-    )
-}
+    );
+};
 
 export default NavbarScrollProgress;

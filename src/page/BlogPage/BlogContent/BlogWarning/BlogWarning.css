@@ -7,21 +7,24 @@
 }
 
 .blog-warning::after {
-    content: '';
+    content: "";
     border-right: 2px solid rgb(255, 150, 0);
     border-bottom: 2px solid rgb(255, 150, 0);
     position: absolute;
-    top: 0; left: -2px;
-    width: 32px; height: 30px;
+    top: 0;
+    left: -2px;
+    width: 32px;
+    height: 30px;
     border-radius: 0 0 100% 0;
-    background: #EEE;
+    background: #eee;
     z-index: 0;
 }
 
 .blog-warning h4 {
-    top: -15px; left: -15px;
+    top: -15px;
+    left: -15px;
     margin: 0 0 10px;
     z-index: 1;
     font-size: 2.3rem;
-    color: rgb(255, 150, 0)
+    color: rgb(255, 150, 0);
 }

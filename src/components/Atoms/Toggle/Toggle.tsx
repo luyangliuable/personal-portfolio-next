@@ -7,10 +7,15 @@ interface IToggleProps {
     toggleState: boolean;
 }
 
-const Toggle: React.FC<IToggleProps> = ({ setToggleState, toggleState, disabled }) => {
-
+const Toggle: React.FC<IToggleProps> = ({
+    setToggleState,
+    toggleState,
+    disabled,
+}) => {
     const toggleClassName = ["toggle"];
-    const toggleContainerClassName = ["toggle--container flex flex-row items-center justify-center"];
+    const toggleContainerClassName = [
+        "toggle--container flex flex-row items-center justify-center",
+    ];
 
     if (toggleState) {
         toggleClassName.push("toggle--on");
@@ -22,17 +27,20 @@ const Toggle: React.FC<IToggleProps> = ({ setToggleState, toggleState, disabled 
 
     const handleClick = () => {
         if (disabled) return;
-        setToggleState(( prev: boolean ) => !prev);
-    }
+        setToggleState((prev: boolean) => !prev);
+    };
 
     return (
-        <div onClick={() => handleClick()} className={toggleContainerClassName.join(" ")}>
+        <div
+            onClick={() => handleClick()}
+            className={toggleContainerClassName.join(" ")}
+        >
             <span className="text-center">Display Leetcode Posts?</span>
             <div className={toggleClassName.join(" ")}>
                 <div className="toggle__inner-circle" />
             </div>
         </div>
     );
-}
+};
 
 export default Toggle;

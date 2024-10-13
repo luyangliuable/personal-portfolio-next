@@ -15,12 +15,9 @@ const TestHarnessPage = () => {
 
     useEffect(() => {
         console.log(links);
-    }, [links])
+    }, [links]);
 
-    return (
-        <main className="h-screen">
-        </main>
-    )
-}
+    return <main className="h-screen"></main>;
+};
 
 export default TestHarnessPage;

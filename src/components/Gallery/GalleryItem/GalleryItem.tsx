@@ -1,6 +1,12 @@
 "use client";
 
-import React, { CSSProperties, useEffect, useRef, ReactElement, useState } from "react";
+import React, {
+    CSSProperties,
+    useEffect,
+    useRef,
+    ReactElement,
+    useState,
+} from "react";
 import { isoDateFormatToString } from "../../../components/Utility/StringUtility";
 import Link from "next/link";
 import { cardGradientEffect } from "../../../components/Utility/MouseUtility";
@@ -49,7 +55,7 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
             );
         }
 
-        return (<></>);
+        return <></>;
     };
 
     const style: CSSProperties = props.style || {};
@@ -57,38 +63,40 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
 
     useEffect(() => {
         setIsRendered(true);
-    }, [])
+    }, []);
 
     if (!isRendered) {
-        return (<></>);
+        return <></>;
     }
 
     return (
         <Link
             shallow
-            className={cl(className, "h-full position-relative w-full flex items-center justify-center")}
-            href={props.link ?? ""}>
+            className={cl(
+                className,
+                "h-full position-relative w-full flex items-center justify-center",
+            )}
+            href={props.link ?? ""}
+        >
             <div
                 style={style}
                 ref={galleryItemRef}
                 key={props.key}
                 onMouseMove={cardGradientEffect}
-                className="card gallery-item initially-hidden blur-boundary--sm">
+                className="card gallery-item initially-hidden blur-boundary--sm"
+            >
                 <GalleryItemTypeSegment />
                 <div className="gallery-item__image flex justify-center items-center">
-                    {!imageOverlay ?
+                    {!imageOverlay ? (
                         <Image
                             isLazyLoading={false}
                             compression={30}
                             alt=""
                             src={image ?? ""}
                         />
-                        :
+                    ) : (
                         <>
-                            <img
-                                alt=""
-                                src={imageOverlay}
-                            />
+                            <img alt="" src={imageOverlay} />
                             <Image
                                 isLazyLoading={false}
                                 compression={30}
@@ -96,54 +104,62 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
                                 src={image ?? ""}
                             />
                         </>
-                    }
+                    )}
                 </div>
                 <div className="px-5">
                     <TagCloud tags={props.tags} />
-                    <a className="gallery-item__link" href={props.link}><h3>{props.name}</h3></a>
+                    <a className="gallery-item__link" href={props.link}>
+                        <h3>{props.name}</h3>
+                    </a>
                     <p>{props.subheading}</p>
-                    {props.description &&
+                    {props.description && (
                         <div className="w-full box-border">
                             <SequentialRiseSpan minNumberOfLettersPerLine={42}>
                                 {truncateTextBody(props.description, 200)}
                             </SequentialRiseSpan>
                         </div>
-                    }
+                    )}
                 </div>
-                {
-                    (props.minuteRead || props.dateCreated || props.metadata) &&
-                    (
-                        <p className="position-absolute gallery-item__metadata flex">
-                            {
-                                props.minuteRead &&
-                                <span className="flex items-center"><CiTimer /> {props.minuteRead} min read</span>
-                            }
-                            {
-                                props.dateCreated &&
-                                <span className="flex items-center"><CiCalendar /> {isoDateFormatToString(new Date(props.dateCreated))}</span>
-                            }
-                            {
-                                props.metadata &&
-                                props.metadata.map((item, idx) => {
-                                    return (
-                                        <span key={idx} className="flex items-center">
-                                            {item.icon}
-                                            {!item.callback && item.value}
-                                            {item.callback && item.callback(item.value)}
-                                        </span>
-                                    )
-                                })
-                            }
-                        </p>
-                    )
-                }
-                {
-                    props.repoOwner && props.repoName &&
-                    <Contributors repoOwner={props.repoOwner} repoName={props.repoName} />
-                }
+                {(props.minuteRead || props.dateCreated || props.metadata) && (
+                    <p className="position-absolute gallery-item__metadata flex">
+                        {props.minuteRead && (
+                            <span className="flex items-center">
+                                <CiTimer /> {props.minuteRead} min read
+                            </span>
+                        )}
+                        {props.dateCreated && (
+                            <span className="flex items-center">
+                                <CiCalendar />{" "}
+                                {isoDateFormatToString(
+                                    new Date(props.dateCreated),
+                                )}
+                            </span>
+                        )}
+                        {props.metadata &&
+                            props.metadata.map((item, idx) => {
+                                return (
+                                    <span
+                                        key={idx}
+                                        className="flex items-center"
+                                    >
+                                        {item.icon}
+                                        {!item.callback && item.value}
+                                        {item.callback &&
+                                            item.callback(item.value)}
+                                    </span>
+                                );
+                            })}
+                    </p>
+                )}
+                {props.repoOwner && props.repoName && (
+                    <Contributors
+                        repoOwner={props.repoOwner}
+                        repoName={props.repoName}
+                    />
+                )}
             </div>
         </Link>
     );
-}
+};
 
 export default GalleryItem;

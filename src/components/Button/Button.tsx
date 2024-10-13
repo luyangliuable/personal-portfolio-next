@@ -1,9 +1,12 @@
-"use client"
+"use client";
 
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import Link from "next/link";
-import './Button.css';
-import IButtonProps, { IButtonPropsWithTo, IButtonPropsWithOnClick } from "./Interface/IButtonProps";
+import "./Button.css";
+import IButtonProps, {
+    IButtonPropsWithTo,
+    IButtonPropsWithOnClick,
+} from "./Interface/IButtonProps";
 
 import { cardGradientEffect } from "../Utility/MouseUtility";
 
@@ -12,18 +15,25 @@ class Button extends Component<IButtonProps, {}> {
 
     constructor(props: IButtonProps) {
         super(props);
-        this.state = {}
+        this.state = {};
     }
 
     renderButton() {
         return (
             <div className="flex justify-center items-center">
-                <div style={this.props.style} className={["t-button button no-select", this.props.className].join(" ")} onMouseMove={(e) => cardGradientEffect(e, false, 1, 38, 20)}>
+                <div
+                    style={this.props.style}
+                    className={[
+                        "t-button button no-select",
+                        this.props.className,
+                    ].join(" ")}
+                    onMouseMove={(e) => cardGradientEffect(e, false, 1, 38, 20)}
+                >
                     <span>{this.props.children}</span>
                 </div>
-                {
-                    this.props.showButtonLine && (<div className="button-line"></div>)
-                }
+                {this.props.showButtonLine && (
+                    <div className="button-line"></div>
+                )}
             </div>
         );
     }
@@ -45,12 +55,16 @@ class Button extends Component<IButtonProps, {}> {
             );
         } else if (this.isButtonProps(this.props)) {
             return (
-                <button type={this.props.type} className="override-button" onClick={(e) => {
-                    e.preventDefault();
-                    if (this.props.disabled) return;
-                    const props = this.props as IButtonPropsWithOnClick;
-                    props.onClick(e);
-                }}>
+                <button
+                    type={this.props.type}
+                    className="override-button"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        if (this.props.disabled) return;
+                        const props = this.props as IButtonPropsWithOnClick;
+                        props.onClick(e);
+                    }}
+                >
                     {this.renderButton()}
                 </button>
             );

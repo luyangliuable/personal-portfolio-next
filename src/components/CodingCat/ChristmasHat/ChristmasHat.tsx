@@ -14,7 +14,7 @@ class ChristmasHat extends Component<{}, {}> {
                 <div className="christmas_hat__body"></div>
                 <div className="christmas_hat__base">.</div>
             </div>
-        )
+        );
     }
 }
 

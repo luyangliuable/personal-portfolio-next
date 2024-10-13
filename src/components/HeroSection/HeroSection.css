@@ -1,6 +1,7 @@
 .hero-section-badge__container {
     overflow-x: auto;
     gap: 1.2rem;
+    z-index: 100;
 }
 
 @media screen and (min-width: 1000px) {
@@ -32,9 +33,9 @@
     }
 
     .hero-section__content__left {
-        animation: .5s animate-slide-up-fade-in ease-in;
+        animation: 0.5s animate-slide-up-fade-in ease-in;
         padding: 0 5vw 0 5vw;
-        font-size: calc(.7rem + 0.1vw); 
+        font-size: calc(0.7rem + 0.1vw);
     }
 
     .hero-section__content__right {
@@ -45,12 +46,12 @@
 }
 
 .hero-section-badge__link {
-    padding: .55rem 1.2rem;
+    padding: 0.55rem 1.2rem;
     border: 1px solid #000;
-    color: #FFF;
+    color: #fff;
     font-weight: bold;
     font-family: "Fira Code";
-    font-size: .75rem;
+    font-size: 0.75rem;
     border-radius: 5px;
     transition: all 0.3s ease-in-out;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -58,7 +59,7 @@
 }
 
 .hero-section-badge__link svg {
-    margin-right: .3rem;
+    margin-right: 0.3rem;
 }
 
 .hero-section-badge__link:hover {
@@ -68,12 +69,13 @@
 .hero-section__content__left__text {
     color: #888;
     max-width: 550px;
-    font-size: .95rem;
+    font-size: 0.95rem;
 }
 
 .hero-section__heading {
-    font-family: 'TT Norms Pro', 'Inter', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
-    color: #2d2d2d; 
+    font-family: "TT Norms Pro", "Inter", "Roboto", "Helvetica Neue", "Arial",
+        sans-serif;
+    color: #2d2d2d;
     margin: 0;
     font-size: clamp(2em, 3.4vw, 5em) !important;
     font-size: 50px !important;
@@ -101,14 +103,32 @@
     --height: 25vh;
     width: 95vw;
     height: var(--height);
-    margin-bottom: calc(-1*var(--height) + var(--common-card-margin));
-    z-index: -2;
+    margin-bottom: calc(-1 * var(--height) + var(--common-card-margin));
+    z-index: -5;
     transform: translateY(-5%);
-    background-image: radial-gradient(var(--background-pattern-color) 1px, transparent 0);
-    background-size: 9px 9px;
+    background-image: radial-gradient(
+        var(--background-pattern-color) 1px,
+        transparent 0
+    );
+    background-size: 12px 12px;
     background-position: -19px -19px;
+
+    background-color: #eeeceb;
+    background-image: linear-gradient(
+            var(--background-pattern-color) 1px,
+            transparent 0
+        ),
+        linear-gradient(
+            90deg,
+            var(--background-pattern-color) 1px,
+            transparent 0
+        );
+    background-size: 12px 12px;
+    background-position: -19px -19px;
+    mask-image: radial-gradient(ellipse at center, #fff 0%, transparent 70%),
+        linear-gradient(to bottom, black 30%, transparent 100%);
 }
 
 .hero-section__text_small {
-    font-size: .87rem;
+    font-size: 0.87rem;
 }

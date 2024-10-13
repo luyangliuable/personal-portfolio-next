@@ -1,47 +1,57 @@
 .retro {
-  --square-width: min(70px, 7vw);
-  --square-height: min(90px, 9vw);
-  perspective: 360px;
-  perspective-origin: 50% 50%;
-  position: absolute;
-  overflow: hidden;
-  height: 100%;
-  width: 100%;
-  z-index: -1;
-  box-shadow: 1px 1px 5px rgba(139, 101, 77, 0.2);
+    --square-width: min(70px, 7vw);
+    --square-height: min(90px, 9vw);
+    perspective: 360px;
+    perspective-origin: 50% 50%;
+    position: absolute;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
 }
 
 .retro--show-border::before {
-  border-width: 3px 8px;
-  border-style: solid;
-  border-color: var(--wire-color);
-  box-shadow: 15px 15px 50px #FFF;
-  z-index: 0;
+    border-width: 10px 0 0 0;
+    border-style: solid;
+    border-color: var(--wire-color);
+    box-shadow: 15px 15px 500px var(--wire-color);
+    z-index: 0;
 }
 
 .retro::before {
-  --wire-color: rgb(210, 210, 210);
+    --wire-color: rgb(210, 210, 210);
 
-  content: "";
-  left: 0;
-  width: 200%; height: 360px;
-  left: -50%;
-  position: absolute;
-  border-radius: 5px;
-  bottom: -60px;
-  background-image: -webkit-linear-gradient(var(--wire-color) .5px, transparent 1px), -webkit-linear-gradient(left, var(--wire-color) 2px, transparent 1px);
-  background-size: var(--square-width) var(--square-width), var(--square-height) var(--square-height);
-  background-position: 0px calc(-1*var(--square-width)), 0px 0px;
-  transform: rotateX(85deg);
-  animation: planeMoveTop 5s infinite linear;
-  z-index: -2;
+    content: "";
+    left: 0;
+    width: 200%;
+    height: 360px;
+    left: -50%;
+    position: absolute;
+    border-radius: 5px;
+    bottom: -60px;
+    background-image:
+        -webkit-linear-gradient(var(--wire-color) 0.5px, transparent 1px),
+        -webkit-linear-gradient(left, var(--wire-color) 2px, transparent 1px);
+    background-size:
+        var(--square-width) var(--square-width),
+        var(--square-height) var(--square-height);
+    background-position:
+        0px calc(-1 * var(--square-width)),
+        0px 0px;
+    transform: rotateX(85deg);
+    animation: planeMoveTop 5s infinite linear;
+    z-index: -2;
 }
 
 @keyframes planeMoveTop {
-  from {
-    background-position: 0px calc(-1*var(--square-width)), 0px 0px;
-  }
-  to {
-    background-position: 0px 0px, var(--square-height) 0px;
-  }
+    from {
+        background-position:
+            0px calc(-1 * var(--square-width)),
+            0px 0px;
+    }
+    to {
+        background-position:
+            0px 0px,
+            var(--square-height) 0px;
+    }
 }

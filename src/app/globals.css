@@ -2,43 +2,51 @@
     --page-top-margin: 68px;
     --navbar-height: 68px;
 
-    --baseline: .25rem;
+    --baseline: 0.25rem;
 
     --page-bottom-margin: 0;
     --page-bottom-padding: 120px;
     --common-card-margin: 10px;
 
-    --background-color: #EEE;
-    --background-color-darker: #EAEAEA;
-    --background-color-lighter: #EAEAEA;
-    --background-highlight-color: #DEDEDE;
-    --background-highlight-color-2: #DDD;
-    --background-highlight-color-gradient: linear-gradient(225deg, rgba(221,221,221,1) 0%, rgba(204,204,204,1) 100%);
-    --background-pattern-color: #AAA;
+    --background-color: #eee;
+    --background-color-darker: #eaeaea;
+    --background-color-lighter: #eaeaea;
+    --background-highlight-color: #dedede;
+    --background-highlight-color-2: #ddd;
+    --background-highlight-color-gradient: linear-gradient(
+        225deg,
+        rgba(221, 221, 221, 1) 0%,
+        rgba(204, 204, 204, 1) 100%
+    );
+    --background-pattern-color: #ddd;
 
-    --border-color: #AAA;
+    --border-color: #aaa;
 
     --dark-mode-black: #1e1e1e;
     --dark-mode-purple: #491ed3;
     --dark-mode-purple-2: #897ed3;
-    --dark-mode-purple-gradient: linear-gradient(225deg, rgba(137,126,211,1) 0%, rgba(100,105,217,1) 100%);
-    --dark-mode-pink: #AA6DA3;
+    --dark-mode-purple-gradient: linear-gradient(
+        225deg,
+        rgba(137, 126, 211, 1) 0%,
+        rgba(100, 105, 217, 1) 100%
+    );
+    --dark-mode-pink: #aa6da3;
     --dark-mode-blue: #1e90ff;
     --dark-mode-blue-2: #1c7497;
     --dark-mode-font-color: #f2f2f2;
 
-    --light-mode-navbar-color: #EEE;
+    --light-mode-navbar-color: #eee;
 
     --zenburn-mode-navbar-color: #333;
     --dark-mode-background-color: #0d0d0d;
-    --zenburn-background: #3F3F3F;
-    --zenburn-foreground: #DCDCCC;
+    --zenburn-background: #3f3f3f;
+    --zenburn-foreground: #dcdccc;
 
     --text-grey: #555;
     --text-black: #000;
-    --text-white: #FFF;
+    --text-white: #fff;
 
-    --divider-color: #CCC;
+    --divider-color: #ccc;
 
     /* Default Dark */
     --bg: #1a1e2d;
@@ -59,162 +67,182 @@
 }
 
 @font-face {
-    font-family: 'Fira Code';
-    src: url('../assets/fonts/FiraCode/FiraCode-Regular.ttf') format('woff2');
+    font-family: "Fira Code";
+    src: url("../assets/fonts/FiraCode/FiraCode-Regular.ttf") format("woff2");
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'Proxima Nova';
-    src: url('../assets/fonts/ProximaNova/ProximaNova-Regular.woff2') format('woff2');
+    font-family: "Proxima Nova";
+    src: url("../assets/fonts/ProximaNova/ProximaNova-Regular.woff2")
+        format("woff2");
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'Proxima Nova Bold';
-    src: url('../assets/fonts/ProximaNova/ProximaNova-Bold.woff2') format('woff2');
+    font-family: "Proxima Nova Bold";
+    src: url("../assets/fonts/ProximaNova/ProximaNova-Bold.woff2")
+        format("woff2");
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'TT Norms Pro';
-    src: url('../assets/fonts/TTNormalsPro/TT Norms Pro Regular.woff2') format('woff2');
+    font-family: "TT Norms Pro";
+    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro Regular.woff2")
+        format("woff2");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'TT Norms Pro';
-    src: url('../assets/fonts/TTNormalsPro/TT Norms Pro Italic.woff2') format('woff2');
+    font-family: "TT Norms Pro";
+    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro Italic.woff2")
+        format("woff2");
     font-weight: normal;
     font-style: italic;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'TT Norms Pro';
-    src: url('../assets/fonts/TTNormalsPro/TT Norms Pro Thin.woff2') format('woff2');
+    font-family: "TT Norms Pro";
+    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro Thin.woff2")
+        format("woff2");
     font-weight: 100;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'TT Norms Pro';
-    src: url('../assets/fonts/TTNormalsPro/TT Norms Pro Thin Italic.woff2') format('woff2');
+    font-family: "TT Norms Pro";
+    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro Thin Italic.woff2")
+        format("woff2");
     font-weight: 100;
     font-style: italic;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'TT Norms Pro';
-    src: url('../assets/fonts/TTNormalsPro/TT Norms Pro ExtraLight.woff2') format('woff2');
+    font-family: "TT Norms Pro";
+    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro ExtraLight.woff2")
+        format("woff2");
     font-weight: 200;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'TT Norms Pro';
-    src: url('../assets/fonts/TTNormalsPro/TT Norms Pro ExtraLight Italic.woff2') format('woff2');
+    font-family: "TT Norms Pro";
+    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro ExtraLight Italic.woff2")
+        format("woff2");
     font-weight: 200;
     font-style: italic;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'TT Norms Pro';
-    src: url('../assets/fonts/TTNormalsPro/TT Norms Pro Light.woff2') format('woff2');
+    font-family: "TT Norms Pro";
+    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro Light.woff2")
+        format("woff2");
     font-weight: 300;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'TT Norms Pro';
-    src: url('../assets/fonts/TTNormalsPro/TT Norms Pro Light Italic.woff2') format('woff2');
+    font-family: "TT Norms Pro";
+    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro Light Italic.woff2")
+        format("woff2");
     font-weight: 300;
     font-style: italic;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'TT Norms Pro';
-    src: url('../assets/fonts/TTNormalsPro/TT Norms Pro Medium.woff2') format('woff2');
+    font-family: "TT Norms Pro";
+    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro Medium.woff2")
+        format("woff2");
     font-weight: 500;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'TT Norms Pro';
-    src: url('../assets/fonts/TTNormalsPro/TT Norms Pro Medium Italic.woff2') format('woff2');
+    font-family: "TT Norms Pro";
+    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro Medium Italic.woff2")
+        format("woff2");
     font-weight: 500;
     font-style: italic;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'TT Norms Pro';
-    src: url('../assets/fonts/TTNormalsPro/TT Norms Pro Bold.woff2') format('woff2');
+    font-family: "TT Norms Pro";
+    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro Bold.woff2")
+        format("woff2");
     font-weight: bold; /* or 700 */
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'TT Norms Pro';
-    src: url('../assets/fonts/TTNormalsPro/TT Norms Pro Bold Italic.woff2') format('woff2');
+    font-family: "TT Norms Pro";
+    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro Bold Italic.woff2")
+        format("woff2");
     font-weight: bold; /* or 700 */
     font-style: italic;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'TT Norms Pro';
-    src: url('../assets/fonts/TTNormalsPro/TT Norms Pro ExtraBold.woff2') format('woff2');
+    font-family: "TT Norms Pro";
+    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro ExtraBold.woff2")
+        format("woff2");
     font-weight: 800;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'TT Norms Pro';
-    src: url('../assets/fonts/TTNormalsPro/TT Norms Pro ExtraBold Italic.woff2') format('woff2');
+    font-family: "TT Norms Pro";
+    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro ExtraBold Italic.woff2")
+        format("woff2");
     font-weight: 800;
     font-style: italic;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'TT Norms Pro';
-    src: url('../assets/fonts/TTNormalsPro/TT Norms Pro Black.woff2') format('woff2');
+    font-family: "TT Norms Pro";
+    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro Black.woff2")
+        format("woff2");
     font-weight: 900;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'TT Norms Pro';
-    src: url('../assets/fonts/TTNormalsPro/TT Norms Pro Black Italic.woff2') format('woff2');
+    font-family: "TT Norms Pro";
+    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro Black Italic.woff2")
+        format("woff2");
     font-weight: 900;
     font-style: italic;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'TT Norms Pro';
-    src: url('../assets/fonts/TTNormalsPro/TT Norms Pro ExtraBlack.woff2') format('woff2');
+    font-family: "TT Norms Pro";
+    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro ExtraBlack.woff2")
+        format("woff2");
     font-weight: 950;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: 'TT Norms Pro';
-    src: url('../assets/fonts/TTNormalsPro/TT Norms Pro ExtraBlack Italic.woff2') format('woff2');
+    font-family: "TT Norms Pro";
+    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro ExtraBlack Italic.woff2")
+        format("woff2");
     font-weight: 950;
     font-style: italic;
     font-display: swap;
@@ -227,18 +255,36 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-html, body {
+html,
+body {
     width: 100vw;
     overflow-x: clip;
 }
 
 code {
-    font-family: 'Fira Code', source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-                 monospace;
+    font-family: "Fira Code", source-code-pro, Menlo, Monaco, Consolas,
+        "Courier New", monospace;
 }
 
-html, textarea, input {
-    font-family: 'Proxima Nova', ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI, Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+html,
+textarea,
+input {
+    font-family:
+        "Proxima Nova",
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        Segoe UI,
+        Roboto,
+        Helvetica Neue,
+        Arial,
+        Noto Sans,
+        sans-serif,
+        Apple Color Emoji,
+        Segoe UI Emoji,
+        Segoe UI Symbol,
+        Noto Color Emoji;
 }
 
 * {
@@ -246,8 +292,8 @@ html, textarea, input {
 }
 
 code {
-    font-family: 'Fira Code', source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-                 monospace;
+    font-family: "Fira Code", source-code-pro, Menlo, Monaco, Consolas,
+        "Courier New", monospace;
 }
 
 h1 {
@@ -278,20 +324,18 @@ a {
 .hero-accordion-button {
     width: 8vw;
     height: 24vh;
-    background: rgba(100, 100, 100, .5);
+    background: rgba(100, 100, 100, 0.5);
     cursor: pointer;
-    transition: opacity .2s ease-in-out
+    transition: opacity 0.2s ease-in-out;
 }
 
 .hero-accordion-button:hover {
-    opacity: .5;
+    opacity: 0.5;
 }
-
 
 .hero-accordion-left {
     border-radius: 0px 2vw 2vw 0px;
 }
-
 
 .hero-accordion-right {
     border-radius: 2vw 0vw 0vw 2vw;
@@ -301,8 +345,9 @@ a {
     color: #888;
 }
 
-.page-body, main {
-    animation: fade-in .5s ease-in-out;
+.page-body,
+main {
+    animation: fade-in 0.5s ease-in-out;
     margin-top: var(--page-top-margin);
     margin-bottom: var(--page-bottom-margin);
     padding-bottom: var(--page-bottom-padding);
@@ -325,14 +370,23 @@ a {
 }
 
 .grid-background--line {
-    background-image:
-        linear-gradient(to right, var(--background-pattern-color) 1px, transparent 1px),
-        linear-gradient(to bottom, var(--background-pattern-color) 1px, transparent 1px);
+    background-image: linear-gradient(
+            to right,
+            var(--background-pattern-color) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            to bottom,
+            var(--background-pattern-color) 1px,
+            transparent 1px
+        );
 }
 
-
 .grid-background--dot {
-    background-image: radial-gradient(var(--background-pattern-color) 1px, transparent 0);
+    background-image: radial-gradient(
+        var(--background-pattern-color) 1px,
+        transparent 0
+    );
     background-size: 4px 4px;
     background-position: -19px -19px;
 }
@@ -350,51 +404,51 @@ a {
 /* Colors */
 
 .color-white {
-    color: #FFF
+    color: #fff;
 }
 
 .bg-red {
-    background: red
+    background: red;
 }
 
 .bg-blue {
-    background: blue
+    background: blue;
 }
 
 /* Scroll */
 
 .overflow-hidden {
-    overflow: hidden
+    overflow: hidden;
 }
 
 .overflow-scroll {
-    overflow: scroll
+    overflow: scroll;
 }
 
 .overflow-x-scroll {
-    overflow-x: scroll
+    overflow-x: scroll;
 }
 
 .overflow-x-hidden {
-    overflow-x: hidden
+    overflow-x: hidden;
 }
 
 .overflow-y-scroll {
-    overflow-y: scroll
+    overflow-y: scroll;
 }
 
 .overflow-y-auto {
-    overflow-y: auto
+    overflow-y: auto;
 }
 
 .overflow-y-hidden {
-    overflow-y: hidden
+    overflow-y: hidden;
 }
 
 /* Dimensions */
 
 .w-full {
-    width: 100%
+    width: 100%;
 }
 
 .h-full {
@@ -410,55 +464,54 @@ a {
 }
 
 .w-80 {
-    width: 80%
+    width: 80%;
 }
 
 .w-70 {
-    width: 70%
+    width: 70%;
 }
 
 .w-half {
-    width: 50%
+    width: 50%;
 }
 
-
 .w-30 {
-    width: 30%
+    width: 30%;
 }
 
 .w-15 {
-    width: 15%
+    width: 15%;
 }
 
 /* Flex */
 
 .flex {
-    display: flex
+    display: flex;
 }
 
 .self-start {
     transform: translateX(-3px);
-    align-self: flex-start
+    align-self: flex-start;
 }
 
 .self-end {
-    align-self: flex-end
+    align-self: flex-end;
 }
 
 .visible-hidden {
-    visibility: hidden
+    visibility: hidden;
 }
 
 .none {
-    display: none !important
+    display: none !important;
 }
 
 .flex-col {
-    flex-direction: column
+    flex-direction: column;
 }
 
 .gap-half {
-    gap: .5rem;
+    gap: 0.5rem;
 }
 
 .gap-1 {
@@ -470,35 +523,35 @@ a {
 }
 
 .flex-row {
-    flex-direction: row
+    flex-direction: row;
 }
 
 .justify-center {
-    justify-content: center
+    justify-content: center;
 }
 
 .justify-evenly {
-    justify-content: space-evenly
+    justify-content: space-evenly;
 }
 
 .justify-start {
-    justify-content: flex-start
+    justify-content: flex-start;
 }
 
 .justify-end {
-    justify-content: flex-end
+    justify-content: flex-end;
 }
 
 .justify-between {
-    justify-content: space-between !important
+    justify-content: space-between !important;
 }
 
 .justify-around {
-    justify-content: space-around
+    justify-content: space-around;
 }
 
 .items-center {
-    align-items: center
+    align-items: center;
 }
 
 .items-stretch {
@@ -506,11 +559,11 @@ a {
 }
 
 .items-start {
-    align-items: flex-start
+    align-items: flex-start;
 }
 
 .items-end {
-    align-items: flex-end
+    align-items: flex-end;
 }
 
 .flex-wrap {
@@ -529,28 +582,28 @@ a {
 /* Position */
 
 .right-0 {
-    right: 0
+    right: 0;
 }
 
 .top-10 {
-    top: 10px
+    top: 10px;
 }
 
 .position-relative {
-    position: relative
+    position: relative;
 }
 
 .position-absolute {
-    position: absolute
+    position: absolute;
 }
 
 .position-fixed {
-    position: fixed
+    position: fixed;
 }
 
 .position-sticky {
     position: -webkit-sticky;
-    position: sticky
+    position: sticky;
 }
 
 /* Border effects */
@@ -565,7 +618,7 @@ a {
 /* Image */
 
 .object-cover {
-    object-fit: cover
+    object-fit: cover;
 }
 
 /* Animation */
@@ -575,7 +628,7 @@ a {
     -webkit-transition: var(--transition);
     -moz-transition: var(--transition);
     -o-transition: var(--transition);
-    -ms-transition: var(--transition)
+    -ms-transition: var(--transition);
 }
 
 /* Filter Effects */
@@ -586,11 +639,11 @@ a {
 /* Margin */
 
 .m-0 {
-    margin: 0
+    margin: 0;
 }
 
 .mb-0 {
-    margin-bottom: 0
+    margin-bottom: 0;
 }
 
 .mb-1 {
@@ -598,57 +651,55 @@ a {
 }
 
 .mb-16 {
-    margin-bottom: calc(4*var(--baseline));
+    margin-bottom: calc(4 * var(--baseline));
 }
 
 .mb-20 {
-    margin-bottom: 5rem
+    margin-bottom: 5rem;
 }
 
-
 .h-7 {
-    height: calc(7*var(--baseline))
+    height: calc(7 * var(--baseline));
 }
 
 .h-14 {
-    height: calc(14*var(--baseline))
+    height: calc(14 * var(--baseline));
 }
 
 .h-18 {
-    height: calc(18*var(--baseline))
+    height: calc(18 * var(--baseline));
 }
 
 .h-19 {
-    height: calc(19*var(--baseline))
+    height: calc(19 * var(--baseline));
 }
 
 .h-20 {
-    height: calc(20*var(--baseline))
+    height: calc(20 * var(--baseline));
 }
 
 .h-21 {
-    height: calc(21*var(--baseline))
+    height: calc(21 * var(--baseline));
 }
 
 .h-28 {
-    height: 7rem
+    height: 7rem;
 }
 
 .mt-20vh {
-    margin-top: 20vh
+    margin-top: 20vh;
 }
 
-
 .mt-5 {
-    margin-top: 10px !important
+    margin-top: 10px !important;
 }
 
 .mt-10 {
-    margin-top: 50px !important
+    margin-top: 50px !important;
 }
 
 .my-2.5 {
-    margin: 10px 0
+    margin: 10px 0;
 }
 
 .ml-2vw {
@@ -656,7 +707,7 @@ a {
 }
 
 .mr-2 {
-    margin-right: .5rem;
+    margin-right: 0.5rem;
 }
 
 .child-mb-50 > * {
@@ -668,51 +719,51 @@ a {
 }
 
 .opacity-0 {
-    opacity: 0
+    opacity: 0;
 }
 
 /* Font */
 .font-fira-code {
-    font-family: 'Fira Code', Courier, monospace;
+    font-family: "Fira Code", Courier, monospace;
 }
 
 .font-bold {
-    font-weight: bold
+    font-weight: bold;
 }
 
 /* Cursor */
 .cursor-pointer {
-    cursor: pointer
+    cursor: pointer;
 }
 
 /* Text */
 
 .important-text {
-    font-family: 'TT Norms Pro', Spartan, 'Poppins', sans-serif;
+    font-family: "TT Norms Pro", Spartan, "Poppins", sans-serif;
 }
 
 .whitespace-nowrap {
-    white-space: nowrap
+    white-space: nowrap;
 }
 
 .text-center {
-    text-align: center
+    text-align: center;
 }
 
 .text-left {
-    text-align: left
+    text-align: left;
 }
 
 .text-right {
-    text-align: right
+    text-align: right;
 }
 
 .text-medium {
-    font-size: .95rem
+    font-size: 0.95rem;
 }
 
 .text-small {
-    font-size: .87rem;
+    font-size: 0.87rem;
 }
 
 /* Padding  */
@@ -726,14 +777,15 @@ a {
 }
 
 .p-1 {
-    padding: .25rem !important
+    padding: 0.25rem !important;
 }
 
 .p-4 {
-    padding: 1rem !important
+    padding: 1rem !important;
 }
 
-.p-24, .p-25 {
+.p-24,
+.p-25 {
     padding: 6rem; /* 96px */
 }
 
@@ -747,7 +799,7 @@ a {
 
 .px-1 {
     padding-left: 2px;
-    padding-right: 2px
+    padding-right: 2px;
 }
 
 .px-5 {
@@ -761,7 +813,7 @@ a {
 }
 
 .pl-3vw {
-    padding-left: 3vw
+    padding-left: 3vw;
 }
 
 .justify-start {
@@ -769,7 +821,7 @@ a {
 }
 
 .semi-opaque {
-    opacity: .5;
+    opacity: 0.5;
 }
 
 .noselect {
@@ -782,7 +834,7 @@ a {
 }
 
 .border-1-solid-black {
-    border: 1px solid black
+    border: 1px solid black;
 }
 
 /* Override Styles (!important only allowed here) */
@@ -799,7 +851,7 @@ a {
 .no-boundary {
     background: transparent !important;
     background-color: transparent !important;
-    border: none !important
+    border: none !important;
 }
 
 .no-border {
@@ -807,69 +859,80 @@ a {
 }
 
 .translucent-white {
-    background: rgba(255, 255, 255, 0.2)
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .box-shadow-lg {
-    box-shadow: 2px 2px 4px rgba(139, 101, 77, 0.2),
-                2px 2px 4px rgba(139, 101, 77, 0.2),
-                2px 2px 8px rgba(0, 0, 0, 0.05) !important;
+    box-shadow:
+        2px 2px 4px rgba(139, 101, 77, 0.2),
+        2px 2px 4px rgba(139, 101, 77, 0.2),
+        2px 2px 8px rgba(0, 0, 0, 0.05) !important;
 }
 
 .box-shadow-md {
-    box-shadow: 1px 1px 2px rgba(139, 101, 77, 0.2),
-                1px 1px 2px rgba(139, 101, 77, 0.2),
-                1px 1px 8px rgba(0, 0, 0, 0.05) !important;
+    box-shadow:
+        1px 1px 2px rgba(139, 101, 77, 0.2),
+        1px 1px 2px rgba(139, 101, 77, 0.2),
+        1px 1px 8px rgba(0, 0, 0, 0.05) !important;
 }
 
 .box-shadow-spread {
-  box-shadow: 0.5px 0.5px 2px rgba(139, 101, 77, 0.15),  /* Soft inner shadow */
-              1px 1px 4px rgba(139, 101, 77, 0.1),      /* Larger, softer outer shadow */
-              2px 2px 8px rgba(0, 0, 0, 0.05);          /* Light, diffused shadow for realism */
+    box-shadow:
+        0.5px 0.5px 2px rgba(139, 101, 77, 0.15),
+        /* Soft inner shadow */ 1px 1px 4px rgba(139, 101, 77, 0.1),
+        /* Larger, softer outer shadow */ 2px 2px 8px rgba(0, 0, 0, 0.05); /* Light, diffused shadow for realism */
 }
 
-.user-image, .user-image-sm {
-  border-radius: 100% !important;
-  width: 20px !important; height: 20px !important;
-  border: 2px solid white;
-  object-fit: cover
+.user-image,
+.user-image-sm {
+    border-radius: 100% !important;
+    width: 20px !important;
+    height: 20px !important;
+    border: 2px solid white;
+    object-fit: cover;
 }
 
 .user-image-md {
-  border-radius: 100% !important;
-  width: 30px !important;
-  height: 30px !important;
-  border: 2px solid white;
-  object-fit: cover
+    border-radius: 100% !important;
+    width: 30px !important;
+    height: 30px !important;
+    border: 2px solid white;
+    object-fit: cover;
 }
 
 .fancy-underline {
-	position: relative;
-  display: inline;
-  word-spacing: -0.09em;
-	white-space: nowrap
+    position: relative;
+    display: inline;
+    word-spacing: -0.09em;
+    white-space: nowrap;
 }
 
 .fancy-underline:after {
-	--deco-height: 0.3125em;
-	content: "";
-	position: absolute;
-	left: 0; right: 0;
-	bottom: calc(var(--deco-height) * -0.325);
-	height: var(--deco-height);
-	background-image: url("data:image/svg+xml,%3Csvg width='100' height='64' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23a)'%3E%3Cpath d='M-17 30.5 C-1 22 72 -4 54 13 37.9 28.2 -2.5 57.5 16 55.5 s 72 -29 104 -40' stroke='%230090E2' stroke-width='6'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Cpath fill='%23fff' d='M0 0h100v64H0z'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
-	background-size: auto 100%;
-	background-repeat: round;
-	background-position: 0em;
-  animation: fade-in 1s ease-in-out
+    --deco-height: 0.3125em;
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: calc(var(--deco-height) * -0.325);
+    height: var(--deco-height);
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='64' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23a)'%3E%3Cpath d='M-17 30.5 C-1 22 72 -4 54 13 37.9 28.2 -2.5 57.5 16 55.5 s 72 -29 104 -40' stroke='%230090E2' stroke-width='6'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Cpath fill='%23fff' d='M0 0h100v64H0z'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
+    background-size: auto 100%;
+    background-repeat: round;
+    background-position: 0em;
+    animation: fade-in 1s ease-in-out;
 }
 
 .skeleton-component {
-  --loader-background-color: var(background-color);
-  --loader-highlight-color: var(--background-highlight-color);
-  background: linear-gradient(90deg, var(--loader-background-color) 25%, var(--loader-highlight-color) 50%, var(--loader-background-color) 75%);
-  animation: loading 2s infinite ease-in-out;
-  background-size: 200% 100%;
+    --loader-background-color: var(background-color);
+    --loader-highlight-color: var(--background-highlight-color);
+    background: linear-gradient(
+        90deg,
+        var(--loader-background-color) 25%,
+        var(--loader-highlight-color) 50%,
+        var(--loader-background-color) 75%
+    );
+    animation: loading 2s infinite ease-in-out;
+    background-size: 200% 100%;
 }
 
 /*****************************************************************************/
@@ -877,74 +940,71 @@ a {
 /*****************************************************************************/
 
 @keyframes loading {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
 }
-
 
 @keyframes blink {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1
-  }
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
-
 @keyframes slide-up {
-  0% {
-    transform: translateY(100px); 
-  }
-  100% {
-    transform: translateY(0);
-  }
+    0% {
+        transform: translateY(100px);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
 
 @keyframes fade-in {
-  0% {
-    transform: translateX(-10px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0px);
-    opacity: 1
-  }
+    0% {
+        transform: translateX(-10px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0px);
+        opacity: 1;
+    }
 }
 
 @keyframes fade-in--up {
-  0% {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0px);
-    opacity: 1
-  }
+    0% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
 }
 
-
 @keyframes fade-in--width {
-  0% {
-    width: 0;
-  }
-  100% {
-    width: 100%;
-  }
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
 }
 
 @keyframes scale-in {
-  0% {
-    transform: scale(.1) rotate(var(--rotation));
-    opacity: 0;
-  }
-  100% {
-    opacity: 1
-  }
+    0% {
+        transform: scale(0.1) rotate(var(--rotation));
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 .normalised-width {

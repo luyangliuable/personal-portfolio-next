@@ -20,7 +20,7 @@ const LandingPage: React.FC<ILandingPageProps> = ({ postList }) => {
     }, []);
 
     if (!isLoaded) {
-        return (<SkeletonPage />);
+        return <SkeletonPage />;
     }
 
     return (
@@ -28,8 +28,13 @@ const LandingPage: React.FC<ILandingPageProps> = ({ postList }) => {
             <HeroSection />
             <FeaturedContentSection postList={postList} />
             <Experiences />
-            <LandingPageCard landingPageCardType="fitContent" className="blend-with-background">
-                <section className="flex-column-centered-centered"><BlogPage data={postList} /></section>
+            <LandingPageCard
+                landingPageCardType="fitContent"
+                className="blend-with-background"
+            >
+                <section className="flex-column-centered-centered">
+                    <BlogPage data={postList} />
+                </section>
             </LandingPageCard>
         </main>
     );

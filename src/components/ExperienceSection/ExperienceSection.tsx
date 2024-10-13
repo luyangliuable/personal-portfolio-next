@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useCallback, useRef, useState, useEffect, useMemo } from "react";
+import React, {
+    useCallback,
+    useRef,
+    useState,
+    useEffect,
+    useMemo,
+} from "react";
 import IExperienceSectionProps from "./Interface/IExperienceSectionProps";
 import {
     IExperienceSectionState,
@@ -10,7 +16,7 @@ import ExperienceSectionEvent from "./ExperienceSectionEvent/ExperienceSectionEv
 import SequentialRiseSpan from "../Atoms/SequentialRiseSpan/SequentialRiseSpan";
 import ExperienceSectionImageDisplay from "./ExperienceSectionImageDisplay/ExperienceSectionImageDisplay";
 import BlackHole from "../Organisms/BlackHole/BlackHole";
-import { gsap } from 'gsap';
+import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TiArrowLeftThick } from "react-icons/ti";
@@ -39,20 +45,22 @@ const items: ExperienceSectionItem[] = [
                 url: "https://llcode.tech/api/image/668c9606a8e1db1f839dba5a",
             },
         },
-    }, {
+    },
+    {
         dateTime: "2022",
         cardTitle: "Monash NRC",
         url: "",
         cardSubtitle: "Orion College Advisor",
         cardDetailedText: "",
-        importance: .8,
+        importance: 0.8,
         media: {
             type: "IMAGE",
             source: {
                 url: "https://llcode.tech/api/image/667d0d655f03f0355e1fc36c",
             },
         },
-    }, {
+    },
+    {
         dateTime: "2024",
         cardTitle: "Monash University",
         url: "",
@@ -65,7 +73,8 @@ const items: ExperienceSectionItem[] = [
                 url: "https://llcode.tech/api/image/667d085d5f03f0355e1fc369",
             },
         },
-    }, {
+    },
+    {
         dateTime: "2023",
         cardTitle: "",
         location: "-24.997805, 172.478887",
@@ -82,7 +91,8 @@ const items: ExperienceSectionItem[] = [
                 url: "https://llcode.tech/api/image/65920a4af1f0fe657dc4683b",
             },
         },
-    }, {
+    },
+    {
         dateTime: "2024",
         cardTitle: "Commbank",
         url: "https://www.linkedin.com/company/sonorus-au/",
@@ -95,7 +105,8 @@ const items: ExperienceSectionItem[] = [
                 url: "https://llcode.tech/api/image/668c946aa8e1db1f839dba56",
             },
         },
-    }, {
+    },
+    {
         dateTime: "2023",
         cardTitle: "Sonorous",
         url: "https://www.linkedin.com/company/sonorus-au/",
@@ -108,7 +119,8 @@ const items: ExperienceSectionItem[] = [
                 url: "https://llcode.tech/api/image/65920366f1f0fe657dc46839",
             },
         },
-    }, {
+    },
+    {
         dateTime: "2023",
         cardTitle: "",
         location: "-37.830474, 145.058351",
@@ -124,7 +136,8 @@ const items: ExperienceSectionItem[] = [
                 url: "https://llcode.tech/api/image/65920b85f1f0fe657dc4683c",
             },
         },
-    }, {
+    },
+    {
         dateTime: "2022",
         cardTitle: "",
         url: "",
@@ -141,7 +154,8 @@ const items: ExperienceSectionItem[] = [
                 url: "https://llcode.tech/api/image/65c3629e98a82efb52729772",
             },
         },
-    }, {
+    },
+    {
         dateTime: "2018",
         cardTitle: "MW Sheetmetal",
         url: "http://www.cisco.com",
@@ -154,7 +168,8 @@ const items: ExperienceSectionItem[] = [
                 url: "https://metro.co.uk/wp-content/uploads/2016/02/poo_emoji.jpg?quality=90&strip=all&zoom=1&resize=644%2C429",
             },
         },
-    }, {
+    },
+    {
         dateTime: "2021",
         cardTitle: "Monash University Humanwise",
         url: "https://www.mymi.org.au/",
@@ -167,23 +182,26 @@ const items: ExperienceSectionItem[] = [
                 url: "https://amsi.org.au/wp-content/uploads/2014/05/logo-monash.png",
             },
         },
-    }, {
+    },
+    {
         dateTime: "2022",
         cardTitle: "",
         url: "",
         cardSubtitle: "",
         location: "-37.829423, 145.058246",
-        cardDetailedText: "A image I took of the sunset in Camberwell where I used to live.",
+        cardDetailedText:
+            "A image I took of the sunset in Camberwell where I used to live.",
         objectPosition: "bottom",
-        importance: .9,
+        importance: 0.9,
         display: "IMAGE",
         media: {
             type: "IMAGE",
             source: {
-                url: "https://llcode.tech/api/image/667d05f65f03f0355e1fc367"
-            }
-        }
-    }, {
+                url: "https://llcode.tech/api/image/667d05f65f03f0355e1fc367",
+            },
+        },
+    },
+    {
         dateTime: "2022",
         cardTitle: "MYMI",
         url: "https://www.mymi.org.au/",
@@ -196,22 +214,25 @@ const items: ExperienceSectionItem[] = [
                 url: "https://llcode.tech/api/image/667d043b5f03f0355e1fc366",
             },
         },
-    }, {
+    },
+    {
         dateTime: "2021",
         cardTitle: "",
         url: "",
         cardSubtitle: "",
         location: "Home",
-        cardDetailedText: "One peaceful morning I sat quietly, with my dog Teddie resting comfortably on my lap. ",
+        cardDetailedText:
+            "One peaceful morning I sat quietly, with my dog Teddie resting comfortably on my lap. ",
         importance: 1,
         display: "IMAGE",
         media: {
             type: "IMAGE",
             source: {
-                url: "https://llcode.tech/api/image/667d0b605f03f0355e1fc36b"
-            }
-        }
-    }, {
+                url: "https://llcode.tech/api/image/667d0b605f03f0355e1fc36b",
+            },
+        },
+    },
+    {
         dateTime: "2023",
         cardTitle: "WEX",
         url: "http://www.wex.com",
@@ -224,23 +245,26 @@ const items: ExperienceSectionItem[] = [
                 url: "https://llcode.tech/api/image/667d0e585f03f0355e1fc36f",
             },
         },
-    }, {
+    },
+    {
         dateTime: "2021",
         cardTitle: "",
         url: "",
         cardSubtitle: "",
         location: "-37.790968, 145.172341",
-        cardDetailedText: "I captured this serene view at Mad Patties during the COVID era.",
+        cardDetailedText:
+            "I captured this serene view at Mad Patties during the COVID era.",
         objectPosition: "top",
         importance: 1,
         display: "IMAGE",
         media: {
             type: "IMAGE",
             source: {
-                url: "https://llcode.tech/api/image/667cfff15f03f0355e1fc35f"
-            }
-        }
-    }, {
+                url: "https://llcode.tech/api/image/667cfff15f03f0355e1fc35f",
+            },
+        },
+    },
+    {
         dateTime: "2021",
         cardTitle: "Cisco",
         url: "http://www.cisco.com",
@@ -253,7 +277,8 @@ const items: ExperienceSectionItem[] = [
                 url: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Cisco_logo_blue_2016.svg/440px-Cisco_logo_blue_2016.svg.png",
             },
         },
-    }, {
+    },
+    {
         dateTime: "2021",
         cardTitle: "Mad Patties",
         url: "http://www.cisco.com",
@@ -268,7 +293,6 @@ const items: ExperienceSectionItem[] = [
     },
 ];
 
-
 const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
     const experienceSectionParentRef = useRef<HTMLDivElement | null>(null);
     const experienceSectionRef = useRef<HTMLElement | null>(null);
@@ -282,10 +306,12 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
             const offset = 10;
             if (experienceSectionParentRef.current === null) return;
             const timeLineLength =
-                experienceSectionScrollRef.current!.getBoundingClientRect().width +
-                offset;
-            const targetElement = experienceSectionParentRef.current?.parentElement;
-            if (targetElement) targetElement.style.height = `${timeLineLength / 2}px`;
+                experienceSectionScrollRef.current!.getBoundingClientRect()
+                    .width + offset;
+            const targetElement =
+                experienceSectionParentRef.current?.parentElement;
+            if (targetElement)
+                targetElement.style.height = `${timeLineLength / 2}px`;
             setState({
                 ...state,
                 timeLineLength: timeLineLength,
@@ -299,7 +325,11 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
 
     useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
-        if (experienceSectionScrollRef.current && experienceSectionParentRef.current && experienceSectionParentRef.current) {
+        if (
+            experienceSectionScrollRef.current &&
+            experienceSectionParentRef.current &&
+            experienceSectionParentRef.current
+        ) {
             const scrollElement = experienceSectionScrollRef.current;
             const sectionElement = experienceSectionParentRef.current;
             const triggerElement = sectionElement.parentElement;
@@ -333,8 +363,8 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                     start: "top 20%",
                     end: () => `+=${scrollElement.scrollWidth / 2}`,
                     scrub: true,
-                    invalidateOnRefresh: true
-                }
+                    invalidateOnRefresh: true,
+                },
             });
 
             refreshScrollTrigger(ScrollTrigger);
@@ -389,7 +419,10 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                             );
                         })}
                         {year === String(2021) && <Burger />}
-                        <div className="experience-section__year flex items-center"><TiArrowLeftThick />{year}</div>
+                        <div className="experience-section__year flex items-center">
+                            <TiArrowLeftThick />
+                            {year}
+                        </div>
                     </div>
                 );
                 accumulatedIdx += currentYearItems.length;
@@ -397,28 +430,41 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
             });
     }, []);
 
-    const experienceSectionContent = useMemo(() => (
-        <div
-            className="timeline__line flex flex-row items-center"
-            ref={timeLineRef} >
-            {mapExperienceSectionItems()}
-            <div><BlackHole /></div>
-        </div>
-    ), [mapExperienceSectionItems]);
+    const experienceSectionContent = useMemo(
+        () => (
+            <div
+                className="timeline__line flex flex-row items-center"
+                ref={timeLineRef}
+            >
+                {mapExperienceSectionItems()}
+                <div>
+                    <BlackHole />
+                </div>
+            </div>
+        ),
+        [mapExperienceSectionItems],
+    );
 
     return (
         <div className="experience-section-wrapper">
             <article
                 className="landing-page-card flex flex-col justify-start overflow-hidden experience-section-parent-container"
-                ref={experienceSectionParentRef}>
+                ref={experienceSectionParentRef}
+            >
                 <header className="ml-2vw important-text">
-                    <SequentialRiseSpan elementType="h2">Retrospective</SequentialRiseSpan>
+                    <SequentialRiseSpan elementType="h2">
+                        Retrospective
+                    </SequentialRiseSpan>
                 </header>
-                <section ref={experienceSectionRef} className="experience-section">
+                <section
+                    ref={experienceSectionRef}
+                    className="experience-section"
+                >
                     {/* Scrolling timeline within the section */}
                     <div
                         ref={experienceSectionScrollRef}
-                        className="experience-section--content">
+                        className="experience-section--content"
+                    >
                         {experienceSectionContent}
                     </div>
                 </section>

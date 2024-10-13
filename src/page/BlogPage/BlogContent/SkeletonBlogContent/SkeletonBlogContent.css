@@ -1,9 +1,9 @@
 .skeleton-blog-content {
-    --loader-background-color: #EEEEEE;
-    --loader-highlight-color: #DEDEDE;
+    --loader-background-color: #eeeeee;
+    --loader-highlight-color: #dedede;
     --margin-top: min(2vh, 200px);
     width: 40vw;
-    margin-top: var( --margin-top );
+    margin-top: var(--margin-top);
     height: 90vh;
     display: flex;
     justify-content: flex-start;
@@ -23,7 +23,12 @@
 
 .skeleton-blog-content__item {
     margin-bottom: 20px;
-    background: linear-gradient(90deg, var(--loader-background-color) 25%, var(--loader-highlight-color) 50%, var(--loader-background-color) 75%);
+    background: linear-gradient(
+        90deg,
+        var(--loader-background-color) 25%,
+        var(--loader-highlight-color) 50%,
+        var(--loader-background-color) 75%
+    );
     animation: loading 2s infinite ease-in-out;
     position: relative;
     background-size: 200% 100%;

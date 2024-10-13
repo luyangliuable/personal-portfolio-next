@@ -1,5 +1,5 @@
-import LandingPage from '../page/LandingPage/LandingPage';
-import PostRepository from '../repositories/PostRepository';
+import LandingPage from "../page/LandingPage/LandingPage";
+import PostRepository from "../repositories/PostRepository";
 import { auth } from "../auth";
 
 export default async function App() {

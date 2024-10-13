@@ -2,7 +2,6 @@ import React, { RefObject, useEffect, useRef } from "react";
 import "./BlackHole.css";
 
 const BlackHole: React.FC = () => {
-
     const back = useRef<HTMLCanvasElement>(null);
     const middle = useRef<HTMLCanvasElement>(null);
     const front = useRef<HTMLCanvasElement>(null);
@@ -15,7 +14,14 @@ const BlackHole: React.FC = () => {
             mid: HTMLCanvasElement | null = init(middle).canv,
             fro: HTMLCanvasElement | null = init(front).canv;
 
-        if (b === null || m === null || f === null || bac === null || mid === null || fro === null) {
+        if (
+            b === null ||
+            m === null ||
+            f === null ||
+            bac === null ||
+            mid === null ||
+            fro === null
+        ) {
             return;
         }
 
@@ -55,20 +61,37 @@ const BlackHole: React.FC = () => {
                 this.size = Math.random() * 4;
                 this.q = 1 / 3 + Math.random() * (1 / 2 - 1 / 3);
                 this.h2p = 10;
-                this.x = this.ox + (this.br + this.re + this.size + this.h2p) * Math.cos(this.a);
-                this.y = this.oy + (this.br + this.re + this.size + this.h2p) * this.q * Math.sin(this.a);
+                this.x =
+                    this.ox +
+                    (this.br + this.re + this.size + this.h2p) *
+                        Math.cos(this.a);
+                this.y =
+                    this.oy +
+                    (this.br + this.re + this.size + this.h2p) *
+                        this.q *
+                        Math.sin(this.a);
                 /* this.tail = [{ x: this.x, y: this.y, a: this.a }]; */
                 this.tl = Math.floor(Math.random() * 5 + 5);
-                this.tail = Array(this.tl).fill({ x: this.x, y: this.y, a: this.a });
-
+                this.tail = Array(this.tl).fill({
+                    x: this.x,
+                    y: this.y,
+                    a: this.a,
+                });
             }
 
             move(x: number, y: number): void {
                 // Update positions
                 this.ox = x;
                 this.oy = y;
-                this.x = this.ox + (this.br + this.re + this.size + this.h2p) * Math.cos(this.a);
-                this.y = this.oy + (this.br + this.re + this.size + this.h2p) * this.q * Math.sin(this.a);
+                this.x =
+                    this.ox +
+                    (this.br + this.re + this.size + this.h2p) *
+                        Math.cos(this.a);
+                this.y =
+                    this.oy +
+                    (this.br + this.re + this.size + this.h2p) *
+                        this.q *
+                        Math.sin(this.a);
 
                 // Update the tail using circular buffer technique
                 this.tail[this.tailIndex] = { x: this.x, y: this.y, a: this.a };
@@ -79,14 +102,33 @@ const BlackHole: React.FC = () => {
 
             show(): void {
                 for (let i = 0; i < this.tail.length; i++) {
-                    if (Math.floor((this.tail[i].a + Math.random() * 0.2 - 0.1) / Math.PI) % 2 !== 0) {
+                    if (
+                        Math.floor(
+                            (this.tail[i].a + Math.random() * 0.2 - 0.1) /
+                                Math.PI,
+                        ) %
+                            2 !==
+                        0
+                    ) {
                         b!.beginPath();
-                        b!.arc(this.tail[i].x, this.tail[i].y, this.size, 0, 2 * Math.PI);
+                        b!.arc(
+                            this.tail[i].x,
+                            this.tail[i].y,
+                            this.size,
+                            0,
+                            2 * Math.PI,
+                        );
                         b!.fillStyle = this.col;
                         b!.fill();
                     } else {
                         f!.beginPath();
-                        f!.arc(this.tail[i].x, this.tail[i].y, this.size, 0, 2 * Math.PI);
+                        f!.arc(
+                            this.tail[i].x,
+                            this.tail[i].y,
+                            this.size,
+                            0,
+                            2 * Math.PI,
+                        );
                         f!.fillStyle = this.col;
                         f!.fill();
                     }
@@ -118,7 +160,10 @@ const BlackHole: React.FC = () => {
             m!.fill();
         }
 
-        function init(elem: RefObject<HTMLCanvasElement>): { canv: HTMLCanvasElement | null, ctx: CanvasRenderingContext2D | null } {
+        function init(elem: RefObject<HTMLCanvasElement>): {
+            canv: HTMLCanvasElement | null;
+            ctx: CanvasRenderingContext2D | null;
+        } {
             const canvas = elem.current;
             const c = canvas!.getContext("2d");
             return { canv: canvas, ctx: c };
@@ -145,8 +190,7 @@ const BlackHole: React.FC = () => {
         }
         loop();
         setInterval(loop, 1500 / 60);
-
-    }, [])
+    }, []);
 
     return (
         <div className="black-hole">

@@ -1,16 +1,25 @@
-"use client"
+"use client";
 
-import React, { useEffect, useRef, useState } from 'react';
-import SkeletonImage from './SkeletonImage/SkeletonImage';
-import IImageProps from './Interface/IImageProps';
+import React, { useEffect, useRef, useState } from "react";
+import SkeletonImage from "./SkeletonImage/SkeletonImage";
+import IImageProps from "./Interface/IImageProps";
 import ImageRepository from "../../repositories/ImageRepository";
-import { default as NextImage } from 'next/image';
+import { default as NextImage } from "next/image";
 import { cl } from "../Utility/LogicUtility";
 import "./Image.css";
 
-const Image: React.FC<IImageProps> = ({ compression, src, isLazyLoading, className, alt, style }) => {
+const Image: React.FC<IImageProps> = ({
+    compression,
+    src,
+    isLazyLoading,
+    className,
+    alt,
+    style,
+}) => {
     const imageRepository = ImageRepository.getInstance();
-    const [fetchedImageUrl, setFetchedImageUrl] = useState<string | undefined>(undefined);
+    const [fetchedImageUrl, setFetchedImageUrl] = useState<string | undefined>(
+        undefined,
+    );
     const [isInView, setIsInView] = useState<boolean>(false);
     const defaultImageAlt = "You are blind";
     const imageRef = useRef(null);
@@ -42,7 +51,7 @@ const Image: React.FC<IImageProps> = ({ compression, src, isLazyLoading, classNa
                     }
                 });
             },
-            { threshold: .1, rootMargin: '20%' }
+            { threshold: 0.1, rootMargin: "20%" },
         );
 
         if (imageRef.current) {
@@ -63,13 +72,20 @@ const Image: React.FC<IImageProps> = ({ compression, src, isLazyLoading, classNa
     alt = alt ?? defaultImageAlt;
 
     if (!fetchedImageUrl) {
-        return (<SkeletonImage ref={imageRef} className={className} />);
+        return <SkeletonImage ref={imageRef} className={className} />;
     }
 
     return (
-        <NextImage style={style} loading="lazy" ref={imageRef} width="100" height="100" className={
-            cl(className, { "animation": isLazyLoading === false })
-        } src={fetchedImageUrl} alt={alt} />
+        <NextImage
+            style={style}
+            loading="lazy"
+            ref={imageRef}
+            width="100"
+            height="100"
+            className={cl(className, { animation: isLazyLoading === false })}
+            src={fetchedImageUrl}
+            alt={alt}
+        />
     );
 };
 

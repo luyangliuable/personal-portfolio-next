@@ -5,10 +5,9 @@ import "./Chatbot.css";
 import LlChatbot from "../../../page/Chatbot/Chatbot";
 import ConfigRepository from "../../../repositories/ConfigRepo";
 
-
 export const metadata: Metadata = {
     title: "Luyang's Chatbot",
-    description: "A chatgpt clone."
+    description: "A chatgpt clone.",
 };
 
 const page = async () => {

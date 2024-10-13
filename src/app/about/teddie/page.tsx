@@ -1,19 +1,17 @@
 "use client";
 
-import { useRef, RefObject, useEffect } from 'react';
+import { useRef, RefObject, useEffect } from "react";
 import "./Teddie.css";
 import Image from "next/image";
 import TeddieImage from "./teddie.png";
-import { useScrollPosition } from '../../../hooks';
-import Bento from '../../../components/Bento/Bento';
-import LandingPageCard from '../../../components/LandingPageCard/LandingPageCard';
+import { useScrollPosition } from "../../../hooks";
+import Bento from "../../../components/Bento/Bento";
+import LandingPageCard from "../../../components/LandingPageCard/LandingPageCard";
 
 const Teddie = () => {
-
     const imageStackRef: RefObject<HTMLDivElement> = useRef(null);
 
-    useEffect(() => {
-    }, [])
+    useEffect(() => {}, []);
 
     return (
         <main>
@@ -33,28 +31,59 @@ const Teddie = () => {
                         <Bento.Item colSpan={1}>
                             <div className="image"></div>
                         </Bento.Item>
-                        <Bento.Item colSpan={1}><div className="image"></div></Bento.Item>
-                        <Bento.Item colSpan={1}><div className="image"></div></Bento.Item>
-                        <Bento.Item colSpan={1}><div className="image"></div></Bento.Item>
-                        <Bento.Item colSpan={1}><div className="image"></div></Bento.Item>
-                        <Bento.Item colSpan={1}><div className="image"></div></Bento.Item>
-                        <Bento.Item colSpan={1}><div className="image"></div></Bento.Item>
-                        <Bento.Item colSpan={1}><div className="image"></div></Bento.Item>
-                        <Bento.Item colSpan={1}><div className="image"></div></Bento.Item>
-                        <Bento.Item colSpan={1}><div className="image"></div></Bento.Item>
-                        <Bento.Item colSpan={1}><div className="image"></div></Bento.Item>
-                        <Bento.Item colSpan={1}><div className="image"></div></Bento.Item>
-                        <Bento.Item colSpan={1}><div className="image"></div></Bento.Item>
-                        <Bento.Item colSpan={1}><div className="image"></div></Bento.Item>
-                        <Bento.Item colSpan={1}><div className="image"></div></Bento.Item>
-                        <Bento.Item colSpan={1}><div className="image"></div></Bento.Item>
-                        <Bento.Item colSpan={1}><div className="image"></div></Bento.Item>
+                        <Bento.Item colSpan={1}>
+                            <div className="image"></div>
+                        </Bento.Item>
+                        <Bento.Item colSpan={1}>
+                            <div className="image"></div>
+                        </Bento.Item>
+                        <Bento.Item colSpan={1}>
+                            <div className="image"></div>
+                        </Bento.Item>
+                        <Bento.Item colSpan={1}>
+                            <div className="image"></div>
+                        </Bento.Item>
+                        <Bento.Item colSpan={1}>
+                            <div className="image"></div>
+                        </Bento.Item>
+                        <Bento.Item colSpan={1}>
+                            <div className="image"></div>
+                        </Bento.Item>
+                        <Bento.Item colSpan={1}>
+                            <div className="image"></div>
+                        </Bento.Item>
+                        <Bento.Item colSpan={1}>
+                            <div className="image"></div>
+                        </Bento.Item>
+                        <Bento.Item colSpan={1}>
+                            <div className="image"></div>
+                        </Bento.Item>
+                        <Bento.Item colSpan={1}>
+                            <div className="image"></div>
+                        </Bento.Item>
+                        <Bento.Item colSpan={1}>
+                            <div className="image"></div>
+                        </Bento.Item>
+                        <Bento.Item colSpan={1}>
+                            <div className="image"></div>
+                        </Bento.Item>
+                        <Bento.Item colSpan={1}>
+                            <div className="image"></div>
+                        </Bento.Item>
+                        <Bento.Item colSpan={1}>
+                            <div className="image"></div>
+                        </Bento.Item>
+                        <Bento.Item colSpan={1}>
+                            <div className="image"></div>
+                        </Bento.Item>
+                        <Bento.Item colSpan={1}>
+                            <div className="image"></div>
+                        </Bento.Item>
                     </Bento>
                 </div>
             </LandingPageCard>
-
         </main>
     );
-}
+};
 
 export default Teddie;

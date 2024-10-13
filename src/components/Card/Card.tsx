@@ -47,28 +47,60 @@ class Card extends Component<ICardProps, ICardState> {
     }
 
     render() {
-        const { link, in_progress, authorImage, image, author, heading, minuteRead, tags, date_created } = this.props;
+        const {
+            link,
+            in_progress,
+            authorImage,
+            image,
+            author,
+            heading,
+            minuteRead,
+            tags,
+            date_created,
+        } = this.props;
         const displayMinuteRead = `${minuteRead || "X"} min read`;
-        const displayDateCreated = date_created ? isoDateFormatToString(new Date(date_created)) : '';
-        if (link === undefined || image === undefined || authorImage === undefined) return null;
+        const displayDateCreated = date_created
+            ? isoDateFormatToString(new Date(date_created))
+            : "";
+        if (
+            link === undefined ||
+            image === undefined ||
+            authorImage === undefined
+        )
+            return null;
         return (
             <a
                 ref={this.cardItemRef}
                 onMouseMove={cardGradientEffect}
                 className="card card-item"
-                href={link}>
+                href={link}
+            >
                 <TagCloud tags={tags} />
                 <section className="card-item__content">
                     <h3 className="card-item__heading">{heading}</h3>
-                    <p className="card-item__label flex flex-row items-center">{`${displayMinuteRead} | ${displayDateCreated}`}{in_progress && <InProgressBlock />}</p>
+                    <p className="card-item__label flex flex-row items-center">
+                        {`${displayMinuteRead} | ${displayDateCreated}`}
+                        {in_progress && <InProgressBlock />}
+                    </p>
                 </section>
-                {image &&
+                {image && (
                     <div className="card-image-preview__wrapper position-absolute overflow-hidden flex justify-center items-center">
-                        {<Image compression={30} src={image} className="card-image-preview" alt="Card Preview" />}
+                        {
+                            <Image
+                                compression={30}
+                                src={image}
+                                className="card-image-preview"
+                                alt="Card Preview"
+                            />
+                        }
                     </div>
-                }
+                )}
                 <footer className="flex mt-5 position-relative items-center">
-                    <Image src={authorImage} className="user-image card-image--author-image" alt={author} />
+                    <Image
+                        src={authorImage}
+                        className="user-image card-image--author-image"
+                        alt={author}
+                    />
                     {author}
                 </footer>
             </a>

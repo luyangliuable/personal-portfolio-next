@@ -14,7 +14,7 @@
     border-width: 10px 0 0 0;
     border-style: solid;
     border-color: var(--wire-color);
-    box-shadow: 15px 15px 500px var(--wire-color);
+    box-shadow: 10px 10px 60px var(--wire-color);
     z-index: 0;
 }
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import IFeaturedContentSectionProps from "./Interface/IFeaturedContentSectionProps";
 import IFeaturedContentSectionState from "./Interface/IFeaturedContentSectionState";
@@ -9,19 +9,21 @@ import GalleryItem from "../Gallery/GalleryItem/GalleryItem";
 import LandingPageCard from "../LandingPageCard/LandingPageCard";
 import TwinCandle from "../TwinCandle/TwinCandle";
 import "./FeaturedContentSection.css";
-import { useTrigger } from '../../stores/TriggerContext';
+import { useTrigger } from "../../stores/TriggerContext";
 import WaveBackground from "./gallery-background-wave.jpg";
-import Retro from '../Retro/Retro';
+import Retro from "../Retro/Retro";
 
-const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({ postList }) => {
+const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({
+    postList,
+}) => {
     const [state, setState] = useState<IFeaturedContentSectionState>({
         featuredPosts: [
             {
                 image: {
-                    $oid: "66e588c918eb5f86ea13b531"
+                    $oid: "66e588c918eb5f86ea13b531",
                 },
                 _id: {
-                    $oid: "featured-tool"
+                    $oid: "featured-tool",
                 },
                 imageOverlay: WaveBackground,
                 heading: "Featured Tool: LLcode.tech Chatbot",
@@ -30,14 +32,14 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({ postLi
                 tags: [],
                 author: "Luyang Liu",
                 body: "Working chatGPT clone using mistral.",
-                url: "/tools/chatbot"
+                url: "/tools/chatbot",
             },
             {
                 image: {
-                    $oid: "66ab67bd8803e8c20005c32e"
+                    $oid: "66ab67bd8803e8c20005c32e",
                 },
                 _id: {
-                    $oid: "can4cancer"
+                    $oid: "can4cancer",
                 },
                 date_created: "",
                 body: "I joined can4cancer which is an initiative that aims to raise funds to support research towards curing and preventing cancer.",
@@ -46,15 +48,15 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({ postLi
                 post_type: "none",
                 tags: [],
                 heading: "Sponsor Me for Can4Cancer Now!",
-            }
+            },
         ],
         numberOfCardsEachRow: 0,
         showAllPosts: false,
         featuredTool: {
             name: "Coming Soon",
             description: "Coming Soon",
-            link: "Coming Soon"
-        }
+            link: "Coming Soon",
+        },
     });
 
     const currentComponentRef = useRef<HTMLDivElement>(null);
@@ -77,7 +79,7 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({ postLi
                     }
                 });
             },
-            { threshold: 1, rootMargin: "-32% 0px 0px 0px" }
+            { threshold: 1, rootMargin: "-32% 0px 0px 0px" },
         );
 
         if (twinCandleComponentParentRef.current) {
@@ -96,15 +98,21 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({ postLi
         const windowWidth = window.innerWidth;
         const elementWidth = 400;
         const wrapperWidth = 1900;
-        let numOfElementsToShow = Math.floor(Math.min(windowWidth, wrapperWidth) / elementWidth);
-        setState(prevState => ({ ...prevState, numberOfCardsEachRow: Math.max(numOfElementsToShow, 1) }));
-    }
+        let numOfElementsToShow = Math.floor(
+            Math.min(windowWidth, wrapperWidth) / elementWidth,
+        );
+        setState((prevState) => ({
+            ...prevState,
+            numberOfCardsEachRow: Math.max(numOfElementsToShow, 1),
+        }));
+    };
 
     const showAllElements = () => {
         setState({ ...state, showAllPosts: true });
-        if (showMoreButtonRef.current) showMoreButtonRef.current.style.display = 'none';
+        if (showMoreButtonRef.current)
+            showMoreButtonRef.current.style.display = "none";
         toggleTrigger();
-    }
+    };
 
     function groupArray<T>(array: T[], groupSize: number): T[][] {
         return array.reduce((acc, _, i) => {
@@ -117,51 +125,92 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({ postLi
 
     const renderTopPickedPostsSortedByDateDescending = (): React.ReactNode => {
         const { numberOfCardsEachRow: sliceEnd, showAllPosts } = state;
-        const posts = [...state.featuredPosts, ...postList.filter(post => post.is_featured)];
-        return groupArray(posts.slice(0, showAllPosts ? -1 : sliceEnd), sliceEnd).map((group, index) => (
-          <div key={index} className="featured-section w-full flex flex-col position-relative">
-            <Retro showBorder/>
-            <div className="flex flex-row w-full justify-center items-stretch gap-1 flex-wrap position-relative">
-              {group.map((content) => (
-                <div
-                  className="featured-section--item flex justify-center"
-                  key={content._id.$oid} >
-                  <GalleryItem
-                    name={content.heading}
-                    tags={content.tags}
-                    description={content.body}
-                    dateCreated={content.date_created}
-                    type={content.post_type === "md" ? "blog" : content.post_type}
-                    minuteRead={content.reading_time_minutes}
-                    className="my-2.5"
-                    link={content.url ?? `/digital-chronicles/blog/${content._id.$oid}`}
-                    imageOverlay={content.imageOverlay?.src}
-                    image={content.imageOverride?.src ?? content.image.$oid}
-                  />
+        const posts = [
+            ...state.featuredPosts,
+            ...postList.filter((post) => post.is_featured),
+        ];
+        return groupArray(
+            posts.slice(0, showAllPosts ? -1 : sliceEnd),
+            sliceEnd,
+        ).map((group, index) => (
+            <div
+                key={index}
+                className="featured-section w-full position-relative"
+            >
+                <Retro showBorder />
+                <div className="featured-section--inner w-full flex flex-col position-relative items-center">
+                    <div className="flex flex-row items-stretch gap-1 justify-between flex-wrap position-relative">
+                        {group.map((content) => (
+                            <div
+                                className="featured-section--item flex"
+                                key={content._id.$oid}
+                            >
+                                <GalleryItem
+                                    name={content.heading}
+                                    tags={content.tags}
+                                    description={content.body}
+                                    dateCreated={content.date_created}
+                                    type={
+                                        content.post_type === "md"
+                                            ? "blog"
+                                            : content.post_type
+                                    }
+                                    minuteRead={content.reading_time_minutes}
+                                    className="my-2.5"
+                                    link={
+                                        content.url ??
+                                        `/digital-chronicles/blog/${content._id.$oid}`
+                                    }
+                                    imageOverlay={content.imageOverlay?.src}
+                                    image={
+                                        content.imageOverride?.src ??
+                                        content.image.$oid
+                                    }
+                                />
+                            </div>
+                        ))}
+                    </div>
                 </div>
-              ))}
             </div>
-          </div>
         ));
-    }
+    };
 
-  return (
-    <LandingPageCard className="mb-20 overflow-x-hidden" heading="Featured Content" landingPageCardType="fitContent" blendWithBackground={true}>
-      <section ref={currentComponentRef} className="featured-section--wrapper flex flex-col items-center position-relative">
-        {renderTopPickedPostsSortedByDateDescending()}
-        <div className="show-more-button-wrapper" ref={showMoreButtonRef}>
-          <Button
-            style={{ "--border-radius": "20px", zIndex: 2, border: "2px solid #FFF" } as React.CSSProperties}
-            onClick={showAllElements}
-            showButtonLine>
-            Show More <FaAngleDown />
-          </Button>
-        </div>
-        <div className="divider h-21"></div>
-        <div ref={twinCandleComponentParentRef}><TwinCandle ref={twinCandleComponentRef} /></div>
-      </section>
-    </LandingPageCard>
-  );
-}
+    return (
+        <LandingPageCard
+            className="mb-20 overflow-x-hidden"
+            heading="Featured Content"
+            landingPageCardType="fitContent"
+            blendWithBackground={true}
+        >
+            <section
+                ref={currentComponentRef}
+                className="featured-section--wrapper flex flex-col items-center position-relative"
+            >
+                {renderTopPickedPostsSortedByDateDescending()}
+                <div
+                    className="show-more-button-wrapper"
+                    ref={showMoreButtonRef}
+                >
+                    <Button
+                        style={
+                            {
+                                "--border-radius": "20px",
+                                zIndex: 2,
+                                border: "2px solid #FFF",
+                            } as React.CSSProperties
+                        }
+                        onClick={showAllElements}
+                    >
+                        Show More <FaAngleDown />
+                    </Button>
+                </div>
+                <div className="divider h-21"></div>
+                <div ref={twinCandleComponentParentRef}>
+                    <TwinCandle ref={twinCandleComponentRef} />
+                </div>
+            </section>
+        </LandingPageCard>
+    );
+};
 
 export default FeaturedContentSection;

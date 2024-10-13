@@ -4,10 +4,13 @@ class ConfigRepository extends Repository {
     private static instance: ConfigRepository;
     static BASE_URL: string = "https://llcode.tech/api/config";
 
-    private constructor() { super(); }
+    private constructor() {
+        super();
+    }
 
     static getInstance(): ConfigRepository {
-        if (!ConfigRepository.instance) ConfigRepository.instance = new ConfigRepository();
+        if (!ConfigRepository.instance)
+            ConfigRepository.instance = new ConfigRepository();
         return ConfigRepository.instance;
     }
 
@@ -23,7 +26,7 @@ class ConfigRepository extends Repository {
 
             return await response.text();
         } catch (error) {
-            console.error('Error:', error);
+            console.error("Error:", error);
             return "";
         }
     }

@@ -1,41 +1,40 @@
-import {EffectCallback, DependencyList} from "react";
-
+import { EffectCallback, DependencyList } from "react";
 
 export const toggleClassName = (
     el: HTMLElement,
     set: boolean,
-    className: string
+    className: string,
 ): void => {
     if (set) {
-        el?.classList.add(className)
+        el?.classList.add(className);
     } else {
         el?.classList.remove(className);
     }
-}
+};
 
 export const toggleProperty = (
     el: HTMLElement,
     set: boolean,
     trueProperty: Record<string, string>,
-    falseProperty: Record<string, string>
+    falseProperty: Record<string, string>,
 ): void => {
     if (set) {
         setProperty(el, trueProperty);
     } else {
         setProperty(el, falseProperty);
     }
-}
+};
 
 export const setProperty = (el: HTMLElement, prop: Record<string, string>) => {
     Object.keys(prop).forEach((key: string) => {
         const val = prop[key];
         el.style.setProperty(key, val);
     });
-}
+};
 
 export const dp = (callback: EffectCallback, dependencyList: any[]) => {
     // Validate the dependency list
-    dependencyList.forEach(item => {
+    dependencyList.forEach((item) => {
         if (!item) return;
     });
 
@@ -47,7 +46,7 @@ export const dp = (callback: EffectCallback, dependencyList: any[]) => {
 export const cl = (...args: any[]) => {
     let res = "";
 
-    args.forEach(item => {
+    args.forEach((item) => {
         if (item && typeof item == "object") {
             const a = Object.keys(item).reduce((acc: string, key: string) => {
                 if (item[key]) {
@@ -57,17 +56,20 @@ export const cl = (...args: any[]) => {
             }, "");
 
             res = res + ` ${a}`;
-
         } else {
             if (item) res = res + ` ${item}`;
         }
-
     });
 
     return res.trim();
-}
+};
 
-export const clamp = (min: number, max: number, value?: number, factor?: number): number => {
+export const clamp = (
+    min: number,
+    max: number,
+    value?: number,
+    factor?: number,
+): number => {
     const validValue = (value ?? 0) * (factor ?? 1);
     return Math.min(max, Math.max(min, validValue));
-}
+};

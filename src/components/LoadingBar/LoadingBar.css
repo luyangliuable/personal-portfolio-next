@@ -1,6 +1,8 @@
 .loading-bar--container {
     height: 350px;
-    display: flex; justify-content: center; align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .loading-bar {
@@ -185,15 +187,17 @@
     }
 }
 
-
 @media screen and (max-width: 900px) {
-    .box3, .box4 {
+    .box3,
+    .box4 {
         display: none;
     }
 }
 
 @media screen and (max-width: 768px) {
-    .box2, .box3, .box4 {
+    .box2,
+    .box3,
+    .box4 {
         display: none;
     }
 }

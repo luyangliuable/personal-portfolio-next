@@ -15,16 +15,22 @@
     --landing-page-card-large--width: 99%;
     --landing-page-card-large--max-width: 2500px;
     --landing-page-card-large--padding: 2vh;
-    --landing-page-card-large--height: calc(97vh - var(--landing-page-card-large--padding)*2);
+    --landing-page-card-large--height: calc(
+        97vh - var(--landing-page-card-large--padding) * 2
+    );
     --landing-page-card-fit-under-navbar--max-height: 170vw;
-    --landing-page-card-box-shadow:  .6px .5px 2.8px #A5A58C;
-    --landing-page-card-intro-animation: animate-slide-up-fade-in .1s ease-in;
+    --landing-page-card-box-shadow: 0.6px 0.5px 2.8px #a5a58c;
+    --landing-page-card-intro-animation: animate-slide-up-fade-in 0.1s ease-in;
     position: relative;
     z-index: 0;
     display: flex;
     justify-content: flex-start;
-    background: #F9F9F9;
-    background: linear-gradient(225deg, rgba(255,255,253,1) 0%, rgba(245,245,245,1) 100%);
+    background: #f9f9f9;
+    background: linear-gradient(
+        225deg,
+        rgba(255, 255, 253, 1) 0%,
+        rgba(245, 245, 245, 1) 100%
+    );
     box-shadow: var(--landing-page-card-box-shadow);
     -webkit-box-shadow: var(--landing-page-card-box-shadow);
     -moz-box-shadow: var(--landing-page-card-box-shadow);
@@ -51,7 +57,6 @@
     height: var(--landing-page-card-fit-content--height);
 }
 
-
 @media screen and (max-width: 768px) {
     .landing-page-card--fit-content {
         --landing-page-card-fit-content--width: 95vw;
@@ -71,19 +76,20 @@
     overflow: hidden;
 }
 
-
 @keyframes animate-slide-up-fade-in {
     0% {
         transform: translateY(3vh);
 
-        opacity: 0
-    },
+        opacity: 0;
+    }
+    ,
     10% {
-        opacity: 1
-    },
+        opacity: 1;
+    }
+    ,
     100% {
         transform: translateY(0);
-        opacity: 1
+        opacity: 1;
     }
 }
 

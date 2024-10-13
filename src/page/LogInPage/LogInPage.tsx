@@ -2,9 +2,9 @@
 
 import React, { useRef, useState } from "react";
 import "./LogInPage.css";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../stores/Repository/Auth";
-import { AppDispatch, RootState } from '../../stores/store';
+import { AppDispatch, RootState } from "../../stores/store";
 
 const LogInPage: React.FC = () => {
     const userNameRef = useRef<HTMLInputElement>(null);
@@ -33,34 +33,35 @@ const LogInPage: React.FC = () => {
         }
 
         return className;
-    }
+    };
 
     const updateLoginFlash = (loginStatus: string, flashMessage: string) => {
         setState({
             loginStatus: loginStatus,
             flashMessage: flashMessage,
         });
-    }
+    };
 
     const handleLoginSuccess = (): void => {
         updateLoginFlash("Success", "Login Successful!");
         /* window.location.href = "/"; */
-    }
+    };
 
     const handleLoginFailure = (err: any): void => {
         updateLoginFlash("Failed", "Invalid User name or password.");
-    }
+    };
 
     const login = (e: any): void => {
         e.preventDefault();
         const loginDetails = {
             username: userNameRef.current!.value,
-            password: passwordRef.current!.value
+            password: passwordRef.current!.value,
         };
-        dispatch(loginUser(loginDetails)).unwrap()
+        dispatch(loginUser(loginDetails))
+            .unwrap()
             .then(() => handleLoginSuccess())
             .catch((err) => handleLoginFailure(err));
-    }
+    };
 
     return (
         <main>
@@ -90,8 +91,8 @@ const LogInPage: React.FC = () => {
                     />
                 </div>
             </form>
-        </main >
+        </main>
     );
-}
+};
 
 export default LogInPage;

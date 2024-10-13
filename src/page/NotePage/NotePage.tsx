@@ -11,13 +11,13 @@ import BlogPostGraphics from "../../components/BlogPostGraphics/BlogPostGraphics
 import type { Metadata } from "next";
 
 export interface INotesProps extends Metadata {
-  content: BlogPostResponse[];
+    content: BlogPostResponse[];
 }
 
 const Notes: React.FC<INotesProps> = ({ title, description, content }) => {
     const heroHeaderContent = Object.freeze({
         heading: title,
-        description: description
+        description: description,
     });
 
     const [isPageLoaded, setIsPageLoaded] = useState(false);
@@ -27,74 +27,79 @@ const Notes: React.FC<INotesProps> = ({ title, description, content }) => {
     }, []);
 
     if (!isPageLoaded) {
-        return <SkeletonPage />
+        return <SkeletonPage />;
     }
 
-    const grouped = content!.reduce((acc: Record<string, any>, item: BlogPostResponse) => {
-        const tagName = item.tags.length > 0 ? item.tags[0] : "random";
+    const grouped = content!.reduce(
+        (acc: Record<string, any>, item: BlogPostResponse) => {
+            const tagName = item.tags.length > 0 ? item.tags[0] : "random";
 
-        if (acc.hasOwnProperty(tagName)) {
-            acc[tagName].push(item);
-        } else {
-            acc[tagName] = [item];
-        }
+            if (acc.hasOwnProperty(tagName)) {
+                acc[tagName].push(item);
+            } else {
+                acc[tagName] = [item];
+            }
 
-        return acc;
-    }, {});
+            return acc;
+        },
+        {},
+    );
 
-
-    const authorImage = "https://llcode.tech/api/image/65817ae96c73ceb16ba51731";
+    const authorImage =
+        "https://llcode.tech/api/image/65817ae96c73ceb16ba51731";
 
     const emojIconMap: Record<string, string[]> = {
-        "random": ["😀", "😃", "😄", "😁", "😆"],
+        random: ["😀", "😃", "😄", "😁", "😆"],
         "object-oriented-programming": ["📦"],
-        "reading": ["📚"],
+        reading: ["📚"],
         "c++": ["⚙️"],
-        "devops": ["🔧"],
-        "cybersecurity": ["🔒"],
+        devops: ["🔧"],
+        cybersecurity: ["🔒"],
         "summer-research": ["🔍"],
         "software-testing": ["✅"],
-        "shell_bash": ["🐚"],
+        shell_bash: ["🐚"],
         "data-science": ["📊"],
         "agile-methodology": ["🔄"],
-        "mlops": ["🤖"],
+        mlops: ["🤖"],
         "c#": ["⚙️"],
-        "rust": ["🦀"],
-        "algorithms": ["🧩"],
+        rust: ["🦀"],
+        algorithms: ["🧩"],
         "parallel-computing": ["📈"],
         "research-methods": ["🔍"],
-        "powershell": ["📘"],
+        powershell: ["📘"],
         "code-smells": ["👃"],
         "ui-ux": ["📱"],
         "package-management": ["📦"],
         "computer-networks": ["🌐"],
         "design-process": ["📝"],
         "vim-and-emacs": ["💻"],
-        "cryptography": ["🔑"],
-        "javascript": ["⚙️"],
-        "data": ["📊"],
-        "django": ["🔨"],
-        "c": ["🇨️"],
-        "redux": ["🔄"],
-        "react": ["⚛️",],
-        "git": ["🔧"],
+        cryptography: ["🔑"],
+        javascript: ["⚙️"],
+        data: ["📊"],
+        django: ["🔨"],
+        c: ["🇨️"],
+        redux: ["🔄"],
+        react: ["⚛️"],
+        git: ["🔧"],
         "REST-api": ["📡"],
-        "sql": ["💻"]
+        sql: ["💻"],
     };
 
     const getIcon = (category: string) => {
-      return (
-        <div
-          style={{
-            width: "40px",
-            minWidth: "40px",
-            height: "40px",
-            minHeight: "40px",
-          }}
-        >
-          <EmojIcon emojis={emojIconMap[category] ?? emojIconMap["random"]} />
-        </div>
-      );  
+        return (
+            <div
+                style={{
+                    width: "40px",
+                    minWidth: "40px",
+                    height: "40px",
+                    minHeight: "40px",
+                }}
+            >
+                <EmojIcon
+                    emojis={emojIconMap[category] ?? emojIconMap["random"]}
+                />
+            </div>
+        );
     };
 
     return (
@@ -102,42 +107,49 @@ const Notes: React.FC<INotesProps> = ({ title, description, content }) => {
             <HeroHeader
                 heading={heroHeaderContent.heading! as string}
                 description={heroHeaderContent.description! as string}
-                graphics={<BlogPostGraphics />} />
+                graphics={<BlogPostGraphics />}
+            />
             <Accordion>
-                {
-                    Object.keys(grouped).map(category => {
-                        return (
-                            <Accordion.Item
-                                key={category}
-                                icon={getIcon(category)}
-                                heading={`${category} (${grouped[category].length})`}>
-                                {
-                                    grouped[category].map((content: BlogPostResponse) => {
-                                        return (
-                                            <Card
-                                                key={content._id.$oid}
-                                                heading={content.heading}
-                                                authorImage={authorImage}
-                                                author={content.author}
-                                                date_created={content.date_created}
-                                                date_updated={content.date_last_modified}
-                                                body={content.body}
-                                                minuteRead={content.reading_time_minutes}
-                                                in_progress={content.in_progress}
-                                                tags={content.tags}
-                                                image={content.image && content.image.$oid}
-                                                link={`/digital-chronicles/coding-note/${content._id.$oid}`}
-                                            />
-                                        )
-                                    })
-                                }
-                            </Accordion.Item>
-                        )
-                    })
-                }
+                {Object.keys(grouped).map((category) => {
+                    return (
+                        <Accordion.Item
+                            key={category}
+                            icon={getIcon(category)}
+                            heading={`${category} (${grouped[category].length})`}
+                        >
+                            {grouped[category].map(
+                                (content: BlogPostResponse) => {
+                                    return (
+                                        <Card
+                                            key={content._id.$oid}
+                                            heading={content.heading}
+                                            authorImage={authorImage}
+                                            author={content.author}
+                                            date_created={content.date_created}
+                                            date_updated={
+                                                content.date_last_modified
+                                            }
+                                            body={content.body}
+                                            minuteRead={
+                                                content.reading_time_minutes
+                                            }
+                                            in_progress={content.in_progress}
+                                            tags={content.tags}
+                                            image={
+                                                content.image &&
+                                                content.image.$oid
+                                            }
+                                            link={`/digital-chronicles/coding-note/${content._id.$oid}`}
+                                        />
+                                    );
+                                },
+                            )}
+                        </Accordion.Item>
+                    );
+                })}
             </Accordion>
-        </main >
+        </main>
     );
-}
+};
 
 export default Notes;

@@ -9,7 +9,8 @@
 }
 
 .sequential-rise-span > * {
-    overflow-y: hidden; overflow-x: visible;
+    overflow-y: hidden;
+    overflow-x: visible;
     width: max-content;
 }
 
@@ -25,7 +26,7 @@
 }
 
 .sequential-rise-span {
-    display: inline-block
+    display: inline-block;
 }
 
 .slide-up {

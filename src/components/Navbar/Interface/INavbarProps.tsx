@@ -1,11 +1,11 @@
 import { NavbarItem } from "./INavbarState";
 
 interface INavbarProps {
-    links: NavbarItem[],
+    links: NavbarItem[];
     scrollStatus?: {
         scrolled: number | undefined;
-        deltaScrolled: number | undefined
-    }
+        deltaScrolled: number | undefined;
+    };
 }
 
 export default INavbarProps;

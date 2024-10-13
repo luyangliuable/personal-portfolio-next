@@ -1,3 +1,3 @@
 export default interface ILoginButtonProps {
-    onMouseOver: (...args: any[]) => unknown,
+    onMouseOver: (...args: any[]) => unknown;
 }

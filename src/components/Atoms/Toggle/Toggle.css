@@ -1,24 +1,24 @@
 .toggle--container {
     padding: 10px;
     border-radius: 15px;
-    border: 1px dashed #DDD;
+    border: 1px dashed #ddd;
     cursor: pointer;
 }
-    .toggle--container * {
-        transition: all .1s ease-in-out;
-    }
+.toggle--container * {
+    transition: all 0.1s ease-in-out;
+}
 
-    .toggle--container.disabled {
-        cursor: not-allowed !important;
-    }
+.toggle--container.disabled {
+    cursor: not-allowed !important;
+}
 
-.toggle--container>span {
+.toggle--container > span {
     margin-right: 1rem;
 }
 
 .toggle {
     position: relative;
-    border: 3px solid #DDD;
+    border: 3px solid #ddd;
     width: 50px;
     height: 20px;
     display: flex;
@@ -29,9 +29,11 @@
 
 .toggle--on {
     border: 3px solid var(--dark-mode-purple-2);
-    box-shadow: 0 0 1px var(--dark-mode-purple-2), 0 0 2px var(--dark-mode-purple-2), 0 0 3px var(--dark-mode-purple-2);
+    box-shadow:
+        0 0 1px var(--dark-mode-purple-2),
+        0 0 2px var(--dark-mode-purple-2),
+        0 0 3px var(--dark-mode-purple-2);
 }
-
 
 .toggle__inner-circle {
     position: absolute;
@@ -39,12 +41,15 @@
     width: 20px;
     height: 18px;
     border-radius: 24px;
-    background: #CCC;
+    background: #ccc;
 }
 
 .toggle--on .toggle__inner-circle {
     background: var(--dark-mode-purple-2);
-    box-shadow: 0 0 1px var(--dark-mode-purple-2), 0 0 2px var(--dark-mode-purple-2), 0 0 3px var(--dark-mode-purple-2);
+    box-shadow:
+        0 0 1px var(--dark-mode-purple-2),
+        0 0 2px var(--dark-mode-purple-2),
+        0 0 3px var(--dark-mode-purple-2);
     left: 100%;
-    transform: translateX(calc( -100% - 2px ));
+    transform: translateX(calc(-100% - 2px));
 }

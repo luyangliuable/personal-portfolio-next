@@ -10,9 +10,9 @@ const NavBar = () => {
     return (
         <article className="navbar flex flex-row">
             <NavbarMainSection links={links} />
-            <LoginButton style={{position: "absolute", right: 0}} />
+            <LoginButton style={{ position: "absolute", right: 0 }} />
         </article>
     );
-}
+};
 
 export default NavBar;

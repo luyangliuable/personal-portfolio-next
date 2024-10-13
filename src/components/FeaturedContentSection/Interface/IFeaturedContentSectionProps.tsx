@@ -1,7 +1,7 @@
 import BlogPostResponse from "../../../repositories/Response/BlogPostResponse";
 
 interface IFeaturedContentSectionProps {
-    postList: BlogPostResponse[]
+    postList: BlogPostResponse[];
 }
 
 export default IFeaturedContentSectionProps;

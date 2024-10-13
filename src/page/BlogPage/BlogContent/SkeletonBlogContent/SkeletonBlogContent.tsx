@@ -10,11 +10,12 @@ const SkeletonBlogContent: React.FC = () => {
             <div className="skeleton-blog-content__line skeleton-blog-content__item"></div>
             <div className="skeleton-blog-content__line skeleton-blog-content__item"></div>
             <div className="skeleton-blog-content__line skeleton-blog-content__item"></div>
-            <br /><br />
+            <br />
+            <br />
             <div className="skeleton-blog-content__line skeleton-blog-content__item"></div>
             <div className="skeleton-blog-content__line skeleton-blog-content__item"></div>
         </div>
     );
-}
+};
 
 export default SkeletonBlogContent;

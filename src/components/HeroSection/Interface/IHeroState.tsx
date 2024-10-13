@@ -1,5 +1,5 @@
 import React from "react";
 
-type IHeroState = {}
+type IHeroState = {};
 
 export default IHeroState;

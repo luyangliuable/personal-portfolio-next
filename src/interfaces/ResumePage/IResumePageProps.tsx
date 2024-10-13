@@ -1,4 +1,3 @@
-interface IResumePageProps {
-}
+interface IResumePageProps {}
 
 export default IResumePageProps;

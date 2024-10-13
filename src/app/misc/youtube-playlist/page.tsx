@@ -1,7 +1,7 @@
 import YoutubePlaylist from "../../../page/YoutubePlaylist/YoutubePlaylist";
 
 const page = () => {
-    return <YoutubePlaylist />
-}
+    return <YoutubePlaylist />;
+};
 
 export default page;

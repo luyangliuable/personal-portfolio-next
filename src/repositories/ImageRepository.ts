@@ -6,24 +6,33 @@ class ImageRepository extends Repository {
     private ongoingRequests = new Map<string, Promise<string>>();
     private static BASE_URL: string = "https://llcode.tech/api/image/";
 
-    private constructor() { super(); }
+    private constructor() {
+        super();
+    }
 
     static getInstance(): ImageRepository {
-        if (!ImageRepository.instance) ImageRepository.instance = new ImageRepository();
+        if (!ImageRepository.instance)
+            ImageRepository.instance = new ImageRepository();
         return ImageRepository.instance;
     }
 
     async getImageById(idOrUrl: string, compression?: number): Promise<string> {
         if (idOrUrl === null) console.error("no image id provided");
         let url: string = idOrUrl;
-        if (!idOrUrl.startsWith('http://') && !idOrUrl.startsWith('https://') && !idOrUrl.startsWith('/static')) url = `${ImageRepository.BASE_URL}${idOrUrl}`;
+        if (
+            !idOrUrl.startsWith("http://") &&
+            !idOrUrl.startsWith("https://") &&
+            !idOrUrl.startsWith("/static")
+        )
+            url = `${ImageRepository.BASE_URL}${idOrUrl}`;
         url = `${url}?compression=${compression ?? 100}`;
         if (this.cache.has(url)) return this.cache.get(url)!;
-        if (this.ongoingRequests.has(url)) return this.ongoingRequests.get(url)!;
+        if (this.ongoingRequests.has(url))
+            return this.ongoingRequests.get(url)!;
         const fetchImage = async () => {
             try {
                 const response = await fetch(url, {
-                    headers: {}
+                    headers: {},
                 });
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -34,7 +43,7 @@ class ImageRepository extends Repository {
                 this.ongoingRequests.delete(url);
                 return imageURL;
             } catch (error) {
-                console.error('Error fetching image:', error, url);
+                console.error("Error fetching image:", error, url);
                 this.ongoingRequests.delete(url);
                 throw error;
             }
@@ -42,8 +51,9 @@ class ImageRepository extends Repository {
         const fetchPromise = fetchImage();
         this.ongoingRequests.set(url, fetchPromise);
         return fetchPromise;
-    } catch(error: Error) {
-        console.error('Error fetching image:', error);
+    }
+    catch(error: Error) {
+        console.error("Error fetching image:", error);
         throw error;
     }
 }

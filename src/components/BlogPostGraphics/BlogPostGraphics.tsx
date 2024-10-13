@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import "./BlogPostGraphics.css";
 
 const BlogPostGraphics: React.FC<{}> = () => {
@@ -15,6 +15,6 @@ const BlogPostGraphics: React.FC<{}> = () => {
             <div className="paper -two"></div>
         </div>
     );
-}
+};
 
 export default BlogPostGraphics;

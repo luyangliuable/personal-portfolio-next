@@ -7,17 +7,23 @@ import { CiLock } from "react-icons/ci";
 import { cl } from "../../Utility/LogicUtility";
 
 interface INavLinkProps {
-    link: NavbarItem,
-    isSubLink: boolean,
-    links?: NavbarItem[],
-    hideDropdownMenu: any,
-    renderDropdownMenu: any
+    link: NavbarItem;
+    isSubLink: boolean;
+    links?: NavbarItem[];
+    hideDropdownMenu: any;
+    renderDropdownMenu: any;
 }
 
-import { usePathname } from 'next/navigation';
+import { usePathname } from "next/navigation";
 import EmojIcon from "../../EmojIcon/EmojIcon";
 
-const NavLink: React.FC<INavLinkProps> = ({ link, isSubLink, renderDropdownMenu, links, hideDropdownMenu }) => {
+const NavLink: React.FC<INavLinkProps> = ({
+    link,
+    isSubLink,
+    renderDropdownMenu,
+    links,
+    hideDropdownMenu,
+}) => {
     // https://mikebifulco.com/posts/javascript-filter-boolean
 
     const navLinkContent = [
@@ -27,7 +33,14 @@ const NavLink: React.FC<INavLinkProps> = ({ link, isSubLink, renderDropdownMenu,
 
     const targetPath = link.isLocked ? undefined : link.to;
 
-    const onMouseOverAction = isSubLink && links ? () => {} : () => renderDropdownMenu(links?.filter(item => item.name === link.name)[0].sublinks);
+    const onMouseOverAction =
+        isSubLink && links
+            ? () => {}
+            : () =>
+                  renderDropdownMenu(
+                      links?.filter((item) => item.name === link.name)[0]
+                          .sublinks,
+                  );
 
     const pathname = usePathname() ?? "/";
 
@@ -42,40 +55,51 @@ const NavLink: React.FC<INavLinkProps> = ({ link, isSubLink, renderDropdownMenu,
 
     return (
         <a
-            href={(targetPath && !link.isDisabled) ? targetPath : pathname}
+            href={targetPath && !link.isDisabled ? targetPath : pathname}
             onClick={() => link.isDisabled && hideDropdownMenu()}
-            className={cl("position-relative flex flex-row justify-center items-center navbar-item", {
-                "items-start": isSubLink,
-                "active-link": isActive(pathname, targetPath)
-            })}
+            className={cl(
+                "position-relative flex flex-row justify-center items-center navbar-item",
+                {
+                    "items-start": isSubLink,
+                    "active-link": isActive(pathname, targetPath),
+                },
+            )}
             key={link.name}
-            onMouseOver={onMouseOverAction}>
+            onMouseOver={onMouseOverAction}
+        >
             <div className="flex flex-row justify-start items-center">
-                {link.emoji && <EmojIcon style={{
-                    width: "40px",
-                    height: "40px",
-                    minWidth: "40px",
-                    minHeight: "40px",
-                    borderRadius: "4px",
-                    marginRight: ".5rem"
-                }} emojis={[link.emoji]} />}
+                {link.emoji && (
+                    <EmojIcon
+                        style={{
+                            width: "40px",
+                            height: "40px",
+                            minWidth: "40px",
+                            minHeight: "40px",
+                            borderRadius: "4px",
+                            marginRight: ".5rem",
+                        }}
+                        emojis={[link.emoji]}
+                    />
+                )}
                 <div className="flex flex-col justify-center">
                     <div className="flex flex-row items-center">
                         {navLinkContent}
                     </div>
-                    {
-                        isSubLink && <div
+                    {isSubLink && (
+                        <div
                             className="w-full"
                             style={{
                                 fontSize: ".8rem",
                                 marginTop: "2px",
-                                color: "#888"
-                            }}>{link.description}</div>
-                    }
+                                color: "#888",
+                            }}
+                        >
+                            {link.description}
+                        </div>
+                    )}
                 </div>
             </div>
-            {
-                link.isLocked &&
+            {link.isLocked && (
                 <div
                     className="blur-boundary flex justify-center items-center mr-2"
                     style={{
@@ -85,11 +109,12 @@ const NavLink: React.FC<INavLinkProps> = ({ link, isSubLink, renderDropdownMenu,
                         minHeight: "30px",
                         height: "30px",
                         borderRadius: "4px",
-                        border: ".1px solid #888"
-                    }}>
+                        border: ".1px solid #888",
+                    }}
+                >
                     <CiLock style={{ strokeWidth: "1px" }} key="lock-icon" />
                 </div>
-            }
+            )}
         </a>
     );
 };

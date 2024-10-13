@@ -1,13 +1,14 @@
-import React, { useMemo } from 'react';
+import React, { useMemo } from "react";
 import Link from "next/link";
-import IButtonProps, { IButtonPropsWithTo } from "../../Button/Interface/IButtonProps";
-import './IconButton.css';
+import IButtonProps, {
+    IButtonPropsWithTo,
+} from "../../Button/Interface/IButtonProps";
+import "./IconButton.css";
 
 const IconButton: React.FC<IButtonProps> = (props: IButtonProps) => {
-
     const imageLink = useMemo(() => {
         const logoMap: { [key: string]: string } = {
-            Email: "protonmail" // Assuming "protonmail" is the correct value you want to use
+            Email: "protonmail", // Assuming "protonmail" is the correct value you want to use
         };
         let logoName = props.logoName;
         if (props.logoName && logoMap[props.logoName]) {
@@ -18,25 +19,36 @@ const IconButton: React.FC<IButtonProps> = (props: IButtonProps) => {
 
     const renderButton = () => {
         return (
-            <span style={props.style} className="inline-link__text no-select flex items-center box-border">
+            <span
+                style={props.style}
+                className="inline-link__text no-select flex items-center box-border"
+            >
                 <img src={imageLink} alt={props.logoName} />
             </span>
         );
-    }
+    };
 
     const isLinkProps = (props: IButtonProps): props is IButtonPropsWithTo => {
         return (props as IButtonPropsWithTo).to !== undefined;
-    }
+    };
 
     if (isLinkProps(props)) {
         return (
-            <Link target={props.target} href={props.to} className={props.className}>{renderButton()}</Link>
+            <Link
+                target={props.target}
+                href={props.to}
+                className={props.className}
+            >
+                {renderButton()}
+            </Link>
         );
     }
 
     return (
-        <div onClick={props.onClick} className={props.className}>{renderButton()}</div>
+        <div onClick={props.onClick} className={props.className}>
+            {renderButton()}
+        </div>
     );
-}
+};
 
 export default IconButton;

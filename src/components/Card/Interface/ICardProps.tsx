@@ -9,5 +9,5 @@ export default interface ICardProps {
     in_progress?: boolean;
     image?: string;
     body: string;
-    tags?: string[]
+    tags?: string[];
 }

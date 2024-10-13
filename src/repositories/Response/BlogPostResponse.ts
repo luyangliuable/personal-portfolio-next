@@ -1,6 +1,6 @@
 export default interface BlogPostResponse {
     _id: {
-        $oid: string
+        $oid: string;
     };
     author: string;
     imageOverride?: any;
@@ -13,12 +13,12 @@ export default interface BlogPostResponse {
     url?: string;
     heading: string;
     image: {
-        $oid: string
-    }
+        $oid: string;
+    };
     is_featured?: boolean;
     month?: number;
     post_type?: "blog" | "project" | "tool" | "url" | "none" | "md";
     reading_time_minutes?: number;
     tags: string[];
-    year?: number
+    year?: number;
 }

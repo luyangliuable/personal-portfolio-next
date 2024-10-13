@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 const LocalTime = () => {
     const [time, setTime] = useState<Date | null>(null);
@@ -24,10 +24,10 @@ const LocalTime = () => {
                 hour: "2-digit",
                 minute: "2-digit",
                 second: "2-digit",
-                hour12: false
+                hour12: false,
             }).format(time) + " (UTC +10:00)"}
         </span>
     );
-}
+};
 
 export default LocalTime;

@@ -5,7 +5,7 @@
     margin: 0;
     justify-content: center;
     align-items: center;
-    animation: fade-in--up-with-tilt .5s ease-in-out;
+    animation: fade-in--up-with-tilt 0.5s ease-in-out;
 }
 
 @media screen and (max-width: 1000px) {
@@ -16,12 +16,12 @@
 
 @keyframes fade-in--up-with-tilt {
     0% {
-        transform: translateY(20px) rotate(5deg) scale(.5);
+        transform: translateY(20px) rotate(5deg) scale(0.5);
         opacity: 0;
     }
     50% {
-        transform: translateY(10px) rotate(-2deg) scale(.75);
-        opacity: .5;
+        transform: translateY(10px) rotate(-2deg) scale(0.75);
+        opacity: 0.5;
     }
     100% {
         transform: translateY(0px) rotate(0deg) scale(1);
@@ -29,47 +29,57 @@
     }
 }
 
- #coding-cat {
-     fill: var(--bg);
-     cursor: pointer;
-     stroke-linecap: round;
-     stroke-linejoin: round;
-     stroke-width: 4;
- }
+#coding-cat {
+    fill: var(--bg);
+    cursor: pointer;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 4;
+}
 
- #coding-cat .laptop-cover, #coding-cat .headphone .band {
-     fill: none;
- }
+#coding-cat .laptop-cover,
+#coding-cat .headphone .band {
+    fill: none;
+}
 
- #coding-cat .paw, #coding-cat .head {
-     stroke: var(--orange);
- }
+#coding-cat .paw,
+#coding-cat .head {
+    stroke: var(--orange);
+}
 
- #coding-cat .laptop-keyboard {
-     stroke-width: 2;
- }
+#coding-cat .laptop-keyboard {
+    stroke-width: 2;
+}
 
- #coding-cat .terminal-code {
-     stroke-width: 5;
- }
+#coding-cat .terminal-code {
+    stroke-width: 5;
+}
 
- #coding-cat .music .note, #coding-cat .laptop-base, #coding-cat .laptop-cover, #coding-cat .paw .pads {
-     stroke: var(--pink);
- }
+#coding-cat .music .note,
+#coding-cat .laptop-base,
+#coding-cat .laptop-cover,
+#coding-cat .paw .pads {
+    stroke: var(--pink);
+}
 
- #coding-cat .table line, #coding-cat .headphone .band, #coding-cat .headphone .speaker path:nth-child(3) {
-     stroke: var(--green);
- }
+#coding-cat .table line,
+#coding-cat .headphone .band,
+#coding-cat .headphone .speaker path:nth-child(3) {
+    stroke: var(--green);
+}
 
- #coding-cat .terminal-frame, #coding-cat .laptop-keyboard, #coding-cat .headphone .speaker path:nth-child(2) {
-     stroke: var(--blue);
- }
+#coding-cat .terminal-frame,
+#coding-cat .laptop-keyboard,
+#coding-cat .headphone .speaker path:nth-child(2) {
+    stroke: var(--blue);
+}
 
- #coding-cat .terminal-code, #coding-cat .headphone .speaker path:first-child {
-     stroke: var(--cyan);
- }
+#coding-cat .terminal-code,
+#coding-cat .headphone .speaker path:first-child {
+    stroke: var(--cyan);
+}
 
- .stop-music-note-animation * {
-     animation-play-state: paused;
-     -webkit-animation-play-state: paused;
- }
+.stop-music-note-animation * {
+    animation-play-state: paused;
+    -webkit-animation-play-state: paused;
+}

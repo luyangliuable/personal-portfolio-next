@@ -7,20 +7,25 @@ class DynamicLoadQueue {
     private observer: IntersectionObserver | null = null;
 
     private constructor() {
-        if (typeof window !== 'undefined' && 'IntersectionObserver' in window) {
-            this.observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting && 
-                        (entry.target instanceof HTMLDivElement || 
-                         entry.target instanceof HTMLElement || 
-                         entry.target instanceof HTMLAnchorElement)) {
-                        this.queue.push(entry.target);
-                        this.processQueueStart();
-                    }
-                });
-            }, { threshold: 0.1 });
+        if (typeof window !== "undefined" && "IntersectionObserver" in window) {
+            this.observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (
+                            entry.isIntersecting &&
+                            (entry.target instanceof HTMLDivElement ||
+                                entry.target instanceof HTMLElement ||
+                                entry.target instanceof HTMLAnchorElement)
+                        ) {
+                            this.queue.push(entry.target);
+                            this.processQueueStart();
+                        }
+                    });
+                },
+                { threshold: 0.1 },
+            );
         } else {
-            console.warn('IntersectionObserver is not supported');
+            console.warn("IntersectionObserver is not supported");
         }
     }
 
@@ -43,7 +48,8 @@ class DynamicLoadQueue {
 
     processQueueStart() {
         const queueMaxSize = 2;
-        if (this.queue.length >= queueMaxSize && this.isLocked === true) this.isLocked = false;
+        if (this.queue.length >= queueMaxSize && this.isLocked === true)
+            this.isLocked = false;
         if (this.isLocked === false && this.queue.length < queueMaxSize) {
             this.isLocked = true;
             this.processQueue();
@@ -67,8 +73,8 @@ class DynamicLoadQueue {
     }
 
     fadeInElement(element: Element) {
-        (element as HTMLElement).style.opacity = '1';
-        (element as HTMLElement).style.transform = 'translate(0, 0)';
+        (element as HTMLElement).style.opacity = "1";
+        (element as HTMLElement).style.transform = "translate(0, 0)";
         if (this.observer) {
             this.observer.unobserve(element);
         }

@@ -1,7 +1,7 @@
 .wrapper {
     position: relative;
     z-index: 1;
-    transform: scale(.8, .8)
+    transform: scale(0.8, 0.8);
 }
 
 .wrapper * {
@@ -10,13 +10,13 @@
 
 @media (min-width: 10px) and (max-width: 700px) {
     .wrapper {
-        transform: scale(.3, .3);
+        transform: scale(0.3, 0.3);
     }
 }
 
 @media (min-width: 700px) and (max-width: 800px) {
     .wrapper {
-        transform: scale(.5);
+        transform: scale(0.5);
     }
 }
 
@@ -26,7 +26,7 @@
     top: 50%;
     width: 350px;
     height: 5px;
-    background: #673C63;
+    background: #673c63;
     transform: translate(-50%, -50%);
     box-shadow: 0px 2px 5px #111;
     z-index: 2;
@@ -49,7 +49,7 @@
     width: 35px;
     height: 100px;
     background: #fff;
-    border: 3px solid #673C63;
+    border: 3px solid #673c63;
     border-bottom: 0px;
     border-radius: 3px;
     transform-origin: center right;
@@ -61,13 +61,14 @@
     animation: expand-body 1s infinite linear;
 }
 
-.candle1__stick, .candle2__stick {
+.candle1__stick,
+.candle2__stick {
     position: absolute;
     left: 50%;
     top: 0%;
     width: 3px;
     height: 15px;
-    background: #673C63;
+    background: #673c63;
     border-radius: 8px;
     transform: translate(-50%, -100%);
 }
@@ -79,7 +80,8 @@
 /*   animation: stick-animation 1s infinite linear; */
 /* } */
 
-.candle1__eyes, .candle2__eyes {
+.candle1__eyes,
+.candle2__eyes {
     position: absolute;
     left: 50%;
     top: 0%;
@@ -95,10 +97,9 @@
     width: 5px;
     height: 5px;
     border-radius: 100%;
-    background: #673C63;
+    background: #673c63;
     transform: translate(-70%, 0%);
 }
-
 
 .candle1__eyes-one-animated {
     animation: blink-eyes 1s infinite linear;
@@ -111,7 +112,7 @@
     width: 5px;
     height: 5px;
     border-radius: 100%;
-    background: #673C63;
+    background: #673c63;
     transform: translate(-70%, 0%);
 }
 
@@ -126,7 +127,7 @@
     width: 0px;
     height: 0px;
     border-radius: 20px;
-    background: #673C63;
+    background: #673c63;
     transform: translate(-50%, -50%);
 }
 
@@ -164,7 +165,7 @@
     width: 42px;
     height: 60px;
     background: #fff;
-    border: 3px solid #673C63;
+    border: 3px solid #673c63;
     border-bottom: 0px;
     border-radius: 3px;
     transform: translate(60%, -15%);
@@ -175,7 +176,6 @@
 .candle2-transition__off {
     animation: shake-left 1s infinite linear;
 }
-
 
 .candle2-transition__on {
     animation: candle-vent-expand 1s infinite linear;
@@ -188,10 +188,10 @@
     width: 5px;
     height: 5px;
     display: inline-block;
-    border: 0px solid #673C63;
+    border: 0px solid #673c63;
     border-radius: 100%;
     float: left;
-    background: #673C63;
+    background: #673c63;
     transform: translate(-80%, 0%);
 }
 
@@ -206,10 +206,10 @@
     width: 5px;
     height: 5px;
     display: inline-block;
-    border: 0px solid #673C63;
+    border: 0px solid #673c63;
     border-radius: 100%;
     float: left;
-    background: #673C63;
+    background: #673c63;
     transform: translate(-80%, 0%);
 }
 
@@ -227,8 +227,8 @@
     z-index: 0;
     transform: translate(-25%, -50%) scale(2.5, 2.5);
     background: rgba();
-    border: 2px solid #FF9800 !important;
-    opacity: .1;
+    border: 2px solid #ff9800 !important;
+    opacity: 0.1;
     animation: expand-light 10s infinite linear;
 }
 
@@ -239,7 +239,7 @@
     display: block;
     background-color: red;
     border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    background: #FF9800;
+    background: #ff9800;
     transform: translate(-50%, -50%);
     width: 0px;
     height: 0px;
@@ -253,7 +253,6 @@
     height: 20px;
 }
 
-
 .candle2__fire-transition__off {
     animation: dance-fire-transform-off 1s infinite linear;
     -moz-animation: dance-fire-transform-off 1s infinite linear;
@@ -261,7 +260,6 @@
     width: 16px;
     height: 20px;
 }
-
 
 .candle2__fire-transition__on {
     animation: dance-fire-transform-on 1s infinite linear;

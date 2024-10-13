@@ -1,5 +1,5 @@
 import React from "react";
-import "./Burger.css"
+import "./Burger.css";
 
 const Burger = () => {
     return (
@@ -34,6 +34,6 @@ const Burger = () => {
             </div>
         </div>
     );
-}
+};
 
 export default Burger;

@@ -3,15 +3,14 @@
 
     min-height: 50vh;
 
-    animation: fade-in .5s ease-in-out;
+    animation: fade-in 0.5s ease-in-out;
 
-    border-bottom: .1px solid #DDD;
+    border-bottom: 0.1px solid #ddd;
     margin-bottom: 5vh;
 
     background: rgb(235, 235, 235);
-    backdrop-filter: blur(5px)
+    backdrop-filter: blur(5px);
 }
-
 
 .hero-header__description {
     color: #888;
@@ -29,10 +28,9 @@
     margin-bottom: 0;
 }
 
-
 .hero-header__content {
     margin-left: 2rem;
-} 
+}
 
 .hero-header__graphics-container {
     position: relative;
@@ -43,11 +41,10 @@
         margin: 40px 0 0;
     }
 
-
     .hero-header__content {
         width: 100%;
         margin: 0;
-    } 
+    }
 
     .hero-header__inner {
         flex-direction: column;

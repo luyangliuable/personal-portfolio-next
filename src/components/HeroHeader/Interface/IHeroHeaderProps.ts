@@ -3,7 +3,7 @@ import React from "react";
 interface IHeroHeaderProps {
     heading: string;
     description: string;
-    graphics?: JSX.Element
+    graphics?: JSX.Element;
 }
 
 export default IHeroHeaderProps;

@@ -1,23 +1,26 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 const useFadeInOnView = () => {
     const [elements, setElements] = useState<Element[]>([]);
     const queue: Element[] = [];
 
     useEffect(() => {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    queue.push(entry.target);
-                    observer.unobserve(entry.target);
-                }
-            });
-            processQueue();
-        }, { threshold: 0.1 });
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        queue.push(entry.target);
+                        observer.unobserve(entry.target);
+                    }
+                });
+                processQueue();
+            },
+            { threshold: 0.1 },
+        );
 
-        const observedElements = document.querySelectorAll('.gallery-item');
+        const observedElements = document.querySelectorAll(".gallery-item");
         setElements(Array.from(observedElements));
-        observedElements.forEach(el => observer.observe(el));
+        observedElements.forEach((el) => observer.observe(el));
 
         function processQueue() {
             if (queue.length === 0) return;
@@ -31,8 +34,8 @@ const useFadeInOnView = () => {
         }
 
         function fadeInElement(element: Element) {
-            (element as HTMLElement).style.opacity = '1';
-            (element as HTMLElement).style.transition = 'opacity 1s ease-in';
+            (element as HTMLElement).style.opacity = "1";
+            (element as HTMLElement).style.transition = "opacity 1s ease-in";
         }
 
         return () => {

@@ -9,16 +9,15 @@ import Bento from "../Bento/Bento";
 import IGalleryItemProps from "./GalleryItem/Interface/IGalleryItemProps";
 
 const Gallery: React.FC<IGalleryProps> = (props) => {
-
     const renderGalleryItems = (): React.ReactNode => {
         return props.content.map((item: IGalleryItemProps, index: number) => {
-            item = { ...item, name: `${item.name}\u00A0/` }
+            item = { ...item, name: `${item.name}\u00A0/` };
             if (index == 0) {
                 return (
                     <Bento.Item key={index} colSpan={2}>
                         <GalleryItem {...item} />
                     </Bento.Item>
-                )
+                );
             }
 
             if (index == 1) {
@@ -26,24 +25,24 @@ const Gallery: React.FC<IGalleryProps> = (props) => {
                     <Bento.Item key={index} rowSpan={2} colSpan={2}>
                         <GalleryItem {...item} />
                     </Bento.Item>
-                )
+                );
             }
 
             return (
                 <Bento.Item key={index} colSpan={1}>
                     <GalleryItem {...item} />
                 </Bento.Item>
-            )
+            );
         });
     };
 
     return (
         <>
             <div className="gallery normalised-width">
-                <div className="heading__wrapper"><h2>{props.heading}</h2></div>
-                <Bento gap="1rem">
-                    {renderGalleryItems()}
-                </Bento>
+                <div className="heading__wrapper">
+                    <h2>{props.heading}</h2>
+                </div>
+                <Bento gap="1rem">{renderGalleryItems()}</Bento>
             </div>
         </>
     );

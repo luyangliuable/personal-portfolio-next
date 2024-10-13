@@ -6,11 +6,12 @@ import UserNameResponse from "../repositories/Response/UserNameResponse";
 
 export const AppContext = React.createContext<IAppContextProvider>({
     userName: "",
-    loginStatus: false
+    loginStatus: false,
 });
 
-
-export const AppContextProvider: React.FC<IAppContextProps> = ({ children }) => {
+export const AppContextProvider: React.FC<IAppContextProps> = ({
+    children,
+}) => {
     const [userName, setUserName] = useState<string>("");
     const [loginStatus, setLoginStatus] = useState<boolean>(false);
 

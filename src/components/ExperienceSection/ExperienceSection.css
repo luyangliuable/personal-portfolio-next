@@ -3,7 +3,7 @@
     display: flow-root;
     position: sticky;
     z-index: 3;
-    top: calc(var(--navbar-height) + .5vh);
+    top: calc(var(--navbar-height) + 0.5vh);
     height: calc(99vh - var(--navbar-height));
     transition: all 0.1s ease-in;
     margin-bottom: -400px;

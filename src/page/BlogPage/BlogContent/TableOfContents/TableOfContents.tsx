@@ -1,17 +1,29 @@
 import React from "react";
-import ItableOfContentsProps from "../../../../interfaces/BlogPage/BlogContent/TableOfContents/ItableOfContentsProps"
+import ItableOfContentsProps from "../../../../interfaces/BlogPage/BlogContent/TableOfContents/ItableOfContentsProps";
 import { useEffect, useState, useRef, RefObject } from "react";
-import { stringToHash, removeHashesAndStripWhitespace, removeTextInsideAngleBrackets, convertHtmlEntities } from "../../../../components/Utility/StringUtility";
+import {
+    stringToHash,
+    removeHashesAndStripWhitespace,
+    removeTextInsideAngleBrackets,
+    convertHtmlEntities,
+} from "../../../../components/Utility/StringUtility";
 import "./TableOfContents.css";
 import { cl } from "../../../../components/Utility/LogicUtility";
 
 const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
     const [tocEntries, setTocEntries] = useState<JSX.Element[] | null>(null);
-    const [tocEntryRef, setTocEntryRef] = useState<RefObject<HTMLElement>[]>([]);
-    const [listenTocItems, setlistenTocItems] = useState<Set<string>>(new Set());
-    const [lastPathInfo, setLastPathInfo] = useState<{lastPathStart: number, lastPathEnd: number}>({
+    const [tocEntryRef, setTocEntryRef] = useState<RefObject<HTMLElement>[]>(
+        [],
+    );
+    const [listenTocItems, setlistenTocItems] = useState<Set<string>>(
+        new Set(),
+    );
+    const [lastPathInfo, setLastPathInfo] = useState<{
+        lastPathStart: number;
+        lastPathEnd: number;
+    }>({
         lastPathStart: 0,
-        lastPathEnd: 0
+        lastPathEnd: 0,
     });
     const tocMarkerPathRef: RefObject<SVGPathElement> = useRef(null);
 
@@ -23,10 +35,21 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
         listenSections();
     }, [tocEntries, props.emitter]);
 
-    const handleClick = (_event: React.MouseEvent<HTMLDivElement>, id: string) => {
-        const allBlogSections = Array.from(document.querySelectorAll(".blog-section"));
-        const targetElement = allBlogSections.find((section) => section.id === id);
-        if (targetElement) targetElement.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    const handleClick = (
+        _event: React.MouseEvent<HTMLDivElement>,
+        id: string,
+    ) => {
+        const allBlogSections = Array.from(
+            document.querySelectorAll(".blog-section"),
+        );
+        const targetElement = allBlogSections.find(
+            (section) => section.id === id,
+        );
+        if (targetElement)
+            targetElement.scrollIntoView({
+                block: "start",
+                behavior: "smooth",
+            });
     };
 
     const renderTableOfContents = (): void => {
@@ -35,24 +58,42 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
             return `hsl(0, 0%, ${lightness}%)`;
         };
         const subheadings = props.headings?.filter(({ level }) => level !== 0);
-        const renderedSubHeadings = subheadings?.map(({ title, level }, idx: number) => {
-            if (level === 1) title = "";
-            const indentation = `${Math.max((level - 2), 0) * 20}px`;
-            const marginBottom = idx === 0 ? "0px" : `${(22 - 4.5 * level) / 2}px`;
-            const color = getTextColor(level);
-            const id = stringToHash(title);
-            const className = `level-${level - 2} section-toc-entry flex items-center`;
-            return (
-                <div key={idx} id={id.toString()} className={className} style={{ color, margin: `${marginBottom} ${indentation}` }} onClick={(e) => handleClick(e, id.toString())}>
-                    {convertHtmlEntities(removeTextInsideAngleBrackets(removeHashesAndStripWhitespace(title)))}
-                </div>
-            );
-        })
+        const renderedSubHeadings = subheadings?.map(
+            ({ title, level }, idx: number) => {
+                if (level === 1) title = "";
+                const indentation = `${Math.max(level - 2, 0) * 20}px`;
+                const marginBottom =
+                    idx === 0 ? "0px" : `${(22 - 4.5 * level) / 2}px`;
+                const color = getTextColor(level);
+                const id = stringToHash(title);
+                const className = `level-${level - 2} section-toc-entry flex items-center`;
+                return (
+                    <div
+                        key={idx}
+                        id={id.toString()}
+                        className={className}
+                        style={{
+                            color,
+                            margin: `${marginBottom} ${indentation}`,
+                        }}
+                        onClick={(e) => handleClick(e, id.toString())}
+                    >
+                        {convertHtmlEntities(
+                            removeTextInsideAngleBrackets(
+                                removeHashesAndStripWhitespace(title),
+                            ),
+                        )}
+                    </div>
+                );
+            },
+        );
         if (renderedSubHeadings) {
             setTocEntries(renderedSubHeadings);
-            setTocEntryRef(renderedSubHeadings.map(() => React.createRef<any>()));
+            setTocEntryRef(
+                renderedSubHeadings.map(() => React.createRef<any>()),
+            );
         }
-    }
+    };
 
     const drawPath = () => {
         const tocPath = tocMarkerPathRef.current,
@@ -68,7 +109,7 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
             pathStart = 0,
             pathEnd = 0;
         tocEntries!.forEach((entry, idx) => {
-            if (entry.props.className.includes('active')) {
+            if (entry.props.className.includes("active")) {
                 if (startIdx === -1) startIdx = idx;
                 if (idx === 1) startHeight = 80;
                 endIdx = idx;
@@ -77,8 +118,12 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
         path.push("M", indent, startHeight);
         height = startHeight;
         tocEntries!.forEach((entry, idx) => {
-            const computedStyle = window.getComputedStyle(tocEntryRef[idx].current!);
-            const extra = parseFloat(computedStyle.height) + parseFloat(computedStyle.marginBottom) * 2;
+            const computedStyle = window.getComputedStyle(
+                tocEntryRef[idx].current!,
+            );
+            const extra =
+                parseFloat(computedStyle.height) +
+                parseFloat(computedStyle.marginBottom) * 2;
             if (idx < startIdx) pathStart += extra;
             const { className } = entry.props;
             const match = className.match(/level-(\d+)/);
@@ -98,52 +143,67 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
         });
         const { lastPathStart, lastPathEnd } = lastPathInfo;
         if (pathStart !== lastPathStart || pathEnd !== lastPathEnd) {
-            if (startIdx === -1) tocPath!.setAttribute('opacity', '0');
-            const pathString = path.join(' ');
+            if (startIdx === -1) tocPath!.setAttribute("opacity", "0");
+            const pathString = path.join(" ");
             const pathLength = tocPath!.getTotalLength();
-            tocPath!.setAttribute('d', pathString);
-            tocPath!.setAttribute('stroke-dashoffset', '1');
-            tocPath!.setAttribute('stroke-dasharray', `0, ${pathStart}, ${pathEnd - pathStart}, ${pathLength === 0 ? 1000 : pathLength}`);
-            tocPath!.setAttribute('opacity', '1');
+            tocPath!.setAttribute("d", pathString);
+            tocPath!.setAttribute("stroke-dashoffset", "1");
+            tocPath!.setAttribute(
+                "stroke-dasharray",
+                `0, ${pathStart}, ${pathEnd - pathStart}, ${pathLength === 0 ? 1000 : pathLength}`,
+            );
+            tocPath!.setAttribute("opacity", "1");
             setLastPathInfo({
                 lastPathStart: pathStart,
-                lastPathEnd: pathEnd
+                lastPathEnd: pathEnd,
             });
         }
-    }
+    };
     useEffect(() => {
         if (tocEntries === null) return;
         drawPath();
     }, [tocEntries]);
     function listenSections(): void {
         if (tocEntries === null || props.emitter === undefined) return;
-        if (listenTocItems.has('intersectingSectionsListener')) return;
-        props.emitter.on('intersectingSections', (intersectingIds) => {
+        if (listenTocItems.has("intersectingSectionsListener")) return;
+        props.emitter.on("intersectingSections", (intersectingIds) => {
             setTocEntries((prev) => {
                 return prev!.map((tocEntry) => {
-                    const prevClassName = tocEntry.props.className.replace('active', '');
+                    const prevClassName = tocEntry.props.className.replace(
+                        "active",
+                        "",
+                    );
                     if (intersectingIds.includes(tocEntry.props.id)) {
-                        return React.cloneElement(tocEntry, { className: `${prevClassName} active` });
+                        return React.cloneElement(tocEntry, {
+                            className: `${prevClassName} active`,
+                        });
                     }
-                    return React.cloneElement(tocEntry, { className: prevClassName });
+                    return React.cloneElement(tocEntry, {
+                        className: prevClassName,
+                    });
                 });
             });
         });
-        setlistenTocItems(prev => new Set(prev).add('intersectingSectionsListener'));
+        setlistenTocItems((prev) =>
+            new Set(prev).add("intersectingSectionsListener"),
+        );
     }
     return (
         <div className={cl("table-of-contents", props.className)}>
             <h2>Table of Contents:</h2>
-            {
-                tocEntries &&
+            {tocEntries &&
                 tocEntries.map((entry, index) => {
                     return React.cloneElement(entry, {
                         ref: tocEntryRef[index],
-                        key: index
-                    })
-                })
-            }
-            <svg className="toc-marker" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+                        key: index,
+                    });
+                })}
+            <svg
+                className="toc-marker"
+                width="200"
+                height="200"
+                xmlns="http://www.w3.org/2000/svg"
+            >
                 <path
                     ref={tocMarkerPathRef}
                     stroke="#444"
@@ -156,7 +216,7 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
                 />
             </svg>
         </div>
-    )
-}
+    );
+};
 
 export default TableOfContents;

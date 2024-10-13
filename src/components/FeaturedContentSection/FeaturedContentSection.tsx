@@ -135,41 +135,39 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({
         ).map((group, index) => (
             <div
                 key={index}
-                className="featured-section w-full position-relative"
+                className="featured-section w-full flex flex-col position-relative"
             >
                 <Retro showBorder />
-                <div className="featured-section--inner w-full flex flex-col position-relative items-center">
-                    <div className="flex flex-row items-stretch gap-2 justify-between flex-wrap position-relative">
-                        {group.map((content) => (
-                            <div
-                                className="featured-section--item flex"
-                                key={content._id.$oid}
-                            >
-                                <GalleryItem
-                                    name={content.heading}
-                                    tags={content.tags}
-                                    description={content.body}
-                                    dateCreated={content.date_created}
-                                    type={
-                                        content.post_type === "md"
-                                            ? "blog"
-                                            : content.post_type
-                                    }
-                                    minuteRead={content.reading_time_minutes}
-                                    className="my-2.5"
-                                    link={
-                                        content.url ??
-                                        `/digital-chronicles/blog/${content._id.$oid}`
-                                    }
-                                    imageOverlay={content.imageOverlay?.src}
-                                    image={
-                                        content.imageOverride?.src ??
-                                        content.image.$oid
-                                    }
-                                />
-                            </div>
-                        ))}
-                    </div>
+                <div className="flex flex-row w-full justify-center items-stretch gap-1 flex-wrap position-relative">
+                    {group.map((content) => (
+                        <div
+                            className="featured-section--item flex justify-center"
+                            key={content._id.$oid}
+                        >
+                            <GalleryItem
+                                name={content.heading}
+                                tags={content.tags}
+                                description={content.body}
+                                dateCreated={content.date_created}
+                                type={
+                                    content.post_type === "md"
+                                        ? "blog"
+                                        : content.post_type
+                                }
+                                minuteRead={content.reading_time_minutes}
+                                className="my-2.5"
+                                link={
+                                    content.url ??
+                                    `/digital-chronicles/blog/${content._id.$oid}`
+                                }
+                                imageOverlay={content.imageOverlay?.src}
+                                image={
+                                    content.imageOverride?.src ??
+                                    content.image.$oid
+                                }
+                            />
+                        </div>
+                    ))}
                 </div>
             </div>
         ));
@@ -200,6 +198,7 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({
                             } as React.CSSProperties
                         }
                         onClick={showAllElements}
+                        showButtonLine
                     >
                         Show More <FaAngleDown />
                     </Button>

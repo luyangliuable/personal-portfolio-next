@@ -6,15 +6,13 @@
 
 @media screen and (min-width: 1000px) {
     .hero-section__content__left {
-        width: 50%;
-        max-width: 600px;
+        width: 520px;
     }
 
     .hero-section__content__right {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 30%;
     }
 
     .hero-section__content {
@@ -22,7 +20,9 @@
         display: flex;
         min-height: 370px;
         padding: 4vh 0;
+        gap: 1rem;
         justify-content: center;
+        align-items: center;
         flex-direction: row;
     }
 }

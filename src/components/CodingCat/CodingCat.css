@@ -1,17 +1,10 @@
 .coding-cat-container {
-    width: 300px;
-    height: 300px;
+    width: 90%;
+    height: 90%;
     display: flex;
-    margin: 0;
     justify-content: center;
     align-items: center;
     animation: fade-in--up-with-tilt 0.5s ease-in-out;
-}
-
-@media screen and (max-width: 1000px) {
-    .coding-cat-container {
-        margin: -50px;
-    }
 }
 
 @keyframes fade-in--up-with-tilt {
@@ -26,6 +19,22 @@
     100% {
         transform: translateY(0px) rotate(0deg) scale(1);
         opacity: 1;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .coding-cat-container {
+        margin: 10px 0 10px;
+        width: 50%;
+        height: 50%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .coding-cat-container {
+        margin: 10px 0 10px;
+        width: 75%;
+        height: 75%;
     }
 }
 

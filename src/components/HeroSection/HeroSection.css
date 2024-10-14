@@ -18,7 +18,6 @@
     }
 
     .hero-section__content {
-        margin-top: 2rem;
         display: flex;
         min-height: 70vh;
         padding: 4vh 0;
@@ -44,6 +43,10 @@
         display: flex;
         margin-top: 2vh;
         justify-content: center;
+    }
+
+    .hero-section__content {
+        margin: 8rem 0 2.5rem;
     }
 }
 

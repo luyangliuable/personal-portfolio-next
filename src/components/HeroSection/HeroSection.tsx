@@ -15,10 +15,61 @@ import { FaGithubSquare, FaLinkedin, FaStackOverflow } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { RiNotionFill } from "react-icons/ri";
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { CSSRulePlugin } from 'gsap/CSSRulePlugin';
 
 import "./HeroSection.css";
 import { refreshScrollTrigger } from "../Utility/ScrollUtility";
+
+const connections = [{
+    name: "Notion",
+    link: "https://luyangl.notion.site/luyangl/71be1ff365c44fd2b4f6f8dce14b7536?v=f1e55d08878e4bfda1b744e76b9480c7",
+    color: "#000",
+    background: "#FEFEFF",
+    icon: <RiNotionFill />,
+    imageSrc: "https://img.shields.io/badge/notion-%2312100E.svg?&style=for-the-badge&logo=notion&logoColor=%23333&color=%239e9e9e",
+},
+{
+    name: "Email",
+    link: "mailto:luyang.l@protonmail.me",
+    color: "#004300",
+    background: "#77dd77",
+    icon: <MdEmail />,
+    imageSrc: "https://img.shields.io/badge/email-%2312100E.svg?&style=for-the-badge&logo=protonmail&logoColor=white&color=black",
+},
+{
+    name: "GitHub",
+    link: "https://github.com/luyangliuable",
+    color: "#FFF",
+    background: "#181717",
+    icon: <FaGithubSquare />,
+    imageSrc:
+        "https://img.shields.io/badge/github-%2312100E.svg?&style=for-the-badge&logo=github&logoColor=white&color=black",
+},
+{
+    name: "LinkedIn",
+    icon: <FaLinkedin />,
+    color: "#FFF",
+    background: "#0077B5",
+    link: "https://www.linkedin.com/in/luyang-l",
+    imageSrc:
+        "https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white",
+},
+{
+    name: "Codecademy",
+    link: "https://www.codecademy.com/profiles/luyangliuable",
+    color: "#FFF",
+    background: "#000",
+    icon: <SiCodecademy />,
+    imageSrc: "https://img.shields.io/badge/codecademy-%2312100E.svg?&style=for-the-badge&logo=codecademy&logoColor=white&color=black",
+},
+{
+    name: "SO",
+    link: "https://stackoverflow.com/users/1570777/luyangliuable",
+    color: "#F48024", // Stack Overflow's primary color
+    background: "#FFF", // White background
+    icon: <FaStackOverflow />,
+    imageSrc: "https://img.shields.io/badge/codecademy-%2312100E.svg?&style=for-the-badge&logo=codecademy&logoColor=white&color=black",
+}]
+
 
 const HeroSection: React.FC<IHeroProps> = ({}) => {
     const heroSectionRef = useRef(null);
@@ -30,58 +81,7 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
         </SequentialRiseSpan>
     );
 
-    const connections: any = [{
-        name: "Notion",
-        link: "https://luyangl.notion.site/luyangl/71be1ff365c44fd2b4f6f8dce14b7536?v=f1e55d08878e4bfda1b744e76b9480c7",
-        color: "#000",
-        background: "#FEFEFF",
-        icon: <RiNotionFill />,
-        imageSrc: "https://img.shields.io/badge/notion-%2312100E.svg?&style=for-the-badge&logo=notion&logoColor=%23333&color=%239e9e9e",
-    },
-    {
-        name: "Email",
-        link: "mailto:luyang.l@protonmail.me",
-        color: "#004300",
-        background: "#77dd77",
-        icon: <MdEmail />,
-        imageSrc: "https://img.shields.io/badge/email-%2312100E.svg?&style=for-the-badge&logo=protonmail&logoColor=white&color=black",
-    },
-    {
-        name: "GitHub",
-        link: "https://github.com/luyangliuable",
-        color: "#FFF",
-        background: "#181717",
-        icon: <FaGithubSquare />,
-        imageSrc:
-            "https://img.shields.io/badge/github-%2312100E.svg?&style=for-the-badge&logo=github&logoColor=white&color=black",
-    },
-    {
-        name: "LinkedIn",
-        icon: <FaLinkedin />,
-        color: "#FFF",
-        background: "#0077B5",
-        link: "https://www.linkedin.com/in/luyang-l",
-        imageSrc:
-            "https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white",
-    },
-    {
-        name: "Codecademy",
-        link: "https://www.codecademy.com/profiles/luyangliuable",
-        color: "#FFF",
-        background: "#000",
-        icon: <SiCodecademy />,
-        imageSrc: "https://img.shields.io/badge/codecademy-%2312100E.svg?&style=for-the-badge&logo=codecademy&logoColor=white&color=black",
-    },
-    {
-        name: "SO",
-        link: "https://stackoverflow.com/users/1570777/luyangliuable",
-        color: "#F48024", // Stack Overflow's primary color
-        background: "#FFF", // White background
-        icon: <FaStackOverflow />,
-        imageSrc: "https://img.shields.io/badge/codecademy-%2312100E.svg?&style=for-the-badge&logo=codecademy&logoColor=white&color=black",
-    }]
-
-    const [ screenWidth, setscreenWidth ] = useState<number>(0);
+    const [screenWidth, setscreenWidth] = useState<number>(0);
 
     useEffect(() => {
         const update = () => {
@@ -149,7 +149,7 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
                 )}
             </footer>
         );
-    }, [connections]);
+    }, []);
 
     const heroSectionContentLeft = useMemo(() => {
         return (
@@ -181,7 +181,6 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
         <>
             <LandingPageCard
                 className="hero-section" landingPageCardType="fitContent" >
-                <div className="space h-28"></div>
                 <section className="hero-section__content">
                     <section className="hero-section__content__right">
                         <CodingCat />

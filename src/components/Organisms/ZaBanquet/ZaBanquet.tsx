@@ -15,12 +15,6 @@ const colorThemes: Record<string, string>[] = [
         "--color-4": "#ff33cc",
     },
     {
-        "--color-1": "#d3cce3",
-        "--color-2": "purple",
-        "--color-3": "#9379aa",
-        "--color-4": "#521c81",
-    },
-    {
         "--color-1": "#ffcccc",
         "--color-2": "#ff9999",
         "--color-3": "#ff6666",
@@ -31,13 +25,7 @@ const colorThemes: Record<string, string>[] = [
         "--color-2": "white",
         "--color-3": "orange",
         "--color-4": "#d9d9d9",
-    },
-    {
-        "--color-1": "#a6b9cd", // Pastel version of Midnight Blue
-        "--color-2": "#b0c4de", // Pastel version of Dark Blue Gray
-        "--color-3": "#2d8896", // Pastel Blue
-        "--color-4": "#b2d8d8", // Pastel Teal (Light Sea Green)
-    },
+    }
 ];
 
 const ZaBanquet = () => {

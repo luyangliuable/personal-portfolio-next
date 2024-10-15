@@ -20,7 +20,7 @@
     .hero-section__content {
         display: flex;
         min-height: 70vh;
-        padding: 4vh 0;
+        margin-top: 3rem;
         gap: 1rem;
         justify-content: center;
         align-items: center;

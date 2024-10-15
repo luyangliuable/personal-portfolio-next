@@ -86,7 +86,7 @@ const HeroHeader: React.FC<IHeroHeaderProps> = ({
                         <SequentialRiseSpan
                             baseAnimationDelay={150}
                             maxNumberOfLettersPerLine={50}
-                            calculationAdjustment={0.8}
+                            calculationAdjustment={0.95}
                         >
                             {description}
                         </SequentialRiseSpan>

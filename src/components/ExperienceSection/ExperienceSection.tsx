@@ -342,18 +342,37 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                 invalidateOnRefresh: true,
             };
 
-            gsap.to(sectionElement, {
-                boxShadow: "0px 0px 0px #A5A58C",
-                ease: "power2.in",
-                scrollTrigger: timelineFinishTrigger,
-            });
+            const timelineStartTrigger = {
+                trigger: triggerElement,
+                start: `top-=${window.innerHeight} top`,
+                end: "top+=100 top",
+                scrub: 0.1,
+                invalidateOnRefresh: true,
+            };
 
-            gsap.to(triggerElement, {
-                y: -400,
-                scale: 0.8,
-                ease: "power2.in",
-                scrollTrigger: timelineFinishTrigger,
-            });
+            gsap.timeline()
+                .fromTo(
+                    triggerElement,
+                    { scale: 0.8, y: 200 },
+                    {
+                        scale: 1,
+                        y: 0,
+                        scrollTrigger: timelineStartTrigger,
+                    },
+                )
+                .fromTo(
+                    triggerElement,
+                    {
+                        y: 0,
+                        scale: 1,
+                    },
+                    {
+                        y: -400,
+                        scale: 0.8,
+                        ease: "power2.in",
+                        scrollTrigger: timelineFinishTrigger,
+                    },
+                );
 
             gsap.to(scrollElement, {
                 x: () => -scrollElement.scrollWidth,
@@ -363,7 +382,6 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                     start: "top 20%",
                     end: () => `+=${scrollElement.scrollWidth / 2}`,
                     scrub: true,
-                    invalidateOnRefresh: true,
                 },
             });
 

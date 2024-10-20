@@ -353,7 +353,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
             gsap.timeline()
                 .fromTo(
                     triggerElement,
-                    { scale: 0.8, y: 200 },
+                    { scale: 0.8, y: 10 },
                     {
                         scale: 1,
                         y: 0,
@@ -367,7 +367,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                         scale: 1,
                     },
                     {
-                        y: -400,
+                        y: -200,
                         scale: 0.8,
                         ease: "power2.in",
                         scrollTrigger: timelineFinishTrigger,

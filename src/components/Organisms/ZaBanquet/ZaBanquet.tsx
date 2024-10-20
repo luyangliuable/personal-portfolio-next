@@ -25,7 +25,7 @@ const colorThemes: Record<string, string>[] = [
         "--color-2": "white",
         "--color-3": "orange",
         "--color-4": "#d9d9d9",
-    }
+    },
 ];
 
 const ZaBanquet = () => {

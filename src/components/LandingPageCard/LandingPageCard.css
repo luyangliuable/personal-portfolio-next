@@ -27,10 +27,12 @@
     justify-content: flex-start;
     background: #f9f9f9;
     background: linear-gradient(
-        225deg,
-        rgba(255, 255, 253, 1) 0%,
-        rgba(245, 245, 245, 1) 100%
-    );
+            225deg,
+            rgb(255, 255, 253) 0%,
+            rgb(245, 245, 245) 100%
+        ),
+        url(https://grainy-gradients.vercel.app/noise.svg);
+    /* filter: contrast(100%) brightness(100%); */
     box-shadow: var(--landing-page-card-box-shadow);
     -webkit-box-shadow: var(--landing-page-card-box-shadow);
     -moz-box-shadow: var(--landing-page-card-box-shadow);

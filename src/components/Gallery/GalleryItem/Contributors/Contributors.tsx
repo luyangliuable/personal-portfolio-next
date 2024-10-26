@@ -62,7 +62,7 @@ const Contributors: React.FC<IContributorsProps> = ({
     }
 
     return (
-        <div className="relative gallery-item__metadata m-0 px-2 py-3 flex w-full overflow-y-scroll">
+        <div className="relative gallery-item__metadata m-0 flex w-full overflow-y-scroll">
             {createPortal(
                 <div
                     ref={contributorTooltipRef}

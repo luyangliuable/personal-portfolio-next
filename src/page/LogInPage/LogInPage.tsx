@@ -65,7 +65,7 @@ const LogInPage: React.FC = () => {
 
     return (
         <main>
-            <form className="login-form__wrapper position-relative flex flex-col justify-center items-center w-full">
+            <form className="login-form__wrapper relative flex flex-col justify-center items-center w-full">
                 <h1>Sign in to ~/llcode.tech</h1>
                 <div className="login-form">
                     {state.loginStatus !== "Pending" && (

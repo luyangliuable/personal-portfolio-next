@@ -24,7 +24,7 @@ export interface ISequentialRiseSpanProps {
 const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
     calculationAdjustment,
     children,
-    baseAnimationDelay,
+    baseAnimationDelay = 0,
     elementType,
     className,
     numberOfLettersPerLine,
@@ -163,7 +163,7 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
                 elementType || "p",
                 {
                     key: index,
-                    className: ["visible-hidden", className].join(" "),
+                    className: ["invisible", className].join(" "),
                 },
                 line,
             );
@@ -181,7 +181,7 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
                         line as React.ReactElement,
                         {
                             style: {
-                                animationDelay: `${(baseAnimationDelay ?? 0) + index * 100}ms`,
+                                animationDelay: `${baseAnimationDelay + index * 100}ms`,
                             },
                             ref: lineRefs[index],
                         },

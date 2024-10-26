@@ -128,7 +128,7 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
 
         tl.add(
             gsap.to(heroSection, {
-                transform: `translateY(${window.innerHeight / 10}px)`,
+                transform: `translateY(${window.innerHeight / 15}px)`,
             }),
             "start",
         );
@@ -174,7 +174,7 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
                 className="hero-section__content__left"
                 ref={heroSectionRef}
             >
-                <header className="mb-16">
+                <header className="mb-2">
                     {screenWidth > 550 && (
                         <SequentialRiseSpan
                             elementType="h1"
@@ -193,7 +193,7 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
                         </SequentialRiseSpan>
                     )}
                 </header>
-                <div className="hero-section__content__left__text position-relative">
+                <div className="hero-section__content__left__text relative">
                     {introduction}
                 </div>
                 <div className="hero-section__button-container flex flex-row mt-10 justify-start self-start flex-wrap gap-1">

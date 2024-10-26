@@ -62,7 +62,7 @@ const Contributors: React.FC<IContributorsProps> = ({
     }
 
     return (
-        <div className="position-relative gallery-item__metadata p-1 flex w-full">
+        <div className="relative gallery-item__metadata m-0 px-2 py-3 flex w-full overflow-y-scroll">
             {createPortal(
                 <div
                     ref={contributorTooltipRef}
@@ -73,7 +73,7 @@ const Contributors: React.FC<IContributorsProps> = ({
             {contributors.map((item) => (
                 <a
                     onClick={(e) => e.stopPropagation()}
-                    onMouseOver={(e) => {
+                    onMouseOver={() => {
                         if (contributorTooltipRef.current) {
                             contributorTooltipRef.current.innerHTML =
                                 item.login;
@@ -93,12 +93,12 @@ const Contributors: React.FC<IContributorsProps> = ({
                             contributorTooltipRef.current.style.opacity = "0";
                         }
                     }}
-                    className="contributor position-relative"
+                    className="relative shrink-0"
                     key={item.login}
                     href={item.profileUrl}
                 >
                     <Image
-                        className="user-image"
+                        className="user-image-sm"
                         src={item.avatarUrl}
                         alt={item.login}
                     />

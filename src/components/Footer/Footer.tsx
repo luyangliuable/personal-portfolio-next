@@ -41,14 +41,14 @@ const Footer: React.FC = () => {
     ) => {
         return (
             <section className={className}>
-                <h3 className="mb-0">{section.name}</h3>
+                <h3 className="text-lg">{section.name}</h3>
                 {section.sublinks?.map((item: any, index: number) => {
                     return (
                         <InlineLink
                             target={target}
                             key={index}
                             to={item.isLocked ? null : item.to}
-                            className="mt-5"
+                            className="mt-2"
                         >
                             {item.name}{" "}
                             {item.isLocked && <CiLock className="ml-2" />}
@@ -60,11 +60,11 @@ const Footer: React.FC = () => {
     };
 
     return (
-        <footer className="footer position-relative flex items-center flex-col">
+        <footer className="footer relative flex items-center flex-col">
             <div className="footer__main normalised-width w-full">
                 <GetInTouch />
                 <section className="footer__connect-with-me mb-20">
-                    <h3 className="mb-0">Connect with Me</h3>
+                    <h3 className="text-lg">Connect with Me</h3>
                     <div className="flex flex-row flex-wrap">
                         {linksToMyOtherSocialMedia.map(
                             (item: any, index: number) => (
@@ -72,7 +72,7 @@ const Footer: React.FC = () => {
                                     target="_blank"
                                     key={index}
                                     to={item.link}
-                                    className="mt-5"
+                                    className="mt-2"
                                     logoName={item.name}
                                     buttonColor="%23eaeaea"
                                 ></IconButton>
@@ -81,36 +81,36 @@ const Footer: React.FC = () => {
                     </div>
                 </section>
                 <section className="footer__sponsor mb-20">
-                    <h3 className="mb-0">Sponsor Me</h3>
+                    <h3 className="text-lg">Sponsor Me</h3>
                     <InlineLink
                         target="_blank"
                         to="https://ko-fi.com/D1D1PFTTH"
-                        className="mt-5"
+                        className="mt-2"
                     >
                         Kofi
                     </InlineLink>
                     <InlineLink
                         target="_blank"
                         to="https://melbournewalk24.can4cancer.com.au/lucas-liu"
-                        className="mt-5"
+                        className="mt-2"
                     >
                         Can4cancer
                     </InlineLink>
                 </section>
                 {renderFooterSection(about, "footer__about")}
                 <section className="footer__resources">
-                    <h3 className="mb-0">Resources</h3>
-                    <InlineLink to={resume.to} className="mt-5">
+                    <h3 className="text-lg">Resources</h3>
+                    <InlineLink to={resume.to} className="mt-2">
                         {resume.name}
                     </InlineLink>
                 </section>
                 {renderFooterSection(tools, "footer__tools")}
                 <section className="footer__local-time">
-                    <h3>Local Time</h3>
+                    <h3 className="text-lg mb-2">Local Time</h3>
                     <LocalTime />
                 </section>
             </div>
-            <div className="footer__bottom position-relative w-full flex justify-around">
+            <div className="footer__bottom relative w-full flex justify-around">
                 <p>LLcode.tech © 2024 All Rights Reserved</p>
                 <p>Made with Typescript, Rust and Love 💖 v0.5.0</p>
                 <Button to="https://github.com/luyangliuable/personal-portfolio-next/issues">

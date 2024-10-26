@@ -295,7 +295,7 @@ const items: ExperienceSectionItem[] = [
 
 const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
     const experienceSectionParentRef = useRef<HTMLDivElement | null>(null);
-    const experienceSectionRef = useRef<HTMLElement | null>(null);
+    const experienceSectionRef = useRef<HTMLDivElement | null>(null);
     const experienceSectionScrollRef = useRef<HTMLDivElement | null>(null);
     const timeLineRef = useRef<HTMLDivElement | null>(null);
 
@@ -465,18 +465,21 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
 
     return (
         <div className="experience-section-wrapper">
-            <article
-                className="landing-page-card flex flex-col justify-start overflow-hidden experience-section-parent-container"
+            <div
+                className="landing-page-card flex flex-col justify-end overflow-hidden experience-section-parent-container"
                 ref={experienceSectionParentRef}
             >
-                <header className="ml-2vw important-text">
-                    <SequentialRiseSpan elementType="h2">
+                <header className="ml-[2vw]">
+                    <SequentialRiseSpan
+                        elementType="h2"
+                        className="text-2xl font-bold"
+                    >
                         Retrospective
                     </SequentialRiseSpan>
                 </header>
-                <section
+                <div
                     ref={experienceSectionRef}
-                    className="experience-section"
+                    className="experience-section flex items-center grow w-100"
                 >
                     {/* Scrolling timeline within the section */}
                     <div
@@ -485,8 +488,8 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                     >
                         {experienceSectionContent}
                     </div>
-                </section>
-            </article>
+                </div>
+            </div>
         </div>
     );
 };

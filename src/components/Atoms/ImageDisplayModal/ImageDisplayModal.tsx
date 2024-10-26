@@ -55,7 +55,7 @@ const ImageDisplayModal: React.FC<IImageDisplayModalProps> = ({
                                     e.stopPropagation();
                                 }}
                             ></div>
-                            <div className="image-display-modal--image position-relative">
+                            <div className="image-display-modal--image relative">
                                 <Image alt="" src={sanitizedImage} />
                             </div>
                             <div className="image-display-modal--description">

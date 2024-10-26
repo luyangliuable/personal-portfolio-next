@@ -20,7 +20,6 @@
 
 .image-display__image__wrapper {
     position: relative;
-    /* overflow: hidden; */
     border-radius: 4px;
     height: 20vh;
     min-height: 100px;

@@ -3,6 +3,7 @@ import { cardGradientEffect } from "../../Utility/MouseUtility";
 import { ExperienceSectionItem } from "../Interface/IExperienceSectionState";
 import "./ExperienceSectionEvent.css";
 import Image from "../../Image/Image";
+import { cl } from "../../Utility/LogicUtility";
 
 interface ExperienceSectionEventProps {
     timeLineRef: RefObject<HTMLDivElement>;
@@ -15,25 +16,18 @@ const ExperienceSectionEvent: React.FC<ExperienceSectionEventProps> = ({
     item,
     index,
     alt,
-    timeLineRef,
 }) => {
     const defaultDisplay = item.display === "NORMAL" || !item.display;
     const experienceSectionCardIndexIsEvenNumber = index % 2 === 0;
-    const experienceSectionCardClassName = [
-        "card experience-section-card flex flex-row justify-between items-center",
-    ];
+    const experienceSectionCardClassName = [""];
 
     experienceSectionCardIndexIsEvenNumber
         ? experienceSectionCardClassName.push("exp-above")
         : experienceSectionCardClassName.push("exp-below");
 
-    const imageWrapperClassName = ["experience-section-card__image-wrapper"];
-
-    imageWrapperClassName.push("experience-section-card__image-wrapper");
-
     const experienceSectionCardTextExperienceBody = (): React.ReactElement => (
-        <div className="w-80">
-            <h2>{item.cardTitle}</h2>
+        <div className="w-80 min-h-[80px] flex flex-col justify-between">
+            <h2 className="text-xl font-bold">{item.cardTitle}</h2>
             <div className="experience-section-card__text-body">
                 <div className="experience-section-card__date">
                     <i>{item.dateTime}</i>
@@ -48,11 +42,17 @@ const ExperienceSectionEvent: React.FC<ExperienceSectionEventProps> = ({
     return (
         <div
             onMouseMove={cardGradientEffect}
-            className={experienceSectionCardClassName.join(" ")}
+            className={cl(
+                "card experience-section-card px-2.5 py-5 flex flex-row justify-between items-center",
+                {
+                    "exp-above": experienceSectionCardIndexIsEvenNumber,
+                    "exp-below": !experienceSectionCardIndexIsEvenNumber,
+                },
+            )}
         >
             {defaultDisplay && experienceSectionCardTextExperienceBody()}
             <div className="connecting-line"></div>
-            <div className={imageWrapperClassName.join(" ")}>
+            <div className="experience-section-card__image-wrapper">
                 <Image compression={20} alt={alt} src={item.media.source.url} />
             </div>
         </div>

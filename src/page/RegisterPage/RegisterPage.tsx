@@ -80,7 +80,7 @@ const RegisterPage: React.FC = () => {
     return (
         <main>
             <form
-                className="register-form__wrapper position-relative flex flex-col justify-center items-center w-full"
+                className="register-form__wrapper relative flex flex-col justify-center items-center w-full"
                 onSubmit={register}
             >
                 <h1>Sign up to ~/llcode.tech</h1>

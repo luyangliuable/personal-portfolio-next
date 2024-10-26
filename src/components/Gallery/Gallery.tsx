@@ -40,7 +40,9 @@ const Gallery: React.FC<IGalleryProps> = (props) => {
         <>
             <div className="gallery normalised-width">
                 <div className="heading__wrapper">
-                    <h2>{props.heading}</h2>
+                    <h2 className="text-2xl font-bold mb-2.5">
+                        {props.heading}
+                    </h2>
                 </div>
                 <Bento gap="1rem">{renderGalleryItems()}</Bento>
             </div>

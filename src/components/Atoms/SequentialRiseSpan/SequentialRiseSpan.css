@@ -14,15 +14,20 @@
     width: max-content;
 }
 
+.sequential-rise-span > div {
+    margin-bottom: -5px;
+    height: fit-content;
+}
+
 .sequential-rise-span > div > p {
-    width: 100%; /* Adjusted to ensure wrapping within parent container. Modify as needed. */
-    white-space: normal; /* Allows text to wrap */
+    width: 100%;
+    white-space: normal;
     margin: 0;
     line-height: 117%;
 }
 
 .sequential-rise-span > div > p > span {
-    display: inline; /* Ensures <span> elements are inline */
+    display: inline;
 }
 
 .sequential-rise-span {

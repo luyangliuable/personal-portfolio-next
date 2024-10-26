@@ -46,7 +46,7 @@ const GetInTouch: React.FC = () => {
             className="footer__get-in-touch flex flex-col items-start justify-start"
             onSubmit={handleSubmit}
         >
-            <h3>Get In Touch</h3>
+            <h3 className="text-lg mb-4">Get In Touch</h3>
             <input
                 ref={messageEmailRef}
                 className="box-border"

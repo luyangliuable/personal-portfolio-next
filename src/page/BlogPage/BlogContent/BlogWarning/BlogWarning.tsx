@@ -4,8 +4,8 @@ import { IoWarning } from "react-icons/io5";
 
 const BlogWarning: React.FC<{ children: string }> = ({ children }) => {
     return (
-        <div className="blog-warning position-relative">
-            <h4 className="position-absolute">
+        <div className="blog-warning relative">
+            <h4 className="absolute">
                 <IoWarning />
             </h4>
             {children}

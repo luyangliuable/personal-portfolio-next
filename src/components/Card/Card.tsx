@@ -77,14 +77,16 @@ class Card extends Component<ICardProps, ICardState> {
             >
                 <TagCloud tags={tags} />
                 <section className="card-item__content">
-                    <h3 className="card-item__heading">{heading}</h3>
+                    <h3 className="card-item__heading my-half font-bold">
+                        {heading}
+                    </h3>
                     <p className="card-item__label flex flex-row items-center">
                         {`${displayMinuteRead} | ${displayDateCreated}`}
                         {in_progress && <InProgressBlock />}
                     </p>
                 </section>
                 {image && (
-                    <div className="card-image-preview__wrapper position-absolute overflow-hidden flex justify-center items-center">
+                    <div className="card-image-preview__wrapper absolute overflow-hidden flex justify-center items-center">
                         {
                             <Image
                                 compression={30}
@@ -95,7 +97,7 @@ class Card extends Component<ICardProps, ICardState> {
                         }
                     </div>
                 )}
-                <footer className="flex mt-5 position-relative items-center">
+                <footer className="flex mt-5 relative items-center">
                     <Image
                         src={authorImage}
                         className="user-image card-image--author-image"

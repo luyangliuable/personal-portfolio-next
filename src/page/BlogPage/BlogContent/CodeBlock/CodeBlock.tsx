@@ -53,12 +53,12 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ lang, children, filename }) => {
     return (
         <div ref={codeBlockRef} className="code-block--native__container">
             {filename && (
-                <div className="code-block--file-name w-full font-bold position-absolute">
+                <div className="code-block--file-name w-full font-bold absolute">
                     {filename}
                 </div>
             )}
             <div
-                className="code-block--copy-button position-absolute cursor-pointer"
+                className="code-block--copy-button absolute cursor-pointer"
                 onClick={() => copyToClipboard()}
             >
                 <FaRegCopy />

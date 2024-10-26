@@ -129,7 +129,7 @@ const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, data }) => {
             .sort((a, b) => parseInt(b) - parseInt(a))
             .map((year) => (
                 <React.Fragment key={year}>
-                    <div className="blog__year position-relative">
+                    <div className="blog__year relative">
                         <span>{year}</span>
                     </div>
                     {state.currentlyShowingContent[year].map(
@@ -156,8 +156,8 @@ const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, data }) => {
 
     const renderTopPickedBlogPost = (): React.ReactNode | null =>
         showTopPicks && (
-            <div className="w-half flex-col items-start pl-3vw blog__featured">
-                <h3>Top Picks</h3>
+            <div className="w-half flex-col items-start pl-[3vw] blog__featured">
+                <h3 className="font-bold text-lg mb-3">Top Picks</h3>
                 {state.topPickedPosts.map((post) => (
                     <SmallCard
                         key={post._id.$oid}
@@ -248,7 +248,7 @@ const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, data }) => {
                 graphics={<BlogPostGraphics />}
             />
             <article className="blog-container flex w-full">
-                <section className="blog-list flex flex-col w-full items-center">
+                <section className="blog-list flex flex-col w-full items-center basis-3/5">
                     <div className="blog-page--options-container flex">
                         <ul className="blog__tag-container flex justify-center flex-wrap">
                             {renderUnSelectedTags()}

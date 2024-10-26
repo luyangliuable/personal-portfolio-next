@@ -1,9 +1,4 @@
-import React, { CSSProperties, ReactNode, useEffect, useState } from "react";
-import Link from "next/link";
-import { CiLogin } from "react-icons/ci";
-import { AiFillCaretDown } from "react-icons/ai";
-import { truncateTextBody } from "../../Utility/StringUtility";
-import ILoginButtonProps from "./Interface/ILoginButtonProps";
+import React, { CSSProperties } from "react";
 import { auth, signIn, signOut } from "../../../auth";
 import "./LoginButton.css";
 import Image from "../../Image/Image";
@@ -14,7 +9,7 @@ const LoginButton: React.FC<{ style?: CSSProperties }> = async ({ style }) => {
     return (
         <nav
             style={style}
-            className="login-button--container flex flex-row items-center"
+            className="login-button--container flex flex-row items-center text-sm"
         >
             {data && (
                 <>

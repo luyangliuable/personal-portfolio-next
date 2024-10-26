@@ -135,16 +135,14 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({
         ).map((group, index) => (
             <div
                 key={index}
-                className="featured-section w-full flex flex-col position-relative"
+                className="featured-section w-full flex flex-col relative"
             >
                 <Retro showBorder />
-                <div className="flex flex-row w-full justify-center items-stretch gap-1 flex-wrap position-relative">
-                    {group.map((content) => (
-                        <div
-                            className="featured-section--item flex justify-center"
-                            key={content._id.$oid}
-                        >
+                <div className="flex w-full h-full justify-center items-stretch gap-3">
+                    {group.map((content, idx) => (
+                        <div className="featured-section--item flex justify-center" key={idx}>
                             <GalleryItem
+                                key={content._id.$oid}
                                 name={content.heading}
                                 tags={content.tags}
                                 description={content.body}
@@ -182,13 +180,10 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({
         >
             <section
                 ref={currentComponentRef}
-                className="featured-section--wrapper flex flex-col items-center position-relative"
+                className="featured-section--wrapper flex flex-col items-center relative"
             >
                 {renderTopPickedPostsSortedByDateDescending()}
-                <div
-                    className="show-more-button-wrapper"
-                    ref={showMoreButtonRef}
-                >
+                <div ref={showMoreButtonRef} className="text-sm">
                     <Button
                         style={
                             {
@@ -203,7 +198,7 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({
                         Show More <FaAngleDown />
                     </Button>
                 </div>
-                <div className="divider h-21"></div>
+                <div className="divider h-28"></div>
                 <div ref={twinCandleComponentParentRef}>
                     <TwinCandle ref={twinCandleComponentRef} />
                 </div>

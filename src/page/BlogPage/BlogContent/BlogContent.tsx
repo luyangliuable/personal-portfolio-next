@@ -139,7 +139,7 @@ const BlogContent: React.FC<IBlogContentProps> = ({
                             />
                         }
                         {renderBlogContent()}
-                        <aside className="blog-content__side-components position-sticky mt-20vh">
+                        <aside className="blog-content__side-components sticky mt-[20vh]">
                             <Link
                                 shallow
                                 href="/digital-chronicles/blogs"

@@ -22,7 +22,7 @@
     --navbar-item-width: 110px;
     --navbar-item-max-width: 90vw;
     --navbar-item-margin: 0.3vw;
-    --navbar-item-padding: 10px 0 10px;
+    --navbar-item-padding: 8px 0 8px;
     --navbar-transition: background 0.2s ease-in-out,
         box-shadow 0.1s ease-in-out, transform 0.1s ease-in-out;
     top: 0;
@@ -79,7 +79,6 @@
     width: var(--navbar-item-width);
     min-height: 100%;
     max-width: var(--navbar-item-max-width);
-    transition: background 0.3s ease-in;
     border-radius: var(--navbar-item-border-radius);
     font-family: "TT Norms Pro", Spartan, "Poppins", sans-serif;
     margin-left: var(--navbar-item-margin);

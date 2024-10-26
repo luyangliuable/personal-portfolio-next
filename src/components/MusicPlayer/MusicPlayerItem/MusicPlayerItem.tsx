@@ -19,7 +19,7 @@ const MusicPlayerItem: React.FC<IMusicPlayerItemProps> = ({
     return (
         <div
             onMouseMove={cardGradientEffect}
-            className="card music-player--item flex flex-column justify-start items-center position-relative"
+            className="card music-player--item flex flex-column justify-start items-center relative"
         >
             <div className="album-cover">
                 <Image
@@ -30,7 +30,7 @@ const MusicPlayerItem: React.FC<IMusicPlayerItemProps> = ({
                     alt={imageSrcAlt}
                 />
             </div>
-            <div className="music-player--metadata position-relative flex flex-col justify-start items-start">
+            <div className="music-player--metadata relative flex flex-col justify-start items-start">
                 <h3 className="m-0">{musicTitle}</h3>
                 <div className="flex justify-between">
                     <span>{artistName}</span>

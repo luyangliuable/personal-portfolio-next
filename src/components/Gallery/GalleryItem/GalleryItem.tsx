@@ -74,7 +74,7 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
             shallow
             className={cl(
                 className,
-                "h-full position-relative w-full flex items-center justify-center",
+                "h-full relative w-full flex items-center justify-center",
             )}
             href={props.link ?? ""}
         >
@@ -109,7 +109,7 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
                 <div className="px-5">
                     <TagCloud tags={props.tags} />
                     <a className="gallery-item__link" href={props.link}>
-                        <h3>{props.name}</h3>
+                        <h3 className="font-bold">{props.name}</h3>
                     </a>
                     <p>{props.subheading}</p>
                     {props.description && (
@@ -121,7 +121,7 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
                     )}
                 </div>
                 {(props.minuteRead || props.dateCreated || props.metadata) && (
-                    <p className="position-absolute gallery-item__metadata flex">
+                    <p className="absolute gallery-item__metadata flex">
                         {props.minuteRead && (
                             <span className="flex items-center">
                                 <CiTimer /> {props.minuteRead} min read

@@ -105,7 +105,7 @@
 }
 
 .hero-section__after {
-    --height: 25vh;
+    --height: 35vh;
     width: 95vw;
     height: var(--height);
     margin-bottom: calc(-1 * var(--height) + var(--common-card-margin));

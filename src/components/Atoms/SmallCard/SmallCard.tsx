@@ -19,9 +19,9 @@ const SmallCard: React.FC<ICardProps> = ({
             onMouseMove={cardGradientEffect}
             className="card small-card flex flex-row box-border justify-between items-center"
         >
-            <div className="w-half">
-                <h3>{heading}</h3>
-                <footer className="flex mt-5 position-relative">
+            <div className="w-6/12">
+                <h3 className="font-semibold text-sm">{heading}</h3>
+                <footer className="flex mt-5 relative text-sm">
                     <Image
                         compression={5}
                         src={authorImage ?? ""}

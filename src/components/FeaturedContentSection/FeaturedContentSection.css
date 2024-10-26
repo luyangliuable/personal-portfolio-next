@@ -12,6 +12,8 @@
 
 .featured-section .featured-section--item {
     width: 400px;
+    height: 360px;
+    margin-bottom: 200px;
 }
 
 .featured-section--wrapper {
@@ -23,9 +25,4 @@
         content: "";
         display: none;
     }
-}
-
-.show-more-button-wrapper {
-    transform: translateY(-50%);
-    z-index: 1;
 }

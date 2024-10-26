@@ -54,7 +54,7 @@ const Item: FC<IAccordionItemProps> = ({ heading, children, icon }) => {
             <div
                 className={cl(
                     "accordion--content w-full flex flex-col items-center",
-                    { none: !show },
+                    { hidden: !show },
                 )}
             >
                 {children}
@@ -84,12 +84,12 @@ const Button: FC<IAccordionButtonProps> = ({
                         "accordion--button noselect flex items-center justify-between cursor-pointer",
                     href: isLink ? href : undefined,
                 },
-                <div className="flex flex-row items-center w-full position-relative">
+                <div className="flex flex-row items-center w-full relative">
                     <span className="mr-2">{icon}</span>
                     <span>{heading}</span>
                     {disabled && (
                         <div
-                            className="blur-boundary flex justify-center items-center position-absolute"
+                            className="blur-boundary flex justify-center items-center absolute"
                             style={{
                                 background: "rgba(255,255,255,.5)",
                                 strokeWidth: "2rem",

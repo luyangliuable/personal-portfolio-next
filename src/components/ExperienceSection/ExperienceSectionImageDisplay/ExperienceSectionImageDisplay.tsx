@@ -36,11 +36,11 @@ const ExperienceSectionImageDisplay: React.FC<
     };
 
     const experienceSectionCardTextImageBody = (): React.ReactElement => (
-        <div className="w-full flex flex-col items-center mt-5">
+        <div className="w-full flex flex-col items-center mt-3">
             <SequentialRiseSpan
                 elementType="p"
                 className="image-display__detailed-text"
-                numberOfLettersPerLine={50}
+                numberOfLettersPerLine={48}
             >
                 {item.cardDetailedText}
             </SequentialRiseSpan>
@@ -51,21 +51,18 @@ const ExperienceSectionImageDisplay: React.FC<
         </div>
     );
 
-    const experienceSectionCardClassName = [
-        "card experience-section-card no-boundary",
-    ];
-
-    experienceSectionCardIndexIsEvenNumber
-        ? experienceSectionCardClassName.push("above")
-        : experienceSectionCardClassName.push("below");
-
     const { objectPosition, media, cardDetailedText } = item;
 
     return (
         <div
             onMouseMove={cardGradientEffect}
-            onClick={() => setShowModal(true)}
-            className={experienceSectionCardClassName.join(" ")}
+            className={cl(
+                "card experience-section-card p-2 no-boundary relative",
+                {
+                    above: experienceSectionCardIndexIsEvenNumber,
+                    below: !experienceSectionCardIndexIsEvenNumber,
+                },
+            )}
         >
             <div className="connecting-line"></div>
             <div className="image-display__image__wrapper flex justify-center items-center box-shadow-lg">
@@ -80,7 +77,10 @@ const ExperienceSectionImageDisplay: React.FC<
                 />
             </div>
             {experienceSectionCardTextImageBody()}
-            <div className="expand position-absolute flex justify-center items-center">
+            <div
+                className="expand absolute flex justify-center items-center cursor-pointer"
+                onClick={() => setShowModal(true)}
+            >
                 <FaExpand />
             </div>
             <ImageDisplayModal

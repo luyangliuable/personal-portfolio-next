@@ -1,6 +1,5 @@
 .experience-section-parent-container {
     overflow-x: hidden;
-    display: flow-root;
     position: sticky;
     z-index: 3;
     top: calc(var(--navbar-height) + 0.5vh);
@@ -18,17 +17,8 @@
     margin-bottom: var(--common-card-margin);
 }
 
-.experience-section {
-    width: calc(var(--home-container-width) - 3vw);
-    max-width: calc(var(--home-container-max-width) - 3vw);
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
 .experience-section--content {
     padding-left: 40vw;
-    flex-grow: 1;
-    flex-basis: 80vh;
     width: min-content;
     display: inline-flex;
     flex-direction: row;
@@ -43,8 +33,6 @@
     width: 310px;
     backdrop-filter: blur(8px);
     margin: 0 -45px;
-    padding: 10px;
-    height: fit-content;
 }
 
 .experience-section-card.exp-above {

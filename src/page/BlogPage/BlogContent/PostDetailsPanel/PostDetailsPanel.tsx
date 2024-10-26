@@ -27,17 +27,17 @@ const PostDetailsPanel: React.FC<IPostDetailsPanelProps> = ({
 
         return (
             <div>
-                <h3>Related Posts</h3>
+                <h3 className="font-bold mb-3">Related Posts</h3>
                 {relatedPosts.map((post: BlogPostResponse, idx: number) => {
                     const { heading, author } = post;
                     const link = `/digital-chronicles/blog/${post._id.$oid}`;
                     return (
-                        <Link className="w-80" href={link} key={idx}>
+                        <Link className="w-4/5" href={link} key={idx}>
                             <div
-                                className="card no-boundary px-1"
+                                className="card no-boundary pb-2"
                                 onMouseMove={cardGradientEffect}
                             >
-                                <h4 className="mb-0">{heading}</h4>
+                                <h4 className="mb-0 font-bold">{heading}</h4>
                                 <p className="m-0">{author}</p>
                             </div>
                         </Link>
@@ -60,11 +60,11 @@ const PostDetailsPanel: React.FC<IPostDetailsPanelProps> = ({
     return (
         <aside className="blog-content__side-components child-mb-50 flex flex-col items-start mt-10">
             <section>
-                <h3>Author</h3>
+                <h3 className="font-bold mb-2">Author</h3>
                 <AuthorDetails content={content} />
             </section>
             <div className="child-mb-10">{renderRelatedPosts()}</div>
-            <aside className="w-80">{renderBlogTags()}</aside>
+            <aside className="w-full">{renderBlogTags()}</aside>
             <BuyMeACoffeeButton />
         </aside>
     );

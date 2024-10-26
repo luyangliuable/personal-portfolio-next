@@ -65,7 +65,7 @@ class LandingPageCard extends Component<ILandingPageCardProps, any> {
                         <header className="landing-page-card__heading important-text">
                             <SequentialRiseSpan
                                 elementType="h2"
-                                className="landing-page-card__header"
+                                className="landing-page-card__header text-2xl font-bold"
                             >
                                 {landingPageCardHeading ?? ""}
                             </SequentialRiseSpan>

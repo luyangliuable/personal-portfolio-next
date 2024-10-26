@@ -190,7 +190,7 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
     }
     return (
         <div className={cl("table-of-contents", props.className)}>
-            <h2>Table of Contents:</h2>
+            <h2 className="text-lg font-bold">Table of Contents:</h2>
             {tocEntries &&
                 tocEntries.map((entry, index) => {
                     return React.cloneElement(entry, {

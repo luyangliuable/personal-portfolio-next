@@ -7,6 +7,7 @@ import React, {
     useEffect,
     useRef,
     RefObject,
+    useCallback,
 } from "react";
 import Link from "next/link";
 import { INavbarState, ILink, NavbarItem } from "../Interface/INavbarState";
@@ -39,7 +40,6 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
         lastScrollY: 0,
         navBarDetached: false,
         currentlyHoveredNavbarLinkName: null,
-        hideNavBarScrollSensitivity: 1,
         isNavbarHidden: false,
         dropdownMenuLinkDisplay: [],
     });
@@ -50,22 +50,26 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
         setNavBarHeight(height);
     }, []);
 
-    const listenDeltaScrolled = () => {
-        const { hideNavBarScrollSensitivity, isNavbarHidden } = state;
-        const deltaScrolled = deltaScrollCalculation?.deltaScrolled ?? 0;
+    const lastScrollTopRef = useRef(0);
+
+    const handleScroll = useCallback(() => {
+        const { isNavbarHidden, navBarDetached } = state;
+        const st = document.documentElement.scrollTop;
+        console.log("hidden", isNavbarHidden);
+        console.log("detached", navBarDetached);
         if (
-            deltaScrolled >= hideNavBarScrollSensitivity &&
+            st > lastScrollTopRef.current &&
             !isNavbarHidden &&
-            state.navBarDetached
+            navBarDetached
         ) {
+            console.log("hiden");
             setNavBarHidden(true);
-        } else if (
-            deltaScrolled <= -hideNavBarScrollSensitivity &&
-            isNavbarHidden
-        ) {
+        } else if (st < lastScrollTopRef.current && isNavbarHidden) {
+            console.log("unhiden");
             setNavBarHidden(false);
         }
-    };
+        lastScrollTopRef.current = st <= 0 ? 0 : st;
+    }, [state]);
 
     const listenContinuousScrolled = () => {
         if (!state.navBarDetached && scrollY! >= navBarHeight) {
@@ -117,16 +121,9 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
     };
 
     useEffect(() => {
-        updateScrollingBehavior();
-    }, [deltaScrollCalculation?.deltaScrolled]);
-
-    useEffect(() => {
         listenContinuousScrolled();
+        handleScroll();
     }, [scrollY]);
-
-    const updateScrollingBehavior = () => {
-        if (deltaScrollCalculation?.deltaScrolled !== 0) listenDeltaScrolled();
-    };
 
     const setNavbarDetached = (set: boolean) => {
         if (
@@ -158,7 +155,11 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
                 { "--navbar-height": "0px" },
                 { "--navbar-height": `${navBarHeight}px` },
             );
-            toggleClassName(navbar.current.parentElement, set, "hidden");
+            toggleClassName(
+                navbar.current.parentElement,
+                set,
+                "navbar--hidden",
+            );
             setState((prev) => {
                 return {
                     ...prev,

@@ -4,9 +4,9 @@ import { NavbarItem } from "./Interface/INavbarState";
 import NavbarMainSection from "./NavbarMainSection/NavbarMainSection";
 import LoginButton from "./LoginButton/LoginButton";
 
-const NavBar = () => {
-    const links: NavbarItem[] = linksData.links as NavbarItem[];
+const links: NavbarItem[] = linksData.links as NavbarItem[];
 
+const NavBar = () => {
     return (
         <article className="navbar flex flex-row">
             <NavbarMainSection links={links} />

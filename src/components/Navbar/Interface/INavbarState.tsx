@@ -19,7 +19,6 @@ export interface INavbarState {
     currentlyHoveredNavbarLinkName: string | null;
     lastScrollY: number;
     isNavbarHidden: boolean;
-    hideNavBarScrollSensitivity: number;
     navBarDetached: boolean;
     dropdownMenuLinkDisplay: ReactNode[];
 }

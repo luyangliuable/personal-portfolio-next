@@ -140,7 +140,10 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({
                 <Retro showBorder />
                 <div className="flex w-full h-full justify-center items-stretch gap-3">
                     {group.map((content, idx) => (
-                        <div className="featured-section--item flex justify-center" key={idx}>
+                        <div
+                            className="featured-section--item flex justify-center"
+                            key={idx}
+                        >
                             <GalleryItem
                                 key={content._id.$oid}
                                 name={content.heading}

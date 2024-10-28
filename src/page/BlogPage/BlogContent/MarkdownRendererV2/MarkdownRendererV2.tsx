@@ -109,16 +109,9 @@ const MarkdownRendererV2: React.FC<MarkdownRendererProps> = ({ markdown }) => {
     };
 
     function filterMarkdown(text: string): string {
-        // Regular expression to match the Table of Contents section
         const tocRegex = /\*\*Table of Contents\*\*\n(?:\s*-\s[^\n]*\n)+/g;
-
-        // Replace the Table of Contents section with an empty string
         let filteredText = text.replace(tocRegex, "");
-
-        // Regular expression to remove * characters from text surrounded by |
         const asteriskRegex = /\|([^\|]*)\|/g;
-
-        // Replace * characters within |...| blocks
         filteredText = filteredText.replace(asteriskRegex, (match, p1) => {
             return `|${p1.replace(/\*/g, "")}|`;
         });

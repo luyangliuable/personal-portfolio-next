@@ -55,17 +55,13 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
     const handleScroll = useCallback(() => {
         const { isNavbarHidden, navBarDetached } = state;
         const st = document.documentElement.scrollTop;
-        console.log("hidden", isNavbarHidden);
-        console.log("detached", navBarDetached);
         if (
             st > lastScrollTopRef.current &&
             !isNavbarHidden &&
             navBarDetached
         ) {
-            console.log("hiden");
             setNavBarHidden(true);
         } else if (st < lastScrollTopRef.current && isNavbarHidden) {
-            console.log("unhiden");
             setNavBarHidden(false);
         }
         lastScrollTopRef.current = st <= 0 ? 0 : st;
@@ -242,6 +238,7 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
                             <h1 className="logo">{websiteName}</h1>
                         </Link>
                     </div>
+                    <div className="h-[20px] w-[1px] bg-[#888] mr-4"></div>
                     <nav ref={navbarLeft} className="navbar-left flex flex-row">
                         {links.map((item, _) => renderNavLink(item, false))}
                         <section

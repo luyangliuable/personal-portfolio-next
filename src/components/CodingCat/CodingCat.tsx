@@ -173,8 +173,63 @@ const CodingCat = () => {
                     <feComposite in="SourceGraphic" in2="a" operator="in" />
                     <feMorphology operator="dilate" radius={pixelRadius} />
                 </filter>
+                <filter id="glitch" x="0" y="0" width="100%" height="100%">
+                    <feFlood
+                        flood-color="#ff0770"
+                        flood-opacity="1"
+                        x="90"
+                        y="30"
+                        height="40"
+                        width="260"
+                        result="A"
+                    />
+                    <feComposite
+                        width={pixelWidth}
+                        height={pixelHeight}
+                        operator="in"
+                        in2="SourceGraphic"
+                        in="A"
+                        result="B"
+                    />
+                    <feTile result="a" />
+                    <feComposite in="SourceGraphic" in2="a" operator="in" />
+                    <feMorphology operator="dilate" radius={pixelRadius} />
+
+                    <feColorMatrix
+                        type="hueRotate"
+                        in="B"
+                        result="C"
+                        values="90"
+                    />
+                    <feComposite operator="over" in2="SourceGraphic" in="C" />
+                </filter>
+                <filter
+                    id="blur"
+                    x="0"
+                    y="0"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="15" />
+                </filter>
+                <filter id="highlight" x="0" y="0" width="1" height="1">
+                    <feGaussianBlur
+                        in="SourceGraphic"
+                        stdDeviation="5"
+                        result="blurred"
+                    />
+                    <feFlood
+                        flood-color="yellow"
+                        flood-opacity="0.5"
+                        result="color"
+                    />
+                    <feBlend in="blurred" in2="color" mode="lighten" />
+                </filter>
             </defs>
-            <g id="coding-cat" onClick={togglePixelatedFilter}>
+            <g
+                id="coding-cat"
+                onClick={togglePixelatedFilter}
+                filter="url(#glitch)"
+            >
                 <g className="head">
                     <path d="M280.4,221l383.8,62.6a171.4,171.4,0,0,0-9.2-40.5,174,174,0,0,0-28.7-50.5,163.3,163.3,0,0,0,3.2-73.8c-11.6-1.9-42,14.2-44.5,17.5-19.6-24-88.5-52.7-153.7-48.1A78.8,78.8,0,0,0,398,67.1c-9.8,2.9-19,29.7-19.4,33.7a320,320,0,0,0-31.7,23.6c-14,11.8-28.9,24.4-42.5,44.3A173,173,0,0,0,280.4,221Z"></path>
                     <path d="M396.6,178.6c.4.9,2.7,6.5,8.5,8.4s13.4-1.2,17.2-7.9c-.9,7.5,3.8,14.3,10.4,16a14.4,14.4,0,0,0,15-5.7"></path>
@@ -288,6 +343,14 @@ const CodingCat = () => {
                         d="M534.1,231.4c-19.7,6-32.9,18.4-34.2,29.1a30.1,30.1,0,0,0,1.7,14.1,24.8,24.8,0,0,0,6.1,8.8c6,5.1,16.8,4,38-3.9a288.7,288.7,0,0,0,46.5-22.1"
                     ></path>
                 </g>
+                <rect
+                    x="0"
+                    y="0"
+                    width="300"
+                    height="300"
+                    fill="transparent"
+                    filter="url(#glitch)"
+                />
             </g>
         </svg>
     );

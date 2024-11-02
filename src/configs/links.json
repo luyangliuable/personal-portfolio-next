@@ -32,7 +32,7 @@
                     "name": "My Daily Leetcode",
                     "description": "The grind",
                     "emoji": "🧩",
-                    "to": "/digital-chronicles/blogs?tag=daily-leetcode"
+                    "to": "/digital-chronicles/blog?tag=daily-leetcode"
                 }
             ]
         },

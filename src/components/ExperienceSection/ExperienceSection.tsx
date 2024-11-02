@@ -34,6 +34,22 @@ const items: ExperienceSectionItem[] = [
         cardTitle: "",
         url: "",
         cardSubtitle: "",
+        location: "-37.902521, 145.164292",
+        cardDetailedText: "",
+        importance: 1,
+        display: "IMAGE",
+        media: {
+            type: "IMAGE",
+            source: {
+                url: "https://llcode.tech/api/image/6725f70418eb5f86ea13b543",
+            },
+        },
+    },
+    {
+        dateTime: "2024",
+        cardTitle: "",
+        url: "",
+        cardSubtitle: "",
         location: "-37.8180679, 145.192779",
         cardDetailedText:
             "After work, the setting sun casts a warm glow across the platform.",

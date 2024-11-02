@@ -44,7 +44,7 @@ const Contributors: React.FC<IContributorsProps> = ({
             }
 
             if (!contributors.some((item) => item.login === "luyangliuable")) {
-                contributors.unshift({
+                contributors.push({
                     login: "luyangliuable",
                     avatarUrl:
                         "https://avatars.githubusercontent.com/u/23611033?v=4",

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { IBlogPageState, IBlogPageProps } from "../../interfaces";
 import { FaWindowClose } from "react-icons/fa";
 import HeroHeader from "../../components/HeroHeader/HeroHeader";
@@ -12,14 +12,15 @@ import Toggle from "../../components/Atoms/Toggle/Toggle";
 import "./BlogPage.css";
 import SkeletonPage from "../SkeletonPage/SkeletonPage";
 
+const authorImage = "https://llcode.tech/api/image/65817ae96c73ceb16ba51731";
+
+const heroHeaderContent = Object.freeze({
+    heading: "Blog Posts",
+    description:
+        "Blog posts for documenting useful code, mark memorable moments in my life and help my journey of endless self-improvement.",
+});
+
 const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, data }) => {
-    const authorImage =
-        "https://llcode.tech/api/image/65817ae96c73ceb16ba51731";
-    const heroHeaderContent = Object.freeze({
-        heading: "Blog Posts",
-        description:
-            "Blog posts for documenting useful code, mark memorable moments in my life and help my journey of endless self-improvement.",
-    });
     const [state, setState] = useState<IBlogPageState>({
         currentlyShowingContent: {},
         allTags: new Set(),
@@ -124,64 +125,70 @@ const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, data }) => {
         return tag ? tag.split(",") : [];
     };
 
-    const renderPostsSortedByDateDescending = (): React.ReactNode => {
-        return Object.keys(state.currentlyShowingContent)
-            .sort((a, b) => parseInt(b) - parseInt(a))
-            .map((year) => (
-                <React.Fragment key={year}>
-                    <div className="blog__year relative">
-                        <span>{year}</span>
-                    </div>
-                    {state.currentlyShowingContent[year].map(
-                        (content: BlogPostResponse) => (
-                            <Card
-                                key={content._id.$oid}
-                                heading={content.heading}
-                                authorImage={authorImage}
-                                author={content.author}
-                                date_created={content.date_created}
-                                date_updated={content.date_last_modified}
-                                body={content.body}
-                                minuteRead={content.reading_time_minutes}
-                                in_progress={content.in_progress}
-                                tags={content.tags}
-                                image={content.image && content.image.$oid}
-                                link={`/digital-chronicles/blog/${content._id.$oid}`}
-                            />
-                        ),
-                    )}
-                </React.Fragment>
-            ));
-    };
+    const renderPostsSortedByDateDescending =
+        useCallback((): React.ReactNode => {
+            return Object.keys(state.currentlyShowingContent)
+                .sort((a, b) => parseInt(b) - parseInt(a))
+                .map((year) => (
+                    <React.Fragment key={year}>
+                        <div className="blog__year relative">
+                            <span>{year}</span>
+                        </div>
+                        {state.currentlyShowingContent[year].map(
+                            (content: BlogPostResponse) => (
+                                <Card
+                                    key={content._id.$oid}
+                                    heading={content.heading}
+                                    authorImage={authorImage}
+                                    author={content.author}
+                                    date_created={content.date_created}
+                                    date_updated={content.date_last_modified}
+                                    body={content.body}
+                                    minuteRead={content.reading_time_minutes}
+                                    in_progress={content.in_progress}
+                                    tags={content.tags}
+                                    image={content.image && content.image.$oid}
+                                    link={`/digital-chronicles/blog/${content._id.$oid}`}
+                                />
+                            ),
+                        )}
+                    </React.Fragment>
+                ));
+        }, [state.currentlyShowingContent]);
 
-    const renderTopPickedBlogPost = (): React.ReactNode | null =>
-        showTopPicks && (
-            <div className="w-half flex-col items-start pl-[3vw] blog__featured">
-                <h3 className="font-bold text-lg mb-3">Top Picks</h3>
-                {state.topPickedPosts.map((post) => (
-                    <SmallCard
-                        key={post._id.$oid}
-                        authorImage={authorImage}
-                        author={post.author}
-                        link={`/digital-chronicles/blog/${post._id.$oid}`}
-                        heading={post.heading}
-                        image={post.image.$oid}
-                        body=""
-                    />
-                ))}
-            </div>
-        );
+    const renderTopPickedBlogPost = useCallback(
+        (): React.ReactNode | null =>
+            showTopPicks && (
+                <div className="w-half flex-col items-start pl-[3vw] blog__featured">
+                    <h3 className="font-bold text-lg mb-3">Top Picks</h3>
+                    {state.topPickedPosts.map((post) => (
+                        <SmallCard
+                            key={post._id.$oid}
+                            authorImage={authorImage}
+                            author={post.author}
+                            link={`/digital-chronicles/blog/${post._id.$oid}`}
+                            heading={post.heading}
+                            image={post.image.$oid}
+                            body=""
+                        />
+                    ))}
+                </div>
+            ),
+        [state.topPickedPosts],
+    );
 
     const renderUnSelectedTags = () => {
         const baseUrlLink = "/digital-chronicles/blogs";
         const { currentSelectTags: selectedTags } = state;
-
         return Array.from(state.allTags).map((tagName) => {
             const isSelected = state.currentSelectTags.includes(tagName);
             const updatedTags = isSelected
                 ? selectedTags.filter((tag) => tag !== tagName)
                 : [...selectedTags, tagName];
-            const to = `${baseUrlLink}?tag=${encodeURIComponent(updatedTags.join(","))}`;
+            let to = baseUrlLink;
+            if (updatedTags.length) {
+                to = `${baseUrlLink}?tag=${encodeURIComponent(updatedTags.join(","))}`;
+            }
             const handleClick = () => {
                 window.history.replaceState({}, "", to);
                 setState((prev) => ({
@@ -194,7 +201,7 @@ const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, data }) => {
                 return (
                     <span
                         key={tagName}
-                        className="blog__tag flex items-center noselect blog__tag--selected"
+                        className="blog__tag flex items-center noselect blog__tag--selected cursor-pointer"
                         onClick={handleClick}
                     >
                         #{tagName} <FaWindowClose />
@@ -266,4 +273,4 @@ const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, data }) => {
     );
 };
 
-export default React.memo(BlogPage);
+export default BlogPage;

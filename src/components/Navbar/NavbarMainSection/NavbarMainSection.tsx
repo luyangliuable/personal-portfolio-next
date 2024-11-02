@@ -182,6 +182,12 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
     };
 
     const setDropdownMenu = (set: boolean): void => {
+        if (!set) {
+            setState((prev) => ({
+                ...prev,
+                dropdownMenuLinkDisplay: [],
+            }));
+        }
         if (navbarSubmenu.current && selectedNavlinkWindow.current) {
             toggleClassName(navbarSubmenu.current, set, "show-navbar-dropdown");
             toggleClassName(
@@ -194,18 +200,16 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
 
     const renderDropdownMenu = useCallback(
         (links?: ILink[]): ReactNode | void => {
-            if (
-                links &&
-                links.length > 0 &&
-                !deepCompare(links, state.dropdownMenuLinkDisplay)
-            ) {
+            if (!links) {
+                setDropdownMenu(false);
+                return;
+            }
+            if (!deepCompare(links, state.dropdownMenuLinkDisplay)) {
                 setDropdownMenu(true);
                 setState((prev) => ({
                     ...prev,
-                    dropdownMenuLinkDisplay: links,
+                    dropdownMenuLinkDisplay: links!,
                 }));
-            } else {
-                setDropdownMenu(false);
             }
         },
         [state.dropdownMenuLinkDisplay],

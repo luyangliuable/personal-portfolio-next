@@ -178,7 +178,7 @@ const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, data }) => {
     );
 
     const renderUnSelectedTags = () => {
-        const baseUrlLink = "/digital-chronicles/blogs";
+        const baseUrlLink = "/digital-chronicles/blog";
         const { currentSelectTags: selectedTags } = state;
         return Array.from(state.allTags).map((tagName) => {
             const isSelected = state.currentSelectTags.includes(tagName);

@@ -63,7 +63,7 @@
 
 .blog__tag:hover {
     background: #1e90ff;
-    border: 0.1px solid #888;
+    border: 1px solid #888;
     color: #eee;
 }
 

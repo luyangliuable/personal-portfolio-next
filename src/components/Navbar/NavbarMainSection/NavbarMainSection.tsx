@@ -17,7 +17,11 @@ import NavBurgerPanel from "../NavBurgerPanel/NavBurgerPanel";
 import BurgerMenuIcon from "../BurgerMenuIcon/BurgerMenuIcon";
 import NavLink from "../NavLink/NavLink";
 import NavbarScrollProgress from "../NavbarScrollProgress/NavbarScrollProgress";
-import { toggleProperty, toggleClassName } from "../../Utility/LogicUtility";
+import {
+    toggleProperty,
+    toggleClassName,
+    deepCompare,
+} from "../../Utility/LogicUtility";
 import "../Navbar.css";
 
 const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
@@ -83,7 +87,6 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
     useEffect(() => {
         initializeNavBar();
         setupNavHoverEffect();
-
         return () => {
             window.removeEventListener("click", hideBurgerMenu);
         };
@@ -92,7 +95,6 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
     const setupNavHoverEffect = () => {
         const navbarLeftTarget = navbarLeft.current!;
         const selectedNavlinkWindowTarget = selectedNavlinkWindow.current!;
-
         if (navbarLeftTarget && selectedNavlinkWindow) {
             Array.from(navbarLeftTarget.children).forEach((child, index) => {
                 if (child !== selectedNavlinkWindowTarget) {
@@ -190,26 +192,24 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
         }
     };
 
-    const renderDropdownMenu = (links?: ILink[]): ReactNode | void => {
-        if (links && links.length > 0) {
-            setDropdownMenu(true);
-            setState((prev) => ({
-                ...prev,
-                dropdownMenuLinkDisplay: links.map((link) => (
-                    <NavLink
-                        key={link.name}
-                        link={link}
-                        isSubLink={true}
-                        links={links}
-                        renderDropdownMenu={renderDropdownMenu}
-                        hideDropdownMenu
-                    />
-                )),
-            }));
-        } else {
-            setDropdownMenu(false);
-        }
-    };
+    const renderDropdownMenu = useCallback(
+        (links?: ILink[]): ReactNode | void => {
+            if (
+                links &&
+                links.length > 0 &&
+                !deepCompare(links, state.dropdownMenuLinkDisplay)
+            ) {
+                setDropdownMenu(true);
+                setState((prev) => ({
+                    ...prev,
+                    dropdownMenuLinkDisplay: links,
+                }));
+            } else {
+                setDropdownMenu(false);
+            }
+        },
+        [state.dropdownMenuLinkDisplay],
+    );
 
     const renderNavLink = (link: NavbarItem, isSubLink: boolean = true) => {
         return (
@@ -238,7 +238,7 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
                             <h1 className="logo">{websiteName}</h1>
                         </Link>
                     </div>
-                    <div className="h-[20px] w-[1px] bg-[#888] mr-4"></div>
+                    <div className="h-[20px] w-[2px] bg-[#CCC] mr-4"></div>
                     <nav ref={navbarLeft} className="navbar-left flex flex-row">
                         {links.map((item, _) => renderNavLink(item, false))}
                         <section
@@ -255,7 +255,16 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
                                 }}
                                 className="navbar-item__dropdown blur-boundary box-shadow-spread"
                             >
-                                {state.dropdownMenuLinkDisplay}
+                                {state.dropdownMenuLinkDisplay.map((link) => (
+                                    <NavLink
+                                        key={link.name}
+                                        link={link}
+                                        isSubLink={true}
+                                        links={links}
+                                        renderDropdownMenu={renderDropdownMenu}
+                                        hideDropdownMenu
+                                    />
+                                ))}
                             </div>
                         </section>
                     </nav>

@@ -20,5 +20,5 @@ export interface INavbarState {
     lastScrollY: number;
     isNavbarHidden: boolean;
     navBarDetached: boolean;
-    dropdownMenuLinkDisplay: ReactNode[];
+    dropdownMenuLinkDisplay: ILink[];
 }

@@ -73,3 +73,7 @@ export const clamp = (
     const validValue = (value ?? 0) * (factor ?? 1);
     return Math.min(max, Math.max(min, validValue));
 };
+
+export const deepCompare = (json1: any, json2: any) => {
+    return JSON.stringify(json1) == JSON.stringify(json2);
+};

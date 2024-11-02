@@ -29,12 +29,6 @@
                     "to": "/digital-chronicles/scenic_memories"
                 },
                 {
-                    "name": "Film Reviews",
-                    "emoji": "🎞️",
-                    "isLocked": true,
-                    "to": "/digital-chronicles/film_reviews"
-                },
-                {
                     "name": "My Daily Leetcode",
                     "description": "The grind",
                     "emoji": "🧩",

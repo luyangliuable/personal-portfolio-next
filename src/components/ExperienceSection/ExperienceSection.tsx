@@ -56,7 +56,7 @@ const items: ExperienceSectionItem[] = [
         media: {
             type: "IMAGE",
             source: {
-                url: "https://llcode.tech/api/image/667d0d655f03f0355e1fc36c",
+                url: "https://llcode.tech/api/image/6725894618eb5f86ea13b53f",
             },
         },
     },
@@ -116,7 +116,7 @@ const items: ExperienceSectionItem[] = [
         media: {
             type: "IMAGE",
             source: {
-                url: "https://llcode.tech/api/image/65920366f1f0fe657dc46839",
+                url: "https://llcode.tech/api/image/6725884d18eb5f86ea13b53e",
             },
         },
     },
@@ -145,7 +145,7 @@ const items: ExperienceSectionItem[] = [
         location: "-37.902488, 145.164690",
         objectPosition: "bottom",
         cardDetailedText:
-            "In the park where I habitually strolled with Teddie post-work or studies, the sunset painted serene silences. ",
+            "In the park where I habitually strolled with Teddie post-work or studies, the afterglow painted serene silences. ",
         importance: 1,
         display: "IMAGE",
         media: {
@@ -253,7 +253,7 @@ const items: ExperienceSectionItem[] = [
         cardSubtitle: "",
         location: "-37.790968, 145.172341",
         cardDetailedText:
-            "I captured this serene view at Mad Patties during the COVID era.",
+            "I captured this serene view at Mad Patties during the COVID.",
         objectPosition: "top",
         importance: 1,
         display: "IMAGE",

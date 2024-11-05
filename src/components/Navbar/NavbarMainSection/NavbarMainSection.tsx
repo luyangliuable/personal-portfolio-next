@@ -201,12 +201,10 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
     const renderDropdownMenu = useCallback(
         (links?: ILink[]): ReactNode | void => {
             if (!links) {
-                console.log("fuck");
                 setDropdownMenu(false);
                 return;
             }
             if (!deepCompare(links, state.dropdownMenuLinkDisplay)) {
-                console.log("shit");
                 setDropdownMenu(true);
                 setState((prev) => ({
                     ...prev,

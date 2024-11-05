@@ -7,6 +7,7 @@ import { CiLock } from "react-icons/ci";
 interface IAccordionItemProps {
     heading: string;
     icon?: ReactNode;
+    className?: string;
     children: ReactNode;
 }
 
@@ -15,6 +16,7 @@ interface IAccordionButtonProps {
     href?: string;
     disabled?: boolean;
     onClick?: () => void;
+    className?: string;
     target?: string;
     icon?: ReactNode;
     children?: ReactNode;
@@ -25,7 +27,12 @@ interface IAccordionProps {
     className?: string;
 }
 
-const Item: FC<IAccordionItemProps> = ({ heading, children, icon }) => {
+const Item: FC<IAccordionItemProps> = ({
+    heading,
+    children,
+    icon,
+    className,
+}) => {
     const [show, setShow] = useState<boolean>(false);
 
     return (
@@ -38,7 +45,10 @@ const Item: FC<IAccordionItemProps> = ({ heading, children, icon }) => {
                             behavior: "smooth",
                         });
                 }}
-                className="accordion--tab noselect flex items-center justify-between cursor-pointer"
+                className={cl(
+                    "accordion--tab noselect flex items-center justify-between cursor-pointer",
+                    className,
+                )}
             >
                 <div className="flex flex-row items-center">
                     <span className="mr-2">{icon}</span>
@@ -68,23 +78,28 @@ const Button: FC<IAccordionButtonProps> = ({
     icon,
     href,
     onClick,
+    className,
     target,
     disabled,
 }) => {
     const [show, setShow] = useState<boolean>(false);
-
     const isLink = href && !disabled;
-
     return (
         <div className="accordion--item flex flex-row justify-between">
             {React.createElement(
                 isLink ? "a" : "div",
                 {
-                    className:
+                    className: cl(
                         "accordion--button noselect flex items-center justify-between cursor-pointer",
+                        className,
+                    ),
                     href: isLink ? href : undefined,
+                    target: isLink ? target : undefined,
+                    onClick: onClick,
                 },
-                <div className="flex flex-row items-center w-full relative">
+                <div
+                    className={cl("flex flex-row items-center w-full relative")}
+                >
                     <span className="mr-2">{icon}</span>
                     <span>{heading}</span>
                     {disabled && (

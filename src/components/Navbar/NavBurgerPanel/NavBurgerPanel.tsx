@@ -9,6 +9,8 @@ import Accordion from "../../Accordion/Accordion";
 import { ILink, NavbarItem } from "../Interface/INavbarState";
 
 import "./NavBurgerPanel.css";
+import { cl } from "../../Utility/LogicUtility";
+import { isActive } from "../../Utility/StringUtility";
 
 const NavBurgerPanel: React.FC<INavBurgerPanelProps> = ({
     burgerPanel,
@@ -26,26 +28,47 @@ const NavBurgerPanel: React.FC<INavBurgerPanelProps> = ({
             {isMounted &&
                 createPortal(
                     <div
+                        key="navbar-burger-panel"
                         ref={burgerPanel}
                         className="nav-burger-panel-hide nav-burger-panel nav-burger-panel-move-lower"
                     >
                         <Accordion className="mb-20">
                             {links.map((link: NavbarItem) => {
-                                const isActive = pathname === link.to;
                                 return link.sublinks ? (
-                                    <Accordion.Item heading={link.name}>
-                                        {link.sublinks?.map((sublink) => (
-                                            <Accordion.Button
-                                                href={sublink.to ?? ""}
-                                                disabled={sublink.isLocked}
-                                                heading={`${sublink.emoji} ${sublink.name}`}
-                                                key={sublink.name}
-                                            ></Accordion.Button>
-                                        ))}
+                                    <Accordion.Item
+                                        heading={link.name}
+                                        className={cl({
+                                            "!bg-[var(--dark-mode-purple-2)] color-white":
+                                                isActive(pathname, link.to),
+                                        })}
+                                        key={link.name}
+                                    >
+                                        {link.sublinks?.map((sublink) => {
+                                            return (
+                                                <Accordion.Button
+                                                    className={cl({
+                                                        "!bg-[var(--dark-mode-purple-2)] color-white":
+                                                            isActive(
+                                                                sublink.to,
+                                                                pathname,
+                                                            ),
+                                                    })}
+                                                    href={sublink.to ?? ""}
+                                                    disabled={sublink.isLocked}
+                                                    heading={`${sublink.emoji} ${sublink.name}`}
+                                                    key={sublink.name}
+                                                ></Accordion.Button>
+                                            );
+                                        })}
                                     </Accordion.Item>
                                 ) : (
                                     <Accordion.Button
+                                        key={link.name}
                                         href={link.to ?? ""}
+                                        className={cl({
+                                            "!bg-[var(--dark-mode-purple-2)] color-white":
+                                                link.to == pathname,
+                                        })}
                                         heading={link.name}
                                         disabled={link.isLocked}
                                     ></Accordion.Button>

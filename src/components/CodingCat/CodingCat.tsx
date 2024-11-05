@@ -175,8 +175,8 @@ const CodingCat = () => {
                 </filter>
                 <filter id="glitch" x="0" y="0" width="100%" height="100%">
                     <feFlood
-                        flood-color="#ff0770"
-                        flood-opacity="1"
+                        floodColor="#ff0770"
+                        floodOpacity="1"
                         x="90"
                         y="30"
                         height="40"
@@ -218,8 +218,8 @@ const CodingCat = () => {
                         result="blurred"
                     />
                     <feFlood
-                        flood-color="yellow"
-                        flood-opacity="0.5"
+                        floodColor="yellow"
+                        floodOpacity="0.5"
                         result="color"
                     />
                     <feBlend in="blurred" in2="color" mode="lighten" />

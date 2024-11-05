@@ -43,7 +43,7 @@ const ExperienceSectionEvent: React.FC<ExperienceSectionEventProps> = ({
         <div
             onMouseMove={cardGradientEffect}
             className={cl(
-                "card experience-section-card px-2.5 py-5 flex flex-row justify-between items-center",
+                "card experience-section-card px-2.5 py-3 flex flex-row justify-between items-center",
                 {
                     "exp-above": experienceSectionCardIndexIsEvenNumber,
                     "exp-below": !experienceSectionCardIndexIsEvenNumber,

@@ -21,9 +21,7 @@
 .image-display__image__wrapper {
     position: relative;
     border-radius: 4px;
-    height: 20vh;
-    min-height: 100px;
-    max-height: 200px;
+    height: 150px;
 }
 
 .image-display__image__wrapper > img {

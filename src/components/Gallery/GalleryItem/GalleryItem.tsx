@@ -81,7 +81,6 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
             <div
                 style={style}
                 ref={galleryItemRef}
-                key={props.key}
                 onMouseMove={cardGradientEffect}
                 className="card gallery-item initially-hidden blur-boundary--sm"
             >
@@ -108,9 +107,9 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
                 </div>
                 <div className="px-5">
                     <TagCloud tags={props.tags} />
-                    <a className="gallery-item__link" href={props.link}>
+                    <div className="gallery-item__link">
                         <h3 className="font-bold">{props.name}</h3>
-                    </a>
+                    </div>
                     <p>{props.subheading}</p>
                     {props.description && (
                         <div className="w-full box-border">

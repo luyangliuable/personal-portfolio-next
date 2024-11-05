@@ -61,6 +61,15 @@ export function convertHtmlEntities(str: string): string {
     return doc.documentElement.textContent ?? str;
 }
 
+const isActive = (currentPathname?: string, targetPathname?: string) => {
+    if (!currentPathname || !targetPathname) return false;
+    if (currentPathname === targetPathname) return true;
+    if (targetPathname === "/") return false;
+    const currentPath = currentPathname.trim().replace(/\/+$/, "");
+    const normalizedTargetPath = targetPathname.trim().replace(/\/+$/, "");
+    return currentPath.startsWith(normalizedTargetPath);
+};
+
 export {
     truncateTextBody,
     stripAwayHashSymbols,
@@ -68,4 +77,5 @@ export {
     stringToHash,
     removeHashesAndStripWhitespace,
     removeTextInsideAngleBrackets,
+    isActive,
 };

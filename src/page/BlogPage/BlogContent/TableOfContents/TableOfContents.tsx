@@ -103,7 +103,7 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
             baseIndent = 10,
             indentOffset = 20,
             heightEach = 20,
-            startHeight = 75,
+            startHeight = 56,
             startIdx = -1,
             endIdx = -1,
             pathStart = 0,
@@ -111,7 +111,6 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
         tocEntries!.forEach((entry, idx) => {
             if (entry.props.className.includes("active")) {
                 if (startIdx === -1) startIdx = idx;
-                if (idx === 1) startHeight = 80;
                 endIdx = idx;
             }
         });
@@ -188,9 +187,14 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
             new Set(prev).add("intersectingSectionsListener"),
         );
     }
+
     return (
         <div className={cl("table-of-contents", props.className)}>
-            <h2 className="text-lg font-bold">Table of Contents:</h2>
+            <div className="mb-2 w-full">
+                <h2 className="font-bold mb-2 pb-1 border-b border-gray-300 w-full">
+                    Table of Contents
+                </h2>
+            </div>
             {tocEntries &&
                 tocEntries.map((entry, index) => {
                     return React.cloneElement(entry, {

@@ -140,14 +140,6 @@ const BlogContent: React.FC<IBlogContentProps> = ({
                         }
                         {renderBlogContent()}
                         <aside className="blog-content__side-components sticky mt-[20vh]">
-                            <Link
-                                shallow
-                                href="/digital-chronicles/blogs"
-                                className="flex items-center"
-                            >
-                                <IoMdArrowBack />
-                                Back to Blogs
-                            </Link>
                             <TableOfContent
                                 emitter={emitter}
                                 headings={headings}

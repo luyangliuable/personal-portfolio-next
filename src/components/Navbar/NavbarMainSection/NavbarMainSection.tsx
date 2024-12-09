@@ -24,6 +24,8 @@ import {
 } from "../../Utility/LogicUtility";
 import "../Navbar.css";
 
+const websiteName = "~/llcode.tech" as const;
+
 const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
     const { scrollY, deltaScrollCalculation } = useScrollPosition();
 
@@ -36,8 +38,6 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
         useRef<HTMLDivElement>(null);
     const navbarSubmenu: RefObject<HTMLDivElement> =
         useRef<HTMLDivElement>(null);
-
-    const websiteName = "~/llcode.tech" as const;
 
     const [navBarHeight, setNavBarHeight] = useState(0);
     const [state, setState] = useState<INavbarState>({
@@ -236,7 +236,7 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
     return (
         <>
             <div onMouseLeave={() => setDropdownMenu(false)} ref={navbar}>
-                <section className="flex items-center">
+                <section className="flex items-center h-full">
                     <div className="logo__wrapper">
                         <Link href="/">
                             <h1 className="logo">{websiteName}</h1>

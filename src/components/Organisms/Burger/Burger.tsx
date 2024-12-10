@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import "./Burger.css";
 
 const Burger = () => {
@@ -36,4 +36,4 @@ const Burger = () => {
     );
 };
 
-export default Burger;
+export default memo(Burger);

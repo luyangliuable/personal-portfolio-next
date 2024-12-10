@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useMemo } from "react";
 import "./ZaBanquet.css";
 
 const colorThemes: Record<string, string>[] = [
@@ -30,27 +30,25 @@ const colorThemes: Record<string, string>[] = [
 
 const ZaBanquet = () => {
     const flowersContainerRef = useRef<HTMLDivElement>(null);
-    const [flowers, setFlowers] = useState<JSX.Element[]>([]);
-    const [flowersRef, setFlowersRef] = useState<
-        React.RefObject<HTMLDivElement>[]
-    >([]);
+    const flowersRef = useRef<React.RefObject<HTMLDivElement>[]>([]);
 
-    const generateFlowers = (num: number) => {
-        const flowers = [];
+    const flowers = useMemo(() => {
+        const num = 20;
+        const flowersArray = [];
         const refs = [];
 
         for (let i = 0; i < num; i++) {
             const flowerRef = React.createRef<HTMLDivElement>();
             refs.push(flowerRef);
 
-            const left = Math.random() * 90; // Adjust range as needed for more spread
-            const top = Math.random() * 90; // Adjust range as needed for more spread
-            const scale = 1 + Math.random() * 0.5; // Random scale between 1 and 1.5
-            const rotate = Math.random() * 360; // Random rotation between 0 and 360 degrees
+            const left = Math.random() * 90;
+            const top = Math.random() * 90;
+            const scale = 1 + Math.random() * 0.5;
+            const rotate = Math.random() * 360;
             const theme =
                 colorThemes[Math.floor(Math.random() * colorThemes.length)];
 
-            flowers.push(
+            flowersArray.push(
                 <div
                     ref={flowerRef}
                     className="flower"
@@ -77,12 +75,8 @@ const ZaBanquet = () => {
                 </div>,
             );
         }
-        setFlowers(flowers);
-        setFlowersRef(refs);
-    };
-
-    useEffect(() => {
-        generateFlowers(20);
+        flowersRef.current = refs;
+        return flowersArray;
     }, []);
 
     useEffect(() => {
@@ -97,20 +91,20 @@ const ZaBanquet = () => {
             { threshold: [0.1, 0.5, 1] },
         );
 
-        flowersRef.forEach((ref) => {
+        flowersRef.current.forEach((ref) => {
             if (ref.current) {
                 observer.observe(ref.current);
             }
         });
 
         return () => {
-            flowersRef.forEach((ref) => {
+            flowersRef.current.forEach((ref) => {
                 if (ref.current) {
                     observer.unobserve(ref.current);
                 }
             });
         };
-    }, [flowersRef]);
+    }, []);
 
     return (
         <div className="flowers" ref={flowersContainerRef}>

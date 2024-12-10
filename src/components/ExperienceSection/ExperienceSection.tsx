@@ -22,46 +22,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TiArrowLeftThick } from "react-icons/ti";
 
 import "./ExperienceSection.css";
-import ZaOcean from "../Organisms/ZaOcean/ZaOcean";
 import ZaBanquet from "../Organisms/ZaBanquet/ZaBanquet";
 import { useTrigger } from "../../stores/TriggerContext";
 import { refreshScrollTrigger } from "../Utility/ScrollUtility";
 import Burger from "../Organisms/Burger/Burger";
 
 const items: ExperienceSectionItem[] = [
-    {
-        dateTime: "2024",
-        cardTitle: "",
-        url: "",
-        cardSubtitle: "",
-        location: "-37.902521, 145.164292",
-        cardDetailedText: "",
-        importance: 1,
-        display: "IMAGE",
-        media: {
-            type: "IMAGE",
-            source: {
-                url: "https://llcode.tech/api/image/6725f70418eb5f86ea13b543",
-            },
-        },
-    },
-    {
-        dateTime: "2024",
-        cardTitle: "",
-        url: "",
-        cardSubtitle: "",
-        location: "-37.8180679, 145.192779",
-        cardDetailedText:
-            "After work, the setting sun casts a warm glow across the platform.",
-        importance: 1,
-        display: "IMAGE",
-        media: {
-            type: "IMAGE",
-            source: {
-                url: "https://llcode.tech/api/image/668c9606a8e1db1f839dba5a",
-            },
-        },
-    },
     {
         dateTime: "2022",
         cardTitle: "Monash NRC",
@@ -362,7 +328,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                 trigger: triggerElement,
                 start: `top-=${window.innerHeight} top`,
                 end: "top+=100 top",
-                scrub: 0.1,
+                scrub: true,
                 invalidateOnRefresh: true,
             };
 
@@ -384,7 +350,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                     },
                     {
                         y: -200,
-                        scale: 0.8,
+                        scale: 0.9,
                         ease: "power2.in",
                         scrollTrigger: timelineFinishTrigger,
                     },
@@ -401,7 +367,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                 },
             });
 
-            refreshScrollTrigger(ScrollTrigger);
+            /* refreshScrollTrigger(ScrollTrigger); */
         }
     }, [trigger]);
 
@@ -420,9 +386,17 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
         }, {});
     };
 
+    const groupedItems = useMemo(() => {
+        return sortedItems.reduce((groups: any, item: any) => {
+            const year = new Date(item.dateTime).getFullYear().toString();
+            if (!groups[year]) groups[year] = [];
+            groups[year].push(item);
+            return groups;
+        }, {});
+    }, [sortedItems]);
+
     const mapExperienceSectionItems = useCallback(() => {
-        // TODO: https://stackoverflow.com/questions/70169152/how-to-memoize-each-element-in-an-array-map-in-react-with-usememo
-        const groupedItems = groupExperienceSectionItems(sortedItems);
+        /* const groupedItems = groupExperienceSectionItems(sortedItems); */
         let accumulatedIdx = 0;
         return Object.keys(groupedItems)
             .sort((a, b) => parseInt(b) - parseInt(a))
@@ -430,7 +404,6 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                 const currentYearItems = groupedItems[year];
                 const fragment = (
                     <div className="timeline__year" key={year}>
-                        {year === String(2023) && <ZaOcean />}
                         {year === String(2022) && <ZaBanquet />}
                         {currentYearItems.map((item: any, idx: number) => {
                             const currentIndex = accumulatedIdx + idx;

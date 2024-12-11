@@ -22,9 +22,8 @@ const AuthorDetails: React.FC<{ content?: BlogPostResponse }> = ({
                     src={defaultAuthorImage}
                     alt={content.author}
                 />
-                <div className="flex-vertical">
+                <div className="flex flex-col justify-center">
                     <b>{author}</b>
-                    <br />
                     <span>{displayDateCreated}</span>
                 </div>
             </div>

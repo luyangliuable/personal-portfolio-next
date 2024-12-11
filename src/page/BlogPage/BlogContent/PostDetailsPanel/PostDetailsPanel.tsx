@@ -7,6 +7,7 @@ import "../../../../components/Card/Card.css";
 import { cardGradientEffect } from "../../../../components/Utility/MouseUtility";
 import TagCloud from "../../../../components/TagCloud/TagCloud";
 import "./PostDetailsPanel.css";
+import TextInputWithCard from "../../../../components/TextInputCard/TextInputWithCard";
 
 type IPostDetailsPanelProps = {
     content?: BlogPostResponse;

@@ -11,11 +11,13 @@ import { useGSAP } from "@gsap/react";
 import { useTrigger } from "../../stores/TriggerContext";
 import { refreshScrollTrigger } from "../Utility/ScrollUtility";
 import GolfedSierpinski from "../GolfedSierpinski/GolfedSierpinski";
+import Button from "../Button/Button";
 
 const HeroHeader: React.FC<IHeroHeaderProps> = ({
     heading,
     description,
     graphics,
+    children,
 }) => {
     const componentRef = useRef<HTMLDivElement>(null);
     const { trigger } = useTrigger();
@@ -71,7 +73,7 @@ const HeroHeader: React.FC<IHeroHeaderProps> = ({
     return (
         <div
             ref={componentRef}
-            className="hero-header flex justify-center items-center relative"
+            className="hero-header flex flex-col justify-center relative gap-20 py-10"
         >
             <div className="flex flex-row normalised-width w-full items-center relative hero-header__inner">
                 {screenWidth > 768 && renderGraphics()}
@@ -95,6 +97,7 @@ const HeroHeader: React.FC<IHeroHeaderProps> = ({
                 </div>
                 {screenWidth <= 768 && renderGraphics()}
             </div>
+            {children}
         </div>
     );
 };

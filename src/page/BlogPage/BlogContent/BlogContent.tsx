@@ -1,13 +1,8 @@
 "use client";
 
 import React, { useMemo, useState, useEffect } from "react";
-import Link from "next/link";
 import { marked } from "marked";
-import {
-    getVisiblePercentage,
-    isCenterAlignedWithViewport,
-} from "../../../components/Utility/ScrollUtility";
-import { IoMdArrowBack } from "react-icons/io";
+import { getVisiblePercentage } from "../../../components/Utility/ScrollUtility";
 import { IBlogContentState } from "../../../interfaces/BlogPage/BlogContent/IBlogContentState";
 import IBlogContentProps from "../../../interfaces/BlogPage/BlogContent/IBlogContentProps";
 import { EventEmitter } from "events";
@@ -100,18 +95,16 @@ const BlogContent: React.FC<IBlogContentProps> = ({
     function renderBlogContent(): React.ReactNode {
         if (!content) return null; // Check if content is undefined
 
-        const { heading, image, body, _id } = content;
-        const imageId = image?.$oid;
+        const { heading, body, _id } = content;
 
         if (!body) return <></>;
 
         return (
             <article className="blog-content box-shadow">
-                <header className="blog-content__header">
-                    <h1>{heading}</h1>
+                <header className="blog-content__header mb-10 pb-1 border-b border-gray-300 pb-5">
+                    <h1 className="font-bold">{heading}</h1>
                     <AuthorDetails content={content} />
                 </header>
-                <Image alt="" className="blog-content__image" src={imageId} />
                 <section className="w-full flex-col justify-center items-center translucent-white table-of-content--small-screen">
                     <TableOfContent
                         className="w-80"
@@ -126,9 +119,13 @@ const BlogContent: React.FC<IBlogContentProps> = ({
     }
 
     const { relatedPosts, headings } = state;
+    const imageId = content.image?.$oid;
 
     return (
         <main className="page-container">
+            {imageId && (
+                <Image alt="" className="blog-content__image" src={imageId} />
+            )}
             <section className="blog-content__wrapper">
                 {content && (
                     <>

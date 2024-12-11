@@ -100,12 +100,12 @@ const BlogContent: React.FC<IBlogContentProps> = ({
         if (!body) return <></>;
 
         return (
-            <article className="blog-content box-shadow">
+            <article className="blog-content">
                 <header className="blog-content__header mb-10 pb-1 border-b border-gray-300 pb-5">
                     <h1 className="font-bold">{heading}</h1>
                     <AuthorDetails content={content} />
                 </header>
-                <section className="w-full flex-col justify-center items-center translucent-white table-of-content--small-screen">
+                <section className="w-full my-10 flex-col justify-center items-center table-of-content--small-screen">
                     <TableOfContent
                         className="w-80"
                         headings={state.headings}

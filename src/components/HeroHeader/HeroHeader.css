@@ -47,9 +47,8 @@
     }
 
     .hero-header {
-        flex-direction: column;
         min-height: 400px;
-        justify-content: center;
+        align-items: center;
     }
 
     .hero-header__description {

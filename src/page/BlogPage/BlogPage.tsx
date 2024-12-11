@@ -11,6 +11,7 @@ import SmallCard from "../../components/Atoms/SmallCard/SmallCard";
 import Toggle from "../../components/Atoms/Toggle/Toggle";
 import "./BlogPage.css";
 import SkeletonPage from "../SkeletonPage/SkeletonPage";
+import TextInputWithCard from "../../components/TextInputCard/TextInputWithCard";
 
 const authorImage = "https://llcode.tech/api/image/65817ae96c73ceb16ba51731";
 
@@ -253,7 +254,15 @@ const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, data }) => {
                 heading={heroHeaderContent.heading}
                 description={heroHeaderContent.description}
                 graphics={<BlogPostGraphics />}
-            />
+            >
+                <TextInputWithCard
+                    className="md:ml-20"
+                    heading="Newsletter"
+                    text="Get the latest posts delivered to your inbox."
+                    placeholder="Email"
+                    submitText="Submit"
+                />
+            </HeroHeader>
             <article className="blog-container flex w-full">
                 <section className="blog-list flex flex-col w-full items-center basis-3/5">
                     <div className="blog-page--options-container flex">

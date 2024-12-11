@@ -9,6 +9,7 @@ import IButtonProps, {
 } from "./Interface/IButtonProps";
 
 import { cardGradientEffect } from "../Utility/MouseUtility";
+import { cl } from "../Utility/LogicUtility";
 
 class Button extends Component<IButtonProps, {}> {
     contentInterval: any;
@@ -23,10 +24,10 @@ class Button extends Component<IButtonProps, {}> {
             <div className="flex justify-center items-center">
                 <div
                     style={this.props.style}
-                    className={[
+                    className={cl(
                         "t-button button no-select",
                         this.props.className,
-                    ].join(" ")}
+                    )}
                     onMouseMove={(e) => cardGradientEffect(e, false, 1, 38, 20)}
                 >
                     <span>{this.props.children}</span>

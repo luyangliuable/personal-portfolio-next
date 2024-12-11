@@ -95,13 +95,11 @@
 }
 
 .blog-content__image {
-    --blog-content__image-top-bottom-margin: min(10vh, 25px);
     width: 100%;
-    height: min(30vh, 400px);
+    height: min(40vh, 400px);
     margin: var(--blog-content__image-top-bottom-margin)
         var(--blog-content__image-top-bottom-margin);
     object-fit: cover;
-    border-radius: 12px;
 }
 
 .blog-content__header {

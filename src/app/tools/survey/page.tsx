@@ -47,7 +47,7 @@ const Survey = () => {
         }
 
         try {
-            const response = await fetch("/api/invite", {
+            const response = await fetch("/next-api/invite", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

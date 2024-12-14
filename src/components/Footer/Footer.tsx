@@ -60,7 +60,7 @@ const Footer: React.FC = () => {
     };
 
     return (
-        <footer className="footer relative flex items-center flex-col">
+        <footer className="footer relative flex items-center flex-col pt-10">
             <div className="footer__main normalised-width w-full">
                 <GetInTouch />
                 <section className="footer__connect-with-me mb-20">

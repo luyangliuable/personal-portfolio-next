@@ -72,6 +72,12 @@
                     "to": "/tools/chatbot"
                 },
                 {
+                    "name": "Askly",
+                    "emoji": "✨",
+                    "description": "Survey creating app",
+                    "to": "/tools/survey"
+                },
+                {
                     "name": "HexaBridger",
                     "emoji": "🌉",
                     "description": "Secret",

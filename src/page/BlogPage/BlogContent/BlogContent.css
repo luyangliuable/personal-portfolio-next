@@ -65,7 +65,6 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    background: rgb(238, 238, 238);
 }
 
 .blog-content-body {

@@ -6,11 +6,7 @@ export default async function App() {
     const postRepo = PostRepository.getInstance();
     const postList = await postRepo.getPostList();
 
-    const session = await auth();
+    const _session = await auth();
 
-    return (
-        <>
-            <LandingPage postList={postList} />
-        </>
-    );
+    return <LandingPage postList={postList} />;
 }

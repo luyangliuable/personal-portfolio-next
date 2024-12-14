@@ -3,6 +3,7 @@ import "./globals.css";
 import NavBar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import { Providers } from "../stores/provider";
+import ContentArea from "../components/ContentArea/ContentArea";
 
 export const metadata: Metadata = {
     title: "Luyang's Website",
@@ -20,7 +21,7 @@ export default function RootLayout({
             <body>
                 <Providers>
                     <NavBar />
-                    {children}
+                    <ContentArea>{children}</ContentArea>
                     <Footer />
                 </Providers>
             </body>

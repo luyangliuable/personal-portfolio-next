@@ -1,25 +1,20 @@
 import React, { useMemo } from "react";
-import "./Footer.css";
 import { CiLock } from "react-icons/ci";
 import InlineLink from "../Atoms/InlineLink/InlineLink";
 import connectionsData from "../../configs/connections.json";
 import linksData from "../../configs/links.json";
 import IconButton from "../Atoms/IconButton/IconButton";
-import dynamic from "next/dynamic";
 import Button from "../Button/Button";
 
-// Dynamic import for GetInTouch client component
-/* const GetInTouch = dynamic(() => import('./GetInTouch'), { ssr: false }); */
+import "./Footer.css";
+
 import GetInTouch from "./GetIntoTouchFooterSection/GetIntoTouchFooterSection";
 import LocalTime from "./LocalTime/LocalTime";
+import { deepCopyJson } from "../Utility/StringUtility";
+
+const linksToMyOtherSocialMedia = connectionsData.connections;
 
 const Footer: React.FC = () => {
-    const linksToMyOtherSocialMedia = connectionsData.connections;
-
-    const deepCopyJson = (jsonObject: any) => {
-        return JSON.parse(JSON.stringify(jsonObject));
-    };
-
     const getSectionData = (name: string): any => {
         const footerLinkCapacity = 5;
         const result = deepCopyJson(

@@ -8,10 +8,6 @@ import { useEffect } from "react";
 const TestHarnessPage = () => {
     const postRepo = PostRepository.getInstance();
 
-    useEffect(() => {
-        console.log(links);
-    }, [links]);
-
     return <main className="h-screen">{/* <FractalHills /> */}</main>;
 };
 

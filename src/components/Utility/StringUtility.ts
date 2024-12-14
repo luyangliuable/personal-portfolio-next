@@ -70,7 +70,12 @@ const isActive = (currentPathname?: string, targetPathname?: string) => {
     return currentPath.startsWith(normalizedTargetPath);
 };
 
+const deepCopyJson = (jsonObject: any) => {
+    return JSON.parse(JSON.stringify(jsonObject));
+};
+
 export {
+    deepCopyJson,
     truncateTextBody,
     stripAwayHashSymbols,
     isoDateFormatToString,

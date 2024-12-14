@@ -2,11 +2,11 @@ import Button from "../Button/Button";
 import { cl } from "../Utility/LogicUtility";
 
 export interface ITextInputWithCard {
-    heading: string,
-    text: string,
-    placeholder: string,
-    submitText: string,
-    className: string,
+    heading: string;
+    text: string;
+    placeholder: string;
+    submitText: string;
+    className: string;
 }
 
 const TextInputWithCard: React.FC<ITextInputWithCard> = ({

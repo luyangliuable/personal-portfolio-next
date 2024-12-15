@@ -5,7 +5,6 @@
     background: var(--background-color-lighter);
     width: 100%;
     max-height: 100vh;
-    overflow-y: scroll;
     bottom: 0;
 }
 
@@ -58,9 +57,9 @@ input:focus {
 .footer__main {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    overflow-y: auto;
     align-items: stretch;
     gap: 2rem;
-
     justify-items: stretch;
     margin: 2rem 0;
 }

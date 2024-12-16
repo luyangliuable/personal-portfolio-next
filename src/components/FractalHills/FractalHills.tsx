@@ -21,7 +21,7 @@ const FractalHills = () => {
             const backgroundColorVal = "#EEE";
 
             p.setup = () => {
-                p.createCanvas(p.windowWidth, p.windowHeight / 2, p.WEBGL);
+                p.createCanvas(p.windowWidth, p.windowHeight, p.WEBGL);
                 cols = w / scl;
                 rows = h / scl;
 
@@ -313,11 +313,7 @@ const FractalHills = () => {
 
     return (
         <>
-            <div id="controls-panel" style={{ display: "none" }}>
-                <button id="toggle-controls">☰ Configurations</button>
-                <div id="controls"></div>
-            </div>
-            <div ref={sketchRef} style={{}}></div>
+            <div ref={sketchRef} className="bg-[red] h-screen"></div>
         </>
     );
 };

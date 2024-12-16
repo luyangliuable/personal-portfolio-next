@@ -82,28 +82,21 @@
 
 .blog__year {
     width: 88%;
-    left: 20px;
     margin: 40px 0;
     margin: min(120px, 8vh) 0 min(30px, 2vh);
     font-size: 1.5rem;
 }
 
-.blog__year > span {
+.blog__year span {
     background: #eee;
     color: var(--text-grey);
 }
 
 .blog__year::before {
     content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    transform: translate(-20px, 13px);
-    transform: translate(-20px, 13px);
     background: var(--divider-color);
+    width: 100%;
     height: 1px;
-    z-index: -1;
     animation: fade-in--width 0.4s ease-in-out;
 }
 

@@ -12,6 +12,7 @@ import Toggle from "../../components/Atoms/Toggle/Toggle";
 import "./BlogPage.css";
 import SkeletonPage from "../SkeletonPage/SkeletonPage";
 import TextInputWithCard from "../../components/TextInputCard/TextInputWithCard";
+import BlogYear from "../../components/BlogYear/BlogYear";
 
 const authorImage = "https://llcode.tech/api/image/65817ae96c73ceb16ba51731";
 
@@ -132,9 +133,7 @@ const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, data }) => {
                 .sort((a, b) => parseInt(b) - parseInt(a))
                 .map((year) => (
                     <React.Fragment key={year}>
-                        <div className="blog__year relative">
-                            <span>{year}</span>
-                        </div>
+                        <BlogYear year={year} />
                         {state.currentlyShowingContent[year].map(
                             (content: BlogPostResponse) => (
                                 <Card

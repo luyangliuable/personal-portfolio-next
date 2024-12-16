@@ -29,7 +29,7 @@
     z-index: 10;
     position: absolute;
     max-height: 61px !important;
-    background: transparent;
+    background: var(--background-color);
     transition: var(--navbar-transition);
     -webkit-transition: var(--navbar-transition);
     -moz-transition: var(--navbar-transition);

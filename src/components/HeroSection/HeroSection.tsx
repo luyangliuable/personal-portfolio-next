@@ -18,6 +18,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import "./HeroSection.css";
 import { refreshScrollTrigger } from "../Utility/ScrollUtility";
+import FractalHills from "../FractalHills/FractalHills";
 
 const connections = [
     {

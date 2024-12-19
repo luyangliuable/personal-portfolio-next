@@ -7,21 +7,19 @@ import { GalleryItem } from "../../../components/Gallery/Interface/IGalleryProps
 
 export const metadata: Metadata = {
     title: "Luyang's Website | 3d Printing",
-    description:
-        "I fabricated these items using a 2016-model 3D printer, acquired in 2017. I plan to resume printing with a new printer once funds allow, as my current one is non-operational. I also designed several of the models myself.",
+    description: "",
 };
 
 const heroHeaderContent = Object.freeze({
     heading: "3D Printing Projects",
-    description:
-        "I fabricated these items using a 2016-model 3D printer, acquired in 2017.",
+    description: "",
 });
 
 const content: GalleryItem[] = [
     {
         name: "3d Printed Swivel Arm",
         description:
-            "Precision-engineered, 3D-printed arm I designed using solidworks that can swivel around: it was used on a robot as the ultimate payload handler",
+            "3D-printed arm I designed using solidworks that can swivel around: it was used on a robot as the ultimate payload handler",
         image: "https://llcode.tech/api/image/650516c6f9b642fb30be599a",
     },
     {
@@ -31,19 +29,8 @@ const content: GalleryItem[] = [
     },
     {
         name: "3d Printed Maneki Neko",
-        description:
-            "With a wink and a beckon printing using Creality 3D printer, this Maneki Neko promises high-tech fortune and whimsy in every layer.",
+        description: "",
         image: "https://llcode.tech/api/image/650502c8f9b642fb30be5999",
-    },
-    {
-        name: "Normal Kirby",
-        description: "",
-        image: "https://llcode.tech/api/image/6725e57218eb5f86ea13b541",
-    },
-    {
-        name: "Dwayne Johnson Kirby",
-        description: "",
-        image: "https://llcode.tech/api/image/6725e4d418eb5f86ea13b540",
     },
     {
         name: "CBA logo with nps+30",

@@ -318,6 +318,12 @@ a {
     color: inherit;
 }
 
+.normalised-width {
+    padding: 0 4rem;
+    max-width: 1800px;
+    overflow: hidden;
+}
+
 .landing-page-content {
     display: flex;
     justify-content: space-around;
@@ -650,12 +656,6 @@ main {
     100% {
         opacity: 1;
     }
-}
-
-.normalised-width {
-    padding: 0 4rem;
-    max-width: 1800px;
-    overflow: hidden;
 }
 
 @media (max-width: 768px) {

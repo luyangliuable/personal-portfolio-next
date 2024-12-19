@@ -5,9 +5,9 @@ import BlogPostResponse from "../../../repositories/Response/BlogPostResponse";
 import NoteRepository from "../../../repositories/NoteRepository";
 
 export const metadata: Metadata = {
-    title: "Luyang's Coding Notes",
+    title: "Coding Notes",
     description:
-        "My personal coding notes and snippets, organized by language and topic that I wrote during the nostalgic days of Uni.",
+        "My personal coding notes and snippets, organised by language and topic that I wrote during Uni.",
 };
 
 export default async function NotesPage() {

@@ -63,7 +63,7 @@ const Item: FC<IAccordionItemProps> = ({
             </div>
             <div
                 className={cl(
-                    "accordion--content w-full flex flex-col items-center",
+                    "accordion--content w-full flex flex-col items-center justify-center",
                     { hidden: !show },
                 )}
             >

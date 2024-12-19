@@ -10,6 +10,8 @@ import SkeletonPage from "../SkeletonPage/SkeletonPage";
 import BlogPostGraphics from "../../components/BlogPostGraphics/BlogPostGraphics";
 import type { Metadata } from "next";
 
+import "./NotePage.css";
+
 export interface INotesProps extends Metadata {
     content: BlogPostResponse[];
 }
@@ -109,7 +111,7 @@ const Notes: React.FC<INotesProps> = ({ title, description, content }) => {
                 description={heroHeaderContent.description! as string}
                 graphics={<BlogPostGraphics />}
             />
-            <Accordion>
+            <Accordion className="notes normalised-width">
                 {Object.keys(grouped).map((category) => {
                     return (
                         <Accordion.Item

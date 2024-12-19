@@ -22,7 +22,7 @@
     background: var(--divider-color);
     height: 1px;
     width: 0;
-    transition: width 1s ease;
+    transition: width 1s ease-in-out;
 }
 
 .blog__year--animate span {

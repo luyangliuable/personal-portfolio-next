@@ -65,7 +65,7 @@
     transform: var(--transform);
 }
 
-.blog-graphics__paper > div {
+.blog-graphics__paper .line {
     background: #666;
     height: 1px;
     width: 80%;

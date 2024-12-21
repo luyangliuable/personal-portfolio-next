@@ -36,7 +36,7 @@ const Footer: React.FC = () => {
     ) => {
         return (
             <section className={className}>
-                <h3 className="text-lg">{section.name}</h3>
+                <h3 className="text-lg important-text">{section.name}</h3>
                 {section.sublinks?.map((item: any, index: number) => {
                     return (
                         <InlineLink
@@ -59,7 +59,7 @@ const Footer: React.FC = () => {
             <div className="footer__main normalised-width w-full">
                 <GetInTouch />
                 <section className="footer__connect-with-me mb-20">
-                    <h3 className="text-lg">Connect with Me</h3>
+                    <h3 className="text-lg important-text">Connect with Me</h3>
                     <div className="flex flex-row flex-wrap">
                         {linksToMyOtherSocialMedia.map(
                             (item: any, index: number) => (
@@ -76,7 +76,7 @@ const Footer: React.FC = () => {
                     </div>
                 </section>
                 <section className="footer__sponsor mb-20">
-                    <h3 className="text-lg">Sponsor Me</h3>
+                    <h3 className="text-lg important-text">Sponsor Me</h3>
                     <InlineLink
                         target="_blank"
                         to="https://ko-fi.com/D1D1PFTTH"
@@ -94,14 +94,14 @@ const Footer: React.FC = () => {
                 </section>
                 {renderFooterSection(about, "footer__about")}
                 <section className="footer__resources">
-                    <h3 className="text-lg">Resources</h3>
+                    <h3 className="text-lg important-text">Resources</h3>
                     <InlineLink to={resume.to} className="mt-2">
                         {resume.name}
                     </InlineLink>
                 </section>
                 {renderFooterSection(tools, "footer__tools")}
                 <section className="footer__local-time">
-                    <h3 className="text-lg mb-2">Local Time</h3>
+                    <h3 className="text-lg mb-2 important-text">Local Time</h3>
                     <LocalTime />
                 </section>
             </div>

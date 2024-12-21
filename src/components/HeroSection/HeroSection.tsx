@@ -15,10 +15,9 @@ import { FaGithubSquare, FaLinkedin, FaStackOverflow } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { RiNotionFill } from "react-icons/ri";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { refreshScrollTrigger } from "../Utility/ScrollUtility";
 
 import "./HeroSection.css";
-import { refreshScrollTrigger } from "../Utility/ScrollUtility";
-import FractalHills from "../FractalHills/FractalHills";
 
 const connections = [
     {
@@ -77,9 +76,10 @@ const connections = [
     },
 ];
 
+const mainHeading: string = "Hi There, I am Luyang.";
+
 const HeroSection: React.FC<IHeroProps> = ({}) => {
     const heroSectionRef = useRef(null);
-    const mainHeading: string = "Hi There, I am Luyang.";
 
     const introduction: JSX.Element = (
         <SequentialRiseSpan

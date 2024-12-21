@@ -91,164 +91,28 @@
 }
 
 @font-face {
-    font-family: "TT Norms Pro";
-    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro Regular.woff2")
-        format("woff2");
-    font-weight: normal;
-    font-style: normal;
+    font-family: "Terminal Grotesque";
+    src: url("../assets/fonts/TerminalGrotesque/terminal-grotesque.ttf")
+        format("truetype");
     font-display: swap;
 }
 
 @font-face {
-    font-family: "TT Norms Pro";
-    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro Italic.woff2")
-        format("woff2");
-    font-weight: normal;
-    font-style: italic;
+    font-family: "Terminal Grotesque Open";
+    src: url("../assets/fonts/TerminalGrotesque/terminal-grotesque_open.otf")
+        format("opentype");
     font-display: swap;
 }
 
 @font-face {
-    font-family: "TT Norms Pro";
-    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro Thin.woff2")
-        format("woff2");
-    font-weight: 100;
-    font-style: normal;
+    font-family: "Quantico";
+    src: url("../assets/fonts/Quantico/Quantico-Regular.woff2") format("woff2");
     font-display: swap;
 }
 
 @font-face {
-    font-family: "TT Norms Pro";
-    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro Thin Italic.woff2")
-        format("woff2");
-    font-weight: 100;
-    font-style: italic;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "TT Norms Pro";
-    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro ExtraLight.woff2")
-        format("woff2");
-    font-weight: 200;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "TT Norms Pro";
-    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro ExtraLight Italic.woff2")
-        format("woff2");
-    font-weight: 200;
-    font-style: italic;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "TT Norms Pro";
-    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro Light.woff2")
-        format("woff2");
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "TT Norms Pro";
-    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro Light Italic.woff2")
-        format("woff2");
-    font-weight: 300;
-    font-style: italic;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "TT Norms Pro";
-    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro Medium.woff2")
-        format("woff2");
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "TT Norms Pro";
-    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro Medium Italic.woff2")
-        format("woff2");
-    font-weight: 500;
-    font-style: italic;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "TT Norms Pro";
-    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro Bold.woff2")
-        format("woff2");
-    font-weight: bold; /* or 700 */
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "TT Norms Pro";
-    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro Bold Italic.woff2")
-        format("woff2");
-    font-weight: bold; /* or 700 */
-    font-style: italic;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "TT Norms Pro";
-    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro ExtraBold.woff2")
-        format("woff2");
-    font-weight: 800;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "TT Norms Pro";
-    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro ExtraBold Italic.woff2")
-        format("woff2");
-    font-weight: 800;
-    font-style: italic;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "TT Norms Pro";
-    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro Black.woff2")
-        format("woff2");
-    font-weight: 900;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "TT Norms Pro";
-    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro Black Italic.woff2")
-        format("woff2");
-    font-weight: 900;
-    font-style: italic;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "TT Norms Pro";
-    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro ExtraBlack.woff2")
-        format("woff2");
-    font-weight: 950;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "TT Norms Pro";
-    src: url("../assets/fonts/TTNormalsPro/TT Norms Pro ExtraBlack Italic.woff2")
-        format("woff2");
-    font-weight: 950;
-    font-style: italic;
+    font-family: "Quantico Bold";
+    src: url("../assets/fonts/Quantico/Quantico-Bold.woff2") format("woff2");
     font-display: swap;
 }
 
@@ -463,7 +327,7 @@ main {
 /* Text */
 
 .important-text {
-    font-family: "TT Norms Pro", Spartan, "Poppins", sans-serif;
+    font-family: "Quantico bold", Spartan, "Poppins", sans-serif;
 }
 
 .whitespace-nowrap {

@@ -81,7 +81,7 @@
     min-height: 100%;
     max-width: var(--navbar-item-max-width);
     border-radius: var(--navbar-item-border-radius);
-    font-family: "TT Norms Pro", Spartan, "Poppins", sans-serif;
+    font-family: "Quantico Bold", Spartan, "Poppins", sans-serif;
     margin-left: var(--navbar-item-margin);
 }
 
@@ -168,6 +168,7 @@
     --font-size-large: 20px;
     display: inline-block;
     font-family:
+        "Quantico Bold",
         "Proxima Nova Bold",
         Segoe UI,
         Roboto,

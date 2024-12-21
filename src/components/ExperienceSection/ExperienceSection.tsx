@@ -461,7 +461,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                 <header className="ml-[2vw]">
                     <SequentialRiseSpan
                         elementType="h2"
-                        className="text-2xl font-bold"
+                        className="text-2xl font-bold important-text"
                     >
                         Retrospective
                     </SequentialRiseSpan>

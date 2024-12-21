@@ -7,6 +7,7 @@
 }
 
 .blog__year span {
+    font-family: "Quantico Bold";
     background: #eee;
     transition: opacity 1s ease;
     opacity: 0;

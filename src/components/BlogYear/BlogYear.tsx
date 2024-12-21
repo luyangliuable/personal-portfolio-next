@@ -33,7 +33,7 @@ const BlogYear: React.FC<{ year: string }> = ({ year }) => {
     return (
         <div
             ref={elementRef}
-            className={`relative flex items-center blog__year ${inView ? "blog__year--animate" : ""}`}
+            className={`relative flex items-center blog__year font-bold ${inView ? "blog__year--animate" : ""}`}
         >
             <span className="absolute left-10 text-3xl">{year}</span>
         </div>

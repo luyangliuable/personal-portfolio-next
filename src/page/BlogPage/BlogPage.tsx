@@ -294,4 +294,6 @@ const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
     );
 });
 
+BlogPage.displayName = "BlogPage";
+
 export default BlogPage;

@@ -7,7 +7,7 @@ import { useScrollPosition } from "../../hooks";
 const easeInOutQuad = (t: number) =>
     t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
 
-const CodingCat = memo(() => {
+const CodingCat = () => {
     const { scrolling } = useScrollPosition();
     const [animation, setAnimation] = useState<gsap.core.Timeline | null>(null);
 
@@ -354,6 +354,6 @@ const CodingCat = memo(() => {
             </g>
         </svg>
     );
-});
+};
 
-export default CodingCat;
+export default memo(CodingCat);

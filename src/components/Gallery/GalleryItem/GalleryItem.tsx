@@ -37,11 +37,13 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
         }
     }, [isRendered, galleryItemRef, dynamicLoadQueue]);
 
+    const MemoizedCgWebsite = useMemo(() => <CgWebsite />, []);
+    const MemoizedTbToolsOff = useMemo(() => <TbToolsOff />, []);
+
     const GalleryItemTypeSegment = (): ReactElement => {
         const type = props.type;
 
         if (type === "blog") {
-            const MemoizedCgWebsite = useMemo(() => <CgWebsite />, []);
             return (
                 <div className="gallery-item__type font-fira-code">
                     {MemoizedCgWebsite}
@@ -49,7 +51,6 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
                 </div>
             );
         } else if (type === "tool") {
-            const MemoizedTbToolsOff = useMemo(() => <TbToolsOff />, []);
             return (
                 <div className="gallery-item__type font-fira-code">
                     {MemoizedTbToolsOff}

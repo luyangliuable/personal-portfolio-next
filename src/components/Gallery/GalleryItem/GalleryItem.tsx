@@ -6,6 +6,7 @@ import React, {
     useRef,
     ReactElement,
     useState,
+    useMemo,
 } from "react";
 import { isoDateFormatToString } from "../../../components/Utility/StringUtility";
 import Link from "next/link";
@@ -36,20 +37,23 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
         }
     }, [isRendered, galleryItemRef, dynamicLoadQueue]);
 
+    const MemoizedCgWebsite = useMemo(() => <CgWebsite />, []);
+    const MemoizedTbToolsOff = useMemo(() => <TbToolsOff />, []);
+
     const GalleryItemTypeSegment = (): ReactElement => {
         const type = props.type;
 
         if (type === "blog") {
             return (
                 <div className="gallery-item__type font-fira-code">
-                    <CgWebsite />
+                    {MemoizedCgWebsite}
                     <span>BLOG</span>
                 </div>
             );
         } else if (type === "tool") {
             return (
                 <div className="gallery-item__type font-fira-code">
-                    <TbToolsOff />
+                    {MemoizedTbToolsOff}
                     <span>TOOL</span>
                 </div>
             );

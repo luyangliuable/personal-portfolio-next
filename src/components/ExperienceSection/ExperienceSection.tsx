@@ -6,6 +6,7 @@ import React, {
     useState,
     useEffect,
     useMemo,
+    memo,
 } from "react";
 import IExperienceSectionProps from "./Interface/IExperienceSectionProps";
 import {
@@ -24,7 +25,6 @@ import { TiArrowLeftThick } from "react-icons/ti";
 import "./ExperienceSection.css";
 import ZaBanquet from "../Organisms/ZaBanquet/ZaBanquet";
 import { useTrigger } from "../../stores/TriggerContext";
-import { refreshScrollTrigger } from "../Utility/ScrollUtility";
 import Burger from "../Organisms/Burger/Burger";
 
 const items: ExperienceSectionItem[] = [
@@ -483,4 +483,4 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
     );
 };
 
-export default ExperienceSection;
+export default memo(ExperienceSection);

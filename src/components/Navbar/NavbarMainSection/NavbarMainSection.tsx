@@ -27,7 +27,7 @@ import "../Navbar.css";
 const websiteName = "~/llcode.tech" as const;
 
 const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
-    const { scrollY, deltaScrollCalculation } = useScrollPosition();
+    const { scrollY } = useScrollPosition();
 
     const navbar: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
     const navbarLeft: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
@@ -71,28 +71,20 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
         lastScrollTopRef.current = st <= 0 ? 0 : st;
     }, [state]);
 
-    const listenContinuousScrolled = () => {
+    const listenContinuousScrolled = useCallback(() => {
         if (!state.navBarDetached && scrollY! >= navBarHeight) {
             setNavBarHidden(true);
             setTimeout(() => setNavbarDetached(true), 100);
         } else if (scrollY! < navBarHeight) {
             setNavbarDetached(false);
         }
-    };
+    }, [state.navBarDetached, scrollY, navBarHeight]);
 
-    const addBurgerClickOutEventLister = () => {
+    const addBurgerClickOutEventLister = useCallback(() => {
         window.addEventListener("click", hideBurgerMenu);
-    };
-
-    useEffect(() => {
-        initializeNavBar();
-        setupNavHoverEffect();
-        return () => {
-            window.removeEventListener("click", hideBurgerMenu);
-        };
     }, []);
 
-    const setupNavHoverEffect = () => {
+    const setupNavHoverEffect = useCallback(() => {
         const navbarLeftTarget = navbarLeft.current!;
         const selectedNavlinkWindowTarget = selectedNavlinkWindow.current!;
         if (navbarLeftTarget && selectedNavlinkWindow) {
@@ -111,67 +103,81 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
                 }
             });
         }
-    };
+    }, [navbarLeft, selectedNavlinkWindow]);
 
-    const initializeNavBar = () => {
+    const initializeNavBar = useCallback(() => {
         listenContinuousScrolled();
         if (window.innerWidth < 900) addBurgerClickOutEventLister();
-    };
+    }, [listenContinuousScrolled, addBurgerClickOutEventLister]);
+
+    useEffect(() => {
+        initializeNavBar();
+        setupNavHoverEffect();
+        return () => {
+            window.removeEventListener("click", hideBurgerMenu);
+        };
+    }, [initializeNavBar, setupNavHoverEffect]);
 
     useEffect(() => {
         listenContinuousScrolled();
         handleScroll();
-    }, [scrollY]);
+    }, [scrollY, handleScroll, listenContinuousScrolled]);
 
-    const setNavbarDetached = (set: boolean) => {
-        if (
-            state.navBarDetached !== set &&
-            navbar.current &&
-            navbar.current.parentElement
-        ) {
-            toggleClassName(navbar.current.parentElement, set, "detached");
-            toggleClassName(
-                navbar.current.parentElement,
-                !set,
-                "nav-burger-panel-move-lower",
-            );
-            setState((prev) => {
-                return {
-                    ...prev,
-                    navBarDetached: set,
-                };
-            });
-        }
-    };
+    const setNavbarDetached = useCallback(
+        (set: boolean) => {
+            if (
+                state.navBarDetached !== set &&
+                navbar.current &&
+                navbar.current.parentElement
+            ) {
+                toggleClassName(navbar.current.parentElement, set, "detached");
+                toggleClassName(
+                    navbar.current.parentElement,
+                    !set,
+                    "nav-burger-panel-move-lower",
+                );
+                setState((prev) => {
+                    return {
+                        ...prev,
+                        navBarDetached: set,
+                    };
+                });
+            }
+        },
+        [state.navBarDetached],
+    );
 
-    const setNavBarHidden = (set: boolean) => {
-        if (state.isNavbarHidden === set) return;
-        if (navbar.current && navbar.current.parentElement) {
-            toggleProperty(
-                document.documentElement,
-                set,
-                { "--navbar-height": "0px" },
-                { "--navbar-height": `${navBarHeight}px` },
-            );
-            toggleClassName(
-                navbar.current.parentElement,
-                set,
-                "navbar--hidden",
-            );
-            setState((prev) => {
-                return {
-                    ...prev,
-                    isNavbarHidden: set,
-                };
-            });
-        }
-    };
+    const setNavBarHidden = useCallback(
+        (set: boolean) => {
+            if (state.isNavbarHidden === set) return;
+            if (navbar.current && navbar.current.parentElement) {
+                toggleProperty(
+                    document.documentElement,
+                    set,
+                    { "--navbar-height": "0px" },
+                    { "--navbar-height": `${navBarHeight}px` },
+                );
+                toggleClassName(
+                    navbar.current.parentElement,
+                    set,
+                    "navbar--hidden",
+                );
+                setState((prev) => {
+                    return {
+                        ...prev,
+                        isNavbarHidden: set,
+                    };
+                });
+            }
+        },
+        [state.isNavbarHidden, navBarHeight],
+    );
 
-    const toggleBurgerMenu = () => {
+    const toggleBurgerMenu = useCallback(() => {
         burgerPanel.current?.classList.toggle("nav-burger-panel-hide");
-    };
+    }, []);
 
-    const hideBurgerMenu = (e: any) => {
+    const hideBurgerMenu = useCallback((e: any) => {
         if (
             burgerPanel.current &&
             !burgerPanel.current.contains(e.target as Node) &&
@@ -179,9 +185,9 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
         ) {
             burgerPanel.current?.classList.add("nav-burger-panel-hide");
         }
-    };
+    }, []);
 
-    const setDropdownMenu = (set: boolean): void => {
+    const setDropdownMenu = useCallback((set: boolean): void => {
         if (!set) {
             setState((prev) => ({
                 ...prev,
@@ -196,7 +202,7 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
                 "show-navbar-dropdown",
             );
         }
-    };
+    }, []);
 
     const renderDropdownMenu = useCallback(
         (links?: ILink[]): ReactNode | void => {
@@ -212,26 +218,33 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
                 }));
             }
         },
-        [state.dropdownMenuLinkDisplay],
+        [state.dropdownMenuLinkDisplay, setDropdownMenu],
     );
 
-    const renderNavLink = (link: NavbarItem, isSubLink: boolean = true) => {
-        return (
-            <NavLink
-                key={link.name}
-                link={link}
-                isSubLink={isSubLink}
-                hideDropdownMenu={() => setDropdownMenu(false)}
-                links={links}
-                renderDropdownMenu={renderDropdownMenu}
-            />
-        );
-    };
+    const hideDropdownMenu = useCallback(() => setDropdownMenu(false), []);
+
+    const renderNavLink = useCallback(
+        (link: NavbarItem, isSubLink: boolean = true) => {
+            return (
+                <NavLink
+                    key={link.name}
+                    link={link}
+                    isSubLink={isSubLink}
+                    hideDropdownMenu={hideDropdownMenu}
+                    links={links}
+                    renderDropdownMenu={renderDropdownMenu}
+                />
+            );
+        },
+        [hideDropdownMenu, links, renderDropdownMenu],
+    );
 
     const navbarBurgerPanel = useMemo(
         () => <NavBurgerPanel links={links} burgerPanel={burgerPanel} />,
-        [state.dropdownMenuLinkDisplay],
+        [links, state.dropdownMenuLinkDisplay, burgerPanel],
     );
+
+    const memoizedBurgerMenuIcon = useMemo(() => <BurgerMenuIcon />, []);
 
     return (
         <>
@@ -244,7 +257,7 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
                     </div>
                     <div className="h-[20px] w-[2px] bg-[#CCC] mr-4"></div>
                     <nav ref={navbarLeft} className="navbar-left flex flex-row">
-                        {links.map((item, _) => renderNavLink(item, false))}
+                        {links.map((item) => renderNavLink(item, false))}
                         <section
                             ref={selectedNavlinkWindow}
                             className="selected-navlink-window flex items-center"
@@ -266,7 +279,7 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
                                         isSubLink={true}
                                         links={links}
                                         renderDropdownMenu={renderDropdownMenu}
-                                        hideDropdownMenu
+                                        hideDropdownMenu={hideDropdownMenu}
                                     />
                                 ))}
                             </div>
@@ -277,7 +290,7 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
                         className="nav-burger"
                         onClick={toggleBurgerMenu}
                     >
-                        <BurgerMenuIcon />
+                        {memoizedBurgerMenuIcon}
                     </div>
                 </section>
                 <NavbarScrollProgress scrollY={scrollY ?? 0} />

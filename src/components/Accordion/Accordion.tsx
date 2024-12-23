@@ -1,4 +1,4 @@
-import React, { useState, FC, ReactNode } from "react";
+import React, { useState, useMemo, FC, ReactNode } from "react";
 import "./Accordion.css";
 import { IoIosArrowDropdown } from "react-icons/io";
 import { cl } from "../Utility/LogicUtility";
@@ -35,6 +35,18 @@ const Item: FC<IAccordionItemProps> = ({
 }) => {
     const [show, setShow] = useState<boolean>(false);
 
+    const memoizedDropdown = useMemo(
+        () => (
+            <IoIosArrowDropdown
+                className={cl("accordion__dropdown-button", {
+                    flip: show,
+                    "no-flip": !show,
+                })}
+            />
+        ),
+        [show],
+    );
+
     return (
         <div className="accordion--item flex flex-col">
             <div
@@ -54,12 +66,7 @@ const Item: FC<IAccordionItemProps> = ({
                     <span className="mr-2">{icon}</span>
                     <span>{heading}</span>
                 </div>
-                <IoIosArrowDropdown
-                    className={cl("accordion__dropdown-button", {
-                        flip: show,
-                        "no-flip": !show,
-                    })}
-                />
+                {memoizedDropdown}
             </div>
             <div
                 className={cl(

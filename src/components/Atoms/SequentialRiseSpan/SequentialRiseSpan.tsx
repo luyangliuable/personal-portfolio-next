@@ -3,8 +3,8 @@ import React, {
     useState,
     useRef,
     useEffect,
+    memo,
     RefObject,
-    JSXElementConstructor,
 } from "react";
 import "./SequentialRiseSpan.css";
 
@@ -195,4 +195,5 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
         </div>
     );
 };
-export default React.memo(SequentialRiseSpan);
+
+export default memo(SequentialRiseSpan);

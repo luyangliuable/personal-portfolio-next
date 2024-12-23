@@ -13,6 +13,7 @@
   "dependencies": {
     "@auth/unstorage-adapter": "^2.0.0",
     "@gsap/react": "^2.1.1",
+    "@million/lint": "^1.0.14",
     "@octokit/rest": "^21.0.1",
     "@reduxjs/toolkit": "^2.2.3",
     "@simplewebauthn/server": "^9.0.3",

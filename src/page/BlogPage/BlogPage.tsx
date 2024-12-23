@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo, memo } from "react";
 import { IBlogPageState, IBlogPageProps } from "../../interfaces";
 import { FaWindowClose } from "react-icons/fa";
 import HeroHeader from "../../components/HeroHeader/HeroHeader";
@@ -22,7 +22,7 @@ const heroHeaderContent = Object.freeze({
         "Blog posts for documenting useful code, mark memorable moments in my life and help my journey of endless self-improvement.",
 });
 
-const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, data }) => {
+const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
     const [state, setState] = useState<IBlogPageState>({
         currentlyShowingContent: {},
         allTags: new Set(),
@@ -33,6 +33,25 @@ const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, data }) => {
     const [isRendered, setIsRendered] = useState<boolean>(false);
     const [displayLeetCodePosts, setDisplayLeetCodePosts] =
         useState<boolean>(false);
+
+    const memoizedBlogPostGraphics = useMemo(() => <BlogPostGraphics />, []);
+
+    // Memoize SkeletonPage to prevent unnecessary re-renders
+    const memoizedSkeletonPage = useMemo(() => <SkeletonPage />, []);
+
+    // Memoize TextInputWithCard to prevent unnecessary re-renders
+    const memoizedTextInputWithCard = useMemo(
+        () => (
+            <TextInputWithCard
+                className="md:ml-20"
+                heading="Newsletter"
+                text="Get the latest posts delivered to your inbox."
+                placeholder="Email"
+                submitText="Submit"
+            />
+        ),
+        [],
+    );
 
     useEffect(() => {
         document.documentElement.scrollTo(0, 0);
@@ -244,7 +263,7 @@ const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, data }) => {
     });
 
     if (!isRendered) {
-        return <SkeletonPage />;
+        return memoizedSkeletonPage;
     }
 
     return (
@@ -252,15 +271,9 @@ const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, data }) => {
             <HeroHeader
                 heading={heroHeaderContent.heading}
                 description={heroHeaderContent.description}
-                graphics={<BlogPostGraphics />}
+                graphics={memoizedBlogPostGraphics}
             >
-                <TextInputWithCard
-                    className="md:ml-20"
-                    heading="Newsletter"
-                    text="Get the latest posts delivered to your inbox."
-                    placeholder="Email"
-                    submitText="Submit"
-                />
+                {memoizedTextInputWithCard}
             </HeroHeader>
             <article className="blog-container flex w-full">
                 <section className="blog-list flex flex-col w-full items-center basis-3/5">
@@ -279,6 +292,8 @@ const BlogPage: React.FC<IBlogPageProps> = ({ showTopPicks, data }) => {
             </article>
         </main>
     );
-};
+});
+
+BlogPage.displayName = "BlogPage";
 
 export default BlogPage;

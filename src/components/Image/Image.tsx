@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useMemo } from "react";
 import SkeletonImage from "./SkeletonImage/SkeletonImage";
 import IImageProps from "./Interface/IImageProps";
 import ImageRepository from "../../repositories/ImageRepository";
@@ -21,7 +21,7 @@ const Image: React.FC<IImageProps> = ({
         undefined,
     );
     const [isInView, setIsInView] = useState<boolean>(false);
-    const defaultImageAlt = "You are blind";
+    const defaultImageAlt = "";
     const imageRef = useRef(null);
 
     const defaultProps = {
@@ -69,13 +69,11 @@ const Image: React.FC<IImageProps> = ({
         if (isInView || isLazyLoading === false) updateImage();
     }, [src, isInView]);
 
-    alt = alt ?? defaultImageAlt;
-
     if (!fetchedImageUrl) {
         return <SkeletonImage ref={imageRef} className={className} />;
     }
 
-    return (
+    const memoizedNextImage = (
         <NextImage
             style={style}
             loading="lazy"
@@ -84,9 +82,11 @@ const Image: React.FC<IImageProps> = ({
             height="100"
             className={cl(className, { animation: isLazyLoading === false })}
             src={fetchedImageUrl}
-            alt={alt}
+            alt={alt ?? defaultImageAlt}
         />
     );
+
+    return memoizedNextImage;
 };
 
 export default Image;

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, memo } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import IFeaturedContentSectionProps from "./Interface/IFeaturedContentSectionProps";
 import IFeaturedContentSectionState from "./Interface/IFeaturedContentSectionState";
@@ -210,4 +210,4 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({
     );
 };
 
-export default FeaturedContentSection;
+export default memo(FeaturedContentSection);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, MouseEvent, useRef } from "react";
+import React, { useEffect, useState, MouseEvent, useRef, memo } from "react";
 import "./CodingCat.css";
 import { gsap } from "gsap";
 
@@ -356,4 +356,4 @@ const CodingCat = () => {
     );
 };
 
-export default CodingCat;
+export default memo(CodingCat);

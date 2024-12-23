@@ -25,7 +25,6 @@ import { TiArrowLeftThick } from "react-icons/ti";
 import "./ExperienceSection.css";
 import ZaBanquet from "../Organisms/ZaBanquet/ZaBanquet";
 import { useTrigger } from "../../stores/TriggerContext";
-import { refreshScrollTrigger } from "../Utility/ScrollUtility";
 import Burger from "../Organisms/Burger/Burger";
 
 const items: ExperienceSectionItem[] = [
@@ -276,7 +275,7 @@ const items: ExperienceSectionItem[] = [
     },
 ];
 
-const ExperienceSection: React.FC<IExperienceSectionProps> = memo(({}) => {
+const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
     const experienceSectionParentRef = useRef<HTMLDivElement | null>(null);
     const experienceSectionRef = useRef<HTMLDivElement | null>(null);
     const experienceSectionScrollRef = useRef<HTMLDivElement | null>(null);
@@ -482,6 +481,6 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = memo(({}) => {
             </div>
         </div>
     );
-});
+};
 
 export default memo(ExperienceSection);

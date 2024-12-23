@@ -6,6 +6,7 @@ import React, {
     useState,
     useEffect,
     useMemo,
+    memo,
 } from "react";
 import IExperienceSectionProps from "./Interface/IExperienceSectionProps";
 import {
@@ -275,7 +276,7 @@ const items: ExperienceSectionItem[] = [
     },
 ];
 
-const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
+const ExperienceSection: React.FC<IExperienceSectionProps> = memo(({}) => {
     const experienceSectionParentRef = useRef<HTMLDivElement | null>(null);
     const experienceSectionRef = useRef<HTMLDivElement | null>(null);
     const experienceSectionScrollRef = useRef<HTMLDivElement | null>(null);
@@ -481,6 +482,6 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
             </div>
         </div>
     );
-};
+});
 
-export default ExperienceSection;
+export default memo(ExperienceSection);

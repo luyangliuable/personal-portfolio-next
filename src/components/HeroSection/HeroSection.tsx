@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useRef, useEffect, useState } from "react";
+import React, { useMemo, useRef, useEffect, useState, memo } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import IHeroProps from "./Interface/IHeroProps";
 import Link from "next/link";
@@ -78,7 +78,7 @@ const connections = [
 
 const mainHeading: string = "Hi There, I am Luyang.";
 
-const HeroSection: React.FC<IHeroProps> = ({}) => {
+const HeroSection: React.FC<IHeroProps> = () => {
     const heroSectionRef = useRef(null);
 
     const introduction: JSX.Element = (
@@ -234,4 +234,4 @@ const HeroSection: React.FC<IHeroProps> = ({}) => {
     );
 };
 
-export default HeroSection;
+export default memo(HeroSection);

@@ -1,5 +1,7 @@
 /** @type {import("next").NextConfig} */
-module.exports = {
+import MillionLint from "@million/lint";
+
+const nextConfig = {
     images: {
         remotePatterns: [
             {
@@ -13,3 +15,5 @@ module.exports = {
         ],
     },
 };
+ 
+export default MillionLint.next({ rsc: true })(nextConfig);

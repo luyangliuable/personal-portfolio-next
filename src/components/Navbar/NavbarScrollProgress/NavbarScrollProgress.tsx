@@ -39,4 +39,4 @@ const NavbarScrollProgress: React.FC<{ scrollY: number }> = ({}) => {
     );
 };
 
-export default NavbarScrollProgress;
+export default React.memo(NavbarScrollProgress);

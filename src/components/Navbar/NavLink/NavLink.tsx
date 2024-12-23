@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useMemo } from "react";
 import { NavbarItem } from "../Interface/INavbarState";
 import { AiOutlineDown } from "react-icons/ai";
 import { CiLock } from "react-icons/ci";
@@ -24,10 +24,11 @@ const NavLink: React.FC<INavLinkProps> = ({
     links,
     hideDropdownMenu,
 }) => {
-    const navLinkContent = [
+
+    const navLinkContent = useMemo(() => [
         link.name,
         link.sublinks && <AiOutlineDown key="down-icon" />,
-    ].filter(Boolean);
+    ].filter(Boolean), []);
 
     const targetPath = link.isLocked ? undefined : link.to;
     const pathname = usePathname() ?? "/";

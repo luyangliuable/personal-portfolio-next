@@ -17,4 +17,4 @@ const SkeletonImage = forwardRef<HTMLDivElement, ISkeletonImageProps>(
 
 SkeletonImage.displayName = "SkeletonImage";
 
-export default SkeletonImage;
+export default React.memo(SkeletonImage);

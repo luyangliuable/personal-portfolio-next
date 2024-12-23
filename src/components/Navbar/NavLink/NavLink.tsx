@@ -24,11 +24,14 @@ const NavLink: React.FC<INavLinkProps> = ({
     links,
     hideDropdownMenu,
 }) => {
-
-    const navLinkContent = useMemo(() => [
-        link.name,
-        link.sublinks && <AiOutlineDown key="down-icon" />,
-    ].filter(Boolean), []);
+    const navLinkContent = useMemo(
+        () =>
+            [
+                link.name,
+                link.sublinks && <AiOutlineDown key="down-icon" />,
+            ].filter(Boolean),
+        [],
+    );
 
     const targetPath = link.isLocked ? undefined : link.to;
     const pathname = usePathname() ?? "/";

@@ -123,49 +123,55 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
         handleScroll();
     }, [scrollY, handleScroll, listenContinuousScrolled]);
 
-    const setNavbarDetached = useCallback((set: boolean) => {
-        if (
-            state.navBarDetached !== set &&
-            navbar.current &&
-            navbar.current.parentElement
-        ) {
-            toggleClassName(navbar.current.parentElement, set, "detached");
-            toggleClassName(
-                navbar.current.parentElement,
-                !set,
-                "nav-burger-panel-move-lower",
-            );
-            setState((prev) => {
-                return {
-                    ...prev,
-                    navBarDetached: set,
-                };
-            });
-        }
-    }, [state.navBarDetached]);
+    const setNavbarDetached = useCallback(
+        (set: boolean) => {
+            if (
+                state.navBarDetached !== set &&
+                navbar.current &&
+                navbar.current.parentElement
+            ) {
+                toggleClassName(navbar.current.parentElement, set, "detached");
+                toggleClassName(
+                    navbar.current.parentElement,
+                    !set,
+                    "nav-burger-panel-move-lower",
+                );
+                setState((prev) => {
+                    return {
+                        ...prev,
+                        navBarDetached: set,
+                    };
+                });
+            }
+        },
+        [state.navBarDetached],
+    );
 
-    const setNavBarHidden = useCallback((set: boolean) => {
-        if (state.isNavbarHidden === set) return;
-        if (navbar.current && navbar.current.parentElement) {
-            toggleProperty(
-                document.documentElement,
-                set,
-                { "--navbar-height": "0px" },
-                { "--navbar-height": `${navBarHeight}px` },
-            );
-            toggleClassName(
-                navbar.current.parentElement,
-                set,
-                "navbar--hidden",
-            );
-            setState((prev) => {
-                return {
-                    ...prev,
-                    isNavbarHidden: set,
-                };
-            });
-        }
-    }, [state.isNavbarHidden, navBarHeight]);
+    const setNavBarHidden = useCallback(
+        (set: boolean) => {
+            if (state.isNavbarHidden === set) return;
+            if (navbar.current && navbar.current.parentElement) {
+                toggleProperty(
+                    document.documentElement,
+                    set,
+                    { "--navbar-height": "0px" },
+                    { "--navbar-height": `${navBarHeight}px` },
+                );
+                toggleClassName(
+                    navbar.current.parentElement,
+                    set,
+                    "navbar--hidden",
+                );
+                setState((prev) => {
+                    return {
+                        ...prev,
+                        isNavbarHidden: set,
+                    };
+                });
+            }
+        },
+        [state.isNavbarHidden, navBarHeight],
+    );
 
     const toggleBurgerMenu = useCallback(() => {
         burgerPanel.current?.classList.toggle("nav-burger-panel-hide");
@@ -217,18 +223,21 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
 
     const hideDropdownMenu = useCallback(() => setDropdownMenu(false), []);
 
-    const renderNavLink = useCallback((link: NavbarItem, isSubLink: boolean = true) => {
-        return (
-            <NavLink
-                key={link.name}
-                link={link}
-                isSubLink={isSubLink}
-                hideDropdownMenu={hideDropdownMenu}
-                links={links}
-                renderDropdownMenu={renderDropdownMenu}
-            />
-        );
-    }, [hideDropdownMenu, links, renderDropdownMenu]);
+    const renderNavLink = useCallback(
+        (link: NavbarItem, isSubLink: boolean = true) => {
+            return (
+                <NavLink
+                    key={link.name}
+                    link={link}
+                    isSubLink={isSubLink}
+                    hideDropdownMenu={hideDropdownMenu}
+                    links={links}
+                    renderDropdownMenu={renderDropdownMenu}
+                />
+            );
+        },
+        [hideDropdownMenu, links, renderDropdownMenu],
+    );
 
     const navbarBurgerPanel = useMemo(
         () => <NavBurgerPanel links={links} burgerPanel={burgerPanel} />,

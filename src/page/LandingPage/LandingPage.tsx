@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import HeroSection from "../../components/HeroSection/HeroSection";
 import { ILandingPageProps } from "../../interfaces";
 import Experiences from "../../components/ExperienceSection/ExperienceSection";
@@ -11,6 +11,7 @@ import SkeletonPage from "../SkeletonPage/SkeletonPage";
 
 const LandingPage: React.FC<ILandingPageProps> = ({ postList }) => {
     const [isLoaded, setIsLoaded] = useState(false);
+    const memoizedSkeletonPage = useMemo(() => <SkeletonPage />, []);
 
     useEffect(() => {
         const handleLoad = () => {
@@ -20,7 +21,7 @@ const LandingPage: React.FC<ILandingPageProps> = ({ postList }) => {
     }, []);
 
     if (!isLoaded) {
-        return <SkeletonPage />;
+        return memoizedSkeletonPage;
     }
 
     return (

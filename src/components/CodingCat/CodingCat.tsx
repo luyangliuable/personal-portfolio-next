@@ -1,4 +1,4 @@
-import React, { useEffect, useState, MouseEvent, useRef } from "react";
+import React, { useEffect, useState, MouseEvent, useRef, memo } from "react";
 import "./CodingCat.css";
 import { gsap } from "gsap";
 
@@ -7,7 +7,7 @@ import { useScrollPosition } from "../../hooks";
 const easeInOutQuad = (t: number) =>
     t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
 
-const CodingCat = () => {
+const CodingCat = memo(() => {
     const { scrolling } = useScrollPosition();
     const [animation, setAnimation] = useState<gsap.core.Timeline | null>(null);
 
@@ -354,6 +354,6 @@ const CodingCat = () => {
             </g>
         </svg>
     );
-};
+});
 
 export default CodingCat;

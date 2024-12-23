@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, RefObject } from "react";
+import React, { useEffect, useRef, RefObject, memo } from "react";
 import { FaArrowCircleUp } from "react-icons/fa";
 import { useScrollPosition } from "../../../hooks";
 import { usePathname } from "next/navigation";
 import "./NavbarScrollProgress.css";
 
-const NavbarScrollProgress: React.FC<{ scrollY: number }> = ({}) => {
+const NavbarScrollProgress: React.FC<{ scrollY: number }> = () => {
     const scrollProgress: RefObject<HTMLDivElement> =
         useRef<HTMLDivElement>(null);
     const { scrollY } = useScrollPosition();
@@ -39,4 +39,4 @@ const NavbarScrollProgress: React.FC<{ scrollY: number }> = ({}) => {
     );
 };
 
-export default React.memo(NavbarScrollProgress);
+export default memo(NavbarScrollProgress);

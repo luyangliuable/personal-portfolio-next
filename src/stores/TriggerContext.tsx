@@ -4,12 +4,13 @@ import React, {
     useState,
     useCallback,
     ReactNode,
+    memo,
 } from "react";
 const TriggerContext = createContext<
     { trigger: boolean; toggleTrigger: () => void } | undefined
 >(undefined);
 
-export const TriggerProvider = ({ children }: { children: ReactNode }) => {
+export const TriggerProvider = memo(({ children }: { children: ReactNode }) => {
     const [trigger, setTrigger] = useState(false);
 
     const toggleTrigger = useCallback(() => {
@@ -21,7 +22,7 @@ export const TriggerProvider = ({ children }: { children: ReactNode }) => {
             {children}
         </TriggerContext.Provider>
     );
-};
+});
 
 export const useTrigger = () => {
     const context = useContext(TriggerContext);

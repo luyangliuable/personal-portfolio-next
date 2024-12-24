@@ -222,8 +222,16 @@ const HeroSection: React.FC<IHeroProps> = () => {
                 landingPageCardType="fitContent"
             >
                 <section className="hero-section__content">
-                    <section className="hero-section__content__right">
-                        <CodingCat />
+                    <section className="hero-section__content__right flex relative min-h-[150px]">
+                        <div className="absolute flex items-center justify-center w-full bg-[color:var(--background-color-primary-white)]">
+                            <CodingCat pixelated />
+                        </div>
+                        <div
+                            className="absolute flex items-center justify-center coding-cat w-full bg-[color:var(--background-color-primary-white)]"
+                            data-style="slides"
+                        >
+                            <CodingCat pixelated={false} />
+                        </div>
                     </section>
                     {heroSectionContentLeft}
                 </section>

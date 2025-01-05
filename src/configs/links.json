@@ -29,7 +29,7 @@
                     "to": "/digital-chronicles/scenic_memories"
                 },
                 {
-                    "name": "My Daily Leetcode",
+                    "name": "Algorithms",
                     "description": "The grind",
                     "emoji": "🧩",
                     "to": "/digital-chronicles/blog?tag=daily-leetcode"
@@ -45,6 +45,12 @@
                     "emoji": "🏗︎",
                     "description": "My coding projects",
                     "to": "/projects/code"
+                },
+                {
+                    "name": "Web Experiments",
+                    "emoji": "🧪️",
+                    "description": "Experiments with some cool web technologies",
+                    "to": "/projects/web-experiments"
                 },
                 {
                     "name": "3D Printing",

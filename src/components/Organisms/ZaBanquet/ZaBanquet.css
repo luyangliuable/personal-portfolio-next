@@ -92,8 +92,8 @@
     border-radius: 20% 80%;
     border: 0px solid var(--color-2);
     box-shadow:
-        -0.1px -0.1px var(--color-2),
-        -0.2px -0.2px black;
+        -0.01em -0.01em var(--color-2),
+        -0.02em -0.02em black;
 }
 
 .flowers .flower > .petal:nth-child(1) {

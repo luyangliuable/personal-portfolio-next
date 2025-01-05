@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useRef, RefObject } from "react";
 import "./FractalHills.css";
 import p5 from "p5/lib/p5.js";

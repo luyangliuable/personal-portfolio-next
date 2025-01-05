@@ -1,9 +1,13 @@
 "use client";
 
-import FractalHills from "../../components/FractalHills/FractalHills";
+import TechStack from "../../components/TechStacks/Techstacks";
 
 const TestHarnessPage = () => {
-    return <main className="h-screen">{/* <FractalHills /> */}</main>;
+    return (
+        <main className="h-screen">
+            <TechStack />
+        </main>
+    );
 };
 
 export default TestHarnessPage;

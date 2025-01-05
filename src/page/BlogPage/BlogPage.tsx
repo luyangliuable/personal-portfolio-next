@@ -70,7 +70,7 @@ const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
         updateCurrentlyShowingContent();
         const { currentSelectTags: selectedTags } = state;
         if (
-            selectedTags.includes("daily-leetcode") ||
+            selectedTags.includes("leetcode") ||
             selectedTags.includes("algorithms")
         )
             setDisplayLeetCodePosts(true);
@@ -99,9 +99,9 @@ const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
                 )
                 .filter(
                     ({ tags }) =>
-                        !tags.includes("daily-leetcode") ||
+                        !tags.includes("leetcode") ||
                         displayLeetCodePosts ||
-                        selectedTags.includes("daily-leetcode") ||
+                        selectedTags.includes("leetcode") ||
                         selectedTags.includes("algorithms"),
                 ),
         );
@@ -247,7 +247,7 @@ const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
     const renderDisplayLeetCodePostsToggleButton = () => {
         const { currentSelectTags: selectedTags } = state;
         const displayLeetCodePostsToggleButtonDisabled =
-            selectedTags.includes("daily-leetcode") ||
+            selectedTags.includes("leetcode") ||
             selectedTags.includes("algorithms");
         return (
             <Toggle

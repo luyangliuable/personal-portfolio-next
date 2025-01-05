@@ -129,7 +129,7 @@ const HeroSection: React.FC<IHeroProps> = () => {
 
         tl.add(
             gsap.to(heroSection, {
-                transform: `translateY(${window.innerHeight / 15}px)`,
+                transform: `translateY(${window.innerHeight / 20}px)`,
             }),
             "start",
         );
@@ -142,8 +142,6 @@ const HeroSection: React.FC<IHeroProps> = () => {
             }),
             "start",
         );
-
-        refreshScrollTrigger(ScrollTrigger);
     });
 
     const footer = useMemo(() => {
@@ -172,7 +170,9 @@ const HeroSection: React.FC<IHeroProps> = () => {
     const heroSectionContentLeft = useMemo(() => {
         return (
             <section
-                className="hero-section__content__left"
+                className="
+                    hero-section__content__right md:w-[50%] md:max-w-[600px]
+                "
                 ref={heroSectionRef}
             >
                 <header className="mb-2">
@@ -222,12 +222,36 @@ const HeroSection: React.FC<IHeroProps> = () => {
                 landingPageCardType="fitContent"
             >
                 <section className="hero-section__content">
-                    <section className="hero-section__content__right flex relative min-h-[150px]">
-                        <div className="absolute flex items-center justify-center w-full bg-[color:var(--background-color-primary-white)]">
+                    <section
+                        className="
+                            hero-section__content__left
+                            flex
+                            relative
+                            min-h-[150px]
+                        "
+                    >
+                        <div
+                            className="
+                                absolute
+                                flex
+                                items-center
+                                justify-center
+                                w-full
+                                bg-[color:var(--background-color-primary-white)]
+                            "
+                        >
                             <CodingCat pixelated />
                         </div>
                         <div
-                            className="absolute flex items-center justify-center coding-cat w-full bg-[color:var(--background-color-primary-white)]"
+                            className="
+                                absolute
+                                flex
+                                items-center
+                                justify-center
+                                coding-cat
+                                w-full
+                                bg-[color:var(--background-color-primary-white)]
+                            "
                             data-style="slides"
                         >
                             <CodingCat pixelated={false} />

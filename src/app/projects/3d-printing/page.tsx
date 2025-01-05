@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 const heroHeaderContent = Object.freeze({
-    heading: "3D Printing Projects",
+    heading: "3D Printing",
     description: "",
 });
 

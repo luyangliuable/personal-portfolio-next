@@ -455,7 +455,14 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
     return (
         <div className="experience-section-wrapper">
             <div
-                className="landing-page-card flex flex-col justify-end overflow-hidden experience-section-parent-container"
+                className="
+                    landing-page-card
+                    flex
+                    flex-col
+                    justify-end
+                    overflow-hidden
+                    experience-section-parent-container
+                "
                 ref={experienceSectionParentRef}
             >
                 <header className="ml-[2vw]">

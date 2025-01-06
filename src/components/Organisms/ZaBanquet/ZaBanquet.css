@@ -92,7 +92,7 @@
     border-radius: 20% 80%;
     border: 0px solid var(--color-2);
     box-shadow:
-        -0.01em -0.01em #888,
+        -0.01em -0.01em var(--color-2),
         -0.02em -0.02em black;
 }
 

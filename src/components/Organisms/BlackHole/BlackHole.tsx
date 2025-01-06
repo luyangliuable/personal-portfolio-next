@@ -91,7 +91,7 @@ const BlackHole: React.FC = () => {
         }
 
         const particles = Array.from(
-            { length: 540 },
+            { length: 840 },
             () => new Particle(w / 2, h / 2, 100),
         );
 

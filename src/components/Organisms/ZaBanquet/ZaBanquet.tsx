@@ -43,8 +43,8 @@ const ZaBanquet = () => {
 
             const left = Math.random() * 90;
             const top = Math.random() * 90;
-            const scale = 1 + Math.random() * 0.5;
-            const rotate = Math.random() * 360;
+            const scale = 1 + Math.random() * 0.2;
+            const rotate = Math.random() * 60;
             const theme =
                 colorThemes[Math.floor(Math.random() * colorThemes.length)];
 

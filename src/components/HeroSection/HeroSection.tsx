@@ -81,19 +81,6 @@ const mainHeading: string = "Hi There, I am Luyang.";
 const HeroSection: React.FC<IHeroProps> = () => {
     const heroSectionRef = useRef(null);
 
-    const introduction: JSX.Element = (
-        <SequentialRiseSpan
-            baseAnimationDelay={200}
-            calculationAdjustment={0.82}
-            minNumberOfLettersPerLine={48}
-        >
-            A software engineer, dog lover and fitness ethusiast who enjoys
-            cooking, experimenting, eager to embrace life’s adventures and form
-            meaningful connections and creating memories with like-minded
-            people!
-        </SequentialRiseSpan>
-    );
-
     const [screenWidth, setscreenWidth] = useState<number>(0);
 
     useEffect(() => {
@@ -175,7 +162,7 @@ const HeroSection: React.FC<IHeroProps> = () => {
                 "
                 ref={heroSectionRef}
             >
-                <header className="mb-2">
+                <header className="mb-8 md:mb-2">
                     {screenWidth > 550 && (
                         <SequentialRiseSpan
                             elementType="h1"
@@ -195,7 +182,30 @@ const HeroSection: React.FC<IHeroProps> = () => {
                     )}
                 </header>
                 <div className="hero-section__content__left__text text-gray-500 relative">
-                    {introduction}
+                    {screenWidth > 550 &&
+                        <SequentialRiseSpan
+                            baseAnimationDelay={200}
+                            calculationAdjustment={0.82}
+                            minNumberOfLettersPerLine={48}
+                        >
+                            A software engineer, dog lover and fitness ethusiast who enjoys
+                            cooking, experimenting, eager to embrace life’s adventures and form
+                            meaningful connections and creating memories with like-minded
+                            people!
+                        </SequentialRiseSpan>
+                    }
+                    {screenWidth <= 550 &&
+                        <SequentialRiseSpan
+                            baseAnimationDelay={200}
+                            calculationAdjustment={1.3}
+                            minNumberOfLettersPerLine={48}
+                        >
+                            A software engineer, dog lover and fitness ethusiast who enjoys
+                            cooking, experimenting, eager to embrace life’s adventures and form
+                            meaningful connections and creating memories with like-minded
+                            people!
+                        </SequentialRiseSpan>
+                    }
                 </div>
                 <div className="hero-section__button-container flex flex-row mt-10 justify-start self-start flex-wrap gap-1">
                     <Button to="/digital-chronicles/blog">
@@ -213,7 +223,7 @@ const HeroSection: React.FC<IHeroProps> = () => {
                 </div>
             </section>
         );
-    }, [mainHeading, introduction]);
+    }, [mainHeading, screenWidth]);
 
     return (
         <>

@@ -225,9 +225,10 @@ const HeroSection: React.FC<IHeroProps> = () => {
                     <section
                         className="
                             hero-section__content__left
-                            !bg-[red]
                             flex
-                            ml-[-5%]
+                            !min-h-28
+                            md:min-h-0
+                            md:ml-[-5%]
                             items-center
                             relative
                         "

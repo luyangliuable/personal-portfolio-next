@@ -171,7 +171,7 @@ const HeroSection: React.FC<IHeroProps> = () => {
         return (
             <section
                 className="
-                    hero-section__content__right md:w-[50%] md:max-w-[600px]
+                    hero-section__content__right
                 "
                 ref={heroSectionRef}
             >
@@ -194,7 +194,7 @@ const HeroSection: React.FC<IHeroProps> = () => {
                         </SequentialRiseSpan>
                     )}
                 </header>
-                <div className="hero-section__content__left__text relative">
+                <div className="hero-section__content__left__text text-gray-500 relative">
                     {introduction}
                 </div>
                 <div className="hero-section__button-container flex flex-row mt-10 justify-start self-start flex-wrap gap-1">
@@ -225,9 +225,11 @@ const HeroSection: React.FC<IHeroProps> = () => {
                     <section
                         className="
                             hero-section__content__left
+                            !bg-[red]
                             flex
+                            ml-[-5%]
+                            items-center
                             relative
-                            min-h-[150px]
                         "
                     >
                         <div

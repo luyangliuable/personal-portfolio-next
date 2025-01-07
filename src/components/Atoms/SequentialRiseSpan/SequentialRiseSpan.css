@@ -16,9 +16,10 @@
 
 .sequential-rise-span > div {
     height: fit-content;
+    margin-bottom: -5px;
 }
 
-.sequential-rise-span h1, .sequential-rise-span h1 {
+.sequential-rise-span > div > * {
     width: 100%;
     white-space: normal;
 }

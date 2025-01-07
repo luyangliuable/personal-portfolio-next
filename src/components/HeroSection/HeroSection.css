@@ -27,6 +27,7 @@
     .hero-section__content__right {
         animation: 0.5s animate-slide-up-fade-in ease-in;
         padding: 0 5vw 0 5vw;
+        margin-top: 30%;
         font-size: calc(0.7rem + 0.1vw);
     }
 

@@ -1,12 +1,11 @@
 .hero-section-badge__container {
     overflow-x: auto;
     gap: 1.2rem;
-    z-index: 100;
 }
 
 @media screen and (min-width: 1000px) {
     .hero-section__content__left {
-        width: 30%;
+        width: 30vw;
     }
 
     .hero-section__content {
@@ -62,9 +61,6 @@
 }
 
 .hero-section__content__left__text {
-    color: #888;
-    max-width: 550px;
-    font-size: 0.95rem;
 }
 
 .hero-section__heading {
@@ -72,7 +68,7 @@
     color: #2d2d2d;
     margin: 0;
     font-size: clamp(2em, 3.4vw, 5em) !important;
-    font-size: 50px !important;
+    font-size: 4rem !important;
     font-weight: 700;
 }
 
@@ -90,6 +86,7 @@
 
 .hero-section {
     position: relative;
+    z-index: 1;
     transform-style: preserve-3d;
 }
 
@@ -98,7 +95,6 @@
     width: 95vw;
     height: var(--height);
     margin-bottom: calc(-1 * var(--height) + var(--common-card-margin));
-    z-index: -5;
     transform: translateY(-5%);
     background-image: radial-gradient(
         var(--background-pattern-color) 1px,

@@ -9,7 +9,7 @@ const BlogPostGraphics: React.FC<{}> = () => {
                 <div className="line"></div>
                 <div className="line"></div>
                 <div className="flex flex-row !w-full px-2 gap-1">
-                    <PiImageSquareLight className="text-4xl md:text-6xl text-black" />
+                    <PiImageSquareLight className="text-4xl md:text-6xl text-gray-600" />
                     <div className="flex flex-col flex-1 justify-between">
                         <div className="line"></div>
                         <div className="line"></div>

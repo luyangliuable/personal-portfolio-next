@@ -15,15 +15,20 @@
 }
 
 .sequential-rise-span > div {
-    margin-bottom: -5px;
     height: fit-content;
 }
 
-.sequential-rise-span > div > p {
+.sequential-rise-span h1, .sequential-rise-span h1 {
     width: 100%;
     white-space: normal;
-    margin: 0;
-    line-height: 117%;
+}
+
+.sequential-rise-span p {
+    line-height: 1;
+}
+
+.sequential-rise-span h1 {
+    line-height: 1.2;
 }
 
 .sequential-rise-span > div > p > span {

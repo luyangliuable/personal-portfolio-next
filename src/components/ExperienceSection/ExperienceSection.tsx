@@ -171,8 +171,7 @@ const items: ExperienceSectionItem[] = [
         url: "",
         cardSubtitle: "",
         location: "-37.829423, 145.058246",
-        cardDetailedText:
-            "A image I took of the sunset in Camberwell where I used to live.",
+        cardDetailedText: "",
         objectPosition: "bottom",
         importance: 0.9,
         display: "IMAGE",
@@ -235,7 +234,7 @@ const items: ExperienceSectionItem[] = [
         cardSubtitle: "",
         location: "-37.790968, 145.172341",
         cardDetailedText:
-            "I captured this serene view at Mad Patties during the COVID.",
+            "I captured this serene view at Mad Patties during the COVID era.",
         objectPosition: "top",
         importance: 1,
         display: "IMAGE",

@@ -3,7 +3,6 @@ import { CiLock } from "react-icons/ci";
 import InlineLink from "../Atoms/InlineLink/InlineLink";
 import connectionsData from "../../configs/connections.json";
 import linksData from "../../configs/links.json";
-import IconButton from "../Atoms/IconButton/IconButton";
 import Button from "../Button/Button";
 
 import "./Footer.css";
@@ -36,7 +35,7 @@ const Footer: React.FC = () => {
     ) => {
         return (
             <section className={className}>
-                <h3 className="text-lg important-text">{section.name}</h3>
+                <h3 className="text-lg important-text mb-2">{section.name}</h3>
                 {section.sublinks?.map((item: any, index: number) => {
                     return (
                         <InlineLink
@@ -58,50 +57,54 @@ const Footer: React.FC = () => {
         <footer className="footer relative flex items-center flex-col pt-10">
             <div className="footer__main normalised-width w-full">
                 <GetInTouch />
-                <section className="footer__connect-with-me mb-20">
-                    <h3 className="text-lg important-text">Connect with Me</h3>
-                    <div className="flex flex-row flex-wrap">
+                <section className="footer__connect-with-me">
+                    <h3 className="text-lg important-text mb-2">
+                        Connect with Me
+                    </h3>
+                    <div className="flex flex-col justify-center">
                         {linksToMyOtherSocialMedia.map(
                             (item: any, index: number) => (
-                                <IconButton
+                                <InlineLink
                                     target="_blank"
                                     key={index}
                                     to={item.link}
-                                    className="mt-2"
-                                    logoName={item.name}
-                                    buttonColor="%23eaeaea"
-                                ></IconButton>
+                                    className="mt-1"
+                                >
+                                    {item.name}
+                                </InlineLink>
                             ),
                         )}
                     </div>
                 </section>
-                <section className="footer__sponsor mb-20">
-                    <h3 className="text-lg important-text">Sponsor Me</h3>
+                <section className="footer__sponsor">
+                    <h3 className="text-lg important-text mb-2">Sponsor Me</h3>
                     <InlineLink
                         target="_blank"
                         to="https://ko-fi.com/D1D1PFTTH"
-                        className="mt-2"
+                        className="mt-1"
                     >
                         Kofi
                     </InlineLink>
                     <InlineLink
                         target="_blank"
                         to="https://melbournewalk24.can4cancer.com.au/lucas-liu"
-                        className="mt-2"
+                        className="mt-1"
                     >
                         Can4cancer
                     </InlineLink>
                 </section>
                 {renderFooterSection(about, "footer__about")}
                 <section className="footer__resources">
-                    <h3 className="text-lg important-text">Resources</h3>
-                    <InlineLink to={resume.to} className="mt-2">
+                    <h3 className="text-lg important-text mb-2">Resources</h3>
+                    <InlineLink to={resume.to} className="mt-1">
                         {resume.name}
                     </InlineLink>
                 </section>
                 {renderFooterSection(tools, "footer__tools")}
                 <section className="footer__local-time">
-                    <h3 className="text-lg mb-2 important-text">Local Time</h3>
+                    <h3 className="text-lg mb-2 important-text mb-2">
+                        Local Time
+                    </h3>
                     <LocalTime />
                 </section>
             </div>

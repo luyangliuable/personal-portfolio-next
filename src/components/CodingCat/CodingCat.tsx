@@ -1,11 +1,4 @@
-import React, {
-    useEffect,
-    useState,
-    MouseEvent,
-    useRef,
-    memo,
-    RefObject,
-} from "react";
+import React, { useEffect, useState, useRef, memo, RefObject } from "react";
 import "./CodingCat.css";
 import { gsap } from "gsap";
 
@@ -74,9 +67,9 @@ const CodingCat: React.FC<{ pixelated: boolean; className?: string }> = ({
         };
     }, []);
 
-    const [pixelWidth, setPixelWidth] = useState(10);
-    const [pixelHeight, setPixelHeight] = useState(10);
-    const [pixelRadius, setPixelRadius] = useState(4);
+    const pixelWidth = 10;
+    const pixelHeight = 10;
+    const pixelRadius = 4;
 
     useEffect(() => {
         if (scrolling && animation) {

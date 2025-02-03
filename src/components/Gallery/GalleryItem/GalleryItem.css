@@ -4,7 +4,7 @@
     width: min(100%, 90vw);
     background: rgba(235, 235, 255, 0.1) !important;
     border-radius: 20px;
-    border: var(--border-size) solid #fff !important;
+    border: var(--border-size) solid #fff;
     padding-bottom: calc(2 * 0.8rem + 50px);
     overflow: hidden;
 }

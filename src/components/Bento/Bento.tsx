@@ -18,14 +18,13 @@ interface IBentoItemProps {
 const Bento: React.FC<IBentoProps> & { Item: React.FC<IBentoItemProps> } = ({
     children,
     className,
-    gap = "1.5vw",
+    gap = "0vw",
 }) => {
     return (
         <div
             className={cl("bento-container", className)}
             style={{
                 display: "grid",
-                gap: gap,
             }}
         >
             {children}
@@ -57,15 +56,19 @@ const BentoItem: React.FC<IBentoItemProps> = ({
     }, [colSpan]);
 
     return (
-        <div
-            className={cl("bento-item", className)}
-            style={{
-                gridRow: `span ${rowSpan}`,
-                gridColumn: `span ${adjustedColSpan}`,
-            }}
-        >
-            {children}
-        </div>
+        <>
+            <div
+                className={cl("bento-item", className)}
+                style={{
+                    gridRow: `span ${rowSpan}`,
+                    gridColumn: `span ${adjustedColSpan}`,
+                }}
+            >
+                {children}
+                <div className="bento-item--left"></div>
+                <div className="bento-item--bottom"></div>
+            </div>
+        </>
     );
 };
 

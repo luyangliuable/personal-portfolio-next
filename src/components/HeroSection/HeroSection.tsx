@@ -272,6 +272,7 @@ const HeroSection: React.FC<IHeroProps> = () => {
                                 flex
                                 items-center
                                 justify-center
+                                coding-cat
                                 w-full
                                 bg-[color:var(--background-color-primary-white)]
                             "

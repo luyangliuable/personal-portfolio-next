@@ -15,9 +15,9 @@ import { FaGithubSquare, FaLinkedin, FaStackOverflow } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { RiNotionFill } from "react-icons/ri";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { refreshScrollTrigger } from "../Utility/ScrollUtility";
 
 import "./HeroSection.css";
+import Bento from "../Bento/Bento";
 
 const connections = [
     {
@@ -25,6 +25,8 @@ const connections = [
         link: "https://luyangl.notion.site/luyangl/71be1ff365c44fd2b4f6f8dce14b7536?v=f1e55d08878e4bfda1b744e76b9480c7",
         color: "#000",
         background: "#FEFEFF",
+        rowSpan: 2,
+        colSpan: 2,
         icon: <RiNotionFill />,
         imageSrc:
             "https://img.shields.io/badge/notion-%2312100E.svg?&style=for-the-badge&logo=notion&logoColor=%23333&color=%239e9e9e",
@@ -33,44 +35,54 @@ const connections = [
         name: "Email",
         link: "mailto:luyang.l@protonmail.me",
         color: "#004300",
+        rowSpan: 2,
+        colSpan: 1,
         background: "#77dd77",
         icon: <MdEmail />,
         imageSrc:
             "https://img.shields.io/badge/email-%2312100E.svg?&style=for-the-badge&logo=protonmail&logoColor=white&color=black",
     },
     {
-        name: "GitHub",
-        link: "https://github.com/luyangliuable",
-        color: "#FFF",
-        background: "#181717",
-        icon: <FaGithubSquare />,
-        imageSrc:
-            "https://img.shields.io/badge/github-%2312100E.svg?&style=for-the-badge&logo=github&logoColor=white&color=black",
-    },
-    {
         name: "LinkedIn",
         icon: <FaLinkedin />,
         color: "#FFF",
+        rowSpan: 1,
+        colSpan: 1,
         background: "#0077B5",
         link: "https://www.linkedin.com/in/luyang-l",
         imageSrc:
             "https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white",
     },
     {
-        name: "Codecademy",
-        link: "https://www.codecademy.com/profiles/luyangliuable",
-        color: "#FFF",
-        background: "#000",
-        icon: <SiCodecademy />,
+        name: "SO",
+        link: "https://stackoverflow.com/users/1570777/luyangliuable",
+        color: "#F48024", // Stack Overflow's primary color
+        rowSpan: 1,
+        colSpan: 1,
+        background: "#FFF", // White background
+        icon: <FaStackOverflow />,
         imageSrc:
             "https://img.shields.io/badge/codecademy-%2312100E.svg?&style=for-the-badge&logo=codecademy&logoColor=white&color=black",
     },
     {
-        name: "SO",
-        link: "https://stackoverflow.com/users/1570777/luyangliuable",
-        color: "#F48024", // Stack Overflow's primary color
-        background: "#FFF", // White background
-        icon: <FaStackOverflow />,
+        name: "GitHub",
+        link: "https://github.com/luyangliuable",
+        color: "#FFF",
+        rowSpan: 1,
+        colSpan: 2,
+        background: "#181717",
+        icon: <FaGithubSquare />,
+        imageSrc:
+            "https://img.shields.io/badge/github-%2312100E.svg?&style=for-the-badge&logo=github&logoColor=white&color=black",
+    },
+    {
+        name: "Codecademy",
+        link: "https://www.codecademy.com/profiles/luyangliuable",
+        color: "#FFF",
+        rowSpan: 1,
+        colSpan: 1,
+        background: "#000",
+        icon: <SiCodecademy />,
         imageSrc:
             "https://img.shields.io/badge/codecademy-%2312100E.svg?&style=for-the-badge&logo=codecademy&logoColor=white&color=black",
     },
@@ -133,7 +145,7 @@ const HeroSection: React.FC<IHeroProps> = () => {
 
     const footer = useMemo(() => {
         return (
-            <footer className="hero-section-badge__container flex justify-center items-center w-full">
+            <footer className="hero-section-badge__container flex justify-center items-center w-full mb-2">
                 {connections.map((item: any, index: number) => (
                     <Link
                         key={index}
@@ -260,7 +272,6 @@ const HeroSection: React.FC<IHeroProps> = () => {
                                 flex
                                 items-center
                                 justify-center
-                                coding-cat
                                 w-full
                                 bg-[color:var(--background-color-primary-white)]
                             "

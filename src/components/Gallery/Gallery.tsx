@@ -11,7 +11,11 @@ import IGalleryItemProps from "./GalleryItem/Interface/IGalleryItemProps";
 const Gallery: React.FC<IGalleryProps> = (props) => {
     const renderGalleryItems = (): React.ReactNode => {
         return props.content.map((item: IGalleryItemProps, index: number) => {
-            item = { ...item, name: `${item.name}\u00A0/` };
+            item = {
+                ...item,
+                name: `${item.name}\u00A0/`,
+                style: { ...item.style, border: "none", borderRadius: "0" },
+            };
             if (index == 0) {
                 return (
                     <Bento.Item key={index} colSpan={2}>

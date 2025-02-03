@@ -65,7 +65,10 @@ const NavLink: React.FC<INavLinkProps> = ({
         },
         React.createElement(
             "div",
-            { className: "flex flex-row justify-start items-center" },
+            {
+                className:
+                    "flex flex-row justify-start items-center select-none",
+            },
             link.emoji &&
                 React.createElement(EmojIcon, {
                     style: {
@@ -80,7 +83,7 @@ const NavLink: React.FC<INavLinkProps> = ({
                 }),
             React.createElement(
                 "div",
-                { className: "flex flex-col justify-center" },
+                { className: "flex flex-col justify-center select-none" },
                 React.createElement(
                     "div",
                     { className: "flex flex-row items-center" },
@@ -94,34 +97,34 @@ const NavLink: React.FC<INavLinkProps> = ({
                             style: {
                                 fontSize: ".8rem",
                                 marginTop: "2px",
-                                color: "#888",
                             },
                         },
                         link.description,
                     ),
             ),
         ),
-        link.isLocked &&
-            React.createElement(
-                "div",
-                {
-                    className:
-                        "blur-boundary flex justify-center items-center mr-2",
-                    style: {
-                        background: "rgba(255,255,255,.5)",
-                        strokeWidth: "2rem",
-                        minWidth: "30px",
-                        minHeight: "30px",
-                        height: "30px",
-                        borderRadius: "4px",
-                        border: ".1px solid #888",
-                    },
+        React.createElement(
+            "div",
+            {
+                className: cl(
+                    "blur-boundary flex justify-center items-center mx-1",
+                    { hidden: link.isLocked === undefined },
+                ),
+                style: {
+                    background: "rgba(255,255,255)",
+                    minWidth: "30px",
+                    minHeight: "30px",
+                    height: "30px",
+                    borderRadius: "2px",
+                    border: ".2px solid #888",
                 },
-                React.createElement(CiLock, {
-                    style: { strokeWidth: "1px" },
-                    key: "lock-icon",
-                }),
-            ),
+            },
+            React.createElement(CiLock, {
+                className: "ml-6",
+                style: { strokeWidth: "1px" },
+                key: "lock-icon",
+            }),
+        ),
     );
 };
 

@@ -7,6 +7,7 @@ import {
     LandingPageCardType,
 } from "./Interface/ILandingPageCardProps";
 import SequentialRiseSpan from "../Atoms/SequentialRiseSpan/SequentialRiseSpan";
+import { cl } from "../Utility/LogicUtility";
 
 class LandingPageCard extends Component<ILandingPageCardProps, any> {
     constructor(props: ILandingPageCardProps) {
@@ -37,8 +38,6 @@ class LandingPageCard extends Component<ILandingPageCardProps, any> {
     ): string {
         const mapper = {
             normal: "landing-page-card",
-            fitUnderNavbar:
-                "landing-page-card landing-page-card--fit-under-navbar",
             fitContent: "landing-page-card landing-page-card--fit-content",
         };
 
@@ -48,18 +47,26 @@ class LandingPageCard extends Component<ILandingPageCardProps, any> {
     }
 
     render(): any {
-        let classArray = [
-            this.determineWhatTypeOfLandingPageCardToUse(
-                this.props.landingPageCardType,
-            ),
-            this.props.className,
-        ];
-
-        if (this.props.blendWithBackground)
-            classArray.push("blend-with-background");
-        const landingPageCardHeading = this.props.heading;
+        const {
+            className,
+            blendWithBackground,
+            grainyBackground,
+            heading: landingPageCardHeading,
+        } = this.props;
         return (
-            <div style={this.props.style} className={classArray.join(" ")}>
+            <div
+                style={this.props.style}
+                className={cl(
+                    this.determineWhatTypeOfLandingPageCardToUse(
+                        this.props.landingPageCardType,
+                    ),
+                    className,
+                    {
+                        "blend-with-background": blendWithBackground,
+                        "grainy-background": grainyBackground,
+                    },
+                )}
+            >
                 <div className="landing-page-card__content">
                     {landingPageCardHeading && (
                         <header className="landing-page-card__heading important-text">

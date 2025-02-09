@@ -1,6 +1,6 @@
 import { CSSProperties, ReactNode } from "react";
 
-export type LandingPageCardType = "normal" | "fitUnderNavbar" | "fitContent";
+export type LandingPageCardType = "normal" | "fitContent";
 
 export interface ILandingPageCardProps {
     className?: string;
@@ -8,5 +8,6 @@ export interface ILandingPageCardProps {
     style?: CSSProperties;
     children?: ReactNode;
     landingPageCardType?: LandingPageCardType;
+    grainyBackground?: boolean;
     blendWithBackground?: boolean;
 }

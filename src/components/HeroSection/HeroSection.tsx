@@ -261,7 +261,6 @@ const HeroSection: React.FC<IHeroProps> = () => {
                                 items-center
                                 justify-center
                                 w-full
-                                bg-[color:var(--background-color-primary-white)]
                             "
                         >
                             <CodingCat pixelated />

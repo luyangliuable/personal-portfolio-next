@@ -365,8 +365,6 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                     scrub: true,
                 },
             });
-
-            /* refreshScrollTrigger(ScrollTrigger); */
         }
     }, [trigger]);
 
@@ -375,15 +373,6 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
             return parseInt(b.dateTime) - parseInt(a.dateTime);
         },
     );
-
-    const groupExperienceSectionItems = (events: any): any => {
-        return events.reduce((groupedEvents: any, event: any) => {
-            const year = new Date(event.dateTime).getFullYear().toString();
-            if (!groupedEvents[year]) groupedEvents[year] = [];
-            groupedEvents[year].push(event);
-            return groupedEvents;
-        }, {});
-    };
 
     const groupedItems = useMemo(() => {
         return sortedItems.reduce((groups: any, item: any) => {
@@ -395,7 +384,6 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
     }, [sortedItems]);
 
     const mapExperienceSectionItems = useCallback(() => {
-        /* const groupedItems = groupExperienceSectionItems(sortedItems); */
         let accumulatedIdx = 0;
         return Object.keys(groupedItems)
             .sort((a, b) => parseInt(b) - parseInt(a))
@@ -456,6 +444,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
             <div
                 className="
                     landing-page-card
+                    grainy-background
                     flex
                     flex-col
                     justify-end

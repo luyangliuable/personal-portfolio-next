@@ -83,7 +83,10 @@ const CodingCat: React.FC<{ pixelated: boolean; className?: string }> = ({
         <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 783.55 354.91"
-            className={cl("coding-cat-container", className)}
+            className={cl(
+                "coding-cat-container flex justify-center items-center",
+                className,
+            )}
         >
             <defs>
                 <filter id="pixelate" x="0" y="0">

@@ -261,6 +261,7 @@ const HeroSection: React.FC<IHeroProps> = () => {
                                 items-center
                                 justify-center
                                 w-full
+                                h-full
                             "
                         >
                             <CodingCat pixelated />
@@ -273,6 +274,7 @@ const HeroSection: React.FC<IHeroProps> = () => {
                                 justify-center
                                 coding-cat
                                 w-full
+                                h-full
                                 bg-[color:var(--background-color-primary-white)]
                             "
                             data-style="slides"

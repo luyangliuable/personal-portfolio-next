@@ -23,8 +23,9 @@
     --navbar-item-max-width: 90vw;
     --navbar-item-margin: 0.3vw;
     --navbar-item-padding: 8px 0 8px;
-    --navbar-transition: background 0.2s ease-in-out,
-        box-shadow 0.1s ease-in-out, transform 0.1s ease-in-out;
+    --navbar-transition:
+        background 0.2s ease-in-out, box-shadow 0.1s ease-in-out,
+        transform 0.1s ease-in-out;
     top: 0;
     z-index: 10;
     position: absolute;

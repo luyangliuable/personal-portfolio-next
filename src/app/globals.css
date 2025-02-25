@@ -131,8 +131,9 @@ body {
 }
 
 code {
-    font-family: "Fira Code", source-code-pro, Menlo, Monaco, Consolas,
-        "Courier New", monospace;
+    font-family:
+        "Fira Code", source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+        monospace;
 }
 
 html,
@@ -161,8 +162,9 @@ input {
 }
 
 code {
-    font-family: "Fira Code", source-code-pro, Menlo, Monaco, Consolas,
-        "Courier New", monospace;
+    font-family:
+        "Fira Code", source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+        monospace;
 }
 
 h1 {
@@ -251,7 +253,8 @@ main {
 }
 
 .grid-background--line {
-    background-image: linear-gradient(
+    background-image:
+        linear-gradient(
             to right,
             var(--background-pattern-color) 1px,
             transparent 1px

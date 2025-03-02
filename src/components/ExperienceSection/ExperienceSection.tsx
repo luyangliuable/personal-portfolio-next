@@ -234,7 +234,7 @@ const items: ExperienceSectionItem[] = [
         cardSubtitle: "",
         location: "-37.790968, 145.172341",
         cardDetailedText:
-            "I captured this serene view at Mad Patties during the COVID era.",
+            "Mad Patties during the COVID.",
         objectPosition: "top",
         importance: 1,
         display: "IMAGE",

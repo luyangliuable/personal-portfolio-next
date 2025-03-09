@@ -40,7 +40,7 @@ const ExperienceSectionImageDisplay: React.FC<
             <SequentialRiseSpan
                 elementType="p"
                 className="image-display__detailed-text"
-                numberOfLettersPerLine={48}
+                numberOfLettersPerLine={40}
             >
                 {item.cardDetailedText}
             </SequentialRiseSpan>

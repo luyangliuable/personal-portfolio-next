@@ -84,6 +84,13 @@
                     "to": "/tools/survey"
                 },
                 {
+                    "name": "IsItHealthy",
+                    "emoji": "🍎",
+                    "description": "AI-powered food healthiness assessment tool.",
+                    "isLocked": true,
+                    "to": "/tools/is-it-healthy"
+                },
+                {
                     "name": "HexaBridger",
                     "emoji": "🌉",
                     "description": "Secret",

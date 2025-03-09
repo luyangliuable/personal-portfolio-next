@@ -65,7 +65,7 @@
 }
 
 .hero-section__heading {
-    font-family: "Quantico Bold", "Helvetica Neue", "Arial", sans-serif;
+    font-family: "Aileron Bold", "Helvetica Neue", "Arial", sans-serif;
     color: #2d2d2d;
     margin: 0;
     font-size: clamp(2em, 3.4vw, 5em) !important;
@@ -75,6 +75,7 @@
 
 .hero-section__content__left__text {
     font-size: 1.125rem;
+    font-family: "M1M Light", "Helvetica Neue", "Arial", sans-serif;
 }
 
 @media (min-width: 1024px) {

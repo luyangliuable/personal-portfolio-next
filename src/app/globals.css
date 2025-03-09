@@ -92,28 +92,34 @@
 }
 
 @font-face {
-    font-family: "Terminal Grotesque";
-    src: url("../assets/fonts/TerminalGrotesque/terminal-grotesque.ttf")
-        format("truetype");
+    font-family: "Aileron Black";
+    src: url("../assets/fonts/AileronBlack/aileron-black.woff2") format("woff2");
     font-display: swap;
 }
 
 @font-face {
-    font-family: "Terminal Grotesque Open";
-    src: url("../assets/fonts/TerminalGrotesque/terminal-grotesque_open.otf")
-        format("opentype");
+    font-family: "Aileron Bold";
+    src: url("../assets/fonts/AileronBlack/aileron-bold.woff2") format("woff2");
     font-display: swap;
 }
 
 @font-face {
-    font-family: "Quantico";
-    src: url("../assets/fonts/Quantico/Quantico-Regular.woff2") format("woff2");
+    font-family: "Aileron Regular";
+    src: url("../assets/fonts/AileronBlack/aileron-regular.woff2")
+        format("woff2");
     font-display: swap;
 }
 
 @font-face {
-    font-family: "Quantico Bold";
-    src: url("../assets/fonts/Quantico/Quantico-Bold.woff2") format("woff2");
+    font-family: "Aileron Semibold";
+    src: url("../assets/fonts/AileronBlack/aileron-semibold.woff2")
+        format("woff2");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "M1M Light";
+    src: url("../assets/fonts/M1M/m1m-light.woff2") format("woff2");
     font-display: swap;
 }
 
@@ -140,6 +146,7 @@ html,
 textarea,
 input {
     font-family:
+        "M1M Light",
         "Proxima Nova",
         ui-sans-serif,
         system-ui,
@@ -165,6 +172,15 @@ code {
     font-family:
         "Fira Code", source-code-pro, Menlo, Monaco, Consolas, "Courier New",
         monospace;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Aileron Regular", Spartan, "Poppins", sans-serif;
 }
 
 h1 {
@@ -337,7 +353,7 @@ main {
 /* Text */
 
 .important-text {
-    font-family: "Quantico bold", Spartan, "Poppins", sans-serif;
+    font-family: "Aileron Bold", Spartan, "Poppins", sans-serif;
 }
 
 .whitespace-nowrap {

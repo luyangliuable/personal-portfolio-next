@@ -7,7 +7,7 @@
 }
 
 .blog__year span {
-    font-family: "Quantico Bold";
+    font-family: "Aileron Regular", Spartan, "Poppins", sans-serif;
     background: #eee;
     transition: opacity 1s ease;
     opacity: 0;

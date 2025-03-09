@@ -80,7 +80,7 @@
     width: var(--navbar-item-width);
     min-height: 100%;
     max-width: var(--navbar-item-max-width);
-    font-family: "Quantico Bold", Spartan, "Poppins", sans-serif;
+    font-family: "Aileron Bold", Spartan, "Poppins", sans-serif;
     border-radius: var(--navbar-item-border-radius);
     margin-left: var(--navbar-item-margin);
 }
@@ -170,7 +170,7 @@
     --font-size-large: 20px;
     display: inline-block;
     font-family:
-        "Quantico Bold",
+        "Aileron Bold",
         "Proxima Nova Bold",
         Segoe UI,
         Roboto,

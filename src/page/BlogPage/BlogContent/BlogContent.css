@@ -56,6 +56,7 @@
     --padding-left-right: min(5vw, 500px);
     --padding-top-bottom: min(3vh, 200px);
     --margin-top: min(2vh, 200px);
+    font-family: "Proxima Nova";
     flex-grow: 3;
     flex-shrink: 1;
     flex-basis: 800px;

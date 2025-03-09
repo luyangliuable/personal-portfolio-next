@@ -8,6 +8,7 @@ import { cl } from "../../Utility/LogicUtility";
 import { usePathname } from "next/navigation";
 import EmojIcon from "../../EmojIcon/EmojIcon";
 import { isActive } from "../../Utility/StringUtility";
+import "./NavLink.css";
 
 interface INavLinkProps {
     link: NavbarItem;
@@ -93,10 +94,9 @@ const NavLink: React.FC<INavLinkProps> = ({
                     React.createElement(
                         "div",
                         {
-                            className: "w-full",
+                            className: "navlink-description w-full",
                             style: {
                                 fontSize: ".8rem",
-                                marginTop: "2px",
                             },
                         },
                         link.description,

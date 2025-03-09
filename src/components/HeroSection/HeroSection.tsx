@@ -100,27 +100,20 @@ const HeroSection: React.FC<IHeroProps> = () => {
     const heroSectionRef = useRef(null);
     const pixelatedCodingCatRef = useRef<HTMLDivElement>(null);
     const [screenWidth, setscreenWidth] = useState<number>(0);
+    const [pixelCatReady, setPixelCatReady] = useState<boolean>(false);
     const [cursorPosition, setCursorPosition] = useState<{
         x?: String;
         y?: String;
     }>({});
 
-    const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-        if (pixelatedCodingCatRef.current) {
-            pixelatedCodingCatRef.current.style.zIndex = "1";
-            const rect = pixelatedCodingCatRef.current.getBoundingClientRect();
-            const elementWidth = rect.width;
-            const elementHeight = rect.height;
-            const x = ((e.clientX - rect.left) / elementWidth) * 100;
-            const y = ((e.clientY - rect.top) / elementHeight) * 100;
-            setCursorPosition({ x: `${x}%`, y: `${y}%` });
-        }
-    };
-
     useEffect(() => {
         const update = () => {
             setscreenWidth(window.innerWidth);
         };
+
+        const delay = setTimeout(() => {
+            setPixelCatReady(true);
+        }, 800);
 
         if (typeof window !== "undefined") {
             setscreenWidth(window.innerWidth);
@@ -128,6 +121,7 @@ const HeroSection: React.FC<IHeroProps> = () => {
         }
 
         return () => {
+            clearTimeout(delay);
             if (typeof window !== "undefined") {
                 window.removeEventListener("resize", update);
             }
@@ -164,6 +158,23 @@ const HeroSection: React.FC<IHeroProps> = () => {
             "start",
         );
     });
+
+    const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+        if (pixelatedCodingCatRef.current && pixelCatReady) {
+            const delay = setTimeout(() => {
+                pixelatedCodingCatRef.current!.style.zIndex = "1";
+            }, 100);
+            const rect = pixelatedCodingCatRef.current.getBoundingClientRect();
+            const elementWidth = rect.width;
+            const elementHeight = rect.height;
+            const x = ((e.clientX - rect.left) / elementWidth) * 100;
+            const y = ((e.clientY - rect.top) / elementHeight) * 100;
+            setCursorPosition({ x: `${x}%`, y: `${y}%` });
+            return () => {
+                clearTimeout(delay);
+            };
+        }
+    };
 
     const footer = useMemo(() => {
         return (

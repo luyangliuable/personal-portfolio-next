@@ -32,7 +32,7 @@
                     "name": "Algorithms",
                     "description": "The grind",
                     "emoji": "🧩",
-                    "to": "/digital-chronicles/blog?tag=daily-leetcode"
+                    "to": "/digital-chronicles/blog?tag=algorithms"
                 }
             ]
         },

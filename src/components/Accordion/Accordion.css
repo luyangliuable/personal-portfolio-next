@@ -22,7 +22,7 @@
 .accordion .accordion--tab,
 .accordion .accordion--button {
     background-color: #ddd;
-    border: 0.1px solid #888;
+    border: 0.1px solid #ccc;
     width: 100%;
     font-size: 1.25rem;
     padding: 20px;

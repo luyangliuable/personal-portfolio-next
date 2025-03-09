@@ -1,6 +1,13 @@
 "use client";
 
-import React, { useMemo, useRef, useEffect, useState, memo } from "react";
+import React, {
+    useMemo,
+    useRef,
+    useEffect,
+    useState,
+    memo,
+    MouseEvent,
+} from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import IHeroProps from "./Interface/IHeroProps";
 import Link from "next/link";
@@ -17,7 +24,6 @@ import { RiNotionFill } from "react-icons/ri";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import "./HeroSection.css";
-import Bento from "../Bento/Bento";
 
 const connections = [
     {
@@ -92,8 +98,24 @@ const mainHeading: string = "Hi There, I am Luyang.";
 
 const HeroSection: React.FC<IHeroProps> = () => {
     const heroSectionRef = useRef(null);
-
+    const pixelatedCodingCatRef = useRef<HTMLDivElement>(null);
     const [screenWidth, setscreenWidth] = useState<number>(0);
+    const [cursorPosition, setCursorPosition] = useState<{
+        x?: String;
+        y?: String;
+    }>({});
+
+    const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+        if (pixelatedCodingCatRef.current) {
+            pixelatedCodingCatRef.current.style.zIndex = "1";
+            const rect = pixelatedCodingCatRef.current.getBoundingClientRect();
+            const elementWidth = rect.width;
+            const elementHeight = rect.height;
+            const x = ((e.clientX - rect.left) / elementWidth) * 100;
+            const y = ((e.clientY - rect.top) / elementHeight) * 100;
+            setCursorPosition({ x: `${x}%`, y: `${y}%` });
+        }
+    };
 
     useEffect(() => {
         const update = () => {
@@ -253,6 +275,7 @@ const HeroSection: React.FC<IHeroProps> = () => {
                             justify-center
                             relative
                         "
+                        onMouseMove={handleMouseMove}
                     >
                         <div
                             className="
@@ -263,6 +286,10 @@ const HeroSection: React.FC<IHeroProps> = () => {
                                 w-full
                                 h-full
                             "
+                            ref={pixelatedCodingCatRef}
+                            style={{
+                                clipPath: `circle(70px at ${cursorPosition.x} ${cursorPosition.y})`,
+                            }}
                         >
                             <CodingCat pixelated />
                         </div>

@@ -137,7 +137,6 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({
                 key={index}
                 className="featured-section w-full flex flex-col relative"
             >
-                <Retro showBorder />
                 <div className="flex w-full h-full justify-center items-stretch gap-3">
                     {group.map((content, idx) => (
                         <div

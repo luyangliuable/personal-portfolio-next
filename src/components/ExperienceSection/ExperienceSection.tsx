@@ -333,7 +333,10 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
             gsap.timeline()
                 .fromTo(
                     triggerElement,
-                    { scale: 0.8, y: 10 },
+                    {
+                        scale: 0.8,
+                        y: 10
+                    },
                     {
                         scale: 1,
                         y: 0,

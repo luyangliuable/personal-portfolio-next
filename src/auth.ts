@@ -1,29 +1,19 @@
-import NextAuth from "next-auth";
 import "next-auth/jwt";
-
 import GitHub from "next-auth/providers/github";
-import { createStorage } from "unstorage";
-import memoryDriver from "unstorage/drivers/memory";
-import vercelKVDriver from "unstorage/drivers/vercel-kv";
-import { UnstorageAdapter } from "@auth/unstorage-adapter";
+import NextAuth from "next-auth";
 import type { NextAuthConfig } from "next-auth";
+import { DrizzleAdapter } from "@auth/drizzle-adapter";
+import { UnstorageAdapter } from "@auth/unstorage-adapter";
+import { db } from "./db";
+import CredentialsProvider from "next-auth/providers/credentials";
+import { storage } from "./unstorage";
 
-const storage = createStorage({
-  driver: process.env.VERCEL
-    ? vercelKVDriver({
-        url: process.env.AUTH_KV_REST_API_URL,
-        token: process.env.AUTH_KV_REST_API_TOKEN,
-        env: false,
-      })
-    : memoryDriver(),
-});
+// const unstorageAdaptor = UnstorageAdapter(storage)
+const drizzleAdaptor = DrizzleAdapter(db);
 
-const config = {
-  adapter: UnstorageAdapter(storage),
-  providers: [GitHub],
-  basePath: "/auth",
-  session: { strategy: "jwt" },
-  callbacks: {
+const callbacks = {
+  credential: {},
+  github: {
     authorized({ request, auth }) {
       const { pathname } = request.nextUrl;
       if (pathname === "/middleware-example") return !!auth;
@@ -43,13 +33,40 @@ const config = {
       return session;
     },
   },
+};
+
+const config = {
+  adapter: drizzleAdaptor,
+  providers: [
+    CredentialsProvider({
+      // The name to display on the sign in form (e.g. "Sign in with...")
+      name: "Credentials",
+      // `credentials` is used to generate a form on the sign in page.
+      // You can specify which fields should be submitted, by adding keys to the `credentials` object.
+      // e.g. domain, username, password, 2FA token, etc.
+      // You can pass any HTML attribute to the <input> tag through the object.
+      credentials: {
+        username: { label: "Username", type: "text", placeholder: "jsmith" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials, req) {
+        const user = { id: "1", name: "J Smith", email: "jsmith@example.com" };
+        if (user) {
+          return user;
+        } else {
+          return null;
+        }
+      },
+    }),
+  ],
+  basePath: "/auth",
+  session: { strategy: "jwt" },
+  callbacks: {},
   experimental: {
     enableWebAuthn: true,
   },
   debug: process.env.NODE_ENV !== "production" ? true : false,
 } satisfies NextAuthConfig;
-
-export const { handlers, auth, signIn, signOut } = NextAuth(config);
 
 declare module "next-auth" {
   interface Session {
@@ -62,3 +79,5 @@ declare module "next-auth/jwt" {
     accessToken?: string;
   }
 }
+
+export const { handlers, auth, signIn, signOut } = NextAuth(config);

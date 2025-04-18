@@ -6,15 +6,15 @@ import LlChatbot from "../../../page/Chatbot/Chatbot";
 import ConfigRepository from "../../../repositories/ConfigRepo";
 
 export const metadata: Metadata = {
-    title: "Luyang's Chatbot",
-    description: "A chatgpt clone.",
+  title: "Luyang's Chatbot",
+  description: "A chatgpt clone.",
 };
 
 const page = async () => {
-    const configRepo = ConfigRepository.getInstance();
-    const baseURI = await configRepo.get("OLLAMA_CLIENT_API");
+  const configRepo = ConfigRepository.getInstance();
+  const baseURI = await configRepo.get("OLLAMA_CLIENT_API");
 
-    return <LlChatbot baseURI={String(baseURI)} />;
+  return <LlChatbot baseURI={String(baseURI)} />;
 };
 
 export default page;

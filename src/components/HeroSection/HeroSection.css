@@ -1,284 +1,272 @@
 .hero-section-badge__container {
-    overflow-x: auto;
-    gap: 1.2rem;
+  overflow-x: auto;
+  gap: 1.2rem;
 }
 
 @media screen and (min-width: 1000px) {
-    .hero-section__content__left {
-        width: 30vw;
-        height: 30vw;
-        max-width: 600px;
-        max-height: 600px;
-    }
+  .hero-section__content__left {
+    width: 30vw;
+    height: 30vw;
+    max-width: 600px;
+    max-height: 600px;
+  }
 
-    .hero-section__content {
-        display: flex;
-        min-height: 70vh;
-        margin-top: 3rem;
-        gap: 1rem;
-        justify-content: center;
-        align-items: center;
-        flex-direction: row;
-    }
+  .hero-section__content {
+    display: flex;
+    min-height: 70vh;
+    margin-top: 3rem;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+  }
 }
 
 @media screen and (max-width: 1000px) {
-    .hero-section-badge__container {
-        display: none;
-    }
+  .hero-section-badge__container {
+    display: none;
+  }
 
-    .hero-section__content__right {
-        animation: 0.5s animate-slide-up-fade-in ease-in;
-        padding: 0 5vw 0 5vw;
-        font-size: calc(0.7rem + 0.1vw);
-    }
+  .hero-section__content__right {
+    animation: 0.5s animate-slide-up-fade-in ease-in;
+    padding: 0 5vw 0 5vw;
+    font-size: calc(0.7rem + 0.1vw);
+  }
 
-    .hero-section__content__left {
-        width: 100%;
-        height: 40vw;
-    }
+  .hero-section__content__left {
+    width: 100%;
+    height: 40vw;
+  }
 
-    .hero-section__content {
-        margin: 8rem 0 2.5rem;
-    }
+  .hero-section__content {
+    margin: 8rem 0 2.5rem;
+  }
 }
 
 .hero-section-badge__link {
-    padding: 0.55rem 1.2rem;
-    border: 1px solid #000;
-    color: #fff;
-    font-weight: bold;
-    font-family: "Fira Code";
-    font-size: 0.75rem;
-    border-radius: 5px;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-decoration: none;
+  padding: 0.55rem 1.2rem;
+  border: 1px solid #000;
+  color: #fff;
+  font-weight: bold;
+  font-family: "Fira Code";
+  font-size: 0.75rem;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
 }
 
 .hero-section-badge__link svg {
-    margin-right: 0.3rem;
+  margin-right: 0.3rem;
 }
 
 .hero-section-badge__link:hover {
-    opacity: 0.6;
+  opacity: 0.6;
 }
 
 .hero-section__heading {
-    font-family: "Aileron Bold", "Helvetica Neue", "Arial", sans-serif;
-    color: #2d2d2d;
-    margin: 0;
-    font-size: clamp(2em, 3.4vw, 5em) !important;
-    font-size: 4rem !important;
-    font-weight: 700;
+  font-family: "Aileron Bold", "Helvetica Neue", "Arial", sans-serif;
+  color: #2d2d2d;
+  margin: 0;
+  font-size: clamp(2em, 3.4vw, 5em) !important;
+  font-size: 4rem !important;
+  font-weight: 700;
 }
 
 .hero-section__content__left__text {
-    font-size: 1.125rem;
-    font-family: "M1M Light", "Helvetica Neue", "Arial", sans-serif;
+  font-size: 1.125rem;
+  font-family: "M1M Light", "Helvetica Neue", "Arial", sans-serif;
 }
 
 @media (min-width: 1024px) {
-    .hero-section__content__left__text {
-        font-size: 1.25rem;
-    }
+  .hero-section__content__left__text {
+    font-size: 1.25rem;
+  }
 }
 
 .hero-section {
-    position: relative;
-    z-index: 1;
-    transform-style: preserve-3d;
+  position: relative;
+  z-index: 1;
+  transform-style: preserve-3d;
 }
 
 .hero-section__after {
-    --height: 35vh;
-    width: 95vw;
-    height: var(--height);
-    margin-bottom: calc(-1 * var(--height) + var(--common-card-margin));
-    transform: translateY(-5%);
-    background-image: radial-gradient(
-        var(--background-pattern-color) 1px,
-        transparent 0
-    );
-    background-size: 12px 12px;
-    background-position: -19px -19px;
+  --height: 35vh;
+  width: 95vw;
+  height: var(--height);
+  margin-bottom: calc(-1 * var(--height) + var(--common-card-margin));
+  transform: translateY(-5%);
+  background-image: radial-gradient(
+    var(--background-pattern-color) 1px,
+    transparent 0
+  );
+  background-size: 12px 12px;
+  background-position: -19px -19px;
 
-    background-color: #eeeceb;
-    background-image:
-        linear-gradient(var(--background-pattern-color) 1px, transparent 0),
-        linear-gradient(
-            90deg,
-            var(--background-pattern-color) 1px,
-            transparent 0
-        );
-    background-size: 12px 12px;
-    background-position: -19px -19px;
-    mask-image:
-        radial-gradient(ellipse at center, #fff 0%, transparent 70%),
-        linear-gradient(to bottom, black 30%, transparent 100%);
+  background-color: #eeeceb;
+  background-image:
+    linear-gradient(var(--background-pattern-color) 1px, transparent 0),
+    linear-gradient(90deg, var(--background-pattern-color) 1px, transparent 0);
+  background-size: 12px 12px;
+  background-position: -19px -19px;
+  mask-image:
+    radial-gradient(ellipse at center, #fff 0%, transparent 70%),
+    linear-gradient(to bottom, black 30%, transparent 100%);
 }
 
 .hero-section__text_small {
-    font-size: 0.87rem;
+  font-size: 0.87rem;
 }
 
 @property --column-one {
-    inherits: true;
-    initial-value: 0;
-    syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+  syntax: "<number>";
 }
 
 @property --column-two {
-    inherits: true;
-    initial-value: 0;
-    syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+  syntax: "<number>";
 }
 
 @property --column-three {
-    inherits: true;
-    initial-value: 0;
-    syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+  syntax: "<number>";
 }
 
 @property --column-four {
-    inherits: true;
-    initial-value: 0;
-    syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+  syntax: "<number>";
 }
 
 @property --column-five {
-    inherits: true;
-    initial-value: 0;
-    syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+  syntax: "<number>";
 }
 
 @property --column-six {
-    inherits: true;
-    initial-value: 0;
-    syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+  syntax: "<number>";
 }
 
 @property --column-seven {
-    inherits: true;
-    initial-value: 0;
-    syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+  syntax: "<number>";
 }
 
 @property --column-eight {
-    inherits: true;
-    initial-value: 0;
-    syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+  syntax: "<number>";
 }
 
 @keyframes one {
-    from {
-        --column-one: 100;
-    }
+  from {
+    --column-one: 100;
+  }
 }
 
 @keyframes two {
-    from {
-        --column-two: 100;
-    }
+  from {
+    --column-two: 100;
+  }
 }
 
 @keyframes three {
-    from {
-        --column-three: 100;
-    }
+  from {
+    --column-three: 100;
+  }
 }
 
 @keyframes four {
-    from {
-        --column-four: 100;
-    }
+  from {
+    --column-four: 100;
+  }
 }
 
 @keyframes five {
-    from {
-        --column-five: 100;
-    }
+  from {
+    --column-five: 100;
+  }
 }
 
 @keyframes six {
-    from {
-        --column-six: 100;
-    }
+  from {
+    --column-six: 100;
+  }
 }
 
 @keyframes seven {
-    from {
-        --column-seven: 100;
-    }
+  from {
+    --column-seven: 100;
+  }
 }
 
 @keyframes eight {
-    from {
-        --column-eight: 100;
-    }
+  from {
+    --column-eight: 100;
+  }
 }
 
 .coding-cat {
-    --speed: 1;
-    --columns: 5;
-    clip-path: polygon(
-        /*	1st column */ 0 100%,
-        0 calc(var(--column-one) * 1%),
-        20% calc(var(--column-one) * 1%),
-        20% 100%,
+  --speed: 1;
+  --columns: 5;
+  clip-path: polygon(
+    /*	1st column */ 0 100%,
+    0 calc(var(--column-one) * 1%),
+    20% calc(var(--column-one) * 1%),
+    20% 100%,
 
-        /*	2nd column */ 10% 100%,
-        20% calc(var(--column-two) * 1%),
-        40% calc(var(--column-two) * 1%),
-        40% 100%,
+    /*	2nd column */ 10% 100%,
+    20% calc(var(--column-two) * 1%),
+    40% calc(var(--column-two) * 1%),
+    40% 100%,
 
-        /*	3rd column */ 20% 100%,
-        40% calc(var(--column-three) * 1%),
-        60% calc(var(--column-three) * 1%),
-        60% 100%,
+    /*	3rd column */ 20% 100%,
+    40% calc(var(--column-three) * 1%),
+    60% calc(var(--column-three) * 1%),
+    60% 100%,
 
-        /*	4th column */ 35% 100%,
-        60% calc(var(--column-four) * 1%),
-        80% calc(var(--column-four) * 1%),
-        80% 100%,
+    /*	4th column */ 35% 100%,
+    60% calc(var(--column-four) * 1%),
+    80% calc(var(--column-four) * 1%),
+    80% 100%,
 
-        /*	5th column */ 50% 100%,
-        80% calc(var(--column-five) * 1%),
-        100% calc(var(--column-five) * 1%),
-        100% 100%,
+    /*	5th column */ 50% 100%,
+    80% calc(var(--column-five) * 1%),
+    100% calc(var(--column-five) * 1%),
+    100% 100%,
 
-        /*	6th column */ 65% 100%,
-        80% calc(var(--column-six) * 1%),
-        100% calc(var(--column-six) * 1%),
-        100% 100%,
+    /*	6th column */ 65% 100%,
+    80% calc(var(--column-six) * 1%),
+    100% calc(var(--column-six) * 1%),
+    100% 100%,
 
-        /*	7th column */ 85% 100%,
-        80% calc(var(--column-seven) * 1%),
-        100% calc(var(--column-seven) * 1%),
-        100% 100%,
+    /*	7th column */ 85% 100%,
+    80% calc(var(--column-seven) * 1%),
+    100% calc(var(--column-seven) * 1%),
+    100% 100%,
 
-        /*	8th column */ 90% 100%,
-        80% calc(var(--column-eight) * 1%),
-        100% calc(var(--column-eight) * 1%),
-        100% 100%
-    );
+    /*	8th column */ 90% 100%,
+    80% calc(var(--column-eight) * 1%),
+    100% calc(var(--column-eight) * 1%),
+    100% 100%
+  );
 
-    animation:
-        one calc(var(--speed) * 1s)
-            calc(sin((0 / 8) * 45deg) * var(--speed) * 1s),
-        two calc(var(--speed) * 1s)
-            calc(sin((1 / 8) * 45deg) * var(--speed) * 1s),
-        three calc(var(--speed) * 1s)
-            calc(sin((2 / 8) * 45deg) * var(--speed) * 1s),
-        four calc(var(--speed) * 1s)
-            calc(sin((3 / 8) * 45deg) * var(--speed) * 1s),
-        five calc(var(--speed) * 1s)
-            calc(sin((4 / 8) * 45deg) * var(--speed) * 1s),
-        six calc(var(--speed) * 1s)
-            calc(sin((5 / 8) * 45deg) * var(--speed) * 1s),
-        seven calc(var(--speed) * 1s)
-            calc(sin((6 / 8) * 45deg) * var(--speed) * 1s),
-        eight calc(var(--speed) * 1s)
-            calc(sin((7 / 8) * 45deg) * var(--speed) * 1s);
-    animation-fill-mode: both;
+  animation:
+    one calc(var(--speed) * 1s) calc(sin((0 / 8) * 45deg) * var(--speed) * 1s),
+    two calc(var(--speed) * 1s) calc(sin((1 / 8) * 45deg) * var(--speed) * 1s),
+    three calc(var(--speed) * 1s) calc(sin((2 / 8) * 45deg) * var(--speed) * 1s),
+    four calc(var(--speed) * 1s) calc(sin((3 / 8) * 45deg) * var(--speed) * 1s),
+    five calc(var(--speed) * 1s) calc(sin((4 / 8) * 45deg) * var(--speed) * 1s),
+    six calc(var(--speed) * 1s) calc(sin((5 / 8) * 45deg) * var(--speed) * 1s),
+    seven calc(var(--speed) * 1s) calc(sin((6 / 8) * 45deg) * var(--speed) * 1s),
+    eight calc(var(--speed) * 1s) calc(sin((7 / 8) * 45deg) * var(--speed) * 1s);
+  animation-fill-mode: both;
 }

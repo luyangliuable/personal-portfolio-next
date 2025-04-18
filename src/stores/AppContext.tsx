@@ -5,36 +5,36 @@ import IAppContextProps from "./Interface/IAppContextProps";
 import UserNameResponse from "../repositories/Response/UserNameResponse";
 
 export const AppContext = React.createContext<IAppContextProvider>({
-    userName: "",
-    loginStatus: false,
+  userName: "",
+  loginStatus: false,
 });
 
 export const AppContextProvider: React.FC<IAppContextProps> = ({
-    children,
+  children,
 }) => {
-    const [userName, setUserName] = useState<string>("");
-    const [loginStatus, setLoginStatus] = useState<boolean>(false);
+  const [userName, setUserName] = useState<string>("");
+  const [loginStatus, setLoginStatus] = useState<boolean>(false);
 
-    useEffect(() => {
-        const initialize = async () => {
-            UserRepository.getUserName()
-                .then((response: UserNameResponse) => {
-                    setUserName(response.username);
-                    setLoginStatus(true);
-                })
-                .catch((error) => {
-                    console.error("An error occurred:", error);
-                });
-        };
+  useEffect(() => {
+    const initialize = async () => {
+      UserRepository.getUserName()
+        .then((response: UserNameResponse) => {
+          setUserName(response.username);
+          setLoginStatus(true);
+        })
+        .catch((error) => {
+          console.error("An error occurred:", error);
+        });
+    };
 
-        initialize();
-    }, []);
+    initialize();
+  }, []);
 
-    return (
-        <AppContext.Provider value={{ userName, loginStatus }}>
-            {children}
-        </AppContext.Provider>
-    );
+  return (
+    <AppContext.Provider value={{ userName, loginStatus }}>
+      {children}
+    </AppContext.Provider>
+  );
 };
 
 export { type IAppContextProps, type IAppContextProvider };

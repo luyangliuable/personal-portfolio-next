@@ -7,12 +7,12 @@ import LoginButton from "./LoginButton/LoginButton";
 const links: NavbarItem[] = linksData.links as NavbarItem[];
 
 const NavBar = () => {
-    return (
-        <article className="navbar flex flex-row">
-            <NavbarMainSection links={links} />
-            <LoginButton style={{ position: "absolute", right: 0 }} />
-        </article>
-    );
+  return (
+    <article className="navbar flex flex-row">
+      <NavbarMainSection links={links} />
+      <LoginButton style={{ position: "absolute", right: 0 }} />
+    </article>
+  );
 };
 
 export default NavBar;

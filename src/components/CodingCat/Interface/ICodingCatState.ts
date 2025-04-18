@@ -1,3 +1,3 @@
 export default interface ICodingCatState {
-    [category: string]: any;
+  [category: string]: any;
 }

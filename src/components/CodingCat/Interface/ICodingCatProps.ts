@@ -1,5 +1,5 @@
 interface ICodingCatProps {
-    [category: string]: any;
+  [category: string]: any;
 }
 
 export default ICodingCatProps;

@@ -1,12 +1,12 @@
 "use client";
 
 import React, {
-    CSSProperties,
-    useEffect,
-    useRef,
-    ReactElement,
-    useState,
-    useMemo,
+  CSSProperties,
+  useEffect,
+  useRef,
+  ReactElement,
+  useState,
+  useMemo,
 } from "react";
 import { isoDateFormatToString } from "../../../components/Utility/StringUtility";
 import Link from "next/link";
@@ -26,143 +26,134 @@ import Contributors from "./Contributors/Contributors";
 import { cl } from "../../Utility/LogicUtility";
 
 const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
-    const galleryItemRef = useRef<HTMLDivElement>(null);
-    const dynamicLoadQueue = DynamicLoadQueue.getInstance();
+  const galleryItemRef = useRef<HTMLDivElement>(null);
+  const dynamicLoadQueue = DynamicLoadQueue.getInstance();
 
-    const [isRendered, setIsRendered] = useState(false);
+  const [isRendered, setIsRendered] = useState(false);
 
-    useEffect(() => {
-        if (isRendered && galleryItemRef.current) {
-            dynamicLoadQueue.addToQueue(galleryItemRef.current);
-        }
-    }, [isRendered, galleryItemRef, dynamicLoadQueue]);
+  useEffect(() => {
+    if (isRendered && galleryItemRef.current) {
+      dynamicLoadQueue.addToQueue(galleryItemRef.current);
+    }
+  }, [isRendered, galleryItemRef, dynamicLoadQueue]);
 
-    const MemoizedCgWebsite = useMemo(() => <CgWebsite />, []);
-    const MemoizedTbToolsOff = useMemo(() => <TbToolsOff />, []);
+  const MemoizedCgWebsite = useMemo(() => <CgWebsite />, []);
+  const MemoizedTbToolsOff = useMemo(() => <TbToolsOff />, []);
 
-    const GalleryItemTypeSegment = (): ReactElement => {
-        const type = props.type;
+  const GalleryItemTypeSegment = (): ReactElement => {
+    const type = props.type;
 
-        if (type === "blog") {
-            return (
-                <div className="gallery-item__type font-fira-code">
-                    {MemoizedCgWebsite}
-                    <span>BLOG</span>
-                </div>
-            );
-        } else if (type === "tool") {
-            return (
-                <div className="gallery-item__type font-fira-code">
-                    {MemoizedTbToolsOff}
-                    <span>TOOL</span>
-                </div>
-            );
-        }
-
-        return <></>;
-    };
-
-    const style: CSSProperties = props.style || {};
-    const { image, className, imageOverlay } = props;
-
-    useEffect(() => {
-        setIsRendered(true);
-    }, []);
-
-    if (!isRendered) {
-        return <></>;
+    if (type === "blog") {
+      return (
+        <div className="gallery-item__type font-fira-code">
+          {MemoizedCgWebsite}
+          <span>BLOG</span>
+        </div>
+      );
+    } else if (type === "tool") {
+      return (
+        <div className="gallery-item__type font-fira-code">
+          {MemoizedTbToolsOff}
+          <span>TOOL</span>
+        </div>
+      );
     }
 
-    return (
-        <Link
-            shallow
-            className={cl(
-                className,
-                "h-full relative w-full flex items-center justify-center",
-            )}
-            href={props.link ?? ""}
-        >
-            <div
-                style={style}
-                ref={galleryItemRef}
-                onMouseMove={cardGradientEffect}
-                className="card gallery-item initially-hidden blur-boundary--sm"
-            >
-                <GalleryItemTypeSegment />
-                <div className="gallery-item__image flex justify-center items-center">
-                    {!imageOverlay ? (
-                        <Image
-                            isLazyLoading={false}
-                            compression={30}
-                            alt=""
-                            src={image ?? ""}
-                        />
-                    ) : (
-                        <>
-                            <img alt="" src={imageOverlay} />
-                            <Image
-                                isLazyLoading={false}
-                                compression={30}
-                                alt=""
-                                src={image ?? ""}
-                            />
-                        </>
-                    )}
-                </div>
-                <div className="px-5">
-                    <TagCloud tags={props.tags} />
-                    <div className="gallery-item__link">
-                        <h3 className="font-bold">{props.name}</h3>
-                    </div>
-                    <p>{props.subheading}</p>
-                    {props.description && (
-                        <div className="w-full box-border">
-                            <SequentialRiseSpan minNumberOfLettersPerLine={42}>
-                                {truncateTextBody(props.description, 200)}
-                            </SequentialRiseSpan>
-                        </div>
-                    )}
-                </div>
-                {(props.minuteRead || props.dateCreated || props.metadata) && (
-                    <p className="absolute gallery-item__metadata flex">
-                        {props.minuteRead && (
-                            <span className="flex items-center">
-                                <CiTimer /> {props.minuteRead} min read
-                            </span>
-                        )}
-                        {props.dateCreated && (
-                            <span className="flex items-center">
-                                <CiCalendar />{" "}
-                                {isoDateFormatToString(
-                                    new Date(props.dateCreated),
-                                )}
-                            </span>
-                        )}
-                        {props.metadata &&
-                            props.metadata.map((item, idx) => {
-                                return (
-                                    <span
-                                        key={idx}
-                                        className="flex items-center"
-                                    >
-                                        {item.icon}
-                                        {!item.callback && item.value}
-                                        {item.callback &&
-                                            item.callback(item.value)}
-                                    </span>
-                                );
-                            })}
-                    </p>
-                )}
-                {props.repoOwner && props.repoName && (
-                    <Contributors
-                        repoOwner={props.repoOwner}
-                        repoName={props.repoName}
-                    />
-                )}
+    return <></>;
+  };
+
+  const style: CSSProperties = props.style || {};
+  const { image, className, imageOverlay } = props;
+
+  useEffect(() => {
+    setIsRendered(true);
+  }, []);
+
+  if (!isRendered) {
+    return <></>;
+  }
+
+  return (
+    <Link
+      shallow
+      className={cl(
+        className,
+        "h-full relative w-full flex items-center justify-center",
+      )}
+      href={props.link ?? ""}
+    >
+      <div
+        style={style}
+        ref={galleryItemRef}
+        onMouseMove={cardGradientEffect}
+        className="card gallery-item initially-hidden blur-boundary--sm"
+      >
+        <GalleryItemTypeSegment />
+        <div className="gallery-item__image flex justify-center items-center">
+          {!imageOverlay ? (
+            <Image
+              isLazyLoading={false}
+              compression={30}
+              alt=""
+              src={image ?? ""}
+            />
+          ) : (
+            <>
+              <img alt="" src={imageOverlay} />
+              <Image
+                isLazyLoading={false}
+                compression={30}
+                alt=""
+                src={image ?? ""}
+              />
+            </>
+          )}
+        </div>
+        <div className="px-5">
+          <TagCloud tags={props.tags} />
+          <div className="gallery-item__link">
+            <h3 className="font-bold">{props.name}</h3>
+          </div>
+          <p>{props.subheading}</p>
+          {props.description && (
+            <div className="w-full box-border">
+              <SequentialRiseSpan minNumberOfLettersPerLine={42}>
+                {truncateTextBody(props.description, 200)}
+              </SequentialRiseSpan>
             </div>
-        </Link>
-    );
+          )}
+        </div>
+        {(props.minuteRead || props.dateCreated || props.metadata) && (
+          <p className="absolute gallery-item__metadata flex">
+            {props.minuteRead && (
+              <span className="flex items-center">
+                <CiTimer /> {props.minuteRead} min read
+              </span>
+            )}
+            {props.dateCreated && (
+              <span className="flex items-center">
+                <CiCalendar />{" "}
+                {isoDateFormatToString(new Date(props.dateCreated))}
+              </span>
+            )}
+            {props.metadata &&
+              props.metadata.map((item, idx) => {
+                return (
+                  <span key={idx} className="flex items-center">
+                    {item.icon}
+                    {!item.callback && item.value}
+                    {item.callback && item.callback(item.value)}
+                  </span>
+                );
+              })}
+          </p>
+        )}
+        {props.repoOwner && props.repoName && (
+          <Contributors repoOwner={props.repoOwner} repoName={props.repoName} />
+        )}
+      </div>
+    </Link>
+  );
 };
 
 export default GalleryItem;

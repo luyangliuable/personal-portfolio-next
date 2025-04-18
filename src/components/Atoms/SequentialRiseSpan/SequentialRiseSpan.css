@@ -1,47 +1,47 @@
 \::selection {
-    background: rgba(170, 170, 170, 0.3);
+  background: rgba(170, 170, 170, 0.3);
 }
 
 .sequential-rise-span {
-    position: relative;
-    visibility: hidden;
-    width: 100%;
+  position: relative;
+  visibility: hidden;
+  width: 100%;
 }
 
 .sequential-rise-span > * {
-    overflow-y: hidden;
-    overflow-x: visible;
-    width: max-content;
+  overflow-y: hidden;
+  overflow-x: visible;
+  width: max-content;
 }
 
 .sequential-rise-span > div {
-    height: fit-content;
-    margin-bottom: -5px;
+  height: fit-content;
+  margin-bottom: -5px;
 }
 
 .sequential-rise-span > div > * {
-    width: 100% !important;
-    white-space: normal;
+  width: 100% !important;
+  white-space: normal;
 }
 
 .sequential-rise-span p {
-    line-height: 1;
+  line-height: 1;
 }
 
 .sequential-rise-span h1 {
-    line-height: 1.2;
+  line-height: 1.2;
 }
 
 .sequential-rise-span > div > p > span {
-    display: inline;
+  display: inline;
 }
 
 .sequential-rise-span {
-    display: inline-block;
+  display: inline-block;
 }
 
 .slide-up {
-    display: inline-block;
-    animation: slide-up 0.55s cubic-bezier(0.65, 0, 0.35, 1) both;
-    visibility: visible;
+  display: inline-block;
+  animation: slide-up 0.55s cubic-bezier(0.65, 0, 0.35, 1) both;
+  visibility: visible;
 }

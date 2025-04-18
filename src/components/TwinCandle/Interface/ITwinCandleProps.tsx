@@ -1,5 +1,5 @@
 interface ITwinCandleProps {
-    style?: React.CSSProperties;
+  style?: React.CSSProperties;
 }
 
 export default ITwinCandleProps;

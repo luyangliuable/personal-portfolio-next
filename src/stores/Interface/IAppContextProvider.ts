@@ -1,4 +1,4 @@
 export default interface IAppContextProvider {
-    userName: string;
-    loginStatus: boolean;
+  userName: string;
+  loginStatus: boolean;
 }

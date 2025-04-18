@@ -1,236 +1,236 @@
 {
-    "links": [
+  "links": [
+    {
+      "name": "Home",
+      "to": "/"
+    },
+    {
+      "name": "Blogs",
+      "to": "/digital-chronicles",
+      "isDisabled": true,
+      "sublinks": [
         {
-            "name": "Home",
-            "to": "/"
+          "name": "Posts",
+          "emoji": "💻",
+          "description": "My Blog posts",
+          "to": "/digital-chronicles/blog"
         },
         {
-            "name": "Blogs",
-            "to": "/digital-chronicles",
-            "isDisabled": true,
-            "sublinks": [
-                {
-                    "name": "Posts",
-                    "emoji": "💻",
-                    "description": "My Blog posts",
-                    "to": "/digital-chronicles/blog"
-                },
-                {
-                    "name": "Coding Notes",
-                    "emoji": "📓",
-                    "description": "Coding Notes from the past",
-                    "to": "/digital-chronicles/coding-notes"
-                },
-                {
-                    "name": "Scenic Memories",
-                    "emoji": "🏞",
-                    "description": "Images of me touching grass probably",
-                    "isLocked": true,
-                    "to": "/digital-chronicles/scenic_memories"
-                },
-                {
-                    "name": "Algorithms",
-                    "description": "The grind",
-                    "emoji": "🧩",
-                    "to": "/digital-chronicles/blog?tag=algorithms"
-                }
-            ]
+          "name": "Coding Notes",
+          "emoji": "📓",
+          "description": "Coding Notes from the past",
+          "to": "/digital-chronicles/coding-notes"
         },
         {
-            "name": "Projects",
-            "to": "/projects",
-            "sublinks": [
-                {
-                    "name": "Coding Projects",
-                    "emoji": "🏗︎",
-                    "description": "My coding projects",
-                    "to": "/projects/code"
-                },
-                {
-                    "name": "Web Experiments",
-                    "emoji": "🧪️",
-                    "description": "Experiments with some cool web technologies",
-                    "to": "/projects/web-experiments"
-                },
-                {
-                    "name": "3D Printing",
-                    "emoji": "🖨️",
-                    "description": "My 3d prints",
-                    "to": "/projects/3d-printing"
-                },
-                {
-                    "name": "Hardware",
-                    "emoji": "🤖",
-                    "description": "Tools I use for hardware",
-                    "to": "/projects/hardware"
-                }
-            ]
+          "name": "Scenic Memories",
+          "emoji": "🏞",
+          "description": "Images of me touching grass probably",
+          "isLocked": true,
+          "to": "/digital-chronicles/scenic_memories"
         },
         {
-            "name": "Tools",
-            "to": "/tools",
-            "isDisabled": true,
-            "sublinks": [
-                {
-                    "name": "Chatgpt 5",
-                    "emoji": "🤖",
-                    "description": "Working chatgpt clone",
-                    "to": "/tools/chatbot"
-                },
-                {
-                    "name": "Askly",
-                    "emoji": "✨",
-                    "description": "Survey creating app",
-                    "to": "/tools/survey"
-                },
-                {
-                    "name": "IsItHealthy",
-                    "emoji": "🍎",
-                    "description": "AI-powered food healthiness assessment tool.",
-                    "isLocked": true,
-                    "to": "/tools/is-it-healthy"
-                },
-                {
-                    "name": "HexaBridger",
-                    "emoji": "🌉",
-                    "description": "Secret",
-                    "isLocked": true,
-                    "to": "/tools/hex-to-rgb"
-                },
-                {
-                    "name": "BloomChain ",
-                    "emoji": "🌸",
-                    "description": "NFT using AI? WTF",
-                    "isLocked": true,
-                    "to": "/tools/bloomchain"
-                },
-                {
-                    "name": "PonderPad",
-                    "emoji": "📝",
-                    "description": "Single page notetaking",
-                    "isLocked": true,
-                    "to": "/tools/ponderpad"
-                },
-                {
-                    "name": "MangaSpeak",
-                    "emoji": "🗣️",
-                    "description": "Manga to realistic speech",
-                    "isLocked": true,
-                    "to": "/tools/mangaspeak"
-                },
-                {
-                    "name": "TimeCapsule Letters",
-                    "emoji": "⌛",
-                    "description": "Send a letter to someone in the future",
-                    "isLocked": true,
-                    "to": "/tools/time-capsule-letters"
-                },
-                {
-                    "name": "CssCrossBrowser",
-                    "emoji": "🌐",
-                    "isLocked": true,
-                    "description": "Css on different browsers",
-                    "to": "/tools/css-cross-browser"
-                },
-                {
-                    "name": "AnonyLetters",
-                    "emoji": "✉️",
-                    "isLocked": true,
-                    "to": "/tools/anony-letters"
-                },
-                {
-                    "name": "Mood Diaries",
-                    "emoji": "😯",
-                    "isLocked": true,
-                    "description": "Mood tracker app",
-                    "to": "/tools/mood-tracker"
-                },
-                {
-                    "name": "AtomicHabits",
-                    "emoji": "⚛️",
-                    "isLocked": true,
-                    "description": "Based on atomic habits book",
-                    "to": "/tools/atomic-habits"
-                },
-                {
-                    "name": "‍️Gym Log",
-                    "emoji": "🏋",
-                    "isLocked": true,
-                    "description": "Gym tracking app",
-                    "to": "/tools/gym-log"
-                },
-                {
-                    "name": "MeetSleek",
-                    "emoji": "🤝",
-                    "description": "When2meet inspired but with better UI/UX",
-                    "isLocked": true,
-                    "to": "/tools/meet-sleek"
-                }
-            ]
-        },
-        {
-            "name": "Resume",
-            "to": "/resume"
-        },
-        {
-            "name": "About",
-            "to": "/about",
-            "isDisabled": true,
-            "sublinks": [
-                {
-                    "name": "Teddie",
-                    "emoji": "🐩",
-                    "description": "About my dog",
-                    "to": "/about/teddie",
-                    "isLocked": true
-                },
-                {
-                    "name": "About Me",
-                    "emoji": "😃",
-                    "to": "/about/me",
-                    "isLocked": true
-                }
-            ]
-        },
-        {
-            "name": "Misc.",
-            "isDisabled": true,
-            "sublinks": [
-                {
-                    "name": "Music Playlist",
-                    "description": "Free online music player disguised as my playlist",
-                    "emoji": "🎵",
-                    "to": "/misc/music-playlist",
-                    "isLocked": true
-                },
-                {
-                    "name": "Youtube Playlist",
-                    "description": "Youtube videos that are interesting",
-                    "emoji": "🎥",
-                    "to": "/misc/youtube-playlist",
-                    "isLocked": false
-                },
-                {
-                    "name": "Man of the Day",
-                    "description": "Shell command of the day",
-                    "emoji": "⌨️",
-                    "to": "/misc/man-of-the-Day",
-                    "isLocked": true
-                },
-                {
-                    "name": "Algorithm of the Day",
-                    "emoji": "📐",
-                    "to": "/misc/algorithm-of-the-Day",
-                    "isLocked": true
-                },
-                {
-                    "name": "Wall of Gratefulness",
-                    "description": "A wall to put what you are grateful for today",
-                    "emoji": "🙏",
-                    "to": "/misc/wall-of-gratefulness",
-                    "isLocked": true
-                }
-            ]
+          "name": "Algorithms",
+          "description": "The grind",
+          "emoji": "🧩",
+          "to": "/digital-chronicles/blog?tag=algorithms"
         }
-    ]
+      ]
+    },
+    {
+      "name": "Projects",
+      "to": "/projects",
+      "sublinks": [
+        {
+          "name": "Coding Projects",
+          "emoji": "🏗︎",
+          "description": "My coding projects",
+          "to": "/projects/code"
+        },
+        {
+          "name": "Web Experiments",
+          "emoji": "🧪️",
+          "description": "Experiments with some cool web technologies",
+          "to": "/projects/web-experiments"
+        },
+        {
+          "name": "3D Printing",
+          "emoji": "🖨️",
+          "description": "My 3d prints",
+          "to": "/projects/3d-printing"
+        },
+        {
+          "name": "Hardware",
+          "emoji": "🤖",
+          "description": "Tools I use for hardware",
+          "to": "/projects/hardware"
+        }
+      ]
+    },
+    {
+      "name": "Tools",
+      "to": "/tools",
+      "isDisabled": true,
+      "sublinks": [
+        {
+          "name": "Chatgpt 5",
+          "emoji": "🤖",
+          "description": "Working chatgpt clone",
+          "to": "/tools/chatbot"
+        },
+        {
+          "name": "Askly",
+          "emoji": "✨",
+          "description": "Survey creating app",
+          "to": "/tools/survey"
+        },
+        {
+          "name": "IsItHealthy",
+          "emoji": "🍎",
+          "description": "AI-powered food healthiness assessment tool.",
+          "isLocked": true,
+          "to": "/tools/is-it-healthy"
+        },
+        {
+          "name": "HexaBridger",
+          "emoji": "🌉",
+          "description": "Secret",
+          "isLocked": true,
+          "to": "/tools/hex-to-rgb"
+        },
+        {
+          "name": "BloomChain ",
+          "emoji": "🌸",
+          "description": "NFT using AI? WTF",
+          "isLocked": true,
+          "to": "/tools/bloomchain"
+        },
+        {
+          "name": "PonderPad",
+          "emoji": "📝",
+          "description": "Single page notetaking",
+          "isLocked": true,
+          "to": "/tools/ponderpad"
+        },
+        {
+          "name": "MangaSpeak",
+          "emoji": "🗣️",
+          "description": "Manga to realistic speech",
+          "isLocked": true,
+          "to": "/tools/mangaspeak"
+        },
+        {
+          "name": "TimeCapsule Letters",
+          "emoji": "⌛",
+          "description": "Send a letter to someone in the future",
+          "isLocked": true,
+          "to": "/tools/time-capsule-letters"
+        },
+        {
+          "name": "CssCrossBrowser",
+          "emoji": "🌐",
+          "isLocked": true,
+          "description": "Css on different browsers",
+          "to": "/tools/css-cross-browser"
+        },
+        {
+          "name": "AnonyLetters",
+          "emoji": "✉️",
+          "isLocked": true,
+          "to": "/tools/anony-letters"
+        },
+        {
+          "name": "Mood Diaries",
+          "emoji": "😯",
+          "isLocked": true,
+          "description": "Mood tracker app",
+          "to": "/tools/mood-tracker"
+        },
+        {
+          "name": "AtomicHabits",
+          "emoji": "⚛️",
+          "isLocked": true,
+          "description": "Based on atomic habits book",
+          "to": "/tools/atomic-habits"
+        },
+        {
+          "name": "‍️Gym Log",
+          "emoji": "🏋",
+          "isLocked": true,
+          "description": "Gym tracking app",
+          "to": "/tools/gym-log"
+        },
+        {
+          "name": "MeetSleek",
+          "emoji": "🤝",
+          "description": "When2meet inspired but with better UI/UX",
+          "isLocked": true,
+          "to": "/tools/meet-sleek"
+        }
+      ]
+    },
+    {
+      "name": "Resume",
+      "to": "/resume"
+    },
+    {
+      "name": "About",
+      "to": "/about",
+      "isDisabled": true,
+      "sublinks": [
+        {
+          "name": "Teddie",
+          "emoji": "🐩",
+          "description": "About my dog",
+          "to": "/about/teddie",
+          "isLocked": true
+        },
+        {
+          "name": "About Me",
+          "emoji": "😃",
+          "to": "/about/me",
+          "isLocked": true
+        }
+      ]
+    },
+    {
+      "name": "Misc.",
+      "isDisabled": true,
+      "sublinks": [
+        {
+          "name": "Music Playlist",
+          "description": "Free online music player disguised as my playlist",
+          "emoji": "🎵",
+          "to": "/misc/music-playlist",
+          "isLocked": true
+        },
+        {
+          "name": "Youtube Playlist",
+          "description": "Youtube videos that are interesting",
+          "emoji": "🎥",
+          "to": "/misc/youtube-playlist",
+          "isLocked": false
+        },
+        {
+          "name": "Man of the Day",
+          "description": "Shell command of the day",
+          "emoji": "⌨️",
+          "to": "/misc/man-of-the-Day",
+          "isLocked": true
+        },
+        {
+          "name": "Algorithm of the Day",
+          "emoji": "📐",
+          "to": "/misc/algorithm-of-the-Day",
+          "isLocked": true
+        },
+        {
+          "name": "Wall of Gratefulness",
+          "description": "A wall to put what you are grateful for today",
+          "emoji": "🙏",
+          "to": "/misc/wall-of-gratefulness",
+          "isLocked": true
+        }
+      ]
+    }
+  ]
 }

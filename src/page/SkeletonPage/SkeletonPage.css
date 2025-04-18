@@ -1,5 +1,5 @@
 .skeleton-page__header {
-    z-index: 12;
-    top: var(--navbar-height);
-    height: 100vh;
+  z-index: 12;
+  top: var(--navbar-height);
+  height: 100vh;
 }

@@ -1,7 +1,7 @@
 .notes {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(500px, 100%), 1fr));
-    overflow-y: auto;
-    align-items: stretch;
-    justify-items: stretch;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(500px, 100%), 1fr));
+  overflow-y: auto;
+  align-items: stretch;
+  justify-items: stretch;
 }

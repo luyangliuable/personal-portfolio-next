@@ -2,7 +2,7 @@
 import Prism from "prismjs";
 
 const useHighlightAll = () => {
-    Prism.highlightAll();
+  Prism.highlightAll();
 };
 
 export default useHighlightAll;

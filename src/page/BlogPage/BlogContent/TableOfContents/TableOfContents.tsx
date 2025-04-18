@@ -2,225 +2,211 @@ import React from "react";
 import ItableOfContentsProps from "../../../../interfaces/BlogPage/BlogContent/TableOfContents/ItableOfContentsProps";
 import { useEffect, useState, useRef, RefObject } from "react";
 import {
-    stringToHash,
-    removeHashesAndStripWhitespace,
-    removeTextInsideAngleBrackets,
-    convertHtmlEntities,
+  stringToHash,
+  removeHashesAndStripWhitespace,
+  removeTextInsideAngleBrackets,
+  convertHtmlEntities,
 } from "../../../../components/Utility/StringUtility";
 import "./TableOfContents.css";
 import { cl } from "../../../../components/Utility/LogicUtility";
 
 const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
-    const [tocEntries, setTocEntries] = useState<JSX.Element[] | null>(null);
-    const [tocEntryRef, setTocEntryRef] = useState<RefObject<HTMLElement>[]>(
-        [],
+  const [tocEntries, setTocEntries] = useState<JSX.Element[] | null>(null);
+  const [tocEntryRef, setTocEntryRef] = useState<RefObject<HTMLElement>[]>([]);
+  const [listenTocItems, setlistenTocItems] = useState<Set<string>>(new Set());
+  const [lastPathInfo, setLastPathInfo] = useState<{
+    lastPathStart: number;
+    lastPathEnd: number;
+  }>({
+    lastPathStart: 0,
+    lastPathEnd: 0,
+  });
+  const tocMarkerPathRef: RefObject<SVGPathElement> = useRef(null);
+
+  useEffect(() => {
+    renderTableOfContents();
+  }, [props.headings]);
+
+  useEffect(() => {
+    listenSections();
+  }, [tocEntries, props.emitter]);
+
+  const handleClick = (
+    _event: React.MouseEvent<HTMLDivElement>,
+    id: string,
+  ) => {
+    const allBlogSections = Array.from(
+      document.querySelectorAll(".blog-section"),
     );
-    const [listenTocItems, setlistenTocItems] = useState<Set<string>>(
-        new Set(),
+    const targetElement = allBlogSections.find((section) => section.id === id);
+    if (targetElement)
+      targetElement.scrollIntoView({
+        block: "start",
+        behavior: "smooth",
+      });
+  };
+
+  const renderTableOfContents = (): void => {
+    const getTextColor = (level: number): string => {
+      const lightness = level * 20;
+      return `hsl(0, 0%, ${lightness}%)`;
+    };
+    const subheadings = props.headings?.filter(({ level }) => level !== 0);
+    const renderedSubHeadings = subheadings?.map(
+      ({ title, level }, idx: number) => {
+        if (level === 1) title = "";
+        const indentation = `${Math.max(level - 2, 0) * 20}px`;
+        const marginBottom = idx === 0 ? "0px" : `${(22 - 4.5 * level) / 2}px`;
+        const color = getTextColor(level);
+        const id = stringToHash(title);
+        const className = `level-${level - 2} section-toc-entry flex items-center`;
+        return (
+          <div
+            key={idx}
+            id={id.toString()}
+            className={className}
+            style={{
+              color,
+              margin: `${marginBottom} ${indentation}`,
+            }}
+            onClick={(e) => handleClick(e, id.toString())}
+          >
+            {convertHtmlEntities(
+              removeTextInsideAngleBrackets(
+                removeHashesAndStripWhitespace(title),
+              ),
+            )}
+          </div>
+        );
+      },
     );
-    const [lastPathInfo, setLastPathInfo] = useState<{
-        lastPathStart: number;
-        lastPathEnd: number;
-    }>({
-        lastPathStart: 0,
-        lastPathEnd: 0,
-    });
-    const tocMarkerPathRef: RefObject<SVGPathElement> = useRef(null);
-
-    useEffect(() => {
-        renderTableOfContents();
-    }, [props.headings]);
-
-    useEffect(() => {
-        listenSections();
-    }, [tocEntries, props.emitter]);
-
-    const handleClick = (
-        _event: React.MouseEvent<HTMLDivElement>,
-        id: string,
-    ) => {
-        const allBlogSections = Array.from(
-            document.querySelectorAll(".blog-section"),
-        );
-        const targetElement = allBlogSections.find(
-            (section) => section.id === id,
-        );
-        if (targetElement)
-            targetElement.scrollIntoView({
-                block: "start",
-                behavior: "smooth",
-            });
-    };
-
-    const renderTableOfContents = (): void => {
-        const getTextColor = (level: number): string => {
-            const lightness = level * 20;
-            return `hsl(0, 0%, ${lightness}%)`;
-        };
-        const subheadings = props.headings?.filter(({ level }) => level !== 0);
-        const renderedSubHeadings = subheadings?.map(
-            ({ title, level }, idx: number) => {
-                if (level === 1) title = "";
-                const indentation = `${Math.max(level - 2, 0) * 20}px`;
-                const marginBottom =
-                    idx === 0 ? "0px" : `${(22 - 4.5 * level) / 2}px`;
-                const color = getTextColor(level);
-                const id = stringToHash(title);
-                const className = `level-${level - 2} section-toc-entry flex items-center`;
-                return (
-                    <div
-                        key={idx}
-                        id={id.toString()}
-                        className={className}
-                        style={{
-                            color,
-                            margin: `${marginBottom} ${indentation}`,
-                        }}
-                        onClick={(e) => handleClick(e, id.toString())}
-                    >
-                        {convertHtmlEntities(
-                            removeTextInsideAngleBrackets(
-                                removeHashesAndStripWhitespace(title),
-                            ),
-                        )}
-                    </div>
-                );
-            },
-        );
-        if (renderedSubHeadings) {
-            setTocEntries(renderedSubHeadings);
-            setTocEntryRef(
-                renderedSubHeadings.map(() => React.createRef<any>()),
-            );
-        }
-    };
-
-    const drawPath = () => {
-        const tocPath = tocMarkerPathRef.current,
-            path: any[] = [];
-        let height = 0,
-            indent = 10,
-            baseIndent = 10,
-            indentOffset = 20,
-            heightEach = 20,
-            startHeight = 56,
-            startIdx = -1,
-            endIdx = -1,
-            pathStart = 0,
-            pathEnd = 0;
-        tocEntries!.forEach((entry, idx) => {
-            if (entry.props.className.includes("active")) {
-                if (startIdx === -1) startIdx = idx;
-                endIdx = idx;
-            }
-        });
-        path.push("M", indent, startHeight);
-        height = startHeight;
-        tocEntries!.forEach((entry, idx) => {
-            const computedStyle = window.getComputedStyle(
-                tocEntryRef[idx].current!,
-            );
-            const extra =
-                parseFloat(computedStyle.height) +
-                parseFloat(computedStyle.marginBottom) * 2;
-            if (idx < startIdx) pathStart += extra;
-            const { className } = entry.props;
-            const match = className.match(/level-(\d+)/);
-            if (match) {
-                const level = match[1];
-                const expectedIdent = baseIndent + level * indentOffset;
-                if (indent !== expectedIdent) {
-                    indent = expectedIdent;
-                    path.push("L", indent, height);
-                    if (idx <= endIdx) pathEnd += heightEach;
-                    if (idx < startIdx) pathStart += heightEach;
-                }
-                if (idx <= endIdx) pathEnd += extra;
-                path.push("L", indent, height + extra);
-                height += extra;
-            }
-        });
-        const { lastPathStart, lastPathEnd } = lastPathInfo;
-        if (pathStart !== lastPathStart || pathEnd !== lastPathEnd) {
-            if (startIdx === -1) tocPath!.setAttribute("opacity", "0");
-            const pathString = path.join(" ");
-            const pathLength = tocPath!.getTotalLength();
-            tocPath!.setAttribute("d", pathString);
-            tocPath!.setAttribute("stroke-dashoffset", "1");
-            tocPath!.setAttribute(
-                "stroke-dasharray",
-                `0, ${pathStart}, ${pathEnd - pathStart}, ${pathLength === 0 ? 1000 : pathLength}`,
-            );
-            tocPath!.setAttribute("opacity", "1");
-            setLastPathInfo({
-                lastPathStart: pathStart,
-                lastPathEnd: pathEnd,
-            });
-        }
-    };
-    useEffect(() => {
-        if (tocEntries === null) return;
-        drawPath();
-    }, [tocEntries]);
-    function listenSections(): void {
-        if (tocEntries === null || props.emitter === undefined) return;
-        if (listenTocItems.has("intersectingSectionsListener")) return;
-        props.emitter.on("intersectingSections", (intersectingIds) => {
-            setTocEntries((prev) => {
-                return prev!.map((tocEntry) => {
-                    const prevClassName = tocEntry.props.className.replace(
-                        "active",
-                        "",
-                    );
-                    if (intersectingIds.includes(tocEntry.props.id)) {
-                        return React.cloneElement(tocEntry, {
-                            className: `${prevClassName} active`,
-                        });
-                    }
-                    return React.cloneElement(tocEntry, {
-                        className: prevClassName,
-                    });
-                });
-            });
-        });
-        setlistenTocItems((prev) =>
-            new Set(prev).add("intersectingSectionsListener"),
-        );
+    if (renderedSubHeadings) {
+      setTocEntries(renderedSubHeadings);
+      setTocEntryRef(renderedSubHeadings.map(() => React.createRef<any>()));
     }
+  };
 
-    return (
-        <div className={cl("table-of-contents", props.className)}>
-            <div className="mb-2 w-full">
-                <h2 className="font-bold mb-2 pb-1 border-b border-gray-300 w-full">
-                    Table of Contents
-                </h2>
-            </div>
-            {tocEntries &&
-                tocEntries.map((entry, index) => {
-                    return React.cloneElement(entry, {
-                        ref: tocEntryRef[index],
-                        key: index,
-                    });
-                })}
-            <svg
-                className="toc-marker"
-                width="200"
-                height="200"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                <path
-                    ref={tocMarkerPathRef}
-                    stroke="#444"
-                    strokeWidth="3"
-                    fill="transparent"
-                    strokeLinecap="round"
-                    troke-dasharray="0, 0, 0, 1000"
-                    strokeLinejoin="round"
-                    transform="translate(-0.5, -0.5)"
-                />
-            </svg>
-        </div>
+  const drawPath = () => {
+    const tocPath = tocMarkerPathRef.current,
+      path: any[] = [];
+    let height = 0,
+      indent = 10,
+      baseIndent = 10,
+      indentOffset = 20,
+      heightEach = 20,
+      startHeight = 56,
+      startIdx = -1,
+      endIdx = -1,
+      pathStart = 0,
+      pathEnd = 0;
+    tocEntries!.forEach((entry, idx) => {
+      if (entry.props.className.includes("active")) {
+        if (startIdx === -1) startIdx = idx;
+        endIdx = idx;
+      }
+    });
+    path.push("M", indent, startHeight);
+    height = startHeight;
+    tocEntries!.forEach((entry, idx) => {
+      const computedStyle = window.getComputedStyle(tocEntryRef[idx].current!);
+      const extra =
+        parseFloat(computedStyle.height) +
+        parseFloat(computedStyle.marginBottom) * 2;
+      if (idx < startIdx) pathStart += extra;
+      const { className } = entry.props;
+      const match = className.match(/level-(\d+)/);
+      if (match) {
+        const level = match[1];
+        const expectedIdent = baseIndent + level * indentOffset;
+        if (indent !== expectedIdent) {
+          indent = expectedIdent;
+          path.push("L", indent, height);
+          if (idx <= endIdx) pathEnd += heightEach;
+          if (idx < startIdx) pathStart += heightEach;
+        }
+        if (idx <= endIdx) pathEnd += extra;
+        path.push("L", indent, height + extra);
+        height += extra;
+      }
+    });
+    const { lastPathStart, lastPathEnd } = lastPathInfo;
+    if (pathStart !== lastPathStart || pathEnd !== lastPathEnd) {
+      if (startIdx === -1) tocPath!.setAttribute("opacity", "0");
+      const pathString = path.join(" ");
+      const pathLength = tocPath!.getTotalLength();
+      tocPath!.setAttribute("d", pathString);
+      tocPath!.setAttribute("stroke-dashoffset", "1");
+      tocPath!.setAttribute(
+        "stroke-dasharray",
+        `0, ${pathStart}, ${pathEnd - pathStart}, ${pathLength === 0 ? 1000 : pathLength}`,
+      );
+      tocPath!.setAttribute("opacity", "1");
+      setLastPathInfo({
+        lastPathStart: pathStart,
+        lastPathEnd: pathEnd,
+      });
+    }
+  };
+  useEffect(() => {
+    if (tocEntries === null) return;
+    drawPath();
+  }, [tocEntries]);
+  function listenSections(): void {
+    if (tocEntries === null || props.emitter === undefined) return;
+    if (listenTocItems.has("intersectingSectionsListener")) return;
+    props.emitter.on("intersectingSections", (intersectingIds) => {
+      setTocEntries((prev) => {
+        return prev!.map((tocEntry) => {
+          const prevClassName = tocEntry.props.className.replace("active", "");
+          if (intersectingIds.includes(tocEntry.props.id)) {
+            return React.cloneElement(tocEntry, {
+              className: `${prevClassName} active`,
+            });
+          }
+          return React.cloneElement(tocEntry, {
+            className: prevClassName,
+          });
+        });
+      });
+    });
+    setlistenTocItems((prev) =>
+      new Set(prev).add("intersectingSectionsListener"),
     );
+  }
+
+  return (
+    <div className={cl("table-of-contents", props.className)}>
+      <div className="mb-2 w-full">
+        <h2 className="font-bold mb-2 pb-1 border-b border-gray-300 w-full">
+          Table of Contents
+        </h2>
+      </div>
+      {tocEntries &&
+        tocEntries.map((entry, index) => {
+          return React.cloneElement(entry, {
+            ref: tocEntryRef[index],
+            key: index,
+          });
+        })}
+      <svg
+        className="toc-marker"
+        width="200"
+        height="200"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          ref={tocMarkerPathRef}
+          stroke="#444"
+          strokeWidth="3"
+          fill="transparent"
+          strokeLinecap="round"
+          troke-dasharray="0, 0, 0, 1000"
+          strokeLinejoin="round"
+          transform="translate(-0.5, -0.5)"
+        />
+      </svg>
+    </div>
+  );
 };
 
 export default TableOfContents;

@@ -8,21 +8,21 @@ import ConfigRepository from "../../repositories/ConfigRepo";
 const Chatbot = ChatbotComponent as unknown as React.FC<{ baseURI: String }>;
 
 interface ILlChatbotProps {
-    baseURI: String;
+  baseURI: String;
 }
 
 const LlChatbot: React.FC<ILlChatbotProps> = ({ baseURI }) => {
-    useEffect(() => {
-        document.documentElement.scrollTo(0, 0);
-        console.log(baseURI);
-        console.log(baseURI);
-    }, []);
+  useEffect(() => {
+    document.documentElement.scrollTo(0, 0);
+    console.log(baseURI);
+    console.log(baseURI);
+  }, []);
 
-    return (
-        <main className="chatbot__wrapper">
-            <Chatbot baseURI={baseURI} />
-        </main>
-    );
+  return (
+    <main className="chatbot__wrapper">
+      <Chatbot baseURI={baseURI} />
+    </main>
+  );
 };
 
 export default LlChatbot;

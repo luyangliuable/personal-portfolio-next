@@ -1,17 +1,17 @@
 #scroll-progress {
-    position: absolute;
-    height: var(--progress-height);
-    z-index: 11;
-    width: 0;
-    border-radius: 0 0 20px 0;
-    background: linear-gradient(
-        to right,
-        var(--dark-mode-purple-2),
-        90%,
-        #00bfff
-    );
-    transition:
-        background 0.3s ease-in,
-        color 0.3s ease-in;
-    color: transparent;
+  position: absolute;
+  height: var(--progress-height);
+  z-index: 11;
+  width: 0;
+  border-radius: 0 0 20px 0;
+  background: linear-gradient(
+    to right,
+    var(--dark-mode-purple-2),
+    90%,
+    #00bfff
+  );
+  transition:
+    background 0.3s ease-in,
+    color 0.3s ease-in;
+  color: transparent;
 }

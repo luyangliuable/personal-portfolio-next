@@ -10,35 +10,35 @@ import BlogPage from "../BlogPage/BlogPage";
 import SkeletonPage from "../SkeletonPage/SkeletonPage";
 
 const LandingPage: React.FC<ILandingPageProps> = ({ postList }) => {
-    const [isLoaded, setIsLoaded] = useState(false);
-    const memoizedSkeletonPage = useMemo(() => <SkeletonPage />, []);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const memoizedSkeletonPage = useMemo(() => <SkeletonPage />, []);
 
-    useEffect(() => {
-        const handleLoad = () => {
-            setIsLoaded(true);
-        };
-        handleLoad();
-    }, []);
+  useEffect(() => {
+    const handleLoad = () => {
+      setIsLoaded(true);
+    };
+    handleLoad();
+  }, []);
 
-    if (!isLoaded) {
-        return memoizedSkeletonPage;
-    }
+  if (!isLoaded) {
+    return memoizedSkeletonPage;
+  }
 
-    return (
-        <main className="landing-page-content">
-            <HeroSection />
-            <FeaturedContentSection postList={postList} />
-            <Experiences />
-            <LandingPageCard
-                landingPageCardType="fitContent"
-                className="blend-with-background"
-            >
-                <section className="flex-column-centered-centered">
-                    <BlogPage data={postList} />
-                </section>
-            </LandingPageCard>
-        </main>
-    );
+  return (
+    <main className="landing-page-content">
+      <HeroSection />
+      <FeaturedContentSection postList={postList} />
+      <Experiences />
+      <LandingPageCard
+        landingPageCardType="fitContent"
+        className="blend-with-background"
+      >
+        <section className="flex-column-centered-centered">
+          <BlogPage data={postList} />
+        </section>
+      </LandingPageCard>
+    </main>
+  );
 };
 
 export default LandingPage;

@@ -1,5 +1,5 @@
 interface INavbarBurgerProps {
-    onNavbarBurgerClick: () => void;
+  onNavbarBurgerClick: () => void;
 }
 
 export default INavbarBurgerProps;

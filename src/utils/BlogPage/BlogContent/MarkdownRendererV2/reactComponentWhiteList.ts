@@ -4,10 +4,10 @@ import BlogNote from "../../../../page/BlogPage/BlogContent/BlogNote/BlogNote";
 import BlogWarning from "../../../../page/BlogPage/BlogContent/BlogWarning/BlogWarning";
 
 const reactComponentWhiteList: { [key: string]: any } = {
-    img: Image,
-    note: BlogNote,
-    warn: BlogWarning,
-    bbb: CodeBlock,
+  img: Image,
+  note: BlogNote,
+  warn: BlogWarning,
+  bbb: CodeBlock,
 };
 
 export default reactComponentWhiteList;

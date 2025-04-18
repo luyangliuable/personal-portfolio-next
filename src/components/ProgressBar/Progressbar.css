@@ -1,26 +1,26 @@
 .progress-bar {
-    position: relative;
-    width: 100px;
-    max-width: 20vw;
-    height: 10px;
-    margin-left: 0.4rem;
-    border: 0.5px solid #888;
-    border-radius: 4px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+  position: relative;
+  width: 100px;
+  max-width: 20vw;
+  height: 10px;
+  margin-left: 0.4rem;
+  border: 0.5px solid #888;
+  border-radius: 4px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .progress-bar > div {
-    --translate-x: 1px;
-    position: relative;
-    width: calc(100% - 2px);
-    transition: transform 0.5s easein;
-    transform: translateX(var(--translate-x)) scaleX(0);
-    transform-origin: left;
-    height: calc(100% - 2px);
-    background: #888;
-    border-radius: 2px;
-    animation: scale-from-zero 0.5s ease-in forwards;
-    animation-delay: 0.5s;
+  --translate-x: 1px;
+  position: relative;
+  width: calc(100% - 2px);
+  transition: transform 0.5s easein;
+  transform: translateX(var(--translate-x)) scaleX(0);
+  transform-origin: left;
+  height: calc(100% - 2px);
+  background: #888;
+  border-radius: 2px;
+  animation: scale-from-zero 0.5s ease-in forwards;
+  animation-delay: 0.5s;
 }

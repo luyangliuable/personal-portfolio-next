@@ -1,35 +1,35 @@
 .blog__year {
-    width: 88%;
-    margin: 40px 0;
-    margin: min(120px, 8vh) 0 min(30px, 2vh);
-    font-size: 1.5rem;
-    position: relative;
+  width: 88%;
+  margin: 40px 0;
+  margin: min(120px, 8vh) 0 min(30px, 2vh);
+  font-size: 1.5rem;
+  position: relative;
 }
 
 .blog__year span {
-    font-family: "Aileron Regular", Spartan, "Poppins", sans-serif;
-    background: #eee;
-    transition: opacity 1s ease;
-    opacity: 0;
-    color: var(--text-grey);
+  font-family: "Aileron Regular", Spartan, "Poppins", sans-serif;
+  background: #eee;
+  transition: opacity 1s ease;
+  opacity: 0;
+  color: var(--text-grey);
 }
 
 .blog__year::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    background: var(--divider-color);
-    height: 1px;
-    width: 0;
-    transition: width 1s ease-in-out;
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--divider-color);
+  height: 1px;
+  width: 0;
+  transition: width 1s ease-in-out;
 }
 
 .blog__year--animate span {
-    opacity: 1;
+  opacity: 1;
 }
 
 .blog__year--animate::before {
-    width: 100%;
+  width: 100%;
 }

@@ -1,60 +1,60 @@
 .table-of-contents {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-    height: 50vw;
-    overflow: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  height: 50vw;
+  overflow: visible;
 }
 
 .table-of-contents div {
-    text-align: left;
-    position: relative;
-    cursor: pointer;
-    padding-left: 8px;
-    font-weight: bold;
-    word-wrap: break-word;
+  text-align: left;
+  position: relative;
+  cursor: pointer;
+  padding-left: 8px;
+  font-weight: bold;
+  word-wrap: break-word;
 }
 
 .table-of-contents h2 {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 @media screen and (max-width: 1000px) {
-    .table-of-contents {
-        height: fit-content;
-    }
+  .table-of-contents {
+    height: fit-content;
+  }
 }
 
 @media screen and (max-width: 1400px) {
-    .table-of-contents {
-        left: 28%;
-    }
+  .table-of-contents {
+    left: 28%;
+  }
 }
 
 .table-of-contents > span {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .section-toc-entry {
-    transition: transform 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .active {
-    color: #000 !important;
-    font-weight: bold !important;
-    transform: translateX(5px);
+  color: #000 !important;
+  font-weight: bold !important;
+  transform: translateX(5px);
 }
 
 .toc-marker {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 
 .toc-marker path {
-    transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }

@@ -12,62 +12,62 @@ import "prismjs/components/prism-toml";
 import "prismjs/components/prism-lisp";
 
 interface CodeBlockProps {
-    lang?: string;
-    filename?: string;
-    children?: string;
+  lang?: string;
+  filename?: string;
+  children?: string;
 }
 
 const CodeBlock: React.FC<CodeBlockProps> = ({ lang, children, filename }) => {
-    const codeBlockRef = useRef<HTMLDivElement>(null);
+  const codeBlockRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        if (filename !== undefined && codeBlockRef.current !== null) {
-            codeBlockRef.current!.style.setProperty("margin-top", "50px");
-        }
-    }, [codeBlockRef.current, filename]);
+  useEffect(() => {
+    if (filename !== undefined && codeBlockRef.current !== null) {
+      codeBlockRef.current!.style.setProperty("margin-top", "50px");
+    }
+  }, [codeBlockRef.current, filename]);
 
-    useEffect(() => {
-        Prism.highlightAll();
-    }, [children]);
+  useEffect(() => {
+    Prism.highlightAll();
+  }, [children]);
 
-    const language = useMemo(() => {
-        if (lang === "sh") {
-            return "bash";
-        } else if (lang === "rs") {
-            return "rust";
-        } else if (lang === "js") {
-            return "javascript";
-        } else if (lang === "py") {
-            return "python";
-        }
-    }, [children]);
+  const language = useMemo(() => {
+    if (lang === "sh") {
+      return "bash";
+    } else if (lang === "rs") {
+      return "rust";
+    } else if (lang === "js") {
+      return "javascript";
+    } else if (lang === "py") {
+      return "python";
+    }
+  }, [children]);
 
-    const cleanedChildren = children ? children.replace(/^\n/, "") : "";
+  const cleanedChildren = children ? children.replace(/^\n/, "") : "";
 
-    const copyToClipboard = () => {
-        if (cleanedChildren) navigator.clipboard.writeText(cleanedChildren);
-    };
+  const copyToClipboard = () => {
+    if (cleanedChildren) navigator.clipboard.writeText(cleanedChildren);
+  };
 
-    const langClass = lang ? `language-${language}` : "language-js";
+  const langClass = lang ? `language-${language}` : "language-js";
 
-    return (
-        <div ref={codeBlockRef} className="code-block--native__container">
-            {filename && (
-                <div className="code-block--file-name w-full font-bold absolute">
-                    {filename}
-                </div>
-            )}
-            <div
-                className="code-block--copy-button absolute cursor-pointer"
-                onClick={() => copyToClipboard()}
-            >
-                <FaRegCopy />
-            </div>
-            <pre className="code-block--native">
-                <code className={langClass}>{cleanedChildren}</code>
-            </pre>
+  return (
+    <div ref={codeBlockRef} className="code-block--native__container">
+      {filename && (
+        <div className="code-block--file-name w-full font-bold absolute">
+          {filename}
         </div>
-    );
+      )}
+      <div
+        className="code-block--copy-button absolute cursor-pointer"
+        onClick={() => copyToClipboard()}
+      >
+        <FaRegCopy />
+      </div>
+      <pre className="code-block--native">
+        <code className={langClass}>{cleanedChildren}</code>
+      </pre>
+    </div>
+  );
 };
 
 export default CodeBlock;

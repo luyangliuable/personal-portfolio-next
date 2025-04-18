@@ -1,79 +1,79 @@
 import { EffectCallback, DependencyList } from "react";
 
 export const toggleClassName = (
-    el: HTMLElement,
-    set: boolean,
-    className: string,
+  el: HTMLElement,
+  set: boolean,
+  className: string,
 ): void => {
-    if (set) {
-        el?.classList.add(className);
-    } else {
-        el?.classList.remove(className);
-    }
+  if (set) {
+    el?.classList.add(className);
+  } else {
+    el?.classList.remove(className);
+  }
 };
 
 export const toggleProperty = (
-    el: HTMLElement,
-    set: boolean,
-    trueProperty: Record<string, string>,
-    falseProperty: Record<string, string>,
+  el: HTMLElement,
+  set: boolean,
+  trueProperty: Record<string, string>,
+  falseProperty: Record<string, string>,
 ): void => {
-    if (set) {
-        setProperty(el, trueProperty);
-    } else {
-        setProperty(el, falseProperty);
-    }
+  if (set) {
+    setProperty(el, trueProperty);
+  } else {
+    setProperty(el, falseProperty);
+  }
 };
 
 export const setProperty = (el: HTMLElement, prop: Record<string, string>) => {
-    Object.keys(prop).forEach((key: string) => {
-        const val = prop[key];
-        el.style.setProperty(key, val);
-    });
+  Object.keys(prop).forEach((key: string) => {
+    const val = prop[key];
+    el.style.setProperty(key, val);
+  });
 };
 
 export const dp = (callback: EffectCallback, dependencyList: any[]) => {
-    // Validate the dependency list
-    dependencyList.forEach((item) => {
-        if (!item) return;
-    });
+  // Validate the dependency list
+  dependencyList.forEach((item) => {
+    if (!item) return;
+  });
 
-    return () => {
-        callback();
-    };
+  return () => {
+    callback();
+  };
 };
 
 export const cl = (...args: any[]) => {
-    let res = "";
+  let res = "";
 
-    args.forEach((item) => {
-        if (item && typeof item == "object") {
-            const a = Object.keys(item).reduce((acc: string, key: string) => {
-                if (item[key]) {
-                    acc = acc + ` ${key}`;
-                }
-                return acc.trim();
-            }, "");
-
-            res = res + ` ${a}`;
-        } else {
-            if (item) res = res + ` ${item}`;
+  args.forEach((item) => {
+    if (item && typeof item == "object") {
+      const a = Object.keys(item).reduce((acc: string, key: string) => {
+        if (item[key]) {
+          acc = acc + ` ${key}`;
         }
-    });
+        return acc.trim();
+      }, "");
 
-    return res.trim();
+      res = res + ` ${a}`;
+    } else {
+      if (item) res = res + ` ${item}`;
+    }
+  });
+
+  return res.trim();
 };
 
 export const clamp = (
-    min: number,
-    max: number,
-    value?: number,
-    factor?: number,
+  min: number,
+  max: number,
+  value?: number,
+  factor?: number,
 ): number => {
-    const validValue = (value ?? 0) * (factor ?? 1);
-    return Math.min(max, Math.max(min, validValue));
+  const validValue = (value ?? 0) * (factor ?? 1);
+  return Math.min(max, Math.max(min, validValue));
 };
 
 export const deepCompare = (json1: any, json2: any) => {
-    return JSON.stringify(json1) == JSON.stringify(json2);
+  return JSON.stringify(json1) == JSON.stringify(json2);
 };

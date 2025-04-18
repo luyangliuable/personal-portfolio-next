@@ -1,115 +1,115 @@
 .button {
-    --border-radius: 4px;
-    --border-color: rgba(220, 220, 220, 0.8);
-    position: relative;
-    background: rgba(220, 220, 220, 0.3);
-    backdrop-filter: blur(2px);
-    box-sizing: content-box;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    width: fit-content;
-    color: #333;
-    transition: background 0.5s ease-in-out;
-    -webkit-transition: background 0.5s ease-in-out;
-    -moz-transition: background 0.5s ease-in-out;
-    z-index: 1;
-    border: none;
+  --border-radius: 4px;
+  --border-color: rgba(220, 220, 220, 0.8);
+  position: relative;
+  background: rgba(220, 220, 220, 0.3);
+  backdrop-filter: blur(2px);
+  box-sizing: content-box;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  width: fit-content;
+  color: #333;
+  transition: background 0.5s ease-in-out;
+  -webkit-transition: background 0.5s ease-in-out;
+  -moz-transition: background 0.5s ease-in-out;
+  z-index: 1;
+  border: none;
 }
 
 .button__done {
-    background: rgb(86, 215, 50, 0.95) !important;
-    color: rgb(0, 43, 16);
-    cursor: not-allowed !important;
+  background: rgb(86, 215, 50, 0.95) !important;
+  color: rgb(0, 43, 16);
+  cursor: not-allowed !important;
 }
 
 .button__error {
-    background: red !important;
-    cursor: not-allowed !important;
+  background: red !important;
+  cursor: not-allowed !important;
 }
 
 .button svg {
-    margin-left: 0.2rem;
+  margin-left: 0.2rem;
 }
 
 .override-button {
-    background: transparent;
-    border: none;
-    padding: 0;
+  background: transparent;
+  border: none;
+  padding: 0;
 }
 
 .t-button {
-    --mouse-x: 0px;
-    --mouse-y: 0px;
-    --height: 30px;
-    --width: fit-content;
-    border-radius: var(--border-radius);
-    display: flex;
-    padding: 5px 20px;
-    align-items: center;
-    justify-content: center;
-    height: var(--height);
-    width: var(--width);
-    cursor: pointer;
-    position: relative;
-    border: 1px solid var(--border-color);
-    z-index: 1;
+  --mouse-x: 0px;
+  --mouse-y: 0px;
+  --height: 30px;
+  --width: fit-content;
+  border-radius: var(--border-radius);
+  display: flex;
+  padding: 5px 20px;
+  align-items: center;
+  justify-content: center;
+  height: var(--height);
+  width: var(--width);
+  cursor: pointer;
+  position: relative;
+  border: 1px solid var(--border-color);
+  z-index: 1;
 }
 
 .t-button:hover {
-    color: #fff;
+  color: #fff;
 }
 
 .t-button svg {
-    transition: transform 100ms ease-out;
+  transition: transform 100ms ease-out;
 }
 
 .t-button:hover svg {
-    transform: translateX(3px);
+  transform: translateX(3px);
 }
 
 .button-line {
-    position: absolute;
-    height: 2.5px;
-    width: 100vw;
-    border-radius: 100%;
-    background: #f3f3f3;
+  position: absolute;
+  height: 2.5px;
+  width: 100vw;
+  border-radius: 100%;
+  background: #f3f3f3;
 }
 
 .t-button:hover::after {
-    border-radius: var(--border-radius);
-    animation: 0.1s settle-position ease-in;
-    opacity: 1;
+  border-radius: var(--border-radius);
+  animation: 0.1s settle-position ease-in;
+  opacity: 1;
 }
 
 .t-button span {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    align-items: center;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
 }
 
 .t-button::after {
-    background: #1e90ff;
-    opacity: 0;
-    content: "";
-    border-radius: 2px;
-    transition: 0.1s all ease-in;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    z-index: 0;
-    padding: 5px 0px;
+  background: #1e90ff;
+  opacity: 0;
+  content: "";
+  border-radius: 2px;
+  transition: 0.1s all ease-in;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 0;
+  padding: 5px 0px;
 }
 
 @keyframes settle-position {
-    0% {
-        opacity: 0;
-        transform: translate(var(--mouse-x), var(--mouse-y)) skew(3deg, 3deg);
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        transform:;
-    }
+  0% {
+    opacity: 0;
+    transform: translate(var(--mouse-x), var(--mouse-y)) skew(3deg, 3deg);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform:;
+  }
 }

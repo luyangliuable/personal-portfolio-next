@@ -1,71 +1,71 @@
 .footer {
-    position: fixed;
-    z-index: -1;
-    flex-shrink: 0;
-    background: var(--background-color-lighter);
-    width: 100%;
-    max-height: 100vh;
-    bottom: 0;
+  position: fixed;
+  z-index: -1;
+  flex-shrink: 0;
+  background: var(--background-color-lighter);
+  width: 100%;
+  max-height: 100vh;
+  bottom: 0;
 }
 
 .footer h3 {
-    border-bottom: 1px solid var(--divider-color);
-    padding-bottom: 0.5rem;
-    width: 100%;
+  border-bottom: 1px solid var(--divider-color);
+  padding-bottom: 0.5rem;
+  width: 100%;
 }
 
 .footer section {
-    margin: 0 clamp(0.5rem, 1vw, 3rem) 2rem;
+  margin: 0 clamp(0.5rem, 1vw, 3rem) 2rem;
 }
 
 .footer__bottom {
-    border-top: 0.1px solid var(--divider-color);
-    padding: 1rem 2rem;
+  border-top: 0.1px solid var(--divider-color);
+  padding: 1rem 2rem;
 }
 
 .footer textarea,
 footer input {
-    width: 300px;
-    padding: 0.5rem;
-    margin-bottom: 10px;
+  width: 300px;
+  padding: 0.5rem;
+  margin-bottom: 10px;
 }
 
 .footer textarea {
-    resize: none;
-    min-height: 100px;
+  resize: none;
+  min-height: 100px;
 }
 
 textarea:focus,
 input:focus {
-    outline: 0;
+  outline: 0;
 }
 
 .footer__connect-with-me > div {
-    max-width: 150px;
+  max-width: 150px;
 }
 
 @media screen and (max-width: 1100px) {
-    .footer > div {
-        flex-direction: column !important;
-    }
+  .footer > div {
+    flex-direction: column !important;
+  }
 
-    .footer section {
-        margin: clamp(0.9rem, 1vw, 3rem) 0;
-    }
+  .footer section {
+    margin: clamp(0.9rem, 1vw, 3rem) 0;
+  }
 }
 
 .footer__main {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    overflow-y: auto;
-    align-items: stretch;
-    gap: 2rem;
-    justify-items: stretch;
-    margin: 2rem 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  overflow-y: auto;
+  align-items: stretch;
+  gap: 2rem;
+  justify-items: stretch;
+  margin: 2rem 0;
 }
 
 @media (max-width: 768px) {
-    .footer__main {
-        padding: 0 2rem;
-    }
+  .footer__main {
+    padding: 0 2rem;
+  }
 }

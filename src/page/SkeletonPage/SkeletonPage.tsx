@@ -3,13 +3,13 @@ import "./SkeletonPage.css";
 import { useScrollToTopOnLoad } from "../../components/Utility/ScrollUtility";
 
 const SkeletonPage: React.FC = () => {
-    useScrollToTopOnLoad();
+  useScrollToTopOnLoad();
 
-    return (
-        <div className="skeleton-page">
-            <div className="skeleton-component skeleton-page__header w-full"></div>
-        </div>
-    );
+  return (
+    <div className="skeleton-page">
+      <div className="skeleton-component skeleton-page__header w-full"></div>
+    </div>
+  );
 };
 
 export default SkeletonPage;

@@ -1,3 +1,3 @@
 export default interface IGalleryItemProps {
-    fetchedImageUrl?: string;
+  fetchedImageUrl?: string;
 }

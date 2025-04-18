@@ -1,28 +1,28 @@
 .featured-section {
-    gap: 3rem 1rem;
-    height: 430px;
-    margin-bottom: 1rem;
-    z-index: 1;
-    padding-bottom: 1rem;
+  gap: 3rem 1rem;
+  height: 430px;
+  margin-bottom: 1rem;
+  z-index: 1;
+  padding-bottom: 1rem;
 }
 
 .featured-section--inner > div {
-    width: 90%;
+  width: 90%;
 }
 
 .featured-section .featured-section--item {
-    width: 400px;
-    height: 360px;
-    margin-bottom: 200px;
+  width: 400px;
+  height: 360px;
+  margin-bottom: 200px;
 }
 
 .featured-section--wrapper {
-    min-height: 550px;
+  min-height: 550px;
 }
 
 @media (max-width: 1439px) {
-    .featured-section-with-before::before {
-        content: "";
-        display: none;
-    }
+  .featured-section-with-before::before {
+    content: "";
+    display: none;
+  }
 }

@@ -3,7 +3,6 @@
 import React, { useRef, useState } from "react";
 import "./RegisterPage.css";
 import { useDispatch, useSelector } from "react-redux";
-import { registerUser } from "../../stores/Repository/Auth";
 import { AppDispatch, RootState } from "../../stores/store";
 
 export type UserData = {
@@ -25,7 +24,7 @@ const RegisterPage: React.FC = () => {
   const [flashMessage, setFlashMessage] = useState<string>("");
 
   const dispatch: AppDispatch = useDispatch();
-  const registerStatus = useSelector((state: RootState) => state.auth.status);
+  const registerStatus = null;
   const error = useSelector((state: RootState) => state.auth.error);
 
   const getFlashClassNames = (): string => {
@@ -70,11 +69,6 @@ const RegisterPage: React.FC = () => {
       first_name: firstnameRef.current!.value,
       last_name: lastnameRef.current!.value,
     };
-
-    dispatch(registerUser(registerDetails))
-      .unwrap()
-      .then(() => handleRegisterSuccess())
-      .catch((err) => handleRegisterFailure(err));
   };
 
   return (

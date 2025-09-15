@@ -1,6 +1,6 @@
 services:
   database:
-    image: "postgres:latest"
+    image: hub.docker.internal.cba/postgres
     ports:
       - 5433:5432
     environment:

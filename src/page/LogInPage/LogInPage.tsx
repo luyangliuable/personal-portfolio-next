@@ -3,7 +3,6 @@
 import React, { useRef, useState } from "react";
 import "./LogInPage.css";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../../stores/Repository/Auth";
 import { AppDispatch, RootState } from "../../stores/store";
 
 const LogInPage: React.FC = () => {
@@ -12,8 +11,6 @@ const LogInPage: React.FC = () => {
   const flash = useRef<HTMLInputElement>(null);
 
   const dispatch: AppDispatch = useDispatch();
-  const registerStatus = useSelector((state: RootState) => state.auth.status);
-  const error = useSelector((state: RootState) => state.auth.error);
 
   const [state, setState] = useState({
     loginStatus: "Pending",
@@ -57,10 +54,6 @@ const LogInPage: React.FC = () => {
       username: userNameRef.current!.value,
       password: passwordRef.current!.value,
     };
-    dispatch(loginUser(loginDetails))
-      .unwrap()
-      .then(() => handleLoginSuccess())
-      .catch((err) => handleLoginFailure(err));
   };
 
   return (

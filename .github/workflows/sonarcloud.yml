@@ -121,10 +121,10 @@ jobs:
               echo "|------|------|------|---------|" >> $GITHUB_STEP_SUMMARY
 
               jq -r ".issues[] | select(.severity==\"$SEVERITY\") |
-                [.component | split(\":\")[1] // \"N/A\",
-                 .line // \"N/A\",
+                [(.component | split(\":\")[1] // \"N/A\"),
+                 (.line // 0 | tostring),
                  .rule,
-                 .message] |
+                 (.message | gsub(\"\\n\"; \" \"))] |
                 @tsv" sonar_issues.json | head -50 | while IFS=$'\t' read -r file line rule message; do
                 echo "| \`$file\` | $line | $rule | $message |" >> $GITHUB_STEP_SUMMARY
               done

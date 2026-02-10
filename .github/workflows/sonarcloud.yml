@@ -62,23 +62,81 @@ jobs:
             "https://sonarcloud.io/api/issues/search?componentKeys=luyangliuable_personal-portfolio-next&statuses=OPEN,CONFIRMED,REOPENED&types=CODE_SMELL,BUG,VULNERABILITY&ps=500" \
             > sonar_issues.json
 
-          # Display summary
+          # Display summary in workflow log
           echo ""
           echo "=== CURRENT TECHNICAL DEBTS ==="
-          echo "Total Issues: $(jq '.total' sonar_issues.json)"
+          TOTAL=$(jq '.total' sonar_issues.json)
+          CODE_SMELLS=$(jq '[.issues[] | select(.type=="CODE_SMELL")] | length' sonar_issues.json)
+          BUGS=$(jq '[.issues[] | select(.type=="BUG")] | length' sonar_issues.json)
+          VULNERABILITIES=$(jq '[.issues[] | select(.type=="VULNERABILITY")] | length' sonar_issues.json)
+          BLOCKER=$(jq '[.issues[] | select(.severity=="BLOCKER")] | length' sonar_issues.json)
+          CRITICAL=$(jq '[.issues[] | select(.severity=="CRITICAL")] | length' sonar_issues.json)
+          MAJOR=$(jq '[.issues[] | select(.severity=="MAJOR")] | length' sonar_issues.json)
+          MINOR=$(jq '[.issues[] | select(.severity=="MINOR")] | length' sonar_issues.json)
+
+          echo "Total Issues: $TOTAL"
           echo ""
           echo "Issues by Type:"
-          echo "- Code Smells: $(jq '[.issues[] | select(.type=="CODE_SMELL")] | length' sonar_issues.json)"
-          echo "- Bugs: $(jq '[.issues[] | select(.type=="BUG")] | length' sonar_issues.json)"
-          echo "- Vulnerabilities: $(jq '[.issues[] | select(.type=="VULNERABILITY")] | length' sonar_issues.json)"
+          echo "- Code Smells: $CODE_SMELLS"
+          echo "- Bugs: $BUGS"
+          echo "- Vulnerabilities: $VULNERABILITIES"
           echo ""
           echo "Issues by Severity:"
-          echo "- Blocker: $(jq '[.issues[] | select(.severity=="BLOCKER")] | length' sonar_issues.json)"
-          echo "- Critical: $(jq '[.issues[] | select(.severity=="CRITICAL")] | length' sonar_issues.json)"
-          echo "- Major: $(jq '[.issues[] | select(.severity=="MAJOR")] | length' sonar_issues.json)"
-          echo "- Minor: $(jq '[.issues[] | select(.severity=="MINOR")] | length' sonar_issues.json)"
-          echo ""
-          echo "ALL ISSUES MUST BE RESOLVED BEFORE MERGING TO MAIN"
+          echo "- Blocker: $BLOCKER"
+          echo "- Critical: $CRITICAL"
+          echo "- Major: $MAJOR"
+          echo "- Minor: $MINOR"
+
+          # Create GitHub Summary
+          echo "# SonarCloud Technical Debt Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Metric | Count |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| **Total Issues** | **$TOTAL** |" >> $GITHUB_STEP_SUMMARY
+          echo "| Code Smells | $CODE_SMELLS |" >> $GITHUB_STEP_SUMMARY
+          echo "| Bugs | $BUGS |" >> $GITHUB_STEP_SUMMARY
+          echo "| Vulnerabilities | $VULNERABILITIES |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Severity | Count |" >> $GITHUB_STEP_SUMMARY
+          echo "|----------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Blocker | $BLOCKER |" >> $GITHUB_STEP_SUMMARY
+          echo "| Critical | $CRITICAL |" >> $GITHUB_STEP_SUMMARY
+          echo "| Major | $MAJOR |" >> $GITHUB_STEP_SUMMARY
+          echo "| Minor | $MINOR |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # Add detailed issue list grouped by severity
+          echo "## Detailed Issues" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # Function to add issues by severity
+          for SEVERITY in BLOCKER CRITICAL MAJOR MINOR; do
+            COUNT=$(jq "[.issues[] | select(.severity==\"$SEVERITY\")] | length" sonar_issues.json)
+            if [ "$COUNT" -gt 0 ]; then
+              echo "### $SEVERITY Issues ($COUNT)" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "| File | Line | Rule | Message |" >> $GITHUB_STEP_SUMMARY
+              echo "|------|------|------|---------|" >> $GITHUB_STEP_SUMMARY
+
+              jq -r ".issues[] | select(.severity==\"$SEVERITY\") |
+                [.component | split(\":\")[1] // \"N/A\",
+                 .line // \"N/A\",
+                 .rule,
+                 .message] |
+                @tsv" sonar_issues.json | head -50 | while IFS=$'\t' read -r file line rule message; do
+                echo "| \`$file\` | $line | $rule | $message |" >> $GITHUB_STEP_SUMMARY
+              done
+              echo "" >> $GITHUB_STEP_SUMMARY
+            fi
+          done
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "[View Full Report on SonarCloud](https://sonarcloud.io/project/overview?id=luyangliuable_personal-portfolio-next)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "ALL ISSUES MUST BE RESOLVED BEFORE MERGING TO MAIN" >> $GITHUB_STEP_SUMMARY
 
           # Fail if there are blocker or critical issues
           BLOCKER_COUNT=$(jq '[.issues[] | select(.severity=="BLOCKER")] | length' sonar_issues.json)

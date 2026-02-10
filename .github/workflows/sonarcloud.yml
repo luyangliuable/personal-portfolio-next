@@ -42,7 +42,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.projectKey=personal-portfolio-next
+            -Dsonar.projectKey=luyangliuable_personal-portfolio-next
             -Dsonar.organization=luyangliuable
             -Dsonar.host.url=https://sonarcloud.io
             -Dsonar.sources=src
@@ -53,13 +53,13 @@ jobs:
       - name: Check Quality Gate and Tech Debt
         run: |
           echo "Quality Gate Status: MUST PASS before merge"
-          echo "SonarCloud Dashboard: https://sonarcloud.io/project/overview?id=personal-portfolio-next"
+          echo "SonarCloud Dashboard: https://sonarcloud.io/project/overview?id=luyangliuable_personal-portfolio-next"
           echo ""
           echo "Fetching current technical debts..."
 
           # Fetch all open issues from SonarCloud
           curl -s -u "${{ secrets.SONAR_TOKEN }}:" \
-            "https://sonarcloud.io/api/issues/search?componentKeys=personal-portfolio-next&statuses=OPEN,CONFIRMED,REOPENED&types=CODE_SMELL,BUG,VULNERABILITY&ps=500" \
+            "https://sonarcloud.io/api/issues/search?componentKeys=luyangliuable_personal-portfolio-next&statuses=OPEN,CONFIRMED,REOPENED&types=CODE_SMELL,BUG,VULNERABILITY&ps=500" \
             > sonar_issues.json
 
           # Display summary in workflow log
@@ -134,7 +134,7 @@ jobs:
 
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "---" >> $GITHUB_STEP_SUMMARY
-          echo "[View Full Report on SonarCloud](https://sonarcloud.io/project/overview?id=personal-portfolio-next)" >> $GITHUB_STEP_SUMMARY
+          echo "[View Full Report on SonarCloud](https://sonarcloud.io/project/overview?id=luyangliuable_personal-portfolio-next)" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "ALL ISSUES MUST BE RESOLVED BEFORE MERGING TO MAIN" >> $GITHUB_STEP_SUMMARY
 

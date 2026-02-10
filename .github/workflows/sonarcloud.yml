@@ -125,7 +125,7 @@ jobs:
                  (.line // 0 | tostring),
                  .rule,
                  (.message | gsub(\"\\n\"; \" \"))] |
-                @tsv" sonar_issues.json | head -50 | while IFS=$'\t' read -r file line rule message; do
+                @tsv" sonar_issues.json 2>/dev/null | head -50 | while IFS=$'\t' read -r file line rule message; do
                 echo "| \`$file\` | $line | $rule | $message |" >> $GITHUB_STEP_SUMMARY
               done
               echo "" >> $GITHUB_STEP_SUMMARY
@@ -138,6 +138,10 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "ALL ISSUES MUST BE RESOLVED BEFORE MERGING TO MAIN" >> $GITHUB_STEP_SUMMARY
 
+          # Save blocker and critical issues to artifact
+          jq '.issues[] | select(.severity=="BLOCKER" or .severity=="CRITICAL") | {file: .component, line: .line, severity: .severity, rule: .rule, message: .message}' sonar_issues.json > critical_issues.json
+          echo "Saved critical issues to artifact for debugging"
+
           # Fail if there are blocker or critical issues
           BLOCKER_COUNT=$(jq '[.issues[] | select(.severity=="BLOCKER")] | length' sonar_issues.json)
           CRITICAL_COUNT=$(jq '[.issues[] | select(.severity=="CRITICAL")] | length' sonar_issues.json)
@@ -148,3 +152,10 @@ jobs:
             echo "These MUST be fixed before merging"
             exit 1
           fi
+
+      - name: Upload critical issues artifact
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sonarcloud-critical-issues
+          path: critical_issues.json

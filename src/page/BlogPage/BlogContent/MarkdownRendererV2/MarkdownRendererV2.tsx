@@ -78,16 +78,12 @@ const convertHtmlToReact = (htmlString: string): JSX.Element => {
     const container = document.createElement("div");
     container.innerHTML = htmlString;
     const elements = Array.from(container.childNodes).map(processNodes);
-    console.log(elements);
     return (
         <>
             {elements.map((el, index) => {
                 const key = typeof el + index;
                 return typeof el === "string"
-                    ? React.createElement("div", {
-                          dangerouslySetInnerHTML: { __html: el },
-                          key: key,
-                      })
+                    ? React.createElement("span", { key: key }, el)
                     : React.cloneElement(el ?? "div", { key: key });
             })}
         </>
@@ -101,7 +97,10 @@ const MarkdownRendererV2: React.FC<MarkdownRendererProps> = ({ markdown }) => {
 
     const processCallback = (err: any, file: any): undefined => {
         if (err) {
-            console.error(err);
+            // Error during markdown processing - render fallback
+            setRenderedContent(
+                React.createElement("div", {}, "Error rendering content")
+            );
         } else {
             setRenderedContent(convertHtmlToReact(String(file)));
         }

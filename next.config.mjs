@@ -2,6 +2,7 @@
 import MillionLint from "@million/lint";
 
 const nextConfig = {
+    output: 'standalone',
     images: {
         remotePatterns: [
             {

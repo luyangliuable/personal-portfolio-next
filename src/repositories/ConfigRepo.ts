@@ -26,7 +26,6 @@ class ConfigRepository extends Repository {
 
             return await response.text();
         } catch (error) {
-            console.error("Error:", error);
             return "";
         }
     }

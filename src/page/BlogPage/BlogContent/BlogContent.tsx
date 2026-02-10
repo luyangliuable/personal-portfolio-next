@@ -41,7 +41,6 @@ const BlogContent: React.FC<IBlogContentProps> = ({
     useEffect(() => {
         const updateBlogContentHeadings = (): void => {
             if (content) {
-                console.log(content.body);
                 const renderer = new marked.Renderer();
                 const originalHeadingRenderer = renderer.heading.bind(renderer);
                 let headings: { title: string; level: number }[] = [];

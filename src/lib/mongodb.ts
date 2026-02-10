@@ -6,10 +6,6 @@ const options = {};
 let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
 
-if (!process.env.MONGODB_URI && process.env.NODE_ENV !== "test") {
-    console.warn("MongoDB URI not found in environment variables");
-}
-
 if (process.env.NODE_ENV === "development") {
     // Use global variable for the client in development to prevent multiple instances
     if (!(globalThis as any)._mongoClientPromise) {

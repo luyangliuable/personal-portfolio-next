@@ -45,7 +45,7 @@ jobs:
             -Dsonar.projectKey=luyangliuable_personal-portfolio-next
             -Dsonar.organization=luyangliuable
             -Dsonar.host.url=https://sonarcloud.io
-            -Dsonar.sources=src,app,pages,components,lib
+            -Dsonar.sources=src
             -Dsonar.exclusions=**/node_modules/**,**/*.test.ts,**/*.test.tsx,**/*.spec.ts,**/*.spec.tsx,**/*.config.js,**/*.config.ts,**/dist/**,**/build/**,**/.next/**
             -Dsonar.qualitygate.wait=true
             -Dsonar.qualitygate.timeout=300

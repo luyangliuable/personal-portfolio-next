@@ -55,10 +55,38 @@ jobs:
           echo "Quality Gate Status: MUST PASS before merge"
           echo "SonarCloud Dashboard: https://sonarcloud.io/project/overview?id=luyangliuable_personal-portfolio-next"
           echo ""
-          echo "The pipeline will fail if:"
-          echo "- Quality Gate fails"
-          echo "- Technical debt ratio is too high"
-          echo "- Security issues are detected"
-          echo "- Code coverage is below threshold"
+          echo "Fetching current technical debts..."
+
+          # Fetch all open issues from SonarCloud
+          curl -s -u "${{ secrets.SONAR_TOKEN }}:" \
+            "https://sonarcloud.io/api/issues/search?componentKeys=luyangliuable_personal-portfolio-next&statuses=OPEN,CONFIRMED,REOPENED&types=CODE_SMELL,BUG,VULNERABILITY&ps=500" \
+            > sonar_issues.json
+
+          # Display summary
           echo ""
-          echo "All technical debts must be resolved before merging to main"
+          echo "=== CURRENT TECHNICAL DEBTS ==="
+          echo "Total Issues: $(jq '.total' sonar_issues.json)"
+          echo ""
+          echo "Issues by Type:"
+          echo "- Code Smells: $(jq '[.issues[] | select(.type=="CODE_SMELL")] | length' sonar_issues.json)"
+          echo "- Bugs: $(jq '[.issues[] | select(.type=="BUG")] | length' sonar_issues.json)"
+          echo "- Vulnerabilities: $(jq '[.issues[] | select(.type=="VULNERABILITY")] | length' sonar_issues.json)"
+          echo ""
+          echo "Issues by Severity:"
+          echo "- Blocker: $(jq '[.issues[] | select(.severity=="BLOCKER")] | length' sonar_issues.json)"
+          echo "- Critical: $(jq '[.issues[] | select(.severity=="CRITICAL")] | length' sonar_issues.json)"
+          echo "- Major: $(jq '[.issues[] | select(.severity=="MAJOR")] | length' sonar_issues.json)"
+          echo "- Minor: $(jq '[.issues[] | select(.severity=="MINOR")] | length' sonar_issues.json)"
+          echo ""
+          echo "ALL ISSUES MUST BE RESOLVED BEFORE MERGING TO MAIN"
+
+          # Fail if there are blocker or critical issues
+          BLOCKER_COUNT=$(jq '[.issues[] | select(.severity=="BLOCKER")] | length' sonar_issues.json)
+          CRITICAL_COUNT=$(jq '[.issues[] | select(.severity=="CRITICAL")] | length' sonar_issues.json)
+
+          if [ "$BLOCKER_COUNT" -gt 0 ] || [ "$CRITICAL_COUNT" -gt 0 ]; then
+            echo ""
+            echo "ERROR: Found $BLOCKER_COUNT blocker and $CRITICAL_COUNT critical issues"
+            echo "These MUST be fixed before merging"
+            exit 1
+          fi

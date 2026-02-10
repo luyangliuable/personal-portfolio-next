@@ -237,7 +237,6 @@
     top: 50%;
     left: 40%;
     display: block;
-    background-color: red;
     border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
     background: #ff9800;
     transform: translate(-50%, -50%);

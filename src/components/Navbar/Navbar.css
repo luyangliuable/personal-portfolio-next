@@ -160,7 +160,6 @@
     -webkit-text-stroke-color: #1e1e1e;
     background-clip: text;
     /* max-height: 100% !important; */
-    -webkit-text-fill-color: transparent;
     background-size: 200% auto;
     animation: animateBg 3s linear infinite;
 }
@@ -206,7 +205,6 @@
     text-align: center;
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     animation: animateBg 10s linear infinite;
     image-rendering: geometricPrecision;
     -webkit-image-rendering: geometricPrecision;

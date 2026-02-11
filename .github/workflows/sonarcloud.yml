@@ -7,7 +7,6 @@ on:
   push:
     branches:
       - main
-      - 'feature/**'
 
 jobs:
   sonarcloud:
@@ -49,22 +48,19 @@ jobs:
             -Dsonar.sources=src
             -Dsonar.exclusions=**/node_modules/**,**/*.test.ts,**/*.test.tsx,**/*.spec.ts,**/*.spec.tsx,**/*.config.js,**/*.config.ts,**/dist/**,**/build/**,**/.next/**
             -Dsonar.coverage.exclusions=**/*
-            -Dsonar.branch.name=${{ github.ref_name }}
             -Dsonar.qualitygate.wait=true
             -Dsonar.qualitygate.timeout=300
 
       - name: Check Quality Gate and Tech Debt
         run: |
-          BRANCH_NAME="${{ github.ref_name }}"
-          echo "Analyzing branch: $BRANCH_NAME"
           echo "Quality Gate Status: MUST PASS before merge"
           echo "SonarCloud Dashboard: https://sonarcloud.io/project/overview?id=luyangliuable_personal-portfolio-next"
           echo ""
-          echo "Fetching current technical debts for branch: $BRANCH_NAME..."
+          echo "Fetching current technical debts..."
 
-          # Fetch branch-specific issues from SonarCloud
+          # Fetch all open issues from SonarCloud
           curl -s -u "${{ secrets.SONAR_TOKEN }}:" \
-            "https://sonarcloud.io/api/issues/search?componentKeys=luyangliuable_personal-portfolio-next&branch=$BRANCH_NAME&statuses=OPEN,CONFIRMED,REOPENED&types=CODE_SMELL,BUG,VULNERABILITY&ps=500" \
+            "https://sonarcloud.io/api/issues/search?componentKeys=luyangliuable_personal-portfolio-next&statuses=OPEN,CONFIRMED,REOPENED&types=CODE_SMELL,BUG,VULNERABILITY&ps=500" \
             > sonar_issues.json
 
           # Display summary in workflow log

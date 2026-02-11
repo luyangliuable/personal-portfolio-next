@@ -165,24 +165,24 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
     function listenSections(): void {
         if (tocEntries === null || props.emitter === undefined) return;
         if (listenTocItems.has("intersectingSectionsListener")) return;
+
+        const updateTocEntry = (tocEntry: React.ReactElement, intersectingIds: string[]) => {
+            const prevClassName = tocEntry.props.className.replace("active", "");
+            const isIntersecting = intersectingIds.includes(tocEntry.props.id);
+            const className = isIntersecting
+                ? `${prevClassName} active`
+                : prevClassName;
+            return React.cloneElement(tocEntry, { className });
+        };
+
         props.emitter.on("intersectingSections", (intersectingIds) => {
             setTocEntries((prev) => {
-                return prev!.map((tocEntry) => {
-                    const prevClassName = tocEntry.props.className.replace(
-                        "active",
-                        "",
-                    );
-                    if (intersectingIds.includes(tocEntry.props.id)) {
-                        return React.cloneElement(tocEntry, {
-                            className: `${prevClassName} active`,
-                        });
-                    }
-                    return React.cloneElement(tocEntry, {
-                        className: prevClassName,
-                    });
-                });
+                return prev!.map((tocEntry) =>
+                    updateTocEntry(tocEntry, intersectingIds)
+                );
             });
         });
+
         setlistenTocItems((prev) =>
             new Set(prev).add("intersectingSectionsListener"),
         );

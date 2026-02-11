@@ -37,31 +37,33 @@ const useScrollPosition = (overrideThrottleInterval?: number) => {
         );
         window.addEventListener("scroll", throttledHandleScroll);
 
+        const updateDeltaScroll = () => {
+            setAppState((prevState) => {
+                const deltaScrolled =
+                    window.scrollY -
+                    Math.max(
+                        0,
+                        prevState.deltaScrollCalculation
+                            ?.lastRecordedScrollY ?? 0,
+                    );
+                if (
+                    prevState.deltaScrollCalculation?.deltaScrolled ===
+                    deltaScrolled
+                )
+                    return prevState;
+                return {
+                    ...prevState,
+                    deltaScrollCalculation: {
+                        ...prevState.deltaScrollCalculation,
+                        lastRecordedScrollY: window.scrollY,
+                        deltaScrolled: deltaScrolled,
+                    },
+                };
+            });
+        };
+
         const deltaScrollCalculationInterval: NodeJS.Timeout = setInterval(
-            () => {
-                setAppState((prevState) => {
-                    const deltaScrolled =
-                        window.scrollY -
-                        Math.max(
-                            0,
-                            prevState.deltaScrollCalculation
-                                ?.lastRecordedScrollY ?? 0,
-                        );
-                    if (
-                        prevState.deltaScrollCalculation?.deltaScrolled ===
-                        deltaScrolled
-                    )
-                        return prevState;
-                    return {
-                        ...prevState,
-                        deltaScrollCalculation: {
-                            ...prevState.deltaScrollCalculation,
-                            lastRecordedScrollY: window.scrollY,
-                            deltaScrolled: deltaScrolled,
-                        },
-                    };
-                });
-            },
+            updateDeltaScroll,
             400,
         );
 

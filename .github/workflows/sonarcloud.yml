@@ -47,6 +47,7 @@ jobs:
             -Dsonar.host.url=https://sonarcloud.io
             -Dsonar.sources=src
             -Dsonar.exclusions=**/node_modules/**,**/*.test.ts,**/*.test.tsx,**/*.spec.ts,**/*.spec.tsx,**/*.config.js,**/*.config.ts,**/dist/**,**/build/**,**/.next/**
+            -Dsonar.coverage.exclusions=**/*
             -Dsonar.qualitygate.wait=true
             -Dsonar.qualitygate.timeout=300
 

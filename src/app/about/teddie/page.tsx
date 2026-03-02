@@ -1,6 +1,9 @@
 "use client";
 
-import { useRef, RefObject, useEffect } from "react";
+"use client";
+
+import React from "react";
+
 import "./Teddie.css";
 import Image from "next/image";
 import TeddieImage from "./teddie.png";

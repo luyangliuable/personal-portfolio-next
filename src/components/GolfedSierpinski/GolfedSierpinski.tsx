@@ -10,7 +10,7 @@ const GolfedSierpinski = () => {
 
     useEffect(() => {
         const update = () => {
-            setSize(Math.max(114, window.innerWidth / 8));
+            setSize(Math.max(114, globalThis.innerWidth / 8));
         };
 
         if (typeof globalThis !== "undefined") {

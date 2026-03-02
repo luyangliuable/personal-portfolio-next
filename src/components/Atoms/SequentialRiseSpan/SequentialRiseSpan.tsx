@@ -12,8 +12,6 @@ export interface ISequentialRiseSpanProps {
     children: string;
     className?: string;
     elementType?: keyof JSX.IntrinsicElements;
-    wordsPerAnimation?: number;
-    animationDelayMiliseconds?: number;
     numberOfLettersPerLine?: number;
     calculationAdjustment?: number;
     minNumberOfLettersPerLine?: number;
@@ -55,13 +53,13 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
         tempSpan.textContent = children;
         document.body.appendChild(tempSpan);
         const charWidth = tempSpan.offsetWidth / children.length;
-        document.body.removeChild(tempSpan);
+        tempSpan.remove();
 
         if (targetElement) {
-            const elementStyle = window.getComputedStyle(targetElement);
+            const elementStyle = globalThis.getComputedStyle(targetElement);
             const elementPadding =
-                parseFloat(elementStyle.paddingLeft) +
-                parseFloat(elementStyle.paddingRight);
+                Number.parseFloat(elementStyle.paddingLeft) +
+                Number.parseFloat(elementStyle.paddingRight);
             const targetElementWidth =
                 targetElement.offsetWidth - elementPadding;
             const adjustment = calculationAdjustment ?? 1.12;

@@ -108,7 +108,7 @@ const HeroSection: React.FC<IHeroProps> = () => {
 
     useEffect(() => {
         const update = () => {
-            setscreenWidth(window.innerWidth);
+            setscreenWidth(globalThis.innerWidth);
         };
 
         const delay = setTimeout(() => {
@@ -116,14 +116,14 @@ const HeroSection: React.FC<IHeroProps> = () => {
         }, 800);
 
         if (typeof globalThis !== "undefined") {
-            setscreenWidth(window.innerWidth);
-            window.addEventListener("resize", update);
+            setscreenWidth(globalThis.innerWidth);
+            globalThis.addEventListener("resize", update);
         }
 
         return () => {
             clearTimeout(delay);
             if (typeof globalThis !== "undefined") {
-                window.removeEventListener("resize", update);
+                globalThis.removeEventListener("resize", update);
             }
         };
     }, []);
@@ -144,7 +144,7 @@ const HeroSection: React.FC<IHeroProps> = () => {
 
         tl.add(
             gsap.to(heroSection, {
-                transform: `translateY(${window.innerHeight / 20}px)`,
+                transform: `translateY(${globalThis.innerHeight / 20}px)`,
             }),
             "start",
         );
@@ -181,7 +181,7 @@ const HeroSection: React.FC<IHeroProps> = () => {
             <footer className="hero-section-badge__container flex justify-center items-center w-full mb-2">
                 {connections.map((item: any, index: number) => (
                     <Link
-                        key={index}
+                                key={item.name}
                         style={{
                             color: item.color,
                             backgroundColor: item.background,

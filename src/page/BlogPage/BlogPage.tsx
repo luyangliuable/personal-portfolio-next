@@ -196,6 +196,14 @@ const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
         [state.topPickedPosts],
     );
 
+    const handleTagClick = (updatedTags: string[], to: string) => {
+        window.history.replaceState({}, "", to);
+        setState((prev) => ({
+            ...prev,
+            currentSelectTags: updatedTags,
+        }));
+    };
+
     const renderUnSelectedTags = () => {
         const baseUrlLink = "/digital-chronicles/blog";
         const { currentSelectTags: selectedTags } = state;
@@ -208,20 +216,14 @@ const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
             if (updatedTags.length) {
                 to = `${baseUrlLink}?tag=${encodeURIComponent(updatedTags.join(","))}`;
             }
-            const handleClick = () => {
-                window.history.replaceState({}, "", to);
-                setState((prev) => ({
-                    ...prev,
-                    currentSelectTags: updatedTags,
-                }));
-            };
+            const onClick = () => handleTagClick(updatedTags, to);
 
             if (isSelected) {
                 return (
                     <span
                         key={tagName}
                         className="blog__tag flex items-center noselect blog__tag--selected cursor-pointer"
-                        onClick={handleClick}
+                        onClick={onClick}
                     >
                         #{tagName} <FaWindowClose />
                     </span>
@@ -236,7 +238,7 @@ const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
                 <span
                     key={tagName}
                     className={`blog__tag noselect ${isDisabled ? "blog__tag--disabled" : "cursor-pointer"}`}
-                    onClick={!isDisabled ? handleClick : undefined}
+                    onClick={!isDisabled ? onClick : undefined}
                 >
                     #{tagName}
                 </span>

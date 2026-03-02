@@ -162,27 +162,33 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
         if (tocEntries === null) return;
         drawPath();
     }, [tocEntries]);
+    const updateTocEntryActiveState = (
+        tocEntry: JSX.Element,
+        intersectingIds: string[],
+    ): JSX.Element => {
+        const prevClassName = tocEntry.props.className.replace("active", "");
+        if (intersectingIds.includes(tocEntry.props.id)) {
+            return React.cloneElement(tocEntry, {
+                className: `${prevClassName} active`,
+            });
+        }
+        return React.cloneElement(tocEntry, {
+            className: prevClassName,
+        });
+    };
+
+    const handleIntersectingSections = (intersectingIds: string[]): void => {
+        setTocEntries((prev) =>
+            prev!.map((tocEntry) =>
+                updateTocEntryActiveState(tocEntry, intersectingIds),
+            ),
+        );
+    };
+
     function listenSections(): void {
         if (tocEntries === null || props.emitter === undefined) return;
         if (listenTocItems.has("intersectingSectionsListener")) return;
-        props.emitter.on("intersectingSections", (intersectingIds) => {
-            setTocEntries((prev) => {
-                return prev!.map((tocEntry) => {
-                    const prevClassName = tocEntry.props.className.replace(
-                        "active",
-                        "",
-                    );
-                    if (intersectingIds.includes(tocEntry.props.id)) {
-                        return React.cloneElement(tocEntry, {
-                            className: `${prevClassName} active`,
-                        });
-                    }
-                    return React.cloneElement(tocEntry, {
-                        className: prevClassName,
-                    });
-                });
-            });
-        });
+        props.emitter.on("intersectingSections", handleIntersectingSections);
         setlistenTocItems((prev) =>
             new Set(prev).add("intersectingSectionsListener"),
         );

@@ -16,19 +16,25 @@ const useScrollPosition = (overrideThrottleInterval?: number) => {
     useEffect(() => {
         let scrollTimeout: NodeJS.Timeout;
         const timeToCheckScrollingHasStoppedMiliseconds = 50;
+
+        const updateScrollingState = (scrolling: boolean) => {
+            setAppState((prevState) => ({
+                ...prevState,
+                scrolling,
+            }));
+        };
+
         const handleScroll = () => {
-            clearTimeout(scrollTimeout); // Clear the timeout to reset the end-of-scroll detection
+            clearTimeout(scrollTimeout);
             setAppState((prevState) => ({
                 ...prevState,
                 scrollY: window.scrollY,
                 scrolling: true,
             }));
-            scrollTimeout = setTimeout(() => {
-                setAppState((prevState) => ({
-                    ...prevState,
-                    scrolling: false,
-                }));
-            }, timeToCheckScrollingHasStoppedMiliseconds);
+            scrollTimeout = setTimeout(
+                () => updateScrollingState(false),
+                timeToCheckScrollingHasStoppedMiliseconds,
+            );
         };
 
         const throttledHandleScroll = throttle(

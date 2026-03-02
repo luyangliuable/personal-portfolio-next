@@ -48,7 +48,7 @@
     border: 1px solid #000;
     color: #fff;
     font-weight: bold;
-    font-family: "Fira Code";
+    font-family: "Fira Code", monospace;
     font-size: 0.75rem;
     border-radius: 5px;
     transition: all 0.3s ease-in-out;

@@ -25,7 +25,7 @@ function customCodeBlockPlugin() {
             let language: string = node.lang || "unknown";
 
             const getMetadataKeyValPairs = (metadata: string) => {
-                const regexPattern = /([\w\.]+)=([\w\.\-\/\d]+)/g;
+                const regexPattern = /([\w.]+)=([\w.\-/\d]+)/g;
                 const keyValuePairs: string[] = [];
                 let match: RegExpExecArray | null;
                 while ((match = regexPattern.exec(metadata)) !== null) {

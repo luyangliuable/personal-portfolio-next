@@ -73,13 +73,6 @@
     transform: translate(-50%, -100%);
 }
 
-/* useless for now */
-/* .candle2__stick { */
-/*   height: 12px; */
-/*   transform-origin: bottom center; */
-/*   animation: stick-animation 1s infinite linear; */
-/* } */
-
 .candle1__eyes,
 .candle2__eyes {
     position: absolute;
@@ -237,9 +230,8 @@
     top: 50%;
     left: 40%;
     display: block;
-    background-color: red;
-    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
     background: #ff9800;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
     transform: translate(-50%, -50%);
     width: 0px;
     height: 0px;

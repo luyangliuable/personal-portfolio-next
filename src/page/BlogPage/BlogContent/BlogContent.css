@@ -1,5 +1,9 @@
 .blog-content__header {
-    width: 100% !important;
+    width: 80%;
+}
+
+.blog-content__header > h1 {
+    margin-bottom: 12px;
 }
 
 .blog-section > p {

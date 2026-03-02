@@ -158,11 +158,11 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
 
         setLineRefs(lines.map(() => React.createRef<any>()));
 
-        const linesElements = lines.map((line, index) => {
+        const linesElements = lines.map((line) => {
             const LineElement = React.createElement(
                 elementType || "p",
                 {
-                    key: index,
+                    key: line,
                     className: ["invisible", className].join(" "),
                 },
                 line,
@@ -187,7 +187,7 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
                         },
                     );
                     return (
-                        <div key={index} className="w-full break-words">
+                        <div key={`line-${line.props.children}`} className="w-full break-words">
                             {lineElement}
                         </div>
                     );

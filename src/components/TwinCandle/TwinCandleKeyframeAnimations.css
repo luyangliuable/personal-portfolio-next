@@ -384,7 +384,6 @@
         display: inline-block;
         border-radius: 100%;
         background: #673c63;
-        border-width: 0 0 0 0;
         border: 0px solid #673c63;
         transform: translate(-90%, 0%);
     }
@@ -412,7 +411,6 @@
         display: inline-block;
         border-radius: 100%;
         background: #673c63;
-        border-width: 0 0 0 0;
         border: 0px solid #673c63;
         transform: translate(-80%, 0%);
     }

@@ -199,15 +199,17 @@ const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
     const renderUnSelectedTags = () => {
         const baseUrlLink = "/digital-chronicles/blog";
         const { currentSelectTags: selectedTags } = state;
-        return Array.from(state.allTags).map((tagName) => {
+
+        const renderTag = (tagName: string) => {
             const isSelected = state.currentSelectTags.includes(tagName);
             const updatedTags = isSelected
                 ? selectedTags.filter((tag) => tag !== tagName)
                 : [...selectedTags, tagName];
-            let to = baseUrlLink;
-            if (updatedTags.length) {
-                to = `${baseUrlLink}?tag=${encodeURIComponent(updatedTags.join(","))}`;
-            }
+
+            const to = updatedTags.length
+                ? `${baseUrlLink}?tag=${encodeURIComponent(updatedTags.join(","))}`
+                : baseUrlLink;
+
             const handleClick = () => {
                 window.history.replaceState({}, "", to);
                 setState((prev) => ({
@@ -241,7 +243,9 @@ const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
                     #{tagName}
                 </span>
             );
-        });
+        };
+
+        return Array.from(state.allTags).map(renderTag);
     };
 
     const renderDisplayLeetCodePostsToggleButton = () => {

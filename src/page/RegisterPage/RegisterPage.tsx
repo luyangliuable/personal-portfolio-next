@@ -56,7 +56,6 @@ const RegisterPage: React.FC = () => {
     };
 
     const handleRegisterFailure = (err: string): void => {
-        console.log(err);
         updateRegisterFlash("failed", err);
     };
 

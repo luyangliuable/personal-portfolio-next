@@ -37,6 +37,12 @@ const NavLink: React.FC<INavLinkProps> = ({
     const targetPath = link.isLocked ? undefined : link.to;
     const pathname = usePathname() ?? "/";
 
+    const getHref = () => {
+        if (link.isLocked) return undefined;
+        if (targetPath && !link.isDisabled) return targetPath;
+        return pathname;
+    };
+
     const onMouseOverAction =
         isSubLink && links
             ? () => {}
@@ -45,64 +51,46 @@ const NavLink: React.FC<INavLinkProps> = ({
                       links?.find((item) => item.name === link.name)?.sublinks,
                   );
 
-    return React.createElement(
-        link.isLocked ? "div" : "a",
-        {
-            href: link.isLocked
-                ? undefined
-                : targetPath && !link.isDisabled
-                  ? targetPath
-                  : pathname,
-            onClick: () => link.isDisabled && hideDropdownMenu(),
-            className: cl(
-                "relative flex flex-row justify-center items-center navbar-item",
-                {
-                    "items-start": isSubLink,
-                    "active-link": isActive(pathname, targetPath),
-                },
-            ),
-            key: link.name,
-            onMouseOver: onMouseOverAction,
-        },
+    const linkProps = {
+        href: getHref(),
+        onClick: () => link.isDisabled && hideDropdownMenu(),
+        className: cl(
+            "relative flex flex-row justify-center items-center navbar-item",
+            {
+                "items-start": isSubLink,
+                "active-link": isActive(pathname, targetPath),
+            },
+        ),
+        key: link.name,
+        onMouseOver: onMouseOverAction,
+    };
+
+    const renderEmoji = () =>
+        link.emoji &&
+        React.createElement(EmojIcon, {
+            style: {
+                width: "40px",
+                height: "40px",
+                minWidth: "40px",
+                minHeight: "40px",
+                borderRadius: "4px",
+                marginRight: ".5rem",
+            },
+            emojis: [link.emoji],
+        });
+
+    const renderDescription = () =>
+        isSubLink &&
         React.createElement(
             "div",
             {
-                className:
-                    "flex flex-row justify-start items-center select-none",
+                className: "navlink-description w-full",
+                style: { fontSize: ".8rem" },
             },
-            link.emoji &&
-                React.createElement(EmojIcon, {
-                    style: {
-                        width: "40px",
-                        height: "40px",
-                        minWidth: "40px",
-                        minHeight: "40px",
-                        borderRadius: "4px",
-                        marginRight: ".5rem",
-                    },
-                    emojis: [link.emoji],
-                }),
-            React.createElement(
-                "div",
-                { className: "flex flex-col justify-center select-none" },
-                React.createElement(
-                    "div",
-                    { className: "flex flex-row items-center" },
-                    ...navLinkContent,
-                ),
-                isSubLink &&
-                    React.createElement(
-                        "div",
-                        {
-                            className: "navlink-description w-full",
-                            style: {
-                                fontSize: ".8rem",
-                            },
-                        },
-                        link.description,
-                    ),
-            ),
-        ),
+            link.description,
+        );
+
+    const renderLockIcon = () =>
         React.createElement(
             "div",
             {
@@ -124,7 +112,30 @@ const NavLink: React.FC<INavLinkProps> = ({
                 style: { strokeWidth: "1px" },
                 key: "lock-icon",
             }),
+        );
+
+    return React.createElement(
+        link.isLocked ? "div" : "a",
+        linkProps,
+        React.createElement(
+            "div",
+            {
+                className:
+                    "flex flex-row justify-start items-center select-none",
+            },
+            renderEmoji(),
+            React.createElement(
+                "div",
+                { className: "flex flex-col justify-center select-none" },
+                React.createElement(
+                    "div",
+                    { className: "flex flex-row items-center" },
+                    ...navLinkContent,
+                ),
+                renderDescription(),
+            ),
         ),
+        renderLockIcon(),
     );
 };
 

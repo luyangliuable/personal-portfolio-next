@@ -1,0 +1,165 @@
+name: SonarCloud Analysis
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+      - 'feature/**'
+
+jobs:
+  sonarcloud:
+    name: SonarCloud Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run build
+        run: npm run build
+        env:
+          MONGODB_URI: mongodb://localhost:27017
+
+      - name: Run lint
+        run: npm run lint
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@ba3875ecf642b2129de2b589510c81a8b53dbf4e
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=luyangliuable_personal-portfolio-next
+            -Dsonar.organization=luyangliuable
+            -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.sources=src
+            -Dsonar.exclusions=**/node_modules/**,**/*.test.ts,**/*.test.tsx,**/*.spec.ts,**/*.spec.tsx,**/*.config.js,**/*.config.ts,**/dist/**,**/build/**,**/.next/**
+            -Dsonar.coverage.exclusions=**/*
+            -Dsonar.branch.name=${{ github.ref_name }}
+            -Dsonar.qualitygate.wait=true
+            -Dsonar.qualitygate.timeout=300
+
+      - name: Check Quality Gate and Tech Debt
+        run: |
+          echo "Quality Gate Status: MUST PASS before merge"
+          echo "SonarCloud Dashboard: https://sonarcloud.io/project/overview?id=luyangliuable_personal-portfolio-next"
+          echo ""
+          echo "Fetching current technical debts..."
+
+          # Fetch branch-specific issues from SonarCloud
+          BRANCH_NAME="${{ github.ref_name }}"
+          curl -s -u "${{ secrets.SONAR_TOKEN }}:" \
+            "https://sonarcloud.io/api/issues/search?componentKeys=luyangliuable_personal-portfolio-next&branch=$BRANCH_NAME&statuses=OPEN,CONFIRMED,REOPENED&types=CODE_SMELL,BUG,VULNERABILITY&ps=500" \
+            > sonar_issues.json
+
+          # Display summary in workflow log
+          echo ""
+          echo "=== CURRENT TECHNICAL DEBTS ==="
+          TOTAL=$(jq '.total' sonar_issues.json)
+          CODE_SMELLS=$(jq '[.issues[] | select(.type=="CODE_SMELL")] | length' sonar_issues.json)
+          BUGS=$(jq '[.issues[] | select(.type=="BUG")] | length' sonar_issues.json)
+          VULNERABILITIES=$(jq '[.issues[] | select(.type=="VULNERABILITY")] | length' sonar_issues.json)
+          BLOCKER=$(jq '[.issues[] | select(.severity=="BLOCKER")] | length' sonar_issues.json)
+          CRITICAL=$(jq '[.issues[] | select(.severity=="CRITICAL")] | length' sonar_issues.json)
+          MAJOR=$(jq '[.issues[] | select(.severity=="MAJOR")] | length' sonar_issues.json)
+          MINOR=$(jq '[.issues[] | select(.severity=="MINOR")] | length' sonar_issues.json)
+
+          echo "Total Issues: $TOTAL"
+          echo ""
+          echo "Issues by Type:"
+          echo "- Code Smells: $CODE_SMELLS"
+          echo "- Bugs: $BUGS"
+          echo "- Vulnerabilities: $VULNERABILITIES"
+          echo ""
+          echo "Issues by Severity:"
+          echo "- Blocker: $BLOCKER"
+          echo "- Critical: $CRITICAL"
+          echo "- Major: $MAJOR"
+          echo "- Minor: $MINOR"
+
+          # Create GitHub Summary
+          echo "# SonarCloud Technical Debt Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Metric | Count |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| **Total Issues** | **$TOTAL** |" >> $GITHUB_STEP_SUMMARY
+          echo "| Code Smells | $CODE_SMELLS |" >> $GITHUB_STEP_SUMMARY
+          echo "| Bugs | $BUGS |" >> $GITHUB_STEP_SUMMARY
+          echo "| Vulnerabilities | $VULNERABILITIES |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Severity | Count |" >> $GITHUB_STEP_SUMMARY
+          echo "|----------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Blocker | $BLOCKER |" >> $GITHUB_STEP_SUMMARY
+          echo "| Critical | $CRITICAL |" >> $GITHUB_STEP_SUMMARY
+          echo "| Major | $MAJOR |" >> $GITHUB_STEP_SUMMARY
+          echo "| Minor | $MINOR |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # Add detailed issue list grouped by severity
+          echo "## Detailed Issues" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # Function to add issues by severity
+          for SEVERITY in BLOCKER CRITICAL MAJOR MINOR; do
+            COUNT=$(jq "[.issues[] | select(.severity==\"$SEVERITY\")] | length" sonar_issues.json)
+            if [ "$COUNT" -gt 0 ]; then
+              echo "### $SEVERITY Issues ($COUNT)" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "| File | Line | Rule | Message |" >> $GITHUB_STEP_SUMMARY
+              echo "|------|------|------|---------|" >> $GITHUB_STEP_SUMMARY
+
+              jq -r ".issues[] | select(.severity==\"$SEVERITY\") |
+                [(.component | split(\":\")[1] // \"N/A\"),
+                 (.line // 0 | tostring),
+                 .rule,
+                 (.message | gsub(\"\\n\"; \" \"))] |
+                @tsv" sonar_issues.json 2>/dev/null | head -50 | while IFS=$'\t' read -r file line rule message; do
+                echo "| \`$file\` | $line | $rule | $message |" >> $GITHUB_STEP_SUMMARY
+              done
+              echo "" >> $GITHUB_STEP_SUMMARY
+            fi
+          done
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "[View Full Report on SonarCloud](https://sonarcloud.io/project/overview?id=luyangliuable_personal-portfolio-next)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "ALL ISSUES MUST BE RESOLVED BEFORE MERGING TO MAIN" >> $GITHUB_STEP_SUMMARY
+
+          # Save blocker and critical issues to artifact
+          jq '.issues[] | select(.severity=="BLOCKER" or .severity=="CRITICAL") | {file: .component, line: .line, severity: .severity, rule: .rule, message: .message}' sonar_issues.json > critical_issues.json
+          echo "Saved critical issues to artifact for debugging"
+
+          # Fail if there are blocker or critical issues
+          BLOCKER_COUNT=$(jq '[.issues[] | select(.severity=="BLOCKER")] | length' sonar_issues.json)
+          CRITICAL_COUNT=$(jq '[.issues[] | select(.severity=="CRITICAL")] | length' sonar_issues.json)
+
+          if [ "$BLOCKER_COUNT" -gt 0 ] || [ "$CRITICAL_COUNT" -gt 0 ]; then
+            echo ""
+            echo "ERROR: Found $BLOCKER_COUNT blocker and $CRITICAL_COUNT critical issues"
+            echo "These MUST be fixed before merging"
+            exit 1
+          fi
+
+      - name: Upload critical issues artifact
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sonarcloud-critical-issues
+          path: critical_issues.json

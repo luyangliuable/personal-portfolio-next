@@ -384,16 +384,14 @@
         display: inline-block;
         border-radius: 100%;
         background: #673c63;
-        border-width: 0 0 0 0;
         border: 0px solid #673c63;
         transform: translate(-90%, 0%);
     }
     11%,
     29% {
         background: none;
-        border: solid #673c63;
+        border: 0 2px 2px 0 solid #673c63;
         border-radius: 0px;
-        border-width: 0 2px 2px 0;
         display: inline-block;
         padding: 1px;
         float: left;
@@ -412,7 +410,6 @@
         display: inline-block;
         border-radius: 100%;
         background: #673c63;
-        border-width: 0 0 0 0;
         border: 0px solid #673c63;
         transform: translate(-80%, 0%);
     }
@@ -420,9 +417,8 @@
     29% {
         top: 30%;
         background: none;
-        border: solid #673c63;
+        border: 0 2px 2px 0 solid #673c63;
         border-radius: 0px;
-        border-width: 0 2px 2px 0;
         display: inline-block;
         padding: 1px;
         float: left;

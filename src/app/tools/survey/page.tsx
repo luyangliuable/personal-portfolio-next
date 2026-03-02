@@ -69,7 +69,6 @@ const Survey = () => {
                 );
             }
         } catch (error) {
-            console.error("Error submitting form:", error);
             setResponseMessage("An error occurred. Please try again later.");
         }
     };

@@ -89,13 +89,16 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
     };
 
     useEffect(() => {
+        const handleEntry = (entry: IntersectionObserverEntry, observer: IntersectionObserver) => {
+            if (entry.isIntersecting) {
+                slideUp(entry.target, observer);
+            }
+        };
+
         const addIntersectionObserver = () => {
             const observer = new IntersectionObserver(
                 (entries) => {
-                    entries.forEach((entry) => {
-                        if (entry.isIntersecting)
-                            slideUp(entry.target, observer);
-                    });
+                    entries.forEach((entry) => handleEntry(entry, observer));
                 },
                 { threshold: [0.1, 0.5, 1] },
             );

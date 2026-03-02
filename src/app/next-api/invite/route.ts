@@ -42,7 +42,6 @@ export async function POST(req: NextRequest) {
             { status: 201 },
         );
     } catch (error: any) {
-        console.error("Error adding survey:", error);
         return NextResponse.json(
             { error: "An error occurred while processing your request" },
             { status: 500 },

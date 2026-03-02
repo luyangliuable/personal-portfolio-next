@@ -197,7 +197,7 @@ const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
     );
 
     const handleTagClick = (updatedTags: string[], to: string) => {
-        window.history.replaceState({}, "", to);
+        globalThis.history.replaceState({}, "", to);
         setState((prev) => ({
             ...prev,
             currentSelectTags: updatedTags,
@@ -218,30 +218,21 @@ const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
             }
             const onClick = () => handleTagClick(updatedTags, to);
 
-            if (isSelected) {
-                return (
-                    <span
-                        key={tagName}
-                        className="blog__tag flex items-center noselect blog__tag--selected cursor-pointer"
-                        onClick={onClick}
-                    >
-                        #{tagName} <FaWindowClose />
-                    </span>
-                );
-            }
-
-            const isDisabled = !data!.some(({ tags }) =>
-                isSubset([...selectedTags, tagName], tags),
-            );
+            const disabled = data?.every(({ tags }) =>
+                !isSubset([...selectedTags, tagName], tags),
+            ) ?? true;
 
             return (
-                <span
+                <button
                     key={tagName}
-                    className={`blog__tag noselect ${isDisabled ? "blog__tag--disabled" : "cursor-pointer"}`}
-                    onClick={!isDisabled ? onClick : undefined}
+                    type="button"
+                    className={`blog__tag noselect ${isSelected ? "blog__tag--selected" : ""} ${disabled ? "blog__tag--disabled" : "cursor-pointer"}`}
+                    onClick={onClick}
+                    disabled={disabled && !isSelected}
+                    style={{ background: 'none', border: 'none', padding: 0 }}
                 >
-                    #{tagName}
-                </span>
+                    #{tagName} {isSelected && <FaWindowClose />}
+                </button>
             );
         });
     };

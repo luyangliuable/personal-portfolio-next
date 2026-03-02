@@ -67,14 +67,20 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
                 const color = getTextColor(level);
                 const id = stringToHash(title);
                 const className = `level-${level - 2} section-toc-entry flex items-center`;
+                const titleId = `${id}-${idx}`;
                 return (
-                    <div
-                        key={idx}
+                    <button
+                        key={titleId}
                         id={id.toString()}
                         className={className}
                         style={{
                             color,
                             margin: `${marginBottom} ${indentation}`,
+                            background: 'none',
+                            border: 'none',
+                            cursor: 'pointer',
+                            textAlign: 'left',
+                            width: '100%',
                         }}
                         onClick={(e) => handleClick(e, id.toString())}
                     >
@@ -83,7 +89,7 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
                                 removeHashesAndStripWhitespace(title),
                             ),
                         )}
-                    </div>
+                    </button>
                 );
             },
         );
@@ -117,12 +123,12 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
         path.push("M", indent, startHeight);
         height = startHeight;
         tocEntries!.forEach((entry, idx) => {
-            const computedStyle = window.getComputedStyle(
+            const computedStyle = globalThis.getComputedStyle(
                 tocEntryRef[idx].current!,
             );
             const extra =
-                parseFloat(computedStyle.height) +
-                parseFloat(computedStyle.marginBottom) * 2;
+                Number.parseFloat(computedStyle.height) +
+                Number.parseFloat(computedStyle.marginBottom) * 2;
             if (idx < startIdx) pathStart += extra;
             const { className } = entry.props;
             const match = className.match(/level-(\d+)/);
@@ -201,13 +207,13 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
                     Table of Contents
                 </h2>
             </div>
-            {tocEntries &&
-                tocEntries.map((entry, index) => {
-                    return React.cloneElement(entry, {
-                        ref: tocEntryRef[index],
-                        key: index,
-                    });
-                })}
+            {tocEntries?.map((entry, index) => {
+                const entryId = `${entry.props.id || 'entry'}-${index}`;
+                return React.cloneElement(entry, {
+                    ref: tocEntryRef[index],
+                    key: entryId,
+                });
+            })}
             <svg
                 className="toc-marker"
                 width="200"
@@ -220,7 +226,7 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
                     strokeWidth="3"
                     fill="transparent"
                     strokeLinecap="round"
-                    troke-dasharray="0, 0, 0, 1000"
+                    strokeDasharray="0, 0, 0, 1000"
                     strokeLinejoin="round"
                     transform="translate(-0.5, -0.5)"
                 />

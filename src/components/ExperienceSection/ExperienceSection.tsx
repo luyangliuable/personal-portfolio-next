@@ -370,7 +370,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
         }
     }, [trigger]);
 
-    const sortedItems = items.sort(
+    const sortedItems = [...items].sort(
         (a: ExperienceSectionItem, b: ExperienceSectionItem) => {
             return Number.parseInt(b.dateTime) - Number.parseInt(a.dateTime);
         },

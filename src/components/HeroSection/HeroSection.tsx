@@ -115,14 +115,14 @@ const HeroSection: React.FC<IHeroProps> = () => {
             setPixelCatReady(true);
         }, 800);
 
-        if (typeof window !== "undefined") {
+        if (typeof globalThis !== "undefined") {
             setscreenWidth(window.innerWidth);
             window.addEventListener("resize", update);
         }
 
         return () => {
             clearTimeout(delay);
-            if (typeof window !== "undefined") {
+            if (typeof globalThis !== "undefined") {
                 window.removeEventListener("resize", update);
             }
         };

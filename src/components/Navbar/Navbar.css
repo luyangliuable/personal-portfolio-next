@@ -207,8 +207,6 @@
     -webkit-text-fill-color: transparent;
     animation: animateBg 10s linear infinite;
     image-rendering: geometricPrecision;
-    -webkit-image-rendering: geometricPrecision;
-    -moz-image-rendering: geometricPrecision;
     -webkit-font-smoothing: antialiased;
     -moz-font-smoothing: antialiased;
     -webkit-text-stroke-width: 0.2px;

@@ -44,7 +44,7 @@ const stringToHash = (str: string): number => {
 };
 
 function removeHashesAndStripWhitespace(str: string): string {
-    let result = str.replaceAll("#", "");
+    const result = str.replaceAll("#", "");
     return result.replace(/^\s/gm, "").trim();
 }
 
@@ -65,8 +65,8 @@ const isActive = (currentPathname?: string, targetPathname?: string) => {
     if (!currentPathname || !targetPathname) return false;
     if (currentPathname === targetPathname) return true;
     if (targetPathname === "/") return false;
-    const currentPath = currentPathname.trim().replace(/\/+$/, "");
-    const normalizedTargetPath = targetPathname.trim().replace(/\/+$/, "");
+    const currentPath = currentPathname.trim().replaceAll("/", "");
+    const normalizedTargetPath = targetPathname.trim().replaceAll("/", "");
     return currentPath.startsWith(normalizedTargetPath);
 };
 

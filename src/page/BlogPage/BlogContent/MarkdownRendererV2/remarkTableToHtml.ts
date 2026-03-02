@@ -84,7 +84,7 @@ function markdownTableToHtml(markdown: string): string {
         html += "</tr>";
     });
     html += "</tbody></table></div>";
-    return html.replace(/\n/g, "").replace(/>\s+</g, "><");
+    return html.replaceAll("\n", "").replaceAll(/>\s+</g, "><");
 }
 
 export default remarkTableToHtml;

@@ -13,14 +13,14 @@ const GolfedSierpinski = () => {
             setSize(Math.max(114, window.innerWidth / 8));
         };
 
-        if (typeof window !== "undefined") {
+        if (typeof globalThis !== "undefined") {
             window.addEventListener("resize", update);
         }
 
         update();
 
         return () => {
-            if (typeof window !== "undefined") {
+            if (typeof globalThis !== "undefined") {
                 window.removeEventListener("resize", update);
             }
         };

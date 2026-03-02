@@ -33,7 +33,7 @@ function styleStringToObject(styleString: string): { [key: string]: string } {
         if (key && value) {
             const formattedKey = key
                 .trim()
-                .replace(/-(.)/g, (match, group) => group.toUpperCase());
+                .replaceAll(/-(.)/g, (match, group) => group.toUpperCase());
             styleObject[formattedKey] = value.trim();
         }
     });

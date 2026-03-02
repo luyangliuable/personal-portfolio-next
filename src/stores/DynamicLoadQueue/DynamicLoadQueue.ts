@@ -7,7 +7,7 @@ class DynamicLoadQueue {
     private observer: IntersectionObserver | null = null;
 
     private constructor() {
-        if (typeof window !== "undefined" && "IntersectionObserver" in window) {
+        if (typeof globalThis !== "undefined" && "IntersectionObserver" in window) {
             this.observer = new IntersectionObserver(
                 (entries) => {
                     entries.forEach((entry) => {

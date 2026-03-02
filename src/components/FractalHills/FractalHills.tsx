@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useRef, RefObject } from "react";
+import React, { useEffect, useRef } from "react";
+
 import "./FractalHills.css";
 import p5 from "p5/lib/p5.js";
 
@@ -16,6 +17,7 @@ const FractalHills = () => {
             let flying = 0;
             let terrain: number[][] = [];
             let colorTheme = "invertedMonochrome";
+            const heightVal = 100;
 
             const speedVal = 0.002;
 
@@ -101,7 +103,6 @@ const FractalHills = () => {
                 p.rotateX(p.PI / 2.5);
                 p.stroke(120);
                 p.strokeWeight(0.5);
-                /* p.translate(-w / 2, -3.5 * p.height) */
                 p.translate(-w / 2, -h / 2);
 
                 for (let y = 0; y < rows - 1; y++) {

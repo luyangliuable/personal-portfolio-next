@@ -5,7 +5,7 @@ const truncateTextBody = (text?: string, size: number = 200): string => {
 };
 
 const stripAwayHashSymbols = (text: string): string => {
-    return text.replace(/#/g, "");
+    return text.replaceAll("#", "");
 };
 
 const isoDateFormatToString = (date: Date): string => {
@@ -44,12 +44,12 @@ const stringToHash = (str: string): number => {
 };
 
 function removeHashesAndStripWhitespace(str: string): string {
-    let result = str.replace(/#/g, "");
+    let result = str.replaceAll("#", "");
     return result.replace(/^\s/gm, "").trim();
 }
 
 function removeTextInsideAngleBrackets(input: string): string {
-    return input.replace(/<[^>]*>/g, "").trim();
+    return input.replaceAll(/<[^>]*>/g, "").trim();
 }
 
 export function convertHtmlEntities(str: string): string {

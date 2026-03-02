@@ -255,7 +255,7 @@ class TwinCandles extends Component<ITwinCandleProps, ITwinCandleState> {
                 },
             );
 
-            window.setTimeout(() => {
+            setTimeout(() => {
                 this.turnCandleLightOff();
             }, this.state.animatedTimeIntervalMiliseconds);
         }
@@ -295,7 +295,7 @@ class TwinCandles extends Component<ITwinCandleProps, ITwinCandleState> {
             }
             // temporary solution because I am tired end
 
-            window.setTimeout(() => {
+            setTimeout(() => {
                 this.turnCandleLightOn();
             }, this.state.animatedTimeIntervalMiliseconds);
         }

@@ -283,7 +283,7 @@ class TwinCandles extends Component<ITwinCandleProps, ITwinCandleState> {
             );
 
             // TODO temporary solution because I am tired start
-            var element: HTMLElement | null = document.querySelector(
+            const element: HTMLElement | null = document.querySelector(
                 ".featured-section-content",
             );
 
@@ -303,7 +303,7 @@ class TwinCandles extends Component<ITwinCandleProps, ITwinCandleState> {
 
     public turnCandleLightOff = () => {
         // TODO temporary solution because I am tired start
-        var element: HTMLElement | null = document.querySelector(
+        const element: HTMLElement | null = document.querySelector(
             ".featured-section-content",
         );
 

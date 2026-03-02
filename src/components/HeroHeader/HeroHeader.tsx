@@ -11,7 +11,6 @@ import { useGSAP } from "@gsap/react";
 import { useTrigger } from "../../stores/TriggerContext";
 import { refreshScrollTrigger } from "../Utility/ScrollUtility";
 import GolfedSierpinski from "../GolfedSierpinski/GolfedSierpinski";
-import Button from "../Button/Button";
 
 const HeroHeader: React.FC<IHeroHeaderProps> = ({
     heading,

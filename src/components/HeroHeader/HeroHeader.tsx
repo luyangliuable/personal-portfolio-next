@@ -28,13 +28,13 @@ const HeroHeader: React.FC<IHeroHeaderProps> = ({
             setscreenWidth(window.innerWidth);
         };
 
-        if (typeof window !== "undefined") {
+        if (typeof globalThis !== "undefined") {
             setscreenWidth(window.innerWidth);
             window.addEventListener("resize", update);
         }
 
         return () => {
-            if (typeof window !== "undefined") {
+            if (typeof globalThis !== "undefined") {
                 window.removeEventListener("resize", update);
             }
         };

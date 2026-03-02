@@ -31,10 +31,10 @@ function customCodeBlockPlugin() {
         visit(tree, "code", (node) => {
             let language = node.lang || "unknown";
             const escapedCode = node.value
-                .replace(/{/g, "&#123;")
-                .replace(/}/g, "&#125;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;");
+                .replaceAll("{", "&#123;")
+                .replaceAll("}", "&#125;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;");
 
             if (language === "sh") {
                 language = "bash";

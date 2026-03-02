@@ -1,0 +1,8 @@
+organization=luyangliuable
+projectKey=luyangliuable_personal-portfolio-next
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.82274
+branch=main
+dashboardUrl=https://sonarcloud.io/dashboard?id=luyangliuable_personal-portfolio-next&branch=main
+ceTaskId=AZyu7kLHBKZ1hoVkGVK7
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AZyu7kLHBKZ1hoVkGVK7

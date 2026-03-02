@@ -407,7 +407,6 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                             }
                             return (
                                 <ExperienceSectionEvent
-                                    timeLineRef={timeLineRef}
                                     key={currentIndex}
                                     item={item}
                                     index={currentIndex}

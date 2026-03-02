@@ -187,7 +187,7 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
                         },
                     );
                     return (
-                        <div key={`line-${line.props.children}`} className="w-full break-words">
+                        <div key={`line-${index}-${line.key}`} className="w-full break-words">
                             {lineElement}
                         </div>
                     );

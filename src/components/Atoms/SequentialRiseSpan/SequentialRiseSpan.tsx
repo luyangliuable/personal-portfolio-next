@@ -33,7 +33,7 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
 }) => {
     const spanItemRef = useRef<HTMLDivElement>(null);
     const [wrappedLines, setWrappedLines] = useState<
-        ReactElement<{ key: number; className: string }>[]
+        ReactElement<{ key: string | number; className: string }>[]
     >([]);
     const [lineRefs, setLineRefs] = useState<RefObject<any>[]>([]);
     const [measuredLettersPerLine, setMeasuredLettersPerLine] =

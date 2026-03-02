@@ -8,9 +8,6 @@ const GolfedSierpinski = () => {
 
     const [size, setSize] = useState<number>(0);
 
-    const sizeX = 1.2 * size;
-    const sizeY = size;
-
     useEffect(() => {
         const update = () => {
             setSize(Math.max(114, window.innerWidth / 8));
@@ -47,7 +44,6 @@ const GolfedSierpinski = () => {
             resizeCanvas();
 
             const squareSize = 4; // New square size
-            const spacing = 3; // Adjust spacing if needed
 
             context.fillStyle = "#433";
 

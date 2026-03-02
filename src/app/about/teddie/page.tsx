@@ -9,8 +9,6 @@ import Bento from "../../../components/Bento/Bento";
 import LandingPageCard from "../../../components/LandingPageCard/LandingPageCard";
 
 const Teddie = () => {
-    const imageStackRef: RefObject<HTMLDivElement> = useRef(null);
-
     useEffect(() => {}, []);
 
     return (

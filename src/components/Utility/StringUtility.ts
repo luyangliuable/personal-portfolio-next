@@ -34,8 +34,8 @@ const stringToHash = (str: string): number => {
     );
     let hash = 0;
 
-    for (let i = 0; i < a!.length; i++) {
-        const char = a!.charCodeAt(i);
+    for (let i = 0; i < a.length; i++) {
+        const char = a.charCodeAt(i);
         hash = (hash << 5) - hash + char;
         hash |= 0;
     }

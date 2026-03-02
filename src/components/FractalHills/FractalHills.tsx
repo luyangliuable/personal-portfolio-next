@@ -309,15 +309,11 @@ const FractalHills = () => {
         };
 
         let p5Instance: p5;
-        if (sketchRef!.current) p5Instance = new p5(sketch, sketchRef!.current);
+        if (sketchRef.current) p5Instance = new p5(sketch, sketchRef.current);
         return () => p5Instance.remove();
     }, []);
 
-    return (
-        <>
-            <div ref={sketchRef} className="bg-[red] h-screen"></div>
-        </>
-    );
+    return <div ref={sketchRef} className="bg-[red] h-screen"></div>;
 };
 
 export default FractalHills;

@@ -89,7 +89,6 @@ const Button: FC<IAccordionButtonProps> = ({
     target,
     disabled,
 }) => {
-    const [show, setShow] = useState<boolean>(false);
     const isLink = href && !disabled;
     return (
         <div className="accordion--item flex flex-row justify-between">

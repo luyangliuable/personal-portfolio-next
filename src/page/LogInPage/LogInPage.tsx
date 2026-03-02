@@ -9,7 +9,6 @@ import { AppDispatch, RootState } from "../../stores/store";
 const LogInPage: React.FC = () => {
     const userNameRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
-    const flash = useRef<HTMLInputElement>(null);
 
     const dispatch: AppDispatch = useDispatch();
     const registerStatus = useSelector((state: RootState) => state.auth.status);

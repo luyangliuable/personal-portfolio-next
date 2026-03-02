@@ -17,10 +17,7 @@ const FractalHills = () => {
             let terrain: number[][] = [];
             let colorTheme = "invertedMonochrome";
 
-            const scaleVal = 40;
             const speedVal = 0.002;
-            const heightVal = 800;
-            const backgroundColorVal = "#EEE";
 
             p.setup = () => {
                 p.createCanvas(p.windowWidth, p.windowHeight, p.WEBGL);

@@ -1,4 +1,4 @@
-import React, { RefObject, useRef, useEffect } from "react";
+import React from "react";
 import { cardGradientEffect } from "../../Utility/MouseUtility";
 import { ExperienceSectionItem } from "../Interface/IExperienceSectionState";
 import "./ExperienceSectionEvent.css";
@@ -6,7 +6,6 @@ import Image from "../../Image/Image";
 import { cl } from "../../Utility/LogicUtility";
 
 interface ExperienceSectionEventProps {
-    timeLineRef: RefObject<HTMLDivElement>;
     item: ExperienceSectionItem;
     index: number;
     alt?: string;

@@ -155,11 +155,11 @@
 .detached .logo {
     background: linear-gradient(90deg, #1e90ff 0%, #491ed3 50%, #1e90ff 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
     -webkit-text-stroke-width: 0.1px;
     -webkit-text-stroke-color: #1e1e1e;
-    background-clip: text;
-    /* max-height: 100% !important; */
     background-size: 200% auto;
     animation: animateBg 3s linear infinite;
 }
@@ -205,10 +205,12 @@
     background-clip: text;
     text-align: center;
     -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
     animation: animateBg 10s linear infinite;
     image-rendering: geometricPrecision;
     -webkit-font-smoothing: antialiased;
-    -moz-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smoothing: antialiased;
     -webkit-text-stroke-width: 0.2px;
     -webkit-text-stroke-color: #1e1e1e;
 }

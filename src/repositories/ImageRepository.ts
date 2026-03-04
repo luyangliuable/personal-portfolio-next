@@ -4,7 +4,7 @@ class ImageRepository extends Repository {
     private static instance: ImageRepository | null = null;
     private cache = new Map<string, string>();
     private ongoingRequests = new Map<string, Promise<string>>();
-    private static BASE_URL: string = "https://llcode.tech/api/image/";
+    private static readonly BASE_URL: string = "https://llcode.tech/api/image/";
 
     private constructor() {
         super();

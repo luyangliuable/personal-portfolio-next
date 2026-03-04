@@ -11,13 +11,13 @@ const LoginButton: React.FC<{ style?: CSSProperties }> = async ({ style }) => {
             style={style}
             className="login-button--container flex flex-row items-center text-sm"
         >
-            {data && (
+            {data?.user && (
                 <>
                     <div className="user-details flex flex-row flex items-center gap-half">
-                        {data.user!.email}
+                        {data.user.email}
                         <Image
                             className="user-image-md"
-                            src={data.user!.image as string}
+                            src={data.user.image as string}
                         />
                     </div>
                     <form
@@ -33,7 +33,7 @@ const LoginButton: React.FC<{ style?: CSSProperties }> = async ({ style }) => {
                     </form>
                 </>
             )}
-            {!data && (
+            {!data?.user && (
                 <form
                     action={async () => {
                         "use server";

@@ -1,18 +1,12 @@
 "use client";
 
-"use client";
-
 import React from "react";
 
 import "./Teddie.css";
-import Image from "next/image";
-import TeddieImage from "./teddie.png";
-import { useScrollPosition } from "../../../hooks";
 import Bento from "../../../components/Bento/Bento";
 import LandingPageCard from "../../../components/LandingPageCard/LandingPageCard";
 
 const Teddie = () => {
-    useEffect(() => {}, []);
 
     return (
         <main>

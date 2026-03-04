@@ -210,7 +210,6 @@
     image-rendering: geometricPrecision;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-smoothing: antialiased;
     -webkit-text-stroke-width: 0.2px;
     -webkit-text-stroke-color: #1e1e1e;
 }

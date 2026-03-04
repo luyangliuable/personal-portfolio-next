@@ -11,7 +11,6 @@ const LogInPage: React.FC = () => {
     const passwordRef = useRef<HTMLInputElement>(null);
 
     const dispatch: AppDispatch = useDispatch();
-    const registerStatus = useSelector((state: RootState) => state.auth.status);
     const error = useSelector((state: RootState) => state.auth.error);
 
     const [state, setState] = useState({
@@ -43,7 +42,6 @@ const LogInPage: React.FC = () => {
 
     const handleLoginSuccess = (): void => {
         updateLoginFlash("Success", "Login Successful!");
-        /* window.location.href = "/"; */
     };
 
     const handleLoginFailure = (err: any): void => {

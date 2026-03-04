@@ -18,7 +18,7 @@ const Gallery: React.FC<IGalleryProps> = (props) => {
             };
             if (index == 0) {
                 return (
-                    <Bento.Item key={index} colSpan={2}>
+                    <Bento.Item key={`gallery-item-${item.name}`} colSpan={2}>
                         <GalleryItem {...item} />
                     </Bento.Item>
                 );
@@ -26,14 +26,14 @@ const Gallery: React.FC<IGalleryProps> = (props) => {
 
             if (index == 1) {
                 return (
-                    <Bento.Item key={index} rowSpan={2} colSpan={2}>
+                    <Bento.Item key={`gallery-item-${item.name}`} rowSpan={2} colSpan={2}>
                         <GalleryItem {...item} />
                     </Bento.Item>
                 );
             }
 
             return (
-                <Bento.Item key={index} colSpan={1}>
+                <Bento.Item key={`gallery-item-${item.name}`} colSpan={1}>
                     <GalleryItem {...item} />
                 </Bento.Item>
             );

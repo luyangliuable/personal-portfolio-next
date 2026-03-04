@@ -45,7 +45,7 @@ const stringToHash = (str: string): number => {
 
 function removeHashesAndStripWhitespace(str: string): string {
     const result = str.replaceAll("#", "");
-    return result.replace(/^\s/gm, "").trim();
+    return result.replaceAll(/^\s/gm, "").trim();
 }
 
 function removeTextInsideAngleBrackets(input: string): string {

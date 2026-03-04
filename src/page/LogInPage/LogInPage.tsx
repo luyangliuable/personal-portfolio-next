@@ -50,10 +50,10 @@ const LogInPage: React.FC = () => {
 
     const login = (e: any): void => {
         e.preventDefault();
-        const loginDetails = {
-            username: userNameRef.current!.value,
-            password: passwordRef.current!.value,
-        };
+        const username = userNameRef.current?.value;
+        const password = passwordRef.current?.value;
+        if (!username || !password) return;
+        const loginDetails = { username, password };
         dispatch(loginUser(loginDetails))
             .unwrap()
             .then(() => handleLoginSuccess())

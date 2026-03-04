@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, RefObject } from "react";
+import { useRef, useState, type RefObject } from "react";
 import Button from "../../Button/Button";
 import "./GetIntoTouchFooterSection.css";
 
@@ -13,10 +13,10 @@ const GetInTouch: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        const messageDetails = {
-            name: messageEmailRef.current!.value,
-            description: messageDescriptionRef.current!.value,
-        };
+        const name = messageEmailRef.current?.value;
+        const description = messageDescriptionRef.current?.value;
+        if (!name || !description) return;
+        const messageDetails = { name, description };
         const BASE_URL: string =
             process.env.REACT_APP_WEATHER_API_BASE_URL ||
             "https://llcode.tech/api";

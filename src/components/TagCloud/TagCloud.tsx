@@ -1,4 +1,3 @@
-import React from "react";
 import ITagCloudProps from "./Interface/ITagCloudProps";
 import "./TagCloud.css";
 import "../../app/page.module.css";

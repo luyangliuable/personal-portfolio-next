@@ -1,4 +1,4 @@
-import React from "react";
+import { memo } from "react";
 import { cardGradientEffect } from "../../Utility/MouseUtility";
 import { ExperienceSectionItem } from "../Interface/IExperienceSectionState";
 import "./ExperienceSectionEvent.css";
@@ -58,4 +58,4 @@ const ExperienceSectionEvent: React.FC<ExperienceSectionEventProps> = ({
     );
 };
 
-export default React.memo(ExperienceSectionEvent);
+export default memo(ExperienceSectionEvent);

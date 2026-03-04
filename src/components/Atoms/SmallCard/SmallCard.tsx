@@ -1,4 +1,3 @@
-import React from "react";
 import ICardProps from "../../Card/Interface/ICardProps";
 import Image from "../../Image/Image";
 import Link from "next/link";

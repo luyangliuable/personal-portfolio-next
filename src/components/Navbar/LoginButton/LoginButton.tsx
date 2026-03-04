@@ -1,4 +1,4 @@
-import React, { CSSProperties } from "react";
+import type { CSSProperties } from "react";
 import { auth, signIn, signOut } from "../../../auth";
 import "./LoginButton.css";
 import Image from "../../Image/Image";

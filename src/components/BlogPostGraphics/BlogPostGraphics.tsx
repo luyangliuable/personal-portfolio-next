@@ -1,4 +1,3 @@
-import React from "react";
 import { PiImageSquareLight } from "react-icons/pi";
 import "./BlogPostGraphics.css";
 

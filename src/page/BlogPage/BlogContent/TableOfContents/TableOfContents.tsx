@@ -1,6 +1,5 @@
-import React from "react";
 import ItableOfContentsProps from "../../../../interfaces/BlogPage/BlogContent/TableOfContents/ItableOfContentsProps";
-import { useEffect, useState, useRef, RefObject } from "react";
+import { useEffect, useState, useRef, createRef, cloneElement, type RefObject } from "react";
 import {
     stringToHash,
     removeHashesAndStripWhitespace,
@@ -96,7 +95,7 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
         if (renderedSubHeadings) {
             setTocEntries(renderedSubHeadings);
             setTocEntryRef(
-                renderedSubHeadings.map(() => React.createRef<any>()),
+                renderedSubHeadings.map(() => createRef<any>()),
             );
         }
     };
@@ -174,11 +173,11 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
     ): JSX.Element => {
         const prevClassName = tocEntry.props.className.replace("active", "");
         if (intersectingIds.includes(tocEntry.props.id)) {
-            return React.cloneElement(tocEntry, {
+            return cloneElement(tocEntry, {
                 className: `${prevClassName} active`,
             });
         }
-        return React.cloneElement(tocEntry, {
+        return cloneElement(tocEntry, {
             className: prevClassName,
         });
     };
@@ -209,7 +208,7 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
             </div>
             {tocEntries?.map((entry, index) => {
                 const entryId = `${entry.props.id || 'entry'}-${index}`;
-                return React.cloneElement(entry, {
+                return cloneElement(entry, {
                     ref: tocEntryRef[index],
                     key: entryId,
                 });

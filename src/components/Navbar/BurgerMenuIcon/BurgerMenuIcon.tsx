@@ -1,4 +1,4 @@
-import React from "react";
+import { memo } from "react";
 
 const BurgerMenuIcon: React.FC = () => {
     return (
@@ -19,4 +19,4 @@ const BurgerMenuIcon: React.FC = () => {
     );
 };
 
-export default React.memo(BurgerMenuIcon);
+export default memo(BurgerMenuIcon);

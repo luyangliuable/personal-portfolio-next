@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import type { ReactNode } from "react";
 import { IGalleryProps } from "./Interface/IGalleryProps";
 import GalleryItem from "./GalleryItem/GalleryItem";
 import "../Utility/MouseUtility";
@@ -9,7 +9,7 @@ import Bento from "../Bento/Bento";
 import IGalleryItemProps from "./GalleryItem/Interface/IGalleryItemProps";
 
 const Gallery: React.FC<IGalleryProps> = (props) => {
-    const renderGalleryItems = (): React.ReactNode => {
+    const renderGalleryItems = (): ReactNode => {
         return props.content.map((item: IGalleryItemProps, index: number) => {
             item = {
                 ...item,

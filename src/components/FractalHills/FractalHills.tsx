@@ -304,7 +304,7 @@ const FractalHills = () => {
                 p.resizeCanvas(p.windowWidth, p.windowHeight);
             }
 
-            window.addEventListener("resize", windowResized);
+            globalThis.addEventListener("resize", windowResized);
         };
 
         let p5Instance: p5;

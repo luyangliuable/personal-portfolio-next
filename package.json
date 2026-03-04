@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "format": "npx prettier --write .",
-    "codegen": "openapi-rq -i \"../api_fastapi/openapi/v1-generated.yaml\" -c axios --format prettier -o openapi-gen --operationId"
+    "codegen": "openapi-rq -i \"../api_fastapi/openapi/v1-generated.yaml\" -c axios --format prettier -o openapi-gen --operationId",
+    "sonar": "sonar-scanner",
+    "sonar:scan-docker": "docker run --rm -e SONAR_HOST_URL=https://sonarcloud.io -e SONAR_TOKEN=$SONAR_TOKEN -v \"$(pwd)\":/usr/src sonarsource/sonar-scanner-cli"
   },
   "dependencies": {
     "@auth/unstorage-adapter": "^2.0.0",

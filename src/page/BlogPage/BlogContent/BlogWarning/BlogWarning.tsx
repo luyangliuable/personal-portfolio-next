@@ -1,4 +1,3 @@
-import React from "react";
 import "./BlogWarning.css";
 import { IoWarning } from "react-icons/io5";
 

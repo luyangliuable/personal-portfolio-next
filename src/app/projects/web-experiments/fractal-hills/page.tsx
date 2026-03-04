@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import React from "react";
 import HeroHeader from "../../../../components/HeroHeader/HeroHeader";
 import FractalHills from "../../../../components/FractalHills/FractalHills";
 

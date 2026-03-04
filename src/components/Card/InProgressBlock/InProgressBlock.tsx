@@ -1,4 +1,3 @@
-import React from "react";
 import "./InProgressBlock.css";
 
 const InProgressBlock: React.FC = () => {

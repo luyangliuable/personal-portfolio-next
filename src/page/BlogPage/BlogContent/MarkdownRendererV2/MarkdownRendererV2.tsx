@@ -113,7 +113,7 @@ const MarkdownRendererV2: React.FC<MarkdownRendererProps> = ({ markdown }) => {
         let filteredText = text.replace(tocRegex, "");
         const asteriskRegex = /\|([^\|]*)\|/g;
         filteredText = filteredText.replace(asteriskRegex, (match, p1) => {
-            return `|${p1.replace(/\*/g, "")}|`;
+            return `|${p1.replaceAll("*", "")}|`;
         });
 
         return filteredText;

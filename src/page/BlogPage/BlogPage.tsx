@@ -149,7 +149,7 @@ const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
     const renderPostsSortedByDateDescending =
         useCallback((): React.ReactNode => {
             return Object.keys(state.currentlyShowingContent)
-                .sort((a, b) => parseInt(b) - parseInt(a))
+                .sort((a, b) => Number.parseInt(b) - Number.parseInt(a))
                 .map((year) => (
                     <React.Fragment key={year}>
                         <BlogYear year={year} />

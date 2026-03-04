@@ -5,14 +5,14 @@ const isCenterAlignedWithViewport = (div: Element | null): number => {
     if (div === null) return Number.MAX_SAFE_INTEGER;
     const rect = div.getBoundingClientRect();
     const divCenterY = rect.top + rect.height / 2;
-    const viewportCenterY = window.innerHeight / 2;
+    const viewportCenterY = globalThis.innerHeight / 2;
     return divCenterY - viewportCenterY;
 };
 
 export function getVisiblePercentage(element: Element | null): number {
     if (element === null) return 0;
     const rect = element.getBoundingClientRect();
-    const viewportHeight = window.innerHeight;
+    const viewportHeight = globalThis.innerHeight;
     const visibleHeight = Math.max(
         0,
         Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0),
@@ -90,7 +90,7 @@ const resetElementPosition = (element: HTMLElement): void => {
 function useScrollToTopOnLoad() {
     useEffect(() => {
         const scrollToTop = () => {
-            window.scrollTo({
+            globalThis.scrollTo({
                 top: 0,
             });
         };

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import "./GolfedSierpinski.css";
 
 const GolfedSierpinski = () => {
@@ -14,14 +14,14 @@ const GolfedSierpinski = () => {
         };
 
         if (typeof globalThis !== "undefined") {
-            window.addEventListener("resize", update);
+            globalThis.addEventListener("resize", update);
         }
 
         update();
 
         return () => {
             if (typeof globalThis !== "undefined") {
-                window.removeEventListener("resize", update);
+                globalThis.removeEventListener("resize", update);
             }
         };
     }, []);
@@ -63,9 +63,9 @@ const GolfedSierpinski = () => {
             requestAnimationFrame(animate);
         };
         requestAnimationFrame(animate);
-        window.addEventListener("resize", resizeCanvas);
+        globalThis.addEventListener("resize", resizeCanvas);
         return () => {
-            window.removeEventListener("resize", resizeCanvas);
+            globalThis.removeEventListener("resize", resizeCanvas);
         };
     }, [size]);
 

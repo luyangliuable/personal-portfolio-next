@@ -28,7 +28,7 @@ const useScrollPosition = (overrideThrottleInterval?: number) => {
             clearTimeout(scrollTimeout);
             setAppState((prevState) => ({
                 ...prevState,
-                scrollY: window.scrollY,
+                scrollY: globalThis.scrollY,
                 scrolling: true,
             }));
             scrollTimeout = setTimeout(
@@ -41,13 +41,13 @@ const useScrollPosition = (overrideThrottleInterval?: number) => {
             handleScroll,
             overrideThrottleInterval ?? 10,
         );
-        window.addEventListener("scroll", throttledHandleScroll);
+        globalThis.addEventListener("scroll", throttledHandleScroll);
 
         const deltaScrollCalculationInterval: NodeJS.Timeout = setInterval(
             () => {
                 setAppState((prevState) => {
                     const deltaScrolled =
-                        window.scrollY -
+                        globalThis.scrollY -
                         Math.max(
                             0,
                             prevState.deltaScrollCalculation
@@ -62,7 +62,7 @@ const useScrollPosition = (overrideThrottleInterval?: number) => {
                         ...prevState,
                         deltaScrollCalculation: {
                             ...prevState.deltaScrollCalculation,
-                            lastRecordedScrollY: window.scrollY,
+                            lastRecordedScrollY: globalThis.scrollY,
                             deltaScrolled: deltaScrolled,
                         },
                     };
@@ -72,9 +72,9 @@ const useScrollPosition = (overrideThrottleInterval?: number) => {
         );
 
         return () => {
-            window.removeEventListener("scroll", throttledHandleScroll);
-            window.clearTimeout(scrollTimeout);
-            window.clearInterval(deltaScrollCalculationInterval);
+            globalThis.removeEventListener("scroll", throttledHandleScroll);
+            clearTimeout(scrollTimeout);
+            clearInterval(deltaScrollCalculationInterval);
         };
     }, []);
 

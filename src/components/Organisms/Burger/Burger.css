@@ -208,5 +208,8 @@
     rotate: 140deg;
     font-size: 1rem;
     font-weight: 100;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     user-select: none;
 }

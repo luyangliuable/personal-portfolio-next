@@ -36,7 +36,7 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
     }, [tocEntries, props.emitter]);
 
     const handleClick = (
-        _event: React.MouseEvent<HTMLDivElement>,
+        _event: React.MouseEvent<HTMLButtonElement>,
         id: string,
     ) => {
         const allBlogSections = Array.from(

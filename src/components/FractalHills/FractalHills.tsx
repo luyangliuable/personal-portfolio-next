@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, RefObject } from "react";
 
 import "./FractalHills.css";
 import p5 from "p5/lib/p5.js";
@@ -18,6 +18,7 @@ const FractalHills = () => {
             let terrain: number[][] = [];
             let colorTheme = "invertedMonochrome";
             const heightVal = 100;
+            const backgroundColorVal = 0;
 
             const speedVal = 0.002;
 

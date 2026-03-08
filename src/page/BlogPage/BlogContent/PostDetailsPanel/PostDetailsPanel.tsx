@@ -44,13 +44,13 @@ const PostDetailsPanel: React.FC<IPostDetailsPanelProps> = ({
             const link = `/digital-chronicles/blog/${post._id.$oid}`;
             return (
                 <Link className="w-4/5" href={link} key={post._id.$oid}>
-                    <div
-                        className="card no-boundary p-[8px] ml-[-8px]"
+                    <span
+                        className="card no-boundary p-[8px] ml-[-8px] block"
                         onMouseMove={cardGradientEffect}
                     >
                         <h4 className="mb-0 font-bold">{heading}</h4>
                         <p className="m-0">{author}</p>
-                    </div>
+                    </span>
                 </Link>
             );
         });

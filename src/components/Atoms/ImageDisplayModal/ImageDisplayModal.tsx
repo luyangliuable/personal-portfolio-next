@@ -35,23 +35,17 @@ const ImageDisplayModal: React.FC<IImageDisplayModalProps> = ({
         <>
             {showModal &&
                 createPortal(
-                    <div
+                    <button
+                        type="button"
                         className="image-display-modal--container flex justify-center items-center"
                         onClick={(e) => {
                             if (
-                                (e.target as HTMLDivElement).className.includes(
+                                (e.target as HTMLButtonElement).className.includes(
                                     "image-display-modal--container",
                                 )
                             )
                                 setShowModal(false);
                             e.stopPropagation();
-                        }}
-                        role="button"
-                        tabIndex={0}
-                        onKeyDown={(e) => {
-                            if (e.key === 'Enter' || e.key === ' ') {
-                                setShowModal(false);
-                            }
                         }}
                     >
                         <div className="image-display-modal flex flex-col justify-center items-start">
@@ -71,7 +65,7 @@ const ImageDisplayModal: React.FC<IImageDisplayModalProps> = ({
                                 {description}
                             </div>
                         </div>
-                    </div>,
+                    </button>,
                     document.body,
                 )}
         </>

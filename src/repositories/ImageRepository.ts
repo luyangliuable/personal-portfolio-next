@@ -11,8 +11,7 @@ class ImageRepository extends Repository {
     }
 
     static getInstance(): ImageRepository {
-        if (!ImageRepository.instance)
-            ImageRepository.instance = new ImageRepository();
+        ImageRepository.instance ??= new ImageRepository();
         return ImageRepository.instance;
     }
 

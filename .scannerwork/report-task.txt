@@ -3,5 +3,5 @@ projectKey=luyangliuable_personal-portfolio-next
 serverUrl=https://sonarcloud.io
 serverVersion=8.0.0.82486
 dashboardUrl=https://sonarcloud.io/dashboard?id=luyangliuable_personal-portfolio-next
-ceTaskId=AZzM2IXivgJ1tx8pM7zJ
-ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AZzM2IXivgJ1tx8pM7zJ
+ceTaskId=AZzM57t-ArCvFm1WrbWO
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AZzM57t-ArCvFm1WrbWO

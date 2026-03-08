@@ -110,13 +110,12 @@ const MarkdownRendererV2: React.FC<MarkdownRendererProps> = ({ markdown }) => {
         null,
     );
 
-    const processCallback = (err: any, file: any): undefined => {
+    const processCallback = (err: any, file: any): void => {
         if (err) {
             console.error(err);
         } else {
             setRenderedContent(convertHtmlToReact(String(file)));
         }
-        return;
     };
 
     useEffect(() => {

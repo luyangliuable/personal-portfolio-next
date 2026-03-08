@@ -19,8 +19,8 @@ class Button extends Component<IButtonProps, {}> {
 
     renderButton() {
         return (
-            <div className="flex justify-center items-center">
-                <div
+            <span className="flex justify-center items-center">
+                <span
                     style={this.props.style}
                     className={cl(
                         "t-button button no-select",
@@ -28,12 +28,12 @@ class Button extends Component<IButtonProps, {}> {
                     )}
                     onMouseMove={(e) => cardGradientEffect(e, false, 1, 38, 20)}
                 >
-                    <span>{this.props.children}</span>
-                </div>
+                    {this.props.children}
+                </span>
                 {this.props.showButtonLine && (
-                    <div className="button-line"></div>
+                    <span className="button-line"></span>
                 )}
-            </div>
+            </span>
         );
     }
 

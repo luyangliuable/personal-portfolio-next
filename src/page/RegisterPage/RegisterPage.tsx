@@ -26,7 +26,6 @@ const RegisterPage: React.FC = () => {
 
     const dispatch: AppDispatch = useDispatch();
     const registerStatus = useSelector((state: RootState) => state.auth.status);
-    const error = useSelector((state: RootState) => state.auth.error);
 
     const getFlashClassNames = (): string => {
         let className = "register-form--register-flash"; // common class
@@ -52,7 +51,7 @@ const RegisterPage: React.FC = () => {
 
     const handleRegisterSuccess = (): void => {
         updateRegisterFlash("succeeded", "Register Successful!");
-        window.location.href = "/";
+        globalThis.location.href = "/";
     };
 
     const handleRegisterFailure = (err: string): void => {

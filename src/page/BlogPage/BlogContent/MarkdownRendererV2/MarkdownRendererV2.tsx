@@ -74,6 +74,17 @@ const processNodes = (node: any): any => {
     return node.outerHTML;
 };
 
+function filterMarkdown(text: string): string {
+    const tocRegex = /\*\*Table of Contents\*\*\n(?:\s*-\s[^\n]*\n)+/g;
+    let filteredText = text.replaceAll(tocRegex, "");
+    const asteriskRegex = /\|([^|]*)\|/g;
+    filteredText = filteredText.replaceAll(asteriskRegex, (match, p1) => {
+        return `|${p1.replaceAll("*", "")}|`;
+    });
+
+    return filteredText;
+}
+
 const convertHtmlToReact = (htmlString: string): JSX.Element => {
     const container = document.createElement("div");
     container.innerHTML = htmlString;
@@ -107,17 +118,6 @@ const MarkdownRendererV2: React.FC<MarkdownRendererProps> = ({ markdown }) => {
         }
         return;
     };
-
-    function filterMarkdown(text: string): string {
-        const tocRegex = /\*\*Table of Contents\*\*\n(?:\s*-\s[^\n]*\n)+/g;
-        let filteredText = text.replace(tocRegex, "");
-        const asteriskRegex = /\|([^\|]*)\|/g;
-        filteredText = filteredText.replace(asteriskRegex, (match, p1) => {
-            return `|${p1.replaceAll("*", "")}|`;
-        });
-
-        return filteredText;
-    }
 
     useEffect(() => {
         const filteredMarkdown = filterMarkdown(

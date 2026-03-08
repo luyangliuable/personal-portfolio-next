@@ -3,7 +3,7 @@ import INavbarBurgerProps from "./Interface/INavbarBurgerProps";
 import INavbarBurgerState from "./Interface/INavbarBurgerState";
 
 class NavbarBurger extends Component<INavbarBurgerProps, INavbarBurgerState> {
-    burgerButton = createRef<HTMLDivElement>();
+    burgerButton = createRef<HTMLButtonElement>();
 
     constructor(props: INavbarBurgerProps) {
         super(props);
@@ -11,10 +11,12 @@ class NavbarBurger extends Component<INavbarBurgerProps, INavbarBurgerState> {
 
     render() {
         return (
-            <div
+            <button
+                type="button"
                 ref={this.burgerButton}
                 className="nav-burger"
                 onClick={this.props.onNavbarBurgerClick}
+                aria-label="Toggle navigation menu"
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +32,7 @@ class NavbarBurger extends Component<INavbarBurgerProps, INavbarBurgerState> {
                 >
                     <path d="M3 12h18M3 6h18M3 18h18"></path>
                 </svg>
-            </div>
+            </button>
         );
     }
 }

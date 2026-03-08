@@ -24,19 +24,6 @@ function customCodeBlockPlugin() {
         visit(tree, "code", (node) => {
             let language: string = node.lang || "unknown";
 
-            const getMetadataKeyValPairs = (metadata: string) => {
-                const regexPattern = /([\w.]+)=([\w.\d/-]+)/g;
-                const keyValuePairs: string[] = [];
-                let match: RegExpExecArray | null;
-                while ((match = regexPattern.exec(metadata)) !== null) {
-                    if (!/app\.js/.test(match[1])) {
-                        keyValuePairs.push(match[0]);
-                    }
-                }
-
-                return keyValuePairs;
-            };
-
             const getMetaDataFileName = (metadata: string) => {
                 const codeblocktitleregex = /^[\w.]+(?!\w*=)\b/g;
                 const result = codeblocktitleregex.exec(metadata);

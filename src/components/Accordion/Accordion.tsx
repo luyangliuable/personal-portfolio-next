@@ -19,7 +19,6 @@ interface IAccordionButtonProps {
     className?: string;
     target?: string;
     icon?: ReactNode;
-    children?: ReactNode;
 }
 
 interface IAccordionProps {

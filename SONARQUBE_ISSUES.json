@@ -1,0 +1,1283 @@
+[
+  {
+    "rule": "css:S4654",
+    "severity": "BLOCKER",
+    "file": "src/components/Navbar/Navbar.css",
+    "line": 160,
+    "message": "Unexpected unknown property \"text-fill-color\""
+  },
+  {
+    "rule": "css:S4654",
+    "severity": "BLOCKER",
+    "file": "src/components/Navbar/Navbar.css",
+    "line": 208,
+    "message": "Unexpected unknown property \"text-fill-color\""
+  },
+  {
+    "rule": "typescript:S3358",
+    "severity": "MAJOR",
+    "file": "src/components/Navbar/NavLink/NavLink.tsx",
+    "line": 50,
+    "message": "Extract this nested ternary operation into an independent statement."
+  },
+  {
+    "rule": "css:S4667",
+    "severity": "MAJOR",
+    "file": "src/app/page.module.css",
+    "line": 1,
+    "message": "Unexpected empty source"
+  },
+  {
+    "rule": "css:S4667",
+    "severity": "MAJOR",
+    "file": "src/app/projects/3d-printing/ThreeDPrintingGallery.css",
+    "line": 1,
+    "message": "Unexpected empty source"
+  },
+  {
+    "rule": "css:S4667",
+    "severity": "MAJOR",
+    "file": "src/components/TextInputCard/TextInputWithCard.css",
+    "line": 1,
+    "message": "Unexpected empty source"
+  },
+  {
+    "rule": "css:S4649",
+    "severity": "MAJOR",
+    "file": "src/components/Navbar/NavLink/NavLink.css",
+    "line": 2,
+    "message": "Unexpected missing generic font family"
+  },
+  {
+    "rule": "typescript:S1533",
+    "severity": "MINOR",
+    "file": "src/components/HeroSection/HeroSection.tsx",
+    "line": 105,
+    "message": "Replace this \"String\" wrapper object with primitive type \"string\"."
+  },
+  {
+    "rule": "typescript:S1533",
+    "severity": "MINOR",
+    "file": "src/components/HeroSection/HeroSection.tsx",
+    "line": 106,
+    "message": "Replace this \"String\" wrapper object with primitive type \"string\"."
+  },
+  {
+    "rule": "typescript:S6848",
+    "severity": "MAJOR",
+    "file": "src/components/HeroSection/HeroSection.tsx",
+    "line": 280,
+    "message": "Avoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element."
+  },
+  {
+    "rule": "css:S125",
+    "severity": "MAJOR",
+    "file": "src/components/Bento/Bento.css",
+    "line": 7,
+    "message": "Remove this commented out code."
+  },
+  {
+    "rule": "typescript:S1128",
+    "severity": "MINOR",
+    "file": "src/components/Image/Image.tsx",
+    "line": 3,
+    "message": "Remove this unused import of 'useMemo'."
+  },
+  {
+    "rule": "typescript:S7764",
+    "severity": "MINOR",
+    "file": "src/components/Navbar/NavbarMainSection/NavbarMainSection.tsx",
+    "line": 117,
+    "message": "Prefer `globalThis` over `window`."
+  },
+  {
+    "rule": "typescript:S7784",
+    "severity": "MINOR",
+    "file": "src/components/Utility/StringUtility.ts",
+    "line": 74,
+    "message": "Prefer `structuredClone(…)` over `JSON.parse(JSON.stringify(…))` to create a deep clone."
+  },
+  {
+    "rule": "typescript:S6848",
+    "severity": "MAJOR",
+    "file": "src/components/Button/Button.tsx",
+    "line": 25,
+    "message": "Avoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element."
+  },
+  {
+    "rule": "typescript:S1128",
+    "severity": "MINOR",
+    "file": "src/page/BlogPage/BlogContent/PostDetailsPanel/PostDetailsPanel.tsx",
+    "line": 10,
+    "message": "Remove this unused import of 'TextInputWithCard'."
+  },
+  {
+    "rule": "typescript:S6848",
+    "severity": "MAJOR",
+    "file": "src/page/BlogPage/BlogContent/PostDetailsPanel/PostDetailsPanel.tsx",
+    "line": 48,
+    "message": "Avoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element."
+  },
+  {
+    "rule": "css:S125",
+    "severity": "MAJOR",
+    "file": "src/components/FractalHills/FractalHills.css",
+    "line": 1,
+    "message": "Remove this commented out code."
+  },
+  {
+    "rule": "css:S7924",
+    "severity": "MAJOR",
+    "file": "src/components/FractalHills/FractalHills.css",
+    "line": 58,
+    "message": "Text does not meet the minimal contrast requirement with its background."
+  },
+  {
+    "rule": "typescript:S7769",
+    "severity": "MINOR",
+    "file": "src/components/FractalHills/FractalHills.tsx",
+    "line": 44,
+    "message": "Prefer `Math.hypot(…)` over `Math.sqrt(…)`."
+  },
+  {
+    "rule": "typescript:S6848",
+    "severity": "MAJOR",
+    "file": "src/components/ExperienceSection/ExperienceSectionEvent/ExperienceSectionEvent.tsx",
+    "line": 42,
+    "message": "Avoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element."
+  },
+  {
+    "rule": "typescript:S4325",
+    "severity": "MINOR",
+    "file": "src/components/Navbar/NavbarMainSection/NavbarMainSection.tsx",
+    "line": 217,
+    "message": "This assertion is unnecessary since it does not change the type of the expression."
+  },
+  {
+    "rule": "typescript:S6479",
+    "severity": "MAJOR",
+    "file": "src/components/FeaturedContentSection/FeaturedContentSection.tsx",
+    "line": 144,
+    "message": "Do not use Array index in keys"
+  },
+  {
+    "rule": "typescript:S7766",
+    "severity": "MINOR",
+    "file": "src/components/Navbar/NavbarMainSection/NavbarMainSection.tsx",
+    "line": 71,
+    "message": "Prefer `Math.max()` to simplify ternary expressions."
+  },
+  {
+    "rule": "typescript:S6848",
+    "severity": "MAJOR",
+    "file": "src/components/ExperienceSection/ExperienceSectionImageDisplay/ExperienceSectionImageDisplay.tsx",
+    "line": 57,
+    "message": "Avoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element."
+  },
+  {
+    "rule": "typescript:S6848",
+    "severity": "MAJOR",
+    "file": "src/components/ExperienceSection/ExperienceSectionImageDisplay/ExperienceSectionImageDisplay.tsx",
+    "line": 80,
+    "message": "Avoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element."
+  },
+  {
+    "rule": "typescript:S1082",
+    "severity": "MINOR",
+    "file": "src/components/ExperienceSection/ExperienceSectionImageDisplay/ExperienceSectionImageDisplay.tsx",
+    "line": 80,
+    "message": "Visible, non-interactive elements with click handlers must have at least one keyboard listener."
+  },
+  {
+    "rule": "typescript:S1082",
+    "severity": "MINOR",
+    "file": "src/components/Gallery/GalleryItem/Contributors/Contributors.tsx",
+    "line": 76,
+    "message": "onMouseOver must be accompanied by onFocus for accessibility."
+  },
+  {
+    "rule": "typescript:S6848",
+    "severity": "MAJOR",
+    "file": "src/components/MusicPlayer/MusicPlayerItem/MusicPlayerItem.tsx",
+    "line": 20,
+    "message": "Avoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element."
+  },
+  {
+    "rule": "typescript:S6848",
+    "severity": "MAJOR",
+    "file": "src/page/BlogPage/BlogContent/CodeBlock/CodeBlock.tsx",
+    "line": 60,
+    "message": "Avoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element."
+  },
+  {
+    "rule": "typescript:S1082",
+    "severity": "MINOR",
+    "file": "src/page/BlogPage/BlogContent/CodeBlock/CodeBlock.tsx",
+    "line": 60,
+    "message": "Visible, non-interactive elements with click handlers must have at least one keyboard listener."
+  },
+  {
+    "rule": "typescript:S6479",
+    "severity": "MAJOR",
+    "file": "src/page/BlogPage/BlogContent/PostDetailsPanel/PostDetailsPanel.tsx",
+    "line": 47,
+    "message": "Do not use Array index in keys"
+  },
+  {
+    "rule": "css:S4649",
+    "severity": "MAJOR",
+    "file": "src/app/about/teddie/Teddie.css",
+    "line": 242,
+    "message": "Unexpected missing generic font family"
+  },
+  {
+    "rule": "typescript:S6848",
+    "severity": "MAJOR",
+    "file": "src/components/Atoms/ImageDisplayModal/ImageDisplayModal.tsx",
+    "line": 38,
+    "message": "Avoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element."
+  },
+  {
+    "rule": "typescript:S1082",
+    "severity": "MINOR",
+    "file": "src/components/Atoms/ImageDisplayModal/ImageDisplayModal.tsx",
+    "line": 38,
+    "message": "Visible, non-interactive elements with click handlers must have at least one keyboard listener."
+  },
+  {
+    "rule": "typescript:S6848",
+    "severity": "MAJOR",
+    "file": "src/components/Atoms/ImageDisplayModal/ImageDisplayModal.tsx",
+    "line": 51,
+    "message": "Avoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element."
+  },
+  {
+    "rule": "typescript:S1082",
+    "severity": "MINOR",
+    "file": "src/components/Atoms/ImageDisplayModal/ImageDisplayModal.tsx",
+    "line": 51,
+    "message": "Visible, non-interactive elements with click handlers must have at least one keyboard listener."
+  },
+  {
+    "rule": "typescript:S6848",
+    "severity": "MAJOR",
+    "file": "src/components/Atoms/Toggle/Toggle.tsx",
+    "line": 34,
+    "message": "Avoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element."
+  },
+  {
+    "rule": "typescript:S1082",
+    "severity": "MINOR",
+    "file": "src/components/Atoms/Toggle/Toggle.tsx",
+    "line": 34,
+    "message": "Visible, non-interactive elements with click handlers must have at least one keyboard listener."
+  },
+  {
+    "rule": "typescript:S7773",
+    "severity": "MINOR",
+    "file": "src/components/ExperienceSection/ExperienceSectionImageDisplay/ExperienceSectionImageDisplay.tsx",
+    "line": 29,
+    "message": "Prefer `Number.parseFloat` over `parseFloat`."
+  },
+  {
+    "rule": "typescript:S1128",
+    "severity": "MINOR",
+    "file": "src/components/FeaturedContentSection/FeaturedContentSection.tsx",
+    "line": 14,
+    "message": "Remove this unused import of 'Retro'."
+  },
+  {
+    "rule": "typescript:S6479",
+    "severity": "MAJOR",
+    "file": "src/components/FeaturedContentSection/FeaturedContentSection.tsx",
+    "line": 137,
+    "message": "Do not use Array index in keys"
+  },
+  {
+    "rule": "typescript:S7750",
+    "severity": "MINOR",
+    "file": "src/components/Footer/Footer.tsx",
+    "line": 20,
+    "message": "Prefer `.find(…)` over `.filter(…)[0]`."
+  },
+  {
+    "rule": "typescript:S6479",
+    "severity": "MAJOR",
+    "file": "src/components/Footer/Footer.tsx",
+    "line": 43,
+    "message": "Do not use Array index in keys"
+  },
+  {
+    "rule": "typescript:S6479",
+    "severity": "MAJOR",
+    "file": "src/components/Footer/Footer.tsx",
+    "line": 69,
+    "message": "Do not use Array index in keys"
+  },
+  {
+    "rule": "css:S4658",
+    "severity": "MAJOR",
+    "file": "src/components/Gallery/Gallery.css",
+    "line": 15,
+    "message": "Unexpected empty block"
+  },
+  {
+    "rule": "typescript:S4325",
+    "severity": "MINOR",
+    "file": "src/components/Gallery/GalleryItem/Contributors/Contributors.tsx",
+    "line": 32,
+    "message": "This assertion is unnecessary since it does not change the type of the expression."
+  },
+  {
+    "rule": "typescript:S1082",
+    "severity": "MINOR",
+    "file": "src/components/Gallery/GalleryItem/Contributors/Contributors.tsx",
+    "line": 91,
+    "message": "onMouseOut must be accompanied by onBlur for accessibility."
+  },
+  {
+    "rule": "css:S4649",
+    "severity": "MAJOR",
+    "file": "src/components/Gallery/GalleryItem/GalleryItem.css",
+    "line": 98,
+    "message": "Unexpected missing generic font family"
+  },
+  {
+    "rule": "typescript:S6848",
+    "severity": "MAJOR",
+    "file": "src/components/Gallery/GalleryItem/GalleryItem.tsx",
+    "line": 85,
+    "message": "Avoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element."
+  },
+  {
+    "rule": "typescript:S7735",
+    "severity": "MINOR",
+    "file": "src/components/Gallery/GalleryItem/GalleryItem.tsx",
+    "line": 93,
+    "message": "Unexpected negated condition."
+  },
+  {
+    "rule": "typescript:S6582",
+    "severity": "MAJOR",
+    "file": "src/components/Gallery/GalleryItem/GalleryItem.tsx",
+    "line": 141,
+    "message": "Prefer using an optional chain expression instead, as it's more concise and easier to read."
+  },
+  {
+    "rule": "typescript:S6479",
+    "severity": "MAJOR",
+    "file": "src/components/Gallery/GalleryItem/GalleryItem.tsx",
+    "line": 145,
+    "message": "Do not use Array index in keys"
+  },
+  {
+    "rule": "typescript:S6582",
+    "severity": "MAJOR",
+    "file": "src/components/Gallery/GalleryItem/GalleryItem.tsx",
+    "line": 150,
+    "message": "Prefer using an optional chain expression instead, as it's more concise and easier to read."
+  },
+  {
+    "rule": "typescript:S878",
+    "severity": "MAJOR",
+    "file": "src/components/GolfedSierpinski/GolfedSierpinski.tsx",
+    "line": 38,
+    "message": "Unexpected use of comma operator."
+  },
+  {
+    "rule": "css:S4656",
+    "severity": "MAJOR",
+    "file": "src/components/HeroSection/HeroSection.css",
+    "line": 99,
+    "message": "Unexpected duplicate \"background-image\""
+  },
+  {
+    "rule": "css:S4656",
+    "severity": "MAJOR",
+    "file": "src/components/HeroSection/HeroSection.css",
+    "line": 103,
+    "message": "Unexpected duplicate \"background-size\""
+  },
+  {
+    "rule": "typescript:S7734",
+    "severity": "MINOR",
+    "file": "src/components/Image/Image.tsx",
+    "line": 7,
+    "message": "Prefer using the default import over named import."
+  },
+  {
+    "rule": "typescript:S1128",
+    "severity": "MINOR",
+    "file": "src/components/Navbar/NavBurgerPanel/NavBurgerPanel.tsx",
+    "line": 8,
+    "message": "Remove this unused import of 'ILink'."
+  },
+  {
+    "rule": "typescript:S6848",
+    "severity": "MAJOR",
+    "file": "src/components/Navbar/NavbarBurger/NavbarBurger.tsx",
+    "line": 14,
+    "message": "Avoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element."
+  },
+  {
+    "rule": "typescript:S1082",
+    "severity": "MINOR",
+    "file": "src/components/Navbar/NavbarBurger/NavbarBurger.tsx",
+    "line": 14,
+    "message": "Visible, non-interactive elements with click handlers must have at least one keyboard listener."
+  },
+  {
+    "rule": "typescript:S6582",
+    "severity": "MAJOR",
+    "file": "src/components/Navbar/NavbarMainSection/NavbarMainSection.tsx",
+    "line": 130,
+    "message": "Prefer using an optional chain expression instead, as it's more concise and easier to read."
+  },
+  {
+    "rule": "typescript:S6848",
+    "severity": "MAJOR",
+    "file": "src/components/Navbar/NavbarMainSection/NavbarMainSection.tsx",
+    "line": 288,
+    "message": "Avoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element."
+  },
+  {
+    "rule": "typescript:S1082",
+    "severity": "MINOR",
+    "file": "src/components/Navbar/NavbarMainSection/NavbarMainSection.tsx",
+    "line": 288,
+    "message": "Visible, non-interactive elements with click handlers must have at least one keyboard listener."
+  },
+  {
+    "rule": "typescript:S6582",
+    "severity": "MAJOR",
+    "file": "src/components/TagCloud/TagCloud.tsx",
+    "line": 8,
+    "message": "Prefer using an optional chain expression instead, as it's more concise and easier to read."
+  },
+  {
+    "rule": "typescript:S2933",
+    "severity": "MAJOR",
+    "file": "src/components/TwinCandle/TwinCandle.tsx",
+    "line": 329,
+    "message": "Member 'changeRefClassName' is never reassigned; mark it as `readonly`."
+  },
+  {
+    "rule": "typescript:S6848",
+    "severity": "MAJOR",
+    "file": "src/components/TwinCandle/TwinCandle.tsx",
+    "line": 347,
+    "message": "Avoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element."
+  },
+  {
+    "rule": "typescript:S1082",
+    "severity": "MINOR",
+    "file": "src/components/TwinCandle/TwinCandle.tsx",
+    "line": 347,
+    "message": "Visible, non-interactive elements with click handlers must have at least one keyboard listener."
+  },
+  {
+    "rule": "typescript:S7772",
+    "severity": "MINOR",
+    "file": "src/interfaces/BlogPage/BlogContent/TableOfContents/ItableOfContentsProps.ts",
+    "line": 2,
+    "message": "Prefer `node:events` over `events`."
+  },
+  {
+    "rule": "typescript:S4325",
+    "severity": "MINOR",
+    "file": "src/page/BlogPage/BlogContent/CodeBlock/CodeBlock.tsx",
+    "line": 25,
+    "message": "This assertion is unnecessary since it does not change the type of the expression."
+  },
+  {
+    "rule": "typescript:S7781",
+    "severity": "MINOR",
+    "file": "src/page/BlogPage/BlogContent/MarkdownRendererV2/MarkdownRendererV2.tsx",
+    "line": 113,
+    "message": "Prefer `String#replaceAll()` over `String#replace()`."
+  },
+  {
+    "rule": "typescript:S6594",
+    "severity": "MINOR",
+    "file": "src/page/BlogPage/BlogContent/MarkdownRendererV2/remarkTableToHtml.ts",
+    "line": 50,
+    "message": "Use the \"RegExp.exec()\" method instead."
+  },
+  {
+    "rule": "css:S7924",
+    "severity": "MAJOR",
+    "file": "src/page/BlogPage/BlogPage.css",
+    "line": 67,
+    "message": "Text does not meet the minimal contrast requirement with its background."
+  },
+  {
+    "rule": "typescript:S1533",
+    "severity": "MINOR",
+    "file": "src/page/Chatbot/Chatbot.tsx",
+    "line": 11,
+    "message": "Replace this \"String\" wrapper object with primitive type \"string\"."
+  },
+  {
+    "rule": "css:S4658",
+    "severity": "MAJOR",
+    "file": "src/page/LogInPage/LogInPage.css",
+    "line": 51,
+    "message": "Unexpected empty block"
+  },
+  {
+    "rule": "typescript:S4325",
+    "severity": "MINOR",
+    "file": "src/page/NotePage/NotePage.tsx",
+    "line": 35,
+    "message": "This assertion is unnecessary since it does not change the type of the expression."
+  },
+  {
+    "rule": "typescript:S6582",
+    "severity": "MAJOR",
+    "file": "src/page/NotePage/NotePage.tsx",
+    "line": 141,
+    "message": "Prefer using an optional chain expression instead, as it's more concise and easier to read."
+  },
+  {
+    "rule": "css:S4658",
+    "severity": "MAJOR",
+    "file": "src/page/RegisterPage/RegisterPage.css",
+    "line": 51,
+    "message": "Unexpected empty block"
+  },
+  {
+    "rule": "typescript:S6848",
+    "severity": "MAJOR",
+    "file": "src/page/UnderConstructionPage/UnderConstruction.tsx",
+    "line": 11,
+    "message": "Avoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element."
+  },
+  {
+    "rule": "typescript:S6606",
+    "severity": "MINOR",
+    "file": "src/repositories/ImageRepository.ts",
+    "line": 14,
+    "message": "Prefer using nullish coalescing operator (`??=`) instead of an assignment expression, as it is simpler to read."
+  },
+  {
+    "rule": "typescript:S7746",
+    "severity": "MAJOR",
+    "file": "src/repositories/NoteRepository.ts",
+    "line": 70,
+    "message": "Prefer `return value` over `return Promise.resolve(value)`."
+  },
+  {
+    "rule": "typescript:S7746",
+    "severity": "MAJOR",
+    "file": "src/repositories/PostRepository.ts",
+    "line": 70,
+    "message": "Prefer `return value` over `return Promise.resolve(value)`."
+  },
+  {
+    "rule": "typescript:S1444",
+    "severity": "MINOR",
+    "file": "src/repositories/UserRepository.ts",
+    "line": 5,
+    "message": "Make this public static property readonly."
+  },
+  {
+    "rule": "typescript:S7723",
+    "severity": "MINOR",
+    "file": "src/repositories/UserRepository.ts",
+    "line": 32,
+    "message": "Use `new Error()` instead of `Error()`."
+  },
+  {
+    "rule": "typescript:S1854",
+    "severity": "MAJOR",
+    "file": "src/utils/BlogPage/BlogContent/MarkdownRendererV2/Plugins/customCodeBlockPlugin.ts",
+    "line": 48,
+    "message": "Remove this useless assignment to variable \"language\"."
+  },
+  {
+    "rule": "typescript:S7735",
+    "severity": "MINOR",
+    "file": "src/auth.ts",
+    "line": 49,
+    "message": "Unexpected negated condition."
+  },
+  {
+    "rule": "typescript:S6644",
+    "severity": "MINOR",
+    "file": "src/auth.ts",
+    "line": 49,
+    "message": "Unnecessary use of boolean literals in conditional expression."
+  },
+  {
+    "rule": "typescript:S7738",
+    "severity": "MINOR",
+    "file": "src/components/Image/Image.tsx",
+    "line": 35,
+    "message": "Wrapping single-element array with `Promise.all()` is unnecessary."
+  },
+  {
+    "rule": "typescript:S7764",
+    "severity": "MINOR",
+    "file": "src/components/Navbar/NavbarMainSection/NavbarMainSection.tsx",
+    "line": 84,
+    "message": "Prefer `globalThis` over `window`."
+  },
+  {
+    "rule": "typescript:S6582",
+    "severity": "MAJOR",
+    "file": "src/components/Navbar/NavbarMainSection/NavbarMainSection.tsx",
+    "line": 153,
+    "message": "Prefer using an optional chain expression instead, as it's more concise and easier to read."
+  },
+  {
+    "rule": "typescript:S6848",
+    "severity": "MAJOR",
+    "file": "src/components/Navbar/NavbarMainSection/NavbarMainSection.tsx",
+    "line": 251,
+    "message": "Avoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element."
+  },
+  {
+    "rule": "typescript:S1854",
+    "severity": "MAJOR",
+    "file": "src/hooks/useScrollAnimation.tsx",
+    "line": 4,
+    "message": "Remove this useless assignment to variable \"setAppState\"."
+  },
+  {
+    "rule": "typescript:S1874",
+    "severity": "MINOR",
+    "file": "src/page/YoutubePlaylist/YoutubePlaylist.tsx",
+    "line": 25,
+    "message": "The signature '(from: number, length?: number | undefined): string' of 's.substr' is deprecated."
+  },
+  {
+    "rule": "css:S4656",
+    "severity": "MAJOR",
+    "file": "src/components/HeroSection/HeroSection.css",
+    "line": 104,
+    "message": "Unexpected duplicate \"background-position\""
+  },
+  {
+    "rule": "typescript:S4325",
+    "severity": "MINOR",
+    "file": "src/page/NotePage/NotePage.tsx",
+    "line": 111,
+    "message": "This assertion is unnecessary since it does not change the type of the expression."
+  },
+  {
+    "rule": "typescript:S1128",
+    "severity": "MINOR",
+    "file": "src/page/Chatbot/Chatbot.tsx",
+    "line": 6,
+    "message": "Remove this unused import of 'ConfigRepository'."
+  },
+  {
+    "rule": "typescript:S1533",
+    "severity": "MINOR",
+    "file": "src/page/Chatbot/Chatbot.tsx",
+    "line": 8,
+    "message": "Replace this \"String\" wrapper object with primitive type \"string\"."
+  },
+  {
+    "rule": "typescript:S1444",
+    "severity": "MINOR",
+    "file": "src/repositories/ConfigRepo.ts",
+    "line": 5,
+    "message": "Make this public static property readonly."
+  },
+  {
+    "rule": "css:S4656",
+    "severity": "MAJOR",
+    "file": "src/components/Retro/Retro.css",
+    "line": 25,
+    "message": "Unexpected duplicate \"left\""
+  },
+  {
+    "rule": "typescript:S7758",
+    "severity": "MINOR",
+    "file": "src/components/EmojIcon/EmojIcon.tsx",
+    "line": 13,
+    "message": "Prefer `String#codePointAt()` over `String#charCodeAt()`."
+  },
+  {
+    "rule": "css:S4656",
+    "severity": "MAJOR",
+    "file": "src/components/Navbar/Navbar.css",
+    "line": 62,
+    "message": "Unexpected duplicate \"align-items\""
+  },
+  {
+    "rule": "typescript:S6767",
+    "severity": "MINOR",
+    "file": "src/components/Accordion/Accordion.tsx",
+    "line": 22,
+    "message": "'children' PropType is defined but prop is never used"
+  },
+  {
+    "rule": "css:S4658",
+    "severity": "MAJOR",
+    "file": "src/components/MusicPlayer/MusicPlayer.css",
+    "line": 29,
+    "message": "Unexpected empty block"
+  },
+  {
+    "rule": "css:S7924",
+    "severity": "MAJOR",
+    "file": "src/components/Organisms/Burger/Burger.css",
+    "line": 148,
+    "message": "Text does not meet the minimal contrast requirement with its background."
+  },
+  {
+    "rule": "css:S125",
+    "severity": "MAJOR",
+    "file": "src/components/Gallery/GalleryItem/GalleryItem.css",
+    "line": 51,
+    "message": "Remove this commented out code."
+  },
+  {
+    "rule": "css:S125",
+    "severity": "MAJOR",
+    "file": "src/components/Card/Card.css",
+    "line": 34,
+    "message": "Remove this commented out code."
+  },
+  {
+    "rule": "css:S125",
+    "severity": "MAJOR",
+    "file": "src/components/ExperienceSection/ExperienceSection.css",
+    "line": 93,
+    "message": "Remove this commented out code."
+  },
+  {
+    "rule": "typescript:S1128",
+    "severity": "MINOR",
+    "file": "src/components/Utility/ScrollUtility.ts",
+    "line": 2,
+    "message": "Remove this unused import of 'ScrollTrigger'."
+  },
+  {
+    "rule": "typescript:S7721",
+    "severity": "MAJOR",
+    "file": "src/components/FeaturedContentSection/FeaturedContentSection.tsx",
+    "line": 117,
+    "message": "Move function 'groupArray' to the outer scope."
+  },
+  {
+    "rule": "typescript:S6481",
+    "severity": "MAJOR",
+    "file": "src/stores/TriggerContext.tsx",
+    "line": 21,
+    "message": "The object passed as the value prop to the Context provider changes every render. To fix this consider wrapping it in a useMemo hook."
+  },
+  {
+    "rule": "typescript:S7758",
+    "severity": "MINOR",
+    "file": "src/components/Utility/StringUtility.ts",
+    "line": 38,
+    "message": "Prefer `String#codePointAt()` over `String#charCodeAt()`."
+  },
+  {
+    "rule": "typescript:S7767",
+    "severity": "MAJOR",
+    "file": "src/components/Utility/StringUtility.ts",
+    "line": 40,
+    "message": "Use `Math.trunc` instead of `|= 0`."
+  },
+  {
+    "rule": "typescript:S6479",
+    "severity": "MAJOR",
+    "file": "src/components/EmojIcon/EmojIcon.tsx",
+    "line": 64,
+    "message": "Do not use Array index in keys"
+  },
+  {
+    "rule": "typescript:S6660",
+    "severity": "MAJOR",
+    "file": "src/components/Utility/LogicUtility.ts",
+    "line": 60,
+    "message": "'If' statement should not be the only statement in 'else' block"
+  },
+  {
+    "rule": "typescript:S6759",
+    "severity": "MINOR",
+    "file": "src/app/digital-chronicles/coding-note/[id]/page.tsx",
+    "line": 36,
+    "message": "Mark the props of the component as read-only."
+  },
+  {
+    "rule": "typescript:S7721",
+    "severity": "MAJOR",
+    "file": "src/page/BlogPage/BlogContent/MarkdownRendererV2/MarkdownRendererV2.tsx",
+    "line": 111,
+    "message": "Move function 'filterMarkdown' to the outer scope."
+  },
+  {
+    "rule": "typescript:S6535",
+    "severity": "MAJOR",
+    "file": "src/page/BlogPage/BlogContent/MarkdownRendererV2/MarkdownRendererV2.tsx",
+    "line": 114,
+    "message": "Unnecessary escape character: \\|."
+  },
+  {
+    "rule": "typescript:S7781",
+    "severity": "MINOR",
+    "file": "src/page/BlogPage/BlogContent/MarkdownRendererV2/MarkdownRendererV2.tsx",
+    "line": 115,
+    "message": "Prefer `String#replaceAll()` over `String#replace()`."
+  },
+  {
+    "rule": "typescript:S1444",
+    "severity": "MINOR",
+    "file": "src/repositories/NoteRepository.ts",
+    "line": 7,
+    "message": "Make this public static property readonly."
+  },
+  {
+    "rule": "typescript:S4325",
+    "severity": "MINOR",
+    "file": "src/components/Gallery/GalleryItem/Contributors/Contributors.tsx",
+    "line": 31,
+    "message": "This assertion is unnecessary since it does not change the type of the expression."
+  },
+  {
+    "rule": "typescript:S4782",
+    "severity": "MAJOR",
+    "file": "src/components/Gallery/GalleryItem/Interface/IGalleryItemProps.ts",
+    "line": 31,
+    "message": "Consider removing 'undefined' type or '?' specifier, one of them is redundant."
+  },
+  {
+    "rule": "typescript:S4782",
+    "severity": "MAJOR",
+    "file": "src/components/Gallery/GalleryItem/Interface/IGalleryItemProps.ts",
+    "line": 32,
+    "message": "Consider removing 'undefined' type or '?' specifier, one of them is redundant."
+  },
+  {
+    "rule": "typescript:S1135",
+    "severity": "INFO",
+    "file": "src/components/Gallery/Interface/IGalleryProps.tsx",
+    "line": 17,
+    "message": "Complete the task associated to this \"TODO\" comment."
+  },
+  {
+    "rule": "typescript:S4782",
+    "severity": "MAJOR",
+    "file": "src/components/Gallery/Interface/IGalleryProps.tsx",
+    "line": 19,
+    "message": "Consider removing 'undefined' type or '?' specifier, one of them is redundant."
+  },
+  {
+    "rule": "typescript:S4782",
+    "severity": "MAJOR",
+    "file": "src/components/Gallery/Interface/IGalleryProps.tsx",
+    "line": 20,
+    "message": "Consider removing 'undefined' type or '?' specifier, one of them is redundant."
+  },
+  {
+    "rule": "css:S125",
+    "severity": "MAJOR",
+    "file": "src/components/Organisms/ZaOcean/ZaOcean.css",
+    "line": 10,
+    "message": "Remove this commented out code."
+  },
+  {
+    "rule": "typescript:S1533",
+    "severity": "MINOR",
+    "file": "src/components/Atoms/ImageDisplayModal/ImageDisplayModal.tsx",
+    "line": 11,
+    "message": "Replace this \"Boolean\" wrapper object with primitive type \"boolean\"."
+  },
+  {
+    "rule": "typescript:S1533",
+    "severity": "MINOR",
+    "file": "src/components/Atoms/ImageDisplayModal/ImageDisplayModal.tsx",
+    "line": 12,
+    "message": "Replace this \"Boolean\" wrapper object with primitive type \"boolean\"."
+  },
+  {
+    "rule": "typescript:S1128",
+    "severity": "MINOR",
+    "file": "src/components/Utility/LogicUtility.ts",
+    "line": 1,
+    "message": "Remove this unused import of 'DependencyList'."
+  },
+  {
+    "rule": "typescript:S2301",
+    "severity": "MAJOR",
+    "file": "src/components/Utility/LogicUtility.ts",
+    "line": 8,
+    "message": "Provide multiple methods instead of using \"set\" to determine which action to take."
+  },
+  {
+    "rule": "typescript:S2301",
+    "severity": "MAJOR",
+    "file": "src/components/Utility/LogicUtility.ts",
+    "line": 21,
+    "message": "Provide multiple methods instead of using \"set\" to determine which action to take."
+  },
+  {
+    "rule": "typescript:S1533",
+    "severity": "MINOR",
+    "file": "src/components/ExperienceSection/ExperienceSectionImageDisplay/ExperienceSectionImageDisplay.tsx",
+    "line": 23,
+    "message": "Replace this \"Boolean\" wrapper object with primitive type \"boolean\"."
+  },
+  {
+    "rule": "typescript:S3863",
+    "severity": "MINOR",
+    "file": "src/components/Gallery/GalleryItem/GalleryItem.tsx",
+    "line": 23,
+    "message": "'/Users/blackfish/personal-portfolio-next/node_modules/react-icons/ci/index.esm.js' imported multiple times."
+  },
+  {
+    "rule": "typescript:S3863",
+    "severity": "MINOR",
+    "file": "src/components/Gallery/GalleryItem/GalleryItem.tsx",
+    "line": 24,
+    "message": "'/Users/blackfish/personal-portfolio-next/node_modules/react-icons/ci/index.esm.js' imported multiple times."
+  },
+  {
+    "rule": "css:S125",
+    "severity": "MAJOR",
+    "file": "src/app/about/teddie/Teddie.css",
+    "line": 234,
+    "message": "Remove this commented out code."
+  },
+  {
+    "rule": "typescript:S6848",
+    "severity": "MAJOR",
+    "file": "src/components/Atoms/InlineLink/InlineLink.tsx",
+    "line": 42,
+    "message": "Avoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element."
+  },
+  {
+    "rule": "typescript:S1082",
+    "severity": "MINOR",
+    "file": "src/components/Atoms/InlineLink/InlineLink.tsx",
+    "line": 42,
+    "message": "Visible, non-interactive elements with click handlers must have at least one keyboard listener."
+  },
+  {
+    "rule": "typescript:S6478",
+    "severity": "MAJOR",
+    "file": "src/components/Gallery/GalleryItem/GalleryItem.tsx",
+    "line": 43,
+    "message": "Move this component definition out of the parent component and pass data as props."
+  },
+  {
+    "rule": "typescript:S7764",
+    "severity": "MINOR",
+    "file": "src/page/BlogPage/BlogPage.tsx",
+    "line": 143,
+    "message": "Prefer `globalThis` over `window`."
+  },
+  {
+    "rule": "typescript:S6582",
+    "severity": "MAJOR",
+    "file": "src/page/BlogPage/BlogPage.tsx",
+    "line": 169,
+    "message": "Prefer using an optional chain expression instead, as it's more concise and easier to read."
+  },
+  {
+    "rule": "typescript:S1854",
+    "severity": "MAJOR",
+    "file": "src/page/LogInPage/LogInPage.tsx",
+    "line": 14,
+    "message": "Remove this useless assignment to variable \"error\"."
+  },
+  {
+    "rule": "typescript:S1854",
+    "severity": "MAJOR",
+    "file": "src/page/RegisterPage/RegisterPage.tsx",
+    "line": 29,
+    "message": "Remove this useless assignment to variable \"error\"."
+  },
+  {
+    "rule": "typescript:S7764",
+    "severity": "MINOR",
+    "file": "src/page/RegisterPage/RegisterPage.tsx",
+    "line": 55,
+    "message": "Prefer `globalThis` over `window`."
+  },
+  {
+    "rule": "typescript:S6481",
+    "severity": "MAJOR",
+    "file": "src/stores/AppContext.tsx",
+    "line": 34,
+    "message": "The object passed as the value prop to the Context provider changes every render. To fix this consider wrapping it in a useMemo hook."
+  },
+  {
+    "rule": "typescript:S6759",
+    "severity": "MINOR",
+    "file": "src/stores/provider.tsx",
+    "line": 12,
+    "message": "Mark the props of the component as read-only."
+  },
+  {
+    "rule": "typescript:S7787",
+    "severity": "MINOR",
+    "file": "src/interfaces/threeDPrintingGalleryPage/index.ts",
+    "line": 1,
+    "message": "export statement without specifiers is not allowed."
+  },
+  {
+    "rule": "typescript:S2933",
+    "severity": "MAJOR",
+    "file": "src/stores/DynamicLoadQueue/DynamicLoadQueue.ts",
+    "line": 7,
+    "message": "Member 'observer' is never reassigned; mark it as `readonly`."
+  },
+  {
+    "rule": "typescript:S6606",
+    "severity": "MINOR",
+    "file": "src/stores/DynamicLoadQueue/DynamicLoadQueue.ts",
+    "line": 33,
+    "message": "Prefer using nullish coalescing operator (`??=`) instead of an assignment expression, as it is simpler to read."
+  },
+  {
+    "rule": "typescript:S1128",
+    "severity": "MINOR",
+    "file": "src/utils/BlogPage/BlogContent/MarkdownRendererV2/utils.ts",
+    "line": 1,
+    "message": "Remove this unused import of 'reactComponentWhiteList'."
+  },
+  {
+    "rule": "typescript:S6759",
+    "severity": "MINOR",
+    "file": "src/app/digital-chronicles/blog/[id]/page.tsx",
+    "line": 36,
+    "message": "Mark the props of the component as read-only."
+  },
+  {
+    "rule": "typescript:S7772",
+    "severity": "MINOR",
+    "file": "src/page/BlogPage/BlogContent/BlogContent.tsx",
+    "line": 8,
+    "message": "Prefer `node:events` over `events`."
+  },
+  {
+    "rule": "typescript:S4325",
+    "severity": "MINOR",
+    "file": "src/components/Navbar/NavbarScrollProgress/NavbarScrollProgress.tsx",
+    "line": 22,
+    "message": "This assertion is unnecessary since it does not change the type of the expression."
+  },
+  {
+    "rule": "css:S4666",
+    "severity": "MAJOR",
+    "file": "src/components/Atoms/SequentialRiseSpan/SequentialRiseSpan.css",
+    "line": 39,
+    "message": "Unexpected duplicate selector \".sequential-rise-span\", first used at line 5"
+  },
+  {
+    "rule": "typescript:S7763",
+    "severity": "MINOR",
+    "file": "src/components/Chatbot/index.ts",
+    "line": 3,
+    "message": "Use `export…from` to re-export `default`."
+  },
+  {
+    "rule": "typescript:S7740",
+    "severity": "MAJOR",
+    "file": "src/components/Utility/AnimationUtility.ts",
+    "line": 10,
+    "message": "Do not assign `this` to `context`."
+  },
+  {
+    "rule": "typescript:S7735",
+    "severity": "MINOR",
+    "file": "src/components/Utility/AnimationUtility.ts",
+    "line": 12,
+    "message": "Unexpected negated condition."
+  },
+  {
+    "rule": "typescript:S1854",
+    "severity": "MAJOR",
+    "file": "src/utils/BlogPage/BlogContent/MarkdownRendererV2/Plugins/customCodeBlockPlugin.ts",
+    "line": 27,
+    "message": "Remove this useless assignment to variable \"getMetadataKeyValPairs\"."
+  },
+  {
+    "rule": "typescript:S5869",
+    "severity": "MAJOR",
+    "file": "src/utils/BlogPage/BlogContent/MarkdownRendererV2/Plugins/customCodeBlockPlugin.ts",
+    "line": 28,
+    "message": "Remove duplicates in this character class."
+  },
+  {
+    "rule": "typescript:S1444",
+    "severity": "MINOR",
+    "file": "src/repositories/PostRepository.ts",
+    "line": 7,
+    "message": "Make this public static property readonly."
+  },
+  {
+    "rule": "css:S4659",
+    "severity": "MAJOR",
+    "file": "src/components/Atoms/SequentialRiseSpan/SequentialRiseSpan.css",
+    "line": 1,
+    "message": "Unexpected unknown pseudo-class selector \":selection\""
+  },
+  {
+    "rule": "typescript:S6441",
+    "severity": "MAJOR",
+    "file": "src/components/Button/Button.tsx",
+    "line": 15,
+    "message": "Remove this property or method or refactor \"Button\", as \"contentInterval\" is not used inside component body"
+  },
+  {
+    "rule": "css:S4666",
+    "severity": "MAJOR",
+    "file": "src/components/Card/Card.css",
+    "line": 25,
+    "message": "Unexpected duplicate selector \".card::before\", first used at line 12"
+  },
+  {
+    "rule": "typescript:S6441",
+    "severity": "MAJOR",
+    "file": "src/components/Card/Card.tsx",
+    "line": 13,
+    "message": "Remove this property or method or refactor \"Card\", as \"iframePreviewRef\" is not used inside component body"
+  },
+  {
+    "rule": "typescript:S6441",
+    "severity": "MAJOR",
+    "file": "src/components/Card/Card.tsx",
+    "line": 31,
+    "message": "Remove this property or method or refactor \"Card\", as \"checkDateIsValid\" is not used inside component body"
+  },
+  {
+    "rule": "typescript:S6441",
+    "severity": "MAJOR",
+    "file": "src/components/Card/Card.tsx",
+    "line": 35,
+    "message": "Remove this property or method or refactor \"Card\", as \"extractRouteFromURL\" is not used inside component body"
+  },
+  {
+    "rule": "css:S7924",
+    "severity": "MAJOR",
+    "file": "src/components/CodingCat/ChristmasHat/ChristmasHat.css",
+    "line": 20,
+    "message": "Text does not meet the minimal contrast requirement with its background."
+  },
+  {
+    "rule": "css:S4666",
+    "severity": "MAJOR",
+    "file": "src/components/CodingCat/ChristmasHat/ChristmasHat.css",
+    "line": 38,
+    "message": "Unexpected duplicate selector \".christmas_hat__ball\", first used at line 17"
+  },
+  {
+    "rule": "css:S7924",
+    "severity": "MAJOR",
+    "file": "src/components/CodingCat/ChristmasHat/ChristmasHat.css",
+    "line": 64,
+    "message": "Text does not meet the minimal contrast requirement with its background."
+  },
+  {
+    "rule": "css:S4666",
+    "severity": "MAJOR",
+    "file": "src/components/ExperienceSection/ExperienceSectionImageDisplay/ExperienceSectionImageDisplay.css",
+    "line": 17,
+    "message": "Unexpected duplicate selector \".experience-section-card__location > svg\", first used at line 12"
+  },
+  {
+    "rule": "typescript:S6756",
+    "severity": "MAJOR",
+    "file": "src/components/LandingPageCard/LandingPageCard.tsx",
+    "line": 21,
+    "message": "Use callback in setState when referencing the previous state."
+  },
+  {
+    "rule": "typescript:S6756",
+    "severity": "MAJOR",
+    "file": "src/components/LandingPageCard/LandingPageCard.tsx",
+    "line": 29,
+    "message": "Use callback in setState when referencing the previous state."
+  },
+  {
+    "rule": "typescript:S6441",
+    "severity": "MAJOR",
+    "file": "src/components/TwinCandle/TwinCandle.tsx",
+    "line": 272,
+    "message": "Remove this property or method or refactor \"TwinCandles\", as \"transitionCandleFireToOn\" is not used inside component body"
+  },
+  {
+    "rule": "typescript:S1135",
+    "severity": "INFO",
+    "file": "src/components/TwinCandle/TwinCandle.tsx",
+    "line": 285,
+    "message": "Complete the task associated to this \"TODO\" comment."
+  },
+  {
+    "rule": "typescript:S1135",
+    "severity": "INFO",
+    "file": "src/components/TwinCandle/TwinCandle.tsx",
+    "line": 305,
+    "message": "Complete the task associated to this \"TODO\" comment."
+  },
+  {
+    "rule": "typescript:S7735",
+    "severity": "MINOR",
+    "file": "src/components/Utility/MouseUtility.ts",
+    "line": 15,
+    "message": "Unexpected negated condition."
+  },
+  {
+    "rule": "typescript:S7776",
+    "severity": "MINOR",
+    "file": "src/components/Utility/ScrollUtility.ts",
+    "line": 44,
+    "message": "`defaultExcludes` should be a `Set`, and use `defaultExcludes.has()` to check existence or non-existence."
+  },
+  {
+    "rule": "css:S7924",
+    "severity": "MAJOR",
+    "file": "src/page/BlogPage/BlogContent/CodeBlock/CodeBlock.css",
+    "line": 43,
+    "message": "Text does not meet the minimal contrast requirement with its background."
+  },
+  {
+    "rule": "typescript:S3626",
+    "severity": "MINOR",
+    "file": "src/page/BlogPage/BlogContent/MarkdownRendererV2/MarkdownRendererV2.tsx",
+    "line": 108,
+    "message": "Remove this redundant jump."
+  },
+  {
+    "rule": "typescript:S1444",
+    "severity": "MINOR",
+    "file": "src/repositories/BlogRepository.ts",
+    "line": 2,
+    "message": "Make this public static property readonly."
+  },
+  {
+    "rule": "typescript:S2933",
+    "severity": "MAJOR",
+    "file": "src/repositories/ImageRepository.ts",
+    "line": 5,
+    "message": "Member 'cache' is never reassigned; mark it as `readonly`."
+  },
+  {
+    "rule": "typescript:S2933",
+    "severity": "MAJOR",
+    "file": "src/repositories/ImageRepository.ts",
+    "line": 6,
+    "message": "Member 'ongoingRequests' is never reassigned; mark it as `readonly`."
+  },
+  {
+    "rule": "typescript:S2933",
+    "severity": "MAJOR",
+    "file": "src/stores/DynamicLoadQueue/DynamicLoadQueue.ts",
+    "line": 5,
+    "message": "Member 'queue' is never reassigned; mark it as `readonly`."
+  },
+  {
+    "rule": "typescript:S6594",
+    "severity": "MINOR",
+    "file": "src/utils/BlogPage/BlogContent/MarkdownRendererV2/utils.ts",
+    "line": 7,
+    "message": "Use the \"RegExp.exec()\" method instead."
+  }
+]

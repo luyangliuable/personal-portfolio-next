@@ -35,9 +35,9 @@ const stringToHash = (str: string): number => {
     let hash = 0;
 
     for (let i = 0; i < a.length; i++) {
-        const char = a.charCodeAt(i);
+        const char = a.codePointAt(i) ?? 0;
         hash = (hash << 5) - hash + char;
-        hash |= 0;
+        hash = Math.trunc(hash);
     }
 
     return hash;
@@ -71,7 +71,7 @@ const isActive = (currentPathname?: string, targetPathname?: string) => {
 };
 
 const deepCopyJson = (jsonObject: any) => {
-    return JSON.parse(JSON.stringify(jsonObject));
+    return structuredClone(jsonObject);
 };
 
 export {

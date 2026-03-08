@@ -230,16 +230,13 @@
     pointer-events: none;
 }
 
-.crt {
-    /* animation: textShadow 1.6s infinite; */
-}
 
 .teddie--hero {
     position: relative;
     height: 92vh;
     width: 100%;
     color: #222;
-    font-family: "TT Norms Pro";
+    font-family: "TT Norms Pro", sans-serif;
     font-weight: bold;
     background: #fff;
     margin-bottom: 5rem;

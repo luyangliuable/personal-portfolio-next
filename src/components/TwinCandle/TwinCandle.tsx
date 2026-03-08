@@ -326,7 +326,7 @@ class TwinCandles extends Component<ITwinCandleProps, ITwinCandleState> {
         });
     }
 
-    private changeRefClassName = (
+    private readonly changeRefClassName = (
         element: RefObject<HTMLElement>,
         newClassNameList: string[],
     ) => {
@@ -344,10 +344,12 @@ class TwinCandles extends Component<ITwinCandleProps, ITwinCandleState> {
 
     render() {
         return (
-            <div
+            <button
+                type="button"
                 className="wrapper"
                 onClick={() => this.transitionCandleFireToOff()}
                 style={this.props.style}
+                aria-label="Turn off candle"
             >
                 <div className="candles">
                     <div
@@ -403,7 +405,7 @@ class TwinCandles extends Component<ITwinCandleProps, ITwinCandleState> {
                     ></div>
                 </div>
                 <div className="floor"></div>
-            </div>
+            </button>
         );
     }
 }

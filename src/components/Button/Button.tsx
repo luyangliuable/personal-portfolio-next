@@ -12,8 +12,6 @@ import { cardGradientEffect } from "../Utility/MouseUtility";
 import { cl } from "../Utility/LogicUtility";
 
 class Button extends Component<IButtonProps, {}> {
-    contentInterval: any;
-
     constructor(props: IButtonProps) {
         super(props);
         this.state = {};

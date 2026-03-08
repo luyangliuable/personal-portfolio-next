@@ -1,4 +1,4 @@
-import { EffectCallback, DependencyList } from "react";
+import { EffectCallback } from "react";
 
 export const toggleClassName = (
     el: HTMLElement,
@@ -47,7 +47,7 @@ export const cl = (...args: any[]) => {
     let res = "";
 
     args.forEach((item) => {
-        if (item && typeof item == "object") {
+        if (item && typeof item === "object") {
             const a = Object.keys(item).reduce((acc: string, key: string) => {
                 if (item[key]) {
                     acc = acc + ` ${key}`;
@@ -75,5 +75,5 @@ export const clamp = (
 };
 
 export const deepCompare = (json1: any, json2: any) => {
-    return JSON.stringify(json1) == JSON.stringify(json2);
+    return JSON.stringify(json1) === JSON.stringify(json2);
 };

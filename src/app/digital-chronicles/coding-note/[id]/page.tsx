@@ -33,7 +33,7 @@ export async function generateMetadata({
     };
 }
 
-export default async function BlogContentServer({ params }: PageProps) {
+export default async function BlogContentServer({ params }: Readonly<PageProps>) {
     const { id } = params;
     const repo = NoteRepository.getInstance();
     const content: BlogPostResponse = await repo.getPost(id);

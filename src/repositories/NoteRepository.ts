@@ -4,7 +4,7 @@ import Repository from "./Repository";
 class NoteRepository extends Repository {
     private static instance: NoteRepository;
     private static postListCache: any[] | null = null;
-    static BASE_URL: string = "https://llcode.tech/api/note";
+    static readonly BASE_URL: string = "https://llcode.tech/api/note";
 
     private constructor() {
         super();
@@ -67,7 +67,7 @@ class NoteRepository extends Repository {
 
     async getPostList(): Promise<BlogPostResponse[]> {
         if (NoteRepository.postListCache)
-            return Promise.resolve(NoteRepository.postListCache);
+            return NoteRepository.postListCache;
         const url = NoteRepository.BASE_URL;
         const options = NoteRepository.options("GET");
         return fetch(url, options)

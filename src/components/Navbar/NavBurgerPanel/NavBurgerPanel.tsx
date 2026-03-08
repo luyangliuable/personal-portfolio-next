@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import INavBurgerPanelProps from "./Interface/INavBurgerPanelProps";
 import { usePathname } from "next/navigation";
 import Accordion from "../../Accordion/Accordion";
-import { ILink, NavbarItem } from "../Interface/INavbarState";
+import { NavbarItem } from "../Interface/INavbarState";
 
 import "./NavBurgerPanel.css";
 import { cl } from "../../Utility/LogicUtility";

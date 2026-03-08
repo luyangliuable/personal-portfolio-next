@@ -1,4 +1,4 @@
-\::selection {
+::selection {
     background: rgba(170, 170, 170, 0.3);
 }
 
@@ -32,11 +32,10 @@
     line-height: 1.2;
 }
 
-.sequential-rise-span > div > p > span {
-    display: inline;
-}
-
 .sequential-rise-span {
+    position: relative;
+    visibility: hidden;
+    width: 100%;
     display: inline-block;
 }
 

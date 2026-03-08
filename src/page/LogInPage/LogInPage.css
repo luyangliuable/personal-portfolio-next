@@ -48,9 +48,6 @@ input[type="password"] {
     width: 80%;
 }
 
-.login-form input[type="text"]:active {
-}
-
 .login-form .flash-red {
     color: #f00;
 }

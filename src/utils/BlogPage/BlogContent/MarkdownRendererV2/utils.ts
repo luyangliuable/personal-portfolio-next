@@ -1,10 +1,10 @@
-import reactComponentWhiteList from "./reactComponentWhiteList";
 import React from "react";
 
 export type Attributes = { [key: string]: string };
 
 export const getFirstTagName = (html: string): string | null => {
-    const matches = html.match(/<([a-z0-9]+)(\s|>)/i);
+    const regex = /<([a-z0-9]+)(\s|>)/i;
+    const matches = regex.exec(html);
     return matches ? matches[1].toLowerCase() : null;
 };
 

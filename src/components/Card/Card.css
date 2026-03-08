@@ -1,5 +1,4 @@
 .card {
-    border-radius: 18px;
     border-radius: 4px;
     position: relative;
 }
@@ -8,7 +7,6 @@
     opacity: 1;
 }
 
-/* .card::after, */
 .card::before {
     border-radius: inherit;
     content: "";
@@ -20,19 +18,12 @@
     transition: opacity 500ms;
     width: 100%;
     z-index: 0;
-}
-
-.card::before {
     background: radial-gradient(
         800px circle at var(--mouse-x) var(--mouse-y),
         rgba(200, 200, 200, 0.3),
         transparent 40%
     );
 }
-
-/* .card::after { */
-/*     background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(200, 200, 200, 0.4), transparent 40%); */
-/* } */
 
 .page-container {
     width: 100vw;

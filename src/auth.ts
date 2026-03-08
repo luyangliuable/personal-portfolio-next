@@ -46,7 +46,7 @@ const config = {
     experimental: {
         enableWebAuthn: true,
     },
-    debug: process.env.NODE_ENV !== "production" ? true : false,
+    debug: process.env.NODE_ENV !== "production",
 } satisfies NextAuthConfig;
 
 export const { handlers, auth, signIn, signOut } = NextAuth(config);

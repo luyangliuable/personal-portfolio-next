@@ -14,10 +14,9 @@ export type GalleryItemWithRepo = GalleryItemBase & {
     repoName: string;
 };
 
-// TODO: use typescript AllOrNothing in latest version.
 export type GalleryItemWithoutRepo = GalleryItemBase & {
-    repoOwner?: undefined;
-    repoName?: undefined;
+    repoOwner?: never;
+    repoName?: never;
 };
 
 export type GalleryItem = GalleryItemWithRepo | GalleryItemWithoutRepo;

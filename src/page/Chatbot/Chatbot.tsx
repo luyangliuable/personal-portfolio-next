@@ -3,12 +3,11 @@ import React, { useEffect } from "react";
 // @ts-ignore
 import { Chatbot as ChatbotComponent } from "ollama-chat-client";
 import "./Chatbot.css";
-import ConfigRepository from "../../repositories/ConfigRepo";
 
-const Chatbot = ChatbotComponent as unknown as React.FC<{ baseURI: String }>;
+const Chatbot = ChatbotComponent as unknown as React.FC<{ baseURI: string }>;
 
 interface ILlChatbotProps {
-    baseURI: String;
+    baseURI: string;
 }
 
 const LlChatbot: React.FC<ILlChatbotProps> = ({ baseURI }) => {

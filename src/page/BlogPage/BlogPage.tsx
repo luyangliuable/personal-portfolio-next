@@ -166,7 +166,7 @@ const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
                                     minuteRead={content.reading_time_minutes}
                                     in_progress={content.in_progress}
                                     tags={content.tags}
-                                    image={content.image && content.image.$oid}
+                                    image={content.image?.$oid}
                                     link={`/digital-chronicles/blog/${content._id.$oid}`}
                                 />
                             ),

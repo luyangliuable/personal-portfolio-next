@@ -45,11 +45,14 @@ const NavLink: React.FC<INavLinkProps> = ({
                       links?.find((item) => item.name === link.name)?.sublinks,
                   );
 
-    const href = link.isLocked
-        ? undefined
-        : targetPath && !link.isDisabled
-          ? targetPath
-          : pathname;
+    let href: string | undefined;
+    if (link.isLocked) {
+        href = undefined;
+    } else if (targetPath && !link.isDisabled) {
+        href = targetPath;
+    } else {
+        href = pathname;
+    }
 
     const className = cl(
         "relative flex flex-row justify-center items-center navbar-item",

@@ -39,9 +39,9 @@ const InlineLink: React.FC<IButtonProps> = (props) => {
         );
     } else if (isButtonProps(props)) {
         return (
-            <div onClick={props.onClick} className={props.className}>
+            <button type="button" onClick={props.onClick} className={props.className}>
                 {renderButton()}
-            </div>
+            </button>
         );
     }
 

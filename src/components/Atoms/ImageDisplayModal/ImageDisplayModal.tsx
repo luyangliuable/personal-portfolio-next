@@ -8,8 +8,8 @@ import Image from "../../Image/Image";
 interface IImageDisplayModalProps {
     image: string;
     description: string;
-    showModal: Boolean;
-    setShowModal: Dispatch<SetStateAction<Boolean>>;
+    showModal: boolean;
+    setShowModal: Dispatch<SetStateAction<boolean>>;
 }
 
 const ImageDisplayModal: React.FC<IImageDisplayModalProps> = ({
@@ -46,15 +46,24 @@ const ImageDisplayModal: React.FC<IImageDisplayModalProps> = ({
                                 setShowModal(false);
                             e.stopPropagation();
                         }}
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                setShowModal(false);
+                            }
+                        }}
                     >
                         <div className="image-display-modal flex flex-col justify-center items-start">
-                            <div
+                            <button
+                                type="button"
                                 className="image-display-modal--handle-close"
                                 onClick={(e) => {
                                     setShowModal(false);
                                     e.stopPropagation();
                                 }}
-                            ></div>
+                                aria-label="Close modal"
+                            ></button>
                             <div className="image-display-modal--image relative">
                                 <Image alt="" src={sanitizedImage} />
                             </div>

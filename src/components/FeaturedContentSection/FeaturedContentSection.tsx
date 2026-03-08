@@ -11,7 +11,15 @@ import TwinCandle from "../TwinCandle/TwinCandle";
 import "./FeaturedContentSection.css";
 import { useTrigger } from "../../stores/TriggerContext";
 import WaveBackground from "./gallery-background-wave.jpg";
-import Retro from "../Retro/Retro";
+
+function groupArray<T>(array: T[], groupSize: number): T[][] {
+    return array.reduce((acc, _, i) => {
+        if (i % groupSize === 0) {
+            acc.push(array.slice(i, i + groupSize));
+        }
+        return acc;
+    }, [] as T[][]);
+}
 
 const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({
     postList,
@@ -68,7 +76,7 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({
 
     useEffect(() => {
         calculateElementsToShow();
-        window.addEventListener("resize", calculateElementsToShow);
+        globalThis.addEventListener("resize", calculateElementsToShow);
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
@@ -90,12 +98,12 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({
             if (twinCandleComponentParentRef.current) {
                 observer.unobserve(twinCandleComponentParentRef.current);
             }
-            window.removeEventListener("resize", calculateElementsToShow);
+            globalThis.removeEventListener("resize", calculateElementsToShow);
         };
     }, []);
 
     const calculateElementsToShow = () => {
-        const windowWidth = window.innerWidth;
+        const windowWidth = globalThis.innerWidth;
         const elementWidth = 400;
         const wrapperWidth = 1900;
         let numOfElementsToShow = Math.floor(
@@ -114,15 +122,6 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({
         toggleTrigger();
     };
 
-    function groupArray<T>(array: T[], groupSize: number): T[][] {
-        return array.reduce((acc, _, i) => {
-            if (i % groupSize === 0) {
-                acc.push(array.slice(i, i + groupSize));
-            }
-            return acc;
-        }, [] as T[][]);
-    }
-
     const renderTopPickedPostsSortedByDateDescending = (): React.ReactNode => {
         const { numberOfCardsEachRow: sliceEnd, showAllPosts } = state;
         const posts = [
@@ -132,16 +131,16 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({
         return groupArray(
             posts.slice(0, showAllPosts ? -1 : sliceEnd),
             sliceEnd,
-        ).map((group, index) => (
+        ).map((group) => (
             <div
-                key={index}
+                key={group[0]._id.$oid}
                 className="featured-section w-full flex flex-col relative"
             >
                 <div className="flex w-full h-full justify-center items-stretch gap-3">
-                    {group.map((content, idx) => (
+                    {group.map((content) => (
                         <div
                             className="featured-section--item flex justify-center"
-                            key={idx}
+                            key={content._id.$oid}
                         >
                             <GalleryItem
                                 key={content._id.$oid}

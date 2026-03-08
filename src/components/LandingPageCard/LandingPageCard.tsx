@@ -17,18 +17,18 @@ class LandingPageCard extends Component<ILandingPageCardProps, any> {
 
     componentDidMount(): void {
         window.addEventListener("scroll", () => {
-            this.setState({
-                ...this.state,
+            this.setState((prevState: any) => ({
+                ...prevState,
                 scrolling: true,
-            });
+            }));
         });
         document.documentElement.scrollTo(0, 0);
         setInterval(() => {
             if (this.state.scrolling) {
-                this.setState({
-                    ...this.state,
+                this.setState((prevState: any) => ({
+                    ...prevState,
                     scrolling: false,
-                });
+                }));
             }
         }, 500);
     }

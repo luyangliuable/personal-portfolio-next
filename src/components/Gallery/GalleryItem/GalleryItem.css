@@ -47,9 +47,6 @@
     width: fit-content;
 }
 
-.gallery-item:hover .gallery-item__link h3 {
-    /*background-size: 100% 0.1em;*/
-}
 
 .gallery-item h3 {
     width: 90%;
@@ -95,7 +92,7 @@
 
 .gallery-item .gallery-item__metadata {
     width: 100%;
-    font-family: "Fira Code";
+    font-family: "Fira Code", monospace;
     font-size: 0.7rem;
     overflow-x: auto;
     scrollbar-color: #ccc #f1f1f1;

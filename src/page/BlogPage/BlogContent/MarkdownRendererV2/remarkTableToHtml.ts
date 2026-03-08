@@ -47,7 +47,7 @@ function markdownTableToHtml(markdown: string): string {
     let alignments: string[] = [];
     if (
         lines.length > 1 &&
-        lines[1].split("|").some((cell) => cell.trim().match(/:-+:?|--:|:--/))
+        lines[1].split("|").some((cell) => /:-+:?|--:|:--/.test(cell.trim()))
     ) {
         alignments = lines[1]
             .split("|")

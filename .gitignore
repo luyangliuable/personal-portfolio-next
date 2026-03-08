@@ -37,3 +37,7 @@ next-env.d.ts
 
 .env
 .scannerwork/
+.agent-shell/
+sonarqube-*.json
+SONARQUBE*
+*~undo-tree~

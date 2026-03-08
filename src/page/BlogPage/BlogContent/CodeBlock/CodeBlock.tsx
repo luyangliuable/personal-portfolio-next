@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import "./CodeBlock.css";
 import { FaRegCopy } from "react-icons/fa";
 import Prism from "prismjs";
@@ -21,10 +21,10 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ lang, children, filename }) => {
     const codeBlockRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        if (filename !== undefined && codeBlockRef.current !== null) {
-            codeBlockRef.current!.style.setProperty("margin-top", "50px");
+        if (filename !== undefined && codeBlockRef.current) {
+            codeBlockRef.current.style.setProperty("margin-top", "50px");
         }
-    }, [codeBlockRef.current, filename]);
+    }, [filename]);
 
     useEffect(() => {
         Prism.highlightAll();
@@ -57,12 +57,14 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ lang, children, filename }) => {
                     {filename}
                 </div>
             )}
-            <div
+            <button
+                type="button"
                 className="code-block--copy-button absolute cursor-pointer"
                 onClick={() => copyToClipboard()}
+                aria-label="Copy code to clipboard"
             >
                 <FaRegCopy />
-            </div>
+            </button>
             <pre className="code-block--native">
                 <code className={langClass}>{cleanedChildren}</code>
             </pre>

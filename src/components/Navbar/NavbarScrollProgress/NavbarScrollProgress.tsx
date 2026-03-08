@@ -19,7 +19,7 @@ const NavbarScrollProgress: React.FC<{ scrollY: number }> = () => {
         if (scrollY !== undefined) {
             const pageHeight =
                 document.documentElement.scrollHeight - window.innerHeight;
-            updateScrolledProgress(scrollY! / pageHeight);
+            updateScrolledProgress(scrollY / pageHeight);
         }
     }, [scrollY]);
 

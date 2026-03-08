@@ -101,8 +101,10 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
     };
 
     const drawPath = () => {
-        const tocPath = tocMarkerPathRef.current,
-            path: any[] = [];
+        const tocPath = tocMarkerPathRef.current;
+        if (!tocPath) return;
+        if (!tocEntries) return;
+        const path: any[] = [];
         let height = 0,
             indent = 10,
             baseIndent = 10,
@@ -113,7 +115,7 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
             endIdx = -1,
             pathStart = 0,
             pathEnd = 0;
-        tocEntries!.forEach((entry, idx) => {
+        tocEntries.forEach((entry, idx) => {
             if (entry.props.className.includes("active")) {
                 if (startIdx === -1) startIdx = idx;
                 endIdx = idx;
@@ -121,9 +123,11 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
         });
         path.push("M", indent, startHeight);
         height = startHeight;
-        tocEntries!.forEach((entry, idx) => {
+        tocEntries.forEach((entry, idx) => {
+            const tocEntryCurrent = tocEntryRef[idx]?.current;
+            if (!tocEntryCurrent) return;
             const computedStyle = globalThis.getComputedStyle(
-                tocEntryRef[idx].current!,
+                tocEntryCurrent,
             );
             const extra =
                 Number.parseFloat(computedStyle.height) +
@@ -147,16 +151,16 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
         });
         const { lastPathStart, lastPathEnd } = lastPathInfo;
         if (pathStart !== lastPathStart || pathEnd !== lastPathEnd) {
-            if (startIdx === -1) tocPath!.setAttribute("opacity", "0");
+            if (startIdx === -1) tocPath.setAttribute("opacity", "0");
             const pathString = path.join(" ");
-            const pathLength = tocPath!.getTotalLength();
-            tocPath!.setAttribute("d", pathString);
-            tocPath!.setAttribute("stroke-dashoffset", "1");
-            tocPath!.setAttribute(
+            const pathLength = tocPath.getTotalLength();
+            tocPath.setAttribute("d", pathString);
+            tocPath.setAttribute("stroke-dashoffset", "1");
+            tocPath.setAttribute(
                 "stroke-dasharray",
                 `0, ${pathStart}, ${pathEnd - pathStart}, ${pathLength === 0 ? 1000 : pathLength}`,
             );
-            tocPath!.setAttribute("opacity", "1");
+            tocPath.setAttribute("opacity", "1");
             setLastPathInfo({
                 lastPathStart: pathStart,
                 lastPathEnd: pathEnd,
@@ -184,9 +188,9 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
 
     const handleIntersectingSections = (intersectingIds: string[]): void => {
         setTocEntries((prev) =>
-            prev!.map((tocEntry) =>
+            prev?.map((tocEntry) =>
                 updateTocEntryActiveState(tocEntry, intersectingIds),
-            ),
+            ) ?? null,
         );
     };
 

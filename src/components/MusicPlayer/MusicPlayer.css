@@ -26,8 +26,6 @@
     border-bottom: 1px solid #ddd;
 }
 
-.music-player .music-player--item:hover {
-}
 
 .music-player--item .album-cover {
     width: 100px;

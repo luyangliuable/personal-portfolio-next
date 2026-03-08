@@ -31,7 +31,8 @@ const Toggle: React.FC<IToggleProps> = ({
     };
 
     return (
-        <div
+        <button
+            type="button"
             onClick={() => handleClick()}
             className={toggleContainerClassName.join(" ")}
         >
@@ -39,7 +40,7 @@ const Toggle: React.FC<IToggleProps> = ({
             <div className={toggleClassName.join(" ")}>
                 <div className="toggle__inner-circle" />
             </div>
-        </div>
+        </button>
     );
 };
 

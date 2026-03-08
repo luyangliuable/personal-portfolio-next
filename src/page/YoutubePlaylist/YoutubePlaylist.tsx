@@ -22,7 +22,7 @@ const YoutubePlaylist = () => {
 
         const pad = (num: number, size: number = 2) => {
             let s = "000" + num;
-            return s.substr(s.length - size);
+            return s.slice(-size);
         };
 
         return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;

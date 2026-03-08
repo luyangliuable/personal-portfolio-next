@@ -41,7 +41,7 @@ const FractalHills = () => {
                 const centerX = cols / 2;
                 const centerY = rows / 2;
                 const flatRadius = Math.min(cols, rows) / 5;
-                const maxDist = Math.sqrt(centerX ** 2 + centerY ** 2);
+                const maxDist = Math.hypot(centerX, centerY);
 
                 for (let y = 0; y < rows; y++) {
                     let xoff = 0;

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import React from "react";
-import "./ThreeDPrintingGallery.css";
 import HeroHeader from "../../../components/HeroHeader/HeroHeader";
 import Gallery from "../../../components/Gallery/Gallery";
 import { GalleryItem } from "../../../components/Gallery/Interface/IGalleryProps";

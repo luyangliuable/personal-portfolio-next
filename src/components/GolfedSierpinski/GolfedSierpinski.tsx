@@ -35,7 +35,8 @@ const GolfedSierpinski = () => {
         const S = Math.sin;
 
         const resizeCanvas = () => {
-            (canvas.width = size), (canvas.height = size);
+            canvas.width = size;
+            canvas.height = size;
         };
 
         const animate = (t: number) => {

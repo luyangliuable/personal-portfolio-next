@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const useScrollAnimation = () => {
-    const [appState, setAppState] = useState<{}>({});
+    const [appState] = useState<{}>({});
 
     return appState;
 };

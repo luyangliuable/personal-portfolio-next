@@ -20,13 +20,13 @@ const ExperienceSectionImageDisplay: React.FC<
 > = ({ item, index, alt }) => {
     const experienceSectionCardIndexIsEvenNumber = index % 2 === 0;
 
-    const [showModal, setShowModal] = useState<Boolean>(false);
+    const [showModal, setShowModal] = useState<boolean>(false);
 
     const parseCoordString = (coord: string | undefined): string => {
         if (!coord) return "";
         const [latitude, longitude] = coord
             .split(",")
-            .map((coord) => parseFloat(coord.trim()));
+            .map((coord) => Number.parseFloat(coord.trim()));
         if (!latitude || !longitude) return coord;
         const latDirection = latitude >= 0 ? "N" : "S";
         const lonDirection = longitude >= 0 ? "E" : "W";
@@ -54,7 +54,7 @@ const ExperienceSectionImageDisplay: React.FC<
     const { objectPosition, media, cardDetailedText } = item;
 
     return (
-        <div
+        <article
             onMouseMove={cardGradientEffect}
             className={cl(
                 "card experience-section-card p-2 no-boundary relative",
@@ -77,19 +77,21 @@ const ExperienceSectionImageDisplay: React.FC<
                 />
             </div>
             {experienceSectionCardTextImageBody()}
-            <div
+            <button
+                type="button"
                 className="expand absolute flex justify-center items-center cursor-pointer"
                 onClick={() => setShowModal(true)}
+                aria-label="Expand image"
             >
                 <FaExpand />
-            </div>
+            </button>
             <ImageDisplayModal
                 showModal={showModal}
                 setShowModal={setShowModal}
                 description={cardDetailedText}
                 image={media.source.url}
             />
-        </div>
+        </article>
     );
 };
 

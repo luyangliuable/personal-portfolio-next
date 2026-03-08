@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const isCenterAlignedWithViewport = (div: Element | null): number => {
     if (div === null) return Number.MAX_SAFE_INTEGER;
@@ -41,11 +40,11 @@ function isCloseToAnotherElement(
     const yAbove = rect.top - proxmityToSenseAt;
     const yBelow = rect.bottom + proxmityToSenseAt;
     const xPos = rect.left + rect.width / 2; // Roughly the horizontal center of the element
-    const defaultExcludes = [document.body, document.documentElement, element];
+    const defaultExcludes = new Set([document.body, document.documentElement, element]);
     const foundElements: Element[] = [];
     function findElements(x: number, y: number) {
         const el = document.elementFromPoint(x, y) as HTMLElement;
-        if (el && !defaultExcludes.includes(el)) {
+        if (el && !defaultExcludes.has(el)) {
             const prevVisibility = el.style.visibility;
             el.style.visibility = "hidden";
             findElements(x, y);

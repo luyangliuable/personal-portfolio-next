@@ -11,7 +11,7 @@ const LogInPage: React.FC = () => {
     const passwordRef = useRef<HTMLInputElement>(null);
 
     const dispatch: AppDispatch = useDispatch();
-    const error = useSelector((state: RootState) => state.auth.error);
+    useSelector((state: RootState) => state.auth.error);
 
     const [state, setState] = useState({
         loginStatus: "Pending",

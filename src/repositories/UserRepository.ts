@@ -2,7 +2,7 @@ import UserNameResponse from "../repositories/Response/UserNameResponse";
 import Repository from "./Repository";
 
 class UserRepository extends Repository {
-    static BASE_URL: string =
+    static readonly BASE_URL: string =
         process.env.REACT_APP_WEATHER_API_BASE_URL || "https://llcode.tech/api";
     private constructor() {
         super();
@@ -29,7 +29,7 @@ class UserRepository extends Repository {
                 return response.json();
             })
             .catch((error) => {
-                throw Error(error);
+                throw new Error(error);
             });
     }
 
@@ -39,7 +39,7 @@ class UserRepository extends Repository {
         return fetch(url, options)
             .then((response) => response.json())
             .catch((error) => {
-                throw error(error);
+                throw new Error(error);
             });
     }
 
@@ -49,7 +49,7 @@ class UserRepository extends Repository {
         return fetch(url, options)
             .then((response) => response.json())
             .catch((error) => {
-                throw error(error);
+                throw new Error(error);
             });
     }
 

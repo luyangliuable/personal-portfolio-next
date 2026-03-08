@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
     const getSectionData = (name: string): any => {
         const footerLinkCapacity = 5;
         const result = deepCopyJson(
-            linksData.links.filter((item: any) => item.name === name)[0],
+            linksData.links.find((item: any) => item.name === name),
         );
         // get only footerLinkCapacity number of sublinks due to lack of space in the footer
         result.sublinks = result.sublinks?.slice(0, footerLinkCapacity);
@@ -36,11 +36,11 @@ const Footer: React.FC = () => {
         return (
             <section className={className}>
                 <h3 className="text-lg important-text mb-2">{section.name}</h3>
-                {section.sublinks?.map((item: any, index: number) => {
+                {section.sublinks?.map((item: any) => {
                     return (
                         <InlineLink
                             target={target}
-                            key={index}
+                            key={item.name}
                             to={item.isLocked ? null : item.to}
                             className="mt-2"
                         >
@@ -63,10 +63,10 @@ const Footer: React.FC = () => {
                     </h3>
                     <div className="flex flex-col justify-center">
                         {linksToMyOtherSocialMedia.map(
-                            (item: any, index: number) => (
+                            (item: any) => (
                                 <InlineLink
                                     target="_blank"
-                                    key={index}
+                                    key={item.name}
                                     to={item.link}
                                     className="mt-1"
                                 >

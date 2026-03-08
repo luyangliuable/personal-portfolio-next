@@ -12,12 +12,12 @@ const cardGradientEffect = (
     offsetX = offsetX ?? 0;
     offsetY = offsetY ?? 0;
 
-    if (!inverse) {
-        x = e.clientX - rect.left;
-        y = e.clientY - rect.top;
-    } else {
+    if (inverse) {
         x = -e.clientX + rect.left;
         y = -e.clientY + rect.top;
+    } else {
+        x = e.clientX - rect.left;
+        y = e.clientY - rect.top;
     }
 
     x = x / scale - offsetX;

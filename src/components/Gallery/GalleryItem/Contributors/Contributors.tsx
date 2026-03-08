@@ -28,8 +28,8 @@ const Contributors: React.FC<IContributorsProps> = ({
 
             try {
                 const { data } = await octokit.repos.listContributors({
-                    owner: repoOwner!,
-                    repo: repoName!,
+                    owner: repoOwner,
+                    repo: repoName,
                 });
                 contributors = data.map((item) => {
                     return {
@@ -82,6 +82,15 @@ const Contributors: React.FC<IContributorsProps> = ({
                                 "block";
                         }
                     }}
+                    onFocus={() => {
+                        if (contributorTooltipRef.current) {
+                            contributorTooltipRef.current.innerHTML =
+                                item.login;
+                            contributorTooltipRef.current.style.opacity = "1";
+                            contributorTooltipRef.current.style.display =
+                                "block";
+                        }
+                    }}
                     onMouseMove={(e) => {
                         if (contributorTooltipRef.current) {
                             contributorTooltipRef.current.style.left = `${e.pageX + 10}px`;
@@ -89,6 +98,11 @@ const Contributors: React.FC<IContributorsProps> = ({
                         }
                     }}
                     onMouseOut={() => {
+                        if (contributorTooltipRef.current) {
+                            contributorTooltipRef.current.style.opacity = "0";
+                        }
+                    }}
+                    onBlur={() => {
                         if (contributorTooltipRef.current) {
                             contributorTooltipRef.current.style.opacity = "0";
                         }

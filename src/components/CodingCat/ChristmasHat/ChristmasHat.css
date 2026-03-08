@@ -15,14 +15,15 @@
 }
 
 .christmas_hat__ball {
+    width: 2rem;
+    height: 2rem;
     background: #f6f6f6;
-    border-radius: 2rem;
-    color: #f6f6f6;
-    width: 8.8rem;
+    border-radius: 50%;
     position: relative;
-    left: 1rem;
+    left: 69%;
+    top: 1rem;
     z-index: -1;
-    border: 1px solid #ccc;
+    border: 0.1px solid #ccc;
 }
 
 .christmas_hat__body {
@@ -33,18 +34,6 @@
     background-color: #ee2b47;
     border-radius: 300% 0% 0%;
     z-index: -3;
-}
-
-.christmas_hat__ball {
-    width: 2rem;
-    height: 2rem;
-    background: #f6f6f6;
-    border-radius: 50%;
-    position: relative;
-    left: 69%;
-    top: 1rem;
-    z-index: -1;
-    border: 0.1px solid #ccc;
 }
 
 .christmas_hat__circle {
@@ -61,7 +50,6 @@
 .christmas_hat__base {
     background: #f6f6f6;
     border-radius: 2rem;
-    color: #f6f6f6;
     width: 8.8rem;
     position: relative;
     left: 1rem;

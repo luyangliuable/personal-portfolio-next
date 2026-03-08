@@ -28,8 +28,8 @@ interface IGalleryItemPropsWithRepo extends IGalleryItemPropsBase {
 }
 
 interface IGalleryItemPropsWithoutRepo extends IGalleryItemPropsBase {
-    repoOwner?: undefined;
-    repoName?: undefined;
+    repoOwner?: never;
+    repoName?: never;
 }
 
 type IGalleryItemProps =

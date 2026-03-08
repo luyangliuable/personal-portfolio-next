@@ -90,7 +90,6 @@
     left: 50%;
     top: 100%;
     width: 1px;
-    /* box-shadow: var(--landing-page-card-box-shadow); */
     background-color: var(--divider-color);
 }
 

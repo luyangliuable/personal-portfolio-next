@@ -10,7 +10,7 @@ interface IEmojIconProps {
 const generatePastelColorFromEmoji = (emojiString: string) => {
     let hash = 0;
     for (let i = 0; i < emojiString.length; i++) {
-        hash = emojiString.charCodeAt(i) + ((hash << 5) - hash);
+        hash = (emojiString.codePointAt(i) ?? 0) + ((hash << 5) - hash);
     }
     const r = (hash >> 16) & 0xff;
     const g = (hash >> 8) & 0xff;
@@ -50,7 +50,7 @@ const EmojIcon: React.FC<IEmojIconProps> = ({ emojis, style }) => {
                 </span>
             )}
             {!single &&
-                emojis.map((a, idx) => {
+                emojis.map((emoji, idx) => {
                     return (
                         <span
                             style={{
@@ -61,9 +61,9 @@ const EmojIcon: React.FC<IEmojIconProps> = ({ emojis, style }) => {
                                 ),
                             }}
                             className="emoj-icon--emoji flex justify-center items-center"
-                            key={idx}
+                            key={`${emoji}-${idx}`}
                         >
-                            {a}
+                            {emoji}
                         </span>
                     );
                 })}

@@ -1,12 +1,12 @@
 "use client";
 
-import React, {
+import {
     useMemo,
     useRef,
     useEffect,
     useState,
     memo,
-    MouseEvent,
+    type MouseEvent,
 } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import IHeroProps from "./Interface/IHeroProps";
@@ -102,8 +102,8 @@ const HeroSection: React.FC<IHeroProps> = () => {
     const [screenWidth, setscreenWidth] = useState<number>(0);
     const [pixelCatReady, setPixelCatReady] = useState<boolean>(false);
     const [cursorPosition, setCursorPosition] = useState<{
-        x?: String;
-        y?: String;
+        x?: string;
+        y?: string;
     }>({});
 
     useEffect(() => {
@@ -160,11 +160,12 @@ const HeroSection: React.FC<IHeroProps> = () => {
     });
 
     const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-        if (pixelatedCodingCatRef.current && pixelCatReady) {
+        const catRef = pixelatedCodingCatRef.current;
+        if (catRef && pixelCatReady) {
             const delay = setTimeout(() => {
-                pixelatedCodingCatRef.current!.style.zIndex = "1";
+                catRef.style.zIndex = "1";
             }, 100);
-            const rect = pixelatedCodingCatRef.current.getBoundingClientRect();
+            const rect = catRef.getBoundingClientRect();
             const elementWidth = rect.width;
             const elementHeight = rect.height;
             const x = ((e.clientX - rect.left) / elementWidth) * 100;
@@ -277,7 +278,7 @@ const HeroSection: React.FC<IHeroProps> = () => {
                 landingPageCardType="fitContent"
             >
                 <section className="hero-section__content">
-                    <section
+                    <div
                         className="
                             hero-section__content__left
                             flex
@@ -287,6 +288,8 @@ const HeroSection: React.FC<IHeroProps> = () => {
                             relative
                         "
                         onMouseMove={handleMouseMove}
+                        role="region"
+                        aria-label="Interactive hero section with coding cat"
                     >
                         <div
                             className="
@@ -319,7 +322,7 @@ const HeroSection: React.FC<IHeroProps> = () => {
                         >
                             <CodingCat pixelated={false} />
                         </div>
-                    </section>
+                    </div>
                     {heroSectionContentLeft}
                 </section>
                 {footer}

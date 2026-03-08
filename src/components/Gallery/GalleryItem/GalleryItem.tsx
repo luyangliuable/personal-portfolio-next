@@ -4,7 +4,6 @@ import React, {
     CSSProperties,
     useEffect,
     useRef,
-    ReactElement,
     useState,
     useMemo,
 } from "react";
@@ -139,8 +138,7 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
                                 )}
                             </span>
                         )}
-                        {props.metadata &&
-                            props.metadata.map((item, idx) => {
+                        {props.metadata?.map((item, idx) => {
                                 const keyValue = typeof item.value === 'string' || typeof item.value === 'number'
                                     ? item.value
                                     : `metadata-${idx}`;

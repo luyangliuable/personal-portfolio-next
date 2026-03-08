@@ -282,18 +282,15 @@ class TwinCandles extends Component<ITwinCandleProps, ITwinCandleState> {
                 },
             );
 
-            // TODO temporary solution because I am tired start
             const element: HTMLElement | null = document.querySelector(
                 ".featured-section-content",
             );
 
-            // Check if the element exists and set its "darkness"
             if (element) {
                 element.classList.remove(
                     "featured-section-content-in-dark-room",
                 );
             }
-            // temporary solution because I am tired end
 
             setTimeout(() => {
                 this.turnCandleLightOn();
@@ -302,17 +299,14 @@ class TwinCandles extends Component<ITwinCandleProps, ITwinCandleState> {
     };
 
     public turnCandleLightOff = () => {
-        // TODO temporary solution because I am tired start
         const element: HTMLElement | null = document.querySelector(
             ".featured-section-content",
         );
 
-        // Check if the element exists and set its display to "none"
         if (element) {
             element.classList.add("featured-section-content-in-dark-room");
         }
 
-        // temporary solution because I am tired end
         Object.entries(this.state.fireOffState).forEach(([_, value]) => {
             this.changeRefClassName(value.reference, value.className);
         });

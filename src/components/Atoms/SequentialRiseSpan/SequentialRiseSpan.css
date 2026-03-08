@@ -6,6 +6,7 @@
     position: relative;
     visibility: hidden;
     width: 100%;
+    display: inline-block;
 }
 
 .sequential-rise-span > * {
@@ -30,13 +31,6 @@
 
 .sequential-rise-span h1 {
     line-height: 1.2;
-}
-
-.sequential-rise-span {
-    position: relative;
-    visibility: hidden;
-    width: 100%;
-    display: inline-block;
 }
 
 .slide-up {

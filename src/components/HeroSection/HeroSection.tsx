@@ -288,7 +288,6 @@ const HeroSection: React.FC<IHeroProps> = () => {
                             relative
                         "
                         onMouseMove={handleMouseMove}
-                        role="region"
                         aria-label="Interactive hero section with coding cat"
                     >
                         <div

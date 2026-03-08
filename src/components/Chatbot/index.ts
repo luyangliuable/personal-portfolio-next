@@ -1,3 +1,1 @@
-import { Chatbot } from "ollama-chat-client";
-
-export default Chatbot;
+export { Chatbot as default } from "ollama-chat-client";

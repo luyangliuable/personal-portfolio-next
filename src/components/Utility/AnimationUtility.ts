@@ -5,18 +5,16 @@ export function throttle<T extends (...args: any[]) => void>(
     let lastFunc: ReturnType<typeof setTimeout> | undefined;
     let lastRan: number;
 
-    return function (this: unknown, ...args: Parameters<T>) {
-        const context = this;
-
+    return (...args: Parameters<T>) => {
         if (lastRan === undefined) {
-            func.apply(context, args);
+            func(...args);
             lastRan = Date.now();
         } else {
             clearTimeout(lastFunc);
             lastFunc = globalThis.setTimeout(
                 () => {
                     if (Date.now() - lastRan >= limit) {
-                        func.apply(context, args);
+                        func(...args);
                         lastRan = Date.now();
                     }
                 },

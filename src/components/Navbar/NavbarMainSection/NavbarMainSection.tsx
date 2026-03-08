@@ -249,7 +249,7 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
 
     return (
         <>
-            <div onMouseLeave={() => setDropdownMenu(false)} ref={navbar} role="navigation" aria-label="Main navigation">
+            <nav onMouseLeave={() => setDropdownMenu(false)} ref={navbar} aria-label="Main navigation">
                 <section className="flex items-center h-full">
                     <div className="logo__wrapper">
                         <Link href="/">
@@ -297,7 +297,7 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
                     </button>
                 </section>
                 <NavbarScrollProgress scrollY={scrollY ?? 0} />
-            </div>
+            </nav>
             {navbarBurgerPanel}
         </>
     );

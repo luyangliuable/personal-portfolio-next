@@ -8,12 +8,12 @@ class UnderConstruction extends Component<{}, {}> {
         return (
             <div className="page-container">
                 <div className="under-contruction-card__container">
-                    <section
+                    <div
                         onMouseMove={cardGradientEffect}
                         className="card under-contruction-card"
                     >
                         <h1>Coming Soon</h1>
-                    </section>
+                    </div>
                 </div>
             </div>
         );

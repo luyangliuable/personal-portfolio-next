@@ -1,12 +1,10 @@
-import React from "react";
 import ITagCloudProps from "./Interface/ITagCloudProps";
 import "./TagCloud.css";
-import "../../app/page.module.css";
 
 const TagCloud: React.FC<ITagCloudProps> = ({ tags }) => {
     return (
         <aside className="card-item__tags relative">
-            {tags && tags.map((item) => <span key={item}>#{item}</span>)}
+            {tags?.map((item) => <span key={item}>#{item}</span>)}
         </aside>
     );
 };

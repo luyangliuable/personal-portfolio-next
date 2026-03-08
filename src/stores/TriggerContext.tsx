@@ -3,6 +3,7 @@ import React, {
     useContext,
     useState,
     useCallback,
+    useMemo,
     ReactNode,
     memo,
 } from "react";
@@ -17,8 +18,10 @@ const TriggerProvider = memo(({ children }: { children: ReactNode }) => {
         setTrigger((prev) => !prev);
     }, []);
 
+    const value = useMemo(() => ({ trigger, toggleTrigger }), [trigger, toggleTrigger]);
+
     return (
-        <TriggerContext.Provider value={{ trigger, toggleTrigger }}>
+        <TriggerContext.Provider value={value}>
             {children}
         </TriggerContext.Provider>
     );

@@ -10,7 +10,6 @@ import ICardState from "./Interface/ICardState";
 import DynamicLoadQueue from "../../stores/DynamicLoadQueue/DynamicLoadQueue";
 
 class Card extends Component<ICardProps, ICardState> {
-    iframePreviewRef = createRef<HTMLIFrameElement>();
     cardItemRef: RefObject<HTMLAnchorElement>;
     dynamicLoadQueue: DynamicLoadQueue;
 
@@ -25,24 +24,6 @@ class Card extends Component<ICardProps, ICardState> {
     componentDidMount() {
         if (this.cardItemRef.current) {
             this.dynamicLoadQueue.addToQueue(this.cardItemRef.current);
-        }
-    }
-
-    checkDateIsValid(): boolean {
-        return this.props.date_created !== "";
-    }
-
-    extractRouteFromURL(url: string): string | null {
-        try {
-            const parsedUrl = new URL(url);
-            if (parsedUrl.hostname === "llcode.tech") {
-                return parsedUrl.pathname;
-            } else {
-                return null;
-            }
-        } catch (error) {
-            console.error("Invalid URL:", error);
-            return null;
         }
     }
 

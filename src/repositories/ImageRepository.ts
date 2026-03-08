@@ -2,17 +2,16 @@ import Repository from "./Repository";
 
 class ImageRepository extends Repository {
     private static instance: ImageRepository | null = null;
-    private cache = new Map<string, string>();
-    private ongoingRequests = new Map<string, Promise<string>>();
-    private static BASE_URL: string = "https://llcode.tech/api/image/";
+    private readonly cache = new Map<string, string>();
+    private readonly ongoingRequests = new Map<string, Promise<string>>();
+    private static readonly BASE_URL: string = "https://llcode.tech/api/image/";
 
     private constructor() {
         super();
     }
 
     static getInstance(): ImageRepository {
-        if (!ImageRepository.instance)
-            ImageRepository.instance = new ImageRepository();
+        ImageRepository.instance ??= new ImageRepository();
         return ImageRepository.instance;
     }
 

@@ -1,17 +1,12 @@
 "use client";
 
-import { useRef, RefObject, useEffect } from "react";
+import React from "react";
+
 import "./Teddie.css";
-import Image from "next/image";
-import TeddieImage from "./teddie.png";
-import { useScrollPosition } from "../../../hooks";
 import Bento from "../../../components/Bento/Bento";
 import LandingPageCard from "../../../components/LandingPageCard/LandingPageCard";
 
 const Teddie = () => {
-    const imageStackRef: RefObject<HTMLDivElement> = useRef(null);
-
-    useEffect(() => {}, []);
 
     return (
         <main>

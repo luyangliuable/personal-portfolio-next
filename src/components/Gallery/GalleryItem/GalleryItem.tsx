@@ -4,7 +4,6 @@ import React, {
     CSSProperties,
     useEffect,
     useRef,
-    ReactElement,
     useState,
     useMemo,
 } from "react";
@@ -20,10 +19,36 @@ import SequentialRiseSpan from "../../Atoms/SequentialRiseSpan/SequentialRiseSpa
 import { TbToolsOff } from "react-icons/tb";
 import { CgWebsite } from "react-icons/cg";
 import { truncateTextBody } from "../../Utility/StringUtility";
-import { CiTimer } from "react-icons/ci";
-import { CiCalendar } from "react-icons/ci";
+import { CiTimer, CiCalendar } from "react-icons/ci";
 import Contributors from "./Contributors/Contributors";
 import { cl } from "../../Utility/LogicUtility";
+
+interface GalleryItemTypeSegmentProps {
+    type?: string;
+}
+
+const GalleryItemTypeSegment: React.FC<GalleryItemTypeSegmentProps> = ({ type }) => {
+    const MemoizedCgWebsite = useMemo(() => <CgWebsite />, []);
+    const MemoizedTbToolsOff = useMemo(() => <TbToolsOff />, []);
+
+    if (type === "blog") {
+        return (
+            <div className="gallery-item__type font-fira-code">
+                {MemoizedCgWebsite}
+                <span>BLOG</span>
+            </div>
+        );
+    } else if (type === "tool") {
+        return (
+            <div className="gallery-item__type font-fira-code">
+                {MemoizedTbToolsOff}
+                <span>TOOL</span>
+            </div>
+        );
+    }
+
+    return <></>;
+};
 
 const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
     const galleryItemRef = useRef<HTMLDivElement>(null);
@@ -36,31 +61,6 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
             dynamicLoadQueue.addToQueue(galleryItemRef.current);
         }
     }, [isRendered, galleryItemRef, dynamicLoadQueue]);
-
-    const MemoizedCgWebsite = useMemo(() => <CgWebsite />, []);
-    const MemoizedTbToolsOff = useMemo(() => <TbToolsOff />, []);
-
-    const GalleryItemTypeSegment = (): ReactElement => {
-        const type = props.type;
-
-        if (type === "blog") {
-            return (
-                <div className="gallery-item__type font-fira-code">
-                    {MemoizedCgWebsite}
-                    <span>BLOG</span>
-                </div>
-            );
-        } else if (type === "tool") {
-            return (
-                <div className="gallery-item__type font-fira-code">
-                    {MemoizedTbToolsOff}
-                    <span>TOOL</span>
-                </div>
-            );
-        }
-
-        return <></>;
-    };
 
     const style: CSSProperties = props.style || {};
     const { image, className, imageOverlay } = props;
@@ -88,16 +88,9 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
                 onMouseMove={cardGradientEffect}
                 className="card gallery-item initially-hidden blur-boundary--sm"
             >
-                <GalleryItemTypeSegment />
+                <GalleryItemTypeSegment type={props.type} />
                 <div className="gallery-item__image flex justify-center items-center">
-                    {!imageOverlay ? (
-                        <Image
-                            isLazyLoading={false}
-                            compression={30}
-                            alt=""
-                            src={image ?? ""}
-                        />
-                    ) : (
+                    {imageOverlay ? (
                         <>
                             <img alt="" src={imageOverlay} />
                             <Image
@@ -107,6 +100,13 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
                                 src={image ?? ""}
                             />
                         </>
+                    ) : (
+                        <Image
+                            isLazyLoading={false}
+                            compression={30}
+                            alt=""
+                            src={image ?? ""}
+                        />
                     )}
                 </div>
                 <div className="px-5">
@@ -138,17 +138,17 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
                                 )}
                             </span>
                         )}
-                        {props.metadata &&
-                            props.metadata.map((item, idx) => {
+                        {props.metadata?.map((item, idx) => {
+                                const keyValue = typeof item.value === 'string' || typeof item.value === 'number'
+                                    ? item.value
+                                    : `metadata-${idx}`;
                                 return (
                                     <span
-                                        key={idx}
+                                        key={keyValue}
                                         className="flex items-center"
                                     >
                                         {item.icon}
-                                        {!item.callback && item.value}
-                                        {item.callback &&
-                                            item.callback(item.value)}
+                                        {item.callback?.(item.value) ?? item.value}
                                     </span>
                                 );
                             })}

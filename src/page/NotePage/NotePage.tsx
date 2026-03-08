@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import HeroHeader from "../../components/HeroHeader/HeroHeader";
 import Card from "../../components/Card/Card";
 import Accordion from "../../components/Accordion/Accordion";
@@ -8,11 +8,12 @@ import BlogPostResponse from "../../repositories/Response/BlogPostResponse";
 import EmojIcon from "../../components/EmojIcon/EmojIcon";
 import SkeletonPage from "../SkeletonPage/SkeletonPage";
 import BlogPostGraphics from "../../components/BlogPostGraphics/BlogPostGraphics";
-import type { Metadata } from "next";
 
 import "./NotePage.css";
 
-export interface INotesProps extends Metadata {
+export interface INotesProps {
+    title: string;
+    description: string;
     content: BlogPostResponse[];
 }
 
@@ -32,8 +33,12 @@ const Notes: React.FC<INotesProps> = ({ title, description, content }) => {
         return <SkeletonPage />;
     }
 
-    const grouped = content!.reduce(
-        (acc: Record<string, any>, item: BlogPostResponse) => {
+    if (!content) {
+        return <SkeletonPage />;
+    }
+
+    const grouped = content.reduce(
+        (acc: Record<string, BlogPostResponse[]>, item: BlogPostResponse) => {
             const tagName = item.tags.length > 0 ? item.tags[0] : "random";
 
             if (acc.hasOwnProperty(tagName)) {
@@ -107,8 +112,8 @@ const Notes: React.FC<INotesProps> = ({ title, description, content }) => {
     return (
         <main>
             <HeroHeader
-                heading={heroHeaderContent.heading! as string}
-                description={heroHeaderContent.description! as string}
+                heading={heroHeaderContent.heading}
+                description={heroHeaderContent.description}
                 graphics={<BlogPostGraphics />}
             />
             <Accordion className="notes normalised-width">
@@ -137,10 +142,7 @@ const Notes: React.FC<INotesProps> = ({ title, description, content }) => {
                                             }
                                             in_progress={content.in_progress}
                                             tags={content.tags}
-                                            image={
-                                                content.image &&
-                                                content.image.$oid
-                                            }
+                                            image={content.image?.$oid}
                                             link={`/digital-chronicles/coding-note/${content._id.$oid}`}
                                         />
                                     );

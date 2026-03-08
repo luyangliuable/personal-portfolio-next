@@ -1,4 +1,4 @@
-import React, { RefObject, useRef, useEffect } from "react";
+import { memo } from "react";
 import { cardGradientEffect } from "../../Utility/MouseUtility";
 import { ExperienceSectionItem } from "../Interface/IExperienceSectionState";
 import "./ExperienceSectionEvent.css";
@@ -6,7 +6,6 @@ import Image from "../../Image/Image";
 import { cl } from "../../Utility/LogicUtility";
 
 interface ExperienceSectionEventProps {
-    timeLineRef: RefObject<HTMLDivElement>;
     item: ExperienceSectionItem;
     index: number;
     alt?: string;
@@ -40,7 +39,7 @@ const ExperienceSectionEvent: React.FC<ExperienceSectionEventProps> = ({
     );
 
     return (
-        <div
+        <article
             onMouseMove={cardGradientEffect}
             className={cl(
                 "card experience-section-card px-2.5 py-3 flex flex-row justify-between items-center",
@@ -55,8 +54,8 @@ const ExperienceSectionEvent: React.FC<ExperienceSectionEventProps> = ({
             <div className="experience-section-card__image-wrapper">
                 <Image compression={20} alt={alt} src={item.media.source.url} />
             </div>
-        </div>
+        </article>
     );
 };
 
-export default React.memo(ExperienceSectionEvent);
+export default memo(ExperienceSectionEvent);

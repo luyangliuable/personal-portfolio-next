@@ -31,10 +31,10 @@ function customCodeBlockPlugin() {
         visit(tree, "code", (node) => {
             let language = node.lang || "unknown";
             const escapedCode = node.value
-                .replace(/{/g, "&#123;")
-                .replace(/}/g, "&#125;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;");
+                .replaceAll("{", "&#123;")
+                .replaceAll("}", "&#125;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;");
 
             if (language === "sh") {
                 language = "bash";
@@ -74,6 +74,17 @@ const processNodes = (node: any): any => {
     return node.outerHTML;
 };
 
+function filterMarkdown(text: string): string {
+    const tocRegex = /\*\*Table of Contents\*\*\n(?:\s*-\s[^\n]*\n)+/g;
+    let filteredText = text.replaceAll(tocRegex, "");
+    const asteriskRegex = /\|([^|]*)\|/g;
+    filteredText = filteredText.replaceAll(asteriskRegex, (match, p1) => {
+        return `|${p1.replaceAll("*", "")}|`;
+    });
+
+    return filteredText;
+}
+
 const convertHtmlToReact = (htmlString: string): JSX.Element => {
     const container = document.createElement("div");
     container.innerHTML = htmlString;
@@ -99,25 +110,13 @@ const MarkdownRendererV2: React.FC<MarkdownRendererProps> = ({ markdown }) => {
         null,
     );
 
-    const processCallback = (err: any, file: any): undefined => {
+    const processCallback = (err: any, file: any): void => {
         if (err) {
             console.error(err);
         } else {
             setRenderedContent(convertHtmlToReact(String(file)));
         }
-        return;
     };
-
-    function filterMarkdown(text: string): string {
-        const tocRegex = /\*\*Table of Contents\*\*\n(?:\s*-\s[^\n]*\n)+/g;
-        let filteredText = text.replace(tocRegex, "");
-        const asteriskRegex = /\|([^\|]*)\|/g;
-        filteredText = filteredText.replace(asteriskRegex, (match, p1) => {
-            return `|${p1.replace(/\*/g, "")}|`;
-        });
-
-        return filteredText;
-    }
 
     useEffect(() => {
         const filteredMarkdown = filterMarkdown(

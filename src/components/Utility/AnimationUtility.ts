@@ -2,22 +2,19 @@ export function throttle<T extends (...args: any[]) => void>(
     func: T,
     limit: number,
 ): (...args: Parameters<T>) => void {
-    let lastFunc: number;
+    let lastFunc: ReturnType<typeof setTimeout> | undefined;
     let lastRan: number;
 
-    // I have no idea what type `this` has. Biggest mystery of typescript actually
-    return function (this: any, ...args: Parameters<T>) {
-        const context = this;
-
-        if (!lastRan) {
-            func.apply(context, args);
+    return (...args: Parameters<T>) => {
+        if (lastRan === undefined) {
+            func(...args);
             lastRan = Date.now();
         } else {
             clearTimeout(lastFunc);
-            lastFunc = window.setTimeout(
+            lastFunc = globalThis.setTimeout(
                 () => {
                     if (Date.now() - lastRan >= limit) {
-                        func.apply(context, args);
+                        func(...args);
                         lastRan = Date.now();
                     }
                 },

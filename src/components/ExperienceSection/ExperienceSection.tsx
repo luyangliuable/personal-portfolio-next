@@ -370,9 +370,9 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
         }
     }, [trigger]);
 
-    const sortedItems = items.sort(
+    const sortedItems = [...items].sort(
         (a: ExperienceSectionItem, b: ExperienceSectionItem) => {
-            return parseInt(b.dateTime) - parseInt(a.dateTime);
+            return Number.parseInt(b.dateTime) - Number.parseInt(a.dateTime);
         },
     );
 
@@ -388,7 +388,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
     const mapExperienceSectionItems = useCallback(() => {
         let accumulatedIdx = 0;
         return Object.keys(groupedItems)
-            .sort((a, b) => parseInt(b) - parseInt(a))
+            .sort((a, b) => Number.parseInt(b) - Number.parseInt(a))
             .map((year) => {
                 const currentYearItems = groupedItems[year];
                 const fragment = (
@@ -407,7 +407,6 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                             }
                             return (
                                 <ExperienceSectionEvent
-                                    timeLineRef={timeLineRef}
                                     key={currentIndex}
                                     item={item}
                                     index={currentIndex}

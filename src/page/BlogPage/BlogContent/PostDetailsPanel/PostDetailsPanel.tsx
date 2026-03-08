@@ -7,7 +7,6 @@ import "../../../../components/Card/Card.css";
 import { cardGradientEffect } from "../../../../components/Utility/MouseUtility";
 import TagCloud from "../../../../components/TagCloud/TagCloud";
 import "./PostDetailsPanel.css";
-import TextInputWithCard from "../../../../components/TextInputCard/TextInputWithCard";
 
 type IPostDetailsPanelProps = {
     content?: BlogPostResponse;
@@ -40,18 +39,18 @@ const PostDetailsPanel: React.FC<IPostDetailsPanelProps> = ({
             return null;
         }
 
-        return relatedPosts.map((post: BlogPostResponse, idx: number) => {
+        return relatedPosts.map((post: BlogPostResponse) => {
             const { heading, author } = post;
             const link = `/digital-chronicles/blog/${post._id.$oid}`;
             return (
-                <Link className="w-4/5" href={link} key={idx}>
-                    <div
-                        className="card no-boundary p-[8px] ml-[-8px]"
+                <Link className="w-4/5" href={link} key={post._id.$oid}>
+                    <span
+                        className="card no-boundary p-[8px] ml-[-8px] block"
                         onMouseMove={cardGradientEffect}
                     >
                         <h4 className="mb-0 font-bold">{heading}</h4>
                         <p className="m-0">{author}</p>
-                    </div>
+                    </span>
                 </Link>
             );
         });

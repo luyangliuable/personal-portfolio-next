@@ -16,32 +16,38 @@ const useScrollPosition = (overrideThrottleInterval?: number) => {
     useEffect(() => {
         let scrollTimeout: NodeJS.Timeout;
         const timeToCheckScrollingHasStoppedMiliseconds = 50;
-        const handleScroll = () => {
-            clearTimeout(scrollTimeout); // Clear the timeout to reset the end-of-scroll detection
+
+        const updateScrollingState = (scrolling: boolean) => {
             setAppState((prevState) => ({
                 ...prevState,
-                scrollY: window.scrollY,
+                scrolling,
+            }));
+        };
+
+        const handleScroll = () => {
+            clearTimeout(scrollTimeout);
+            setAppState((prevState) => ({
+                ...prevState,
+                scrollY: globalThis.scrollY,
                 scrolling: true,
             }));
-            scrollTimeout = setTimeout(() => {
-                setAppState((prevState) => ({
-                    ...prevState,
-                    scrolling: false,
-                }));
-            }, timeToCheckScrollingHasStoppedMiliseconds);
+            scrollTimeout = setTimeout(
+                () => updateScrollingState(false),
+                timeToCheckScrollingHasStoppedMiliseconds,
+            );
         };
 
         const throttledHandleScroll = throttle(
             handleScroll,
             overrideThrottleInterval ?? 10,
         );
-        window.addEventListener("scroll", throttledHandleScroll);
+        globalThis.addEventListener("scroll", throttledHandleScroll);
 
         const deltaScrollCalculationInterval: NodeJS.Timeout = setInterval(
             () => {
                 setAppState((prevState) => {
                     const deltaScrolled =
-                        window.scrollY -
+                        globalThis.scrollY -
                         Math.max(
                             0,
                             prevState.deltaScrollCalculation
@@ -56,7 +62,7 @@ const useScrollPosition = (overrideThrottleInterval?: number) => {
                         ...prevState,
                         deltaScrollCalculation: {
                             ...prevState.deltaScrollCalculation,
-                            lastRecordedScrollY: window.scrollY,
+                            lastRecordedScrollY: globalThis.scrollY,
                             deltaScrolled: deltaScrolled,
                         },
                     };
@@ -66,9 +72,9 @@ const useScrollPosition = (overrideThrottleInterval?: number) => {
         );
 
         return () => {
-            window.removeEventListener("scroll", throttledHandleScroll);
-            window.clearTimeout(scrollTimeout);
-            window.clearInterval(deltaScrollCalculationInterval);
+            globalThis.removeEventListener("scroll", throttledHandleScroll);
+            clearTimeout(scrollTimeout);
+            clearInterval(deltaScrollCalculationInterval);
         };
     }, []);
 

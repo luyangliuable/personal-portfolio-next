@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, RefObject } from "react";
+
 import "./FractalHills.css";
 import p5 from "p5/lib/p5.js";
 
@@ -16,11 +17,10 @@ const FractalHills = () => {
             let flying = 0;
             let terrain: number[][] = [];
             let colorTheme = "invertedMonochrome";
+            const heightVal = 100;
+            const backgroundColorVal = 0;
 
-            const scaleVal = 40;
             const speedVal = 0.002;
-            const heightVal = 800;
-            const backgroundColorVal = "#EEE";
 
             p.setup = () => {
                 p.createCanvas(p.windowWidth, p.windowHeight, p.WEBGL);
@@ -41,7 +41,7 @@ const FractalHills = () => {
                 const centerX = cols / 2;
                 const centerY = rows / 2;
                 const flatRadius = Math.min(cols, rows) / 5;
-                const maxDist = Math.sqrt(centerX ** 2 + centerY ** 2);
+                const maxDist = Math.hypot(centerX, centerY);
 
                 for (let y = 0; y < rows; y++) {
                     let xoff = 0;
@@ -104,7 +104,6 @@ const FractalHills = () => {
                 p.rotateX(p.PI / 2.5);
                 p.stroke(120);
                 p.strokeWeight(0.5);
-                /* p.translate(-w / 2, -3.5 * p.height) */
                 p.translate(-w / 2, -h / 2);
 
                 for (let y = 0; y < rows - 1; y++) {
@@ -305,19 +304,15 @@ const FractalHills = () => {
                 p.resizeCanvas(p.windowWidth, p.windowHeight);
             }
 
-            window.addEventListener("resize", windowResized);
+            globalThis.addEventListener("resize", windowResized);
         };
 
         let p5Instance: p5;
-        if (sketchRef!.current) p5Instance = new p5(sketch, sketchRef!.current);
+        if (sketchRef.current) p5Instance = new p5(sketch, sketchRef.current);
         return () => p5Instance.remove();
     }, []);
 
-    return (
-        <>
-            <div ref={sketchRef} className="bg-[red] h-screen"></div>
-        </>
-    );
+    return <div ref={sketchRef} className="bg-[red] h-screen"></div>;
 };
 
 export default FractalHills;

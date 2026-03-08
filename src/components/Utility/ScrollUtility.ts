@@ -1,18 +1,17 @@
 import { useEffect } from "react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const isCenterAlignedWithViewport = (div: Element | null): number => {
     if (div === null) return Number.MAX_SAFE_INTEGER;
     const rect = div.getBoundingClientRect();
     const divCenterY = rect.top + rect.height / 2;
-    const viewportCenterY = window.innerHeight / 2;
+    const viewportCenterY = globalThis.innerHeight / 2;
     return divCenterY - viewportCenterY;
 };
 
 export function getVisiblePercentage(element: Element | null): number {
     if (element === null) return 0;
     const rect = element.getBoundingClientRect();
-    const viewportHeight = window.innerHeight;
+    const viewportHeight = globalThis.innerHeight;
     const visibleHeight = Math.max(
         0,
         Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0),
@@ -41,11 +40,11 @@ function isCloseToAnotherElement(
     const yAbove = rect.top - proxmityToSenseAt;
     const yBelow = rect.bottom + proxmityToSenseAt;
     const xPos = rect.left + rect.width / 2; // Roughly the horizontal center of the element
-    const defaultExcludes = [document.body, document.documentElement, element];
+    const defaultExcludes = new Set([document.body, document.documentElement, element]);
     const foundElements: Element[] = [];
     function findElements(x: number, y: number) {
         const el = document.elementFromPoint(x, y) as HTMLElement;
-        if (el && !defaultExcludes.includes(el)) {
+        if (el && !defaultExcludes.has(el)) {
             const prevVisibility = el.style.visibility;
             el.style.visibility = "hidden";
             findElements(x, y);
@@ -76,7 +75,6 @@ const adjustElementPositionAbsoluteY = (
     element.style.position = "absolute";
 
     // Center the element in the viewport taking the scroll position into account
-    /* element.style.top = `calc(50% + ${scrollTop}px)`; */
     if (y !== 0) element.style.top = `calc(${y}px)`;
     element.style.transform = "translate(-50%, -50%)";
 };
@@ -91,7 +89,7 @@ const resetElementPosition = (element: HTMLElement): void => {
 function useScrollToTopOnLoad() {
     useEffect(() => {
         const scrollToTop = () => {
-            window.scrollTo({
+            globalThis.scrollTo({
                 top: 0,
             });
         };

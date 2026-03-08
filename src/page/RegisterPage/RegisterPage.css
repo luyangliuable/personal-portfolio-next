@@ -48,9 +48,6 @@ input[type="password"] {
     width: 80%;
 }
 
-.register-form input[type="text"]:active {
-}
-
 .register-form .flash-red {
     color: #f00;
 }

@@ -1,12 +1,12 @@
 "use client";
 
-import React, {
+import {
     useMemo,
     useState,
-    ReactNode,
+    type ReactNode,
     useEffect,
     useRef,
-    RefObject,
+    type RefObject,
     useCallback,
 } from "react";
 import Link from "next/link";
@@ -34,8 +34,8 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
     const selectedNavlinkWindow: RefObject<HTMLDivElement> =
         useRef<HTMLDivElement>(null);
     const burgerPanel: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
-    const burgerButton: RefObject<HTMLDivElement> =
-        useRef<HTMLDivElement>(null);
+    const burgerButton: RefObject<HTMLButtonElement> =
+        useRef<HTMLButtonElement>(null);
     const navbarSubmenu: RefObject<HTMLDivElement> =
         useRef<HTMLDivElement>(null);
 
@@ -49,8 +49,7 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
     });
 
     useEffect(() => {
-        const element = navbar.current!;
-        const height = element?.getBoundingClientRect().height || 0;
+        const height = navbar.current?.getBoundingClientRect().height ?? 0;
         setNavBarHeight(height);
     }, []);
 
@@ -68,7 +67,7 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
         } else if (st < lastScrollTopRef.current && isNavbarHidden) {
             setNavBarHidden(false);
         }
-        lastScrollTopRef.current = st <= 0 ? 0 : st;
+        lastScrollTopRef.current = Math.max(st, 0);
     }, [state]);
 
     const listenContinuousScrolled = useCallback(() => {
@@ -81,13 +80,13 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
     }, [state.navBarDetached, scrollY, navBarHeight]);
 
     const addBurgerClickOutEventLister = useCallback(() => {
-        window.addEventListener("click", hideBurgerMenu);
+        globalThis.addEventListener("click", hideBurgerMenu);
     }, []);
 
     const setupNavHoverEffect = useCallback(() => {
-        const navbarLeftTarget = navbarLeft.current!;
-        const selectedNavlinkWindowTarget = selectedNavlinkWindow.current!;
-        if (navbarLeftTarget && selectedNavlinkWindow) {
+        const navbarLeftTarget = navbarLeft.current;
+        const selectedNavlinkWindowTarget = selectedNavlinkWindow.current;
+        if (navbarLeftTarget && selectedNavlinkWindowTarget) {
             Array.from(navbarLeftTarget.children).forEach((child, index) => {
                 if (child !== selectedNavlinkWindowTarget) {
                     child.addEventListener("mouseover", () => {
@@ -107,14 +106,14 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
 
     const initializeNavBar = useCallback(() => {
         listenContinuousScrolled();
-        if (window.innerWidth < 900) addBurgerClickOutEventLister();
+        if (globalThis.innerWidth < 900) addBurgerClickOutEventLister();
     }, [listenContinuousScrolled, addBurgerClickOutEventLister]);
 
     useEffect(() => {
         initializeNavBar();
         setupNavHoverEffect();
         return () => {
-            window.removeEventListener("click", hideBurgerMenu);
+            globalThis.removeEventListener("click", hideBurgerMenu);
         };
     }, [initializeNavBar, setupNavHoverEffect]);
 
@@ -127,8 +126,7 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
         (set: boolean) => {
             if (
                 state.navBarDetached !== set &&
-                navbar.current &&
-                navbar.current.parentElement
+                navbar.current?.parentElement
             ) {
                 toggleClassName(navbar.current.parentElement, set, "detached");
                 toggleClassName(
@@ -150,7 +148,7 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
     const setNavBarHidden = useCallback(
         (set: boolean) => {
             if (state.isNavbarHidden === set) return;
-            if (navbar.current && navbar.current.parentElement) {
+            if (navbar.current?.parentElement) {
                 toggleProperty(
                     document.documentElement,
                     set,
@@ -178,12 +176,15 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
     }, []);
 
     const hideBurgerMenu = useCallback((e: any) => {
+        const button = burgerButton.current;
+        const panel = burgerPanel.current;
         if (
-            burgerPanel.current &&
-            !burgerPanel.current.contains(e.target as Node) &&
-            !burgerButton.current!.contains(e.target as Node)
+            panel &&
+            !panel.contains(e.target as Node) &&
+            button &&
+            !button.contains(e.target as Node)
         ) {
-            burgerPanel.current?.classList.add("nav-burger-panel-hide");
+            panel.classList.add("nav-burger-panel-hide");
         }
     }, []);
 
@@ -214,7 +215,7 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
                 setDropdownMenu(true);
                 setState((prev) => ({
                     ...prev,
-                    dropdownMenuLinkDisplay: links!,
+                    dropdownMenuLinkDisplay: links,
                 }));
             }
         },
@@ -248,7 +249,7 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
 
     return (
         <>
-            <div onMouseLeave={() => setDropdownMenu(false)} ref={navbar}>
+            <nav onMouseLeave={() => setDropdownMenu(false)} ref={navbar} aria-label="Main navigation">
                 <section className="flex items-center h-full">
                     <div className="logo__wrapper">
                         <Link href="/">
@@ -285,16 +286,18 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
                             </div>
                         </section>
                     </nav>
-                    <div
+                    <button
+                        type="button"
                         ref={burgerButton}
                         className="nav-burger"
                         onClick={toggleBurgerMenu}
+                        aria-label="Toggle navigation menu"
                     >
                         {memoizedBurgerMenuIcon}
-                    </div>
+                    </button>
                 </section>
                 <NavbarScrollProgress scrollY={scrollY ?? 0} />
-            </div>
+            </nav>
             {navbarBurgerPanel}
         </>
     );

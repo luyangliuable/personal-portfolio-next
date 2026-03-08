@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useEffect, useRef, useState, useMemo } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SkeletonImage from "./SkeletonImage/SkeletonImage";
 import IImageProps from "./Interface/IImageProps";
 import ImageRepository from "../../repositories/ImageRepository";
-import { default as NextImage } from "next/image";
+import NextImage from "next/image";
 import { cl } from "../Utility/LogicUtility";
 import "./Image.css";
 
@@ -31,10 +31,8 @@ const Image: React.FC<IImageProps> = ({
     const updateImage = async () => {
         if (fetchedImageUrl) return;
         try {
-            const imageId = src ?? defaultProps!.defaultImageId;
-            const [imageUrl] = await Promise.all([
-                imageRepository.getImageById(imageId, compression),
-            ]);
+            const imageId = src ?? defaultProps.defaultImageId;
+            const imageUrl = await imageRepository.getImageById(imageId, compression);
             setFetchedImageUrl(imageUrl);
         } catch (error) {
             console.error("Error fetching images:", error);

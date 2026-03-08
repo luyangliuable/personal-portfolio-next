@@ -9,11 +9,9 @@ import { AppDispatch, RootState } from "../../stores/store";
 const LogInPage: React.FC = () => {
     const userNameRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
-    const flash = useRef<HTMLInputElement>(null);
 
     const dispatch: AppDispatch = useDispatch();
-    const registerStatus = useSelector((state: RootState) => state.auth.status);
-    const error = useSelector((state: RootState) => state.auth.error);
+    useSelector((state: RootState) => state.auth.error);
 
     const [state, setState] = useState({
         loginStatus: "Pending",
@@ -44,7 +42,6 @@ const LogInPage: React.FC = () => {
 
     const handleLoginSuccess = (): void => {
         updateLoginFlash("Success", "Login Successful!");
-        /* window.location.href = "/"; */
     };
 
     const handleLoginFailure = (err: any): void => {
@@ -53,10 +50,10 @@ const LogInPage: React.FC = () => {
 
     const login = (e: any): void => {
         e.preventDefault();
-        const loginDetails = {
-            username: userNameRef.current!.value,
-            password: passwordRef.current!.value,
-        };
+        const username = userNameRef.current?.value;
+        const password = passwordRef.current?.value;
+        if (!username || !password) return;
+        const loginDetails = { username, password };
         dispatch(loginUser(loginDetails))
             .unwrap()
             .then(() => handleLoginSuccess())

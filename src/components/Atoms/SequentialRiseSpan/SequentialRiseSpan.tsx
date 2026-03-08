@@ -12,8 +12,6 @@ export interface ISequentialRiseSpanProps {
     children: string;
     className?: string;
     elementType?: keyof JSX.IntrinsicElements;
-    wordsPerAnimation?: number;
-    animationDelayMiliseconds?: number;
     numberOfLettersPerLine?: number;
     calculationAdjustment?: number;
     minNumberOfLettersPerLine?: number;
@@ -33,7 +31,7 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
 }) => {
     const spanItemRef = useRef<HTMLDivElement>(null);
     const [wrappedLines, setWrappedLines] = useState<
-        ReactElement<{ key: number; className: string }>[]
+        ReactElement<{ key: string | number; className: string }>[]
     >([]);
     const [lineRefs, setLineRefs] = useState<RefObject<any>[]>([]);
     const [measuredLettersPerLine, setMeasuredLettersPerLine] =
@@ -49,65 +47,50 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
         )
             return;
 
-        const createTempSpan = () => {
-            const tempSpan = document.createElement("span");
-            tempSpan.style.visibility = "hidden";
-            tempSpan.style.whiteSpace = "nowrap";
-            tempSpan.textContent = children;
-            return tempSpan;
-        };
-
-        const getCharWidth = () => {
-            const tempSpan = createTempSpan();
-            document.body.appendChild(tempSpan);
-            const charWidth = tempSpan.offsetWidth;
-            document.body.removeChild(tempSpan);
-            return charWidth / children.length;
-        };
-
-        const charWidth = getCharWidth();
+        const tempSpan = document.createElement("span");
+        tempSpan.style.visibility = "hidden";
+        tempSpan.style.whiteSpace = "nowrap";
+        tempSpan.textContent = children;
+        document.body.appendChild(tempSpan);
+        const charWidth = tempSpan.offsetWidth / children.length;
+        tempSpan.remove();
 
         if (targetElement) {
-            const elementStyle = window.getComputedStyle(targetElement);
+            const elementStyle = globalThis.getComputedStyle(targetElement);
             const elementPadding =
-                parseFloat(elementStyle.paddingLeft) +
-                parseFloat(elementStyle.paddingRight);
+                Number.parseFloat(elementStyle.paddingLeft) +
+                Number.parseFloat(elementStyle.paddingRight);
             const targetElementWidth =
                 targetElement.offsetWidth - elementPadding;
-            calculationAdjustment = calculationAdjustment ?? 1.12;
+            const adjustment = calculationAdjustment ?? 1.12;
             setMeasuredLettersPerLine(
                 Math.floor(
-                    (targetElementWidth * calculationAdjustment) / charWidth,
+                    (targetElementWidth * adjustment) / charWidth,
                 ),
             );
         }
     };
 
-    const slideUp = (target: Element, observer: any): void => {
+    const slideUp = (target: Element, observer: IntersectionObserver): void => {
         target.classList.add("slide-up");
         observer.unobserve(target);
     };
 
     useEffect(() => {
-        const addIntersectionObserver = () => {
-            const observer = new IntersectionObserver(
-                (entries) => {
-                    entries.forEach((entry) => {
-                        if (entry.isIntersecting)
-                            slideUp(entry.target, observer);
-                    });
-                },
-                { threshold: [0.1, 0.5, 1] },
-            );
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting)
+                        slideUp(entry.target, observer);
+                });
+            },
+            { threshold: [0.1, 0.5, 1] },
+        );
 
-            lineRefs.forEach((ref) => {
-                if (ref.current) observer.observe(ref.current);
-            });
+        lineRefs.forEach((ref) => {
+            if (ref.current) observer.observe(ref.current);
+        });
 
-            return observer;
-        };
-
-        const observer = addIntersectionObserver();
         return () => observer.disconnect();
     }, [lineRefs]);
 
@@ -128,25 +111,21 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
 
         if (!numberOfLettersPerLine && !measuredLettersPerLine) return;
 
-        const determineFinalLineNumberofLettersPerLine = () => {
-            if (numberOfLettersPerLine) return numberOfLettersPerLine;
-            const max = maxNumberOfLettersPerLine ?? Number.MAX_SAFE_INTEGER;
-            const min = Math.max(
-                measuredLettersPerLine,
-                minNumberOfLettersPerLine ?? 0,
+        const finalNumber = numberOfLettersPerLine ??
+            Math.min(
+                Math.max(
+                    measuredLettersPerLine,
+                    minNumberOfLettersPerLine ?? 0,
+                ),
+                maxNumberOfLettersPerLine ?? Number.MAX_SAFE_INTEGER,
             );
-            return Math.min(min, max);
-        };
-
-        const finalNumberOfLettersPerLine =
-            determineFinalLineNumberofLettersPerLine();
 
         String(children)
             .split(" ")
             .forEach((word) => {
                 if (
                     (currentLine + (currentLine ? " " : "") + word).length >
-                    finalNumberOfLettersPerLine
+                    finalNumber
                 ) {
                     lines.push(currentLine);
                     currentLine = word;
@@ -158,16 +137,15 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
 
         setLineRefs(lines.map(() => React.createRef<any>()));
 
-        const linesElements = lines.map((line, index) => {
-            const LineElement = React.createElement(
+        const linesElements = lines.map((line) => {
+            return React.createElement(
                 elementType || "p",
                 {
-                    key: index,
+                    key: line,
                     className: ["invisible", className].join(" "),
                 },
                 line,
             );
-            return LineElement;
         });
 
         setWrappedLines(linesElements);
@@ -187,7 +165,7 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
                         },
                     );
                     return (
-                        <div key={index} className="w-full break-words">
+                        <div key={`line-${index}-${line.key}`} className="w-full break-words">
                             {lineElement}
                         </div>
                     );

@@ -2,12 +2,12 @@ type TargetObservedElement = HTMLDivElement | HTMLElement | HTMLAnchorElement;
 
 class DynamicLoadQueue {
     private static instance: DynamicLoadQueue | null = null;
-    private queue: TargetObservedElement[] = [];
+    private readonly queue: TargetObservedElement[] = [];
     private isLocked: boolean = false;
-    private observer: IntersectionObserver | null = null;
+    private readonly observer: IntersectionObserver | null = null;
 
     private constructor() {
-        if (typeof window !== "undefined" && "IntersectionObserver" in window) {
+        if (typeof globalThis !== "undefined" && "IntersectionObserver" in globalThis) {
             this.observer = new IntersectionObserver(
                 (entries) => {
                     entries.forEach((entry) => {
@@ -30,9 +30,7 @@ class DynamicLoadQueue {
     }
 
     static getInstance(): DynamicLoadQueue {
-        if (!DynamicLoadQueue.instance) {
-            DynamicLoadQueue.instance = new DynamicLoadQueue();
-        }
+        DynamicLoadQueue.instance ??= new DynamicLoadQueue();
         return DynamicLoadQueue.instance;
     }
 

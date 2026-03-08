@@ -3,19 +3,16 @@
     --water-color--dark: #1e90ff;
     --ship-color: #030308;
 
-    display: none !important;
-    position: absolute;
     display: block;
+    position: absolute;
     z-index: -1;
     transform: translate(0, 0);
-    /* opacity: .3; */
     width: 100%;
     height: 50%;
 }
 
 .water-wrapper {
     position: absolute;
-    display: none;
     left: 65px;
     bottom: 0;
     height: 70px;

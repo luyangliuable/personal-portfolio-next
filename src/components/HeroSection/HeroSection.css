@@ -48,7 +48,7 @@
     border: 1px solid #000;
     color: #fff;
     font-weight: bold;
-    font-family: "Fira Code";
+    font-family: "Fira Code", monospace;
     font-size: 0.75rem;
     border-radius: 5px;
     transition: all 0.3s ease-in-out;
@@ -68,8 +68,7 @@
     font-family: "Aileron Bold", "Helvetica Neue", "Arial", sans-serif;
     color: #2d2d2d;
     margin: 0;
-    font-size: clamp(2em, 3.4vw, 5em) !important;
-    font-size: 4rem !important;
+    font-size: clamp(2rem, 3.4vw, 5rem) !important;
     font-weight: 700;
 }
 
@@ -96,13 +95,6 @@
     height: var(--height);
     margin-bottom: calc(-1 * var(--height) + var(--common-card-margin));
     transform: translateY(-5%);
-    background-image: radial-gradient(
-        var(--background-pattern-color) 1px,
-        transparent 0
-    );
-    background-size: 12px 12px;
-    background-position: -19px -19px;
-
     background-color: #eeeceb;
     background-image:
         linear-gradient(var(--background-pattern-color) 1px, transparent 0),

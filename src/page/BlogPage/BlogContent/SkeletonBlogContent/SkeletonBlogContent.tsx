@@ -1,4 +1,3 @@
-import React from "react";
 import "./SkeletonBlogContent.css";
 
 const SkeletonBlogContent: React.FC = () => {

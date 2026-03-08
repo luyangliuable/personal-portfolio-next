@@ -6,10 +6,10 @@ import { TriggerProvider } from "./TriggerContext";
 import { store } from "./store";
 
 interface ProvidersProps {
-    children: ReactNode;
+    readonly children: ReactNode;
 }
 
-export function Providers({ children }: ProvidersProps) {
+export function Providers({ children }: Readonly<ProvidersProps>) {
     return (
         <Provider store={store}>
             <TriggerProvider>{children}</TriggerProvider>

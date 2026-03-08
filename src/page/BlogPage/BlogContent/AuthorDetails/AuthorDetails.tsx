@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "../../../../components/Image/Image";
 import BlogPostResponse from "../../../../repositories/Response/BlogPostResponse";
 import { isoDateFormatToString } from "../../../../components/Utility/StringUtility";

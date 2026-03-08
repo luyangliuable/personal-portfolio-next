@@ -26,7 +26,6 @@ const RegisterPage: React.FC = () => {
 
     const dispatch: AppDispatch = useDispatch();
     const registerStatus = useSelector((state: RootState) => state.auth.status);
-    const error = useSelector((state: RootState) => state.auth.error);
 
     const getFlashClassNames = (): string => {
         let className = "register-form--register-flash"; // common class
@@ -52,7 +51,7 @@ const RegisterPage: React.FC = () => {
 
     const handleRegisterSuccess = (): void => {
         updateRegisterFlash("succeeded", "Register Successful!");
-        window.location.href = "/";
+        globalThis.location.href = "/";
     };
 
     const handleRegisterFailure = (err: string): void => {
@@ -63,13 +62,15 @@ const RegisterPage: React.FC = () => {
     const register = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
 
-        const registerDetails = {
-            email: emailRef.current!.value,
-            password: passwordRef.current!.value,
-            username: userNameRef.current!.value,
-            first_name: firstnameRef.current!.value,
-            last_name: lastnameRef.current!.value,
-        };
+        const email = emailRef.current?.value;
+        const password = passwordRef.current?.value;
+        const username = userNameRef.current?.value;
+        const first_name = firstnameRef.current?.value;
+        const last_name = lastnameRef.current?.value;
+
+        if (!email || !password || !username || !first_name || !last_name) return;
+
+        const registerDetails = { email, password, username, first_name, last_name };
 
         dispatch(registerUser(registerDetails))
             .unwrap()

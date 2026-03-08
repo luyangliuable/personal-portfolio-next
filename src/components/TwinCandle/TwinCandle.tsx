@@ -114,7 +114,7 @@ class TwinCandles extends Component<ITwinCandleProps, ITwinCandleState> {
                 },
                 candleTwoFire: {
                     reference: this.candleTwoFireRef,
-                    className: ["candle2__fire"], // The comment "This is optional" was here; adjust as needed
+                    className: ["candle2__fire"],
                 },
                 candleOneSmokeOne: {
                     reference: this.candleOneSmokeOneRef,
@@ -255,7 +255,7 @@ class TwinCandles extends Component<ITwinCandleProps, ITwinCandleState> {
                 },
             );
 
-            window.setTimeout(() => {
+            setTimeout(() => {
                 this.turnCandleLightOff();
             }, this.state.animatedTimeIntervalMiliseconds);
         }
@@ -282,37 +282,31 @@ class TwinCandles extends Component<ITwinCandleProps, ITwinCandleState> {
                 },
             );
 
-            // TODO temporary solution because I am tired start
-            var element: HTMLElement | null = document.querySelector(
+            const element: HTMLElement | null = document.querySelector(
                 ".featured-section-content",
             );
 
-            // Check if the element exists and set its "darkness"
             if (element) {
                 element.classList.remove(
                     "featured-section-content-in-dark-room",
                 );
             }
-            // temporary solution because I am tired end
 
-            window.setTimeout(() => {
+            setTimeout(() => {
                 this.turnCandleLightOn();
             }, this.state.animatedTimeIntervalMiliseconds);
         }
     };
 
     public turnCandleLightOff = () => {
-        // TODO temporary solution because I am tired start
-        var element: HTMLElement | null = document.querySelector(
+        const element: HTMLElement | null = document.querySelector(
             ".featured-section-content",
         );
 
-        // Check if the element exists and set its display to "none"
         if (element) {
             element.classList.add("featured-section-content-in-dark-room");
         }
 
-        // temporary solution because I am tired end
         Object.entries(this.state.fireOffState).forEach(([_, value]) => {
             this.changeRefClassName(value.reference, value.className);
         });
@@ -326,7 +320,7 @@ class TwinCandles extends Component<ITwinCandleProps, ITwinCandleState> {
         });
     }
 
-    private changeRefClassName = (
+    private readonly changeRefClassName = (
         element: RefObject<HTMLElement>,
         newClassNameList: string[],
     ) => {
@@ -344,10 +338,12 @@ class TwinCandles extends Component<ITwinCandleProps, ITwinCandleState> {
 
     render() {
         return (
-            <div
+            <button
+                type="button"
                 className="wrapper"
                 onClick={() => this.transitionCandleFireToOff()}
                 style={this.props.style}
+                aria-label="Turn off candle"
             >
                 <div className="candles">
                     <div
@@ -393,8 +389,6 @@ class TwinCandles extends Component<ITwinCandleProps, ITwinCandleState> {
                         ref={this.candleTwoFireRef}
                         className="candle2__fire"
                     ></div>
-                    {/* <div className="sparkles-one"></div> */}
-                    {/* <div className="sparkles-two"></div> */}
                     <div
                         ref={this.candleOneSmokeOneRef}
                         className="candle__smoke-one"
@@ -405,7 +399,7 @@ class TwinCandles extends Component<ITwinCandleProps, ITwinCandleState> {
                     ></div>
                 </div>
                 <div className="floor"></div>
-            </div>
+            </button>
         );
     }
 }

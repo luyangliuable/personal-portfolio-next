@@ -56,19 +56,17 @@ const BentoItem: React.FC<IBentoItemProps> = ({
     }, [colSpan]);
 
     return (
-        <>
-            <div
-                className={cl("bento-item", className)}
-                style={{
-                    gridRow: `span ${rowSpan}`,
-                    gridColumn: `span ${adjustedColSpan}`,
-                }}
-            >
-                {children}
-                <div className="bento-item--left"></div>
-                <div className="bento-item--bottom"></div>
-            </div>
-        </>
+        <div
+            className={cl("bento-item", className)}
+            style={{
+                gridRow: `span ${rowSpan}`,
+                gridColumn: `span ${adjustedColSpan}`,
+            }}
+        >
+            {children}
+            <div className="bento-item--left"></div>
+            <div className="bento-item--bottom"></div>
+        </div>
     );
 };
 

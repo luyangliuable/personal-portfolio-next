@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import UserRepository from "../repositories/UserRepository";
 import IAppContextProvider from "./Interface/IAppContextProvider";
 import IAppContextProps from "./Interface/IAppContextProps";
@@ -30,8 +30,13 @@ export const AppContextProvider: React.FC<IAppContextProps> = ({
         initialize();
     }, []);
 
+    const contextValue = useMemo(
+        () => ({ userName, loginStatus }),
+        [userName, loginStatus]
+    );
+
     return (
-        <AppContext.Provider value={{ userName, loginStatus }}>
+        <AppContext.Provider value={contextValue}>
             {children}
         </AppContext.Provider>
     );

@@ -1,28 +1,18 @@
-import { EffectCallback, DependencyList } from "react";
+import { EffectCallback } from "react";
 
-export const toggleClassName = (
-    el: HTMLElement,
-    set: boolean,
-    className: string,
-): void => {
-    if (set) {
-        el?.classList.add(className);
-    } else {
-        el?.classList.remove(className);
-    }
+export const addClassName = (el: HTMLElement, className: string): void => {
+    el?.classList.add(className);
 };
 
-export const toggleProperty = (
+export const removeClassName = (el: HTMLElement, className: string): void => {
+    el?.classList.remove(className);
+};
+
+export const setPropertyOnElement = (
     el: HTMLElement,
-    set: boolean,
-    trueProperty: Record<string, string>,
-    falseProperty: Record<string, string>,
+    property: Record<string, string>,
 ): void => {
-    if (set) {
-        setProperty(el, trueProperty);
-    } else {
-        setProperty(el, falseProperty);
-    }
+    setProperty(el, property);
 };
 
 export const setProperty = (el: HTMLElement, prop: Record<string, string>) => {
@@ -47,7 +37,7 @@ export const cl = (...args: any[]) => {
     let res = "";
 
     args.forEach((item) => {
-        if (item && typeof item == "object") {
+        if (item && typeof item === "object") {
             const a = Object.keys(item).reduce((acc: string, key: string) => {
                 if (item[key]) {
                     acc = acc + ` ${key}`;
@@ -56,8 +46,8 @@ export const cl = (...args: any[]) => {
             }, "");
 
             res = res + ` ${a}`;
-        } else {
-            if (item) res = res + ` ${item}`;
+        } else if (item) {
+            res = res + ` ${item}`;
         }
     });
 
@@ -75,5 +65,5 @@ export const clamp = (
 };
 
 export const deepCompare = (json1: any, json2: any) => {
-    return JSON.stringify(json1) == JSON.stringify(json2);
+    return JSON.stringify(json1) === JSON.stringify(json2);
 };

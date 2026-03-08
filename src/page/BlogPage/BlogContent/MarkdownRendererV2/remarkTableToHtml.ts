@@ -47,7 +47,7 @@ function markdownTableToHtml(markdown: string): string {
     let alignments: string[] = [];
     if (
         lines.length > 1 &&
-        lines[1].split("|").some((cell) => cell.trim().match(/:-+:?|--:|:--/))
+        lines[1].split("|").some((cell) => /:-+:?|--:|:--/.test(cell.trim()))
     ) {
         alignments = lines[1]
             .split("|")
@@ -84,7 +84,7 @@ function markdownTableToHtml(markdown: string): string {
         html += "</tr>";
     });
     html += "</tbody></table></div>";
-    return html.replace(/\n/g, "").replace(/>\s+</g, "><");
+    return html.replaceAll("\n", "").replaceAll(/>\s+</g, "><");
 }
 
 export default remarkTableToHtml;

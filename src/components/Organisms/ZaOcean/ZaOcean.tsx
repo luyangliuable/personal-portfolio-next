@@ -1,5 +1,5 @@
 import "./ZaOcean.css";
-import React from "react";
+import { memo } from "react";
 
 const ZaOcean = () => {
     return (
@@ -220,4 +220,4 @@ const ZaOcean = () => {
     );
 };
 
-export default React.memo(ZaOcean);
+export default memo(ZaOcean);

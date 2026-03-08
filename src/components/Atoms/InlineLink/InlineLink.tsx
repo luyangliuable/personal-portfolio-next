@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
 import IButtonProps, {
     IButtonPropsWithTo,
@@ -40,9 +39,9 @@ const InlineLink: React.FC<IButtonProps> = (props) => {
         );
     } else if (isButtonProps(props)) {
         return (
-            <div onClick={props.onClick} className={props.className}>
+            <button type="button" onClick={props.onClick} className={props.className}>
                 {renderButton()}
-            </div>
+            </button>
         );
     }
 

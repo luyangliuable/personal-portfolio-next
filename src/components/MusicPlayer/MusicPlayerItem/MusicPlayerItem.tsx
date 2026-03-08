@@ -17,7 +17,7 @@ const MusicPlayerItem: React.FC<IMusicPlayerItemProps> = ({
     musicTitle,
 }) => {
     return (
-        <div
+        <article
             onMouseMove={cardGradientEffect}
             className="card music-player--item flex flex-column justify-start items-center relative"
         >
@@ -37,7 +37,7 @@ const MusicPlayerItem: React.FC<IMusicPlayerItemProps> = ({
                     <span>{length}</span>
                 </div>
             </div>
-        </div>
+        </article>
     );
 };
 

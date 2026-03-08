@@ -1,12 +1,12 @@
 "use client";
 
-import React, {
+import {
     useMemo,
     useRef,
     useEffect,
     useState,
     memo,
-    MouseEvent,
+    type MouseEvent,
 } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import IHeroProps from "./Interface/IHeroProps";
@@ -102,28 +102,28 @@ const HeroSection: React.FC<IHeroProps> = () => {
     const [screenWidth, setscreenWidth] = useState<number>(0);
     const [pixelCatReady, setPixelCatReady] = useState<boolean>(false);
     const [cursorPosition, setCursorPosition] = useState<{
-        x?: String;
-        y?: String;
+        x?: string;
+        y?: string;
     }>({});
 
     useEffect(() => {
         const update = () => {
-            setscreenWidth(window.innerWidth);
+            setscreenWidth(globalThis.innerWidth);
         };
 
         const delay = setTimeout(() => {
             setPixelCatReady(true);
         }, 800);
 
-        if (typeof window !== "undefined") {
-            setscreenWidth(window.innerWidth);
-            window.addEventListener("resize", update);
+        if (typeof globalThis !== "undefined") {
+            setscreenWidth(globalThis.innerWidth);
+            globalThis.addEventListener("resize", update);
         }
 
         return () => {
             clearTimeout(delay);
-            if (typeof window !== "undefined") {
-                window.removeEventListener("resize", update);
+            if (typeof globalThis !== "undefined") {
+                globalThis.removeEventListener("resize", update);
             }
         };
     }, []);
@@ -144,7 +144,7 @@ const HeroSection: React.FC<IHeroProps> = () => {
 
         tl.add(
             gsap.to(heroSection, {
-                transform: `translateY(${window.innerHeight / 20}px)`,
+                transform: `translateY(${globalThis.innerHeight / 20}px)`,
             }),
             "start",
         );
@@ -160,11 +160,12 @@ const HeroSection: React.FC<IHeroProps> = () => {
     });
 
     const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-        if (pixelatedCodingCatRef.current && pixelCatReady) {
+        const catRef = pixelatedCodingCatRef.current;
+        if (catRef && pixelCatReady) {
             const delay = setTimeout(() => {
-                pixelatedCodingCatRef.current!.style.zIndex = "1";
+                catRef.style.zIndex = "1";
             }, 100);
-            const rect = pixelatedCodingCatRef.current.getBoundingClientRect();
+            const rect = catRef.getBoundingClientRect();
             const elementWidth = rect.width;
             const elementHeight = rect.height;
             const x = ((e.clientX - rect.left) / elementWidth) * 100;
@@ -181,7 +182,7 @@ const HeroSection: React.FC<IHeroProps> = () => {
             <footer className="hero-section-badge__container flex justify-center items-center w-full mb-2">
                 {connections.map((item: any, index: number) => (
                     <Link
-                        key={index}
+                                key={item.name}
                         style={{
                             color: item.color,
                             backgroundColor: item.background,
@@ -277,7 +278,7 @@ const HeroSection: React.FC<IHeroProps> = () => {
                 landingPageCardType="fitContent"
             >
                 <section className="hero-section__content">
-                    <section
+                    <div
                         className="
                             hero-section__content__left
                             flex
@@ -287,6 +288,7 @@ const HeroSection: React.FC<IHeroProps> = () => {
                             relative
                         "
                         onMouseMove={handleMouseMove}
+                        aria-label="Interactive hero section with coding cat"
                     >
                         <div
                             className="
@@ -319,7 +321,7 @@ const HeroSection: React.FC<IHeroProps> = () => {
                         >
                             <CodingCat pixelated={false} />
                         </div>
-                    </section>
+                    </div>
                     {heroSectionContentLeft}
                 </section>
                 {footer}

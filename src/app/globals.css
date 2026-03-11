@@ -54,12 +54,12 @@
     --divider-color: #ccc;
 
     /* Default Dark */
-    --bg: #000;
+    --bg: #1a1e2d;
     --green: #a5ea9b;
     --pink: #ff61d8;
     --blue: #1e90ff;
     --orange: #ffcc81;
-    --cyan: #cbf4f9;
+    --cyan: #7ed1e2;
 }
 
 @font-face {

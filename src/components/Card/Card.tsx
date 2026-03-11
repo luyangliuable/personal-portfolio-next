@@ -23,7 +23,7 @@ class Card extends Component<ICardProps, ICardState> {
     }
 
     componentDidMount() {
-        if (this.cardItemRef.current && !this.props.locked) {
+        if (this.cardItemRef.current) {
             this.dynamicLoadQueue.addToQueue(this.cardItemRef.current);
         }
     }
@@ -52,9 +52,6 @@ class Card extends Component<ICardProps, ICardState> {
                     ref={this.cardItemRef}
                     className="card card-item card-item--locked"
                 >
-                    <div className="card-item__lock-icon">
-                        <FaLock />
-                    </div>
                     <TagCloud tags={tags} />
                     <section className="card-item__content">
                         <h3 className="card-item__heading my-half font-bold">
@@ -62,6 +59,9 @@ class Card extends Component<ICardProps, ICardState> {
                         </h3>
                         <p className="card-item__label flex flex-row items-center">
                             Content temporarily unavailable
+                            <span className="card-item__lock-icon">
+                                <FaLock />
+                            </span>
                         </p>
                     </section>
                     {image && (

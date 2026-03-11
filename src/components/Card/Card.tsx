@@ -8,9 +8,10 @@ import Image from "../Image/Image";
 import ICardProps from "./Interface/ICardProps";
 import ICardState from "./Interface/ICardState";
 import DynamicLoadQueue from "../../stores/DynamicLoadQueue/DynamicLoadQueue";
+import { FaLock } from "react-icons/fa";
 
 class Card extends Component<ICardProps, ICardState> {
-    cardItemRef: RefObject<HTMLAnchorElement>;
+    cardItemRef: RefObject<any>;
     dynamicLoadQueue: DynamicLoadQueue;
 
     constructor(props: ICardProps) {
@@ -22,7 +23,7 @@ class Card extends Component<ICardProps, ICardState> {
     }
 
     componentDidMount() {
-        if (this.cardItemRef.current) {
+        if (this.cardItemRef.current && !this.props.locked) {
             this.dynamicLoadQueue.addToQueue(this.cardItemRef.current);
         }
     }
@@ -38,11 +39,53 @@ class Card extends Component<ICardProps, ICardState> {
             minuteRead,
             tags,
             date_created,
+            locked,
         } = this.props;
         const displayMinuteRead = `${minuteRead || "X"} min read`;
         const displayDateCreated = date_created
             ? isoDateFormatToString(new Date(date_created))
             : "";
+
+        if (locked) {
+            return (
+                <div
+                    ref={this.cardItemRef}
+                    className="card card-item card-item--locked"
+                >
+                    <div className="card-item__lock-icon">
+                        <FaLock />
+                    </div>
+                    <TagCloud tags={tags} />
+                    <section className="card-item__content">
+                        <h3 className="card-item__heading my-half font-bold">
+                            {heading || "Content Unavailable"}
+                        </h3>
+                        <p className="card-item__label flex flex-row items-center">
+                            Content temporarily unavailable
+                        </p>
+                    </section>
+                    {image && (
+                        <div className="card-image-preview__wrapper absolute overflow-hidden flex justify-center items-center">
+                            <Image
+                                compression={30}
+                                src={image}
+                                className="card-image-preview"
+                                alt="Card Preview"
+                            />
+                        </div>
+                    )}
+                    <footer className="flex mt-5 relative items-center">
+                        <Image
+                            src={authorImage || ""}
+                            className="user-image card-image--author-image"
+                            alt={author || "Unknown"}
+                        />
+                        {author || "Unknown"}
+                    </footer>
+                </div>
+            );
+        }
+
         if (
             link === undefined ||
             image === undefined ||

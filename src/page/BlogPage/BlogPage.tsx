@@ -156,18 +156,19 @@ const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
                         {state.currentlyShowingContent[year].map(
                             (content: BlogPostResponse) => (
                                 <Card
-                                    key={content._id.$oid}
-                                    heading={content.heading}
+                                    key={content._id?.$oid || Math.random()}
+                                    heading={content.heading || "Content Unavailable"}
                                     authorImage={authorImage}
-                                    author={content.author}
+                                    author={content.author || "Unknown"}
                                     date_created={content.date_created}
                                     date_updated={content.date_last_modified}
-                                    body={content.body}
+                                    body={content.body || ""}
                                     minuteRead={content.reading_time_minutes}
                                     in_progress={content.in_progress}
-                                    tags={content.tags}
+                                    tags={content.tags || []}
                                     image={content.image?.$oid}
-                                    link={`/digital-chronicles/blog/${content._id.$oid}`}
+                                    link={content._id?.$oid ? `/digital-chronicles/blog/${content._id.$oid}` : undefined}
+                                    locked={!content._id?.$oid || !content.body}
                                 />
                             ),
                         )}
@@ -182,13 +183,14 @@ const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
                     <h3 className="font-bold text-lg mb-3">Top Picks</h3>
                     {state.topPickedPosts.map((post) => (
                         <SmallCard
-                            key={post._id.$oid}
+                            key={post._id?.$oid || Math.random()}
                             authorImage={authorImage}
-                            author={post.author}
-                            link={`/digital-chronicles/blog/${post._id.$oid}`}
-                            heading={post.heading}
-                            image={post.image.$oid}
+                            author={post.author || "Unknown"}
+                            link={post._id?.$oid ? `/digital-chronicles/blog/${post._id.$oid}` : undefined}
+                            heading={post.heading || "Content Unavailable"}
+                            image={post.image?.$oid}
                             body=""
+                            locked={!post._id?.$oid || !post.body}
                         />
                     ))}
                 </div>

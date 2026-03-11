@@ -141,3 +141,32 @@
         font-size: 4vw;
     }
 }
+
+.card-item--locked {
+    opacity: 0.5 !important;
+    pointer-events: none;
+    background: rgba(100, 100, 100, 0.1) !important;
+    cursor: not-allowed;
+}
+
+.card-item--locked .card-item__heading {
+    color: #666;
+}
+
+.card-item--locked .card-item__label {
+    color: #888;
+}
+
+.card-item__lock-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    color: #666;
+    z-index: 10;
+}
+
+.card-item--locked .card-image-preview__wrapper {
+    filter: grayscale(100%);
+}

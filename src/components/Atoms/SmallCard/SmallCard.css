@@ -18,3 +18,14 @@
     object-fit: cover;
     border-radius: 8px;
 }
+
+.small-card--locked {
+    opacity: 0.5;
+    background-color: rgba(100, 100, 100, 0.1);
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.small-card__image--locked {
+    filter: grayscale(100%);
+}

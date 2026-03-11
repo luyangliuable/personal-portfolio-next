@@ -131,7 +131,7 @@ const MarkdownRendererV2: React.FC<MarkdownRendererProps> = ({ markdown }) => {
             .use(customCodeBlockPlugin)
             .use(html, { sanitize: false })
             .use(sectionise)
-            .process(filteredMarkdown, processCallback);
+            .process(filteredMarkdown, processCallback as any);
     }, [markdown]);
 
     useEffect(() => {

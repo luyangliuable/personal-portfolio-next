@@ -10,4 +10,5 @@ export default interface ICardProps {
     image?: string;
     body: string;
     tags?: string[];
+    locked?: boolean;
 }

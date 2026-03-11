@@ -67,3 +67,28 @@ export const clamp = (
 export const deepCompare = (json1: any, json2: any) => {
     return JSON.stringify(json1) === JSON.stringify(json2);
 };
+
+export const toggleProperty = (
+    el: HTMLElement,
+    condition: boolean,
+    propIfTrue: Record<string, string>,
+    propIfFalse: Record<string, string>,
+): void => {
+    if (condition) {
+        setProperty(el, propIfTrue);
+    } else {
+        setProperty(el, propIfFalse);
+    }
+};
+
+export const toggleClassName = (
+    el: HTMLElement,
+    condition: boolean,
+    className: string,
+): void => {
+    if (condition) {
+        el.classList.add(className);
+    } else {
+        el.classList.remove(className);
+    }
+};

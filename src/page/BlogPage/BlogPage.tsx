@@ -231,7 +231,6 @@ const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
                     className={`blog__tag noselect ${isSelected ? "blog__tag--selected" : ""} ${disabled ? "blog__tag--disabled" : "cursor-pointer"}`}
                     onClick={onClick}
                     disabled={disabled && !isSelected}
-                    style={{ background: 'none', border: 'none', padding: 0 }}
                 >
                     #{tagName} {isSelected && <FaWindowClose />}
                 </button>

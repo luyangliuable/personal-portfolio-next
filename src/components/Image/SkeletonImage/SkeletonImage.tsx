@@ -4,11 +4,11 @@ import ISkeletonImageProps from "./Interface/ISkeletonImageProps";
 import { cl } from "../../../components/Utility/LogicUtility";
 
 const SkeletonImage = forwardRef<HTMLDivElement, ISkeletonImageProps>(
-    ({ className, style }, ref) => {
+    ({ className, style, hasError }, ref) => {
         return (
             <div
                 ref={ref}
-                className={cl("image-skeleton", className)}
+                className={cl("image-skeleton", className, { "image-skeleton--error": hasError })}
                 style={style}
             ></div>
         );

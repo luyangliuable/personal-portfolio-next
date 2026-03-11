@@ -21,6 +21,7 @@ const Image: React.FC<IImageProps> = ({
         undefined,
     );
     const [isInView, setIsInView] = useState<boolean>(false);
+    const [imageError, setImageError] = useState<boolean>(false);
     const defaultImageAlt = "";
     const imageRef = useRef(null);
 
@@ -30,12 +31,14 @@ const Image: React.FC<IImageProps> = ({
 
     const updateImage = async () => {
         if (fetchedImageUrl) return;
+
         try {
             const imageId = src ?? defaultProps.defaultImageId;
             const imageUrl = await imageRepository.getImageById(imageId, compression);
             setFetchedImageUrl(imageUrl);
         } catch (error) {
             console.error("Error fetching images:", error);
+            setImageError(true);
         }
     };
 
@@ -44,8 +47,8 @@ const Image: React.FC<IImageProps> = ({
             (entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting && !isInView) {
-                        entry.target.classList.add("animation");
                         setIsInView(true);
+                        entry.target.classList.add("animation");
                     }
                 });
             },
@@ -68,7 +71,7 @@ const Image: React.FC<IImageProps> = ({
     }, [src, isInView]);
 
     if (!fetchedImageUrl) {
-        return <SkeletonImage ref={imageRef} className={className} />;
+        return <SkeletonImage ref={imageRef} className={className} hasError={imageError} />;
     }
 
     const memoizedNextImage = (

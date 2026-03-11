@@ -1,6 +1,5 @@
 .image-skeleton {
     --loader-background-color: #eeeeee;
-    --loader-background-color: transparent;
     --loader-highlight-color: #dedede;
     position: relative;
     z-index: 1;
@@ -20,6 +19,12 @@
     );
     background-size: 200% 100%;
     animation: loading 2s infinite ease-in-out;
+}
+
+/* Solid gray background when image fails to load or times out */
+.image-skeleton--error {
+    background: #cccccc;
+    animation: none;
 }
 
 @keyframes loading {

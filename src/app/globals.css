@@ -64,7 +64,7 @@
 
 @font-face {
     font-family: "Fira Code";
-    src: url("../assets/fonts/FiraCode/FiraCode-Regular.ttf") format("woff2");
+    src: url("../assets/fonts/FiraCode/FiraCode-Regular.woff2") format("woff2");
     font-display: swap;
 }
 

@@ -23,7 +23,7 @@ import { MdEmail } from "react-icons/md";
 import { RiNotionFill } from "react-icons/ri";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import PixelBlast from "../PixelBlast/PixelBlast";
+import PixelBlast from "../PixelBlast/PixelBlast.lazy";
 import "./HeroSection.css";
 
 const connections = [

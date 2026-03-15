@@ -142,25 +142,13 @@
     }
 }
 
+/* Locked card styles */
 .card-item--locked {
-    pointer-events: none;
-    background: rgba(100, 100, 100, 0.1) !important;
     cursor: not-allowed;
-    /* Use transition to smoothly go from opacity 1 (set by JS) to 0.5 */
-    transition: opacity 0.3s ease-in-out;
 }
 
-/* When locked card is visible (after JS sets opacity), apply 0.5 opacity */
-.card-item--locked[style*="opacity: 1"] {
-    opacity: 0.5 !important;
-}
-
-.card-item--locked .card-item__heading {
-    color: #666;
-}
-
-.card-item--locked .card-item__label {
-    color: #888;
+.card-item--locked .card-image-preview__wrapper {
+    filter: grayscale(100%);
 }
 
 .card-item__lock-icon {
@@ -169,8 +157,4 @@
     margin-left: 8px;
     display: inline-flex;
     align-items: center;
-}
-
-.card-item--locked .card-image-preview__wrapper {
-    filter: grayscale(100%);
 }

@@ -128,7 +128,7 @@ const Notes: React.FC<INotesProps> = ({ title, description, content }) => {
                                 (content: BlogPostResponse) => {
                                     return (
                                         <Card
-                                            key={content._id.$oid}
+                                            key={content._id?.$oid}
                                             heading={content.heading}
                                             authorImage={authorImage}
                                             author={content.author}
@@ -143,7 +143,8 @@ const Notes: React.FC<INotesProps> = ({ title, description, content }) => {
                                             in_progress={content.in_progress}
                                             tags={content.tags}
                                             image={content.image?.$oid}
-                                            link={`/digital-chronicles/coding-note/${content._id.$oid}`}
+                                            link={`/digital-chronicles/coding-note/${content._id?.$oid ?? ""}`}
+                                            locked={content.is_locked ?? (!content._id?.$oid || !content.body)}
                                         />
                                     );
                                 },

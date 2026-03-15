@@ -168,7 +168,7 @@ const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
                                     tags={content.tags || []}
                                     image={content.image?.$oid}
                                     link={content._id?.$oid ? `/digital-chronicles/blog/${content._id.$oid}` : undefined}
-                                    locked={!content._id?.$oid || !content.body}
+                                    locked={content.is_locked ?? (!content._id?.$oid || !content.body)}
                                 />
                             ),
                         )}
@@ -190,7 +190,7 @@ const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
                             heading={post.heading || "Content Unavailable"}
                             image={post.image?.$oid}
                             body=""
-                            locked={!post._id?.$oid || !post.body}
+                            locked={post.is_locked ?? (!post._id?.$oid || !post.body)}
                         />
                     ))}
                 </div>

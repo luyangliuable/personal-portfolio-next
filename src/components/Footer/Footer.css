@@ -19,9 +19,8 @@
 }
 
 .footer__bottom {
-    border-top: 1px solid var(--divider-color);
-    padding: 1.5rem 4rem;
-    margin-top: 2rem;
+    border-top: 0.1px solid var(--divider-color);
+    padding: 1rem 2rem;
 }
 
 .footer textarea,
@@ -57,13 +56,12 @@ input:focus {
 
 .footer__main {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     overflow-y: auto;
-    align-items: start;
-    gap: 3rem;
-    justify-items: start;
+    align-items: stretch;
+    gap: 2rem;
+    justify-items: stretch;
     margin: 2rem 0;
-    max-width: 1000px;
 }
 
 @media (max-width: 768px) {

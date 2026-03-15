@@ -1,5 +1,5 @@
 .image-skeleton {
-    --loader-background-color: #eeeeee;
+    --loader-background-color: transparent;
     --loader-highlight-color: #dedede;
     position: relative;
     z-index: 1;

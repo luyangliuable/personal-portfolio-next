@@ -48,7 +48,9 @@ const Image: React.FC<IImageProps> = ({
                 entries.forEach((entry) => {
                     if (entry.isIntersecting && !isInView) {
                         setIsInView(true);
-                        entry.target.classList.add("animation");
+                        if (!imageError) {
+                            entry.target.classList.add("animation");
+                        }
                     }
                 });
             },
@@ -64,11 +66,14 @@ const Image: React.FC<IImageProps> = ({
                 observer.unobserve(imageRef.current);
             }
         };
-    }, []);
+    }, [imageError]);
 
     useEffect(() => {
-        if (isInView || isLazyLoading === false) updateImage();
-    }, [src, isInView]);
+        if (imageError) return;
+        if ((isInView || isLazyLoading === false) && !fetchedImageUrl) {
+            updateImage();
+        }
+    }, [src, isInView, imageError, fetchedImageUrl, isLazyLoading]);
 
     if (!fetchedImageUrl) {
         return <SkeletonImage ref={imageRef} className={className} hasError={imageError} />;

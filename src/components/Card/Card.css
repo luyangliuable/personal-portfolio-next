@@ -142,12 +142,8 @@
     }
 }
 
+/* Locked card styles */
 .card-item--locked {
-    background: rgba(200, 200, 200, 0.1) !important;
-    cursor: not-allowed;
-}
-
-.card-item--locked:hover {
     cursor: not-allowed;
 }
 

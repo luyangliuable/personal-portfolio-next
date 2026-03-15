@@ -21,4 +21,5 @@ export default interface BlogPostResponse {
     reading_time_minutes?: number;
     tags: string[];
     year?: number;
+    is_locked?: boolean;
 }

@@ -11,7 +11,7 @@ import DynamicLoadQueue from "../../stores/DynamicLoadQueue/DynamicLoadQueue";
 import { FaLock } from "react-icons/fa";
 
 class Card extends Component<ICardProps, ICardState> {
-    cardItemRef: RefObject<any>;
+    cardItemRef: RefObject<HTMLAnchorElement>;
     dynamicLoadQueue: DynamicLoadQueue;
 
     constructor(props: ICardProps) {
@@ -45,7 +45,7 @@ class Card extends Component<ICardProps, ICardState> {
         const displayDateCreated = date_created
             ? isoDateFormatToString(new Date(date_created))
             : "";
-
+        // Locked card - same content but no href, lock icon, and disabled cursor
         if (locked) {
             return (
                 <a
@@ -56,13 +56,14 @@ class Card extends Component<ICardProps, ICardState> {
                     <TagCloud tags={tags} />
                     <section className="card-item__content">
                         <h3 className="card-item__heading my-half font-bold">
-                            {heading || "Content Unavailable"}
-                        </h3>
-                        <p className="card-item__label flex flex-row items-center">
-                            Content temporarily unavailable
+                            {heading}
                             <span className="card-item__lock-icon">
                                 <FaLock />
                             </span>
+                        </h3>
+                        <p className="card-item__label flex flex-row items-center">
+                            {`${displayMinuteRead} | ${displayDateCreated}`}
+                            {in_progress && <InProgressBlock />}
                         </p>
                     </section>
                     {image && (
@@ -87,6 +88,7 @@ class Card extends Component<ICardProps, ICardState> {
             );
         }
 
+        // Normal unlocked card
         if (
             link === undefined ||
             image === undefined ||
@@ -112,14 +114,12 @@ class Card extends Component<ICardProps, ICardState> {
                 </section>
                 {image && (
                     <div className="card-image-preview__wrapper absolute overflow-hidden flex justify-center items-center">
-                        {
-                            <Image
-                                compression={30}
-                                src={image}
-                                className="card-image-preview"
-                                alt="Card Preview"
-                            />
-                        }
+                        <Image
+                            compression={30}
+                            src={image}
+                            className="card-image-preview"
+                            alt="Card Preview"
+                        />
                     </div>
                 )}
                 <footer className="flex mt-5 relative items-center">

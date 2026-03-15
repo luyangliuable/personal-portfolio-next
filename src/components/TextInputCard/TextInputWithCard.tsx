@@ -31,7 +31,7 @@ const TextInputWithCard: React.FC<ITextInputWithCard> = ({
                 <input
                     type="text"
                     placeholder={placeholder}
-                    className="w-[400px] max-w-[60%] h-[40px] rounded-tl-md rounded-bl-md px-4"
+                    className="w-full max-w-[400px] h-[40px] rounded-tl-md rounded-bl-md px-4"
                 />
                 <Button to="" className="text-sm">
                     {submitText}

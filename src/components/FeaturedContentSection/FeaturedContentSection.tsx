@@ -127,7 +127,7 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({
         const { numberOfCardsEachRow: sliceEnd, showAllPosts } = state;
         const posts = [
             ...state.featuredPosts,
-            ...postList.filter((post) => post.is_featured),
+            ...postList.filter((post) => post.is_featured && post._id?.$oid),
         ];
         return groupArray(
             posts.slice(0, showAllPosts ? -1 : sliceEnd),
@@ -144,7 +144,7 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({
                             key={idx}
                         >
                             <GalleryItem
-                                key={content._id.$oid}
+                                key={content._id?.$oid ?? idx}
                                 name={content.heading}
                                 tags={content.tags}
                                 description={content.body}
@@ -158,12 +158,12 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({
                                 className="my-2.5"
                                 link={
                                     content.url ??
-                                    `/digital-chronicles/blog/${content._id.$oid}`
+                                    `/digital-chronicles/blog/${content._id?.$oid ?? ""}`
                                 }
                                 imageOverlay={content.imageOverlay?.src}
                                 image={
                                     content.imageOverride?.src ??
-                                    content.image.$oid
+                                    content.image?.$oid
                                 }
                             />
                         </div>

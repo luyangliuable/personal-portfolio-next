@@ -232,7 +232,7 @@ const HeroSection: React.FC<IHeroProps> = () => {
                     {screenWidth > 550 && (
                         <SequentialRiseSpan
                             baseAnimationDelay={200}
-                            calculationAdjustment={0.82}
+                            calculationAdjustment={0.75}
                             minNumberOfLettersPerLine={48}
                         >
                             A software engineer, dog lover and fitness ethusiast

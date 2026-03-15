@@ -75,7 +75,7 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
                 Number.parseFloat(elementStyle.paddingRight);
             const targetElementWidth =
                 targetElement.offsetWidth - elementPadding;
-            const adjustment = calculationAdjustment ?? 1.12;
+            const adjustment = calculationAdjustment ?? 0.95;
 
             const calculated = Math.floor(
                 (targetElementWidth * adjustment) / charWidth,

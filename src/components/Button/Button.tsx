@@ -18,6 +18,9 @@ class Button extends Component<IButtonProps, {}> {
     }
 
     renderButton() {
+        const isLoading = this.props.loading;
+        const isDisabled = this.props.disabled || isLoading;
+
         return (
             <span className="flex justify-center items-center">
                 <span
@@ -25,10 +28,11 @@ class Button extends Component<IButtonProps, {}> {
                     className={cl(
                         "t-button button no-select",
                         this.props.className,
+                        isDisabled && "button-disabled",
                     )}
-                    onMouseMove={(e) => cardGradientEffect(e, false, 1, 38, 20)}
+                    onMouseMove={(e) => !isDisabled && cardGradientEffect(e, false, 1, 38, 20)}
                 >
-                    {this.props.children}
+                    {isLoading ? "Loading..." : this.props.children}
                 </span>
                 {this.props.showButtonLine && (
                     <span className="button-line"></span>
@@ -46,9 +50,11 @@ class Button extends Component<IButtonProps, {}> {
     }
 
     render(): React.ReactNode {
+        const isDisabled = this.props.disabled || this.props.loading;
+
         if (this.isLinkProps(this.props)) {
             return (
-                <Link href={this.props.disabled ? "" : this.props.to}>
+                <Link href={isDisabled ? "" : this.props.to}>
                     {this.renderButton()}
                 </Link>
             );
@@ -57,9 +63,10 @@ class Button extends Component<IButtonProps, {}> {
                 <button
                     type={this.props.type}
                     className="override-button"
+                    disabled={isDisabled}
                     onClick={(e) => {
                         e.preventDefault();
-                        if (this.props.disabled) return;
+                        if (isDisabled) return;
                         const props = this.props as IButtonPropsWithOnClick;
                         props.onClick(e);
                     }}

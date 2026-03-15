@@ -16,6 +16,7 @@ const LogInPage: React.FC = () => {
     const [state, setState] = useState({
         loginStatus: "Pending",
         flashMessage: "",
+        isLoading: false,
     });
 
     const getFlashClassNames = (): string => {
@@ -33,10 +34,11 @@ const LogInPage: React.FC = () => {
         return className;
     };
 
-    const updateLoginFlash = (loginStatus: string, flashMessage: string) => {
+    const updateLoginFlash = (loginStatus: string, flashMessage: string, isLoading = false) => {
         setState({
             loginStatus: loginStatus,
             flashMessage: flashMessage,
+            isLoading,
         });
     };
 
@@ -53,6 +55,8 @@ const LogInPage: React.FC = () => {
         const username = userNameRef.current?.value;
         const password = passwordRef.current?.value;
         if (!username || !password) return;
+
+        updateLoginFlash("Pending", "", true);
         const loginDetails = { username, password };
         dispatch(loginUser(loginDetails))
             .unwrap()
@@ -91,6 +95,8 @@ const LogInPage: React.FC = () => {
                     <input
                         type="submit"
                         className="button"
+                        value={state.isLoading ? "Loading..." : "Submit"}
+                        disabled={state.isLoading}
                         onClick={(e) => login(e)}
                     />
                 </div>

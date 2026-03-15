@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.llcode.cloudflare</string>
+    <key>Program</key>
+    <string>/opt/homebrew/bin/cloudflared</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>cloudflared</string>
+        <string>tunnel</string>
+        <string>run</string>
+        <string>llcode-tech-home</string>
+    </array>
+    <key>KeepAlive</key>
+    <true/>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>/Users/blackfish/Library/Logs/com.llcode.cloudflare.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/blackfish/Library/Logs/com.llcode.cloudflare.err.log</string>
+</dict>
+</plist>

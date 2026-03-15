@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.llcode.frontend</string>
+    <key>Program</key>
+    <string>/Users/blackfish/.nvm/versions/node/v21.1.0/bin/npm</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>npm</string>
+        <string>start</string>
+    </array>
+    <key>WorkingDirectory</key>
+    <string>/Users/blackfish/personal-portfolio-next</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/Users/blackfish/.nvm/versions/node/v21.1.0/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+    </dict>
+    <key>KeepAlive</key>
+    <true/>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>/Users/blackfish/Library/Logs/com.llcode.frontend.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/blackfish/Library/Logs/com.llcode.frontend.err.log</string>
+</dict>
+</plist>

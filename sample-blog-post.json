@@ -1,0 +1,16 @@
+{
+  "heading": "From DigitalOcean to My Laptop: A Hosting Disaster Recovery Story",
+  "author": "Luyang",
+  "description": "How DigitalOcean deleted all my droplets and volumes, and my journey to self-hosting on my laptop",
+  "post_type": "blog",
+  "year": 2025,
+  "month": 3,
+  "file_name": "digitalocean-to-laptop-hosting",
+  "tags": ["hosting", "digitalocean", "self-hosting", "cloudflare", "rust", "nextjs"],
+  "reading_time_minutes": 8,
+  "is_featured": true,
+  "in_progress": false,
+  "active": true,
+  "image": null,
+  "body": ""
+}

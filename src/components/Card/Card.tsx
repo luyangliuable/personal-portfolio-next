@@ -48,8 +48,9 @@ class Card extends Component<ICardProps, ICardState> {
 
         if (locked) {
             return (
-                <div
+                <a
                     ref={this.cardItemRef}
+                    onMouseMove={cardGradientEffect}
                     className="card card-item card-item--locked"
                 >
                     <TagCloud tags={tags} />
@@ -82,7 +83,7 @@ class Card extends Component<ICardProps, ICardState> {
                         />
                         {author || "Unknown"}
                     </footer>
-                </div>
+                </a>
             );
         }
 

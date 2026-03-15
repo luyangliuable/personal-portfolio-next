@@ -567,3 +567,12 @@ main {
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
+/* Form Validation States */
+input:invalid:not(:placeholder-shown) {
+    border-color: #ff6b6b;
+}
+
+input:valid:not(:placeholder-shown) {
+    border-color: #51cf66;
+}

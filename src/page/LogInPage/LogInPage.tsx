@@ -73,13 +73,20 @@ const LogInPage: React.FC = () => {
                     <input
                         ref={userNameRef}
                         type="text"
+                        required
+                        maxLength={50}
                         placeholder="🙋‍♂️🙋‍♀️ username"
+                        aria-label="Username"
                     />
                     <p>Forgot Password?</p>
                     <input
                         ref={passwordRef}
                         type="password"
+                        required
+                        minLength={8}
+                        maxLength={100}
                         placeholder="🔒🔑️ password"
+                        aria-label="Password"
                     />
                     <input
                         type="submit"

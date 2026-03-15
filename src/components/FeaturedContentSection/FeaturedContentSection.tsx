@@ -126,7 +126,7 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({
         const { numberOfCardsEachRow: sliceEnd, showAllPosts } = state;
         const posts = [
             ...state.featuredPosts,
-            ...postList.filter((post) => post.is_featured),
+            ...postList.filter((post) => post.is_featured && post._id?.$oid),
         ];
         return groupArray(
             posts.slice(0, showAllPosts ? -1 : sliceEnd),
@@ -162,7 +162,7 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({
                                 imageOverlay={content.imageOverlay?.src}
                                 image={
                                     content.imageOverride?.src ??
-                                    content.image.$oid
+                                    content.image?.$oid
                                 }
                             />
                         </div>

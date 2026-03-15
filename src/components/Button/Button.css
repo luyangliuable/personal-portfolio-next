@@ -3,7 +3,8 @@
     --border-color: rgba(242, 242, 242, 0.3);
     position: relative;
     background: rgba(242, 242, 242, 0.4);
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     box-sizing: content-box;
     border-radius: var(--border-radius);
     cursor: pointer;
@@ -44,6 +45,8 @@
     --height: 30px;
     --width: fit-content;
     background: rgba(132, 169, 198, 0.2);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-radius: var(--border-radius);
     display: flex;
     padding: 5px 20px;

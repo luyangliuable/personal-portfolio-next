@@ -23,6 +23,7 @@ import { MdEmail } from "react-icons/md";
 import { RiNotionFill } from "react-icons/ri";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import PixelBlast from "../PixelBlast/PixelBlast";
 import "./HeroSection.css";
 
 const connections = [
@@ -277,6 +278,23 @@ const HeroSection: React.FC<IHeroProps> = () => {
                 className="hero-section"
                 landingPageCardType="fitContent"
             >
+                <div className="pixel-blast-wrapper">
+                    <PixelBlast
+                        variant="square"
+                        pixelSize={4}
+                        color="#897ed3"
+                        patternScale={3}
+                        patternDensity={0.4}
+                        pixelSizeJitter={0.3}
+                        enableRipples={true}
+                        rippleSpeed={0.3}
+                        rippleThickness={0.15}
+                        rippleIntensityScale={0.8}
+                        speed={0.2}
+                        edgeFade={0.5}
+                        transparent={true}
+                    />
+                </div>
                 <section className="hero-section__content">
                     <div
                         className="
@@ -315,7 +333,7 @@ const HeroSection: React.FC<IHeroProps> = () => {
                                 coding-cat
                                 w-full
                                 h-full
-                                bg-[color:var(--background-color-primary-white)]
+                                bg-transparent
                             "
                             data-style="slides"
                         >

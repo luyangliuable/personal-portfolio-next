@@ -1,6 +1,8 @@
 .hero-section-badge__container {
     overflow-x: auto;
     gap: 1.2rem;
+    position: relative;
+    z-index: 5;
 }
 
 @media screen and (min-width: 1000px) {
@@ -40,6 +42,8 @@
 
     .hero-section__content {
         margin: 8rem 0 2.5rem;
+        position: relative;
+        z-index: 10;
     }
 }
 
@@ -75,6 +79,33 @@
 .hero-section__content__left__text {
     font-size: 1.125rem;
     font-family: "M1M Light", "Helvetica Neue", "Arial", sans-serif;
+    position: relative;
+    z-index: 5;
+    background: rgba(238, 236, 235, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.hero-section__heading {
+    position: relative;
+    z-index: 5;
+}
+
+.hero-section__button-container {
+    position: relative;
+    z-index: 5;
+}
+
+.hero-section__content__right {
+    position: relative;
+    z-index: 5;
+}
+
+.hero-section__content__left {
+    position: relative;
+    z-index: 5;
 }
 
 @media (min-width: 1024px) {
@@ -87,6 +118,22 @@
     position: relative;
     z-index: 1;
     transform-style: preserve-3d;
+    overflow: visible;
+}
+
+.pixel-blast-wrapper {
+    position: absolute;
+    inset: 0;
+    pointer-events: auto;
+    z-index: 1;
+    overflow: hidden;
+    border-radius: var(--landing-page-card-border-radius, 14px);
+    opacity: 0.6;
+}
+
+.pixel-blast-wrapper > div {
+    position: absolute;
+    inset: 0;
 }
 
 .hero-section__after {

@@ -363,7 +363,8 @@ const PixelBlast = ({
     const container = containerRef.current;
     if (!container) return;
     speedRef.current = speed;
-    const needsReinitKeys = ['antialias', 'liquid', 'noiseAmount'];
+    type ConfigKey = 'antialias' | 'liquid' | 'noiseAmount';
+    const needsReinitKeys: ConfigKey[] = ['antialias', 'liquid', 'noiseAmount'];
     const cfg = { antialias, liquid, noiseAmount };
     let mustReinit = false;
     if (!threeRef.current) mustReinit = true;
@@ -455,7 +456,7 @@ const PixelBlast = ({
         return Math.random();
       };
       const timeOffset = randomFloat() * 1000;
-      let composer;
+      let composer: EffectComposer | undefined;
       let touch: any;
       let liquidEffect: any;
       if (liquid) {

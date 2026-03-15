@@ -52,3 +52,47 @@ The portfolio should feel like stepping into someone's creative mind - confident
 - React 18 with TypeScript
 - Custom fonts: M1M Light (body), Aileron (headings), Fira Code (monospace)
 - Existing interactive elements: Coding cat hero, bento grids, card hover effects
+
+## Deployment
+
+### Services Overview
+- **Frontend**: Next.js app (this repo)
+- **Backend**: Rust server (../personal-portfolio/server)
+- **Tunnel**: Cloudflare tunnel (cloudflared)
+
+### Restart Services (Quick Deploy)
+```bash
+# Stop all services
+launchctl unload ~/Library/LaunchAgents/com.llcode.frontend.plist
+launchctl unload ~/Library/LaunchAgents/com.llcode.backend.plist
+launchctl unload ~/Library/LaunchAgents/com.llcode.cloudflare.plist
+
+# Start all services
+launchctl load ~/Library/LaunchAgents/com.llcode.backend.plist
+launchctl load ~/Library/LaunchAgents/com.llcode.cloudflare.plist
+launchctl load ~/Library/LaunchAgents/com.llcode.frontend.plist
+```
+
+### Full Build & Deploy
+```bash
+# 1. Clean build directory (if permission issues)
+sudo rm -rf /Users/blackfish/personal-portfolio-next/.next
+
+# 2. Build frontend
+cd /Users/blackfish/personal-portfolio-next
+npm run build
+
+# 3. Restart services
+launchctl unload ~/Library/LaunchAgents/com.llcode.frontend.plist
+launchctl load ~/Library/LaunchAgents/com.llcode.frontend.plist
+```
+
+### Check Service Status
+```bash
+ps aux | grep -E "(cloudflared|server|node)" | grep -v grep | grep -E "(llcode|personal-portfolio)"
+```
+
+### Log Files
+- Backend: `~/Library/Logs/com.llcode.backend.out.log`
+- Frontend: `~/Library/Logs/com.llcode.frontend.out.log`
+- Cloudflare: `~/Library/Logs/com.llcode.cloudflare.out.log`

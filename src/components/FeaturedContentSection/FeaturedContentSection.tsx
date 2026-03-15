@@ -131,19 +131,19 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({
         return groupArray(
             posts.slice(0, showAllPosts ? -1 : sliceEnd),
             sliceEnd,
-        ).map((group) => (
+        ).map((group, groupIdx) => (
             <div
-                key={group[0]._id.$oid}
+                key={group[0]?._id?.$oid ?? groupIdx}
                 className="featured-section w-full flex flex-col relative"
             >
                 <div className="flex w-full h-full justify-center items-stretch gap-3">
-                    {group.map((content) => (
+                    {group.map((content, contentIdx) => (
                         <div
                             className="featured-section--item flex justify-center"
-                            key={content._id.$oid}
+                            key={content?._id?.$oid ?? contentIdx}
                         >
                             <GalleryItem
-                                key={content._id.$oid}
+                                key={content?._id?.$oid ?? contentIdx}
                                 name={content.heading}
                                 tags={content.tags}
                                 description={content.body}
@@ -157,7 +157,7 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({
                                 className="my-2.5"
                                 link={
                                     content.url ??
-                                    `/digital-chronicles/blog/${content._id.$oid}`
+                                    `/digital-chronicles/blog/${content?._id?.$oid ?? ""}`
                                 }
                                 imageOverlay={content.imageOverlay?.src}
                                 image={

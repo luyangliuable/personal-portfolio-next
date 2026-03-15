@@ -1,0 +1,8 @@
+(undo-tree-save-format-version . 1)
+"e0e8ccc7184cd24a18775795cdcb2a841b86d869"
+[nil nil nil nil (27047 59557 561965 0) 0 nil]
+([nil nil ((5172 . 5191) (5174 . 5189) (5305 . 5340) 1 (t 27045 40799 848547 339000)) nil (27047 59557 561960 0) 0 nil])
+([nil current ((3952 . 3979) (3958 . 3963) (3960 . 3989) (#("
+    background-clip: text;
+    /* max-height: 100% !important; */" 0 66 (fontified nil)) . 4067) 1 (t 27047 59557 582251 331000)) nil (27047 59575 992311 0) 0 nil])
+nil

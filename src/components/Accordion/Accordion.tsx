@@ -49,7 +49,8 @@ const Item: FC<IAccordionItemProps> = ({
 
     return (
         <div className="accordion--item flex flex-col">
-            <div
+            <button
+                type="button"
                 onClick={(e) => {
                     setShow((prev) => !prev);
                     if (!show)
@@ -61,13 +62,14 @@ const Item: FC<IAccordionItemProps> = ({
                     "accordion--tab noselect flex items-center justify-between cursor-pointer",
                     className,
                 )}
+                style={{ background: 'none', border: 'none', width: '100%', textAlign: 'left' }}
             >
                 <div className="flex flex-row items-center">
                     <span className="mr-2">{icon}</span>
                     <span>{heading}</span>
                 </div>
                 {memoizedDropdown}
-            </div>
+            </button>
             <div
                 className={cl(
                     "accordion--content w-full flex flex-col items-center justify-center",
@@ -89,7 +91,6 @@ const Button: FC<IAccordionButtonProps> = ({
     target,
     disabled,
 }) => {
-    const [show, setShow] = useState<boolean>(false);
     const isLink = href && !disabled;
     return (
         <div className="accordion--item flex flex-row justify-between">

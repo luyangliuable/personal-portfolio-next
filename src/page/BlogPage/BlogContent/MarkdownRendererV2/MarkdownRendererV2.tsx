@@ -31,10 +31,10 @@ function customCodeBlockPlugin() {
         visit(tree, "code", (node) => {
             let language = node.lang || "unknown";
             const escapedCode = node.value
-                .replace(/{/g, "&#123;")
-                .replace(/}/g, "&#125;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;");
+                .replaceAll("{", "&#123;")
+                .replaceAll("}", "&#125;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;");
 
             if (language === "sh") {
                 language = "bash";
@@ -113,7 +113,7 @@ const MarkdownRendererV2: React.FC<MarkdownRendererProps> = ({ markdown }) => {
         let filteredText = text.replace(tocRegex, "");
         const asteriskRegex = /\|([^\|]*)\|/g;
         filteredText = filteredText.replace(asteriskRegex, (match, p1) => {
-            return `|${p1.replace(/\*/g, "")}|`;
+            return `|${p1.replaceAll("*", "")}|`;
         });
 
         return filteredText;

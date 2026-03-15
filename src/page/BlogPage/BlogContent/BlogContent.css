@@ -1,5 +1,9 @@
 .blog-content__header {
-    width: 100% !important;
+    width: 80%;
+}
+
+.blog-content__header > h1 {
+    margin-bottom: 12px;
 }
 
 .blog-section > p {
@@ -56,7 +60,7 @@
     --padding-left-right: min(5vw, 500px);
     --padding-top-bottom: min(3vh, 200px);
     --margin-top: min(2vh, 200px);
-    font-family: "Proxima Nova";
+    font-family: "Proxima Nova", sans-serif;
     flex-grow: 3;
     flex-shrink: 1;
     flex-basis: 800px;
@@ -78,10 +82,6 @@
     transition: background 0.3s ease-in;
 }
 
-.blog-content__header > h1 {
-    margin-bottom: 12px;
-}
-
 .blog-content-body > h1 {
     display: none;
 }
@@ -97,10 +97,6 @@
     margin: var(--blog-content__image-top-bottom-margin)
         var(--blog-content__image-top-bottom-margin);
     object-fit: cover;
-}
-
-.blog-content__header {
-    width: 80%;
 }
 
 .blog-content--author-image {

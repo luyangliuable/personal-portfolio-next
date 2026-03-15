@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { CiLock } from "react-icons/ci";
 import InlineLink from "../Atoms/InlineLink/InlineLink";
 import connectionsData from "../../configs/connections.json";

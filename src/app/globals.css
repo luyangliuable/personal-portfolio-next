@@ -54,20 +54,11 @@
     --divider-color: #ccc;
 
     /* Default Dark */
-    --bg: #1a1e2d;
     --bg: #000;
     --green: #a5ea9b;
     --pink: #ff61d8;
     --blue: #1e90ff;
     --orange: #ffcc81;
-    --cyan: #7ed1e2;
-
-    /* Pastel Edition Dark */
-    --green: #92d7a6;
-    --pink: #555;
-    --blue: #85a9c6;
-    --orange: #e3b88f;
-    --cyan: #8bc4c9;
     --cyan: #cbf4f9;
 }
 
@@ -168,12 +159,6 @@ input {
     box-sizing: border-box;
 }
 
-code {
-    font-family:
-        "Fira Code", source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-        monospace;
-}
-
 h1,
 h2,
 h3,
@@ -256,7 +241,6 @@ main {
     justify-content: flex-start;
     align-items: center;
     position: relative;
-    /* background-image: linear-gradient(to right, rgba(245,245,245,0.7),20%, rgba(245,245,245,0.5),80%, rgba(245,245,245,0.7)), url(https://grainy-gradients.vercel.app/noise.svg); */
 }
 
 @keyframes background-scroll {

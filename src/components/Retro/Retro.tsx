@@ -1,10 +1,10 @@
-import React from "react";
+import type { ReactNode, CSSProperties } from "react";
 import "./Retro.css";
 import { cl } from "../Utility/LogicUtility";
 
 interface IRetroProps {
-    children?: React.ReactNode;
-    style?: React.CSSProperties;
+    children?: ReactNode;
+    style?: CSSProperties;
     className?: string;
     showBorder?: boolean;
 }

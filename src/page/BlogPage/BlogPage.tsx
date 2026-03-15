@@ -149,7 +149,7 @@ const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
     const renderPostsSortedByDateDescending =
         useCallback((): React.ReactNode => {
             return Object.keys(state.currentlyShowingContent)
-                .sort((a, b) => parseInt(b) - parseInt(a))
+                .sort((a, b) => Number.parseInt(b) - Number.parseInt(a))
                 .map((year) => (
                     <React.Fragment key={year}>
                         <BlogYear year={year} />
@@ -196,6 +196,14 @@ const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
         [state.topPickedPosts],
     );
 
+    const handleTagClick = (updatedTags: string[], to: string) => {
+        globalThis.history.replaceState({}, "", to);
+        setState((prev) => ({
+            ...prev,
+            currentSelectTags: updatedTags,
+        }));
+    };
+
     const renderUnSelectedTags = () => {
         const baseUrlLink = "/digital-chronicles/blog";
         const { currentSelectTags: selectedTags } = state;
@@ -208,38 +216,23 @@ const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
             if (updatedTags.length) {
                 to = `${baseUrlLink}?tag=${encodeURIComponent(updatedTags.join(","))}`;
             }
-            const handleClick = () => {
-                window.history.replaceState({}, "", to);
-                setState((prev) => ({
-                    ...prev,
-                    currentSelectTags: updatedTags,
-                }));
-            };
+            const onClick = () => handleTagClick(updatedTags, to);
 
-            if (isSelected) {
-                return (
-                    <span
-                        key={tagName}
-                        className="blog__tag flex items-center noselect blog__tag--selected cursor-pointer"
-                        onClick={handleClick}
-                    >
-                        #{tagName} <FaWindowClose />
-                    </span>
-                );
-            }
-
-            const isDisabled = !data!.some(({ tags }) =>
-                isSubset([...selectedTags, tagName], tags),
-            );
+            const disabled = data?.every(({ tags }) =>
+                !isSubset([...selectedTags, tagName], tags),
+            ) ?? true;
 
             return (
-                <span
+                <button
                     key={tagName}
-                    className={`blog__tag noselect ${isDisabled ? "blog__tag--disabled" : "cursor-pointer"}`}
-                    onClick={!isDisabled ? handleClick : undefined}
+                    type="button"
+                    className={`blog__tag noselect ${isSelected ? "blog__tag--selected" : ""} ${disabled ? "blog__tag--disabled" : "cursor-pointer"}`}
+                    onClick={onClick}
+                    disabled={disabled && !isSelected}
+                    style={{ background: 'none', border: 'none', padding: 0 }}
                 >
-                    #{tagName}
-                </span>
+                    #{tagName} {isSelected && <FaWindowClose />}
+                </button>
             );
         });
     };

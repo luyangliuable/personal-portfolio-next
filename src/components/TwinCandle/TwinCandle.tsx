@@ -114,7 +114,7 @@ class TwinCandles extends Component<ITwinCandleProps, ITwinCandleState> {
                 },
                 candleTwoFire: {
                     reference: this.candleTwoFireRef,
-                    className: ["candle2__fire"], // The comment "This is optional" was here; adjust as needed
+                    className: ["candle2__fire"],
                 },
                 candleOneSmokeOne: {
                     reference: this.candleOneSmokeOneRef,
@@ -255,7 +255,7 @@ class TwinCandles extends Component<ITwinCandleProps, ITwinCandleState> {
                 },
             );
 
-            window.setTimeout(() => {
+            setTimeout(() => {
                 this.turnCandleLightOff();
             }, this.state.animatedTimeIntervalMiliseconds);
         }
@@ -283,7 +283,7 @@ class TwinCandles extends Component<ITwinCandleProps, ITwinCandleState> {
             );
 
             // TODO temporary solution because I am tired start
-            var element: HTMLElement | null = document.querySelector(
+            const element: HTMLElement | null = document.querySelector(
                 ".featured-section-content",
             );
 
@@ -295,7 +295,7 @@ class TwinCandles extends Component<ITwinCandleProps, ITwinCandleState> {
             }
             // temporary solution because I am tired end
 
-            window.setTimeout(() => {
+            setTimeout(() => {
                 this.turnCandleLightOn();
             }, this.state.animatedTimeIntervalMiliseconds);
         }
@@ -303,7 +303,7 @@ class TwinCandles extends Component<ITwinCandleProps, ITwinCandleState> {
 
     public turnCandleLightOff = () => {
         // TODO temporary solution because I am tired start
-        var element: HTMLElement | null = document.querySelector(
+        const element: HTMLElement | null = document.querySelector(
             ".featured-section-content",
         );
 
@@ -393,8 +393,6 @@ class TwinCandles extends Component<ITwinCandleProps, ITwinCandleState> {
                         ref={this.candleTwoFireRef}
                         className="candle2__fire"
                     ></div>
-                    {/* <div className="sparkles-one"></div> */}
-                    {/* <div className="sparkles-two"></div> */}
                     <div
                         ref={this.candleOneSmokeOneRef}
                         className="candle__smoke-one"

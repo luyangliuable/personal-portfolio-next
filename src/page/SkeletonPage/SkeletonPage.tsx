@@ -1,4 +1,3 @@
-import React from "react";
 import "./SkeletonPage.css";
 import { useScrollToTopOnLoad } from "../../components/Utility/ScrollUtility";
 

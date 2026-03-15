@@ -5,7 +5,7 @@ const truncateTextBody = (text?: string, size: number = 200): string => {
 };
 
 const stripAwayHashSymbols = (text: string): string => {
-    return text.replace(/#/g, "");
+    return text.replaceAll("#", "");
 };
 
 const isoDateFormatToString = (date: Date): string => {
@@ -34,8 +34,8 @@ const stringToHash = (str: string): number => {
     );
     let hash = 0;
 
-    for (let i = 0; i < a!.length; i++) {
-        const char = a!.charCodeAt(i);
+    for (let i = 0; i < a.length; i++) {
+        const char = a.charCodeAt(i);
         hash = (hash << 5) - hash + char;
         hash |= 0;
     }
@@ -44,12 +44,12 @@ const stringToHash = (str: string): number => {
 };
 
 function removeHashesAndStripWhitespace(str: string): string {
-    let result = str.replace(/#/g, "");
-    return result.replace(/^\s/gm, "").trim();
+    const result = str.replaceAll("#", "");
+    return result.replaceAll(/^\s/gm, "").trim();
 }
 
 function removeTextInsideAngleBrackets(input: string): string {
-    return input.replace(/<[^>]*>/g, "").trim();
+    return input.replaceAll(/<[^>]*>/g, "").trim();
 }
 
 export function convertHtmlEntities(str: string): string {
@@ -65,8 +65,8 @@ const isActive = (currentPathname?: string, targetPathname?: string) => {
     if (!currentPathname || !targetPathname) return false;
     if (currentPathname === targetPathname) return true;
     if (targetPathname === "/") return false;
-    const currentPath = currentPathname.trim().replace(/\/+$/, "");
-    const normalizedTargetPath = targetPathname.trim().replace(/\/+$/, "");
+    const currentPath = currentPathname.trim().replaceAll("/", "");
+    const normalizedTargetPath = targetPathname.trim().replaceAll("/", "");
     return currentPath.startsWith(normalizedTargetPath);
 };
 

@@ -1,6 +1,5 @@
-import React from "react";
 import ItableOfContentsProps from "../../../../interfaces/BlogPage/BlogContent/TableOfContents/ItableOfContentsProps";
-import { useEffect, useState, useRef, RefObject } from "react";
+import { useEffect, useState, useRef, createRef, cloneElement, type RefObject } from "react";
 import {
     stringToHash,
     removeHashesAndStripWhitespace,
@@ -36,7 +35,7 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
     }, [tocEntries, props.emitter]);
 
     const handleClick = (
-        _event: React.MouseEvent<HTMLDivElement>,
+        _event: React.MouseEvent<HTMLButtonElement>,
         id: string,
     ) => {
         const allBlogSections = Array.from(
@@ -67,14 +66,20 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
                 const color = getTextColor(level);
                 const id = stringToHash(title);
                 const className = `level-${level - 2} section-toc-entry flex items-center`;
+                const titleId = `${id}-${idx}`;
                 return (
-                    <div
-                        key={idx}
+                    <button
+                        key={titleId}
                         id={id.toString()}
                         className={className}
                         style={{
                             color,
                             margin: `${marginBottom} ${indentation}`,
+                            background: 'none',
+                            border: 'none',
+                            cursor: 'pointer',
+                            textAlign: 'left',
+                            width: '100%',
                         }}
                         onClick={(e) => handleClick(e, id.toString())}
                     >
@@ -83,14 +88,14 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
                                 removeHashesAndStripWhitespace(title),
                             ),
                         )}
-                    </div>
+                    </button>
                 );
             },
         );
         if (renderedSubHeadings) {
             setTocEntries(renderedSubHeadings);
             setTocEntryRef(
-                renderedSubHeadings.map(() => React.createRef<any>()),
+                renderedSubHeadings.map(() => createRef<any>()),
             );
         }
     };
@@ -117,12 +122,12 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
         path.push("M", indent, startHeight);
         height = startHeight;
         tocEntries!.forEach((entry, idx) => {
-            const computedStyle = window.getComputedStyle(
+            const computedStyle = globalThis.getComputedStyle(
                 tocEntryRef[idx].current!,
             );
             const extra =
-                parseFloat(computedStyle.height) +
-                parseFloat(computedStyle.marginBottom) * 2;
+                Number.parseFloat(computedStyle.height) +
+                Number.parseFloat(computedStyle.marginBottom) * 2;
             if (idx < startIdx) pathStart += extra;
             const { className } = entry.props;
             const match = className.match(/level-(\d+)/);
@@ -162,27 +167,33 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
         if (tocEntries === null) return;
         drawPath();
     }, [tocEntries]);
+    const updateTocEntryActiveState = (
+        tocEntry: JSX.Element,
+        intersectingIds: string[],
+    ): JSX.Element => {
+        const prevClassName = tocEntry.props.className.replace("active", "");
+        if (intersectingIds.includes(tocEntry.props.id)) {
+            return cloneElement(tocEntry, {
+                className: `${prevClassName} active`,
+            });
+        }
+        return cloneElement(tocEntry, {
+            className: prevClassName,
+        });
+    };
+
+    const handleIntersectingSections = (intersectingIds: string[]): void => {
+        setTocEntries((prev) =>
+            prev!.map((tocEntry) =>
+                updateTocEntryActiveState(tocEntry, intersectingIds),
+            ),
+        );
+    };
+
     function listenSections(): void {
         if (tocEntries === null || props.emitter === undefined) return;
         if (listenTocItems.has("intersectingSectionsListener")) return;
-        props.emitter.on("intersectingSections", (intersectingIds) => {
-            setTocEntries((prev) => {
-                return prev!.map((tocEntry) => {
-                    const prevClassName = tocEntry.props.className.replace(
-                        "active",
-                        "",
-                    );
-                    if (intersectingIds.includes(tocEntry.props.id)) {
-                        return React.cloneElement(tocEntry, {
-                            className: `${prevClassName} active`,
-                        });
-                    }
-                    return React.cloneElement(tocEntry, {
-                        className: prevClassName,
-                    });
-                });
-            });
-        });
+        props.emitter.on("intersectingSections", handleIntersectingSections);
         setlistenTocItems((prev) =>
             new Set(prev).add("intersectingSectionsListener"),
         );
@@ -195,13 +206,13 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
                     Table of Contents
                 </h2>
             </div>
-            {tocEntries &&
-                tocEntries.map((entry, index) => {
-                    return React.cloneElement(entry, {
-                        ref: tocEntryRef[index],
-                        key: index,
-                    });
-                })}
+            {tocEntries?.map((entry, index) => {
+                const entryId = `${entry.props.id || 'entry'}-${index}`;
+                return cloneElement(entry, {
+                    ref: tocEntryRef[index],
+                    key: entryId,
+                });
+            })}
             <svg
                 className="toc-marker"
                 width="200"
@@ -214,7 +225,7 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
                     strokeWidth="3"
                     fill="transparent"
                     strokeLinecap="round"
-                    troke-dasharray="0, 0, 0, 1000"
+                    strokeDasharray="0, 0, 0, 1000"
                     strokeLinejoin="round"
                     transform="translate(-0.5, -0.5)"
                 />

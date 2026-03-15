@@ -11,7 +11,6 @@ import { useGSAP } from "@gsap/react";
 import { useTrigger } from "../../stores/TriggerContext";
 import { refreshScrollTrigger } from "../Utility/ScrollUtility";
 import GolfedSierpinski from "../GolfedSierpinski/GolfedSierpinski";
-import Button from "../Button/Button";
 
 const HeroHeader: React.FC<IHeroHeaderProps> = ({
     heading,
@@ -29,13 +28,13 @@ const HeroHeader: React.FC<IHeroHeaderProps> = ({
             setscreenWidth(window.innerWidth);
         };
 
-        if (typeof window !== "undefined") {
+        if (typeof globalThis !== "undefined") {
             setscreenWidth(window.innerWidth);
             window.addEventListener("resize", update);
         }
 
         return () => {
-            if (typeof window !== "undefined") {
+            if (typeof globalThis !== "undefined") {
                 window.removeEventListener("resize", update);
             }
         };

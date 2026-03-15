@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import "./GolfedSierpinski.css";
 
 const GolfedSierpinski = () => {
@@ -8,23 +8,20 @@ const GolfedSierpinski = () => {
 
     const [size, setSize] = useState<number>(0);
 
-    const sizeX = 1.2 * size;
-    const sizeY = size;
-
     useEffect(() => {
         const update = () => {
-            setSize(Math.max(114, window.innerWidth / 8));
+            setSize(Math.max(114, globalThis.innerWidth / 8));
         };
 
-        if (typeof window !== "undefined") {
-            window.addEventListener("resize", update);
+        if (typeof globalThis !== "undefined") {
+            globalThis.addEventListener("resize", update);
         }
 
         update();
 
         return () => {
-            if (typeof window !== "undefined") {
-                window.removeEventListener("resize", update);
+            if (typeof globalThis !== "undefined") {
+                globalThis.removeEventListener("resize", update);
             }
         };
     }, []);
@@ -47,7 +44,6 @@ const GolfedSierpinski = () => {
             resizeCanvas();
 
             const squareSize = 4; // New square size
-            const spacing = 3; // Adjust spacing if needed
 
             context.fillStyle = "#433";
 
@@ -67,9 +63,9 @@ const GolfedSierpinski = () => {
             requestAnimationFrame(animate);
         };
         requestAnimationFrame(animate);
-        window.addEventListener("resize", resizeCanvas);
+        globalThis.addEventListener("resize", resizeCanvas);
         return () => {
-            window.removeEventListener("resize", resizeCanvas);
+            globalThis.removeEventListener("resize", resizeCanvas);
         };
     }, [size]);
 

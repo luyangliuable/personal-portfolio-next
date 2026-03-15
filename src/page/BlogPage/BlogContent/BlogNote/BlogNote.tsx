@@ -1,4 +1,3 @@
-import React from "react";
 import "./BlogNote.css";
 import { IoIosInformationCircle } from "react-icons/io";
 

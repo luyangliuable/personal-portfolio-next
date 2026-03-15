@@ -1,8 +1,8 @@
+import type { Dispatch, SetStateAction } from "react";
 import "./Toggle.css";
-import React from "react";
 
 interface IToggleProps {
-    setToggleState: React.Dispatch<React.SetStateAction<boolean>>;
+    setToggleState: Dispatch<SetStateAction<boolean>>;
     disabled?: boolean;
     toggleState: boolean;
 }

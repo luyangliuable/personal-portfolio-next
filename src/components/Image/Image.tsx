@@ -31,7 +31,7 @@ const Image: React.FC<IImageProps> = ({
     const updateImage = async () => {
         if (fetchedImageUrl) return;
         try {
-            const imageId = src ?? defaultProps!.defaultImageId;
+            const imageId = src ?? defaultProps.defaultImageId;
             const [imageUrl] = await Promise.all([
                 imageRepository.getImageById(imageId, compression),
             ]);

@@ -6,8 +6,8 @@ import React, {
     memo,
     RefObject,
     useCallback,
-    useMemo,
 } from "react";
+import { useDebounce } from "../../../hooks";
 import "./SequentialRiseSpan.css";
 
 export interface ISequentialRiseSpanProps {
@@ -20,18 +20,6 @@ export interface ISequentialRiseSpanProps {
     baseAnimationDelay?: number;
     maxNumberOfLettersPerLine?: number;
 }
-
-// Debounce helper
-const debounce = <T extends (...args: any[]) => void>(
-    func: T,
-    wait: number,
-): ((...args: Parameters<T>) => void) => {
-    let timeout: NodeJS.Timeout | null = null;
-    return (...args: Parameters<T>) => {
-        if (timeout) clearTimeout(timeout);
-        timeout = setTimeout(() => func(...args), wait);
-    };
-};
 
 const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
     calculationAdjustment,
@@ -128,10 +116,7 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
     }, [lineRefs]);
 
     // Debounced resize handler (250ms delay)
-    const debouncedCalculate = useMemo(
-        () => debounce(calculateLettersPerLine, 250),
-        [calculateLettersPerLine],
-    );
+    const debouncedCalculate = useDebounce(calculateLettersPerLine, 250);
 
     useEffect(() => {
         if (!numberOfLettersPerLine) {

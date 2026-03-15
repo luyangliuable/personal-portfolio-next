@@ -4,6 +4,7 @@ import NavBar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import { Providers } from "../stores/provider";
 import ContentArea from "../components/ContentArea/ContentArea";
+import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
 
 export const metadata: Metadata = {
     title: "Luyang's Website",
@@ -19,13 +20,15 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
-                <Providers>
-                    <ContentArea>
-                        <NavBar />
-                        {children}
-                    </ContentArea>
-                    <Footer />
-                </Providers>
+                <ErrorBoundary>
+                    <Providers>
+                        <ContentArea>
+                            <NavBar />
+                            {children}
+                        </ContentArea>
+                        <Footer />
+                    </Providers>
+                </ErrorBoundary>
             </body>
         </html>
     );

@@ -119,7 +119,7 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
                         <div className="w-full box-border">
                             <SequentialRiseSpan
                                 minNumberOfLettersPerLine={42}
-                                calculationAdjustment={0.50}
+                                calculationAdjustment={0.35}
                             >
                                 {truncateTextBody(props.description, 200)}
                             </SequentialRiseSpan>

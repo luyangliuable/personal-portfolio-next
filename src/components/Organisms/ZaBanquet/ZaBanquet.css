@@ -54,9 +54,9 @@
 
 .flowers .flower {
     position: absolute;
-    width: 30px;
+    width: clamp(20px, 3vw, 40px);
     transform-origin: center;
-    height: 30px;
+    height: clamp(20px, 3vw, 40px);
     visibility: hidden;
 }
 
@@ -68,8 +68,8 @@
 .flowers .flower:after {
     content: "";
     position: absolute;
-    width: 3.5px;
-    height: 3.5px;
+    width: clamp(2.5px, 0.35vw, 4px);
+    height: clamp(2.5px, 0.35vw, 4px);
     border-radius: 100%;
     left: 9px;
     top: 11px;
@@ -84,8 +84,8 @@
 
 .flowers .flower > .petal {
     position: absolute;
-    width: 10px;
-    height: 10px;
+    width: clamp(8px, 1vw, 12px);
+    height: clamp(8px, 1vw, 12px);
     background-color: #f8f8ff;
     background-image: linear-gradient(45deg, #f8f8ff, var(--color-1));
     border-radius: 50% 80%;

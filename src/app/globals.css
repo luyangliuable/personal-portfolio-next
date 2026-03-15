@@ -53,13 +53,13 @@
 
     --divider-color: #ccc;
 
-    /* Default Dark */
-    --bg: #1a1e2d;
-    --green: #a5ea9b;
-    --pink: #ff61d8;
-    --blue: #1e90ff;
-    --orange: #ffcc81;
-    --cyan: #7ed1e2;
+    /* Pastel Edition Dark */
+    --bg: #000;
+    --green: #92d7a6;
+    --pink: #555;
+    --blue: #85a9c6;
+    --orange: #e3b88f;
+    --cyan: #cbf4f9;
 }
 
 @font-face {
@@ -176,13 +176,17 @@ h1 {
 
 h3 {
     margin-block-start: 0.67em;
-    font-size: 1.2rem !important;
+    font-size: clamp(1rem, 1.2vw, 1.25rem);
     margin-block-end: 0.67em;
+}
+
+h4 {
+    font-size: clamp(0.9rem, 1vw, 1.1rem);
 }
 
 @media screen and (max-width: 768px) {
     h1 {
-        font-size: 1.5rem !important;
+        font-size: clamp(1.5rem, 5vw, 2rem);
     }
 }
 

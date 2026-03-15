@@ -1,21 +1,17 @@
 import { useMemo } from "react";
-import { CiLock } from "react-icons/ci";
 import InlineLink from "../Atoms/InlineLink/InlineLink";
 import connectionsData from "../../configs/connections.json";
 import linksData from "../../configs/links.json";
-import Button from "../Button/Button";
 
 import "./Footer.css";
 
-import GetInTouch from "./GetIntoTouchFooterSection/GetIntoTouchFooterSection";
-import LocalTime from "./LocalTime/LocalTime";
 import { deepCopyJson } from "../Utility/StringUtility";
 
 const linksToMyOtherSocialMedia = connectionsData.connections;
 
 const Footer: React.FC = () => {
     const getSectionData = (name: string): any => {
-        const footerLinkCapacity = 5;
+        const footerLinkCapacity = 4;
         const result = deepCopyJson(
             linksData.links.find((item: any) => item.name === name),
         );
@@ -24,28 +20,29 @@ const Footer: React.FC = () => {
         return result;
     };
 
+    const work = useMemo(() => getSectionData("Work"), []);
+    const writing = useMemo(() => getSectionData("Writing"), []);
     const about = useMemo(() => getSectionData("About"), []);
-    const tools = useMemo(() => getSectionData("Tools"), []);
-    const resume = useMemo(() => getSectionData("Resume"), []);
 
     const renderFooterSection = (
         section: any,
         className: string,
         target?: string,
     ) => {
+        if (!section?.sublinks?.length) return null;
         return (
             <section className={className}>
-                <h3 className="text-lg important-text mb-2">{section.name}</h3>
+                <h3 className="text-base font-semibold mb-3">{section.name}</h3>
                 {section.sublinks?.map((item: any) => {
+                    if (item.isLocked || item.isDisabled) return null;
                     return (
                         <InlineLink
                             target={target}
                             key={item.name}
-                            to={item.isLocked ? null : item.to}
-                            className="mt-2"
+                            to={item.to}
+                            className="mt-2 text-sm opacity-80 hover:opacity-100"
                         >
-                            {item.name}{" "}
-                            {item.isLocked && <CiLock className="ml-2" />}
+                            {item.name}
                         </InlineLink>
                     );
                 })}
@@ -54,66 +51,48 @@ const Footer: React.FC = () => {
     };
 
     return (
-        <footer className="footer relative flex items-center flex-col pt-10">
+        <footer className="footer relative flex items-center flex-col pt-12">
             <div className="footer__main normalised-width w-full">
-                <GetInTouch />
-                <section className="footer__connect-with-me">
-                    <h3 className="text-lg important-text mb-2">
-                        Connect with Me
-                    </h3>
-                    <div className="flex flex-col justify-center">
-                        {linksToMyOtherSocialMedia.map(
+                {/* Connect Section - Social links + email */}
+                <section className="footer__connect">
+                    <h3 className="text-base font-semibold mb-3">Connect</h3>
+                    <div className="flex flex-col">
+                        {linksToMyOtherSocialMedia.slice(0, 4).map(
                             (item: any) => (
                                 <InlineLink
                                     target="_blank"
                                     key={item.name}
                                     to={item.link}
-                                    className="mt-1"
+                                    className="mt-2 text-sm opacity-80 hover:opacity-100"
                                 >
                                     {item.name}
                                 </InlineLink>
                             ),
                         )}
+                        <InlineLink
+                            to="mailto:luyang.l@protonmail.me"
+                            className="mt-2 text-sm opacity-80 hover:opacity-100"
+                        >
+                            Email Me
+                        </InlineLink>
                     </div>
                 </section>
-                <section className="footer__sponsor">
-                    <h3 className="text-lg important-text mb-2">Sponsor Me</h3>
-                    <InlineLink
-                        target="_blank"
-                        to="https://ko-fi.com/D1D1PFTTH"
-                        className="mt-1"
-                    >
-                        Kofi
-                    </InlineLink>
-                    <InlineLink
-                        target="_blank"
-                        to="https://melbournewalk24.can4cancer.com.au/lucas-liu"
-                        className="mt-1"
-                    >
-                        Can4cancer
-                    </InlineLink>
-                </section>
+
+                {/* Explore Section - Work, Writing, About */}
+                {renderFooterSection(work, "footer__work")}
+                {renderFooterSection(writing, "footer__writing")}
                 {renderFooterSection(about, "footer__about")}
-                <section className="footer__resources">
-                    <h3 className="text-lg important-text mb-2">Resources</h3>
-                    <InlineLink to={resume.to} className="mt-1">
-                        {resume.name}
-                    </InlineLink>
-                </section>
-                {renderFooterSection(tools, "footer__tools")}
-                <section className="footer__local-time">
-                    <h3 className="text-lg mb-2 important-text mb-2">
-                        Local Time
-                    </h3>
-                    <LocalTime />
-                </section>
             </div>
-            <div className="footer__bottom relative w-full flex justify-around">
-                <p>LLcode.tech © 2024 All Rights Reserved</p>
-                <p>Made with Typescript, Rust and Love 💖 v0.5.0</p>
-                <Button to="https://github.com/luyangliuable/personal-portfolio-next/issues">
-                    Submit an Issue
-                </Button>
+
+            <div className="footer__bottom relative w-full flex justify-between items-center px-8 lg:px-16">
+                <p className="text-sm opacity-60">
+                    LLcode.tech © 2024 All Rights Reserved
+                </p>
+                <div className="flex gap-6 text-sm opacity-60">
+                    <InlineLink to="https://github.com/luyangliuable/personal-portfolio-next/issues">
+                        Submit an Issue
+                    </InlineLink>
+                </div>
             </div>
         </footer>
     );

@@ -126,47 +126,51 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({
         const { numberOfCardsEachRow: sliceEnd, showAllPosts } = state;
         const posts = [
             ...state.featuredPosts,
-            ...postList.filter((post) => post.is_featured),
+            ...postList.filter((post) => post.is_featured && post._id?.$oid),
         ];
         return groupArray(
             posts.slice(0, showAllPosts ? -1 : sliceEnd),
             sliceEnd,
-        ).map((group) => (
+        ).map((group, groupIndex) => (
             <div
-                key={group[0]._id.$oid}
+                key={group[0]?._id?.$oid ?? `group-${groupIndex}`}
                 className="featured-section w-full flex flex-col relative"
             >
                 <div className="flex w-full h-full justify-center items-stretch gap-3">
-                    {group.map((content) => (
-                        <div
-                            className="featured-section--item flex justify-center"
-                            key={content._id.$oid}
-                        >
-                            <GalleryItem
-                                key={content._id.$oid}
-                                name={content.heading}
-                                tags={content.tags}
-                                description={content.body}
-                                dateCreated={content.date_created}
-                                type={
-                                    content.post_type === "md"
-                                        ? "blog"
-                                        : content.post_type
-                                }
-                                minuteRead={content.reading_time_minutes}
-                                className="my-2.5"
-                                link={
-                                    content.url ??
-                                    `/digital-chronicles/blog/${content._id.$oid}`
-                                }
-                                imageOverlay={content.imageOverlay?.src}
-                                image={
-                                    content.imageOverride?.src ??
-                                    content.image.$oid
-                                }
-                            />
-                        </div>
-                    ))}
+                    {group.map((content, contentIndex) => {
+                        const contentId = content._id?.$oid ?? `content-${groupIndex}-${contentIndex}`;
+                        return (
+                            <div
+                                className="featured-section--item flex justify-center"
+                                key={contentId}
+                            >
+                                <GalleryItem
+                                    key={contentId}
+                                    name={content.heading}
+                                    tags={content.tags}
+                                    description={content.body}
+                                    dateCreated={content.date_created}
+                                    type={
+                                        content.post_type === "md"
+                                            ? "blog"
+                                            : content.post_type
+                                    }
+                                    minuteRead={content.reading_time_minutes}
+                                    className="my-2.5"
+                                    link={
+                                        content.url ??
+                                        `/digital-chronicles/blog/${contentId}`
+                                    }
+                                    imageOverlay={content.imageOverlay?.src}
+                                    image={
+                                        content.imageOverride?.src ??
+                                        content.image?.$oid ??
+                                        ""
+                                    }
+                                />
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
         ));

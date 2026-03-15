@@ -55,7 +55,7 @@ class Card extends Component<ICardProps, ICardState> {
                 >
                     <TagCloud tags={tags} />
                     <section className="card-item__content">
-                        <h3 className="card-item__heading my-half font-bold">
+                        <h3 className="card-item__heading my-half font-bold line-clamp-2">
                             {heading}
                             <span className="card-item__lock-icon">
                                 <FaLock />
@@ -104,7 +104,7 @@ class Card extends Component<ICardProps, ICardState> {
             >
                 <TagCloud tags={tags} />
                 <section className="card-item__content">
-                    <h3 className="card-item__heading my-half font-bold">
+                    <h3 className="card-item__heading my-half font-bold line-clamp-2">
                         {heading}
                     </h3>
                     <p className="card-item__label flex flex-row items-center">

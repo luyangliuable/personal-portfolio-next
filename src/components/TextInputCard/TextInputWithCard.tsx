@@ -29,9 +29,12 @@ const TextInputWithCard: React.FC<ITextInputWithCard> = ({
             </div>
             <div className="flex flex-row">
                 <input
-                    type="text"
+                    type="email"
+                    required
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                     placeholder={placeholder}
-                    className="w-[400px] max-w-[60%] h-[40px] rounded-tl-md rounded-bl-md px-4"
+                    aria-label="Email address"
+                    className="w-full max-w-[400px] h-[40px] rounded-tl-md rounded-bl-md px-4"
                 />
                 <Button to="" className="text-sm">
                     {submitText}

@@ -148,7 +148,31 @@ const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
 
     const renderPostsSortedByDateDescending =
         useCallback((): React.ReactNode => {
-            return Object.keys(state.currentlyShowingContent)
+            const years = Object.keys(state.currentlyShowingContent);
+
+            if (years.length === 0) {
+                if (data.length === 0) {
+                    return (
+                        <div className="empty-state text-center py-12">
+                            <h3 className="text-xl font-bold mb-2">No posts found</h3>
+                            <p className="text-gray-400">
+                                Check back later for new content.
+                            </p>
+                        </div>
+                    );
+                } else {
+                    return (
+                        <div className="empty-state text-center py-12">
+                            <h3 className="text-xl font-bold mb-2">No matching posts</h3>
+                            <p className="text-gray-400">
+                                No posts match your current filters. Try adjusting your selection.
+                            </p>
+                        </div>
+                    );
+                }
+            }
+
+            return years
                 .sort((a, b) => Number.parseInt(b) - Number.parseInt(a))
                 .map((year) => (
                     <React.Fragment key={year}>
@@ -174,7 +198,7 @@ const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
                         )}
                     </React.Fragment>
                 ));
-        }, [state.currentlyShowingContent]);
+        }, [state.currentlyShowingContent, data.length]);
 
     const renderTopPickedBlogPost = useCallback(
         (): React.ReactNode | null =>

@@ -5,7 +5,9 @@ import React, {
     useEffect,
     memo,
     RefObject,
+    useCallback,
 } from "react";
+import { useDebounce } from "../../../hooks";
 import "./SequentialRiseSpan.css";
 
 export interface ISequentialRiseSpanProps {
@@ -37,39 +39,58 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
     const [measuredLettersPerLine, setMeasuredLettersPerLine] =
         useState<number>(numberOfLettersPerLine ?? 0);
 
-    const calculateLettersPerLine = () => {
+    const calculateLettersPerLine = useCallback(() => {
+        // SSR guard
+        if (typeof window === "undefined") return;
+
         const targetElement = spanItemRef.current;
 
         if (
             numberOfLettersPerLine ||
             measuredLettersPerLine > 0 ||
-            targetElement === undefined
+            !targetElement
         )
             return;
 
-        const tempSpan = document.createElement("span");
-        tempSpan.style.visibility = "hidden";
-        tempSpan.style.whiteSpace = "nowrap";
-        tempSpan.textContent = children;
-        document.body.appendChild(tempSpan);
-        const charWidth = tempSpan.offsetWidth / children.length;
-        tempSpan.remove();
+        // Input validation
+        if (!children || typeof children !== "string" || children.length === 0) {
+            console.warn("SequentialRiseSpan: Invalid children provided");
+            return;
+        }
 
-        if (targetElement) {
-            const elementStyle = globalThis.getComputedStyle(targetElement);
+        let tempSpan: HTMLSpanElement | null = null;
+
+        try {
+            tempSpan = document.createElement("span");
+            tempSpan.style.visibility = "hidden";
+            tempSpan.style.whiteSpace = "nowrap";
+            tempSpan.textContent = children;
+            document.body.appendChild(tempSpan);
+
+            const charWidth = tempSpan.offsetWidth / children.length;
+
+            const elementStyle = window.getComputedStyle(targetElement);
             const elementPadding =
                 Number.parseFloat(elementStyle.paddingLeft) +
                 Number.parseFloat(elementStyle.paddingRight);
             const targetElementWidth =
                 targetElement.offsetWidth - elementPadding;
             const adjustment = calculationAdjustment ?? 1.12;
-            setMeasuredLettersPerLine(
-                Math.floor(
-                    (targetElementWidth * adjustment) / charWidth,
-                ),
+
+            const calculated = Math.floor(
+                (targetElementWidth * adjustment) / charWidth,
             );
+
+            setMeasuredLettersPerLine(Math.max(1, calculated));
+        } catch (error) {
+            console.error("SequentialRiseSpan: Error calculating letters per line:", error);
+        } finally {
+            // Guaranteed cleanup
+            if (tempSpan && tempSpan.parentNode) {
+                tempSpan.remove();
+            }
         }
-    };
+    }, [children, calculationAdjustment, measuredLettersPerLine, numberOfLettersPerLine]);
 
     const slideUp = (target: Element, observer: IntersectionObserver): void => {
         target.classList.add("slide-up");
@@ -94,16 +115,19 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
         return () => observer.disconnect();
     }, [lineRefs]);
 
+    // Debounced resize handler (250ms delay)
+    const debouncedCalculate = useDebounce(calculateLettersPerLine, 250);
+
     useEffect(() => {
         if (!numberOfLettersPerLine) {
             if (measuredLettersPerLine === 0) calculateLettersPerLine();
-            window.addEventListener("resize", calculateLettersPerLine);
+            window.addEventListener("resize", debouncedCalculate);
         }
 
         return () => {
-            window.removeEventListener("resize", calculateLettersPerLine);
+            window.removeEventListener("resize", debouncedCalculate);
         };
-    }, [numberOfLettersPerLine]);
+    }, [numberOfLettersPerLine, debouncedCalculate, calculateLettersPerLine, measuredLettersPerLine]);
 
     useEffect(() => {
         let currentLine = "";
@@ -123,7 +147,17 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
         String(children)
             .split(" ")
             .forEach((word) => {
-                if (
+                // Handle words longer than line length
+                if (word.length > finalNumber) {
+                    if (currentLine) {
+                        lines.push(currentLine);
+                        currentLine = "";
+                    }
+                    // Split long word into chunks
+                    for (let i = 0; i < word.length; i += finalNumber) {
+                        lines.push(word.slice(i, i + finalNumber));
+                    }
+                } else if (
                     (currentLine + (currentLine ? " " : "") + word).length >
                     finalNumber
                 ) {
@@ -133,7 +167,10 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
                     currentLine += (currentLine.length > 0 ? " " : "") + word;
                 }
             });
-        lines.push(currentLine);
+
+        if (currentLine) {
+            lines.push(currentLine);
+        }
 
         setLineRefs(lines.map(() => React.createRef<any>()));
 
@@ -149,7 +186,7 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
         });
 
         setWrappedLines(linesElements);
-    }, [measuredLettersPerLine, numberOfLettersPerLine]);
+    }, [measuredLettersPerLine, numberOfLettersPerLine, children, className, elementType, minNumberOfLettersPerLine, maxNumberOfLettersPerLine]);
 
     return (
         <div className="sequential-rise-span" ref={spanItemRef}>

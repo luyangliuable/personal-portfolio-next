@@ -7,6 +7,7 @@ export interface IButtonPropsWithTo {
     className?: string;
     style?: React.CSSProperties;
     disabled?: boolean;
+    loading?: boolean;
     logoName?: string; // For IconButton
     buttonColor?: string; // For IconButton
     target?: string;
@@ -21,6 +22,7 @@ export interface IButtonPropsWithOnClick {
     style?: React.CSSProperties;
     logoName?: string; // For IconButton
     disabled?: boolean;
+    loading?: boolean;
     buttonColor?: string; // For IconButton
     target?: string;
     type?: "button" | "submit" | "reset";

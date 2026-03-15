@@ -537,3 +537,42 @@ main {
         padding: 0 2rem;
     }
 }
+
+/* Reduced Motion Support (WCAG 2.1 Level AA) */
+/* @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+} */
+
+/* Text Overflow Utilities */
+.truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Form Validation States */
+input:invalid:not(:placeholder-shown) {
+    border-color: #ff6b6b;
+}
+
+input:valid:not(:placeholder-shown) {
+    border-color: #51cf66;
+}

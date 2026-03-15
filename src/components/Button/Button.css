@@ -121,3 +121,9 @@
         transform: translate(0, 0) skew(0deg, 0deg);
     }
 }
+
+.button-disabled {
+    opacity: 0.5;
+    cursor: not-allowed !important;
+    pointer-events: none;
+}

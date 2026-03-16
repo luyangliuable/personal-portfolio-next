@@ -68,9 +68,16 @@ const RegisterPage: React.FC = () => {
         const first_name = firstnameRef.current?.value;
         const last_name = lastnameRef.current?.value;
 
-        if (!email || !password || !username || !first_name || !last_name) return;
+        if (!email || !password || !username || !first_name || !last_name)
+            return;
 
-        const registerDetails = { email, password, username, first_name, last_name };
+        const registerDetails = {
+            email,
+            password,
+            username,
+            first_name,
+            last_name,
+        };
 
         dispatch(registerUser(registerDetails))
             .unwrap()

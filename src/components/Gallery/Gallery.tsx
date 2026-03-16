@@ -26,7 +26,11 @@ const Gallery: React.FC<IGalleryProps> = (props) => {
 
             if (index == 1) {
                 return (
-                    <Bento.Item key={`gallery-item-${item.name}`} rowSpan={2} colSpan={2}>
+                    <Bento.Item
+                        key={`gallery-item-${item.name}`}
+                        rowSpan={2}
+                        colSpan={2}
+                    >
                         <GalleryItem {...item} />
                     </Bento.Item>
                 );
@@ -43,9 +47,7 @@ const Gallery: React.FC<IGalleryProps> = (props) => {
     return (
         <div className="gallery normalised-width">
             <div className="heading__wrapper">
-                <h2 className="text-2xl font-bold mb-2.5">
-                    {props.heading}
-                </h2>
+                <h2 className="text-2xl font-bold mb-2.5">{props.heading}</h2>
             </div>
             <Bento gap="1rem">{renderGalleryItems()}</Bento>
         </div>

@@ -124,10 +124,7 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
 
     const setNavbarDetached = useCallback(
         (set: boolean) => {
-            if (
-                state.navBarDetached !== set &&
-                navbar.current?.parentElement
-            ) {
+            if (state.navBarDetached !== set && navbar.current?.parentElement) {
                 toggleClassName(navbar.current.parentElement, set, "detached");
                 toggleClassName(
                     navbar.current.parentElement,
@@ -249,7 +246,11 @@ const NavBarMainSection: React.FC<INavbarProps> = ({ links }) => {
 
     return (
         <>
-            <nav onMouseLeave={() => setDropdownMenu(false)} ref={navbar} aria-label="Main navigation">
+            <nav
+                onMouseLeave={() => setDropdownMenu(false)}
+                ref={navbar}
+                aria-label="Main navigation"
+            >
                 <section className="flex items-center h-full">
                     <div className="logo__wrapper">
                         <Link href="/">

@@ -18,7 +18,9 @@ const SmallCard: React.FC<ICardProps> = ({
         return (
             <div className="card small-card small-card--locked flex flex-row box-border justify-between items-center">
                 <div className="w-6/12">
-                    <h3 className="font-semibold text-sm text-gray-500">{heading || "Content Unavailable"}</h3>
+                    <h3 className="font-semibold text-sm text-gray-500">
+                        {heading || "Content Unavailable"}
+                    </h3>
                     <footer className="flex mt-5 relative text-sm text-gray-500">
                         <FaLock className="mr-2" />
                         Locked

@@ -11,21 +11,23 @@ This folder contains launchd plist files for auto-starting the backend and front
 ## Prerequisites
 
 1. **Backend binary must be built:**
-   ```bash
-   cd /Users/blackfish/personal-portfolio/server
-   cargo build --release
-   ```
+
+    ```bash
+    cd /Users/blackfish/personal-portfolio/server
+    cargo build --release
+    ```
 
 2. **Frontend dependencies must be installed:**
-   ```bash
-   cd /Users/blackfish/personal-portfolio-next
-   npm install
-   ```
+
+    ```bash
+    cd /Users/blackfish/personal-portfolio-next
+    npm install
+    ```
 
 3. **Logs directory:**
-   ```bash
-   mkdir -p ~/Library/Logs
-   ```
+    ```bash
+    mkdir -p ~/Library/Logs
+    ```
 
 ## Setup
 
@@ -65,12 +67,14 @@ launchctl unload ~/Library/LaunchAgents/com.llcode.cloudflare.plist
 ## Configuration Details
 
 ### Backend Plist
+
 - **Program:** `/Users/blackfish/personal-portfolio/server/target/release/server`
 - **Working Directory:** `/Users/blackfish/personal-portfolio/server`
 - **KeepAlive:** true (restarts if crashes)
 - **RunAtLoad:** true (starts on boot/login)
 
 ### Frontend Plist
+
 - **Program:** `/Users/blackfish/.nvm/versions/node/v21.1.0/bin/npm`
 - **Arguments:** `start`
 - **Working Directory:** `/Users/blackfish/personal-portfolio-next`
@@ -79,6 +83,7 @@ launchctl unload ~/Library/LaunchAgents/com.llcode.cloudflare.plist
 - **RunAtLoad:** true
 
 ### Cloudflare Tunnel Plist
+
 - **Program:** `/opt/homebrew/bin/cloudflared`
 - **Arguments:** `tunnel run llcode-tech-home`
 - **KeepAlive:** true (restarts if crashes)
@@ -88,15 +93,16 @@ launchctl unload ~/Library/LaunchAgents/com.llcode.cloudflare.plist
 ## Troubleshooting
 
 1. **Permission issues:** Ensure the plist files have correct permissions:
-   ```bash
-   chmod 644 ~/Library/LaunchAgents/com.llcode.*.plist
-   ```
+
+    ```bash
+    chmod 644 ~/Library/LaunchAgents/com.llcode.*.plist
+    ```
 
 2. **Binary not found:** Verify the paths in the plist files match your actual file locations.
 
 3. **Port conflicts:** Make sure ports 3000 (frontend) and 8000 (backend) are not in use by other processes.
 
 4. **Check system logs:**
-   ```bash
-   log show --predicate 'process == "launchd"' --last 1h | grep com.llcode
-   ```
+    ```bash
+    log show --predicate 'process == "launchd"' --last 1h | grep com.llcode
+    ```

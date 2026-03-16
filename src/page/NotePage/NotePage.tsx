@@ -144,7 +144,11 @@ const Notes: React.FC<INotesProps> = ({ title, description, content }) => {
                                             tags={content.tags}
                                             image={content.image?.$oid}
                                             link={`/digital-chronicles/coding-note/${content._id?.$oid ?? ""}`}
-                                            locked={content.is_locked ?? (!content._id?.$oid || !content.body)}
+                                            locked={
+                                                content.is_locked ??
+                                                (!content._id?.$oid ||
+                                                    !content.body)
+                                            }
                                         />
                                     );
                                 },

@@ -38,8 +38,7 @@ class Particle {
         this.tail[this.tailIndex] = {
             x:
                 this.ox +
-                (this.br + this.re + this.size + this.h2p) *
-                    Math.cos(this.a),
+                (this.br + this.re + this.size + this.h2p) * Math.cos(this.a),
             y:
                 this.oy +
                 (this.br + this.re + this.size + this.h2p) *

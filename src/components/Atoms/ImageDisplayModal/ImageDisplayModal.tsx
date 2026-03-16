@@ -40,7 +40,9 @@ const ImageDisplayModal: React.FC<IImageDisplayModalProps> = ({
                         className="image-display-modal--container flex justify-center items-center"
                         onClick={(e) => {
                             if (
-                                (e.target as HTMLButtonElement).className.includes(
+                                (
+                                    e.target as HTMLButtonElement
+                                ).className.includes(
                                     "image-display-modal--container",
                                 )
                             )

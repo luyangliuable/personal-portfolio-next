@@ -30,7 +30,9 @@ class Button extends Component<IButtonProps, {}> {
                         this.props.className,
                         isDisabled && "button-disabled",
                     )}
-                    onMouseMove={(e) => !isDisabled && cardGradientEffect(e, false, 1, 38, 20)}
+                    onMouseMove={(e) =>
+                        !isDisabled && cardGradientEffect(e, false, 1, 38, 20)
+                    }
                 >
                     {isLoading ? "Loading..." : this.props.children}
                 </span>

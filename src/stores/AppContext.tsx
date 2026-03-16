@@ -32,7 +32,7 @@ export const AppContextProvider: React.FC<IAppContextProps> = ({
 
     const contextValue = useMemo(
         () => ({ userName, loginStatus }),
-        [userName, loginStatus]
+        [userName, loginStatus],
     );
 
     return (

@@ -47,7 +47,6 @@
     width: fit-content;
 }
 
-
 .gallery-item h3 {
     width: 90%;
     font-size: clamp(1.1rem, 1.1vw, 2rem);

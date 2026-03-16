@@ -7,7 +7,6 @@ import Bento from "../../../components/Bento/Bento";
 import LandingPageCard from "../../../components/LandingPageCard/LandingPageCard";
 
 const Teddie = () => {
-
     return (
         <main>
             <div className="teddie--hero flex justify-start items-start flex-col p-24">

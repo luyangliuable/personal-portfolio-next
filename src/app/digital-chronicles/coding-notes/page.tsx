@@ -15,5 +15,11 @@ export default async function NotesPage() {
     const content: BlogPostResponse[] = await noteRepository.getPostList();
     const { title, description } = metadata;
 
-    return <Notes title={title as string} description={description as string} content={content} />;
+    return (
+        <Notes
+            title={title as string}
+            description={description as string}
+            content={content}
+        />
+    );
 }

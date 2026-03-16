@@ -183,7 +183,7 @@ const HeroSection: React.FC<IHeroProps> = () => {
             <footer className="hero-section-badge__container flex justify-center items-center w-full mb-2">
                 {connections.map((item: any, index: number) => (
                     <Link
-                                key={item.name}
+                        key={item.name}
                         style={{
                             color: item.color,
                             backgroundColor: item.background,

@@ -61,7 +61,12 @@ const Item: FC<IAccordionItemProps> = ({
                     "accordion--tab noselect flex items-center justify-between cursor-pointer",
                     className,
                 )}
-                style={{ background: 'none', border: 'none', width: '100%', textAlign: 'left' }}
+                style={{
+                    background: "none",
+                    border: "none",
+                    width: "100%",
+                    textAlign: "left",
+                }}
             >
                 <div className="flex flex-row items-center">
                     <span className="mr-2">{icon}</span>

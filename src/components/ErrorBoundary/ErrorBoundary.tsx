@@ -40,7 +40,8 @@ class ErrorBoundary extends Component<Props, State> {
                             Something went wrong
                         </h1>
                         <p className="error-boundary__message">
-                            We encountered an unexpected error. Please try refreshing the page.
+                            We encountered an unexpected error. Please try
+                            refreshing the page.
                         </p>
                         <button
                             className="error-boundary__button"

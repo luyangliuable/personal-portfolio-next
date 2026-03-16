@@ -138,7 +138,9 @@ const FeaturedContentSection: React.FC<IFeaturedContentSectionProps> = ({
             >
                 <div className="flex w-full h-full justify-center items-stretch gap-3">
                     {group.map((content, contentIndex) => {
-                        const contentId = content._id?.$oid ?? `content-${groupIndex}-${contentIndex}`;
+                        const contentId =
+                            content._id?.$oid ??
+                            `content-${groupIndex}-${contentIndex}`;
                         return (
                             <div
                                 className="featured-section--item flex justify-center"

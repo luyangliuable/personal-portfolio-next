@@ -18,7 +18,10 @@ const TriggerProvider = memo(({ children }: { children: ReactNode }) => {
         setTrigger((prev) => !prev);
     }, []);
 
-    const value = useMemo(() => ({ trigger, toggleTrigger }), [trigger, toggleTrigger]);
+    const value = useMemo(
+        () => ({ trigger, toggleTrigger }),
+        [trigger, toggleTrigger],
+    );
 
     return (
         <TriggerContext.Provider value={value}>

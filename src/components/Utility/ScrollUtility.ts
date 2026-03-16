@@ -40,7 +40,11 @@ function isCloseToAnotherElement(
     const yAbove = rect.top - proxmityToSenseAt;
     const yBelow = rect.bottom + proxmityToSenseAt;
     const xPos = rect.left + rect.width / 2; // Roughly the horizontal center of the element
-    const defaultExcludes = new Set([document.body, document.documentElement, element]);
+    const defaultExcludes = new Set([
+        document.body,
+        document.documentElement,
+        element,
+    ]);
     const foundElements: Element[] = [];
     function findElements(x: number, y: number) {
         const el = document.elementFromPoint(x, y) as HTMLElement;

@@ -27,7 +27,9 @@ interface GalleryItemTypeSegmentProps {
     type?: string;
 }
 
-const GalleryItemTypeSegment: React.FC<GalleryItemTypeSegmentProps> = ({ type }) => {
+const GalleryItemTypeSegment: React.FC<GalleryItemTypeSegmentProps> = ({
+    type,
+}) => {
     const MemoizedCgWebsite = useMemo(() => <CgWebsite />, []);
     const MemoizedTbToolsOff = useMemo(() => <TbToolsOff />, []);
 
@@ -119,7 +121,7 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
                         <div className="w-full box-border">
                             <SequentialRiseSpan
                                 minNumberOfLettersPerLine={42}
-                                calculationAdjustment={0.20}
+                                calculationAdjustment={0.2}
                             >
                                 {truncateTextBody(props.description, 200)}
                             </SequentialRiseSpan>
@@ -142,19 +144,21 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
                             </span>
                         )}
                         {props.metadata?.map((item, idx) => {
-                                const keyValue = typeof item.value === 'string' || typeof item.value === 'number'
+                            const keyValue =
+                                typeof item.value === "string" ||
+                                typeof item.value === "number"
                                     ? item.value
                                     : `metadata-${idx}`;
-                                return (
-                                    <span
-                                        key={keyValue}
-                                        className="flex items-center"
-                                    >
-                                        {item.icon}
-                                        {item.callback?.(item.value) ?? item.value}
-                                    </span>
-                                );
-                            })}
+                            return (
+                                <span
+                                    key={keyValue}
+                                    className="flex items-center"
+                                >
+                                    {item.icon}
+                                    {item.callback?.(item.value) ?? item.value}
+                                </span>
+                            );
+                        })}
                     </p>
                 )}
                 {props.repoOwner && props.repoName && (

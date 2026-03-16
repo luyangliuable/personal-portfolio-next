@@ -1,5 +1,12 @@
 import ItableOfContentsProps from "../../../../interfaces/BlogPage/BlogContent/TableOfContents/ItableOfContentsProps";
-import { useEffect, useState, useRef, createRef, cloneElement, type RefObject } from "react";
+import {
+    useEffect,
+    useState,
+    useRef,
+    createRef,
+    cloneElement,
+    type RefObject,
+} from "react";
 import {
     stringToHash,
     removeHashesAndStripWhitespace,
@@ -75,11 +82,11 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
                         style={{
                             color,
                             margin: `${marginBottom} ${indentation}`,
-                            background: 'none',
-                            border: 'none',
-                            cursor: 'pointer',
-                            textAlign: 'left',
-                            width: '100%',
+                            background: "none",
+                            border: "none",
+                            cursor: "pointer",
+                            textAlign: "left",
+                            width: "100%",
                         }}
                         onClick={(e) => handleClick(e, id.toString())}
                     >
@@ -94,9 +101,7 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
         );
         if (renderedSubHeadings) {
             setTocEntries(renderedSubHeadings);
-            setTocEntryRef(
-                renderedSubHeadings.map(() => createRef<any>()),
-            );
+            setTocEntryRef(renderedSubHeadings.map(() => createRef<any>()));
         }
     };
 
@@ -126,9 +131,7 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
         tocEntries.forEach((entry, idx) => {
             const tocEntryCurrent = tocEntryRef[idx]?.current;
             if (!tocEntryCurrent) return;
-            const computedStyle = globalThis.getComputedStyle(
-                tocEntryCurrent,
-            );
+            const computedStyle = globalThis.getComputedStyle(tocEntryCurrent);
             const extra =
                 Number.parseFloat(computedStyle.height) +
                 Number.parseFloat(computedStyle.marginBottom) * 2;
@@ -187,10 +190,11 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
     };
 
     const handleIntersectingSections = (intersectingIds: string[]): void => {
-        setTocEntries((prev) =>
-            prev?.map((tocEntry) =>
-                updateTocEntryActiveState(tocEntry, intersectingIds),
-            ) ?? null,
+        setTocEntries(
+            (prev) =>
+                prev?.map((tocEntry) =>
+                    updateTocEntryActiveState(tocEntry, intersectingIds),
+                ) ?? null,
         );
     };
 
@@ -211,7 +215,7 @@ const TableOfContents: React.FC<ItableOfContentsProps> = (props) => {
                 </h2>
             </div>
             {tocEntries?.map((entry, index) => {
-                const entryId = `${entry.props.id || 'entry'}-${index}`;
+                const entryId = `${entry.props.id || "entry"}-${index}`;
                 return cloneElement(entry, {
                     ref: tocEntryRef[index],
                     key: entryId,

@@ -66,8 +66,7 @@ class NoteRepository extends Repository {
     }
 
     async getPostList(): Promise<BlogPostResponse[]> {
-        if (NoteRepository.postListCache)
-            return NoteRepository.postListCache;
+        if (NoteRepository.postListCache) return NoteRepository.postListCache;
         const url = NoteRepository.BASE_URL;
         const options = NoteRepository.options("GET");
         return fetch(url, options)

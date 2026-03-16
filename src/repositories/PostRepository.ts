@@ -66,8 +66,7 @@ class PostRepository extends Repository {
     }
 
     async getPostList(): Promise<BlogPostResponse[]> {
-        if (PostRepository.postListCache)
-            return PostRepository.postListCache;
+        if (PostRepository.postListCache) return PostRepository.postListCache;
         const url = PostRepository.BASE_URL;
         const options = PostRepository.options("GET");
         return fetch(url, options)

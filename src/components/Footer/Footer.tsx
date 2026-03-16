@@ -62,18 +62,16 @@ const Footer: React.FC = () => {
                         Connect with Me
                     </h3>
                     <div className="flex flex-col justify-center">
-                        {linksToMyOtherSocialMedia.map(
-                            (item: any) => (
-                                <InlineLink
-                                    target="_blank"
-                                    key={item.name}
-                                    to={item.link}
-                                    className="mt-1"
-                                >
-                                    {item.name}
-                                </InlineLink>
-                            ),
-                        )}
+                        {linksToMyOtherSocialMedia.map((item: any) => (
+                            <InlineLink
+                                target="_blank"
+                                key={item.name}
+                                to={item.link}
+                                className="mt-1"
+                            >
+                                {item.name}
+                            </InlineLink>
+                        ))}
                     </div>
                 </section>
                 <section className="footer__sponsor">

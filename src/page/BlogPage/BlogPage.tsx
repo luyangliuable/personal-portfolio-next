@@ -154,7 +154,9 @@ const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
                 if (data.length === 0) {
                     return (
                         <div className="empty-state text-center py-12">
-                            <h3 className="text-xl font-bold mb-2">No posts found</h3>
+                            <h3 className="text-xl font-bold mb-2">
+                                No posts found
+                            </h3>
                             <p className="text-gray-400">
                                 Check back later for new content.
                             </p>
@@ -163,9 +165,12 @@ const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
                 } else {
                     return (
                         <div className="empty-state text-center py-12">
-                            <h3 className="text-xl font-bold mb-2">No matching posts</h3>
+                            <h3 className="text-xl font-bold mb-2">
+                                No matching posts
+                            </h3>
                             <p className="text-gray-400">
-                                No posts match your current filters. Try adjusting your selection.
+                                No posts match your current filters. Try
+                                adjusting your selection.
                             </p>
                         </div>
                     );
@@ -181,7 +186,9 @@ const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
                             (content: BlogPostResponse) => (
                                 <Card
                                     key={content._id?.$oid || Math.random()}
-                                    heading={content.heading || "Content Unavailable"}
+                                    heading={
+                                        content.heading || "Content Unavailable"
+                                    }
                                     authorImage={authorImage}
                                     author={content.author || "Unknown"}
                                     date_created={content.date_created}
@@ -191,8 +198,15 @@ const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
                                     in_progress={content.in_progress}
                                     tags={content.tags || []}
                                     image={content.image?.$oid}
-                                    link={content._id?.$oid ? `/digital-chronicles/blog/${content._id.$oid}` : undefined}
-                                    locked={content.is_locked ?? (!content._id?.$oid || !content.body)}
+                                    link={
+                                        content._id?.$oid
+                                            ? `/digital-chronicles/blog/${content._id.$oid}`
+                                            : undefined
+                                    }
+                                    locked={
+                                        content.is_locked ??
+                                        (!content._id?.$oid || !content.body)
+                                    }
                                 />
                             ),
                         )}
@@ -210,11 +224,18 @@ const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
                             key={post._id?.$oid || Math.random()}
                             authorImage={authorImage}
                             author={post.author || "Unknown"}
-                            link={post._id?.$oid ? `/digital-chronicles/blog/${post._id.$oid}` : undefined}
+                            link={
+                                post._id?.$oid
+                                    ? `/digital-chronicles/blog/${post._id.$oid}`
+                                    : undefined
+                            }
                             heading={post.heading || "Content Unavailable"}
                             image={post.image?.$oid}
                             body=""
-                            locked={post.is_locked ?? (!post._id?.$oid || !post.body)}
+                            locked={
+                                post.is_locked ??
+                                (!post._id?.$oid || !post.body)
+                            }
                         />
                     ))}
                 </div>
@@ -244,9 +265,10 @@ const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
             }
             const onClick = () => handleTagClick(updatedTags, to);
 
-            const disabled = data?.every(({ tags }) =>
-                !isSubset([...selectedTags, tagName], tags),
-            ) ?? true;
+            const disabled =
+                data?.every(
+                    ({ tags }) => !isSubset([...selectedTags, tagName], tags),
+                ) ?? true;
 
             return (
                 <button

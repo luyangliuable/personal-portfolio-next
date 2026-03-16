@@ -34,7 +34,11 @@ const LogInPage: React.FC = () => {
         return className;
     };
 
-    const updateLoginFlash = (loginStatus: string, flashMessage: string, isLoading = false) => {
+    const updateLoginFlash = (
+        loginStatus: string,
+        flashMessage: string,
+        isLoading = false,
+    ) => {
         setState({
             loginStatus: loginStatus,
             flashMessage: flashMessage,

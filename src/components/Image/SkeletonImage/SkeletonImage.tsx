@@ -8,7 +8,9 @@ const SkeletonImage = forwardRef<HTMLDivElement, ISkeletonImageProps>(
         return (
             <div
                 ref={ref}
-                className={cl("image-skeleton", className, { "image-skeleton--error": hasError })}
+                className={cl("image-skeleton", className, {
+                    "image-skeleton--error": hasError,
+                })}
                 style={style}
             ></div>
         );

@@ -53,7 +53,11 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
             return;
 
         // Input validation
-        if (!children || typeof children !== "string" || children.length === 0) {
+        if (
+            !children ||
+            typeof children !== "string" ||
+            children.length === 0
+        ) {
             console.warn("SequentialRiseSpan: Invalid children provided");
             return;
         }
@@ -83,14 +87,22 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
 
             setMeasuredLettersPerLine(Math.max(1, calculated));
         } catch (error) {
-            console.error("SequentialRiseSpan: Error calculating letters per line:", error);
+            console.error(
+                "SequentialRiseSpan: Error calculating letters per line:",
+                error,
+            );
         } finally {
             // Guaranteed cleanup
             if (tempSpan && tempSpan.parentNode) {
                 tempSpan.remove();
             }
         }
-    }, [children, calculationAdjustment, measuredLettersPerLine, numberOfLettersPerLine]);
+    }, [
+        children,
+        calculationAdjustment,
+        measuredLettersPerLine,
+        numberOfLettersPerLine,
+    ]);
 
     const slideUp = (target: Element, observer: IntersectionObserver): void => {
         target.classList.add("slide-up");
@@ -101,8 +113,7 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
-                    if (entry.isIntersecting)
-                        slideUp(entry.target, observer);
+                    if (entry.isIntersecting) slideUp(entry.target, observer);
                 });
             },
             { threshold: [0.1, 0.5, 1] },
@@ -127,7 +138,12 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
         return () => {
             window.removeEventListener("resize", debouncedCalculate);
         };
-    }, [numberOfLettersPerLine, debouncedCalculate, calculateLettersPerLine, measuredLettersPerLine]);
+    }, [
+        numberOfLettersPerLine,
+        debouncedCalculate,
+        calculateLettersPerLine,
+        measuredLettersPerLine,
+    ]);
 
     useEffect(() => {
         let currentLine = "";
@@ -135,7 +151,8 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
 
         if (!numberOfLettersPerLine && !measuredLettersPerLine) return;
 
-        const finalNumber = numberOfLettersPerLine ??
+        const finalNumber =
+            numberOfLettersPerLine ??
             Math.min(
                 Math.max(
                     measuredLettersPerLine,
@@ -186,7 +203,15 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
         });
 
         setWrappedLines(linesElements);
-    }, [measuredLettersPerLine, numberOfLettersPerLine, children, className, elementType, minNumberOfLettersPerLine, maxNumberOfLettersPerLine]);
+    }, [
+        measuredLettersPerLine,
+        numberOfLettersPerLine,
+        children,
+        className,
+        elementType,
+        minNumberOfLettersPerLine,
+        maxNumberOfLettersPerLine,
+    ]);
 
     return (
         <div className="sequential-rise-span" ref={spanItemRef}>
@@ -202,7 +227,10 @@ const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
                         },
                     );
                     return (
-                        <div key={`line-${index}-${line.key}`} className="w-full break-words">
+                        <div
+                            key={`line-${index}-${line.key}`}
+                            className="w-full break-words"
+                        >
                             {lineElement}
                         </div>
                     );

@@ -34,7 +34,10 @@ const Image: React.FC<IImageProps> = ({
 
         try {
             const imageId = src ?? defaultProps.defaultImageId;
-            const imageUrl = await imageRepository.getImageById(imageId, compression);
+            const imageUrl = await imageRepository.getImageById(
+                imageId,
+                compression,
+            );
             setFetchedImageUrl(imageUrl);
         } catch (error) {
             console.error("Error fetching images:", error);
@@ -76,7 +79,13 @@ const Image: React.FC<IImageProps> = ({
     }, [src, isInView, imageError, fetchedImageUrl, isLazyLoading]);
 
     if (!fetchedImageUrl) {
-        return <SkeletonImage ref={imageRef} className={className} hasError={imageError} />;
+        return (
+            <SkeletonImage
+                ref={imageRef}
+                className={className}
+                hasError={imageError}
+            />
+        );
     }
 
     const memoizedNextImage = (

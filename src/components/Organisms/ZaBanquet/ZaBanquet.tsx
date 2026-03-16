@@ -33,7 +33,8 @@ const ZaBanquet = () => {
     const flowersRef = useRef<React.RefObject<HTMLDivElement>[]>([]);
 
     const flowers = useMemo(() => {
-        const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+        const isMobile =
+            typeof window !== "undefined" && window.innerWidth < 768;
         const num = isMobile ? 40 : 80;
         const flowersArray = [];
         const refs = [];

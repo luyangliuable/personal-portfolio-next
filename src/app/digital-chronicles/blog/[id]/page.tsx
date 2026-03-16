@@ -28,12 +28,16 @@ export async function generateMetadata({
             removeHashesAndStripWhitespace(content.body),
         ),
         openGraph: {
-            images: content.image?.$oid ? [`https://llcode.tech/api/image/${content.image.$oid}`] : [],
+            images: content.image?.$oid
+                ? [`https://llcode.tech/api/image/${content.image.$oid}`]
+                : [],
         },
     };
 }
 
-export default async function BlogContentServer({ params }: Readonly<PageProps>) {
+export default async function BlogContentServer({
+    params,
+}: Readonly<PageProps>) {
     const { id } = params;
     const postRepository = PostRepository.getInstance();
     const content: BlogPostResponse = await postRepository.getPost(id);

@@ -21,9 +21,9 @@ export function useDebounce<T extends (...args: any[]) => void>(
     // Memoize the debounced function
     return useMemo(() => {
         const debouncedFn = debounce(
-            (...args: Parameters<T>) => callbackRef.current(...args),
+            (...args: any[]) => callbackRef.current(...(args as Parameters<T>)),
             delay,
-        );
+        ) as (...args: Parameters<T>) => void;
         return debouncedFn;
     }, [delay]);
 }

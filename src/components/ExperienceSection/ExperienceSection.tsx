@@ -16,16 +16,16 @@ import {
 import ExperienceSectionEvent from "./ExperienceSectionEvent/ExperienceSectionEvent";
 import SequentialRiseSpan from "../Atoms/SequentialRiseSpan/SequentialRiseSpan";
 import ExperienceSectionImageDisplay from "./ExperienceSectionImageDisplay/ExperienceSectionImageDisplay";
-import BlackHole from "../Organisms/BlackHole/BlackHole";
+import BlackHole from "../Organisms/BlackHole/BlackHole.lazy";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TiArrowLeftThick } from "react-icons/ti";
 
 import "./ExperienceSection.css";
-import ZaBanquet from "../Organisms/ZaBanquet/ZaBanquet";
+import ZaBanquet from "../Organisms/ZaBanquet/ZaBanquet.lazy";
 import { useTrigger } from "../../stores/TriggerContext";
-import Burger from "../Organisms/Burger/Burger";
+import Burger from "../Organisms/Burger/Burger.lazy";
 
 const items: ExperienceSectionItem[] = [
     {

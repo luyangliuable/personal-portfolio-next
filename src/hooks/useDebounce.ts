@@ -13,18 +13,16 @@ export function useDebounce<T extends (...args: any[]) => void>(
 ): (...args: Parameters<T>) => void {
     const callbackRef = useRef(callback);
 
-    // Update ref when callback changes
     useEffect(() => {
         callbackRef.current = callback;
     }, [callback]);
 
-    // Memoize the debounced function
     return useMemo(() => {
         const debouncedFn = debounce(
-            (...args: Parameters<T>) => callbackRef.current(...args),
+            ((...args: Parameters<T>) => callbackRef.current(...args)) as (...args: any[]) => void,
             delay,
         );
-        return debouncedFn;
+        return debouncedFn as unknown as (...args: Parameters<T>) => void;
     }, [delay]);
 }
 

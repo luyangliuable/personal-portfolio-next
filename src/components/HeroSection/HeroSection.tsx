@@ -23,7 +23,7 @@ import { MdEmail } from "react-icons/md";
 import { RiNotionFill } from "react-icons/ri";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import PixelBlast from "../PixelBlast/PixelBlast";
+import PixelBlast from "../PixelBlast/PixelBlast.lazy";
 import "./HeroSection.css";
 
 const connections = [
@@ -232,7 +232,7 @@ const HeroSection: React.FC<IHeroProps> = () => {
                     {screenWidth > 550 && (
                         <SequentialRiseSpan
                             baseAnimationDelay={200}
-                            calculationAdjustment={0.82}
+                            calculationAdjustment={0.75}
                             minNumberOfLettersPerLine={48}
                         >
                             A software engineer, dog lover and fitness ethusiast

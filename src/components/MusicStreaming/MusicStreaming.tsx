@@ -1,14 +1,14 @@
 "use client";
 
 import React from "react";
-import { useMusicPlayer } from "@/hooks/useMusicPlayer";
-import { useMusicSearch } from "@/hooks/useMusicSearch";
+import { useMusicPlayer } from "../../hooks/useMusicPlayer";
+import { useMusicSearch } from "../../hooks/useMusicSearch";
 import MusicSearchBar from "./MusicSearchBar/MusicSearchBar";
 import MusicSearchResults from "./MusicSearchResults/MusicSearchResults";
 import MusicPlayerControls from "./MusicPlayerControls/MusicPlayerControls";
 import MusicQueue from "./MusicQueue/MusicQueue";
 import type { IMusicStreamingProps } from "./Interface/IMusicStreamingProps";
-import type { SpotdlSearchResult } from "@/lib/spotdl";
+import type { SpotdlSearchResult } from "../../lib/spotdl";
 import "./MusicStreaming.css";
 
 const MusicStreaming: React.FC<IMusicStreamingProps> = ({ initialQuery }) => {

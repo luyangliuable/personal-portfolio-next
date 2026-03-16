@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { cardGradientEffect } from "@/components/Utility/MouseUtility";
+import { cardGradientEffect } from "../../Utility/MouseUtility";
 import type { IMusicQueueItemProps } from "../Interface/IMusicQueueItemProps";
 
 const MusicQueueItem: React.FC<IMusicQueueItemProps> = ({

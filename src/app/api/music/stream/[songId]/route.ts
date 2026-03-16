@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { stat, open } from "fs/promises";
-import { getCachedSongPath } from "@/lib/musicCache";
+import { getCachedSongPath } from "../../../../../lib/musicCache";
 import { createReadStream } from "fs";
 
 export async function GET(

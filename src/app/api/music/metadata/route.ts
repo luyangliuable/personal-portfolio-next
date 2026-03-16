@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { extractMetadata } from "@/lib/spotdl";
+import { extractMetadata } from "../../../../lib/spotdl";
 
 export async function GET(req: NextRequest) {
     try {

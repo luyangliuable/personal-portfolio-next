@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { searchMusic } from "@/lib/spotdl";
-import { initializeCache } from "@/lib/musicCache";
+import { searchMusic } from "../../../../lib/spotdl";
+import { initializeCache } from "../../../../lib/musicCache";
 
 interface SearchRequestBody {
     query: string;

@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from "react";
-import type { SpotdlSearchResult } from "@/lib/spotdl";
+import type { SpotdlSearchResult } from "../lib/spotdl";
 
 export interface MusicPlayerState {
     currentSong: SpotdlSearchResult | null;

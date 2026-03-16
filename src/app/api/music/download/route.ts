@@ -4,8 +4,8 @@ import {
     generateSongId,
     saveMetadata,
     type SpotdlSearchResult,
-} from "@/lib/spotdl";
-import { isSongCached, getCachedSongPath } from "@/lib/musicCache";
+} from "../../../../lib/spotdl";
+import { isSongCached, getCachedSongPath } from "../../../../lib/musicCache";
 
 interface DownloadRequestBody {
     spotifyUrl: string;

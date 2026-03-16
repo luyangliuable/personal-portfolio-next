@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from "react";
-import type { SpotdlSearchResult } from "@/lib/spotdl";
+import type { SpotdlSearchResult } from "../lib/spotdl";
 
 export interface MusicSearchState {
     query: string;

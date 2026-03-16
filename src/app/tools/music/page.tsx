@@ -1,6 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
-import MusicStreaming from "@/components/MusicStreaming/MusicStreaming";
+import MusicStreaming from "../../../components/MusicStreaming/MusicStreaming";
 
 export const metadata: Metadata = {
     title: "Music Streaming | Luyang's Portfolio",

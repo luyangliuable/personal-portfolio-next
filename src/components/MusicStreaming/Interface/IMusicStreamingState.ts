@@ -1,4 +1,4 @@
-import type { SpotdlSearchResult } from "@/lib/spotdl";
+import type { SpotdlSearchResult } from "../../../lib/spotdl";
 
 export interface IMusicStreamingState {
     searchQuery: string;

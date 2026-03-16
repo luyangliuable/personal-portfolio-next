@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import Image from "@/components/Image/Image";
-import { cardGradientEffect } from "@/components/Utility/MouseUtility";
+import Image from "../../Image/Image";
+import { cardGradientEffect } from "../../Utility/MouseUtility";
 import type { IMusicSearchResultItemProps } from "../Interface/IMusicSearchResultItemProps";
 
 const MusicSearchResultItem: React.FC<IMusicSearchResultItemProps> = ({

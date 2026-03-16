@@ -21,7 +21,7 @@ const CACHE_DIR = path.join(process.cwd(), ".music-cache");
 
 /**
  * Search for music using spotdl via Python API
- * Uses yt-dlp's ytsearch to find songs
+ * Uses Spotify API to find songs
  */
 export async function searchMusic(
     query: string,
@@ -31,40 +31,83 @@ export async function searchMusic(
 import asyncio
 import json
 import sys
-from spotdl.types.song import Song
+import os
+import ssl
+from spotdl.search import from_search_term, SpotifyClient
 
-async def search_songs(query):
+# Disable SSL verification
+ssl._create_default_https_context = ssl._create_unverified_context
+
+async def search_songs(query, client_id, client_secret):
     try:
-        songs = await Song.create_basic_list(query)
+        # Initialize Spotify client
+        SpotifyClient.init(
+            client_id=client_id,
+            client_secret=client_secret,
+            user_auth=False
+        )
+
+        # Search for songs
+        songs = await from_search_term(query)
         results = []
+
         for song in songs[:10]:  # Limit to 10 results
+            # Generate a unique ID from name and artist
+            song_id = f"{song.name}-{song.artist}".encode('utf-8')
+            import hashlib
+            song_id = hashlib.md5(song_id).hexdigest()[:16]
+
             results.append({
-                "id": song.song_id or str(hash(song.name + song.artist)),
+                "id": song_id,
                 "name": song.name,
                 "artists": [song.artist],
-                "album": song.album_name or "",
-                "duration": song.duration or 0,
-                "coverUrl": song.cover_url or "",
-                "spotifyUrl": song.url,
-                "youtubeUrl": song.download_url
+                "album": song.album_name if hasattr(song, 'album_name') else "",
+                "duration": int(song.duration) if hasattr(song, 'duration') and song.duration else 0,
+                "coverUrl": song.cover_url if hasattr(song, 'cover_url') else "",
+                "spotifyUrl": song.url if hasattr(song, 'url') else "",
+                "youtubeUrl": song.download_url if hasattr(song, 'download_url') else ""
             })
+
         return results
     except Exception as e:
-        print(json.dumps({"error": str(e)}), file=sys.stderr)
+        import traceback
+        print(json.dumps({"error": str(e), "traceback": traceback.format_exc()}), file=sys.stderr)
         return []
 
 if __name__ == "__main__":
     query = sys.argv[1] if len(sys.argv) > 1 else ""
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    results = loop.run_until_complete(search_songs(query))
+    client_id = os.environ.get('SPOTIFY_CLIENT_ID', '')
+    client_secret = os.environ.get('SPOTIFY_CLIENT_SECRET', '')
+
+    if not client_id or not client_secret:
+        print(json.dumps({"error": "Spotify credentials not found"}), file=sys.stderr)
+        sys.exit(1)
+
+    results = asyncio.run(search_songs(query, client_id, client_secret))
     print(json.dumps(results))
-    loop.close()
 `;
+
+        // Create environment without proxy settings
+        const cleanEnv = { ...process.env };
+        delete cleanEnv.HTTP_PROXY;
+        delete cleanEnv.HTTPS_PROXY;
+        delete cleanEnv.http_proxy;
+        delete cleanEnv.https_proxy;
+        delete cleanEnv.ALL_PROXY;
+        delete cleanEnv.all_proxy;
+        delete cleanEnv.NO_PROXY;
+        delete cleanEnv.no_proxy;
 
         const { stdout, stderr } = await execAsync(
             `${PYTHON_ENV_PATH} -c '${searchScript.replace(/'/g, "'\\''")}'  '${query.replace(/'/g, "'\\''")}'`,
-            { maxBuffer: 1024 * 1024 * 10 }, // 10MB buffer
+            {
+                maxBuffer: 1024 * 1024 * 10, // 10MB buffer
+                env: {
+                    ...cleanEnv,
+                    SPOTIFY_CLIENT_ID: process.env.SPOTIFY_CLIENT_ID,
+                    SPOTIFY_CLIENT_SECRET: process.env.SPOTIFY_CLIENT_SECRET,
+                },
+            },
         );
 
         if (stderr && !stderr.includes("WARNING")) {
@@ -93,36 +136,83 @@ export async function downloadSong(
 
         const downloadScript = `
 import asyncio
+import json
 import sys
-from spotdl.download.downloader import DownloadManager
+import os
+import ssl
+from spotdl import Spotdl
+from spotdl.search import SpotifyClient
 
-async def download_song(url, output):
+# Disable SSL verification
+ssl._create_default_https_context = ssl._create_unverified_context
+
+async def download_song(url, output_dir, client_id, client_secret):
     try:
-        args = {
-            "query": [url],
-            "output": output,
-            "output_format": "mp3",
-            "threads": 1
-        }
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        downloader = DownloadManager(args)
-        await downloader.download_songs([url])
-        downloader.close()
-        print("SUCCESS")
+        # Initialize Spotify client
+        SpotifyClient.init(
+            client_id=client_id,
+            client_secret=client_secret,
+            user_auth=False
+        )
+
+        # Create Spotdl instance with settings
+        spotdl = Spotdl(
+            client_id=client_id,
+            client_secret=client_secret,
+            user_auth=False,
+            output=output_dir,
+            format='mp3',
+            threads=1
+        )
+
+        # Download the song
+        songs = await spotdl.search([url])
+        if songs:
+            await spotdl.download_songs(songs)
+            print("SUCCESS")
+        else:
+            raise Exception("No songs found for the given URL")
+
     except Exception as e:
-        print(f"ERROR: {str(e)}", file=sys.stderr)
+        import traceback
+        print(json.dumps({"error": str(e), "traceback": traceback.format_exc()}), file=sys.stderr)
         sys.exit(1)
 
 if __name__ == "__main__":
     url = sys.argv[1]
-    output = sys.argv[2]
-    asyncio.run(download_song(url, output))
+    output_dir = sys.argv[2]
+    client_id = os.environ.get('SPOTIFY_CLIENT_ID', '')
+    client_secret = os.environ.get('SPOTIFY_CLIENT_SECRET', '')
+
+    if not client_id or not client_secret:
+        print(json.dumps({"error": "Spotify credentials not found"}), file=sys.stderr)
+        sys.exit(1)
+
+    asyncio.run(download_song(url, output_dir, client_id, client_secret))
 `;
 
+        // Create environment without proxy settings
+        const cleanEnv = { ...process.env };
+        delete cleanEnv.HTTP_PROXY;
+        delete cleanEnv.HTTPS_PROXY;
+        delete cleanEnv.http_proxy;
+        delete cleanEnv.https_proxy;
+        delete cleanEnv.ALL_PROXY;
+        delete cleanEnv.all_proxy;
+        delete cleanEnv.NO_PROXY;
+        delete cleanEnv.no_proxy;
+
         const { stdout, stderr } = await execAsync(
-            `${PYTHON_ENV_PATH} -c '${downloadScript.replace(/'/g, "'\\''")}' '${spotifyUrl}' '${outputPath}'`,
-            { maxBuffer: 1024 * 1024 * 10, timeout: 120000 }, // 2 min timeout
+            `${PYTHON_ENV_PATH} -c '${downloadScript.replace(/'/g, "'\\''")}' '${spotifyUrl}' '${songsDir}'`,
+            {
+                maxBuffer: 1024 * 1024 * 10,
+                timeout: 120000, // 2 min timeout
+                env: {
+                    ...cleanEnv,
+                    SPOTIFY_CLIENT_ID: process.env.SPOTIFY_CLIENT_ID,
+                    SPOTIFY_CLIENT_SECRET: process.env.SPOTIFY_CLIENT_SECRET,
+                },
+            },
         );
 
         if (stderr || !stdout.includes("SUCCESS")) {

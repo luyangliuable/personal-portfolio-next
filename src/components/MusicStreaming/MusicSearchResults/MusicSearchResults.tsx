@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import type { SpotdlSearchResult } from "@/lib/spotdl";
+import type { SpotdlSearchResult } from "../../../lib/spotdl";
 import MusicSearchResultItem from "./MusicSearchResultItem";
 
 interface IMusicSearchResultsProps {

@@ -36,6 +36,7 @@ const MusicSearchBar: React.FC<IMusicSearchBarProps> = ({
                 type="submit"
                 disabled={loading || !query.trim()}
                 loading={loading}
+                onClick={() => {}}
             >
                 {loading ? "Searching..." : "Search"}
             </Button>

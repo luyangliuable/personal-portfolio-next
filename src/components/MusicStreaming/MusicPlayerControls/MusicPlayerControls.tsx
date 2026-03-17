@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { FaBackward, FaPlay, FaPause, FaForward, FaList, FaChevronDown, FaChevronUp } from "react-icons/fa6";
 import type { IMusicPlayerControlsProps } from "../Interface/IMusicPlayerControlsProps";
+import type { SpotdlSearchResult } from "../../../lib/spotdl";
 
 const MusicPlayerControls: React.FC<IMusicPlayerControlsProps> = ({
     currentSong,

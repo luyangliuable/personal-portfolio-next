@@ -20,55 +20,88 @@ const PYTHON_ENV_PATH = path.join(process.cwd(), "python-env", "bin", "python");
 const CACHE_DIR = path.join(process.cwd(), ".music-cache");
 
 /**
- * Search for music using spotdl via Python API
- * Uses Spotify API to find songs
+ * Search for music on YouTube using yt-dlp
+ * Returns results in SpotdlSearchResult format with YouTube URLs
  */
-export async function searchMusic(
+export async function searchYoutubeMusic(
     query: string,
 ): Promise<SpotdlSearchResult[]> {
     try {
         const searchScript = `
-import asyncio
 import json
 import sys
 import os
-import ssl
-from spotdl.search import from_search_term, SpotifyClient
+import hashlib
+import yt_dlp
 
-# Disable SSL verification
-ssl._create_default_https_context = ssl._create_unverified_context
-
-async def search_songs(query, client_id, client_secret):
+def search_youtube(query):
     try:
-        # Initialize Spotify client
-        SpotifyClient.init(
-            client_id=client_id,
-            client_secret=client_secret,
-            user_auth=False
-        )
+        ydl_opts = {
+            'quiet': True,
+            'no_warnings': True,
+            'extract_flat': True,
+            'default_search': 'ytsearch',
+        }
 
-        # Search for songs
-        songs = await from_search_term(query)
-        results = []
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            # Search for 10 results
+            search_query = f'ytsearch10:{query}'
+            results = ydl.extract_info(search_query, download=False)
 
-        for song in songs[:10]:  # Limit to 10 results
-            # Generate a unique ID from name and artist
-            song_id = f"{song.name}-{song.artist}".encode('utf-8')
-            import hashlib
-            song_id = hashlib.md5(song_id).hexdigest()[:16]
+            if not results or 'entries' not in results:
+                return []
 
-            results.append({
-                "id": song_id,
-                "name": song.name,
-                "artists": [song.artist],
-                "album": song.album_name if hasattr(song, 'album_name') else "",
-                "duration": int(song.duration) if hasattr(song, 'duration') and song.duration else 0,
-                "coverUrl": song.cover_url if hasattr(song, 'cover_url') else "",
-                "spotifyUrl": song.url if hasattr(song, 'url') else "",
-                "youtubeUrl": song.download_url if hasattr(song, 'download_url') else ""
-            })
+            formatted_results = []
+            for entry in results['entries']:
+                if not entry:
+                    continue
 
-        return results
+                # Try to extract title components for better parsing
+                title = entry.get('title', 'Unknown')
+                duration = entry.get('duration', 0) or 0
+                thumbnail = entry.get('thumbnail', '')
+
+                # Try to parse artist and song from title
+                # Common format: "Artist - Song" or "Artist: Song"
+                parts = title.split(' - ')
+                if len(parts) > 1:
+                    artist = parts[0].strip()
+                    song_name = parts[1].strip()
+                else:
+                    parts = title.split(':')
+                    if len(parts) > 1:
+                        artist = parts[0].strip()
+                        song_name = parts[1].strip()
+                    else:
+                        # Fallback: use title as song name, unknown artist
+                        artist = 'Unknown'
+                        song_name = title
+
+                # Generate a unique ID from YouTube URL
+                url = entry.get('url', entry.get('webpage_url', ''))
+
+                # Extract YouTube video ID from URL for caching
+                # Format: https://www.youtube.com/watch?v=VIDEO_ID or https://youtu.be/VIDEO_ID
+                if 'youtu.be/' in url:
+                    song_id = url.split('youtu.be/')[-1].split('?')[0]
+                elif 'watch?v=' in url:
+                    song_id = url.split('watch?v=')[-1].split('&')[0]
+                else:
+                    # Fallback to MD5 hash if we can't extract the video ID
+                    song_id = hashlib.md5(url.encode('utf-8')).hexdigest()[:16]
+
+                formatted_results.append({
+                    "id": song_id,
+                    "name": song_name,
+                    "artists": [artist],
+                    "album": "YouTube Music",
+                    "duration": int(duration),
+                    "coverUrl": thumbnail,
+                    "spotifyUrl": "",
+                    "youtubeUrl": url
+                })
+
+            return formatted_results
     except Exception as e:
         import traceback
         print(json.dumps({"error": str(e), "traceback": traceback.format_exc()}), file=sys.stderr)
@@ -76,14 +109,7 @@ async def search_songs(query, client_id, client_secret):
 
 if __name__ == "__main__":
     query = sys.argv[1] if len(sys.argv) > 1 else ""
-    client_id = os.environ.get('SPOTIFY_CLIENT_ID', '')
-    client_secret = os.environ.get('SPOTIFY_CLIENT_SECRET', '')
-
-    if not client_id or not client_secret:
-        print(json.dumps({"error": "Spotify credentials not found"}), file=sys.stderr)
-        sys.exit(1)
-
-    results = asyncio.run(search_songs(query, client_id, client_secret))
+    results = search_youtube(query)
     print(json.dumps(results))
 `;
 
@@ -99,19 +125,15 @@ if __name__ == "__main__":
         delete cleanEnv.no_proxy;
 
         const { stdout, stderr } = await execAsync(
-            `${PYTHON_ENV_PATH} -c '${searchScript.replace(/'/g, "'\\''")}'  '${query.replace(/'/g, "'\\''")}'`,
+            `${PYTHON_ENV_PATH} -c '${searchScript.replace(/'/g, "'\\''")}' '${query.replace(/'/g, "'\\''")}'`,
             {
                 maxBuffer: 1024 * 1024 * 10, // 10MB buffer
-                env: {
-                    ...cleanEnv,
-                    SPOTIFY_CLIENT_ID: process.env.SPOTIFY_CLIENT_ID,
-                    SPOTIFY_CLIENT_SECRET: process.env.SPOTIFY_CLIENT_SECRET,
-                },
+                env: cleanEnv,
             },
         );
 
         if (stderr && !stderr.includes("WARNING")) {
-            console.error("spotdl search error:", stderr);
+            console.error("yt-dlp search error:", stderr);
         }
 
         const results: SpotdlSearchResult[] = JSON.parse(stdout);
@@ -123,73 +145,47 @@ if __name__ == "__main__":
 }
 
 /**
- * Download a song using spotdl
+ * Search for music using YouTube (via yt-dlp)
+ * Returns results in SpotdlSearchResult format with YouTube URLs
+ */
+export async function searchMusic(
+    query: string,
+): Promise<SpotdlSearchResult[]> {
+    return searchYoutubeMusic(query);
+}
+
+/**
+ * Extract YouTube video ID from URL
+ */
+function extractYoutubeId(url: string): string | null {
+    const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+    const match = url.match(regex);
+    return match ? match[1] : null;
+}
+
+/**
+ * Download a song using youtube-dl CLI from a YouTube URL
  * Returns the path to the downloaded file
  */
 export async function downloadSong(
-    spotifyUrl: string,
+    youtubeUrl: string,
     songId: string,
 ): Promise<string> {
     try {
         const songsDir = path.join(CACHE_DIR, "songs");
-        const outputPath = path.join(songsDir, `${songId}.mp3`);
 
-        const downloadScript = `
-import asyncio
-import json
-import sys
-import os
-import ssl
-from spotdl import Spotdl
-from spotdl.search import SpotifyClient
+        // Extract video ID from YouTube URL for caching
+        const videoId = extractYoutubeId(youtubeUrl) || songId;
+        const outputPath = path.join(songsDir, `${videoId}.mp3`);
 
-# Disable SSL verification
-ssl._create_default_https_context = ssl._create_unverified_context
-
-async def download_song(url, output_dir, client_id, client_secret):
-    try:
-        # Initialize Spotify client
-        SpotifyClient.init(
-            client_id=client_id,
-            client_secret=client_secret,
-            user_auth=False
-        )
-
-        # Create Spotdl instance with settings
-        spotdl = Spotdl(
-            client_id=client_id,
-            client_secret=client_secret,
-            user_auth=False,
-            output=output_dir,
-            format='mp3',
-            threads=1
-        )
-
-        # Download the song
-        songs = await spotdl.search([url])
-        if songs:
-            await spotdl.download_songs(songs)
-            print("SUCCESS")
-        else:
-            raise Exception("No songs found for the given URL")
-
-    except Exception as e:
-        import traceback
-        print(json.dumps({"error": str(e), "traceback": traceback.format_exc()}), file=sys.stderr)
-        sys.exit(1)
-
-if __name__ == "__main__":
-    url = sys.argv[1]
-    output_dir = sys.argv[2]
-    client_id = os.environ.get('SPOTIFY_CLIENT_ID', '')
-    client_secret = os.environ.get('SPOTIFY_CLIENT_SECRET', '')
-
-    if not client_id or not client_secret:
-        print(json.dumps({"error": "Spotify credentials not found"}), file=sys.stderr)
-        sys.exit(1)
-
-    asyncio.run(download_song(url, output_dir, client_id, client_secret))
-`;
+        // Check if file already exists
+        const fs = await import("fs/promises");
+        try {
+            await fs.access(outputPath);
+            return outputPath; // File already cached
+        } catch {
+            // File doesn't exist, proceed with download
+        }
 
         // Create environment without proxy settings
         const cleanEnv = { ...process.env };
@@ -202,22 +198,27 @@ if __name__ == "__main__":
         delete cleanEnv.NO_PROXY;
         delete cleanEnv.no_proxy;
 
-        const { stdout, stderr } = await execAsync(
-            `${PYTHON_ENV_PATH} -c '${downloadScript.replace(/'/g, "'\\''")}' '${spotifyUrl}' '${songsDir}'`,
-            {
-                maxBuffer: 1024 * 1024 * 10,
-                timeout: 120000, // 2 min timeout
-                env: {
-                    ...cleanEnv,
-                    SPOTIFY_CLIENT_ID: process.env.SPOTIFY_CLIENT_ID,
-                    SPOTIFY_CLIENT_SECRET: process.env.SPOTIFY_CLIENT_SECRET,
-                },
-            },
-        );
+        // Use yt-dlp CLI to download audio
+        const command = [
+            "yt-dlp",
+            "-x",  // Extract audio
+            "--audio-format", "mp3",
+            "--audio-quality", "192K",
+            "--output", outputPath,
+            "--no-playlist",
+            "--quiet",
+            "--no-warnings",
+            youtubeUrl,
+        ].join(" ");
 
-        if (stderr || !stdout.includes("SUCCESS")) {
-            throw new Error(stderr || "Download failed");
-        }
+        const { stdout, stderr } = await execAsync(command, {
+            maxBuffer: 1024 * 1024 * 10,
+            timeout: 120000, // 2 min timeout
+            env: cleanEnv,
+        });
+
+        // Verify the file was created
+        await fs.access(outputPath);
 
         return outputPath;
     } catch (error: any) {

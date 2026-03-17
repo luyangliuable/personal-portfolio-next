@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Button from "../../Button/Button";
 import type { IMusicQueueProps } from "../Interface/IMusicQueueProps";
 import MusicQueueItem from "./MusicQueueItem";
 
@@ -22,9 +23,9 @@ const MusicQueue: React.FC<IMusicQueueProps> = ({
         <div className="music-queue">
             <div className="queue-header">
                 <h3>Queue ({queue.length})</h3>
-                <button onClick={onClear} aria-label="Clear queue">
+                <Button onClick={onClear} aria-label="Clear queue">
                     Clear All
-                </button>
+                </Button>
             </div>
             <div className="queue-list">
                 {queue.map((song, index) => (

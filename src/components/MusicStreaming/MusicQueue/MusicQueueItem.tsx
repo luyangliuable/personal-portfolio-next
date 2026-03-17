@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { cardGradientEffect } from "../../Utility/MouseUtility";
+import { FaXmark } from "react-icons/fa6";
 import type { IMusicQueueItemProps } from "../Interface/IMusicQueueItemProps";
 
 const MusicQueueItem: React.FC<IMusicQueueItemProps> = ({
@@ -12,8 +12,7 @@ const MusicQueueItem: React.FC<IMusicQueueItemProps> = ({
 }) => {
     return (
         <div
-            onMouseMove={cardGradientEffect}
-            className={`card music-queue-item ${isPlaying ? "playing" : ""}`}
+            className={`music-queue-item ${isPlaying ? "playing" : ""}`}
         >
             <div className="queue-item-info">
                 <span className="queue-index">{index + 1}</span>
@@ -24,10 +23,10 @@ const MusicQueueItem: React.FC<IMusicQueueItemProps> = ({
             </div>
             <button
                 onClick={() => onRemove(index)}
-                className="queue-remove-btn"
+                className="queue-remove-button"
                 aria-label="Remove from queue"
             >
-                ✕
+                <FaXmark />
             </button>
         </div>
     );

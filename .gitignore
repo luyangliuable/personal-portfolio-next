@@ -43,3 +43,9 @@ sonarqube-*.json
 SONARQUBE*
 *~undo-tree~
 .million/
+
+# Python virtual environment for spotdl
+python-env/
+
+# Music cache directory
+.music-cache/

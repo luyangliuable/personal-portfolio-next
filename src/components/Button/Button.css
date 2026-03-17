@@ -107,6 +107,7 @@
     position: absolute;
     z-index: -1;
     padding: 5px 0px;
+    pointer-events: none; /* Allow clicks to pass through */
 }
 
 @keyframes settle-position {

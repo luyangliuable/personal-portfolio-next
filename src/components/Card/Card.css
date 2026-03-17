@@ -23,6 +23,7 @@
         rgba(200, 200, 200, 0.3),
         transparent 40%
     );
+    pointer-events: none; /* Allow clicks to pass through */
 }
 
 .page-container {

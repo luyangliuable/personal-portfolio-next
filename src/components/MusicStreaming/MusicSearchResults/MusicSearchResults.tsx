@@ -9,6 +9,7 @@ interface IMusicSearchResultsProps {
     onPlay: (song: SpotdlSearchResult) => void;
     onAddToQueue: (song: SpotdlSearchResult) => void;
     loading?: boolean;
+    downloadingSongId?: string;
 }
 
 const MusicSearchResults: React.FC<IMusicSearchResultsProps> = ({
@@ -16,6 +17,7 @@ const MusicSearchResults: React.FC<IMusicSearchResultsProps> = ({
     onPlay,
     onAddToQueue,
     loading = false,
+    downloadingSongId,
 }) => {
     if (loading) {
         return (
@@ -52,6 +54,7 @@ const MusicSearchResults: React.FC<IMusicSearchResultsProps> = ({
                     song={song}
                     onPlay={onPlay}
                     onAddToQueue={onAddToQueue}
+                    isDownloading={downloadingSongId === song.id}
                 />
             ))}
         </div>

@@ -11,4 +11,9 @@ export interface IMusicPlayerControlsProps {
     onVolumeChange: (volume: number) => void;
     onNext: () => void;
     onPrevious: () => void;
+    queue?: SpotdlSearchResult[];
+    currentIndex?: number;
+    onRemove?: (index: number) => void;
+    onClear?: () => void;
+    onPlayFromQueue?: (song: SpotdlSearchResult) => void;
 }

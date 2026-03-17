@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Button from "../../Button/Button";
 import type { IMusicSearchBarProps } from "../Interface/IMusicSearchBarProps";
 
 const MusicSearchBar: React.FC<IMusicSearchBarProps> = ({
@@ -18,9 +19,7 @@ const MusicSearchBar: React.FC<IMusicSearchBarProps> = ({
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        setQuery(value);
-        onSearch(value);
+        setQuery(e.target.value);
     };
 
     return (
@@ -31,17 +30,15 @@ const MusicSearchBar: React.FC<IMusicSearchBarProps> = ({
                 onChange={handleChange}
                 placeholder={placeholder}
                 className="music-search-input"
-                disabled={loading}
                 aria-label="Search for music"
             />
-            <button
+            <Button
                 type="submit"
-                className="music-search-button"
                 disabled={loading || !query.trim()}
-                aria-label="Search"
+                loading={loading}
             >
                 {loading ? "Searching..." : "Search"}
-            </button>
+            </Button>
         </form>
     );
 };

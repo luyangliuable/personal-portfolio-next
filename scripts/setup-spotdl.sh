@@ -12,14 +12,22 @@ CACHE_DIR="$PROJECT_ROOT/.music-cache"
 echo "🎵 Setting up spotdl for music streaming..."
 echo "Project root: $PROJECT_ROOT"
 
-# Check if Python 3 is installed
-if ! command -v python3 &> /dev/null; then
-    echo "❌ Python 3 is not installed. Please install Python 3.8 or higher."
+# Check if Python 3.10+ is installed
+PYTHON_CMD=""
+for cmd in python3.12 python3.11 python3.10; do
+    if command -v $cmd &> /dev/null; then
+        PYTHON_CMD=$cmd
+        break
+    fi
+done
+
+if [ -z "$PYTHON_CMD" ]; then
+    echo "❌ Python 3.10 or higher is not installed. Please install Python 3.10 or higher."
     exit 1
 fi
 
-PYTHON_VERSION=$(python3 --version | cut -d' ' -f2)
-echo "✅ Found Python $PYTHON_VERSION"
+PYTHON_VERSION=$($PYTHON_CMD --version | cut -d' ' -f2)
+echo "✅ Found Python $PYTHON_VERSION (using $PYTHON_CMD)"
 
 # Create virtual environment
 if [ -d "$VENV_DIR" ]; then
@@ -35,7 +43,7 @@ fi
 
 if [ ! -d "$VENV_DIR" ]; then
     echo "📦 Creating virtual environment..."
-    python3 -m venv "$VENV_DIR"
+    $PYTHON_CMD -m venv "$VENV_DIR"
     echo "✅ Virtual environment created"
 fi
 
@@ -45,17 +53,18 @@ source "$VENV_DIR/bin/activate"
 
 # Upgrade pip
 echo "⬆️  Upgrading pip..."
-pip install -i https://artifactory.internal.cba/api/pypi/org.python.pypi/simple --upgrade pip > /dev/null 2>&1
+pip install --upgrade pip > /dev/null 2>&1
 
-# Install spotdl using internal PyPI
-echo "📥 Installing spotdl from internal PyPI..."
-pip install -i https://artifactory.internal.cba/api/pypi/org.python.pypi/simple setuptools spotdl
+# Install spotdl using PyPI
+echo "📥 Installing spotdl from PyPI..."
+pip install spotdl
 
-# Create pkg_resources compatibility shim for Python 3.14+
+# Create pkg_resources compatibility shim (for newer Python versions that might need it)
 echo "🔧 Creating pkg_resources compatibility shim..."
-cat > "$VENV_DIR/lib/python3.14/site-packages/pkg_resources.py" << 'SHIMEOF'
+PYTHON_SITE_PACKAGES=$(python3 -c "import sys; print(f'lib/python{sys.version_info.major}.{sys.version_info.minor}/site-packages')")
+cat > "$VENV_DIR/$PYTHON_SITE_PACKAGES/pkg_resources.py" << 'SHIMEOF'
 """
-Compatibility shim for pkg_resources (deprecated in Python 3.14)
+Compatibility shim for pkg_resources (deprecated in newer Python versions)
 This provides basic functionality needed by spotdl
 """
 import sys

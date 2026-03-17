@@ -1,37 +1,50 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
     downloadSong,
-    generateSongId,
     saveMetadata,
     type SpotdlSearchResult,
 } from "../../../../lib/spotdl";
 import { isSongCached, getCachedSongPath } from "../../../../lib/musicCache";
 
 interface DownloadRequestBody {
-    spotifyUrl: string;
+    youtubeUrl: string;
     metadata: SpotdlSearchResult;
 }
 
 // Prevent duplicate downloads with a simple in-memory lock
 const downloadLocks = new Set<string>();
 
+/**
+ * Extract YouTube video ID from URL
+ */
+function extractYoutubeId(url: string): string | null {
+    const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+    const match = url.match(regex);
+    return match ? match[1] : null;
+}
+
 export async function POST(req: NextRequest) {
     try {
         const body: DownloadRequestBody = await req.json();
 
         // Validate input
-        if (!body.spotifyUrl || !body.metadata) {
+        if (!body.youtubeUrl || !body.metadata) {
             return NextResponse.json(
-                { error: "Spotify URL and metadata are required" },
+                { error: "YouTube URL and metadata are required" },
                 { status: 400 },
             );
         }
 
-        // Generate song ID
-        const songId = generateSongId(
-            body.metadata.name,
-            body.metadata.artists[0] ?? "Unknown",
-        );
+        // Extract YouTube video ID from URL for caching
+        const youtubeVideoId = extractYoutubeId(body.youtubeUrl);
+        if (!youtubeVideoId) {
+            return NextResponse.json(
+                { error: "Invalid YouTube URL" },
+                { status: 400 },
+            );
+        }
+
+        const songId = youtubeVideoId;
 
         // Check if already cached
         const cached = await isSongCached(songId);
@@ -65,7 +78,7 @@ export async function POST(req: NextRequest) {
 
         try {
             // Download the song
-            const songPath = await downloadSong(body.spotifyUrl, songId);
+            const songPath = await downloadSong(body.youtubeUrl, songId);
 
             // Save metadata
             await saveMetadata(songId, body.metadata);

@@ -72,6 +72,12 @@
             "isDisabled": true,
             "sublinks": [
                 {
+                    "name": "Jukebox Jellyfish",
+                    "emoji": "🔊",
+                    "description": "Legal music streaming",
+                    "to": "/tools/music"
+                },
+                {
                     "name": "Chatgpt 5",
                     "emoji": "🤖",
                     "description": "Working chatgpt clone",

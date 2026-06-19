@@ -9,7 +9,10 @@
     "lint": "next lint",
     "format": "npx prettier --write .",
     "codegen": "openapi-rq -i \"../api_fastapi/openapi/v1-generated.yaml\" -c axios --format prettier -o openapi-gen --operationId",
-    "knip": "knip"
+    "knip": "knip",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@auth/unstorage-adapter": "^2.0.0",
@@ -46,17 +49,24 @@
     "unstorage": "^1.12.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "^20",
     "@types/p5": "^1.7.6",
     "@types/prismjs": "^1.26.4",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@vitest/coverage-v8": "^4.1.9",
     "autoprefixer": "^10.4.20",
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
+    "jsdom": "^29.1.1",
     "knip": "^6.17.1",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.14",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vite-tsconfig-paths": "^6.1.1",
+    "vitest": "^4.1.9"
   }
 }

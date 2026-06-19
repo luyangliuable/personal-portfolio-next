@@ -1,0 +1,29 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": [
+    "next.config.mjs",
+    "middleware.ts",
+    "src/pages/**/*.{js,jsx,ts,tsx}",
+    "src/app/**/*.{js,jsx,ts,tsx}",
+    "src/components/**/*.{js,jsx,ts,tsx}",
+    "src/lib/**/*.{js,jsx,ts,tsx}"
+  ],
+  "project": [
+    "**/*.{js,jsx,ts,tsx}"
+  ],
+  "ignore": [
+    ".next/**",
+    "node_modules/**",
+    "python-env/**",
+    "openapi-gen/**"
+  ],
+  "ignoreDependencies": [
+    "@types/*",
+    "autoprefixer",
+    "eslint",
+    "eslint-config-next",
+    "postcss",
+    "tailwindcss",
+    "typescript"
+  ]
+}

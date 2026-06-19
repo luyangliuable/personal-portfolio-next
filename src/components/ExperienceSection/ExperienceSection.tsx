@@ -335,7 +335,7 @@ const ExperienceSection: React.FC<IExperienceSectionProps> = ({}) => {
                     triggerElement,
                     {
                         scale: 0.8,
-                        y: 10
+                        y: 10,
                     },
                     {
                         scale: 1,

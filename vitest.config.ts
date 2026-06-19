@@ -1,5 +1,5 @@
-import { coverageConfigDefaults, defineConfig } from "vitest/config";
 import { resolve } from "path";
+import { coverageConfigDefaults, defineConfig } from "vitest/config";
 
 export default defineConfig({
     test: {

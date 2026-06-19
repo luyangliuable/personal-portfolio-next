@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "format": "npx prettier --write .",
+    "format:all": "npx prettier --write .",
     "codegen": "openapi-rq -i \"../api_fastapi/openapi/v1-generated.yaml\" -c axios --format prettier -o openapi-gen --operationId",
     "knip": "knip",
     "test": "vitest run",

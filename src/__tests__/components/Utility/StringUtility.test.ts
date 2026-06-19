@@ -35,7 +35,7 @@ describe("StringUtility", () => {
 
     it("removes markdown heading hashes and leading whitespace from each line", () => {
         expect(removeHashesAndStripWhitespace("  # Title\n  ## Child")).toBe(
-            "Title\n  Child",
+            "Title\nChild",
         );
     });
 

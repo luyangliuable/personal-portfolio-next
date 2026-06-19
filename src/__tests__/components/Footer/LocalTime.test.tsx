@@ -17,7 +17,7 @@ describe("LocalTime", () => {
 
     it("clears the update interval when the component unmounts.", () => {
         vi.useFakeTimers();
-        const clearIntervalSpy = vi.spyOn(global, "clearInterval");
+        const clearIntervalSpy = vi.spyOn(globalThis, "clearInterval");
         const { unmount } = render(<LocalTime />);
         unmount();
         expect(clearIntervalSpy).toHaveBeenCalled();

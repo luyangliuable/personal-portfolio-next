@@ -2,38 +2,61 @@ name: CI
 
 on:
     pull_request:
+        branches:
+            - main
     push:
         branches:
             - main
+    workflow_dispatch:
 
 jobs:
-    formatting:
-        name: Formatting
+    test-build-sonar:
+        name: Test, Build, and SonarCloud
         runs-on: ubuntu-latest
-
         steps:
             - name: Checkout repository
               uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
 
-            - name: Setup Node.js
+            - name: Set up Node.js
               uses: actions/setup-node@v4
               with:
                   node-version: 20
                   cache: npm
 
-            - name: Enforce code formatting
+            - name: Install dependencies
+              run: npm i
+
+            - name: Check formatting
               run: |
-                  echo "Checking code formatting with Prettier..."
-
                   npx --yes prettier@3.6.2 --write .
-
-                  # Check if any files were modified by git, excluding package-lock.json
                   MODIFIED_FILES=$(git status --porcelain | grep -v 'package-lock.json' || true)
                   if [ -n "$MODIFIED_FILES" ]; then
-                    echo "Code formatter made changes to files!"
-                    echo "Run 'npx --yes prettier@3.6.2 --write .' and re-push your changes"
-                    echo "Files that were formatted:"
+                    echo "Code formatter made changes to files."
                     echo "$MODIFIED_FILES"
                     exit 1
                   fi
-                  echo "Code formatting is correct"
+
+            - name: Run unit tests with coverage
+              run: npm run test:coverage:ci
+
+            - name: Run lint
+              run: npm run lint
+
+            - name: Run production build
+              run: npm run build
+              env:
+                  MONGODB_URI: mongodb://127.0.0.1:27017/test
+
+            - name: Run SonarCloud analysis
+              uses: SonarSource/sonarqube-scan-action@v6
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+            - name: Check SonarCloud quality gate
+              uses: SonarSource/sonarqube-quality-gate-action@v1
+              timeout-minutes: 5
+              env:
+                  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

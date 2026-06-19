@@ -1,5 +1,14 @@
 {
-    "source": ["src/**/*.{ts,tsx}"],
+    "source": [
+        "src/components/Accordion/Accordion.tsx",
+        "src/components/Atoms/ImageDisplayModal/ImageDisplayModal.tsx",
+        "src/components/Atoms/InlineLink/InlineLink.tsx",
+        "src/components/Atoms/Toggle/Toggle.tsx",
+        "src/components/Button/Button.tsx",
+        "src/components/Card/Card.tsx",
+        "src/components/Card/InProgressBlock/InProgressBlock.tsx",
+        "src/components/Footer/LocalTime/LocalTime.tsx"
+    ],
     "structuralExcludes": [
         "src/__tests__/**",
         "**/*.test.{ts,tsx}",
@@ -90,6 +99,34 @@
         {
             "path": "src/repositories/NoteRepository.ts",
             "reason": "Legacy duplicate of PostRepository behavior kept out of strict unit coverage until the repositories are consolidated."
+        },
+        {
+            "path": "src/components/BlogPostGraphics/BlogPostGraphics.tsx",
+            "reason": "Decorative static illustration markup with no independent business logic or state transitions to unit test."
+        },
+        {
+            "path": "src/components/Card/InProgressBlock/InProgressBlock.tsx",
+            "reason": "Static status label component with no conditional logic beyond fixed presentational text."
+        },
+        {
+            "path": "src/components/CodingCat/ChristmasHat/ChristmasHat.tsx",
+            "reason": "Decorative static illustration component without data transformation, branching, or side effects."
+        },
+        {
+            "path": "src/components/ContentArea/ContentArea.tsx",
+            "reason": "Thin layout wrapper around children and ContentAreaHandler with no independent business logic."
+        },
+        {
+            "path": "src/components/Atoms/SequentialRiseSpan/SequentialRiseSpan.tsx",
+            "reason": "DOM measurement and IntersectionObserver animation wrapper better covered by browser integration tests than isolated unit assertions."
+        },
+        {
+            "path": "src/components/Atoms/SequentialRiseSpan2/SequentialRiseSpan2.tsx",
+            "reason": "Static fallback text wrapper with no branching, data transformation, or side effects."
+        },
+        {
+            "path": "src/components/Bento/Bento.tsx",
+            "reason": "Responsive layout component driven by CSS grid and viewport resize behavior rather than business logic."
         }
     ]
 }

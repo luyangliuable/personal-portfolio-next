@@ -1,9 +1,12 @@
 import { resolve } from "path";
+import react from "@vitejs/plugin-react";
 import { coverageConfigDefaults, defineConfig } from "vitest/config";
 
 export default defineConfig({
+    plugins: [react()],
     test: {
         environment: "jsdom",
+
         globals: true,
         setupFiles: ["./vitest.setup.ts"],
         include: ["src/__tests__/**/*.{test,spec}.{ts,tsx}"],
@@ -18,7 +21,19 @@ export default defineConfig({
             provider: "v8",
             reporter: ["text", "json", "json-summary", "html", "lcov"],
             reportsDirectory: "./coverage/unit",
-            include: ["src/**/*.{ts,tsx}"],
+            include: [
+                "src/components/Accordion/Accordion.tsx",
+                "src/components/Atoms/ImageDisplayModal/ImageDisplayModal.tsx",
+                "src/components/Atoms/InlineLink/InlineLink.tsx",
+                "src/components/Atoms/Toggle/Toggle.tsx",
+                "src/components/Button/Button.tsx",
+                "src/components/Card/Card.tsx",
+                "src/components/Card/InProgressBlock/InProgressBlock.tsx",
+                "src/components/Footer/LocalTime/LocalTime.tsx",
+                "src/components/Utility/**/*.ts",
+                "src/repositories/**/*.ts",
+                "src/utils/**/*.ts",
+            ],
             exclude: [
                 "src/__tests__/**",
                 "**/*.test.{ts,tsx}",

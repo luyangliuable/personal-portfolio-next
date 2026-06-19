@@ -1,0 +1,39 @@
+name: CI
+
+on:
+    pull_request:
+    push:
+        branches:
+            - main
+
+jobs:
+    formatting:
+        name: Formatting
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: npm
+
+            - name: Enforce code formatting
+              run: |
+                  echo "Checking code formatting with Prettier..."
+
+                  npx --yes prettier@3.6.2 --write .
+
+                  # Check if any files were modified by git, excluding package-lock.json
+                  MODIFIED_FILES=$(git status --porcelain | grep -v 'package-lock.json' || true)
+                  if [ -n "$MODIFIED_FILES" ]; then
+                    echo "Code formatter made changes to files!"
+                    echo "Run 'npx --yes prettier@3.6.2 --write .' and re-push your changes"
+                    echo "Files that were formatted:"
+                    echo "$MODIFIED_FILES"
+                    exit 1
+                  fi
+                  echo "Code formatting is correct"

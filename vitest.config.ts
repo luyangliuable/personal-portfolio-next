@@ -1,6 +1,6 @@
-import { coverageConfigDefaults, defineConfig } from "vitest/config";
 import { resolve } from "path";
 import react from "@vitejs/plugin-react";
+import { coverageConfigDefaults, defineConfig } from "vitest/config";
 
 export default defineConfig({
     plugins: [react()],

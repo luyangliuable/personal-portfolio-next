@@ -12,9 +12,7 @@
         "src/repositories/Response/**",
         "src/stores/AppContext.tsx",
         "src/stores/TriggerContext.tsx",
-        "src/stores/provider.tsx",
-        "src/components/**/*.tsx",
-        "src/page/**/*.tsx"
+        "src/stores/provider.tsx"
     ],
     "documentedExcludes": [
         {

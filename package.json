@@ -12,7 +12,9 @@
     "knip": "knip",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:coverage-scope": "node scripts/check-coverage-scope.mjs",
+    "test:coverage:ci": "vitest run --coverage && npm run test:coverage-scope"
   },
   "dependencies": {
     "@auth/unstorage-adapter": "^2.0.0",

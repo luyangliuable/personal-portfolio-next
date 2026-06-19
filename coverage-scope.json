@@ -1,0 +1,97 @@
+{
+    "source": ["src/**/*.{ts,tsx}"],
+    "structuralExcludes": [
+        "src/__tests__/**",
+        "**/*.test.{ts,tsx}",
+        "**/*.spec.{ts,tsx}",
+        "**/*.d.ts",
+        "**/Interface/**",
+        "**/interfaces/**",
+        "**/index.{ts,tsx}",
+        "src/app/**",
+        "src/repositories/Response/**",
+        "src/stores/AppContext.tsx",
+        "src/stores/TriggerContext.tsx",
+        "src/stores/provider.tsx",
+        "src/components/**/*.tsx",
+        "src/page/**/*.tsx"
+    ],
+    "documentedExcludes": [
+        {
+            "path": "src/utils/BlogPage/BlogContent/MarkdownRendererV2/reactComponentWhiteList.ts",
+            "reason": "Static component whitelist data with no executable business logic."
+        },
+        {
+            "path": "src/auth.ts",
+            "reason": "NextAuth runtime configuration; integration-tested through Next/Auth and not meaningful as isolated unit logic."
+        },
+        {
+            "path": "src/lib/mongodb.ts",
+            "reason": "Runtime MongoDB client bootstrap that depends on deployment environment variables and driver connection side effects."
+        },
+        {
+            "path": "src/components/Utility/DebugUtility.ts",
+            "reason": "Debug-only React hook for logging prop changes; not production business logic."
+        },
+        {
+            "path": "src/components/Utility/ScrollUtility.ts",
+            "reason": "DOM/GSAP scroll positioning helpers requiring browser layout integration rather than isolated unit assertions."
+        },
+        {
+            "path": "src/components/Utility/UseFadeInOnView/UseFadeInOnView.tsx",
+            "reason": "Thin React hook wrapper around IntersectionObserver queue side effects; better covered by integration tests."
+        },
+        {
+            "path": "src/hooks/useScrollAnimation.tsx",
+            "reason": "Thin wrapper hook around GSAP animation setup with no business transformation logic."
+        },
+        {
+            "path": "src/hooks/useScrollPosition.tsx",
+            "reason": "Browser scroll listener hook dominated by timer/window side effects; needs integration test coverage separately."
+        },
+        {
+            "path": "src/stores/store.ts",
+            "reason": "Redux store wiring with no business logic beyond combining API slices."
+        },
+        {
+            "path": "src/stores/DynamicLoadQueue/DynamicLoadQueue.ts",
+            "reason": "IntersectionObserver singleton with DOM timing side effects better suited for integration coverage."
+        },
+        {
+            "path": "src/stores/Repository/Auth.tsx",
+            "reason": "RTK Query endpoint declarations; generated hook behavior is covered by Redux Toolkit integration."
+        },
+        {
+            "path": "src/stores/Repository/Notes.tsx",
+            "reason": "RTK Query endpoint declarations; generated hook behavior is covered by Redux Toolkit integration."
+        },
+        {
+            "path": "src/stores/Repository/Posts.tsx",
+            "reason": "RTK Query endpoint declarations; generated hook behavior is covered by Redux Toolkit integration."
+        },
+        {
+            "path": "src/stores/Selectors/Auth.tsx",
+            "reason": "Trivial selector wrapper with no data transformation logic."
+        },
+        {
+            "path": "src/components/ContentArea/ContentAreaHandler/ContentAreaHandler.tsx",
+            "reason": "Thin presentational hook wrapper with no independent business logic."
+        },
+        {
+            "path": "src/components/ContentArea/ContentAreaHandler/useContentAreaHandler.ts",
+            "reason": "DOM CSS variable synchronization hook requiring layout integration coverage."
+        },
+        {
+            "path": "src/page/BlogPage/BlogContent/MarkdownRendererV2/useHighlightAll.tsx",
+            "reason": "Thin hook wrapper around Prism highlighting side effects."
+        },
+        {
+            "path": "src/utils/BlogPage/BlogContent/MarkdownRendererV2/Plugins/customCodeBlockPlugin.ts",
+            "reason": "React server rendering plugin coupled to CodeBlock component; requires renderer integration coverage."
+        },
+        {
+            "path": "src/repositories/NoteRepository.ts",
+            "reason": "Legacy duplicate of PostRepository behavior kept out of strict unit coverage until the repositories are consolidated."
+        }
+    ]
+}

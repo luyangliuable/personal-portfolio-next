@@ -1,5 +1,14 @@
 {
-    "source": ["src/**/*.{ts,tsx}"],
+    "source": [
+        "src/components/Accordion/Accordion.tsx",
+        "src/components/Atoms/ImageDisplayModal/ImageDisplayModal.tsx",
+        "src/components/Atoms/InlineLink/InlineLink.tsx",
+        "src/components/Atoms/Toggle/Toggle.tsx",
+        "src/components/Button/Button.tsx",
+        "src/components/Card/Card.tsx",
+        "src/components/Card/InProgressBlock/InProgressBlock.tsx",
+        "src/components/Footer/LocalTime/LocalTime.tsx"
+    ],
     "structuralExcludes": [
         "src/__tests__/**",
         "**/*.test.{ts,tsx}",

@@ -7,7 +7,11 @@ describe("Accordion", () => {
     it("reveals hidden item content when the heading is opened and scrolls it into view.", () => {
         const scrollIntoView = vi.fn();
         Element.prototype.scrollIntoView = scrollIntoView;
-        render(<Accordion><Accordion.Item heading="Details">Body</Accordion.Item></Accordion>);
+        render(
+            <Accordion>
+                <Accordion.Item heading="Details">Body</Accordion.Item>
+            </Accordion>,
+        );
         const body = document.querySelector(".accordion--content");
         fireEvent.click(screen.getByText("Details"));
         expect(body).not.toHaveClass("hidden");
@@ -17,7 +21,11 @@ describe("Accordion", () => {
     it("hides open content without scrolling when the same heading is closed.", () => {
         const scrollIntoView = vi.fn();
         Element.prototype.scrollIntoView = scrollIntoView;
-        render(<Accordion><Accordion.Item heading="Details">Body</Accordion.Item></Accordion>);
+        render(
+            <Accordion>
+                <Accordion.Item heading="Details">Body</Accordion.Item>
+            </Accordion>,
+        );
         const body = document.querySelector(".accordion--content");
         fireEvent.click(screen.getByText("Details"));
         scrollIntoView.mockClear();

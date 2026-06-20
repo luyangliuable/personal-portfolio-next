@@ -19,12 +19,14 @@ const ImageDisplayModal: React.FC<IImageDisplayModalProps> = ({
     showModal,
 }) => {
     const removeQueryParams = (url: string): string => {
+        if (!url.startsWith("http://") && !url.startsWith("https://"))
+            return url;
+
         try {
             const parsedUrl = new URL(url);
             parsedUrl.search = "";
             return parsedUrl.toString();
-        } catch (error) {
-            console.error("Invalid URL", error);
+        } catch {
             return url;
         }
     };

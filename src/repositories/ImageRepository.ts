@@ -5,7 +5,6 @@ class ImageRepository extends Repository {
     private static instance: ImageRepository | null = null;
     private cache = new Map<string, string>();
     private ongoingRequests = new Map<string, Promise<string>>();
-    private static BASE_URL: string = "";
 
     private constructor() {
         super();
@@ -20,9 +19,15 @@ class ImageRepository extends Repository {
     async getImageById(idOrUrl: string, compression?: number): Promise<string> {
         if (idOrUrl === null) console.error("no image id provided");
         let url: string = idOrUrl;
-        if (!idOrUrl.startsWith("http://") && !idOrUrl.startsWith("https://"))
-            return apiImageUrl(idOrUrl, compression);
-        url = `${url}?compression=${compression ?? 100}`;
+        if (
+            !idOrUrl.startsWith("http://") &&
+            !idOrUrl.startsWith("https://") &&
+            !idOrUrl.startsWith("/static")
+        ) {
+            url = apiImageUrl(idOrUrl, compression);
+        } else {
+            url = `${url}?compression=${compression ?? 100}`;
+        }
         if (this.cache.has(url)) return this.cache.get(url)!;
         if (this.ongoingRequests.has(url))
             return this.ongoingRequests.get(url)!;

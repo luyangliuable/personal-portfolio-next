@@ -1,4 +1,5 @@
 import BlogContent from "../../../../page/BlogPage/BlogContent/BlogContent";
+import { apiImageUrl } from "../../../../config/api";
 import PostRepository from "../../../../repositories/PostRepository";
 import BlogPostResponse from "../../../../repositories/Response/BlogPostResponse";
 import {
@@ -28,7 +29,7 @@ export async function generateMetadata({
             removeHashesAndStripWhitespace(content.body),
         ),
         openGraph: {
-            images: [`${content.image.$oid}`],
+            images: [apiImageUrl(content.image.$oid)],
         },
     };
 }

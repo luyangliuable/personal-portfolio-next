@@ -47,8 +47,7 @@ const Notes: React.FC<INotesProps> = ({ title, description, content }) => {
         {},
     );
 
-    const authorImage =
-        "65817ae96c73ceb16ba51731";
+    const authorImage = "65817ae96c73ceb16ba51731";
 
     const emojIconMap: Record<string, string[]> = {
         random: ["😀", "😃", "😄", "😁", "😆"],

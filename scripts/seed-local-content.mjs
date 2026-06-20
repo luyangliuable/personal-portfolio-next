@@ -4,6 +4,7 @@ const uri = process.env.MONGOURI ?? "mongodb://localhost:27017";
 const client = new MongoClient(uri);
 
 const imageIds = [
+  "651942aaf9b642fb30be59ae",
   "650502c8f9b642fb30be5999", "650516c6f9b642fb30be599a",
   "65051a29f9b642fb30be599b", "65052756f9b642fb30be599d",
   "6505281ef9b642fb30be599e", "65052952f9b642fb30be599f",
@@ -18,6 +19,7 @@ const imageIds = [
   "667d043b5f03f0355e1fc366", "667d05f65f03f0355e1fc367",
   "667d085d5f03f0355e1fc369", "667d0b605f03f0355e1fc36b",
   "667d0e585f03f0355e1fc36f", "668c946aa8e1db1f839dba56",
+  "66ab67bd8803e8c20005c32e", "66e588c918eb5f86ea13b531",
   "6725884d18eb5f86ea13b53e", "6725894618eb5f86ea13b53f",
   "6725e5bd18eb5f86ea13b542", "677a5f3618eb5f86ea13b55a",
 ];
@@ -50,6 +52,8 @@ const posts = [
   post("658180006c73ceb16ba51732", "Local Blog Smoke Test", ["local", "test"], true),
   post("658180016c73ceb16ba51733", "Algorithms Local Post", ["algorithms"], true),
   post("658180026c73ceb16ba51734", "Projects Local Post", ["projects"]),
+  post("66ab67bd8803e8c20005c32e", "Local Tool Post", ["tools"]),
+  post("66e588c918eb5f86ea13b531", "Local Experience Post", ["experience"]),
 ];
 for (const item of posts) {
   await db.collection("Post").updateOne({ _id: item._id }, { $set: item }, { upsert: true });

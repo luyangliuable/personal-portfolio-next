@@ -1,10 +1,11 @@
+import { apiUrl } from "../config/api";
 import BlogPostResponse from "./Response/BlogPostResponse";
 import Repository from "./Repository";
 
 class PostRepository extends Repository {
     private static instance: PostRepository;
     private static postListCache: any[] | null = null;
-    static BASE_URL: string = "https://llcode.tech/api/posts";
+    static BASE_URL: string = apiUrl("/posts");
 
     private constructor() {
         super();

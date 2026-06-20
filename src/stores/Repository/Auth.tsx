@@ -1,3 +1,4 @@
+import { apiUrl } from "../../config/api";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { UserData } from "../../page/RegisterPage/RegisterPage";
 
@@ -17,7 +18,7 @@ export const registerUser = createAsyncThunk(
     "auth/registerUser",
     async (userData: UserData, thunkAPI) => {
         try {
-            const response = await fetch("https://llcode.tech/api/register", {
+            const response = await fetch(apiUrl("/register"), {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -39,7 +40,7 @@ export const loginUser = createAsyncThunk(
     "auth/loginUser",
     async (userData: { username: string; password: string }, thunkAPI) => {
         try {
-            const response = await fetch("https://llcode.tech/api/login", {
+            const response = await fetch(apiUrl("/login"), {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -63,7 +64,7 @@ export const authUser = createAsyncThunk<AuthUserResponse, void>(
     "auth/fetchUserDetails",
     async (_, thunkAPI) => {
         try {
-            const response = await fetch("https://llcode.tech/api/user", {
+            const response = await fetch(apiUrl("/user"), {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

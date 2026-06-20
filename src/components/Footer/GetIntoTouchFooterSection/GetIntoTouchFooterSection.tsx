@@ -1,3 +1,4 @@
+import { apiUrl } from "../../../config/api";
 "use client";
 
 import React, { useRef, useState, RefObject } from "react";
@@ -19,7 +20,7 @@ const GetInTouch: React.FC = () => {
         };
         const BASE_URL: string =
             process.env.REACT_APP_WEATHER_API_BASE_URL ||
-            "https://llcode.tech/api";
+            API_BASE_URL;
         fetch(`${BASE_URL}/message`, {
             method: "POST",
             cache: "no-cache",

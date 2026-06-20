@@ -6,6 +6,7 @@ import NoteRepository from "../../repositories/NoteRepository";
 import PostRepository from "../../repositories/PostRepository";
 import Repository from "../../repositories/Repository";
 import UserRepository from "../../repositories/UserRepository";
+import { API_BASE_URL } from "../../config/api";
 
 const posts = [
     {
@@ -104,6 +105,17 @@ describe("repositories", () => {
         vi.spyOn(console, "error").mockImplementation(() => {});
 
         await expect(repo.getRelatedPosts(["tag"], "id")).resolves.toEqual([]);
+    });
+
+    it("builds direct image URLs for ids, static paths and remote URLs", () => {
+        const repo = ImageRepository.getInstance();
+        expect(repo.getImageUrl("abc", 50)).toBe(
+            `${API_BASE_URL}/image/abc?compression=50`,
+        );
+        expect(repo.getImageUrl("/static/a.png", 50)).toBe("/static/a.png");
+        expect(repo.getImageUrl("https://site.test/a.png?x=1", 20)).toBe(
+            "https://site.test/a.png?x=1&compression=20",
+        );
     });
 
     it("caches image requests and removes failed image requests from the in-flight map", async () => {

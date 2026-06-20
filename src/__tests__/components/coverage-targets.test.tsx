@@ -3,8 +3,11 @@ const h = React.createElement;
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const addToQueue = vi.fn();
-const toggleTrigger = vi.fn();
+const { addToQueue, toggleTrigger, octokitList } = vi.hoisted(() => ({
+    addToQueue: vi.fn(),
+    toggleTrigger: vi.fn(),
+    octokitList: vi.fn(),
+}));
 
 vi.mock("next/link", () => ({
     default: ({ href, children, ...props }: any) => (
@@ -109,7 +112,6 @@ vi.mock("@/components/Atoms/ImageDisplayModal/ImageDisplayModal", () => ({
     ),
 }));
 
-const octokitList = vi.fn();
 vi.mock("@octokit/rest", () => {
     class Octokit {
         repos = { listContributors: octokitList };

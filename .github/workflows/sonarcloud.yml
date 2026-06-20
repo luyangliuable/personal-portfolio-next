@@ -1,4 +1,4 @@
-name: CI
+name: SonarCloud
 
 on:
     pull_request:
@@ -10,8 +10,8 @@ on:
     workflow_dispatch:
 
 jobs:
-    test-build-sonar:
-        name: Test, Build, and SonarCloud
+    sonarcloud:
+        name: SonarCloud Analysis
         runs-on: ubuntu-latest
         steps:
             - name: Checkout repository
@@ -28,26 +28,8 @@ jobs:
             - name: Install dependencies
               run: npm i
 
-            - name: Check formatting
-              run: |
-                  npx --yes prettier@3.6.2 --write .
-                  MODIFIED_FILES=$(git status --porcelain | grep -v 'package-lock.json' || true)
-                  if [ -n "$MODIFIED_FILES" ]; then
-                    echo "Code formatter made changes to files."
-                    echo "$MODIFIED_FILES"
-                    exit 1
-                  fi
-
-            - name: Run unit tests with coverage
-              run: npm run test:coverage:ci
-
-            - name: Run lint
-              run: npm run lint
-
-            - name: Run production build
-              run: npm run build
-              env:
-                  MONGODB_URI: mongodb://127.0.0.1:27017/test
+            - name: Generate coverage for SonarCloud
+              run: npm run test:coverage
 
             - name: Run SonarCloud analysis
               uses: SonarSource/sonarqube-scan-action@v6

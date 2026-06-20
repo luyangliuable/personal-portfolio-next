@@ -7,7 +7,7 @@ const AuthorDetails: React.FC<{ content?: BlogPostResponse }> = ({
     content,
 }) => {
     const defaultAuthorImage: string =
-        "https://llcode.tech/api/image/65817ae96c73ceb16ba51731";
+        "65817ae96c73ceb16ba51731";
 
     if (content === undefined) return <></>;
 

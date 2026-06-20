@@ -38,7 +38,7 @@ const items: ExperienceSectionItem[] = [
         media: {
             type: "IMAGE",
             source: {
-                url: "https://llcode.tech/api/image/6725894618eb5f86ea13b53f",
+                url: "6725894618eb5f86ea13b53f",
             },
         },
     },
@@ -52,7 +52,7 @@ const items: ExperienceSectionItem[] = [
         media: {
             type: "IMAGE",
             source: {
-                url: "https://llcode.tech/api/image/667d085d5f03f0355e1fc369",
+                url: "667d085d5f03f0355e1fc369",
             },
         },
     },
@@ -70,7 +70,7 @@ const items: ExperienceSectionItem[] = [
         media: {
             type: "IMAGE",
             source: {
-                url: "https://llcode.tech/api/image/65920a4af1f0fe657dc4683b",
+                url: "65920a4af1f0fe657dc4683b",
             },
         },
     },
@@ -84,7 +84,7 @@ const items: ExperienceSectionItem[] = [
         media: {
             type: "IMAGE",
             source: {
-                url: "https://llcode.tech/api/image/668c946aa8e1db1f839dba56",
+                url: "668c946aa8e1db1f839dba56",
             },
         },
     },
@@ -98,7 +98,7 @@ const items: ExperienceSectionItem[] = [
         media: {
             type: "IMAGE",
             source: {
-                url: "https://llcode.tech/api/image/6725884d18eb5f86ea13b53e",
+                url: "6725884d18eb5f86ea13b53e",
             },
         },
     },
@@ -115,7 +115,7 @@ const items: ExperienceSectionItem[] = [
         media: {
             type: "IMAGE",
             source: {
-                url: "https://llcode.tech/api/image/65920b85f1f0fe657dc4683c",
+                url: "65920b85f1f0fe657dc4683c",
             },
         },
     },
@@ -133,7 +133,7 @@ const items: ExperienceSectionItem[] = [
         media: {
             type: "IMAGE",
             source: {
-                url: "https://llcode.tech/api/image/65c3629e98a82efb52729772",
+                url: "65c3629e98a82efb52729772",
             },
         },
     },
@@ -178,7 +178,7 @@ const items: ExperienceSectionItem[] = [
         media: {
             type: "IMAGE",
             source: {
-                url: "https://llcode.tech/api/image/667d05f65f03f0355e1fc367",
+                url: "667d05f65f03f0355e1fc367",
             },
         },
     },
@@ -192,7 +192,7 @@ const items: ExperienceSectionItem[] = [
         media: {
             type: "IMAGE",
             source: {
-                url: "https://llcode.tech/api/image/667d043b5f03f0355e1fc366",
+                url: "667d043b5f03f0355e1fc366",
             },
         },
     },
@@ -209,7 +209,7 @@ const items: ExperienceSectionItem[] = [
         media: {
             type: "IMAGE",
             source: {
-                url: "https://llcode.tech/api/image/667d0b605f03f0355e1fc36b",
+                url: "667d0b605f03f0355e1fc36b",
             },
         },
     },
@@ -223,7 +223,7 @@ const items: ExperienceSectionItem[] = [
         media: {
             type: "IMAGE",
             source: {
-                url: "https://llcode.tech/api/image/667d0e585f03f0355e1fc36f",
+                url: "667d0e585f03f0355e1fc36f",
             },
         },
     },
@@ -240,7 +240,7 @@ const items: ExperienceSectionItem[] = [
         media: {
             type: "IMAGE",
             source: {
-                url: "https://llcode.tech/api/image/667cfff15f03f0355e1fc35f",
+                url: "667cfff15f03f0355e1fc35f",
             },
         },
     },
@@ -267,7 +267,7 @@ const items: ExperienceSectionItem[] = [
         media: {
             type: "IMAGE",
             source: {
-                url: "https://llcode.tech/api/image/667d02115f03f0355e1fc363",
+                url: "667d02115f03f0355e1fc363",
             },
         },
     },

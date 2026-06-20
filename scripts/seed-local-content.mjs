@@ -30,7 +30,7 @@ function post(id, heading, tags, featured = false) {
     description: `Local seeded content for ${heading}.`, post_type: "blog",
     year: 2026, month: 6, date_created: "2026-06-20T00:00:00Z",
     date_last_modified: "2026-06-20T00:00:00Z",
-    file_name: `${heading.toLowerCase().replaceAll(" ", "-")}.md`, tags,
+    file_name: heading.toLowerCase().replaceAll(" ", "-"), tags,
     reading_time_minutes: 3, is_featured: featured, in_progress: false,
     active: true, image: new ObjectId("65817ae96c73ceb16ba51731"),
     checksum: "local-seed", is_locked: false,

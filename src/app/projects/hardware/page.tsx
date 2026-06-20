@@ -22,29 +22,29 @@ const HardwareProjectsPage: React.FC<{}> = () => {
             name: "Arduino mega",
             description:
                 "Harnessing creativity in a compact circuit, my Arduino Mega survived where its predecessor met a fiery end with a rogue laptop charger.",
-            image: "https://llcode.tech/api/image/65052756f9b642fb30be599d",
+            image: "65052756f9b642fb30be599d",
         },
         {
             name: "",
             description:
                 "I used this Raspberry Pi for commanding home devices and blocking ads by using Pi-hole. A real tech charm!",
-            image: "https://llcode.tech/api/image/6505281ef9b642fb30be599e",
+            image: "6505281ef9b642fb30be599e",
         },
         {
             name: "rgb controller",
             description: "",
-            image: "https://llcode.tech/api/image/65052952f9b642fb30be599f",
+            image: "65052952f9b642fb30be599f",
         },
         {
             name: "light sensor",
             description: "",
-            image: "https://llcode.tech/api/image/650529b6f9b642fb30be59a0",
+            image: "650529b6f9b642fb30be59a0",
         },
         {
             name: "bread board",
             description:
                 "Why don't breadboards ever become musicians? Because they're always losing their connections!",
-            image: "https://llcode.tech/api/image/65052a6af9b642fb30be59a1",
+            image: "65052a6af9b642fb30be59a1",
         },
     ];
 

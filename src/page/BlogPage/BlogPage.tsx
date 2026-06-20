@@ -14,7 +14,7 @@ import SkeletonPage from "../SkeletonPage/SkeletonPage";
 import TextInputWithCard from "../../components/TextInputCard/TextInputWithCard";
 import BlogYear from "../../components/BlogYear/BlogYear";
 
-const authorImage = "https://llcode.tech/api/image/65817ae96c73ceb16ba51731";
+const authorImage = "65817ae96c73ceb16ba51731";
 
 const heroHeaderContent = Object.freeze({
     heading: "Blog Posts",

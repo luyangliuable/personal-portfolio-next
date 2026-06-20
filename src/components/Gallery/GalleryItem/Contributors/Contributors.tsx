@@ -6,7 +6,7 @@ import { Octokit } from "@octokit/rest";
 import Image from "../../../Image/Image";
 import "./Contributors.css";
 
-const octokit = new Octokit({
+export const octokit = new Octokit({
     auth: process.env.REACT_APP_GITHUB_TOKEN,
 });
 
@@ -14,6 +14,25 @@ interface IContributorsProps {
     repoName: string;
     repoOwner: string;
 }
+
+export const mapContributor = (item: any) => ({
+    login: item.login,
+    avatarUrl: item.avatar_url,
+    profileUrl: item.html_url,
+    contributions: item.contributions,
+});
+
+export const ensureDefaultContributor = (contributors: any[]) => {
+    if (!contributors.some((item) => item.login === "luyangliuable")) {
+        contributors.push({
+            login: "luyangliuable",
+            avatarUrl: "https://avatars.githubusercontent.com/u/23611033?v=4",
+            profileUrl: "https://github.com/luyangliuable",
+            contributions: 0,
+        });
+    }
+    return contributors;
+};
 
 const Contributors: React.FC<IContributorsProps> = ({
     repoName,
@@ -31,28 +50,12 @@ const Contributors: React.FC<IContributorsProps> = ({
                     owner: repoOwner!,
                     repo: repoName!,
                 });
-                contributors = data.map((item) => {
-                    return {
-                        login: item.login,
-                        avatarUrl: item.avatar_url,
-                        profileUrl: item.html_url,
-                        contributions: item.contributions,
-                    };
-                });
+                contributors = data.map(mapContributor);
             } catch (error) {
                 console.error("Error fetching contributors:", error);
             }
 
-            if (!contributors.some((item) => item.login === "luyangliuable")) {
-                contributors.push({
-                    login: "luyangliuable",
-                    avatarUrl:
-                        "https://avatars.githubusercontent.com/u/23611033?v=4",
-                    profileUrl: "https://github.com/luyangliuable",
-                    contributions: 0,
-                });
-            }
-            setContributors(contributors);
+            setContributors(ensureDefaultContributor(contributors));
         };
         fetchContributors();
     }, [repoName, repoOwner]);

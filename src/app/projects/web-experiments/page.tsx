@@ -19,7 +19,7 @@ const content: GalleryItem[] = [
         name: "Fractal Hills",
         description: "Created with web-gl",
         link: "https://llcode.tech/projects/web-experiments/fractal-hills",
-        image: "https://llcode.tech/api/image/677a5f3618eb5f86ea13b55a",
+        image: "677a5f3618eb5f86ea13b55a",
     },
 ];
 

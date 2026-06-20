@@ -1,10 +1,11 @@
+import { API_BASE_URL } from "../config/api";
 import Repository from "./Repository";
 
 class ImageRepository extends Repository {
     private static instance: ImageRepository | null = null;
     private cache = new Map<string, string>();
     private ongoingRequests = new Map<string, Promise<string>>();
-    private static BASE_URL: string = "https://llcode.tech/api/image/";
+    private static BASE_URL: string = `${API_BASE_URL}/image/`;
 
     private constructor() {
         super();
@@ -16,16 +17,20 @@ class ImageRepository extends Repository {
         return ImageRepository.instance;
     }
 
+    getImageUrl(idOrUrl: string, compression?: number): string {
+        if (idOrUrl.startsWith("/static")) return idOrUrl;
+
+        let url = idOrUrl;
+        if (!idOrUrl.startsWith("http://") && !idOrUrl.startsWith("https://"))
+            url = `${ImageRepository.BASE_URL}${idOrUrl}`;
+
+        const separator = url.includes("?") ? "&" : "?";
+        return `${url}${separator}compression=${compression ?? 100}`;
+    }
+
     async getImageById(idOrUrl: string, compression?: number): Promise<string> {
         if (idOrUrl === null) console.error("no image id provided");
-        let url: string = idOrUrl;
-        if (
-            !idOrUrl.startsWith("http://") &&
-            !idOrUrl.startsWith("https://") &&
-            !idOrUrl.startsWith("/static")
-        )
-            url = `${ImageRepository.BASE_URL}${idOrUrl}`;
-        url = `${url}?compression=${compression ?? 100}`;
+        const url = this.getImageUrl(idOrUrl, compression);
         if (this.cache.has(url)) return this.cache.get(url)!;
         if (this.ongoingRequests.has(url))
             return this.ongoingRequests.get(url)!;

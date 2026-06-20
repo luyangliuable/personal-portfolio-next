@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Personal Portfolio Next
 
-## Getting Started
+<!-- markdown-toc start - Don't edit this section. -->
 
-First, run the development server:
+**Table of Contents**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- [Personal Portfolio Next](#personal-portfolio-next)
+    - [1. <a name='GettingStarted'></a>Getting Started](#1-a-namegettingstartedagetting-started)
+        - [1.1. <a name='Prerequisites'></a>Prerequisites](#11-a-nameprerequisitesaprerequisites)
+        - [1.2. <a name='InstallDependencies'></a>Install Dependencies](#12-a-nameinstalldependenciesainstall-dependencies)
+        - [1.3. <a name='LocalFullStackSetup'></a>Local Full-Stack Setup](#13-a-namelocalfullstacksetupalocal-full-stack-setup)
+    - [2. <a name='RunningtheApplication'></a>Running the Application](#2-a-namerunningtheapplicationarunning-the-application)
+    - [3. <a name='DevelopmentCommands'></a>Development Commands](#3-a-namedevelopmentcommandsadevelopment-commands)
+
+<!-- markdown-toc end -->
+
+Next.js portfolio app backed by the Rust portfolio API for posts, notes, and images.
+
+## 1. <a name='GettingStarted'></a>Getting Started
+
+### 1.1. <a name='Prerequisites'></a>Prerequisites
+
+- Node.js 20+
+- pnpm
+- Docker Desktop, for local MongoDB and Redis
+- Rust, for running the backend API locally
+
+### 1.2. <a name='InstallDependencies'></a>Install Dependencies
+
+```sh
+pnpm install
+cp .env.local.example .env.local
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 1.3. <a name='LocalFullStackSetup'></a>Local Full-Stack Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```sh
+docker compose up -d
+IMAGE_STORE_LOCATION="$PWD/.local/images" node scripts/seed-local-content.mjs
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+In the backend repo:
 
-## Learn More
+```sh
+cd /Users/liul31/personal-portfolio/server
+cat > .env <<'ENV'
+MONGOURI=mongodb://localhost:27017
+IMAGE_STORE_LOCATION=/Users/liul31/pp-compare/.local/images
+ENV
+cargo run
+```
 
-To learn more about Next.js, take a look at the following resources:
+The seed script creates deterministic PNG images in `.local/images`. Each seeded image ID maps to its own generated image, with the colour derived from the ID.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 2. <a name='RunningtheApplication'></a>Running the Application
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```sh
+pnpm dev
+```
 
-## Deploy on Vercel
+Open [http://localhost:3000](http://localhost:3000). The frontend uses `NEXT_PUBLIC_API_BASE_URL` from `.env.local` and defaults to the hosted API when the variable is not set.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 3. <a name='DevelopmentCommands'></a>Development Commands
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```sh
+pnpm run format
+pnpm run lint
+pnpm run build
+pnpm test
+```

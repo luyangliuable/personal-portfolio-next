@@ -20,22 +20,22 @@ const content: GalleryItem[] = [
         name: "3d Printed Swivel Arm",
         description:
             "3D-printed arm I designed using solidworks that can swivel around: it was used on a robot as the ultimate payload handler",
-        image: "https://llcode.tech/api/image/650516c6f9b642fb30be599a",
+        image: "650516c6f9b642fb30be599a",
     },
     {
         name: "3d Printed Dino",
         description: "A 3D-printed dinosaur with a rhythmic rattle exoskeleton",
-        image: "https://llcode.tech/api/image/65051a29f9b642fb30be599b",
+        image: "65051a29f9b642fb30be599b",
     },
     {
         name: "3d Printed Maneki Neko",
         description: "",
-        image: "https://llcode.tech/api/image/650502c8f9b642fb30be5999",
+        image: "650502c8f9b642fb30be5999",
     },
     {
         name: "CBA logo with nps+30",
         description: "",
-        image: "https://llcode.tech/api/image/6725e5bd18eb5f86ea13b542",
+        image: "6725e5bd18eb5f86ea13b542",
     },
 ];
 

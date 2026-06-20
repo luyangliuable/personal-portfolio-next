@@ -25,6 +25,36 @@ describe("ImageDisplayModal", () => {
         expect(screen.getByText("Caption")).toBeInTheDocument();
     });
 
+    it("keeps bare image ids unchanged.", () => {
+        render(
+            <ImageDisplayModal
+                image="65817ae96c73ceb16ba51731"
+                description="Caption"
+                showModal
+                setShowModal={vi.fn()}
+            />,
+        );
+        expect(document.querySelector("img")).toHaveAttribute(
+            "src",
+            "65817ae96c73ceb16ba51731",
+        );
+    });
+
+    it("keeps malformed URLs unchanged without logging noise.", () => {
+        render(
+            <ImageDisplayModal
+                image="https://%"
+                description="Caption"
+                showModal
+                setShowModal={vi.fn()}
+            />,
+        );
+        expect(document.querySelector("img")).toHaveAttribute(
+            "src",
+            "https://%",
+        );
+    });
+
     it("requests closing only when the backdrop is clicked.", () => {
         const setShowModal = vi.fn();
         render(

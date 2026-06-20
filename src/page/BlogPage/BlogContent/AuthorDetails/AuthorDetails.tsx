@@ -6,8 +6,7 @@ import { isoDateFormatToString } from "../../../../components/Utility/StringUtil
 const AuthorDetails: React.FC<{ content?: BlogPostResponse }> = ({
     content,
 }) => {
-    const defaultAuthorImage: string =
-        "https://llcode.tech/api/image/65817ae96c73ceb16ba51731";
+    const defaultAuthorImage: string = "65817ae96c73ceb16ba51731";
 
     if (content === undefined) return <></>;
 

@@ -251,6 +251,7 @@ describe("new coverage target visual components", () => {
                     name="Tool"
                     type="tool"
                     imageOverlay="/overlay.png"
+                    minuteRead={4}
                     metadata={[{ icon: "I", value: "raw" }]}
                 />
                 <GalleryItem

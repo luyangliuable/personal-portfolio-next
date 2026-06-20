@@ -56,6 +56,7 @@ const Contributors: React.FC<IContributorsProps> = ({
                 contributors = buildContributors(data);
             } catch (error) {
                 console.error("Error fetching contributors:", error);
+                contributors = buildContributors();
             }
 
             setContributors(contributors);

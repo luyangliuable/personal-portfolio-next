@@ -1,0 +1,38 @@
+name: Unit Coverage Gate
+
+on:
+    pull_request:
+        branches:
+            - main
+    push:
+        branches:
+            - main
+    workflow_dispatch:
+
+jobs:
+    coverage-scope:
+        name: Coverage Scope, Lint, and Build
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: npm
+
+            - name: Install dependencies
+              run: npm i
+
+            - name: Run unit tests with coverage scope gate
+              run: npm run test:coverage:ci
+
+            - name: Run lint
+              run: npm run lint
+
+            - name: Run production build
+              run: npm run build
+              env:
+                  MONGODB_URI: mongodb://127.0.0.1:27017/test

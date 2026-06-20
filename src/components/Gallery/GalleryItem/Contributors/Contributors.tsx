@@ -15,28 +15,6 @@ interface IContributorsProps {
     repoOwner: string;
 }
 
-const defaultContributor = {
-    login: "luyangliuable",
-    avatarUrl: "https://avatars.githubusercontent.com/u/23611033?v=4",
-    profileUrl: "https://github.com/luyangliuable",
-    contributions: 0,
-};
-
-export const buildContributors = (items: any[] = []) => {
-    const contributors = items.map((item) => ({
-        login: item.login,
-        avatarUrl: item.avatar_url,
-        profileUrl: item.html_url,
-        contributions: item.contributions,
-    }));
-    const hasDefaultContributor = contributors.some(
-        (item) => item.login === defaultContributor.login,
-    );
-    return hasDefaultContributor
-        ? contributors
-        : [...contributors, defaultContributor];
-};
-
 const Contributors: React.FC<IContributorsProps> = ({
     repoName,
     repoOwner,
@@ -53,12 +31,27 @@ const Contributors: React.FC<IContributorsProps> = ({
                     owner: repoOwner!,
                     repo: repoName!,
                 });
-                contributors = buildContributors(data);
+                contributors = data.map((item) => {
+                    return {
+                        login: item.login,
+                        avatarUrl: item.avatar_url,
+                        profileUrl: item.html_url,
+                        contributions: item.contributions,
+                    };
+                });
             } catch (error) {
                 console.error("Error fetching contributors:", error);
-                contributors = buildContributors();
             }
 
+            if (!contributors.some((item) => item.login === "luyangliuable")) {
+                contributors.push({
+                    login: "luyangliuable",
+                    avatarUrl:
+                        "https://avatars.githubusercontent.com/u/23611033?v=4",
+                    profileUrl: "https://github.com/luyangliuable",
+                    contributions: 0,
+                });
+            }
             setContributors(contributors);
         };
         fetchContributors();

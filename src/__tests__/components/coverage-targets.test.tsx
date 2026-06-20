@@ -265,7 +265,7 @@ describe("new coverage target visual components", () => {
         expect(await screen.findByText("GI")).toBeInTheDocument();
         expect(screen.getByText("BLOG")).toBeInTheDocument();
         expect(screen.getByText("TOOL")).toBeInTheDocument();
-        expect(screen.getByText("raw")).toBeInTheDocument();
+        expect(await screen.findByText("raw")).toBeInTheDocument();
         expect(screen.getByText("mapped")).toBeInTheDocument();
         expect(addToQueue).toHaveBeenCalled();
     });

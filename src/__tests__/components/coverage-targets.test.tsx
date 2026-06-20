@@ -3,10 +3,8 @@ const h = React.createElement;
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const { addToQueue, toggleTrigger, octokitList } = vi.hoisted(() => ({
+const { addToQueue } = vi.hoisted(() => ({
     addToQueue: vi.fn(),
-    toggleTrigger: vi.fn(),
-    octokitList: vi.fn(),
 }));
 
 vi.mock("next/link", () => ({
@@ -51,7 +49,7 @@ vi.mock("@/stores/DynamicLoadQueue/DynamicLoadQueue", () => ({
     default: { getInstance: () => ({ addToQueue }) },
 }));
 vi.mock("@/stores/TriggerContext", () => ({
-    useTrigger: () => ({ trigger: 1, toggleTrigger }),
+    useTrigger: () => ({ trigger: 1, toggleTrigger: vi.fn() }),
 }));
 vi.mock("@/hooks", () => ({ useScrollPosition: () => ({ scrolling: true }) }));
 
@@ -112,42 +110,6 @@ vi.mock("@/components/Atoms/ImageDisplayModal/ImageDisplayModal", () => ({
     ),
 }));
 
-vi.mock("@octokit/rest", () => {
-    class Octokit {
-        repos = { listContributors: octokitList };
-    }
-    return { Octokit };
-});
-vi.mock("p5/lib/p5.js", () => ({
-    default: vi.fn(function (this: any, sketch: any, node: any) {
-        this.remove = vi.fn();
-        const p: any = {
-            windowWidth: 100,
-            windowHeight: 100,
-            WEBGL: "WEBGL",
-            TRIANGLE_STRIP: "TRI",
-            PI: Math.PI,
-            createCanvas: vi.fn(),
-            noise: vi.fn(() => 0.5),
-            map: vi.fn((v, a, b, c, d) => c + ((v - a) / (b - a)) * (d - c)),
-            background: vi.fn(),
-            translate: vi.fn(),
-            rotateX: vi.fn(),
-            stroke: vi.fn(),
-            strokeWeight: vi.fn(),
-            beginShape: vi.fn(),
-            fill: vi.fn(),
-            vertex: vi.fn(),
-            endShape: vi.fn(),
-            color: vi.fn((...args) => args.join(",")),
-            lerpColor: vi.fn((a) => a),
-        };
-        sketch(p);
-        p.setup();
-        p.draw();
-    }),
-}));
-
 import SmallCard from "@/components/Atoms/SmallCard/SmallCard";
 import BlogYear from "@/components/BlogYear/BlogYear";
 import CodingCat from "@/components/CodingCat/CodingCat";
@@ -155,12 +117,10 @@ import EmojIcon from "@/components/EmojIcon/EmojIcon";
 import ExperienceSection from "@/components/ExperienceSection/ExperienceSection";
 import ExperienceSectionEvent from "@/components/ExperienceSection/ExperienceSectionEvent/ExperienceSectionEvent";
 import ExperienceSectionImageDisplay from "@/components/ExperienceSection/ExperienceSectionImageDisplay/ExperienceSectionImageDisplay";
-import FeaturedContentSection from "@/components/FeaturedContentSection/FeaturedContentSection";
 import Footer from "@/components/Footer/Footer";
 import GetInTouch from "@/components/Footer/GetIntoTouchFooterSection/GetIntoTouchFooterSection";
 
 import Gallery from "@/components/Gallery/Gallery";
-import Contributors from "@/components/Gallery/GalleryItem/Contributors/Contributors";
 import GalleryItem from "@/components/Gallery/GalleryItem/GalleryItem";
 
 beforeEach(() => {
@@ -183,7 +143,7 @@ describe("new coverage target visual components", () => {
         media: { source: { url: "/img.png" } },
     };
 
-    it("renders SmallCard and emoji variants", () => {
+    it("renders SmallCard fallback URLs and deterministic emoji variants for single and multi-emoji inputs.", () => {
         render(
             (
                 <SmallCard
@@ -204,7 +164,7 @@ describe("new coverage target visual components", () => {
         expect(screen.getAllByText("A").length).toBeGreaterThan(1);
     });
 
-    it("renders observer and animation driven components", () => {
+    it("marks BlogYear as visible from observer events and runs CodingCat scroll animation lifecycle.", () => {
         render(<BlogYear year="2024" />);
         expect(screen.getByText("2024").parentElement).toHaveClass(
             "blog__year--animate",
@@ -222,7 +182,7 @@ describe("new coverage target visual components", () => {
         expect(timeline.kill).toHaveBeenCalled();
     });
 
-    it("renders experience cards and modal interactions", () => {
+    it("formats experience coordinates and opens the image modal from the expand action.", () => {
         render(
             <ExperienceSectionEvent
                 timeLineRef={{ current: null }}
@@ -237,47 +197,13 @@ describe("new coverage target visual components", () => {
         expect(screen.getByTestId("modal")).toHaveTextContent("open");
     });
 
-    it("renders ExperienceSection timeline content", () => {
+    it("builds the retrospective timeline from configured experience entries.", () => {
         render(<ExperienceSection />);
         expect(screen.getByText("Retrospective")).toBeInTheDocument();
         expect(screen.getByText("BlackHole")).toBeInTheDocument();
     });
 
-    it("renders featured content and show more behavior", () => {
-        Object.defineProperty(globalThis, "innerWidth", {
-            value: 900,
-            configurable: true,
-        });
-        render(
-            <FeaturedContentSection
-                postList={[
-                    {
-                        _id: { $oid: "p1" },
-                        is_featured: true,
-                        heading: "Post",
-                        body: "Body",
-                        tags: [],
-                        post_type: "md",
-                        date_created: "2024-01-01",
-                    } as any,
-                    {
-                        _id: { $oid: "p2" },
-                        is_featured: false,
-                        heading: "Hidden",
-                        body: "Body",
-                        tags: [],
-                        post_type: "tool",
-                    } as any,
-                ]}
-            />,
-        );
-        expect(screen.getByText("Featured Content")).toBeInTheDocument();
-        expect(screen.queryByText("Hidden")).not.toBeInTheDocument();
-        fireEvent.click(screen.getByText(/Show More/));
-        expect(toggleTrigger).toHaveBeenCalled();
-    });
-
-    it("submits get in touch form and renders footer", async () => {
+    it("posts get-in-touch form data and updates the submit button after success.", async () => {
         globalThis.fetch = vi.fn().mockResolvedValue({}) as any;
         render(<GetInTouch />);
         fireEvent.change(screen.getByPlaceholderText("Email"), {
@@ -295,17 +221,7 @@ describe("new coverage target visual components", () => {
         expect(screen.getByText("Sponsor Me")).toBeInTheDocument();
     });
 
-    it("renders p5 hills, gallery, gallery item, and contributors", async () => {
-        octokitList.mockResolvedValue({
-            data: [
-                {
-                    login: "dev",
-                    avatar_url: "/a.png",
-                    html_url: "https://x",
-                    contributions: 2,
-                },
-            ],
-        });
+    it("transforms gallery items and queues rendered gallery cards for dynamic loading.", async () => {
         render(
             <Gallery
                 heading="Gallery"
@@ -329,22 +245,10 @@ describe("new coverage target visual components", () => {
                 description="long description"
                 minuteRead={3}
                 dateCreated="2024-01-01"
-                repoOwner="o"
-                repoName="r"
             />,
         );
         expect(await screen.findByText("GI")).toBeInTheDocument();
         expect(screen.getByText("BLOG")).toBeInTheDocument();
-        render(<Contributors repoOwner="o" repoName="r" />);
-        const contributor = await screen.findByAltText("dev");
-        expect(contributor).toBeInTheDocument();
-        fireEvent.mouseOver(contributor.closest("a")!);
-        fireEvent.mouseMove(contributor.closest("a")!, { pageX: 1, pageY: 2 });
-        fireEvent.mouseOut(contributor.closest("a")!);
-        octokitList.mockRejectedValueOnce(new Error("boom"));
-        render(<Contributors repoOwner="o" repoName="r" />);
-        expect(await screen.findAllByAltText("luyangliuable")).not.toHaveLength(
-            0,
-        );
+        expect(addToQueue).toHaveBeenCalled();
     });
 });

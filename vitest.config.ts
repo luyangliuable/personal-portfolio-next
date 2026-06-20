@@ -3,6 +3,9 @@ import react from "@vitejs/plugin-react";
 import { coverageConfigDefaults, defineConfig } from "vitest/config";
 
 export default defineConfig({
+    oxc: {
+        jsx: "react-jsx",
+    },
     plugins: [react()],
     test: {
         environment: "jsdom",
@@ -38,11 +41,18 @@ export default defineConfig({
                 "src/components/ExperienceSection/ExperienceSectionImageDisplay/ExperienceSectionImageDisplay.tsx",
                 "src/components/FeaturedContentSection/FeaturedContentSection.tsx",
                 "src/components/Footer/Footer.tsx",
+                "src/components/GolfedSierpinski/GolfedSierpinski.tsx",
+                "src/components/Image/Image.tsx",
                 "src/components/Footer/GetIntoTouchFooterSection/GetIntoTouchFooterSection.tsx",
                 "src/components/Footer/LocalTime/LocalTime.tsx",
                 "src/components/Gallery/Gallery.tsx",
                 "src/components/Gallery/GalleryItem/GalleryItem.tsx",
                 "src/components/Utility/**/*.ts",
+                "src/config/api.ts",
+                "src/page/BlogPage/BlogContent/AuthorDetails/AuthorDetails.tsx",
+                "src/page/BlogPage/BlogPage.tsx",
+                "src/page/NotePage/NotePage.tsx",
+                "src/page/ResumePage/ResumePage.tsx",
                 "src/repositories/**/*.ts",
                 "src/utils/**/*.ts",
             ],

@@ -48,6 +48,15 @@ describe("Contributors", () => {
                 { login: "luyangliuable", avatarUrl: "a", profileUrl: "p" },
             ]),
         ).toHaveLength(1);
+        expect(ensureDefaultContributor([])).toEqual([
+            {
+                login: "luyangliuable",
+                avatarUrl:
+                    "https://avatars.githubusercontent.com/u/23611033?v=4",
+                profileUrl: "https://github.com/luyangliuable",
+                contributions: 0,
+            },
+        ]);
     });
     it("renders fetched contributors and tooltip interactions.", async () => {
         octokitList.mockResolvedValue({

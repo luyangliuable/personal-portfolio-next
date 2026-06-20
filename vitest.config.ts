@@ -40,7 +40,6 @@ export default defineConfig({
                 "src/components/Footer/Footer.tsx",
                 "src/components/Footer/GetIntoTouchFooterSection/GetIntoTouchFooterSection.tsx",
                 "src/components/Footer/LocalTime/LocalTime.tsx",
-                "src/components/FractalHills/FractalHills.tsx",
                 "src/components/Gallery/Gallery.tsx",
                 "src/components/Gallery/GalleryItem/Contributors/Contributors.tsx",
                 "src/components/Gallery/GalleryItem/GalleryItem.tsx",

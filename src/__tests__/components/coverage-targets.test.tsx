@@ -158,7 +158,7 @@ import ExperienceSectionImageDisplay from "@/components/ExperienceSection/Experi
 import FeaturedContentSection from "@/components/FeaturedContentSection/FeaturedContentSection";
 import Footer from "@/components/Footer/Footer";
 import GetInTouch from "@/components/Footer/GetIntoTouchFooterSection/GetIntoTouchFooterSection";
-import FractalHills from "@/components/FractalHills/FractalHills";
+
 import Gallery from "@/components/Gallery/Gallery";
 import Contributors from "@/components/Gallery/GalleryItem/Contributors/Contributors";
 import GalleryItem from "@/components/Gallery/GalleryItem/GalleryItem";
@@ -195,8 +195,10 @@ describe("new coverage target visual components", () => {
                 />
             ) as any,
         );
+        render((<SmallCard heading="Fallback" author="Me" />) as any);
         expect(screen.getByText("Head")).toBeInTheDocument();
-        expect(screen.getByRole("link")).toHaveAttribute("href", "/a");
+        expect(screen.getByText("Fallback")).toBeInTheDocument();
+        expect(screen.getAllByRole("link")[0]).toHaveAttribute("href", "/a");
         render(<EmojIcon emojis={["A"]} style={{ color: "red" }} />);
         render(<EmojIcon emojis={["A", "B", "C", "D", "E"]} />);
         expect(screen.getAllByText("A").length).toBeGreaterThan(1);
@@ -258,10 +260,19 @@ describe("new coverage target visual components", () => {
                         post_type: "md",
                         date_created: "2024-01-01",
                     } as any,
+                    {
+                        _id: { $oid: "p2" },
+                        is_featured: false,
+                        heading: "Hidden",
+                        body: "Body",
+                        tags: [],
+                        post_type: "tool",
+                    } as any,
                 ]}
             />,
         );
         expect(screen.getByText("Featured Content")).toBeInTheDocument();
+        expect(screen.queryByText("Hidden")).not.toBeInTheDocument();
         fireEvent.click(screen.getByText(/Show More/));
         expect(toggleTrigger).toHaveBeenCalled();
     });
@@ -295,7 +306,6 @@ describe("new coverage target visual components", () => {
                 },
             ],
         });
-        render(<FractalHills />);
         render(
             <Gallery
                 heading="Gallery"
@@ -326,6 +336,15 @@ describe("new coverage target visual components", () => {
         expect(await screen.findByText("GI")).toBeInTheDocument();
         expect(screen.getByText("BLOG")).toBeInTheDocument();
         render(<Contributors repoOwner="o" repoName="r" />);
-        expect(await screen.findByAltText("dev")).toBeInTheDocument();
+        const contributor = await screen.findByAltText("dev");
+        expect(contributor).toBeInTheDocument();
+        fireEvent.mouseOver(contributor.closest("a")!);
+        fireEvent.mouseMove(contributor.closest("a")!, { pageX: 1, pageY: 2 });
+        fireEvent.mouseOut(contributor.closest("a")!);
+        octokitList.mockRejectedValueOnce(new Error("boom"));
+        render(<Contributors repoOwner="o" repoName="r" />);
+        expect(await screen.findAllByAltText("luyangliuable")).not.toHaveLength(
+            0,
+        );
     });
 });

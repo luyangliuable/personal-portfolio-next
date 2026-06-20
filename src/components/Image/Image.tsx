@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState, useMemo } from "react";
 import SkeletonImage from "./SkeletonImage/SkeletonImage";
 import IImageProps from "./Interface/IImageProps";
 import ImageRepository from "../../repositories/ImageRepository";
-import { default as NextImage } from "next/image";
 import { cl } from "../Utility/LogicUtility";
 import "./Image.css";
 
@@ -32,9 +31,10 @@ const Image: React.FC<IImageProps> = ({
         if (fetchedImageUrl) return;
         try {
             const imageId = src ?? defaultProps!.defaultImageId;
-            const [imageUrl] = await Promise.all([
-                imageRepository.getImageById(imageId, compression),
-            ]);
+            const imageUrl = await imageRepository.getImageById(
+                imageId,
+                compression,
+            );
             setFetchedImageUrl(imageUrl);
         } catch (error) {
             console.error("Error fetching images:", error);
@@ -74,7 +74,7 @@ const Image: React.FC<IImageProps> = ({
     }
 
     const memoizedNextImage = (
-        <NextImage
+        <img
             style={style}
             loading="lazy"
             ref={imageRef}

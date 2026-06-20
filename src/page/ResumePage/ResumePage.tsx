@@ -9,7 +9,7 @@ const ResumePage: React.FC<IResumePageProps> = (props) => {
         <main className="resume-page-content relative">
             <iframe
                 className="browser"
-                src="https://llcode.tech/api/image/6599eebc58701a6b8fe5908a"
+                src="6599eebc58701a6b8fe5908a"
                 title="Resume"
             />
         </main>

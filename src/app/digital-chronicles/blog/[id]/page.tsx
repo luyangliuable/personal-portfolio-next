@@ -28,7 +28,7 @@ export async function generateMetadata({
             removeHashesAndStripWhitespace(content.body),
         ),
         openGraph: {
-            images: [`https://llcode.tech/api/image/${content.image.$oid}`],
+            images: [`${content.image.$oid}`],
         },
     };
 }

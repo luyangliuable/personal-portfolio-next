@@ -4,17 +4,29 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import Image from "@/components/Image/Image";
 import { API_BASE_URL } from "@/config/api";
 
-vi.mock("next/image", () => ({
-    default: ({ src, alt }: any) => <img src={src} alt={alt} />,
-}));
+vi.mock("next/image", async () => {
+    const React = await import("react");
+    const MockNextImage = React.forwardRef<HTMLImageElement, any>(
+        ({ src, alt, unoptimized }, ref) => (
+            <img
+                ref={ref}
+                src={src}
+                alt={alt}
+                data-unoptimized={unoptimized ? "true" : "false"}
+            />
+        ),
+    );
+    MockNextImage.displayName = "MockNextImage";
+    return { default: MockNextImage };
+});
 
 vi.mock("@/components/Image/SkeletonImage/SkeletonImage", async () => {
     const React = await import("react");
-    return {
-        default: React.forwardRef<HTMLDivElement>(() => (
-            <div role="status" aria-label="loading image" />
-        )),
-    };
+    const MockSkeletonImage = React.forwardRef<HTMLDivElement>(() => (
+        <div role="status" aria-label="loading image" />
+    ));
+    MockSkeletonImage.displayName = "MockSkeletonImage";
+    return { default: MockSkeletonImage };
 });
 
 class MockIntersectionObserver {
@@ -44,6 +56,10 @@ describe("Image", () => {
                 "src",
                 `${API_BASE_URL}/image/abc?compression=40`,
             ),
+        );
+        expect(screen.getByAltText("preview")).toHaveAttribute(
+            "data-unoptimized",
+            "true",
         );
     });
 

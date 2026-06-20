@@ -77,8 +77,8 @@ class PostRepository extends Repository {
                 PostRepository.postListCache = this.sortPostsByDate(data);
                 return PostRepository.postListCache;
             })
-            .catch((error) => {
-                console.error("Error:", error);
+            .catch(() => {
+                console.warn("Post list unavailable; rendering empty list.");
                 return [];
             });
     }

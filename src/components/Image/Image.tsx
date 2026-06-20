@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState, useMemo } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SkeletonImage from "./SkeletonImage/SkeletonImage";
 import IImageProps from "./Interface/IImageProps";
 import ImageRepository from "../../repositories/ImageRepository";
@@ -72,6 +72,10 @@ const Image: React.FC<IImageProps> = ({
         return <SkeletonImage ref={imageRef} className={className} />;
     }
 
+    const shouldBypassOptimizer =
+        fetchedImageUrl.startsWith("http://") ||
+        fetchedImageUrl.startsWith("https://");
+
     return (
         <NextImage
             style={style}
@@ -82,6 +86,7 @@ const Image: React.FC<IImageProps> = ({
             className={cl(className, { animation: isLazyLoading === false })}
             src={fetchedImageUrl}
             alt={alt ?? defaultImageAlt}
+            unoptimized={shouldBypassOptimizer}
         />
     );
 };

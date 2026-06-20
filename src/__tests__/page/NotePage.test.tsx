@@ -15,7 +15,10 @@ vi.mock("@/page/SkeletonPage/SkeletonPage", () => ({
 }));
 vi.mock("@/components/Accordion/Accordion", () => {
     const Accordion: any = ({ children }: any) => <div>{children}</div>;
-    Accordion.Item = ({ children }: any) => <section>{children}</section>;
+    const AccordionItem = ({ children }: any) => <section>{children}</section>;
+    Accordion.displayName = "MockAccordion";
+    AccordionItem.displayName = "MockAccordionItem";
+    Accordion.Item = AccordionItem;
     return { default: Accordion };
 });
 vi.mock("@/components/Card/Card", () => ({

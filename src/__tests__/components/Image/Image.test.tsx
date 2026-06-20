@@ -5,20 +5,31 @@ import Image from "@/components/Image/Image";
 import { API_BASE_URL } from "@/config/api";
 
 vi.mock("next/image", () => ({
-    default: ({ src, alt, className }: any) => (
-        <img src={src} alt={alt} className={className} />
-    ),
+    default: ({ src, alt }: any) => <img src={src} alt={alt} />,
 }));
+
+vi.mock("@/components/Image/SkeletonImage/SkeletonImage", async () => {
+    const React = await import("react");
+    return {
+        default: React.forwardRef<HTMLDivElement>(() => (
+            <div role="status" aria-label="loading image" />
+        )),
+    };
+});
+
+class MockIntersectionObserver {
+    observe = vi.fn();
+    unobserve = vi.fn();
+
+    constructor() {}
+}
 
 describe("Image", () => {
     beforeEach(() => {
-        vi.stubGlobal(
-            "IntersectionObserver",
-            vi.fn(() => ({ observe: vi.fn(), unobserve: vi.fn() })),
-        );
+        vi.stubGlobal("IntersectionObserver", MockIntersectionObserver);
     });
 
-    it("shows a skeleton until a bare image id is resolved", async () => {
+    it("resolves a bare image id to an API URL after showing the loading placeholder.", async () => {
         render(
             <Image
                 src="abc"
@@ -27,13 +38,24 @@ describe("Image", () => {
                 compression={40}
             />,
         );
-        expect(document.querySelector(".image-skeleton")).toBeInTheDocument();
+
+        expect(
+            screen.getByRole("status", { name: "loading image" }),
+        ).toBeInTheDocument();
         await waitFor(() =>
-            expect(screen.getByAltText("preview")).toBeInTheDocument(),
+            expect(screen.getByAltText("preview")).toHaveAttribute(
+                "src",
+                `${API_BASE_URL}/image/abc?compression=40`,
+            ),
         );
-        expect(screen.getByAltText("preview")).toHaveAttribute(
-            "src",
-            `${API_BASE_URL}/image/abc?compression=40`,
-        );
+    });
+
+    it("keeps the loading placeholder when a lazy image has not entered the viewport.", () => {
+        render(<Image src="abc" alt="preview" />);
+
+        expect(
+            screen.getByRole("status", { name: "loading image" }),
+        ).toBeInTheDocument();
+        expect(screen.queryByAltText("preview")).not.toBeInTheDocument();
     });
 });

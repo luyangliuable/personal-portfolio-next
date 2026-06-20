@@ -111,7 +111,9 @@ vi.mock("@/components/Atoms/ImageDisplayModal/ImageDisplayModal", () => ({
 
 const octokitList = vi.fn();
 vi.mock("@octokit/rest", () => ({
-    Octokit: vi.fn(() => ({ repos: { listContributors: octokitList } })),
+    Octokit: vi.fn().mockImplementation(() => ({
+        repos: { listContributors: octokitList },
+    })),
 }));
 vi.mock("p5/lib/p5.js", () => ({
     default: vi.fn(function (this: any, sketch: any, node: any) {

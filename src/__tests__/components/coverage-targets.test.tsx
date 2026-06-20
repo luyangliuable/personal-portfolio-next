@@ -165,7 +165,7 @@ import GalleryItem from "@/components/Gallery/GalleryItem/GalleryItem";
 
 beforeEach(() => {
     vi.clearAllMocks();
-    (global as any).IntersectionObserver = vi.fn(function (this: any, cb: any) {
+    globalThis.IntersectionObserver = vi.fn(function (this: any, cb: any) {
         this.observe = vi.fn();
         this.unobserve = vi.fn();
         cb([{ isIntersecting: true, target: document.createElement("div") }]);
@@ -244,7 +244,7 @@ describe("new coverage target visual components", () => {
     });
 
     it("renders featured content and show more behavior", () => {
-        Object.defineProperty(window, "innerWidth", {
+        Object.defineProperty(globalThis, "innerWidth", {
             value: 900,
             configurable: true,
         });
@@ -278,7 +278,7 @@ describe("new coverage target visual components", () => {
     });
 
     it("submits get in touch form and renders footer", async () => {
-        (global as any).fetch = vi.fn().mockResolvedValue({});
+        globalThis.fetch = vi.fn().mockResolvedValue({}) as any;
         render(<GetInTouch />);
         fireEvent.change(screen.getByPlaceholderText("Email"), {
             target: { value: "a@test.com" },

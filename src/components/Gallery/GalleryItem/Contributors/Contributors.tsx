@@ -6,7 +6,7 @@ import { Octokit } from "@octokit/rest";
 import Image from "../../../Image/Image";
 import "./Contributors.css";
 
-export const octokit = new Octokit({
+const octokit = new Octokit({
     auth: process.env.REACT_APP_GITHUB_TOKEN,
 });
 
@@ -15,23 +15,26 @@ interface IContributorsProps {
     repoOwner: string;
 }
 
-export const mapContributor = (item: any) => ({
-    login: item.login,
-    avatarUrl: item.avatar_url,
-    profileUrl: item.html_url,
-    contributions: item.contributions,
-});
+const defaultContributor = {
+    login: "luyangliuable",
+    avatarUrl: "https://avatars.githubusercontent.com/u/23611033?v=4",
+    profileUrl: "https://github.com/luyangliuable",
+    contributions: 0,
+};
 
-export const ensureDefaultContributor = (contributors: any[]) => {
-    if (!contributors.some((item) => item.login === "luyangliuable")) {
-        contributors.push({
-            login: "luyangliuable",
-            avatarUrl: "https://avatars.githubusercontent.com/u/23611033?v=4",
-            profileUrl: "https://github.com/luyangliuable",
-            contributions: 0,
-        });
-    }
-    return contributors;
+export const buildContributors = (items: any[] = []) => {
+    const contributors = items.map((item) => ({
+        login: item.login,
+        avatarUrl: item.avatar_url,
+        profileUrl: item.html_url,
+        contributions: item.contributions,
+    }));
+    const hasDefaultContributor = contributors.some(
+        (item) => item.login === defaultContributor.login,
+    );
+    return hasDefaultContributor
+        ? contributors
+        : [...contributors, defaultContributor];
 };
 
 const Contributors: React.FC<IContributorsProps> = ({
@@ -50,12 +53,12 @@ const Contributors: React.FC<IContributorsProps> = ({
                     owner: repoOwner!,
                     repo: repoName!,
                 });
-                contributors = data.map(mapContributor);
+                contributors = buildContributors(data);
             } catch (error) {
                 console.error("Error fetching contributors:", error);
             }
 
-            setContributors(ensureDefaultContributor(contributors));
+            setContributors(contributors);
         };
         fetchContributors();
     }, [repoName, repoOwner]);

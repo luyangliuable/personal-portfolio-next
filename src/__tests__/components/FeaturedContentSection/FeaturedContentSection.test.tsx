@@ -53,11 +53,11 @@ vi.mock("@/components/Retro/Retro", () => ({
 
 beforeEach(() => {
     vi.clearAllMocks();
-    Object.defineProperty(window, "innerWidth", {
+    Object.defineProperty(globalThis, "innerWidth", {
         value: 1200,
         configurable: true,
     });
-    global.IntersectionObserver = vi.fn(function (this: any) {
+    globalThis.IntersectionObserver = vi.fn(function (this: any) {
         this.observe = vi.fn();
         this.unobserve = vi.fn();
         this.disconnect = vi.fn();
@@ -95,7 +95,7 @@ describe("FeaturedContentSection", () => {
     });
 
     it("shows all post groups and toggles layout refresh.", () => {
-        Object.defineProperty(window, "innerWidth", {
+        Object.defineProperty(globalThis, "innerWidth", {
             value: 400,
             configurable: true,
         });

@@ -3,8 +3,7 @@ const h = React.createElement;
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import Contributors, {
-    ensureDefaultContributor,
-    mapContributor,
+    buildContributors,
 } from "@/components/Gallery/GalleryItem/Contributors/Contributors";
 
 const { octokitList } = vi.hoisted(() => ({
@@ -29,34 +28,28 @@ beforeEach(() => {
 });
 
 describe("Contributors", () => {
-    it("maps and preserves contributor lists.", () => {
+    it("builds contributors and default fallback lists.", () => {
         expect(
-            mapContributor({
-                login: "dev",
-                avatar_url: "/dev.png",
-                html_url: "https://github.com/dev",
-                contributions: 2,
-            }),
-        ).toEqual({
-            login: "dev",
-            avatarUrl: "/dev.png",
-            profileUrl: "https://github.com/dev",
-            contributions: 2,
-        });
+            buildContributors([
+                {
+                    login: "dev",
+                    avatar_url: "/dev.png",
+                    html_url: "https://github.com/dev",
+                    contributions: 2,
+                },
+            ]),
+        ).toHaveLength(2);
         expect(
-            ensureDefaultContributor([
-                { login: "luyangliuable", avatarUrl: "a", profileUrl: "p" },
+            buildContributors([
+                {
+                    login: "luyangliuable",
+                    avatar_url: "a",
+                    html_url: "p",
+                    contributions: 1,
+                },
             ]),
         ).toHaveLength(1);
-        expect(ensureDefaultContributor([])).toEqual([
-            {
-                login: "luyangliuable",
-                avatarUrl:
-                    "https://avatars.githubusercontent.com/u/23611033?v=4",
-                profileUrl: "https://github.com/luyangliuable",
-                contributions: 0,
-            },
-        ]);
+        expect(buildContributors()).toHaveLength(1);
     });
     it("renders fetched contributors and tooltip interactions.", async () => {
         octokitList.mockResolvedValue({

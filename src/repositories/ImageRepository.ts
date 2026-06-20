@@ -17,16 +17,18 @@ class ImageRepository extends Repository {
         return ImageRepository.instance;
     }
 
-    async getImageById(idOrUrl: string, compression?: number): Promise<string> {
-        if (idOrUrl === null) console.error("no image id provided");
-        let url: string = idOrUrl;
+    getImageUrl(idOrUrl: string, compression?: number): string {
         if (idOrUrl.startsWith("/static")) return idOrUrl;
+        let url = idOrUrl;
         if (!idOrUrl.startsWith("http://") && !idOrUrl.startsWith("https://"))
             url = `${ImageRepository.BASE_URL}${idOrUrl}`;
-        if (url.startsWith("http://") || url.startsWith("https://")) {
-            const separator = url.includes("?") ? "&" : "?";
-            url = `${url}${separator}compression=${compression ?? 100}`;
-        }
+        const separator = url.includes("?") ? "&" : "?";
+        return `${url}${separator}compression=${compression ?? 100}`;
+    }
+
+    async getImageById(idOrUrl: string, compression?: number): Promise<string> {
+        if (idOrUrl === null) console.error("no image id provided");
+        const url = this.getImageUrl(idOrUrl, compression);
         if (this.cache.has(url)) return this.cache.get(url)!;
         if (this.ongoingRequests.has(url))
             return this.ongoingRequests.get(url)!;

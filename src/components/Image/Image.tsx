@@ -31,10 +31,9 @@ const Image: React.FC<IImageProps> = ({
         if (fetchedImageUrl) return;
         try {
             const imageId = src ?? defaultProps!.defaultImageId;
-            const [imageUrl] = await Promise.all([
-                imageRepository.getImageById(imageId, compression),
-            ]);
-            setFetchedImageUrl(imageUrl);
+            setFetchedImageUrl(
+                imageRepository.getImageUrl(imageId, compression),
+            );
         } catch (error) {
             console.error("Error fetching images:", error);
         }

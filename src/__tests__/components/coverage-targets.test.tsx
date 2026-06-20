@@ -236,19 +236,37 @@ describe("new coverage target visual components", () => {
         );
         expect(screen.getByText("Gallery")).toBeInTheDocument();
         render(
-            <GalleryItem
-                name="GI"
-                type="blog"
-                image="/i.png"
-                link="/g"
-                tags={["t"]}
-                description="long description"
-                minuteRead={3}
-                dateCreated="2024-01-01"
-            />,
+            <>
+                <GalleryItem
+                    name="GI"
+                    type="blog"
+                    image="/i.png"
+                    link="/g"
+                    tags={["t"]}
+                    description="long description"
+                    minuteRead={3}
+                    dateCreated="2024-01-01"
+                />
+                <GalleryItem
+                    name="Tool"
+                    type="tool"
+                    imageOverlay="/overlay.png"
+                    metadata={[{ icon: "I", value: "raw" }]}
+                />
+                <GalleryItem
+                    name="Callback"
+                    type="none"
+                    metadata={[
+                        { icon: "I", value: "x", callback: () => "mapped" },
+                    ]}
+                />
+            </>,
         );
         expect(await screen.findByText("GI")).toBeInTheDocument();
         expect(screen.getByText("BLOG")).toBeInTheDocument();
+        expect(screen.getByText("TOOL")).toBeInTheDocument();
+        expect(screen.getByText("raw")).toBeInTheDocument();
+        expect(screen.getByText("mapped")).toBeInTheDocument();
         expect(addToQueue).toHaveBeenCalled();
     });
 });

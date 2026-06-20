@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState, useMemo } from "react";
 import SkeletonImage from "./SkeletonImage/SkeletonImage";
 import IImageProps from "./Interface/IImageProps";
 import ImageRepository from "../../repositories/ImageRepository";
+import { default as NextImage } from "next/image";
 import { cl } from "../Utility/LogicUtility";
 import "./Image.css";
 
@@ -72,7 +73,7 @@ const Image: React.FC<IImageProps> = ({
     }
 
     return (
-        <img
+        <NextImage
             style={style}
             loading="lazy"
             ref={imageRef}

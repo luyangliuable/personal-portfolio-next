@@ -103,7 +103,7 @@ describe("FeaturedContentSection", () => {
         fireEvent.click(screen.getByText(/Show More/));
         expect(toggleTrigger).toHaveBeenCalledTimes(1);
         expect(
-            screen.getByText("/digital-chronicles/blog/featured-post"),
+            screen.getByText("Sponsor Me for Can4Cancer Now!"),
         ).toBeInTheDocument();
     });
 });

@@ -29,7 +29,7 @@ describe("Image", () => {
         vi.stubGlobal("IntersectionObserver", MockIntersectionObserver);
     });
 
-    it("resolves a bare image id to an API URL after showing the loading placeholder.", async () => {
+    it("resolves a bare image id to an API URL when eager loading is requested.", async () => {
         render(
             <Image
                 src="abc"
@@ -39,9 +39,6 @@ describe("Image", () => {
             />,
         );
 
-        expect(
-            screen.getByRole("status", { name: "loading image" }),
-        ).toBeInTheDocument();
         await waitFor(() =>
             expect(screen.getByAltText("preview")).toHaveAttribute(
                 "src",

@@ -11,11 +11,11 @@ describe("GolfedSierpinski", () => {
     beforeEach(() => {
         animationFrames = [];
         fillRect.mockClear();
-        Object.defineProperty(window, "innerWidth", {
+        Object.defineProperty(globalThis, "innerWidth", {
             value: 1200,
             configurable: true,
         });
-        vi.spyOn(window, "requestAnimationFrame").mockImplementation(
+        vi.spyOn(globalThis, "requestAnimationFrame").mockImplementation(
             (callback) => {
                 animationFrames.push(callback);
                 return animationFrames.length;
@@ -34,7 +34,7 @@ describe("GolfedSierpinski", () => {
         await waitFor(() => expect(canvas.width).toBe(150));
 
         act(() => {
-            animationFrames[animationFrames.length - 1]?.(1000);
+            animationFrames.at(-1)?.(1000);
         });
 
         expect(canvas.height).toBe(150);

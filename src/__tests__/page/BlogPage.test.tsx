@@ -45,7 +45,7 @@ vi.mock("@/components/Card/Card", () => ({
 
 describe("BlogPage", () => {
     beforeEach(() => {
-        window.history.replaceState({}, "", "/digital-chronicles/blog");
+        globalThis.history.replaceState({}, "", "/digital-chronicles/blog");
         Object.defineProperty(document.documentElement, "scrollTo", {
             value: vi.fn(),
             configurable: true,
@@ -68,7 +68,7 @@ describe("BlogPage", () => {
     });
 
     it("filters posts from the URL tag while preserving local author image data.", async () => {
-        window.history.replaceState(
+        globalThis.history.replaceState(
             {},
             "",
             "/digital-chronicles/blog?tag=react",

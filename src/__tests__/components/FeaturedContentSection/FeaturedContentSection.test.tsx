@@ -91,7 +91,7 @@ describe("FeaturedContentSection", () => {
                         url: "/tools/local",
                         imageOverride: { src: "/override.png" },
                         imageOverlay: { src: "/overlay.png" },
-                    } as any,
+                    },
                 ],
             }),
         );

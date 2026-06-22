@@ -8,24 +8,17 @@ const GolfedSierpinski = () => {
 
     const [size, setSize] = useState<number>(0);
 
-    const sizeX = 1.2 * size;
-    const sizeY = size;
-
     useEffect(() => {
         const update = () => {
             setSize(Math.max(114, window.innerWidth / 8));
         };
 
-        if (typeof window !== "undefined") {
-            window.addEventListener("resize", update);
-        }
+        window.addEventListener("resize", update);
 
         update();
 
         return () => {
-            if (typeof window !== "undefined") {
-                window.removeEventListener("resize", update);
-            }
+            window.removeEventListener("resize", update);
         };
     }, []);
 

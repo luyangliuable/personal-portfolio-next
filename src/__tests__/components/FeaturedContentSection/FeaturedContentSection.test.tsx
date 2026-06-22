@@ -3,6 +3,7 @@ const h = React.createElement;
 import { fireEvent, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import FeaturedContentSection from "@/components/FeaturedContentSection/FeaturedContentSection";
+import BlogPostResponse from "@/repositories/Response/BlogPostResponse";
 
 const toggleTrigger = vi.fn();
 
@@ -57,32 +58,40 @@ beforeEach(() => {
         value: 1200,
         configurable: true,
     });
-    globalThis.IntersectionObserver = vi.fn(function (this: any) {
-        this.observe = vi.fn();
-        this.unobserve = vi.fn();
-        this.disconnect = vi.fn();
-    }) as any;
+    vi.stubGlobal(
+        "IntersectionObserver",
+        vi.fn(function (this: any) {
+            this.observe = vi.fn();
+            this.unobserve = vi.fn();
+            this.disconnect = vi.fn();
+        }),
+    );
 });
 
 describe("FeaturedContentSection", () => {
-    const featuredPost = {
+    const featuredPost: BlogPostResponse = {
         _id: { $oid: "featured-post" },
+        author: "Luyang Liu",
+        image: { $oid: "featured-image" },
         is_featured: true,
         heading: "Featured Blog",
         body: "Featured body",
         tags: ["react"],
         post_type: "md",
         date_created: "2024-01-01",
-    } as any;
+    };
 
-    const hiddenPost = {
+    const hiddenPost: BlogPostResponse = {
         _id: { $oid: "hidden-post" },
+        author: "Luyang Liu",
+        image: { $oid: "hidden-image" },
         is_featured: false,
         heading: "Hidden Blog",
         body: "Hidden body",
         tags: [],
         post_type: "tool",
-    } as any;
+        date_created: "2024-01-02",
+    };
 
     it("renders default and featured posts while filtering non-featured posts.", () => {
         render(

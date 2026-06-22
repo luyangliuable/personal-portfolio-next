@@ -2,6 +2,7 @@ import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import BlogPage from "@/page/BlogPage/BlogPage";
+import BlogPostResponse from "@/repositories/Response/BlogPostResponse";
 
 vi.mock("react-icons/fa", () => ({ FaWindowClose: () => <span /> }));
 vi.mock("@/components/HeroHeader/HeroHeader", () => ({
@@ -40,26 +41,22 @@ describe("BlogPage", () => {
     });
 
     it("passes the default author image id to blog cards", async () => {
-        render(
-            <BlogPage
-                showTopPicks={false}
-                data={[
-                    {
-                        _id: { $oid: "1" },
-                        heading: "Post",
-                        author: "Lu",
-                        body: "",
-                        date_created: "2026-06-20",
-                        date_last_modified: "2026-06-20",
-                        reading_time_minutes: 1,
-                        in_progress: false,
-                        tags: ["local"],
-                        is_featured: false,
-                        image: { $oid: "image-id" },
-                    } as any,
-                ]}
-            />,
-        );
+        const data: BlogPostResponse[] = [
+            {
+                _id: { $oid: "1" },
+                heading: "Post",
+                author: "Lu",
+                body: "",
+                date_created: "2026-06-20",
+                date_last_modified: "2026-06-20",
+                reading_time_minutes: 1,
+                in_progress: false,
+                tags: ["local"],
+                is_featured: false,
+                image: { $oid: "image-id" },
+            },
+        ];
+        render(<BlogPage showTopPicks={false} data={data} />);
         await waitFor(() =>
             expect(screen.getByTestId("blog-card")).toBeInTheDocument(),
         );

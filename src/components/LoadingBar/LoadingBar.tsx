@@ -2,7 +2,11 @@ import "./LoadingBar.css";
 
 const LoadingBar = () => {
     return (
-        <div className="loading-bar">
+        <div
+            aria-label="Loading content"
+            className="loading-bar"
+            role="progressbar"
+        >
             <div className="box1">
                 <div className="bar"></div>
                 <div className="bar"></div>

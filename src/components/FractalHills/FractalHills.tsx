@@ -4,7 +4,9 @@ import React, { useEffect, useRef, RefObject } from "react";
 import "./FractalHills.css";
 import p5 from "p5/lib/p5.js";
 
-const FractalHills = () => {
+const FractalHills: React.FC<{ colorTheme?: string }> = ({
+    colorTheme = "invertedMonochrome",
+}) => {
     const sketchRef: RefObject<HTMLDivElement> = useRef(null);
 
     useEffect(() => {
@@ -15,7 +17,6 @@ const FractalHills = () => {
             let h = 1600;
             let flying = 0;
             let terrain: number[][] = [];
-            let colorTheme = "invertedMonochrome";
 
             const scaleVal = 40;
             const speedVal = 0.002;
@@ -308,10 +309,10 @@ const FractalHills = () => {
             window.addEventListener("resize", windowResized);
         };
 
-        let p5Instance: p5;
+        let p5Instance: p5 | undefined;
         if (sketchRef!.current) p5Instance = new p5(sketch, sketchRef!.current);
-        return () => p5Instance.remove();
-    }, []);
+        return () => p5Instance?.remove();
+    }, [colorTheme]);
 
     return (
         <>

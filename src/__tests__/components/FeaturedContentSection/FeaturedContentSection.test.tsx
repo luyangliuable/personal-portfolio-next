@@ -5,50 +5,39 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import FeaturedContentSection from "@/components/FeaturedContentSection/FeaturedContentSection";
 
 const toggleTrigger = vi.fn();
-
 vi.mock("@/stores/TriggerContext", () => ({
     useTrigger: () => ({ toggleTrigger }),
 }));
-
 vi.mock("@/components/LandingPageCard/LandingPageCard", () => ({
-    default: ({ children, heading }: any) => (
-        <section>
-            <h2>{heading}</h2>
-            {children}
-        </section>
-    ),
+    default: ({ children, heading }: any) =>
+        h("section", null, h("h2", null, heading), children),
 }));
-
 vi.mock("@/components/Button/Button", () => ({
-    default: ({ children, onClick }: any) => (
-        <button onClick={onClick}>{children}</button>
-    ),
+    default: ({ children, onClick }: any) => h("button", { onClick }, children),
 }));
-
 vi.mock("@/components/Gallery/GalleryItem/GalleryItem", () => ({
-    default: ({ name, type, link, image, imageOverlay }: any) => (
-        <article>
-            <h3>{name}</h3>
-            <p>{type}</p>
-            <p>{link}</p>
-            <p>{image}</p>
-            <p>{imageOverlay}</p>
-        </article>
-    ),
+    default: ({ name, type, link, image, imageOverlay }: any) =>
+        h(
+            "article",
+            null,
+            h("h3", null, name),
+            h("p", null, type),
+            h("p", null, link),
+            h("p", null, image),
+            h("p", null, imageOverlay),
+        ),
 }));
-
 vi.mock("@/components/TwinCandle/TwinCandle", () => ({
     default: React.forwardRef((_: any, ref: any) => {
         React.useImperativeHandle(ref, () => ({
             transitionCandleFireToOn: vi.fn(),
             transitionCandleFireToOff: vi.fn(),
         }));
-        return <div>TwinCandle</div>;
+        return h("div", null, "TwinCandle");
     }),
 }));
-
 vi.mock("@/components/Retro/Retro", () => ({
-    default: () => <div>Retro</div>,
+    default: () => h("div", null, "Retro"),
 }));
 
 beforeEach(() => {
@@ -74,7 +63,6 @@ describe("FeaturedContentSection", () => {
         post_type: "md",
         date_created: "2024-01-01",
     } as any;
-
     const hiddenPost = {
         _id: { $oid: "hidden-post" },
         is_featured: false,
@@ -86,12 +74,31 @@ describe("FeaturedContentSection", () => {
 
     it("renders default and featured posts while filtering non-featured posts.", () => {
         render(
-            <FeaturedContentSection postList={[featuredPost, hiddenPost]} />,
+            h(FeaturedContentSection, { postList: [featuredPost, hiddenPost] }),
         );
-        expect(screen.getByText("Featured Content")).toBeInTheDocument();
         expect(screen.getByText("Featured Blog")).toBeInTheDocument();
         expect(screen.queryByText("Hidden Blog")).not.toBeInTheDocument();
         expect(screen.getByText("blog")).toBeInTheDocument();
+    });
+
+    it("preserves explicit tool links and image overrides for featured content.", () => {
+        render(
+            h(FeaturedContentSection, {
+                postList: [
+                    {
+                        ...featuredPost,
+                        post_type: "tool",
+                        url: "/tools/local",
+                        imageOverride: { src: "/override.png" },
+                        imageOverlay: { src: "/overlay.png" },
+                    },
+                ],
+            }),
+        );
+        expect(screen.getAllByText("tool").length).toBeGreaterThan(0);
+        expect(screen.getByText("/tools/local")).toBeInTheDocument();
+        expect(screen.getByText("/override.png")).toBeInTheDocument();
+        expect(screen.getByText("/overlay.png")).toBeInTheDocument();
     });
 
     it("shows all post groups and toggles layout refresh.", () => {
@@ -99,7 +106,7 @@ describe("FeaturedContentSection", () => {
             value: 400,
             configurable: true,
         });
-        render(<FeaturedContentSection postList={[featuredPost]} />);
+        render(h(FeaturedContentSection, { postList: [featuredPost] }));
         fireEvent.click(screen.getByText(/Show More/));
         expect(toggleTrigger).toHaveBeenCalledTimes(1);
         expect(

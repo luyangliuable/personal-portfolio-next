@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState, useMemo } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SkeletonImage from "./SkeletonImage/SkeletonImage";
 import IImageProps from "./Interface/IImageProps";
 import ImageRepository from "../../repositories/ImageRepository";

@@ -4,10 +4,7 @@ import { coverageConfigDefaults, defineConfig } from "vitest/config";
 
 export default defineConfig({
     oxc: {
-        jsx: {
-            runtime: "automatic",
-            importSource: "react",
-        },
+        jsx: "react-jsx",
     },
     plugins: [react()],
     test: {
@@ -129,4 +126,4 @@ export default defineConfig({
             "@": resolve(__dirname, "./src"),
         },
     },
-});
+} as any);

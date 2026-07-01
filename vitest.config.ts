@@ -3,9 +3,6 @@ import react from "@vitejs/plugin-react";
 import { coverageConfigDefaults, defineConfig } from "vitest/config";
 
 export default defineConfig({
-    oxc: {
-        jsx: "react-jsx",
-    },
     plugins: [react()],
     test: {
         environment: "jsdom",

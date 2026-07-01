@@ -13,7 +13,14 @@ vi.mock("@/components/Navbar/BurgerMenuIcon/BurgerMenuIcon", () => ({ default: (
 vi.mock("@/components/Navbar/NavbarScrollProgress/NavbarScrollProgress", () => ({ default: () => <div>Progress</div> }));
 vi.mock("@/components/Navbar/NavLink/NavLink", () => ({
     default: ({ link, renderDropdownMenu, hideDropdownMenu, isSubLink }: any) => (
-        <button onMouseOver={() => renderDropdownMenu(link.sublinks)} onClick={hideDropdownMenu} data-sub={isSubLink}>{link.name}</button>
+        <button
+            onFocus={() => renderDropdownMenu(link.sublinks)}
+            onMouseOver={() => renderDropdownMenu(link.sublinks)}
+            onClick={hideDropdownMenu}
+            data-sub={isSubLink}
+        >
+            {link.name}
+        </button>
     ),
 }));
 

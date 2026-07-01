@@ -1,5 +1,5 @@
 import React from "react";
-import { act, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import HeroHeader from "@/components/HeroHeader/HeroHeader";
 
@@ -45,7 +45,7 @@ describe("HeroHeader", () => {
         render(<HeroHeader heading="Hi" description="There" />);
         act(() => {
             window.innerWidth = 500;
-            window.dispatchEvent(new Event("resize"));
+            fireEvent.resize(window);
         });
         expect(screen.getByText("Default graphic")).toBeInTheDocument();
     });

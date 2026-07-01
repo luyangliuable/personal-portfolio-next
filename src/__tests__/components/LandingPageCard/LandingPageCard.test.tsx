@@ -1,5 +1,5 @@
 import React from "react";
-import { act, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import LandingPageCard from "@/components/LandingPageCard/LandingPageCard";
 
@@ -37,7 +37,7 @@ describe("LandingPageCard", () => {
         expect(card).toHaveClass("grainy-background");
         expect(card.style.color).toBe("red");
         act(() => {
-            window.dispatchEvent(new Event("scroll"));
+            fireEvent.scroll(window);
             vi.advanceTimersByTime(500);
         });
         expect(document.documentElement.scrollTo).toHaveBeenCalledWith(0, 0);

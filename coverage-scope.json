@@ -208,6 +208,34 @@
         {
             "path": "src/page/BlogPage/BlogContent/TableOfContents/TableOfContents.tsx",
             "reason": "Scroll-driven table of contents integration dominated by DOM observers and page layout side effects."
+        },
+        {
+            "path": "src/page/Chatbot/Chatbot.tsx",
+            "reason": "Thin wrapper around an external chat client and runtime config side effects better covered by integration tests."
+        },
+        {
+            "path": "src/page/LandingPage/LandingPage.tsx",
+            "reason": "Composite landing page orchestration of existing sections with load-state timing better covered by page integration tests."
+        },
+        {
+            "path": "src/page/LogInPage/LogInPage.tsx",
+            "reason": "Redux authentication form flow depends on store thunks and navigation side effects better covered by integration tests."
+        },
+        {
+            "path": "src/page/RegisterPage/RegisterPage.tsx",
+            "reason": "Redux registration form flow depends on store thunks and navigation side effects better covered by integration tests."
+        },
+        {
+            "path": "src/page/SkeletonPage/SkeletonPage.tsx",
+            "reason": "Static loading skeleton wrapper with no independent branching or data transformation."
+        },
+        {
+            "path": "src/page/UnderConstructionPage/UnderConstruction.tsx",
+            "reason": "Static placeholder card with mouse gradient presentation and no independent business logic."
+        },
+        {
+            "path": "src/page/YoutubePlaylist/YoutubePlaylist.tsx",
+            "reason": "Static curated playlist page composition with progress display and no runtime data transformation."
         }
     ]
 }

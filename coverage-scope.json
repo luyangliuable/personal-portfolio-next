@@ -118,6 +118,14 @@
         {
             "path": "src/components/Bento/Bento.tsx",
             "reason": "Responsive layout component driven by CSS grid and viewport resize behavior rather than business logic."
+        },
+        {
+            "path": "src/components/FractalHills/FractalHills.tsx",
+            "reason": "P5 canvas terrain animation with color interpolation and browser rendering side effects better covered by visual integration tests."
+        },
+        {
+            "path": "src/components/Gallery/GalleryItem/Contributors/Contributors.tsx",
+            "reason": "Octokit-backed contributor tooltip integration dominated by network and portal hover side effects rather than isolated business logic."
         }
     ]
 }

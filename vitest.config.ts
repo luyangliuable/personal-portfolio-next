@@ -4,7 +4,10 @@ import { coverageConfigDefaults, defineConfig } from "vitest/config";
 
 export default defineConfig({
     oxc: {
-        jsx: "react-jsx",
+        jsx: {
+            runtime: "automatic",
+            importSource: "react",
+        },
     },
     plugins: [react()],
     test: {

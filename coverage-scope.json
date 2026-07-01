@@ -118,6 +118,102 @@
         {
             "path": "src/components/Bento/Bento.tsx",
             "reason": "Responsive layout component driven by CSS grid and viewport resize behavior rather than business logic."
+        },
+        {
+            "path": "src/components/FractalHills/FractalHills.tsx",
+            "reason": "Decorative p5 canvas terrain animation with rendering behavior better covered by browser visual integration tests."
+        },
+        {
+            "path": "src/components/Gallery/GalleryItem/Contributors/Contributors.tsx",
+            "reason": "GitHub API contributor tooltip widget dominated by network and portal interactions better covered through integration tests."
+        },
+        {
+            "path": "src/components/HeroHeader/HeroHeader.tsx",
+            "reason": "Hero layout and GSAP scroll animation wrapper with behavior driven by viewport and browser animation integration."
+        },
+        {
+            "path": "src/components/HeroSection/HeroSection.tsx",
+            "reason": "Landing hero animation and responsive visual composition better covered by integration and visual regression tests."
+        },
+        {
+            "path": "src/components/Image/SkeletonImage/SkeletonImage.tsx",
+            "reason": "Static skeleton placeholder wrapper with no business logic beyond fixed presentational markup."
+        },
+        {
+            "path": "src/components/LandingPageCard/LandingPageCard.tsx",
+            "reason": "Layout wrapper for landing page sections with scroll side effects and presentation-only class composition."
+        },
+        {
+            "path": "src/components/LoadingBar/LoadingBar.tsx",
+            "reason": "Static decorative loading indicator markup with no branching or business transformation logic."
+        },
+        {
+            "path": "src/components/MusicPlayer/MusicPlayer.tsx",
+            "reason": "Portal-based decorative music player shell with static sample content and no independent business logic."
+        },
+        {
+            "path": "src/components/MusicPlayer/MusicPlayerItem/MusicPlayerItem.tsx",
+            "reason": "Presentational music item card whose behavior is limited to image display and hover styling."
+        },
+        {
+            "path": "src/components/Navbar/BurgerMenuIcon/BurgerMenuIcon.tsx",
+            "reason": "Static SVG menu icon with no data transformation, branching, or side effects."
+        },
+        {
+            "path": "src/components/Navbar/LoginButton/LoginButton.tsx",
+            "reason": "Async authentication server action UI coupled to NextAuth runtime, better covered by auth integration tests."
+        },
+        {
+            "path": "src/components/Navbar/NavBurgerPanel/NavBurgerPanel.tsx",
+            "reason": "Responsive portal navigation panel driven by routing and accordion integration rather than isolated business logic."
+        },
+        {
+            "path": "src/components/Navbar/NavLink/NavLink.tsx",
+            "reason": "Navigation link renderer dominated by routing, hover dropdown, and visual state integration."
+        },
+        {
+            "path": "src/components/Navbar/Navbar.tsx",
+            "reason": "Thin navbar composition wrapper around main navigation and login components with no independent logic."
+        },
+        {
+            "path": "src/components/Navbar/NavbarBurger/NavbarBurger.tsx",
+            "reason": "Legacy burger wrapper around static SVG and click passthrough with no independent business behavior."
+        },
+        {
+            "path": "src/components/Navbar/NavbarMainSection/NavbarMainSection.tsx",
+            "reason": "Responsive navbar orchestration with DOM refs, scroll state, and hover interactions better covered by browser integration tests."
+        },
+        {
+            "path": "src/components/Navbar/NavbarScrollProgress/NavbarScrollProgress.tsx",
+            "reason": "Scroll progress DOM style synchronizer dependent on browser scroll dimensions and routing integration."
+        },
+        {
+            "path": "src/page/Chatbot/Chatbot.tsx",
+            "reason": "Thin third-party chatbot page wrapper with environment-specific client integration side effects."
+        },
+        {
+            "path": "src/page/LandingPage/LandingPage.tsx",
+            "reason": "Top-level page composition that wires existing tested sections together without independent business logic."
+        },
+        {
+            "path": "src/page/LogInPage/LogInPage.tsx",
+            "reason": "Redux/auth form workflow coupled to RTK async thunks and app store integration."
+        },
+        {
+            "path": "src/page/RegisterPage/RegisterPage.tsx",
+            "reason": "Redux/auth registration workflow coupled to RTK async thunks and navigation side effects."
+        },
+        {
+            "path": "src/page/SkeletonPage/SkeletonPage.tsx",
+            "reason": "Static page skeleton wrapper with scroll-to-top side effect and no business transformation logic."
+        },
+        {
+            "path": "src/page/UnderConstructionPage/UnderConstruction.tsx",
+            "reason": "Static placeholder page with decorative card hover styling and no independent business logic."
+        },
+        {
+            "path": "src/page/YoutubePlaylist/YoutubePlaylist.tsx",
+            "reason": "Static gallery page data composition with simple formatting better covered by gallery integration tests."
         }
     ]
 }

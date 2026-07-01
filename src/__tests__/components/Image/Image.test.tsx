@@ -6,18 +6,20 @@ import Image from "@/components/Image/Image";
 import { API_BASE_URL } from "@/config/api";
 import ImageRepository from "@/repositories/ImageRepository";
 
-vi.mock("next/image", () => ({
-    default: React.forwardRef<HTMLImageElement, any>(({ src, alt }, ref) =>
-        h("img", { ref, src, alt }),
-    ),
-}));
+vi.mock("next/image", () => {
+    const MockNextImage = React.forwardRef<HTMLImageElement, any>(
+        ({ src, alt }, ref) => h("img", { ref, src, alt }),
+    );
+    MockNextImage.displayName = "MockNextImage";
+    return { default: MockNextImage };
+});
 vi.mock("@/components/Image/SkeletonImage/SkeletonImage", async () => {
     const React = await import("react");
-    return {
-        default: React.forwardRef<HTMLDivElement>((_, ref) =>
-            h("div", { ref, role: "status", "aria-label": "loading image" }),
-        ),
-    };
+    const MockSkeletonImage = React.forwardRef<HTMLDivElement>((_, ref) =>
+        h("div", { ref, role: "status", "aria-label": "loading image" }),
+    );
+    MockSkeletonImage.displayName = "MockSkeletonImage";
+    return { default: MockSkeletonImage };
 });
 
 const observerInstances: MockIntersectionObserver[] = [];

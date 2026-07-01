@@ -43,6 +43,7 @@ export default defineConfig({
                 "src/components/Footer/Footer.tsx",
                 "src/components/GolfedSierpinski/GolfedSierpinski.tsx",
                 "src/components/Image/Image.tsx",
+                "src/components/Image/SkeletonImage/SkeletonImage.tsx",
                 "src/components/Footer/GetIntoTouchFooterSection/GetIntoTouchFooterSection.tsx",
                 "src/components/Footer/LocalTime/LocalTime.tsx",
                 "src/components/Gallery/Gallery.tsx",

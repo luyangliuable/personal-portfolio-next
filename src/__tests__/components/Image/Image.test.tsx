@@ -1,23 +1,25 @@
 import React from "react";
 const h = React.createElement;
-import { act, render, screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import Image from "@/components/Image/Image";
 import { API_BASE_URL } from "@/config/api";
 import ImageRepository from "@/repositories/ImageRepository";
 
-vi.mock("next/image", () => ({
-    default: React.forwardRef<HTMLImageElement, any>(({ src, alt }, ref) =>
-        h("img", { ref, src, alt }),
-    ),
-}));
+vi.mock("next/image", () => {
+    const MockNextImage = React.forwardRef<HTMLImageElement, any>(
+        (props, ref) => h("img", { ...props, ref }),
+    );
+    MockNextImage.displayName = "MockNextImage";
+    return { default: MockNextImage };
+});
 vi.mock("@/components/Image/SkeletonImage/SkeletonImage", async () => {
     const React = await import("react");
-    return {
-        default: React.forwardRef<HTMLDivElement>((_, ref) =>
-            h("div", { ref, role: "status", "aria-label": "loading image" }),
-        ),
-    };
+    const MockSkeletonImage = React.forwardRef<HTMLDivElement>((_, ref) =>
+        h("div", { ref, role: "status", "aria-label": "loading image" }),
+    );
+    MockSkeletonImage.displayName = "MockSkeletonImage";
+    return { default: MockSkeletonImage };
 });
 
 const observerInstances: MockIntersectionObserver[] = [];
@@ -76,7 +78,7 @@ describe("Image", () => {
                 {
                     isIntersecting: true,
                     target: placeholder,
-                } as IntersectionObserverEntry,
+                } as unknown as IntersectionObserverEntry,
             ]);
         });
 
@@ -86,6 +88,29 @@ describe("Image", () => {
                 `${API_BASE_URL}/image/abc?compression=60`,
             ),
         );
+    });
+
+    it("keeps skeleton styling until the image load event fires.", async () => {
+        render(h(Image, { src: "abc", alt: "preview" }));
+        const placeholder = screen.getByRole("status", {
+            name: "loading image",
+        });
+
+        act(() => {
+            observerInstances[0].callback([
+                {
+                    isIntersecting: true,
+                    target: placeholder,
+                } as unknown as IntersectionObserverEntry,
+            ]);
+        });
+
+        const image = await screen.findByAltText("preview");
+        expect(image).toHaveClass("image-skeleton");
+        expect(image).toHaveClass("animation");
+        fireEvent.load(image);
+        await waitFor(() => expect(image).not.toHaveClass("image-skeleton"));
+        expect(image).not.toHaveClass("animation");
     });
 
     it("uses the default image id and empty alt text when no image data is provided.", async () => {

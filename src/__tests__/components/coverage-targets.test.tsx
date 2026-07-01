@@ -80,15 +80,17 @@ vi.mock("@/components/Organisms/ZaBanquet/ZaBanquet", () => ({
 vi.mock("@/components/Organisms/Burger/Burger", () => ({
     default: () => <div>Burger</div>,
 }));
-vi.mock("@/components/TwinCandle/TwinCandle", () => ({
-    default: React.forwardRef((_: any, ref: any) => {
+vi.mock("@/components/TwinCandle/TwinCandle", () => {
+    const MockTwinCandle = React.forwardRef((_: any, ref: any) => {
         React.useImperativeHandle(ref, () => ({
             transitionCandleFireToOn: vi.fn(),
             transitionCandleFireToOff: vi.fn(),
         }));
         return <div>TwinCandle</div>;
-    }),
-}));
+    });
+    MockTwinCandle.displayName = "MockTwinCandle";
+    return { default: MockTwinCandle };
+});
 vi.mock("@/components/LandingPageCard/LandingPageCard", () => ({
     default: ({ children, heading }: any) => (
         <section>

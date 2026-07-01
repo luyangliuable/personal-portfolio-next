@@ -27,15 +27,17 @@ vi.mock("@/components/Gallery/GalleryItem/GalleryItem", () => ({
             h("p", null, imageOverlay),
         ),
 }));
-vi.mock("@/components/TwinCandle/TwinCandle", () => ({
-    default: React.forwardRef((_: any, ref: any) => {
+vi.mock("@/components/TwinCandle/TwinCandle", () => {
+    const MockTwinCandle = React.forwardRef((_: any, ref: any) => {
         React.useImperativeHandle(ref, () => ({
             transitionCandleFireToOn: vi.fn(),
             transitionCandleFireToOff: vi.fn(),
         }));
         return h("div", null, "TwinCandle");
-    }),
-}));
+    });
+    MockTwinCandle.displayName = "MockTwinCandle";
+    return { default: MockTwinCandle };
+});
 vi.mock("@/components/Retro/Retro", () => ({
     default: () => h("div", null, "Retro"),
 }));

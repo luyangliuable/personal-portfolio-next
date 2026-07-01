@@ -1,5 +1,7 @@
 {
-    "source": ["src/**/*.{ts,tsx}"],
+    "source": [
+        "src/**/*.{ts,tsx}"
+    ],
     "structuralExcludes": [
         "src/__tests__/**",
         "**/*.test.{ts,tsx}",
@@ -126,6 +128,86 @@
         {
             "path": "src/components/Gallery/GalleryItem/Contributors/Contributors.tsx",
             "reason": "Octokit-backed contributor tooltip integration dominated by network and portal hover side effects rather than isolated business logic."
+        },
+        {
+            "path": "src/components/Organisms/BlackHole/BlackHole.tsx",
+            "reason": "Canvas animation organism; behavior depends on rendering loops and layout side effects better suited for visual integration tests."
+        },
+        {
+            "path": "src/components/Organisms/Burger/Burger.tsx",
+            "reason": "Decorative static illustration component with no branching or data transformation requiring isolated unit tests."
+        },
+        {
+            "path": "src/components/Organisms/ZaBanquet/ZaBanquet.tsx",
+            "reason": "Animated decorative scene driven by IntersectionObserver and DOM timing side effects rather than business logic."
+        },
+        {
+            "path": "src/components/Organisms/ZaOcean/ZaOcean.tsx",
+            "reason": "Decorative static illustration component with no branching or data transformation requiring isolated unit tests."
+        },
+        {
+            "path": "src/components/ProgressBar/Progressbar.tsx",
+            "reason": "Thin presentational CSS variable wrapper with no independent business logic beyond style projection."
+        },
+        {
+            "path": "src/components/Retro/Retro.tsx",
+            "reason": "Thin visual wrapper around children and style props with behavior dominated by CSS presentation."
+        },
+        {
+            "path": "src/components/TagCloud/TagCloud.tsx",
+            "reason": "Simple presentational tag list rendering with no independent data transformation beyond label display."
+        },
+        {
+            "path": "src/components/TechStacks/Techstacks.tsx",
+            "reason": "Decorative static technology orbit markup with no independent branching or business logic."
+        },
+        {
+            "path": "src/components/TextInputCard/TextInputWithCard.tsx",
+            "reason": "Presentational form card wrapper with behavior delegated to caller-provided props and browser inputs."
+        },
+        {
+            "path": "src/components/TwinCandle/TwinCandle.tsx",
+            "reason": "Imperative SVG animation component dominated by refs and DOM transition side effects better tested visually."
+        },
+        {
+            "path": "src/page/BlogPage/BlogContent/BlogContent.tsx",
+            "reason": "Integration composition of markdown, author, media, and related-post sections better covered by page tests."
+        },
+        {
+            "path": "src/page/BlogPage/BlogContent/BlogNote/BlogNote.tsx",
+            "reason": "Static markdown note callout with no independent branching or data transformation."
+        },
+        {
+            "path": "src/page/BlogPage/BlogContent/BlogWarning/BlogWarning.tsx",
+            "reason": "Static markdown warning callout with no independent branching or data transformation."
+        },
+        {
+            "path": "src/page/BlogPage/BlogContent/BuyMeACoffeeButton/BuyMeACoffeeButton.tsx",
+            "reason": "Static external support link component with no business logic beyond fixed markup."
+        },
+        {
+            "path": "src/page/BlogPage/BlogContent/CodeBlock/CodeBlock.tsx",
+            "reason": "Prism and clipboard-backed code rendering integration better validated through markdown renderer coverage."
+        },
+        {
+            "path": "src/page/BlogPage/BlogContent/MarkdownRendererV2/MarkdownRendererV2.tsx",
+            "reason": "Markdown parsing and React rendering integration depends on third-party parser behavior and renderer tests."
+        },
+        {
+            "path": "src/page/BlogPage/BlogContent/MarkdownRendererV2/remarkTableToHtml.ts",
+            "reason": "Markdown AST table conversion plugin covered by focused renderer utility tests rather than component scope."
+        },
+        {
+            "path": "src/page/BlogPage/BlogContent/PostDetailsPanel/PostDetailsPanel.tsx",
+            "reason": "Composite metadata panel linking tags, author, and related posts; behavior covered by blog page integration tests."
+        },
+        {
+            "path": "src/page/BlogPage/BlogContent/SkeletonBlogContent/SkeletonBlogContent.tsx",
+            "reason": "Static loading skeleton markup with no independent branching or data transformation."
+        },
+        {
+            "path": "src/page/BlogPage/BlogContent/TableOfContents/TableOfContents.tsx",
+            "reason": "Scroll-driven table of contents integration dominated by DOM observers and page layout side effects."
         }
     ]
 }

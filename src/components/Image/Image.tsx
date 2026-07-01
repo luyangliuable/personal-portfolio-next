@@ -1,12 +1,14 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import SkeletonImage from "./SkeletonImage/SkeletonImage";
 import IImageProps from "./Interface/IImageProps";
 import ImageRepository from "../../repositories/ImageRepository";
 import { default as NextImage } from "next/image";
 import { cl } from "../Utility/LogicUtility";
 import "./Image.css";
+
+const DEFAULT_IMAGE_ID = "651942aaf9b642fb30be59ae";
 
 const Image: React.FC<IImageProps> = ({
     compression,
@@ -21,30 +23,27 @@ const Image: React.FC<IImageProps> = ({
         undefined,
     );
     const [isInView, setIsInView] = useState<boolean>(false);
+    const [isImageLoaded, setIsImageLoaded] = useState<boolean>(false);
     const defaultImageAlt = "";
     const imageRef = useRef(null);
 
-    const defaultProps = {
-        defaultImageId: "651942aaf9b642fb30be59ae",
-    };
-
-    const updateImage = async () => {
-        if (fetchedImageUrl) return;
+    const updateImage = useCallback(() => {
         try {
-            const imageId = src ?? defaultProps!.defaultImageId;
-            setFetchedImageUrl(
-                imageRepository.getImageUrl(imageId, compression),
-            );
+            const imageId = src ?? DEFAULT_IMAGE_ID;
+            const imageUrl = imageRepository.getImageUrl(imageId, compression);
+            if (imageUrl === fetchedImageUrl) return;
+            setIsImageLoaded(false);
+            setFetchedImageUrl(imageUrl);
         } catch (error) {
             console.error("Error fetching images:", error);
         }
-    };
+    }, [compression, fetchedImageUrl, imageRepository, src]);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
-                    if (entry.isIntersecting && !isInView) {
+                    if (entry.isIntersecting) {
                         entry.target.classList.add("animation");
                         setIsInView(true);
                     }
@@ -53,23 +52,26 @@ const Image: React.FC<IImageProps> = ({
             { threshold: 0.1, rootMargin: "20%" },
         );
 
-        if (imageRef.current) {
-            observer.observe(imageRef.current);
+        const imageElement = imageRef.current;
+        if (imageElement) {
+            observer.observe(imageElement);
         }
 
         return () => {
-            if (imageRef.current) {
-                observer.unobserve(imageRef.current);
+            if (imageElement) {
+                observer.unobserve(imageElement);
             }
         };
     }, []);
 
     useEffect(() => {
         if (isInView || isLazyLoading === false) updateImage();
-    }, [src, isInView]);
+    }, [isInView, isLazyLoading, updateImage]);
 
     if (!fetchedImageUrl) {
-        return <SkeletonImage ref={imageRef} className={className} />;
+        return (
+            <SkeletonImage ref={imageRef} className={className} style={style} />
+        );
     }
 
     return (
@@ -79,9 +81,12 @@ const Image: React.FC<IImageProps> = ({
             ref={imageRef}
             width="100"
             height="100"
-            className={cl(className, { animation: isLazyLoading === false })}
+            className={cl(className, {
+                "image-skeleton animation": !isImageLoaded,
+            })}
             src={fetchedImageUrl}
             alt={alt ?? defaultImageAlt}
+            onLoad={() => setIsImageLoaded(true)}
         />
     );
 };

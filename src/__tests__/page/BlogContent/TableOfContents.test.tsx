@@ -7,13 +7,13 @@ import {
     waitFor,
 } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { EventEmitter } from "events";
+import { EventEmitter } from "node:events";
 import TableOfContents from "@/page/BlogPage/BlogContent/TableOfContents/TableOfContents";
 import { stringToHash } from "@/components/Utility/StringUtility";
 
 describe("TableOfContents", () => {
     beforeEach(() => {
-        vi.spyOn(window, "getComputedStyle").mockReturnValue({
+        vi.spyOn(globalThis, "getComputedStyle").mockReturnValue({
             height: "20px",
             marginBottom: "2px",
         } as any);

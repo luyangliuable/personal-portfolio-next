@@ -37,7 +37,7 @@ describe("LandingPageCard", () => {
         expect(card).toHaveClass("grainy-background");
         expect(card.style.color).toBe("red");
         act(() => {
-            fireEvent.scroll(window);
+            fireEvent.scroll(globalThis as Window);
             vi.advanceTimersByTime(500);
         });
         expect(document.documentElement.scrollTo).toHaveBeenCalledWith(0, 0);

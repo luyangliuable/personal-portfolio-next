@@ -25,7 +25,7 @@ vi.mock("@/components/Atoms/SequentialRiseSpan/SequentialRiseSpan", () => ({
 describe("HeroHeader", () => {
     beforeEach(() => {
         vi.clearAllMocks();
-        window.innerWidth = 1024;
+        globalThis.innerWidth = 1024;
     });
 
     it("renders desktop content with custom graphics and initializes GSAP.", () => {
@@ -44,8 +44,8 @@ describe("HeroHeader", () => {
     it("uses default graphics after resizing into the mobile layout.", () => {
         render(<HeroHeader heading="Hi" description="There" />);
         act(() => {
-            window.innerWidth = 500;
-            fireEvent.resize(window);
+            globalThis.innerWidth = 500;
+            fireEvent.resize(globalThis as Window);
         });
         expect(screen.getByText("Default graphic")).toBeInTheDocument();
     });

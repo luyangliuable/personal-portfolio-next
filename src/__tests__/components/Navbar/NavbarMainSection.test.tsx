@@ -14,6 +14,7 @@ vi.mock("@/components/Navbar/NavbarScrollProgress/NavbarScrollProgress", () => (
 vi.mock("@/components/Navbar/NavLink/NavLink", () => ({
     default: ({ link, renderDropdownMenu, hideDropdownMenu, isSubLink }: any) => (
         <button
+            type="button"
             onFocus={() => renderDropdownMenu(link.sublinks)}
             onMouseOver={() => renderDropdownMenu(link.sublinks)}
             onClick={hideDropdownMenu}

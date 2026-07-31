@@ -1,5 +1,7 @@
 {
-    "source": ["src/**/*.{ts,tsx}"],
+    "source": [
+        "src/**/*.{ts,tsx}"
+    ],
     "structuralExcludes": [
         "src/__tests__/**",
         "**/*.test.{ts,tsx}",
@@ -118,6 +120,10 @@
         {
             "path": "src/components/Bento/Bento.tsx",
             "reason": "Responsive layout component driven by CSS grid and viewport resize behavior rather than business logic."
+        },
+        {
+            "path": "src/components/Gallery/GalleryItem/Contributors/Contributors.tsx",
+            "reason": "Octokit-backed contributor tooltip integration dominated by network and portal hover side effects rather than isolated business logic."
         }
     ]
 }

@@ -18,7 +18,7 @@ vi.mock("@/components/TagCloud/TagCloud", () => ({
 }));
 vi.mock(
     "@/page/BlogPage/BlogContent/BuyMeACoffeeButton/BuyMeACoffeeButton",
-    () => ({ default: () => <button>Coffee</button> }),
+    () => ({ default: () => <button type="button">Coffee</button> }),
 );
 vi.mock("@/components/Utility/MouseUtility", () => ({
     cardGradientEffect: vi.fn(),

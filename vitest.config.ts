@@ -146,4 +146,4 @@ export default defineConfig({
             "@": resolve(__dirname, "./src"),
         },
     },
-});
+} as any);

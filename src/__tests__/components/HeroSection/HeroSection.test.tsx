@@ -27,8 +27,8 @@ vi.mock("@/components/Atoms/SequentialRiseSpan/SequentialRiseSpan", () => ({
 describe("HeroSection", () => {
     beforeEach(() => {
         vi.useFakeTimers();
-        window.innerWidth = 800;
-        window.innerHeight = 1000;
+        globalThis.innerWidth = 800;
+        globalThis.innerHeight = 1000;
         Element.prototype.getBoundingClientRect = vi.fn(() => ({
             left: 0, top: 0, width: 200, height: 100, right: 200, bottom: 100,
             x: 0, y: 0, toJSON: () => {},

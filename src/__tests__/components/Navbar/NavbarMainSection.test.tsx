@@ -33,7 +33,7 @@ describe("NavbarMainSection", () => {
     beforeEach(() => {
         vi.useFakeTimers();
         scrollState.scrollY = 0;
-        window.innerWidth = 800;
+        globalThis.innerWidth = 800;
         Element.prototype.getBoundingClientRect = vi.fn(() => ({ height: 50 }) as DOMRect);
         Object.defineProperty(document.documentElement, "scrollTop", { configurable: true, writable: true, value: 0 });
     });

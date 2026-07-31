@@ -11,7 +11,7 @@ describe("NavbarScrollProgress", () => {
     beforeEach(() => {
         state.scrollY = 0;
         state.pathname = "/";
-        window.innerHeight = 200;
+        globalThis.innerHeight = 200;
         Object.defineProperty(document.documentElement, "scrollHeight", {
             configurable: true,
             value: 1000,

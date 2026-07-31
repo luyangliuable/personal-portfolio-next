@@ -23,7 +23,7 @@ describe("ZaBanquet", () => {
                 },
             }) as any;
         });
-        global.IntersectionObserver = vi.fn(function (callback: any) {
+        globalThis.IntersectionObserver = vi.fn(function (callback: any) {
             return {
                 observe: (element: Element) => {
                     observe(element);

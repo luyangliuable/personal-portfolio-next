@@ -7,7 +7,7 @@ import {
     waitFor,
 } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { EventEmitter } from "events";
+import { EventEmitter } from "node:events";
 import TableOfContents from "@/page/BlogPage/BlogContent/TableOfContents/TableOfContents";
 import { stringToHash } from "@/components/Utility/StringUtility";
 

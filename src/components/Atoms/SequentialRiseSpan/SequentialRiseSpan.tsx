@@ -3,195 +3,168 @@ import React, {
     useState,
     useRef,
     useEffect,
+    useCallback,
     memo,
     RefObject,
 } from "react";
+import {
+    layoutWithLines,
+    prepareWithSegments,
+    type PreparedTextWithSegments,
+} from "@chenglou/pretext";
 import "./SequentialRiseSpan.css";
 
 export interface ISequentialRiseSpanProps {
     children: string;
     className?: string;
     elementType?: keyof JSX.IntrinsicElements;
-    wordsPerAnimation?: number;
-    animationDelayMiliseconds?: number;
-    numberOfLettersPerLine?: number;
-    calculationAdjustment?: number;
-    minNumberOfLettersPerLine?: number;
     baseAnimationDelay?: number;
-    maxNumberOfLettersPerLine?: number;
+    font?: string;
+    lineHeight?: number;
 }
 
+const DEFAULT_LINE_HEIGHT_RATIO = 1.2;
+
 const SequentialRiseSpan: React.FC<ISequentialRiseSpanProps> = ({
-    calculationAdjustment,
     children,
     baseAnimationDelay = 0,
     elementType,
     className,
-    numberOfLettersPerLine,
-    minNumberOfLettersPerLine,
-    maxNumberOfLettersPerLine,
+    font,
+    lineHeight,
 }) => {
     const spanItemRef = useRef<HTMLDivElement>(null);
-    const [wrappedLines, setWrappedLines] = useState<
-        ReactElement<{ key: number; className: string }>[]
-    >([]);
+    const preparedRef = useRef<PreparedTextWithSegments | null>(null);
+    const preparedKeyRef = useRef<string>("");
+    const [wrappedLines, setWrappedLines] = useState<ReactElement[]>([]);
     const [lineRefs, setLineRefs] = useState<RefObject<any>[]>([]);
-    const [measuredLettersPerLine, setMeasuredLettersPerLine] =
-        useState<number>(numberOfLettersPerLine ?? 0);
 
-    const calculateLettersPerLine = () => {
-        const targetElement = spanItemRef.current;
+    const resolveFont = useCallback(
+        (element: HTMLElement): string => {
+            if (font) return font;
 
-        if (
-            numberOfLettersPerLine ||
-            measuredLettersPerLine > 0 ||
-            targetElement === undefined
-        )
-            return;
+            const style = window.getComputedStyle(element);
+            return `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
+        },
+        [font],
+    );
 
-        const createTempSpan = () => {
-            const tempSpan = document.createElement("span");
-            tempSpan.style.visibility = "hidden";
-            tempSpan.style.whiteSpace = "nowrap";
-            tempSpan.textContent = children;
-            return tempSpan;
-        };
+    const resolvePrepared = useCallback(
+        (element: HTMLElement): PreparedTextWithSegments => {
+            const resolvedFont = resolveFont(element);
+            const preparedKey = `${children}::${resolvedFont}`;
 
-        const getCharWidth = () => {
-            const tempSpan = createTempSpan();
-            document.body.appendChild(tempSpan);
-            const charWidth = tempSpan.offsetWidth;
-            document.body.removeChild(tempSpan);
-            return charWidth / children.length;
-        };
+            if (
+                preparedRef.current === null ||
+                preparedKeyRef.current !== preparedKey
+            ) {
+                preparedRef.current = prepareWithSegments(
+                    children,
+                    resolvedFont,
+                );
+                preparedKeyRef.current = preparedKey;
+            }
 
-        const charWidth = getCharWidth();
+            return preparedRef.current;
+        },
+        [children, resolveFont],
+    );
 
-        if (targetElement) {
-            const elementStyle = window.getComputedStyle(targetElement);
-            const elementPadding =
-                parseFloat(elementStyle.paddingLeft) +
-                parseFloat(elementStyle.paddingRight);
-            const targetElementWidth =
-                targetElement.offsetWidth - elementPadding;
-            calculationAdjustment = calculationAdjustment ?? 1.12;
-            setMeasuredLettersPerLine(
-                Math.floor(
-                    (targetElementWidth * calculationAdjustment) / charWidth,
+    const measureLines = useCallback(() => {
+        const element = spanItemRef.current;
+
+        if (!element) return;
+
+        const style = window.getComputedStyle(element);
+        const horizontalPadding =
+            parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+        const maxWidth = element.offsetWidth - horizontalPadding;
+
+        if (!Number.isFinite(maxWidth) || maxWidth <= 0) return;
+
+        const resolvedLineHeight =
+            lineHeight ??
+            (parseFloat(style.lineHeight) ||
+                parseFloat(style.fontSize) * DEFAULT_LINE_HEIGHT_RATIO);
+
+        const prepared = resolvePrepared(element);
+        const { lines } = layoutWithLines(
+            prepared,
+            maxWidth,
+            resolvedLineHeight,
+        );
+
+        setWrappedLines(
+            lines.map((line, index) =>
+                React.createElement(
+                    elementType || "p",
+                    {
+                        key: index,
+                        className: ["invisible", className].join(" "),
+                    },
+                    line.text,
                 ),
-            );
-        }
-    };
-
-    const slideUp = (target: Element, observer: any): void => {
-        target.classList.add("slide-up");
-        observer.unobserve(target);
-    };
+            ),
+        );
+        setLineRefs(lines.map(() => React.createRef<any>()));
+    }, [className, elementType, lineHeight, resolvePrepared]);
 
     useEffect(() => {
-        const addIntersectionObserver = () => {
-            const observer = new IntersectionObserver(
-                (entries) => {
-                    entries.forEach((entry) => {
-                        if (entry.isIntersecting)
-                            slideUp(entry.target, observer);
-                    });
-                },
-                { threshold: [0.1, 0.5, 1] },
-            );
+        measureLines();
+        window.addEventListener("resize", measureLines);
 
-            lineRefs.forEach((ref) => {
-                if (ref.current) observer.observe(ref.current);
+        let cancelled = false;
+        const fontsReady = document?.fonts?.ready;
+        if (fontsReady) {
+            fontsReady.then(() => {
+                if (!cancelled) measureLines();
             });
-
-            return observer;
-        };
-
-        const observer = addIntersectionObserver();
-        return () => observer.disconnect();
-    }, [lineRefs]);
-
-    useEffect(() => {
-        if (!numberOfLettersPerLine) {
-            if (measuredLettersPerLine === 0) calculateLettersPerLine();
-            window.addEventListener("resize", calculateLettersPerLine);
         }
 
         return () => {
-            window.removeEventListener("resize", calculateLettersPerLine);
+            cancelled = true;
+            window.removeEventListener("resize", measureLines);
         };
-    }, [numberOfLettersPerLine]);
+    }, [measureLines]);
 
     useEffect(() => {
-        let currentLine = "";
-        let lines: string[] = [];
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("slide-up");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: [0.1, 0.5, 1] },
+        );
 
-        if (!numberOfLettersPerLine && !measuredLettersPerLine) return;
-
-        const determineFinalLineNumberofLettersPerLine = () => {
-            if (numberOfLettersPerLine) return numberOfLettersPerLine;
-            const max = maxNumberOfLettersPerLine ?? Number.MAX_SAFE_INTEGER;
-            const min = Math.max(
-                measuredLettersPerLine,
-                minNumberOfLettersPerLine ?? 0,
-            );
-            return Math.min(min, max);
-        };
-
-        const finalNumberOfLettersPerLine =
-            determineFinalLineNumberofLettersPerLine();
-
-        String(children)
-            .split(" ")
-            .forEach((word) => {
-                if (
-                    (currentLine + (currentLine ? " " : "") + word).length >
-                    finalNumberOfLettersPerLine
-                ) {
-                    lines.push(currentLine);
-                    currentLine = word;
-                } else {
-                    currentLine += (currentLine.length > 0 ? " " : "") + word;
-                }
-            });
-        lines.push(currentLine);
-
-        setLineRefs(lines.map(() => React.createRef<any>()));
-
-        const linesElements = lines.map((line, index) => {
-            const LineElement = React.createElement(
-                elementType || "p",
-                {
-                    key: index,
-                    className: ["invisible", className].join(" "),
-                },
-                line,
-            );
-            return LineElement;
+        lineRefs.forEach((ref) => {
+            if (ref.current) observer.observe(ref.current);
         });
 
-        setWrappedLines(linesElements);
-    }, [measuredLettersPerLine, numberOfLettersPerLine]);
+        return () => observer.disconnect();
+    }, [lineRefs]);
 
     return (
         <div className="sequential-rise-span" ref={spanItemRef}>
-            {measuredLettersPerLine !== 0 &&
-                wrappedLines.map((line, index) => {
-                    const lineElement = React.cloneElement(
-                        line as React.ReactElement,
-                        {
-                            style: {
-                                animationDelay: `${baseAnimationDelay + index * 100}ms`,
-                            },
-                            ref: lineRefs[index],
+            {wrappedLines.map((line, index) => {
+                const lineElement = React.cloneElement(
+                    line as React.ReactElement,
+                    {
+                        style: {
+                            animationDelay: `${baseAnimationDelay + index * 100}ms`,
                         },
-                    );
-                    return (
-                        <div key={index} className="w-full break-words">
-                            {lineElement}
-                        </div>
-                    );
-                })}
+                        ref: lineRefs[index],
+                    },
+                );
+                return (
+                    <div key={index} className="w-full break-words">
+                        {lineElement}
+                    </div>
+                );
+            })}
         </div>
     );
 };

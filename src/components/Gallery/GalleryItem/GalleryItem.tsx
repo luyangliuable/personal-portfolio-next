@@ -117,7 +117,7 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
                     <p>{props.subheading}</p>
                     {props.description && (
                         <div className="w-full box-border">
-                            <SequentialRiseSpan minNumberOfLettersPerLine={42}>
+                            <SequentialRiseSpan>
                                 {truncateTextBody(props.description, 200)}
                             </SequentialRiseSpan>
                         </div>

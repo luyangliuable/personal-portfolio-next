@@ -13,7 +13,7 @@ import { stringToHash } from "@/components/Utility/StringUtility";
 
 describe("TableOfContents", () => {
     beforeEach(() => {
-        vi.spyOn(window, "getComputedStyle").mockReturnValue({
+        vi.spyOn(globalThis, "getComputedStyle").mockReturnValue({
             height: "20px",
             marginBottom: "2px",
         } as any);

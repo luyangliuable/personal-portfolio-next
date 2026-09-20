@@ -73,6 +73,22 @@ describe("auth repository", () => {
         vi.mocked(fetch).mockRejectedValueOnce(new Error("network"));
         await store.dispatch(authUser());
         expect(store.getState().auth.error).toBe("network");
+
+        vi.mocked(fetch).mockResolvedValueOnce(jsonResponse({}, false));
+        await store.dispatch(registerUser({} as any));
+        expect(store.getState().auth.error).toBe("Failed to register");
+
+        vi.mocked(fetch).mockResolvedValueOnce(
+            jsonResponse({ message: "bad user" }, false),
+        );
+        await store.dispatch(authUser());
+        expect(store.getState().auth.error).toBe("bad user");
+
+        vi.mocked(fetch).mockResolvedValueOnce(jsonResponse({}, false));
+        await store.dispatch(authUser());
+        expect(store.getState().auth.error).toBe(
+            "Failed to fetch user details",
+        );
     });
 
     it("clears the user on logout.", () => {

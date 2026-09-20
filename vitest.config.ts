@@ -116,6 +116,7 @@ export default defineConfig({
                 "src/components/Atoms/SequentialRiseSpan2/SequentialRiseSpan2.tsx",
                 "src/components/Bento/Bento.tsx",
                 "src/components/Gallery/GalleryItem/Contributors/Contributors.tsx",
+                "src/app/next-api/invite/route.ts",
             ],
             exclude: [
                 "src/__tests__/**",
@@ -127,7 +128,9 @@ export default defineConfig({
                 "**/index.{ts,tsx}",
                 "**/types/**",
                 "**/constants/**",
-                "src/app/**",
+                "src/app/**/page.tsx",
+                "src/app/layout.tsx",
+                "src/app/auth/**",
                 "src/repositories/Response/**",
                 ...coverageConfigDefaults.exclude,
             ],

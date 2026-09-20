@@ -210,10 +210,6 @@
         {
             "path": "src/page/UnderConstructionPage/UnderConstruction.tsx",
             "reason": "Static placeholder page with decorative card hover styling and no independent business logic."
-        },
-        {
-            "path": "src/page/YoutubePlaylist/YoutubePlaylist.tsx",
-            "reason": "Static gallery page data composition with simple formatting better covered by gallery integration tests."
         }
     ]
 }

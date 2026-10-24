@@ -9,7 +9,9 @@ vi.mock("gsap", () => ({
     gsap: { registerPlugin: vi.fn(), timeline: vi.fn(() => ({ to })) },
 }));
 vi.mock("gsap/ScrollTrigger", () => ({ ScrollTrigger: { refresh: vi.fn() } }));
-vi.mock("@/stores/TriggerContext", () => ({ useTrigger: () => ({ trigger: 1 }) }));
+vi.mock("@/stores/TriggerContext", () => ({
+    useTrigger: () => ({ trigger: 1 }),
+}));
 vi.mock("@/components/Utility/ScrollUtility", () => ({
     refreshScrollTrigger: vi.fn(),
 }));
@@ -30,11 +32,17 @@ describe("HeroHeader", () => {
 
     it("renders desktop content with custom graphics and initializes GSAP.", () => {
         render(
-            <HeroHeader heading="Hello" description="World" graphics={<b>Art</b>}>
+            <HeroHeader
+                heading="Hello"
+                description="World"
+                graphics={<b>Art</b>}
+            >
                 Child
             </HeroHeader>,
         );
-        expect(screen.getByRole("heading", { name: /Hello/ })).toBeInTheDocument();
+        expect(
+            screen.getByRole("heading", { name: /Hello/ }),
+        ).toBeInTheDocument();
         expect(screen.getByText("World")).toBeInTheDocument();
         expect(screen.getByText("Art")).toBeInTheDocument();
         expect(screen.getByText("Child")).toBeInTheDocument();

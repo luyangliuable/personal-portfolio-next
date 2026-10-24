@@ -7,6 +7,7 @@ import {
     truncateTextBody,
 } from "../../../../components/Utility/StringUtility";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 interface PageProps {
     params: {
@@ -20,7 +21,10 @@ export async function generateMetadata({
     const postRepository = PostRepository.getInstance();
     const { id } = params;
 
-    const content: BlogPostResponse = await postRepository.getPost(id);
+    const content: BlogPostResponse | undefined =
+        await postRepository.getPost(id);
+    // getPost resolves undefined when the post or its markdown file is missing.
+    if (!content) notFound();
 
     return {
         title: `Blog | ${content.heading}`,
@@ -29,7 +33,7 @@ export async function generateMetadata({
             removeHashesAndStripWhitespace(content.body),
         ),
         openGraph: {
-            images: [apiImageUrl(content.image.$oid)],
+            images: content.image ? [apiImageUrl(content.image.$oid)] : [],
         },
     };
 }
@@ -37,7 +41,9 @@ export async function generateMetadata({
 export default async function BlogContentServer({ params }: PageProps) {
     const { id } = params;
     const postRepository = PostRepository.getInstance();
-    const content: BlogPostResponse = await postRepository.getPost(id);
+    const content: BlogPostResponse | undefined =
+        await postRepository.getPost(id);
+    if (!content) notFound();
 
     return <BlogContent id={id} content={content} showRelatedPosts />;
 }

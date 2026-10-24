@@ -187,7 +187,7 @@ const BlogPage: React.FC<IBlogPageProps> = memo(({ showTopPicks, data }) => {
                             author={post.author}
                             link={`/digital-chronicles/blog/${post._id.$oid}`}
                             heading={post.heading}
-                            image={post.image.$oid}
+                            image={post.image?.$oid}
                             body=""
                         />
                     ))}

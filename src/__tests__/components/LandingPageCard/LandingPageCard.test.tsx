@@ -29,8 +29,9 @@ describe("LandingPageCard", () => {
             </LandingPageCard>,
         );
         const card = container.firstElementChild as HTMLElement;
-        expect(screen.getByRole("heading", { name: "Featured" }))
-            .toBeInTheDocument();
+        expect(
+            screen.getByRole("heading", { name: "Featured" }),
+        ).toBeInTheDocument();
         expect(screen.getByText("Body")).toBeInTheDocument();
         expect(card).toHaveClass("landing-page-card--fit-content");
         expect(card).toHaveClass("custom", "blend-with-background");
@@ -44,11 +45,17 @@ describe("LandingPageCard", () => {
     });
 
     it("uses normal card classes when type is omitted or explicit.", () => {
-        const { container } = render(<LandingPageCard>No heading</LandingPageCard>);
+        const { container } = render(
+            <LandingPageCard>No heading</LandingPageCard>,
+        );
         expect(container.firstElementChild).toHaveClass("landing-page-card");
         const rendered = render(
-            <LandingPageCard landingPageCardType="normal">Normal</LandingPageCard>,
+            <LandingPageCard landingPageCardType="normal">
+                Normal
+            </LandingPageCard>,
         );
-        expect(rendered.container.firstElementChild).toHaveClass("landing-page-card");
+        expect(rendered.container.firstElementChild).toHaveClass(
+            "landing-page-card",
+        );
     });
 });

@@ -6,7 +6,9 @@ import RegisterPage from "@/page/RegisterPage/RegisterPage";
 import { loginUser, registerUser } from "@/stores/Repository/Auth";
 
 const dispatch = vi.hoisted(() => vi.fn());
-const selectorState = vi.hoisted(() => ({ auth: { status: "idle", error: null as string | null } }));
+const selectorState = vi.hoisted(() => ({
+    auth: { status: "idle", error: null as string | null },
+}));
 
 vi.mock("react-redux", () => ({
     useDispatch: () => dispatch,
@@ -35,15 +37,23 @@ describe("auth pages", () => {
             target: { value: password },
         });
         fireEvent.click(container.querySelector("input[type='submit']")!);
-        await waitFor(() => expect(screen.getByText("Login Successful!"))
-            .toBeInTheDocument());
-        expect(loginUser).toHaveBeenCalledWith(expect.objectContaining({ username }));
+        await waitFor(() =>
+            expect(screen.getByText("Login Successful!")).toBeInTheDocument(),
+        );
+        expect(loginUser).toHaveBeenCalledWith(
+            expect.objectContaining({ username }),
+        );
 
-        dispatch.mockReturnValueOnce({ unwrap: () => Promise.reject(new Error("bad")) });
+        dispatch.mockReturnValueOnce({
+            unwrap: () => Promise.reject(new Error("bad")),
+        });
         rerender(<LogInPage />);
         fireEvent.click(container.querySelector("input[type='submit']")!);
-        await waitFor(() => expect(screen.getByText("Invalid User name or password."))
-            .toBeInTheDocument());
+        await waitFor(() =>
+            expect(
+                screen.getByText("Invalid User name or password."),
+            ).toBeInTheDocument(),
+        );
     });
 
     it("submits registration details and displays status styling.", async () => {
@@ -70,7 +80,8 @@ describe("auth pages", () => {
 
         selectorState.auth = { status: "failed", error: "bad" };
         rerender(<RegisterPage />);
-        expect(document.querySelector(".register-form--register-flash"))
-            .toHaveClass("flash-red");
+        expect(
+            document.querySelector(".register-form--register-flash"),
+        ).toHaveClass("flash-red");
     });
 });

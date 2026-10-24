@@ -10,7 +10,7 @@ import authReducer, {
 const makeStore = () => configureStore({ reducer: { auth: authReducer } });
 
 const jsonResponse = (data: unknown, ok = true) =>
-    ({ ok, json: async () => data }) as Response;
+    ({ ok, json: () => Promise.resolve(data) }) as Response;
 
 describe("auth repository", () => {
     beforeEach(() => {

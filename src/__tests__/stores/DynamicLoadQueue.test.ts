@@ -29,9 +29,8 @@ describe("DynamicLoadQueue", () => {
         const { ctor, observe, unobserve, getCallback } = makeObserver();
         vi.stubGlobal("IntersectionObserver", ctor);
 
-        const { default: DynamicLoadQueue } = await import(
-            "@/stores/DynamicLoadQueue/DynamicLoadQueue"
-        );
+        const { default: DynamicLoadQueue } =
+            await import("@/stores/DynamicLoadQueue/DynamicLoadQueue");
         const instance = DynamicLoadQueue.getInstance();
         expect(DynamicLoadQueue.getInstance()).toBe(instance);
 
@@ -65,9 +64,8 @@ describe("DynamicLoadQueue", () => {
         delete (window as any).IntersectionObserver;
         const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
 
-        const { default: DynamicLoadQueue } = await import(
-            "@/stores/DynamicLoadQueue/DynamicLoadQueue"
-        );
+        const { default: DynamicLoadQueue } =
+            await import("@/stores/DynamicLoadQueue/DynamicLoadQueue");
         const instance = DynamicLoadQueue.getInstance();
         expect(warn).toHaveBeenCalledWith(
             "IntersectionObserver is not supported",

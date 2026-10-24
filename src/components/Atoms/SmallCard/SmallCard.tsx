@@ -22,21 +22,25 @@ const SmallCard: React.FC<ICardProps> = ({
             <div className="w-6/12">
                 <h3 className="font-semibold text-sm">{heading}</h3>
                 <footer className="flex mt-5 relative text-sm">
-                    <Image
-                        compression={5}
-                        src={authorImage ?? ""}
-                        className="user-image card-image--author-image"
-                        alt="Author"
-                    />
+                    {authorImage && (
+                        <Image
+                            compression={5}
+                            src={authorImage}
+                            className="user-image card-image--author-image"
+                            alt="Author"
+                        />
+                    )}
                     {author}
                 </footer>
             </div>
-            <Image
-                compression={30}
-                className="small-card__image"
-                alt={heading}
-                src={image ?? ""}
-            />
+            {image && (
+                <Image
+                    compression={30}
+                    className="small-card__image"
+                    alt={heading}
+                    src={image}
+                />
+            )}
         </Link>
     );
 };

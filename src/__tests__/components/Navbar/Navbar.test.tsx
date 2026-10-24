@@ -14,6 +14,9 @@ describe("Navbar", () => {
     it("renders configured links through the main section and positions login.", () => {
         render(<Navbar />);
         expect(screen.getByTestId("main")).toHaveTextContent("Home");
-        expect(screen.getByText("Login")).toHaveStyle({ position: "absolute", right: "0px" });
+        expect(screen.getByText("Login")).toHaveStyle({
+            position: "absolute",
+            right: "0px",
+        });
     });
 });

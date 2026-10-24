@@ -14,10 +14,12 @@ describe("MusicPlayer", () => {
                 <span>Custom track</span>
             </MusicPlayer>,
         );
-        expect(document.body.querySelector(".music-player"))
-            .toBeInTheDocument();
-        expect(document.body.querySelector(".music-player--play"))
-            .toBeInTheDocument();
+        expect(
+            document.body.querySelector(".music-player"),
+        ).toBeInTheDocument();
+        expect(
+            document.body.querySelector(".music-player--play"),
+        ).toBeInTheDocument();
         expect(screen.getAllByText("Test Music")).toHaveLength(6);
         expect(screen.getByText("Custom track")).toBeInTheDocument();
     });

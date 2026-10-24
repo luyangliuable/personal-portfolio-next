@@ -90,23 +90,14 @@ const GalleryItem: React.FC<IGalleryItemProps> = (props) => {
             >
                 <GalleryItemTypeSegment />
                 <div className="gallery-item__image flex justify-center items-center">
-                    {!imageOverlay ? (
+                    {imageOverlay && <img alt="" src={imageOverlay} />}
+                    {image && (
                         <Image
                             isLazyLoading={false}
                             compression={30}
                             alt=""
-                            src={image ?? ""}
+                            src={image}
                         />
-                    ) : (
-                        <>
-                            <img alt="" src={imageOverlay} />
-                            <Image
-                                isLazyLoading={false}
-                                compression={30}
-                                alt=""
-                                src={image ?? ""}
-                            />
-                        </>
                     )}
                 </div>
                 <div className="px-5">

@@ -14,7 +14,7 @@ vi.mock("@/lib/mongodb", () => ({
 import { POST } from "@/app/next-api/invite/route";
 
 function request(body: unknown) {
-    return { json: async () => body } as never;
+    return { json: () => Promise.resolve(body) } as never;
 }
 
 describe("invite route POST", () => {
@@ -65,9 +65,7 @@ describe("invite route POST", () => {
 
     it("returns 500 when the request cannot be processed", async () => {
         const broken = {
-            json: async () => {
-                throw new Error("invalid json");
-            },
+            json: () => Promise.reject(new Error("invalid json")),
         } as never;
 
         const response = await POST(broken);

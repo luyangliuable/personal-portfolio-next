@@ -75,7 +75,11 @@ const processNodes = (node: any): any => {
 };
 
 const convertHtmlToReact = (htmlString: string): JSX.Element => {
-    const container = document.createElement("div");
+    // An inert document stops the browser fetching <img src="<image id>"> as a
+    // relative URL before it is swapped for the Image component.
+    const container = document.implementation
+        .createHTMLDocument("")
+        .createElement("div");
     container.innerHTML = htmlString;
     const elements = Array.from(container.childNodes).map(processNodes);
     console.log(elements);

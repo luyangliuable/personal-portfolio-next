@@ -36,8 +36,11 @@ cp .env.local.example .env.local
 
 ```sh
 docker compose up -d
-IMAGE_STORE_LOCATION="$PWD/.local/images" node scripts/seed-local-content.mjs
+npm run seed
+npm run dev:local
 ```
+
+Both scripts unset any shell-exported `MONGOURI` and `*_STORE_LOCATION` so `.env.local` is used, and the seed refuses to write to a non-localhost MongoDB. Set `NOTES_STORE_LOCATION` to a local notes checkout to index its markdown as coding notes. Real copies of referenced images placed in `.local/originals/<id>.<ext>` are used instead of the generated placeholders.
 
 In the backend repo:
 
@@ -58,7 +61,7 @@ The seed script creates deterministic PNG images in `.local/images`. Each seeded
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). The frontend uses `NEXT_PUBLIC_API_BASE_URL` from `.env.local` and defaults to the hosted API when the variable is not set.
+Open [http://localhost:3000](http://localhost:3000). The frontend uses `NEXT_PUBLIC_API_BASE_URL` from `.env.local` for API calls, the production CORS origin and internal-link detection. Set it to an absolute URL (e.g. `https://your-domain/api`); without it the app falls back to a relative `/api`, which server-side rendering cannot fetch.
 
 ## 3. <a name='DevelopmentCommands'></a>Development Commands
 

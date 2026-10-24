@@ -9,6 +9,9 @@ export default defineConfig({
 
         globals: true,
         setupFiles: ["./vitest.setup.ts"],
+        // Same absolute API base the app expects (see .env.example); Node's
+        // fetch cannot resolve the relative /api fallback.
+        env: { NEXT_PUBLIC_API_BASE_URL: "http://localhost:3000/api" },
         include: ["src/__tests__/**/*.{test,spec}.{ts,tsx}"],
         exclude: [
             "node_modules/**",
@@ -22,6 +25,8 @@ export default defineConfig({
             reporter: ["text", "json", "json-summary", "html", "lcov"],
             reportsDirectory: "./coverage/unit",
             include: [
+                "src/middleware.ts",
+                "src/server/**/*.ts",
                 "src/components/Accordion/Accordion.tsx",
                 "src/components/Atoms/ImageDisplayModal/ImageDisplayModal.tsx",
                 "src/components/Atoms/InlineLink/InlineLink.tsx",
@@ -39,6 +44,7 @@ export default defineConfig({
                 "src/components/FeaturedContentSection/FeaturedContentSection.tsx",
                 "src/components/Footer/Footer.tsx",
                 "src/components/FractalHills/FractalHills.tsx",
+                "src/components/FractalHills/FractalHillsClient.tsx",
                 "src/components/GolfedSierpinski/GolfedSierpinski.tsx",
                 "src/components/Image/Image.tsx",
                 "src/components/HeroHeader/HeroHeader.tsx",

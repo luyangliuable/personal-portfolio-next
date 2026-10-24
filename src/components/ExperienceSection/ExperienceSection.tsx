@@ -254,7 +254,7 @@ const items: ExperienceSectionItem[] = [
         media: {
             type: "IMAGE",
             source: {
-                url: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Cisco_logo_blue_2016.svg/440px-Cisco_logo_blue_2016.svg.png",
+                url: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Cisco_logo_blue_2016.svg/500px-Cisco_logo_blue_2016.svg.png",
             },
         },
     },

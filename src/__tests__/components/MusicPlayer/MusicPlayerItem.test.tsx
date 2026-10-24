@@ -22,11 +22,15 @@ describe("MusicPlayerItem", () => {
                 musicTitle="Song"
             />,
         );
-        expect(screen.getByRole("heading", { name: "Song" }))
-            .toBeInTheDocument();
+        expect(
+            screen.getByRole("heading", { name: "Song" }),
+        ).toBeInTheDocument();
         expect(screen.getByText("Artist")).toBeInTheDocument();
         expect(screen.getByText("03:10")).toBeInTheDocument();
-        expect(screen.getByAltText("Cover")).toHaveAttribute("src", "/cover.png");
+        expect(screen.getByAltText("Cover")).toHaveAttribute(
+            "src",
+            "/cover.png",
+        );
     });
 
     it("uses the fallback cover and mouse gradient handler.", () => {
@@ -35,7 +39,8 @@ describe("MusicPlayerItem", () => {
         );
         fireEvent.mouseMove(container.querySelector(".music-player--item")!);
         expect(cardGradientEffect).toHaveBeenCalled();
-        expect(container.querySelector("img")!.getAttribute("src"))
-            .toContain("abc-cdn.net.au");
+        expect(container.querySelector("img")!.getAttribute("src")).toContain(
+            "abc-cdn.net.au",
+        );
     });
 });

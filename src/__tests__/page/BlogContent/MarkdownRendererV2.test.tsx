@@ -21,11 +21,25 @@ vi.mock(
             warn: ({ children }: any) => (
                 <aside data-testid="warn">{children}</aside>
             ),
+            img: ({ src }: any) => <span data-testid="image">{src}</span>,
         },
     }),
 );
 
 describe("MarkdownRendererV2", () => {
+    it("parses post HTML in an inert document so image ids are not fetched as URLs.", async () => {
+        const createHTMLDocument = vi.spyOn(
+            document.implementation,
+            "createHTMLDocument",
+        );
+        render(<MarkdownRendererV2 markdown={'<Image src="abc123"/>'} />);
+
+        expect(await screen.findByTestId("image")).toHaveTextContent("abc123");
+        expect(createHTMLDocument).toHaveBeenCalled();
+        expect(document.querySelector('img[src="abc123"]')).toBeNull();
+        createHTMLDocument.mockRestore();
+    });
+
     it("filters root headings and renders markdown, inline code, and whitelisted HTML.", async () => {
         render(
             <MarkdownRendererV2

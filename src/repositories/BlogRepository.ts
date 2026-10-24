@@ -1,5 +1,7 @@
+import { apiUrl } from "../config/api";
+
 class BlogRepository {
-    static BASE_URL: string = "https://llcode.tech/api/blogs";
+    static readonly BASE_URL: string = apiUrl("/blogs");
 
     static options(
         method: "GET" | "DELETE" | "POST" | "PUT",

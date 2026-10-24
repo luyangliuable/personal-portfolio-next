@@ -1,6 +1,6 @@
 import React from "react";
-import { render } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import FractalHills from "@/components/FractalHills/FractalHills";
 
 const p5Mocks = vi.hoisted(() => ({
@@ -46,7 +46,22 @@ vi.mock("p5/lib/p5.js", () => ({
 }));
 
 describe("FractalHills", () => {
+    afterEach(() => vi.restoreAllMocks());
+
+    it("shows a message instead of crashing when WebGL is unavailable.", () => {
+        vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue(
+            null,
+        );
+        p5Mocks.vertex.mockClear();
+        render(<FractalHills />);
+        expect(screen.getByText(/needs WebGL/)).toBeInTheDocument();
+        expect(p5Mocks.vertex).not.toHaveBeenCalled();
+    });
+
     it("initializes, draws, resizes, and removes p5 terrain sketches.", () => {
+        vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue(
+            {} as RenderingContext,
+        );
         const themes = [
             "heatmap",
             "rainbow",
@@ -63,7 +78,11 @@ describe("FractalHills", () => {
             "unknown",
         ];
         const { container, unmount } = render(
-            <>{themes.map((theme) => <FractalHills key={theme} colorTheme={theme} />)}</>,
+            <>
+                {themes.map((theme) => (
+                    <FractalHills key={theme} colorTheme={theme} />
+                ))}
+            </>,
         );
         expect(container.firstElementChild).toHaveClass("bg-[red]", "h-screen");
         expect(p5Mocks.vertex).toHaveBeenCalled();

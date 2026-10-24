@@ -37,8 +37,6 @@ describe("notes api", () => {
         );
         expect(single.data).toEqual({ _id: "2" });
         expect((fetchMock.mock.calls[0][0] as Request).url).toContain("note");
-        expect((fetchMock.mock.calls[1][0] as Request).url).toContain(
-            "note/2",
-        );
+        expect((fetchMock.mock.calls[1][0] as Request).url).toContain("note/2");
     });
 });

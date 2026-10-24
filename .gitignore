@@ -19,7 +19,7 @@
 # misc
 .DS_Store
 *.pem
-.local/images/
+.local/
 
 # debug
 npm-debug.log*

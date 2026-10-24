@@ -1,8 +1,9 @@
 import Repository from "./Repository";
+import { apiUrl } from "../config/api";
 
 class ConfigRepository extends Repository {
     private static instance: ConfigRepository;
-    static BASE_URL: string = "https://llcode.tech/api/config";
+    static readonly BASE_URL: string = apiUrl("/config");
 
     private constructor() {
         super();

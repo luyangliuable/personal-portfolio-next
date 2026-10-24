@@ -10,9 +10,12 @@ vi.mock("@/components/Utility/MouseUtility", () => ({
 describe("UnderConstruction", () => {
     it("renders the coming soon card and wires the gradient handler.", () => {
         const { container } = render(<UnderConstruction />);
-        expect(screen.getByRole("heading", { name: "Coming Soon" }))
-            .toBeInTheDocument();
-        fireEvent.mouseMove(container.querySelector(".under-contruction-card")!);
+        expect(
+            screen.getByRole("heading", { name: "Coming Soon" }),
+        ).toBeInTheDocument();
+        fireEvent.mouseMove(
+            container.querySelector(".under-contruction-card")!,
+        );
         expect(cardGradientEffect).toHaveBeenCalled();
     });
 });

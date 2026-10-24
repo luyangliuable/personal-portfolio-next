@@ -33,7 +33,6 @@ interface IGalleryItemPropsWithoutRepo extends IGalleryItemPropsBase {
 }
 
 type IGalleryItemProps =
-    | IGalleryItemPropsWithRepo
-    | IGalleryItemPropsWithoutRepo;
+    IGalleryItemPropsWithRepo | IGalleryItemPropsWithoutRepo;
 
 export default IGalleryItemProps;

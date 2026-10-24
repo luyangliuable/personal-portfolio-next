@@ -16,5 +16,90 @@
         "src/stores/TriggerContext.tsx",
         "src/stores/provider.tsx"
     ],
-    "documentedExcludes": []
+    "documentedExcludes": [
+        {
+            "path": "src/app/api/check_env_variable/route.ts",
+            "reason": "Rust backend parity port; HTTP route adapters and service modules verified through API integration tests instead of the component unit-coverage thresholds."
+        },
+        {
+            "path": "src/app/api/check_mongodb_uri/route.ts",
+            "reason": "Rust backend parity port; HTTP route adapters and service modules verified through API integration tests instead of the component unit-coverage thresholds."
+        },
+        {
+            "path": "src/app/api/config/[key]/route.ts",
+            "reason": "Rust backend parity port; HTTP route adapters and service modules verified through API integration tests instead of the component unit-coverage thresholds."
+        },
+        {
+            "path": "src/app/api/config/route.ts",
+            "reason": "Rust backend parity port; HTTP route adapters and service modules verified through API integration tests instead of the component unit-coverage thresholds."
+        },
+        {
+            "path": "src/app/api/handle_data/route.ts",
+            "reason": "Rust backend parity port; HTTP route adapters and service modules verified through API integration tests instead of the component unit-coverage thresholds."
+        },
+        {
+            "path": "src/app/api/health/route.ts",
+            "reason": "Rust backend parity port; HTTP route adapters and service modules verified through API integration tests instead of the component unit-coverage thresholds."
+        },
+        {
+            "path": "src/app/api/image/[id]/route.ts",
+            "reason": "Rust backend parity port; HTTP route adapters and service modules verified through API integration tests instead of the component unit-coverage thresholds."
+        },
+        {
+            "path": "src/app/api/image/route.ts",
+            "reason": "Rust backend parity port; HTTP route adapters and service modules verified through API integration tests instead of the component unit-coverage thresholds."
+        },
+        {
+            "path": "src/app/api/login/route.ts",
+            "reason": "Rust backend parity port; HTTP route adapters and service modules verified through API integration tests instead of the component unit-coverage thresholds."
+        },
+        {
+            "path": "src/app/api/logout/route.ts",
+            "reason": "Rust backend parity port; HTTP route adapters and service modules verified through API integration tests instead of the component unit-coverage thresholds."
+        },
+        {
+            "path": "src/app/api/message/route.ts",
+            "reason": "Rust backend parity port; HTTP route adapters and service modules verified through API integration tests instead of the component unit-coverage thresholds."
+        },
+        {
+            "path": "src/app/api/note/[id]/route.ts",
+            "reason": "Rust backend parity port; HTTP route adapters and service modules verified through API integration tests instead of the component unit-coverage thresholds."
+        },
+        {
+            "path": "src/app/api/note/route.ts",
+            "reason": "Rust backend parity port; HTTP route adapters and service modules verified through API integration tests instead of the component unit-coverage thresholds."
+        },
+        {
+            "path": "src/app/api/posts/[id]/route.ts",
+            "reason": "Rust backend parity port; HTTP route adapters and service modules verified through API integration tests instead of the component unit-coverage thresholds."
+        },
+        {
+            "path": "src/app/api/posts/route.ts",
+            "reason": "Rust backend parity port; HTTP route adapters and service modules verified through API integration tests instead of the component unit-coverage thresholds."
+        },
+        {
+            "path": "src/app/api/proxy_post/route.ts",
+            "reason": "Rust backend parity port; HTTP route adapters and service modules verified through API integration tests instead of the component unit-coverage thresholds."
+        },
+        {
+            "path": "src/app/api/proxy/route.ts",
+            "reason": "Rust backend parity port; HTTP route adapters and service modules verified through API integration tests instead of the component unit-coverage thresholds."
+        },
+        {
+            "path": "src/app/api/register/route.ts",
+            "reason": "Rust backend parity port; HTTP route adapters and service modules verified through API integration tests instead of the component unit-coverage thresholds."
+        },
+        {
+            "path": "src/app/api/route.ts",
+            "reason": "Rust backend parity port; HTTP route adapters and service modules verified through API integration tests instead of the component unit-coverage thresholds."
+        },
+        {
+            "path": "src/app/api/session/route.ts",
+            "reason": "Rust backend parity port; HTTP route adapters and service modules verified through API integration tests instead of the component unit-coverage thresholds."
+        },
+        {
+            "path": "src/app/api/user/route.ts",
+            "reason": "Rust backend parity port; HTTP route adapters and service modules verified through API integration tests instead of the component unit-coverage thresholds."
+        }
+    ]
 }

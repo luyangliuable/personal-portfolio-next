@@ -10,14 +10,18 @@ vi.mock("@/auth", () => ({
     signOut: vi.fn(),
 }));
 vi.mock("@/components/Image/Image", () => ({
-    default: ({ src, className }: any) => <img src={src} className={className} alt="user" />,
+    default: ({ src, className }: any) => (
+        <img src={src} className={className} alt="user" />
+    ),
 }));
 
 describe("LoginButton", () => {
     beforeEach(() => vi.clearAllMocks());
 
     it("renders signed-in user details and invokes sign-out action.", async () => {
-        vi.mocked(auth).mockResolvedValue({ user: { email: "u@test.com", image: "/u.png" } } as any);
+        vi.mocked(auth).mockResolvedValue({
+            user: { email: "u@test.com", image: "/u.png" },
+        } as any);
         const element: any = await LoginButton({ style: { right: 0 } });
         const fragment: any = React.Children.toArray(element.props.children)[0];
         const form: any = React.Children.toArray(fragment.props.children)[1];
@@ -25,7 +29,9 @@ describe("LoginButton", () => {
         render(element);
         expect(screen.getByText("u@test.com")).toBeInTheDocument();
         expect(screen.getByAltText("user")).toHaveAttribute("src", "/u.png");
-        expect(screen.getByRole("button", { name: "Sign Out" })).toBeInTheDocument();
+        expect(
+            screen.getByRole("button", { name: "Sign Out" }),
+        ).toBeInTheDocument();
         expect(signOut).toHaveBeenCalled();
     });
 
@@ -35,7 +41,9 @@ describe("LoginButton", () => {
         const form: any = React.Children.toArray(element.props.children)[0];
         await form.props.action();
         render(element);
-        expect(screen.getByRole("button", { name: "Sign In" })).toBeInTheDocument();
+        expect(
+            screen.getByRole("button", { name: "Sign In" }),
+        ).toBeInTheDocument();
         expect(signIn).toHaveBeenCalled();
     });
 });

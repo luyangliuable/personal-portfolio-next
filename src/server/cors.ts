@@ -1,9 +1,17 @@
-const PRODUCTION_ORIGINS = [
-    "http://llcode.tech",
-    "https://llcode.tech",
+import { apiOrigin } from "../config/api";
+
+const PRODUCTION_IP_ORIGINS = [
     "http://170.64.250.107",
     "https://170.64.250.107",
 ];
+
+/** The site's own origin comes from NEXT_PUBLIC_API_BASE_URL. */
+function productionOrigins(): string[] {
+    const siteOrigin = apiOrigin(process.env.NEXT_PUBLIC_API_BASE_URL ?? "");
+    return siteOrigin
+        ? [siteOrigin, ...PRODUCTION_IP_ORIGINS]
+        : PRODUCTION_IP_ORIGINS;
+}
 
 const DEVELOPMENT_ORIGINS = [
     "http://localhost:3000",
@@ -19,7 +27,7 @@ export function buildCorsHeaders(
 ): Record<string, string> {
     const isProduction = environment === "production";
     const allowedOrigins = isProduction
-        ? PRODUCTION_ORIGINS
+        ? productionOrigins()
         : DEVELOPMENT_ORIGINS;
 
     const headers: Record<string, string> = {
@@ -28,8 +36,12 @@ export function buildCorsHeaders(
         "Access-Control-Allow-Credentials": "true",
     };
 
-    if (origin && allowedOrigins.includes(origin)) {
-        headers["Access-Control-Allow-Origin"] = origin;
+    // A disallowed Origin gets no header at all; the wildcard is only for
+    // requests without an Origin, outside production.
+    if (origin !== null) {
+        if (allowedOrigins.includes(origin)) {
+            headers["Access-Control-Allow-Origin"] = origin;
+        }
     } else if (!isProduction) {
         headers["Access-Control-Allow-Origin"] = "*";
     }

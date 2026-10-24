@@ -166,6 +166,14 @@ describe("new coverage target visual components", () => {
         expect(screen.getAllByText("A").length).toBeGreaterThan(1);
     });
 
+    it("renders SmallCard without image requests when a post has no cover or author image.", () => {
+        const { container } = render(
+            (<SmallCard link="/b" heading="No Cover" author="Me" />) as any,
+        );
+        expect(screen.getByText("No Cover")).toBeInTheDocument();
+        expect(container.querySelector("img")).toBeNull();
+    });
+
     it("marks BlogYear as visible from observer events and runs CodingCat scroll animation lifecycle.", () => {
         render(<BlogYear year="2024" />);
         expect(screen.getByText("2024").parentElement).toHaveClass(
@@ -269,5 +277,22 @@ describe("new coverage target visual components", () => {
         expect(screen.getByText("BLOG")).toBeInTheDocument();
         expect(screen.getByText("TOOL")).toBeInTheDocument();
         await waitFor(() => expect(addToQueue).toHaveBeenCalled());
+    });
+
+    it("renders GalleryItem without an image request when there is no image id.", () => {
+        const { container } = render(
+            <>
+                <GalleryItem name="Bare" type="blog" link="/bare" />
+                <GalleryItem
+                    name="Overlay"
+                    type="tool"
+                    imageOverlay="/overlay.png"
+                />
+            </>,
+        );
+        const sources = Array.from(container.querySelectorAll("img")).map(
+            (img) => img.getAttribute("src"),
+        );
+        expect(sources).toEqual(["/overlay.png"]);
     });
 });

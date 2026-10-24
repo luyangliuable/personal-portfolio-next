@@ -172,6 +172,18 @@
         {
             "path": "src/server/users.ts",
             "reason": "Rust backend parity port; HTTP route adapters and service modules verified through API integration tests instead of the component unit-coverage thresholds."
+        },
+        {
+            "path": "src/server/models.ts",
+            "reason": "Rust backend parity port; HTTP route adapters and service modules verified through API integration tests instead of the component unit-coverage thresholds."
+        },
+        {
+            "path": "src/server/rustDate.ts",
+            "reason": "Rust backend parity port; HTTP route adapters and service modules verified through API integration tests instead of the component unit-coverage thresholds."
+        },
+        {
+            "path": "src/server/schema.ts",
+            "reason": "Rust backend parity port; HTTP route adapters and service modules verified through API integration tests instead of the component unit-coverage thresholds."
         }
     ]
 }

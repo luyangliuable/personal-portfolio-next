@@ -1,5 +1,6 @@
 import { ObjectId } from "mongodb";
 import type { InsertOneResult, UpdateResult } from "mongodb";
+import { isHexObjectId, serializeValue } from "./serialization";
 
 export class HttpError extends Error {
     status: number;
@@ -15,26 +16,21 @@ export function requireObjectId(
     id: string,
     invalidStatus: 400 | 500 = 400,
 ): ObjectId {
-    if (!ObjectId.isValid(id)) {
+    if (!isHexObjectId(id)) {
         throw new HttpError(invalidStatus, `Invalid ObjectId: ${id}`);
     }
     return new ObjectId(id);
 }
 
-export function objectIdOrNull(id: string): ObjectId | null {
-    return ObjectId.isValid(id) ? new ObjectId(id) : null;
-}
-
+/** mongodb 2.5 result structs serialize with `rename_all = "camelCase"`. */
 export function insertOneResult(result: InsertOneResult): unknown {
-    return { inserted_id: { $oid: String(result.insertedId) } };
+    return { insertedId: serializeValue(result.insertedId) };
 }
 
 export function updateResult(result: UpdateResult): unknown {
     return {
-        matched_count: result.matchedCount,
-        modified_count: result.modifiedCount,
-        upserted_id: result.upsertedId
-            ? { $oid: String(result.upsertedId) }
-            : null,
+        matchedCount: result.matchedCount,
+        modifiedCount: result.modifiedCount,
+        upsertedId: serializeValue(result.upsertedId ?? null),
     };
 }

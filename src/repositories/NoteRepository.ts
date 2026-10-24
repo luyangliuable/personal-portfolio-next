@@ -1,10 +1,11 @@
 import BlogPostResponse from "./Response/BlogPostResponse";
 import Repository from "./Repository";
+import { apiUrl } from "../config/api";
 
 class NoteRepository extends Repository {
     private static instance: NoteRepository;
     private static postListCache: any[] | null = null;
-    static BASE_URL: string = "https://llcode.tech/api/note";
+    static BASE_URL: string = apiUrl("/note");
 
     private constructor() {
         super();

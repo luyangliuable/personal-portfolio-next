@@ -1,4 +1,6 @@
-import { parseDate, toObjectId } from "./serialization";
+import { getCollection } from "./db";
+import { HttpError, requireObjectId, updateResult } from "./http";
+import type { Model } from "./schema";
 
 export const COLLECTIONS = {
     post: "Post",
@@ -9,41 +11,25 @@ export const COLLECTIONS = {
     config: "Config",
 } as const;
 
-export interface NormalizeOptions {
-    dateFields?: string[];
-    oidFields?: string[];
-}
-
 /**
- * Converts an incoming JSON body into a Mongo document, matching the Rust
- * serde behaviour: dates decode from RFC3339 strings, ObjectIds from `$oid`.
+ * MongoRepo::update: `$set` the whole decoded struct (nulls included) with
+ * upsert. Invalid ids and driver errors both surface as 400.
  */
-export function normalizeDocument(
-    input: Record<string, unknown>,
-    { dateFields = [], oidFields = [] }: NormalizeOptions = {},
-): Record<string, unknown> {
-    const document: Record<string, unknown> = { ...input };
-
-    for (const field of dateFields) {
-        if (field in document) document[field] = parseDate(document[field]);
+export async function updateById(
+    collectionName: string,
+    id: string,
+    document: Model,
+): Promise<unknown> {
+    const objectId = requireObjectId(id, 400);
+    const collection = await getCollection(collectionName);
+    try {
+        const result = await collection.updateOne(
+            { _id: objectId },
+            { $set: document },
+            { upsert: true },
+        );
+        return updateResult(result);
+    } catch {
+        throw new HttpError(400);
     }
-
-    for (const field of oidFields) {
-        if (field in document) {
-            document[field] = toObjectId(document[field]) ?? null;
-        }
-    }
-
-    return document;
-}
-
-/** Rust `create` skips `_id` when absent; Mongo generates one. */
-export function withoutId(
-    input: Record<string, unknown>,
-): Record<string, unknown> {
-    const document = { ...input };
-    if (document._id === null || document._id === undefined) {
-        delete document._id;
-    }
-    return document;
 }

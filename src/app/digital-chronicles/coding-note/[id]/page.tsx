@@ -5,6 +5,7 @@ import {
     truncateTextBody,
 } from "../../../../components/Utility/StringUtility";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import NoteRepository from "../../../../repositories/NoteRepository";
 
 interface PageProps {
@@ -19,7 +20,9 @@ export async function generateMetadata({
     const repo = NoteRepository.getInstance();
     const { id } = params;
 
-    const content: BlogPostResponse = await repo.getPost(id);
+    const content: BlogPostResponse | undefined = await repo.getPost(id);
+    // getPost resolves undefined when the note or its markdown file is missing.
+    if (!content) notFound();
 
     return {
         title: `Notes | ${content.heading}`,
@@ -36,7 +39,8 @@ export async function generateMetadata({
 export default async function BlogContentServer({ params }: PageProps) {
     const { id } = params;
     const repo = NoteRepository.getInstance();
-    const content: BlogPostResponse = await repo.getPost(id);
+    const content: BlogPostResponse | undefined = await repo.getPost(id);
+    if (!content) notFound();
 
     return <BlogContent id={id} content={content} />;
 }

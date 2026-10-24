@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
+import { parseCompression } from "@/server/image";
 import { getImage, updateImage } from "@/server/images";
-import { errorResponse, readJson } from "@/server/route";
+import { errorResponse, readJsonBody } from "@/server/route";
 
 interface Context {
     params: { id: string };
@@ -8,8 +9,8 @@ interface Context {
 
 export async function GET(request: Request, { params }: Context) {
     try {
-        const compression = Number(
-            new URL(request.url).searchParams.get("compression") ?? 100,
+        const compression = parseCompression(
+            new URL(request.url).searchParams.get("compression"),
         );
         const { contentType, buffer } = await getImage(params.id, compression);
         return new NextResponse(buffer, {
@@ -23,7 +24,7 @@ export async function GET(request: Request, { params }: Context) {
 
 export async function PUT(request: Request, { params }: Context) {
     try {
-        const body = await readJson(request);
+        const body = await readJsonBody(request);
         return NextResponse.json(await updateImage(params.id, body));
     } catch (error) {
         return errorResponse(error);

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getPost, updatePost } from "@/server/posts";
-import { errorResponse, readJson } from "@/server/route";
+import { errorResponse, readJsonBody } from "@/server/route";
 
 interface Context {
     params: { id: string };
@@ -16,7 +16,7 @@ export async function GET(_request: Request, { params }: Context) {
 
 export async function PATCH(request: Request, { params }: Context) {
     try {
-        const body = await readJson(request);
+        const body = await readJsonBody(request);
         return NextResponse.json(await updatePost(params.id, body));
     } catch (error) {
         return errorResponse(error);

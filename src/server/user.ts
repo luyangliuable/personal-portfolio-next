@@ -10,6 +10,14 @@ export function hashPassword(password: string): string {
     return bcrypt.hashSync(password, BCRYPT_COST);
 }
 
+/** The Rust bcrypt crate rejects malformed hashes with an error (500). */
+export function isBcryptHash(hash: unknown): hash is string {
+    return (
+        typeof hash === "string" &&
+        /^\$2[abxy]\$\d{1,2}\$[./A-Za-z0-9]{53}$/.test(hash)
+    );
+}
+
 export function verifyPassword(password: string, hash: string): boolean {
     return bcrypt.compareSync(password, hash);
 }

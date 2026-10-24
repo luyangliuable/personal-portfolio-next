@@ -1,13 +1,7 @@
-import { describe, expect, it, beforeEach } from "vitest";
+import { describe, expect, it, beforeEach, vi } from "vitest";
 import { ObjectId } from "mongodb";
-import {
-    formatDate,
-    parseDate,
-    serializeValue,
-    toObjectId,
-} from "@/server/serialization";
+import { serializeValue, toObjectId } from "@/server/serialization";
 import { buildCorsHeaders } from "@/server/cors";
-import { normalizeDocument, withoutId } from "@/server/documents";
 import { memoryCache } from "@/server/cache";
 import { contentTypeFor } from "@/server/image";
 import { hashPassword, newSessionToken, verifyPassword } from "@/server/user";
@@ -19,18 +13,6 @@ import {
 } from "@/server/http";
 
 describe("backend serialization", () => {
-    it("formats and parses dates like the Rust service.", () => {
-        const date = new Date("2024-01-02T03:04:05.123Z");
-        expect(formatDate(date)).toBe("2024-01-02T03:04:05.123Z");
-        expect(parseDate("2024-01-02T03:04:05.123Z")?.toISOString()).toBe(
-            date.toISOString(),
-        );
-        expect(parseDate(date)).toBe(date);
-        expect(parseDate("")).toBeNull();
-        expect(parseDate("nope")).toBeNull();
-        expect(parseDate(null)).toBeNull();
-    });
-
     it("converts ObjectIds and nested BSON values.", () => {
         const id = new ObjectId();
         expect(toObjectId(id)).toBe(id);
@@ -41,43 +23,24 @@ describe("backend serialization", () => {
             id.toHexString(),
         );
         expect(toObjectId("bad")).toBeNull();
+        expect(toObjectId("abcdefghijkl")).toBeNull();
         expect(toObjectId(42)).toBeNull();
 
         const serialized = serializeValue({
             _id: id,
-            image: id,
             date_created: new Date("2024-01-02T03:04:05.000Z"),
             tags: ["a"],
             empty: undefined,
         }) as Record<string, unknown>;
         expect(serialized._id).toEqual({ $oid: id.toHexString() });
-        expect(serialized.image).toEqual({ $oid: id.toHexString() });
-        expect(serialized.date_created).toBe("2024-01-02T03:04:05.000Z");
+        expect(serialized.date_created).toBe("2024-01-02T03:04:05Z");
         expect(serialized.tags).toEqual(["a"]);
         expect(serialized.empty).toBeNull();
     });
 });
 
-describe("backend documents", () => {
-    it("normalizes dates, ObjectIds and drops empty ids.", () => {
-        const id = new ObjectId();
-        const document = normalizeDocument(
-            {
-                _id: { $oid: id.toHexString() },
-                date_created: "2024-01-02T03:04:05.000Z",
-            },
-            { dateFields: ["date_created"], oidFields: ["_id"] },
-        );
-        expect(document.date_created).toBeInstanceOf(Date);
-        expect((document._id as ObjectId).toHexString()).toBe(id.toHexString());
-        expect(withoutId({ _id: null, a: 1 })).toEqual({ a: 1 });
-        expect(withoutId({ _id: undefined })).toEqual({});
-        expect(withoutId({ _id: id })).toHaveProperty("_id", id);
-    });
-});
-
 describe("backend cors", () => {
-    it("echoes allowed dev origins and falls back to wildcard.", () => {
+    it("echoes allowed dev origins and only wildcards origin-less requests.", () => {
         expect(
             buildCorsHeaders("http://localhost:3000", "development")[
                 "Access-Control-Allow-Origin"
@@ -87,7 +50,7 @@ describe("backend cors", () => {
             buildCorsHeaders("http://evil.test", "development")[
                 "Access-Control-Allow-Origin"
             ],
-        ).toBe("*");
+        ).toBeUndefined();
         expect(
             buildCorsHeaders(null, "development")[
                 "Access-Control-Allow-Origin"
@@ -96,11 +59,17 @@ describe("backend cors", () => {
     });
 
     it("only allows production origins in production.", () => {
+        vi.stubEnv("NEXT_PUBLIC_API_BASE_URL", "https://site.test/api");
         expect(
-            buildCorsHeaders("https://llcode.tech", "production")[
+            buildCorsHeaders("https://site.test", "production")[
                 "Access-Control-Allow-Origin"
             ],
-        ).toBe("https://llcode.tech");
+        ).toBe("https://site.test");
+        expect(
+            buildCorsHeaders("http://170.64.250.107", "production")[
+                "Access-Control-Allow-Origin"
+            ],
+        ).toBe("http://170.64.250.107");
         expect(
             buildCorsHeaders("http://evil.test", "production")[
                 "Access-Control-Allow-Origin"
@@ -109,6 +78,17 @@ describe("backend cors", () => {
         expect(
             buildCorsHeaders(null, "production")["Access-Control-Allow-Origin"],
         ).toBeUndefined();
+        vi.unstubAllEnvs();
+    });
+
+    it("allows no site origin when the API base URL is relative.", () => {
+        vi.stubEnv("NEXT_PUBLIC_API_BASE_URL", "/api");
+        expect(
+            buildCorsHeaders("https://site.test", "production")[
+                "Access-Control-Allow-Origin"
+            ],
+        ).toBeUndefined();
+        vi.unstubAllEnvs();
     });
 });
 
@@ -143,7 +123,7 @@ describe("backend helpers", () => {
     it("builds mongo result envelopes.", () => {
         const id = new ObjectId();
         expect(insertOneResult({ insertedId: id } as never)).toEqual({
-            inserted_id: { $oid: id.toHexString() },
+            insertedId: { $oid: id.toHexString() },
         });
         expect(
             updateResult({
@@ -152,10 +132,13 @@ describe("backend helpers", () => {
                 upsertedId: id,
             } as never),
         ).toEqual({
-            matched_count: 1,
-            modified_count: 1,
-            upserted_id: { $oid: id.toHexString() },
+            matchedCount: 1,
+            modifiedCount: 1,
+            upsertedId: { $oid: id.toHexString() },
         });
+        expect(
+            updateResult({ matchedCount: 1, modifiedCount: 0 } as never),
+        ).toEqual({ matchedCount: 1, modifiedCount: 0, upsertedId: null });
     });
 
     it("validates object ids with mapped errors.", () => {

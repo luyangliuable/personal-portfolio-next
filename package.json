@@ -11,6 +11,8 @@
     "format:all": "npx prettier --write .",
     "codegen": "openapi-rq -i \"../api_fastapi/openapi/v1-generated.yaml\" -c axios --format prettier -o openapi-gen --operationId",
     "knip": "knip",
+    "dev:local": "env -u MONGOURI -u IMAGE_STORE_LOCATION -u MARKDOWN_POSTS_STORE_LOCATION -u NOTES_STORE_LOCATION next dev",
+    "seed": "env -u MONGOURI -u IMAGE_STORE_LOCATION -u MARKDOWN_POSTS_STORE_LOCATION -u NOTES_STORE_LOCATION node --env-file=.env.local scripts/seed-local-content.mjs",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest",

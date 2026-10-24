@@ -16,20 +16,36 @@ export function errorResponse(error: unknown): NextResponse {
     return new NextResponse(null, { status: 500 });
 }
 
-export async function readJson(
-    request: Request,
-): Promise<Record<string, unknown>> {
+/** Rocket's default `json` data limit. */
+const JSON_LIMIT_BYTES = 1024 * 1024;
+
+/** Mirrors Rocket's Json guard: 413 over the limit, 400 on bad syntax. */
+export async function readJsonBody(request: Request): Promise<unknown> {
+    const bytes = new Uint8Array(await request.arrayBuffer());
+    if (bytes.byteLength > JSON_LIMIT_BYTES) throw new HttpError(413);
     try {
-        const body = await request.json();
-        if (body && typeof body === "object") {
-            return body as Record<string, unknown>;
-        }
-        return {};
+        const decoder = new TextDecoder("utf-8", {
+            fatal: true,
+            ignoreBOM: true,
+        });
+        return JSON.parse(decoder.decode(bytes));
     } catch {
-        return {};
+        throw new HttpError(400);
     }
 }
 
-export function sessionTokenCookieOptions() {
-    return { path: "/api" };
+/** `Option<Json<Value>>`: any failure becomes "no data". */
+export async function readOptionalJson(
+    request: Request,
+): Promise<{ value: unknown } | null> {
+    try {
+        return { value: await readJsonBody(request) };
+    } catch {
+        return null;
+    }
+}
+
+/** Rocket's CookieJar::add defaults SameSite to Strict. */
+export function sessionCookieOptions() {
+    return { path: "/api", sameSite: "strict" as const };
 }

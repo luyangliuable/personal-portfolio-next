@@ -1,8 +1,20 @@
 "use client";
 
-import React, { useEffect, useRef, RefObject } from "react";
+import React, { useEffect, useRef, useState, RefObject } from "react";
 import "./FractalHills.css";
 import p5 from "p5/lib/p5.js";
+
+/** p5 throws when it cannot create a WebGL context, taking the page down. */
+function supportsWebGL(): boolean {
+    try {
+        const canvas = document.createElement("canvas");
+        return Boolean(
+            canvas.getContext("webgl2") ?? canvas.getContext("webgl"),
+        );
+    } catch {
+        return false;
+    }
+}
 
 const FractalHills = ({
     colorTheme = "invertedMonochrome",
@@ -10,8 +22,14 @@ const FractalHills = ({
     colorTheme?: string;
 }) => {
     const sketchRef: RefObject<HTMLDivElement> = useRef(null);
+    const [isWebGLUnavailable, setIsWebGLUnavailable] = useState(false);
 
     useEffect(() => {
+        if (!supportsWebGL()) {
+            setIsWebGLUnavailable(true);
+            return;
+        }
+
         const sketch = (p: p5) => {
             let cols: number, rows: number;
             let scl = 40;
@@ -311,10 +329,18 @@ const FractalHills = ({
             window.addEventListener("resize", windowResized);
         };
 
-        let p5Instance: p5;
+        let p5Instance: p5 | undefined;
         if (sketchRef!.current) p5Instance = new p5(sketch, sketchRef!.current);
-        return () => p5Instance.remove();
+        return () => p5Instance?.remove();
     }, [colorTheme]);
+
+    if (isWebGLUnavailable) {
+        return (
+            <p className="h-screen flex items-center justify-center">
+                Fractal Hills needs WebGL, which this browser has disabled.
+            </p>
+        );
+    }
 
     return (
         <>

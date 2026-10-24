@@ -1,16 +1,22 @@
 import { NextResponse } from "next/server";
 import { createUser } from "@/server/users";
-import { errorResponse, readJson } from "@/server/route";
+import {
+    errorResponse,
+    readJsonBody,
+    sessionCookieOptions,
+} from "@/server/route";
 
 export async function POST(request: Request) {
     try {
-        const body = await readJson(request);
+        const body = await readJsonBody(request);
         const session = await createUser(body);
         const response = NextResponse.json(session);
-        response.cookies.set("session_token", session.session_token, {
-            path: "/api",
-        });
-        response.cookies.set("user_id", session.userid, { path: "/api" });
+        response.cookies.set(
+            "session_token",
+            session.session_token,
+            sessionCookieOptions(),
+        );
+        response.cookies.set("user_id", session.userid, sessionCookieOptions());
         return response;
     } catch (error) {
         return errorResponse(error);

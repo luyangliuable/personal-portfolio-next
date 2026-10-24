@@ -5,6 +5,10 @@ import { describe, expect, it, vi } from "vitest";
 import Card from "@/components/Card/Card";
 
 const addToQueue = vi.fn();
+vi.mock("@/config/api", async (importOriginal) => ({
+    ...(await importOriginal<typeof import("@/config/api")>()),
+    apiOrigin: () => "https://site.test",
+}));
 vi.mock("@/stores/DynamicLoadQueue/DynamicLoadQueue", () => ({
     default: { getInstance: () => ({ addToQueue }) },
 }));
@@ -42,11 +46,14 @@ describe("Card", () => {
         expect(container).toBeEmptyDOMElement();
     });
 
-    it("extracts only internal llcode.tech paths from absolute URLs.", () => {
+    it("extracts only internal site paths from absolute URLs.", () => {
         const instance = new Card(baseProps as any);
-        expect(instance.extractRouteFromURL("https://llcode.tech/blog/a")).toBe(
+        expect(instance.extractRouteFromURL("https://site.test/blog/a")).toBe(
             "/blog/a",
         );
+        expect(
+            instance.extractRouteFromURL("https://llcode.tech/blog/a"),
+        ).toBeNull();
         expect(
             instance.extractRouteFromURL("https://example.com/blog/a"),
         ).toBeNull();

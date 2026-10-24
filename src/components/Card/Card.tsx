@@ -8,6 +8,7 @@ import Image from "../Image/Image";
 import ICardProps from "./Interface/ICardProps";
 import ICardState from "./Interface/ICardState";
 import DynamicLoadQueue from "../../stores/DynamicLoadQueue/DynamicLoadQueue";
+import { apiOrigin } from "../../config/api";
 
 class Card extends Component<ICardProps, ICardState> {
     iframePreviewRef = createRef<HTMLIFrameElement>();
@@ -35,7 +36,7 @@ class Card extends Component<ICardProps, ICardState> {
     extractRouteFromURL(url: string): string | null {
         try {
             const parsedUrl = new URL(url);
-            if (parsedUrl.hostname === "llcode.tech") {
+            if (parsedUrl.origin === apiOrigin()) {
                 return parsedUrl.pathname;
             } else {
                 return null;

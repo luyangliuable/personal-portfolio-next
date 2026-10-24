@@ -1,17 +1,17 @@
 import { NextResponse } from "next/server";
-import { errorResponse, readJson } from "@/server/route";
+import { errorResponse, readOptionalJson } from "@/server/route";
 import { streamUpstream } from "@/server/proxy";
 
 export async function POST(request: Request) {
     try {
         const url = new URL(request.url).searchParams.get("url");
         if (!url) return new NextResponse(null, { status: 400 });
-        const body = await readJson(request);
-        const hasBody = Object.keys(body).length > 0;
+        // Any valid JSON value is forwarded; invalid or empty bodies are not.
+        const data = await readOptionalJson(request);
         return await streamUpstream(url, {
             method: "POST",
-            headers: hasBody ? { "Content-Type": "application/json" } : {},
-            body: hasBody ? JSON.stringify(body) : undefined,
+            headers: data ? { "Content-Type": "application/json" } : {},
+            body: data ? JSON.stringify(data.value) : undefined,
         });
     } catch (error) {
         return errorResponse(error);

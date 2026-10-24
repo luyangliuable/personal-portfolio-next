@@ -42,8 +42,8 @@ const GolfedSierpinski = () => {
 
             context.fillStyle = "#433";
 
-            for (let i = 114; i--; ) {
-                for (let j = 66; j--; ) {
+            for (let i = 114; i--;) {
+                for (let j = 66; j--;) {
                     const P =
                         S(((j - i) & (j + i)) + t) * squareSize + squareSize;
                     context.fillRect(

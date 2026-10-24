@@ -8,7 +8,9 @@ describe("BurgerMenuIcon", () => {
         const svg = container.querySelector("svg")!;
         expect(svg).toHaveClass("navbar-burger-icon");
         expect(svg).toHaveAttribute("viewBox", "0 0 24 24");
-        expect(container.querySelector("path"))
-            .toHaveAttribute("d", "M3 12h18M3 6h18M3 18h18");
+        expect(container.querySelector("path")).toHaveAttribute(
+            "d",
+            "M3 12h18M3 6h18M3 18h18",
+        );
     });
 });

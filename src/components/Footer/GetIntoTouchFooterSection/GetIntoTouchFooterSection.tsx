@@ -2,6 +2,7 @@
 
 import React, { useRef, useState, RefObject } from "react";
 import Button from "../../Button/Button";
+import { apiUrl } from "../../../config/api";
 import "./GetIntoTouchFooterSection.css";
 
 const GetInTouch: React.FC = () => {
@@ -17,10 +18,7 @@ const GetInTouch: React.FC = () => {
             name: messageEmailRef.current!.value,
             description: messageDescriptionRef.current!.value,
         };
-        const BASE_URL: string =
-            process.env.REACT_APP_WEATHER_API_BASE_URL ||
-            "https://llcode.tech/api";
-        fetch(`${BASE_URL}/message`, {
+        fetch(apiUrl("/message"), {
             method: "POST",
             cache: "no-cache",
             credentials: "include",

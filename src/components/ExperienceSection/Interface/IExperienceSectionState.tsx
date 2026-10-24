@@ -21,8 +21,7 @@ export interface ExperienceSectionItem {
 export interface IExperienceSectionState<
     P = any,
     W extends string | JSXElementConstructor<any> =
-        | string
-        | JSXElementConstructor<any>,
+        string | JSXElementConstructor<any>,
 > {
     render?: () => React.ReactElement<P, W>;
     timeLineLength?: number;

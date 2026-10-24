@@ -1,9 +1,9 @@
 import UserNameResponse from "../repositories/Response/UserNameResponse";
 import Repository from "./Repository";
+import { API_BASE_URL } from "../config/api";
 
 class UserRepository extends Repository {
-    static BASE_URL: string =
-        process.env.REACT_APP_WEATHER_API_BASE_URL || "https://llcode.tech/api";
+    static BASE_URL: string = API_BASE_URL;
     private constructor() {
         super();
     }

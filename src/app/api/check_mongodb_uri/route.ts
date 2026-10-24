@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { mongoUri } from "@/server/db";
 import { textResponse } from "@/server/route";
 
 export async function GET() {
@@ -6,7 +7,6 @@ export async function GET() {
         return new NextResponse(null, { status: 401 });
     }
 
-    const uri = process.env.MONGOURI ?? "mongodb://localhost:27017";
-    return textResponse(uri);
+    return textResponse(mongoUri());
 }
 export const dynamic = "force-dynamic";

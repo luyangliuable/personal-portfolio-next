@@ -1,5 +1,4 @@
 import { readFile } from "node:fs/promises";
-import path from "node:path";
 import sharp from "sharp";
 
 export function imageStoreLocation(): string | null {
@@ -23,14 +22,20 @@ export function contentTypeFor(imageType: string): string | null {
     }
 }
 
-/** {IMAGE_STORE_LOCATION}/{file_name}.{image_type} */
+/** util::path_combiner: `{root}/{file_name}.{image_type}`. */
 export async function readImageFile(
+    root: string,
     imageType: string,
     fileName: string,
 ): Promise<Buffer> {
-    const root = imageStoreLocation();
-    if (!root) throw new Error("No image store location found");
-    return readFile(path.join(root, `${fileName}.${imageType}`));
+    return readFile(`${root}/${fileName}.${imageType}`);
+}
+
+/** Rocket's `Option<u8>` query field: unparsable values fall back to 100. */
+export function parseCompression(value: string | null): number {
+    if (value === null || !/^\+?\d+$/.test(value)) return 100;
+    const parsed = Number(value);
+    return parsed <= 255 ? parsed : 100;
 }
 
 /**

@@ -35,9 +35,9 @@ describe("useScrollPosition", () => {
             vi.advanceTimersByTime(400);
         });
         expect(result.current.deltaScrollCalculation?.deltaScrolled).toBe(100);
-        expect(
-            result.current.deltaScrollCalculation?.lastRecordedScrollY,
-        ).toBe(100);
+        expect(result.current.deltaScrollCalculation?.lastRecordedScrollY).toBe(
+            100,
+        );
 
         act(() => {
             window.dispatchEvent(new Event("scroll"));

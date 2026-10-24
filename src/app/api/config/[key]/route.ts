@@ -1,5 +1,5 @@
 import { getConfigValue, updateConfig } from "@/server/config";
-import { errorResponse, readJson, textResponse } from "@/server/route";
+import { errorResponse, readJsonBody, textResponse } from "@/server/route";
 
 interface Context {
     params: { key: string };
@@ -15,7 +15,7 @@ export async function GET(_request: Request, { params }: Context) {
 
 export async function PATCH(request: Request, { params }: Context) {
     try {
-        const body = await readJson(request);
+        const body = await readJsonBody(request);
         return Response.json(await updateConfig(params.key, body));
     } catch (error) {
         return errorResponse(error);

@@ -1,41 +1,31 @@
 import { getCollection } from "./db";
-import { COLLECTIONS, normalizeDocument, withoutId } from "./documents";
+import { COLLECTIONS } from "./documents";
 import { HttpError, insertOneResult, requireObjectId } from "./http";
 import { readNoteBody } from "./markdown";
-import { serializeDocument, serializeDocuments } from "./serialization";
-
-const DATE_FIELDS = ["date_created", "date_last_modified"];
-const OID_FIELDS = ["_id", "image"];
+import { NOTE } from "./models";
+import { fromJson, fromStorage, toResponse, type Model } from "./schema";
+import { rustDateNow } from "./rustDate";
 
 export async function getNotes(): Promise<unknown[]> {
     const collection = await getCollection(COLLECTIONS.note);
-    const notes = await collection.find({}).toArray();
-    return serializeDocuments(notes.filter((note) => note.active !== false));
+    const documents = await collection.find({}).toArray();
+    return documents
+        .map((document) => fromStorage(document, NOTE))
+        .filter((note): note is Model => note !== null && note.active !== false)
+        .map(toResponse);
 }
 
-export async function insertNote(
-    body: Record<string, unknown>,
-): Promise<unknown> {
-    const document = withoutId(
-        normalizeDocument(body, {
-            dateFields: DATE_FIELDS,
-            oidFields: OID_FIELDS,
-        }),
-    );
-    document.date_created = new Date();
+export async function insertNote(body: unknown): Promise<unknown> {
+    const note = fromJson(body, NOTE);
+    note.date_created = rustDateNow();
     const collection = await getCollection(COLLECTIONS.note);
-    try {
-        const result = await collection.insertOne(document);
-        return insertOneResult(result);
-    } catch {
-        throw new HttpError(400);
-    }
+    return insertOneResult(await collection.insertOne(note));
 }
 
 export async function getNote(id: string): Promise<unknown> {
     const objectId = requireObjectId(id, 400);
     const collection = await getCollection(COLLECTIONS.note);
-    const note = await collection.findOne({ _id: objectId });
+    const note = fromStorage(await collection.findOne({ _id: objectId }), NOTE);
     if (!note) throw new HttpError(500);
     if (note.active === false) throw new HttpError(404);
 
@@ -45,5 +35,5 @@ export async function getNote(id: string): Promise<unknown> {
         throw new HttpError(404);
     }
 
-    return serializeDocument(note);
+    return toResponse(note);
 }

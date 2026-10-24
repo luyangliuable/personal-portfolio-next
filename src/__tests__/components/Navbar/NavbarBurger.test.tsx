@@ -10,7 +10,8 @@ describe("NavbarBurger", () => {
         );
         fireEvent.click(container.querySelector(".nav-burger")!);
         expect(onClick).toHaveBeenCalledTimes(1);
-        expect(container.querySelector("svg"))
-            .toHaveClass("navbar-burger-icon");
+        expect(container.querySelector("svg")).toHaveClass(
+            "navbar-burger-icon",
+        );
     });
 });

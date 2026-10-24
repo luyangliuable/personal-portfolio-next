@@ -41,7 +41,9 @@ describe("NoteRepository coverage", () => {
         expect(NoteRepository.getInstance()).toBe(repo);
 
         expect(
-            repo.sortPostsByDate(posts, "asc").map((post: any) => post._id.$oid),
+            repo
+                .sortPostsByDate(posts, "asc")
+                .map((post: any) => post._id.$oid),
         ).toEqual(["old", "mid", "new"]);
         expect(
             repo.sortPostsByDate(posts).map((post: any) => post._id.$oid),

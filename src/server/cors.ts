@@ -1,9 +1,6 @@
 import { apiOrigin } from "../config/api";
 
-const PRODUCTION_IP_ORIGINS = [
-    "http://170.64.250.107",
-    "https://170.64.250.107",
-];
+const PRODUCTION_IP_ORIGINS = ["https://170.64.250.107"];
 
 /** The site's own origin comes from NEXT_PUBLIC_API_BASE_URL. */
 function productionOrigins(): string[] {

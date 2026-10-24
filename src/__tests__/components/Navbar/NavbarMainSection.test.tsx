@@ -83,7 +83,9 @@ describe("NavbarMainSection", () => {
         scrollState.scrollY = 100;
         rerender(<NavbarMainSection links={links} />);
         expect(container).toHaveClass("navbar--hidden");
-        act(() => vi.advanceTimersByTime(100));
+        act(() => {
+            vi.advanceTimersByTime(100);
+        });
         expect(container).toHaveClass("detached");
     });
 });

@@ -6,7 +6,7 @@ const STORE_LOCATIONS = [
     ["note", "NOTES_STORE_LOCATION"],
 ] as const;
 
-export async function GET() {
+export function GET() {
     let result = "";
     for (const [name, variable] of STORE_LOCATIONS) {
         const location = process.env[variable];

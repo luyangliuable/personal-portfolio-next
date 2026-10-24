@@ -50,7 +50,7 @@ describe("NoteRepository coverage", () => {
         ).toEqual(["new", "mid", "old"]);
 
         vi.mocked(fetch).mockResolvedValueOnce({
-            json: async () => posts,
+            json: () => Promise.resolve(posts),
         } as Response);
         await expect(repo.getFeaturedPostList()).resolves.toEqual([
             posts[2],
@@ -75,7 +75,7 @@ describe("NoteRepository coverage", () => {
         const NoteRepository = await load();
         const repo = NoteRepository.getInstance();
         vi.mocked(fetch).mockResolvedValueOnce({
-            json: async () => posts,
+            json: () => Promise.resolve(posts),
         } as Response);
         await repo.getPostList();
         await repo.getPostList();
@@ -92,7 +92,7 @@ describe("NoteRepository coverage", () => {
         const NoteRepository = await load();
         const repo = NoteRepository.getInstance();
         vi.mocked(fetch).mockResolvedValueOnce({
-            json: async () => posts[0],
+            json: () => Promise.resolve(posts[0]),
         } as Response);
         await expect(repo.getPost("abc")).resolves.toEqual(posts[0]);
 

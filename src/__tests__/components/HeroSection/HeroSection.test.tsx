@@ -74,7 +74,9 @@ describe("HeroSection", () => {
 
     it("updates the pixel reveal clip path after the cat becomes ready.", () => {
         const { container } = render(<HeroSection />);
-        act(() => vi.advanceTimersByTime(800));
+        act(() => {
+            vi.advanceTimersByTime(800);
+        });
         fireEvent.mouseMove(
             container.querySelector(".hero-section__content__left")!,
             { clientX: 100, clientY: 50 },

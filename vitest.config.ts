@@ -25,6 +25,8 @@ export default defineConfig({
             reporter: ["text", "json", "json-summary", "html", "lcov"],
             reportsDirectory: "./coverage/unit",
             include: [
+                "src/middleware.ts",
+                "src/server/**/*.ts",
                 "src/components/Accordion/Accordion.tsx",
                 "src/components/Atoms/ImageDisplayModal/ImageDisplayModal.tsx",
                 "src/components/Atoms/InlineLink/InlineLink.tsx",

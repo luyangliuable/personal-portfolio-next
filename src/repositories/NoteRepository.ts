@@ -5,7 +5,7 @@ import { apiUrl } from "../config/api";
 class NoteRepository extends Repository {
     private static instance: NoteRepository;
     private static postListCache: any[] | null = null;
-    static BASE_URL: string = apiUrl("/note");
+    static readonly BASE_URL: string = apiUrl("/note");
 
     private constructor() {
         super();

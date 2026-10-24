@@ -12,7 +12,8 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import sharp from "sharp";
 import { memoryCache } from "@/server/cache";
-import { getImage, insertImage } from "@/server/images";
+import { compressImage } from "@/server/image";
+import { getImage, getImages, insertImage, updateImage } from "@/server/images";
 import { fakeStore } from "./fakeMongo";
 
 vi.mock("@/server/db", async () => (await import("./fakeMongo")).fakeDb);
@@ -92,5 +93,39 @@ describe("image service", () => {
         expect(
             await statusOf(getImage(await addImage("bmp", "red"), 100)),
         ).toBe(415);
+    });
+
+    it("answers 500 when a stored image cannot be compressed.", async () => {
+        await writeFile(path.join(root, "broken.png"), "not a png");
+        expect(
+            await statusOf(getImage(await addImage("png", "broken"), 50)),
+        ).toBe(500);
+    });
+
+    it("lists images and replaces image metadata by id.", async () => {
+        const id = await addImage("png", "red");
+        const result = await updateImage(id, {
+            image_type: "png",
+            file_name: "red",
+            description: "updated",
+        });
+        expect(result).toMatchObject({ matchedCount: 1 });
+        const images = (await getImages()) as { description: string }[];
+        expect(images.map((image) => image.description)).toEqual(["updated"]);
+        expect(fakeStore.get("LocalImage")![0].date_last_modified).toBeTruthy();
+    });
+
+    it("re-encodes JPEGs at a clamped quality and passes other types through.", async () => {
+        const jpeg = await sharp({
+            create: { width: 2, height: 2, channels: 3, background: "#00f" },
+        })
+            .jpeg()
+            .toBuffer();
+        for (const compression of [0, 150]) {
+            const output = await compressImage(jpeg, "jpeg", compression);
+            expect((await sharp(output).metadata()).format).toBe("jpeg");
+        }
+        const pdf = Buffer.from("%PDF");
+        expect(await compressImage(pdf, "pdf", 30)).toBe(pdf);
     });
 });

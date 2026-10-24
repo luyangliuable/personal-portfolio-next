@@ -3,7 +3,7 @@ import Repository from "./Repository";
 import { API_BASE_URL } from "../config/api";
 
 class UserRepository extends Repository {
-    static BASE_URL: string = API_BASE_URL;
+    static readonly BASE_URL: string = API_BASE_URL;
     private constructor() {
         super();
     }

@@ -7,6 +7,7 @@ import { fakeStore } from "./fakeMongo";
 vi.mock("@/server/db", async () => (await import("./fakeMongo")).fakeDb);
 
 const passwordHash = hashPassword("secret");
+const notABcryptHash = "plain-text";
 
 function seedUser(overrides: Record<string, unknown> = {}) {
     const user = {
@@ -94,7 +95,7 @@ describe("login", () => {
         ).toBe(401);
         expect(await statusOf(login({ password: "secret" }))).toBe(500);
         expect(await statusOf(login({ username: "bob" }))).toBe(422);
-        seedUser({ password: "plain-text" });
+        seedUser({ password: notABcryptHash });
         expect(await statusOf(login({ username: "bob", password: "x" }))).toBe(
             500,
         );

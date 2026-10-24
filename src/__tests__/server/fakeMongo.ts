@@ -17,30 +17,32 @@ function collection(name: string) {
     const documents = fakeStore.get(name)!;
 
     return {
-        find: () => ({ toArray: async () => documents }),
-        findOne: async (filter: Doc) =>
-            documents.find((document) => matches(document, filter)) ?? null,
-        insertOne: async (document: Doc) => {
+        find: () => ({ toArray: () => Promise.resolve(documents) }),
+        findOne: (filter: Doc) =>
+            Promise.resolve(
+                documents.find((document) => matches(document, filter)) ?? null,
+            ),
+        insertOne: (document: Doc) => {
             const stored = { _id: new ObjectId(), ...document };
             documents.push(stored);
-            return { insertedId: stored._id };
+            return Promise.resolve({ insertedId: stored._id });
         },
-        updateOne: async (filter: Doc, update: { $set: Doc }) => {
+        updateOne: (filter: Doc, update: { $set: Doc }) => {
             const found = documents.find((document) =>
                 matches(document, filter),
             );
             if (found) Object.assign(found, update.$set);
             const count = found ? 1 : 0;
-            return {
+            return Promise.resolve({
                 matchedCount: count,
                 modifiedCount: count,
                 upsertedId: null,
-            };
+            });
         },
     };
 }
 
 export const fakeDb = {
-    getCollection: async (name: string) => collection(name),
+    getCollection: (name: string) => Promise.resolve(collection(name)),
     mongoUri: () => "mongodb://fake",
 };

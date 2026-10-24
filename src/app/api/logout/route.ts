@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-export async function POST() {
+export function POST() {
     const response = new NextResponse(null, { status: 200 });
     response.cookies.set("session_token", "", { path: "/api", maxAge: 0 });
     response.cookies.set("user_id", "", { path: "/api", maxAge: 0 });

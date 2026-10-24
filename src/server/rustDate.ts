@@ -28,9 +28,8 @@ function parseRfc3339(value: string): Instant | null {
         return null;
     }
 
-    const offset = sign
-        ? (sign === "-" ? -1 : 1) * (Number(oh) * 3600 + Number(om) * 60)
-        : 0;
+    const direction = sign === "-" ? -1 : 1;
+    const offset = sign ? direction * (Number(oh) * 3600 + Number(om) * 60) : 0;
     const nanos = Number((fraction ?? "").slice(0, 9).padEnd(9, "0"));
     return { seconds: millis / 1000 - offset, nanos };
 }

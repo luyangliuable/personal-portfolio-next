@@ -66,10 +66,10 @@ describe("backend cors", () => {
             ],
         ).toBe("https://site.test");
         expect(
-            buildCorsHeaders("http://170.64.250.107", "production")[
+            buildCorsHeaders("https://170.64.250.107", "production")[
                 "Access-Control-Allow-Origin"
             ],
-        ).toBe("http://170.64.250.107");
+        ).toBe("https://170.64.250.107");
         expect(
             buildCorsHeaders("http://evil.test", "production")[
                 "Access-Control-Allow-Origin"
@@ -146,7 +146,7 @@ describe("backend helpers", () => {
         expect(requireObjectId(id.toHexString()).toHexString()).toBe(
             id.toHexString(),
         );
-        expect(() => requireObjectId("bad", 500)).toThrowError(HttpError);
+        expect(() => requireObjectId("bad", 500)).toThrow(HttpError);
         try {
             requireObjectId("bad", 500);
         } catch (error) {

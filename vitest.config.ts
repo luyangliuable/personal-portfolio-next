@@ -42,6 +42,7 @@ export default defineConfig({
                 "src/components/FeaturedContentSection/FeaturedContentSection.tsx",
                 "src/components/Footer/Footer.tsx",
                 "src/components/FractalHills/FractalHills.tsx",
+                "src/components/FractalHills/FractalHillsClient.tsx",
                 "src/components/GolfedSierpinski/GolfedSierpinski.tsx",
                 "src/components/Image/Image.tsx",
                 "src/components/HeroHeader/HeroHeader.tsx",

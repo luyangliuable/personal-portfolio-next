@@ -13,7 +13,7 @@ export async function GET(request: Request, { params }: Context) {
             new URL(request.url).searchParams.get("compression"),
         );
         const { contentType, buffer } = await getImage(params.id, compression);
-        return new NextResponse(buffer, {
+        return new NextResponse(new Uint8Array(buffer), {
             status: 200,
             headers: { "Content-Type": contentType },
         });

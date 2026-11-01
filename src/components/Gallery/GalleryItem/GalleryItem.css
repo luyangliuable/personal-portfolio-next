@@ -178,3 +178,9 @@
         transform: translateY(0px);
     }
 }
+
+/* SequentialRiseSpan keeps description lines at least 42 characters of this
+   monospace font wide; the half character absorbs rounding. */
+.gallery-item .sequential-rise-span p {
+    min-width: 42.5ch;
+}

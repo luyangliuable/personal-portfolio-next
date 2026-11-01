@@ -73,6 +73,26 @@
     font-weight: 700;
 }
 
+/* SequentialRiseSpan wraps lines by these: one line on wide screens, and
+   "Hi There," / "I am" / "Luyang." stacked on narrow ones. */
+.sequential-rise-span .hero-section__heading--single-line {
+    white-space: nowrap;
+}
+
+.hero-section__heading--stacked {
+    max-width: 4.5em;
+}
+
+/* Intro lines stay at least this many characters of the monospace font wide;
+   the half character absorbs rounding. */
+.sequential-rise-span .hero-section__intro--wide {
+    min-width: 48.5ch;
+}
+
+.sequential-rise-span .hero-section__intro--narrow {
+    min-width: 38.5ch;
+}
+
 .hero-section__content__left__text {
     font-size: 1.125rem;
     font-family: "M1M Light", "Helvetica Neue", "Arial", sans-serif;

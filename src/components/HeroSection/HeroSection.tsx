@@ -97,7 +97,6 @@ const connections = [
 const mainHeading: string = "Hi There, I am Luyang.";
 
 const HeroSection: React.FC<IHeroProps> = () => {
-    const heroSectionRef = useRef(null);
     const pixelatedCodingCatRef = useRef<HTMLDivElement>(null);
     const [screenWidth, setscreenWidth] = useState<number>(0);
     const [pixelCatReady, setPixelCatReady] = useState<boolean>(false);
@@ -205,13 +204,12 @@ const HeroSection: React.FC<IHeroProps> = () => {
                 className="
                     hero-section__content__right
                 "
-                ref={heroSectionRef}
             >
                 <header className="mb-2 md:mb-2">
                     {screenWidth > 550 && (
                         <SequentialRiseSpan
                             elementType="h1"
-                            className="hero-section__heading"
+                            className="hero-section__heading hero-section__heading--single-line"
                         >
                             {mainHeading}
                         </SequentialRiseSpan>
@@ -219,8 +217,7 @@ const HeroSection: React.FC<IHeroProps> = () => {
                     {screenWidth <= 550 && (
                         <SequentialRiseSpan
                             elementType="h1"
-                            className="hero-section__heading"
-                            maxNumberOfLettersPerLine={10}
+                            className="hero-section__heading hero-section__heading--stacked"
                         >
                             {mainHeading}
                         </SequentialRiseSpan>
@@ -230,8 +227,7 @@ const HeroSection: React.FC<IHeroProps> = () => {
                     {screenWidth > 550 && (
                         <SequentialRiseSpan
                             baseAnimationDelay={200}
-                            calculationAdjustment={0.82}
-                            minNumberOfLettersPerLine={48}
+                            className="hero-section__intro--wide"
                         >
                             A software engineer, dog lover and fitness ethusiast
                             who enjoys cooking, experimenting, eager to embrace
@@ -242,8 +238,7 @@ const HeroSection: React.FC<IHeroProps> = () => {
                     {screenWidth <= 550 && (
                         <SequentialRiseSpan
                             baseAnimationDelay={200}
-                            calculationAdjustment={0.7}
-                            minNumberOfLettersPerLine={38}
+                            className="hero-section__intro--narrow"
                         >
                             A software engineer, dog lover and fitness ethusiast
                             who enjoys cooking, experimenting, eager to embrace

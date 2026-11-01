@@ -80,17 +80,12 @@ const HeroHeader: React.FC<IHeroHeaderProps> = ({
                 <div className="hero-header__content w-full">
                     <div className="hero-header__heading important-text">
                         <SequentialRiseSpan
-                            calculationAdjustment={0.35}
                             className="text-2xl font-bold"
                             elementType="h1"
                         >{`${heading}\u00A0/ `}</SequentialRiseSpan>
                     </div>
                     <div className="hero-header__description">
-                        <SequentialRiseSpan
-                            baseAnimationDelay={150}
-                            maxNumberOfLettersPerLine={50}
-                            calculationAdjustment={0.95}
-                        >
+                        <SequentialRiseSpan baseAnimationDelay={150}>
                             {description}
                         </SequentialRiseSpan>
                     </div>
